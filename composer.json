@@ -22,7 +22,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "Hydrofon\\": "app/"
         }
     },
     "autoload-dev": {
