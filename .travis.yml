@@ -1,0 +1,20 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - nightly
+
+sudo: false
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+install:
+  - composer install --no-interaction --prefer-dist --no-suggest
+  - cp .env.example .env          # Create a new .env file.
+  - php artisan key:generate      # Generate application key.
+
+script: vendor/bin/phpunit
