@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+    @include('partials.object-list')
 
-    You are logged in!
+    <main class="main-content">
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <p>MAIN</p>
+        <button id="toggle-logged-in">Toggle</button>
+    </main>
 @endsection

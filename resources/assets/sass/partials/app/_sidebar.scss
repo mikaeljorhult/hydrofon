@@ -10,6 +10,7 @@
 
   a {
     color: #596073;
+    text-decoration: none;
   }
 }
 
@@ -22,4 +23,8 @@
   width: 2rem;
   margin-right: .5rem;
   border-radius: 50%;
+}
+
+.user-name {
+  padding-top: .25rem;
 }

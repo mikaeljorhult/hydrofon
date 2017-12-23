@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    MAIN
+    <main class="main-content">
+        <p>MAIN</p>
+        <button id="toggle-logged-in">Toggle</button>
+    </main>
 @endsection

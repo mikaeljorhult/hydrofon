@@ -1,0 +1,1 @@
+import objectList from './modules/objectlist';

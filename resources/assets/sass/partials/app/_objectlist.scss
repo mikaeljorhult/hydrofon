@@ -1,0 +1,43 @@
+.objectlist {
+  flex: 0 1 14rem;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0 1rem;
+  background-color: #313541;
+  color: rgba(255, 255, 255, .6);
+
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+}
+
+.objectlist__collapsed {
+  flex: 0 1 1rem;
+
+  ul {
+    display: none;
+  }
+}
+
+.objectlist-toggle {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  line-height: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+
+  &:before {
+    content: '<';
+
+    .objectlist__collapsed & {
+      content: '>';
+    }
+  }
+}

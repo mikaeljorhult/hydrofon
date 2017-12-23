@@ -13,16 +13,15 @@
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
     </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
     @include('partials.sidebar')
 
-    <main class="main-content">
-        @yield('content')
-        <button id="toggle-logged-in">Toggle</button>
-    </main>
+    @yield('content')
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
