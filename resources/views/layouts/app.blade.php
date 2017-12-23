@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>@yield('title', config('app.name', 'Hydrofon'))</title>
+
+    <script>document.documentElement.className = 'js';</script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    @include('partials.sidebar')
+
+    <main class="main-content">
+        @yield('content')
+        <button id="toggle-logged-in">Toggle</button>
+    </main>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        document.getElementById('toggle-logged-in').addEventListener('click', function(event) {
+            document.documentElement.classList.toggle('logged-in');
+            event.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
