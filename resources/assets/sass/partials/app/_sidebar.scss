@@ -1,0 +1,25 @@
+.sidebar {
+  background-color: #282c37;
+  color: #596073;
+  text-align: center;
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: #596073;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 2rem;
+  margin-right: .5rem;
+  border-radius: 50%;
+}

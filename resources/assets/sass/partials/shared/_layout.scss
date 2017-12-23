@@ -1,0 +1,25 @@
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  padding: 1rem 2rem;
+}
+
+.logged-in {
+  body {
+    display: flex;
+  }
+
+  .sidebar {
+    flex: 0 1 10rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+  }
+}

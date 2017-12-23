@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" class="no-js">
+<html lang="{{ app()->getLocale() }}" class="no-js {{ auth()->check() ? 'logged-in' : '' }}">
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +9,10 @@
 
     <title>@yield('title', config('app.name', 'Hydrofon'))</title>
 
-    <script>document.documentElement.className = 'js';</script>
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 

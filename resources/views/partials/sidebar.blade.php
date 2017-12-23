@@ -1,8 +1,10 @@
 <aside class="sidebar">
     <header class="branding">
-        <h1 class="screen-reader">{{ config('app.name', 'Hydrofon') }}</h1>
+        <h1 class="screen-reader">
+            <a href="{{ url('/') }}">{{ config('app.name', 'Hydrofon') }}</a>
+        </h1>
 
-        <a href="{{ route('home') }}">
+        <a href="{{ url('/') }}">
             <img src="{{ asset('img/logo.png') }}" width="281" alt="{{ config('app.name', 'Hydrofon') }}"/>
         </a>
     </header>
@@ -19,7 +21,9 @@
 
     @auth
         <section class="user">
-            <img src="https://www.gravatar.com/avatar/" class="user-avatar" alt="{{ auth()->user()->name }}" />
+            <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
+                 class="user-avatar"
+                 alt="{{ auth()->user()->name }}"/>
             <div class="user-name">{{ auth()->user()->name }}</div>
         </section>
 
