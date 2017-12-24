@@ -11,6 +11,10 @@
     padding: 0;
     list-style-type: none;
   }
+
+  li {
+    margin: .25rem 0;
+  }
 }
 
 .objectlist__collapsed {
@@ -40,4 +44,8 @@
       content: '>';
     }
   }
+}
+
+.objectlist-children {
+  margin: 0 0 .5rem .5rem;
 }

@@ -176,6 +176,7 @@ return [
         // Hydrofon\Providers\BroadcastServiceProvider::class,
         Hydrofon\Providers\EventServiceProvider::class,
         Hydrofon\Providers\RouteServiceProvider::class,
+        Hydrofon\Providers\ViewComposerServiceProvider::class,
 
     ],
 
