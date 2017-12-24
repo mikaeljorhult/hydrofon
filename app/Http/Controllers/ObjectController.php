@@ -30,7 +30,8 @@ class ObjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,8 @@ class ObjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Object  $object
+     * @param  \Hydrofon\Object $object
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Object $object)
@@ -52,7 +54,8 @@ class ObjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Hydrofon\Object  $object
+     * @param  \Hydrofon\Object $object
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Object $object)
@@ -63,8 +66,9 @@ class ObjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Hydrofon\Object  $object
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Hydrofon\Object $object
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Object $object)
@@ -75,7 +79,8 @@ class ObjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Object  $object
+     * @param  \Hydrofon\Object $object
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Object $object)

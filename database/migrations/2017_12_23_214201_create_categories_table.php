@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
 {
@@ -18,6 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name', 60);
             $table->timestamps();
+
+            $table->foreign('parent_id')->references('id')->on('categories')
+                  ->onUpdate('cascade')
+                  ->onDelete('set null');
         });
     }
 

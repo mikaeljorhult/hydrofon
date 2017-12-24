@@ -16,4 +16,15 @@ class Object extends Model
         'description',
         'facility',
     ];
+
+    /**
+     * Categories the object belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(\Hydrofon\Category::class)
+                    ->orderBy('name');
+    }
 }

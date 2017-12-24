@@ -2,8 +2,6 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class AppController extends Controller
 {
     /**

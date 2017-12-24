@@ -15,4 +15,35 @@ class Category extends Model
         'parent_id',
         'name',
     ];
+
+    /**
+     * Parent category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(\Hydrofon\Category::class);
+    }
+
+    /**
+     * Categories assigned to model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        return $this->hasMany(\Hydrofon\Category::class, 'parent_id');
+    }
+
+    /**
+     * Objects assigned to model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function objects()
+    {
+        return $this->belongsToMany(\Hydrofon\Object::class)
+                    ->orderBy('name');
+    }
 }
