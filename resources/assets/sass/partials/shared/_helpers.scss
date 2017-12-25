@@ -10,3 +10,8 @@
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
 }
+
+.narrow-content {
+  max-width: 30rem;
+  margin: 0 auto;
+}
