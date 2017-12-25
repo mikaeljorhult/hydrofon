@@ -19,7 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'AppController@index')->name('home');
 
-Route::resource('bookings', 'BookingController');
-Route::resource('categories', 'CategoryController');
-Route::resource('objects', 'ObjectController');
-Route::resource('users', 'UserController');
+Route::resources([
+    'bookings'   => 'BookingController',
+    'categories' => 'CategoryController',
+    'objects'    => 'ObjectController',
+    'users'      => 'UserController',
+]);
+
+Route::resource('checkins', 'CheckinController', ['only' => ['store', 'destroy']]);
+Route::resource('checkouts', 'CheckoutController', ['only' => ['store', 'destroy']]);

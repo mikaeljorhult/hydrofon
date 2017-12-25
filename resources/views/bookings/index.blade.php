@@ -31,6 +31,20 @@
                             {{ $booking->end_time }}
                         </td>
                         <td data-title="&nbsp;">
+                            @unless($booking->checkin)
+                                {!! Form::open(['route' => ['checkins.store']]) !!}
+                                    {!! Form::hidden('booking_id', $booking->id) !!}
+                                    {!! Form::submit('Check in') !!}
+                                {!! Form::close() !!}
+                            @endif
+
+                            @unless($booking->checkout)
+                                {!! Form::open(['route' => ['checkouts.store']]) !!}
+                                    {!! Form::hidden('booking_id', $booking->id) !!}
+                                    {!! Form::submit('Check out') !!}
+                                {!! Form::close() !!}
+                            @endif
+
                             {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
                                 {!! Form::submit('Delete') !!}
                             {!! Form::close() !!}

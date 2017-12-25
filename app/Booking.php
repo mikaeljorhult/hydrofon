@@ -25,7 +25,7 @@ class Booking extends Model
      */
     protected $casts = [
         'start_time' => 'datetime',
-        'end_time' => 'datetime',
+        'end_time'   => 'datetime',
     ];
 
     /**
@@ -56,5 +56,25 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo(\Hydrofon\User::class);
+    }
+
+    /**
+     * Booking can be checked in.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function checkin()
+    {
+        return $this->hasOne(\Hydrofon\Checkin::class);
+    }
+
+    /**
+     * Booking can be checked out.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function checkout()
+    {
+        return $this->hasOne(\Hydrofon\Checkout::class);
     }
 }
