@@ -16,6 +16,14 @@ class CreateCategoryObjectTable extends Migration
         Schema::create('category_object', function (Blueprint $table) {
             $table->integer('category_id')->unsigned()->index();
             $table->integer('object_id')->unsigned()->index();
+
+            // Delete relationship if category is deleted.
+            $table->foreign('category_id')->references('id')->on('categories')
+                  ->onDelete('cascade');
+
+            // Delete relationship if object is deleted.
+            $table->foreign('object_id')->references('id')->on('objects')
+                  ->onDelete('cascade');
         });
     }
 
