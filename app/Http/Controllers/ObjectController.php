@@ -14,7 +14,9 @@ class ObjectController extends Controller
      */
     public function index()
     {
-        //
+        $objects = Object::orderBy('name')->get();
+
+        return view('objects.index')->with('objects', $objects);
     }
 
     /**
@@ -24,7 +26,7 @@ class ObjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('objects.create');
     }
 
     /**
@@ -48,7 +50,7 @@ class ObjectController extends Controller
      */
     public function show(Object $object)
     {
-        //
+        return view('objects.show')->with('object', $object);
     }
 
     /**
@@ -60,7 +62,7 @@ class ObjectController extends Controller
      */
     public function edit(Object $object)
     {
-        //
+        return view('objects.edit')->with('object', $object);
     }
 
     /**
