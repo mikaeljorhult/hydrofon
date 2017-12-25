@@ -18,6 +18,16 @@ class Object extends Model
     ];
 
     /**
+     * Bookings of object.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bookings()
+    {
+        return $this->hasMany(\Hydrofon\Booking::class);
+    }
+
+    /**
      * Categories the object belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
