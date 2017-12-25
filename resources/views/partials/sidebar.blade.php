@@ -29,10 +29,9 @@
 
         <nav class="main-navigation">
             <ul>
-                <li>Section A</li>
-                <li>Section B</li>
-                <li>Section C</li>
-                <li>Section D</li>
+                <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                <li><a href="{{ route('objects.index') }}">Objects</a></li>
+                <li><a href="{{ route('users.index') }}">Users</a></li>
             </ul>
         </nav>
 

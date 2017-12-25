@@ -2,6 +2,8 @@
 
 @section('content')
     <main class="main-content">
+        <h1>Users</h1>
+
         <table class="table">
             <thead>
                 <th>#</th>
