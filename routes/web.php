@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'AppController@index')->name('home');
 
+Route::resource('bookings', 'BookingController');
 Route::resource('categories', 'CategoryController');
 Route::resource('objects', 'ObjectController');
 Route::resource('users', 'UserController');
