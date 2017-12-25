@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Register">
+                    <input type="submit" value="Register" class="btn btn-block btn-primary">
                 </div>
             </form>
         </div>

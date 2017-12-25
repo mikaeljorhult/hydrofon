@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Reset password">
+                    <input type="submit" value="Reset password" class="btn btn-block btn-primary">
                 </div>
             </form>
         </div>

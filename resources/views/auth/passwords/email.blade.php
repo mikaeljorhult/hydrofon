@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Send reset link">
+                    <input type="submit" value="Send reset link" class="btn btn-block btn-primary">
                 </div>
             </form>
         </div>

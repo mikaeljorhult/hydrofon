@@ -1,0 +1,88 @@
+.btn {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 1.375rem;
+  color: inherit;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  font-weight: normal;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: none; // FOCUS STATE
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: .8;
+    box-shadow: none; // DISABLED STATE
+    cursor: not-allowed;
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    background-image: none;
+    box-shadow: none; // ACTIVE STATE
+  }
+}
+
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+
+.btn-link {
+  font-weight: normal;
+  color: $link-color;
+  background-color: transparent;
+  border-color: transparent;
+
+  &:hover {
+    color: $link-hover-color;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  &:focus,
+  &.focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $link-color;
+  }
+}
+
+
+.btn-block {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 1.375rem;
+
+  + .btn-block {
+    margin-top: .25rem;
+  }
+}
+
+// Colors.
+.btn-primary {
+  background-color: #e40428;
+  color: #fff;
+  border-color: #e40428;
+}
+
+.btn-secondary {
+  border-color: #ccc;
+}
+
+.btn-small {
+  padding: .375rem;
+}

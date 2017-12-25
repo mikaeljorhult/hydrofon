@@ -2,9 +2,12 @@
 @import '../../../node_modules/normalize.css/normalize.css';
 
 // Shared styles.
+@import './partials/shared/variables';
 @import './partials/shared/base';
 @import './partials/shared/layout';
 @import './partials/shared/forms';
+@import './partials/shared/button';
+@import './partials/shared/tables';
 @import './partials/shared/helpers';
 
 // Partials.
