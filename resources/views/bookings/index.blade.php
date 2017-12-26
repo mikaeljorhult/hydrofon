@@ -4,6 +4,8 @@
     <main class="main-content">
         <h1>Bookings</h1>
 
+        <a href="{{ route('bookings.create') }}">New booking</a>
+
         <table class="table">
             <thead>
                 <th>#</th>

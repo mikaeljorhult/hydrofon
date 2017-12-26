@@ -4,6 +4,8 @@
     <main class="main-content">
         <h1>Objects</h1>
 
+        <a href="{{ route('objects.create') }}">New object</a>
+
         <table class="table">
             <thead>
                 <th>#</th>

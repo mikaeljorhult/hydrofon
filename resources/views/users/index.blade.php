@@ -4,6 +4,8 @@
     <main class="main-content">
         <h1>Users</h1>
 
+        <a href="{{ route('users.create') }}">New user</a>
+
         <table class="table">
             <thead>
                 <th>#</th>
