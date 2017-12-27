@@ -37,7 +37,7 @@ class DestroyTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithObject()
     {
-        $user   = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs($user)->delete('objects/' . $booking->object->id);

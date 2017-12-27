@@ -6,7 +6,6 @@ use Hydrofon\Http\Requests\ObjectDestroyRequest;
 use Hydrofon\Http\Requests\ObjectStoreRequest;
 use Hydrofon\Http\Requests\ObjectUpdateRequest;
 use Hydrofon\Object;
-use Illuminate\Http\Request;
 
 class ObjectController extends Controller
 {

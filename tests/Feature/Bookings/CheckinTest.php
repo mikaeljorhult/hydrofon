@@ -61,7 +61,7 @@ class CheckinTest extends TestCase
         $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create([
             'start_time' => now()->subHour(),
-            'end_time' => now()->addHour(5),
+            'end_time'   => now()->addHour(5),
         ]);
 
         $this->actingAs($user)->post('checkins', [
