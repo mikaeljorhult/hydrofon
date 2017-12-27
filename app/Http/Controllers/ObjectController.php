@@ -2,6 +2,9 @@
 
 namespace Hydrofon\Http\Controllers;
 
+use Hydrofon\Http\Requests\ObjectDestroyRequest;
+use Hydrofon\Http\Requests\ObjectStoreRequest;
+use Hydrofon\Http\Requests\ObjectUpdateRequest;
 use Hydrofon\Object;
 use Illuminate\Http\Request;
 
@@ -32,13 +35,15 @@ class ObjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\ObjectStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ObjectStoreRequest $request)
     {
-        //
+        Object::create($request->all());
+
+        return redirect('/objects');
     }
 
     /**
@@ -68,25 +73,30 @@ class ObjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Hydrofon\Object $object
+     * @param \Hydrofon\Http\Requests\ObjectUpdateRequest $request
+     * @param \Hydrofon\Object $object
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Object $object)
+    public function update(ObjectUpdateRequest $request, Object $object)
     {
-        //
+        $object->update($request->all());
+
+        return redirect('/objects');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Object $object
+     * @param \Hydrofon\Object $object
+     * @param \Hydrofon\Http\Requests\ObjectDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Object $object)
+    public function destroy(Object $object, ObjectDestroyRequest $request)
     {
-        //
+        $object->delete();
+
+        return redirect('/objects');
     }
 }
