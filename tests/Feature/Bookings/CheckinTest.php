@@ -40,14 +40,35 @@ class CheckinTest extends TestCase
      */
     public function testCheckinCanBeUndone()
     {
-        $user     = factory(User::class)->create();
-        $checkout = factory(Checkin::class)->create();
+        $user    = factory(User::class)->create();
+        $checkin = factory(Checkin::class)->create();
 
-        $this->actingAs($user)->delete('checkouts/' . $checkout->id);
+        $this->actingAs($user)->delete('checkins/' . $checkin->id);
 
-        $this->assertDatabaseMissing('checkouts', [
-            'booking_id' => $checkout->booking_id,
-            'user_id'    => $checkout->user_id,
+        $this->assertDatabaseMissing('checkins', [
+            'booking_id' => $checkin->booking_id,
+            'user_id'    => $checkin->user_id,
         ]);
+    }
+
+    /**
+     * End time is shortened if it has not ended yet when booking is checked in.
+     *
+     * @return void
+     */
+    public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create([
+            'start_time' => now()->subHour(),
+            'end_time' => now()->addHour(5),
+        ]);
+
+        $this->actingAs($user)->post('checkins', [
+            'booking_id' => $booking->id,
+        ]);
+
+        $booking->refresh();
+        $this->assertTrue($booking->end_time->lte(now()));
     }
 }

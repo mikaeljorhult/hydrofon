@@ -22,6 +22,13 @@ class CheckinController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
+        // Shorten booking if it has not ended yet.
+        if ($booking->end_time->isFuture() && $booking->start_time->isPast()) {
+            $booking->update([
+                'end_time' => now(),
+            ]);
+        }
+
         return redirect()->back();
     }
 
