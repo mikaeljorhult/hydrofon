@@ -3,7 +3,9 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Booking;
-use Illuminate\Http\Request;
+use Hydrofon\Http\Requests\BookingDestroyRequest;
+use Hydrofon\Http\Requests\BookingStoreRequest;
+use Hydrofon\Http\Requests\BookingUpdateRequest;
 
 class BookingController extends Controller
 {
@@ -32,13 +34,18 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\BookingStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookingStoreRequest $request)
     {
-        //
+        Booking::create(array_merge(
+            $request->all(),
+            ['user_id' => auth()->user()->id]
+        ));
+
+        return redirect('/bookings');
     }
 
     /**
@@ -68,25 +75,30 @@ class BookingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\BookingUpdateRequest $request
      * @param  \Hydrofon\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(BookingUpdateRequest $request, Booking $booking)
     {
-        //
+        $booking->update($request->all());
+
+        return redirect('/bookings');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\Http\Requests\BookingDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking, BookingDestroyRequest $request)
     {
-        //
+        $booking->delete();
+
+        return redirect('/bookings');
     }
 }

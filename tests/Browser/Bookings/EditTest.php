@@ -1,0 +1,33 @@
+<?php
+
+namespace Tests\Browser\Bookings;
+
+use Hydrofon\Booking;
+use Hydrofon\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+
+class EditTest extends DuskTestCase
+{
+    use DatabaseMigrations;
+
+    /**
+     * User can navigate to edit page from bookings index.
+     *
+     * @return void
+     */
+    public function testUserCanNavigateToEditPage()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user, $booking) {
+            $browser->loginAs($user)
+                    ->visit('/bookings')
+                    ->clickLink($booking->object->name)
+                    ->assertPathIs('/bookings/' . $booking->id . '/edit')
+                    ->assertSourceHas('form');
+        });
+    }
+}
