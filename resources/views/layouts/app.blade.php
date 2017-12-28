@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" class="no-js {{ auth()->check() ? 'logged-in' : '' }}">
+<html lang="{{ app()->getLocale() }}" class="no-js {{ auth()->check() && auth()->user()->isAdmin() ? 'administrator' : '' }}">
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +26,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
         document.getElementById('toggle-logged-in').addEventListener('click', function(event) {
-            document.documentElement.classList.toggle('logged-in');
+            document.documentElement.classList.toggle('administrator');
             event.preventDefault();
         });
     </script>

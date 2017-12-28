@@ -19,7 +19,7 @@
         </section>
     @endguest
 
-    @auth
+    @admin
         <section class="user">
             <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
                  class="user-avatar"
@@ -35,7 +35,9 @@
                 <li><a href="{{ route('users.index') }}">Users</a></li>
             </ul>
         </nav>
+    @endadmin
 
+    @auth
         <section>
             <ul>
                 <li>

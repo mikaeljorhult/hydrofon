@@ -3,6 +3,7 @@
 namespace Hydrofon\Providers;
 
 use Illuminate\Database\SQLiteConnection;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
         if (DB::connection() instanceof SQLiteConnection) {
             DB::statement(DB::raw('PRAGMA foreign_keys=1'));
         }
+
+        // Custom Blade if statement for administrators.
+        Blade::if('admin', function () {
+            return auth()->check() && auth()->user()->isAdmin();
+        });
     }
 
     /**
