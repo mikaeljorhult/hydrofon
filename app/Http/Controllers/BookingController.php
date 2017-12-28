@@ -40,10 +40,12 @@ class BookingController extends Controller
      */
     public function store(BookingStoreRequest $request)
     {
-        Booking::create(array_merge(
-            $request->all(),
-            ['user_id' => auth()->user()->id]
-        ));
+        $currentUser = auth()->user();
+
+        Booking::create(array_merge($request->all(), [
+            'user_id'       => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
+            'created_by_id' => $currentUser->id,
+        ]));
 
         return redirect('/bookings');
     }
@@ -82,7 +84,11 @@ class BookingController extends Controller
      */
     public function update(BookingUpdateRequest $request, Booking $booking)
     {
-        $booking->update($request->all());
+        $currentUser = auth()->user();
+
+        $booking->update(array_merge($request->all(), [
+            'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $booking->user_id,
+        ]));
 
         return redirect('/bookings');
     }

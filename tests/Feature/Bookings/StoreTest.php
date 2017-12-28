@@ -29,6 +29,61 @@ class StoreTest extends TestCase
 
         $response->assertRedirect('/bookings');
         $this->assertDatabaseHas('bookings', [
+            'user_id'    => $user->id,
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * An administrator can create bookings for other users.
+     *
+     * @return void
+     */
+    public function testAdministratorCanCreateBookingForOtherUser()
+    {
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->make();
+
+        $response = $this->actingAs($admin)->post('bookings', [
+            'user_id'    => $user->id,
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect('/bookings');
+        $this->assertDatabaseHas('bookings', [
+            'user_id'    => $user->id,
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * A regular user cannot create bookings for other users.
+     *
+     * @return void
+     */
+    public function testUserCannotCreateBookingsForOtherUser()
+    {
+        $firstUser  = factory(User::class)->create();
+        $secondUser = factory(User::class)->create();
+        $booking    = factory(Booking::class)->make();
+
+        $response = $this->actingAs($firstUser)->post('bookings', [
+            'user_id'    => $secondUser->id,
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect('/bookings');
+        $this->assertDatabaseHas('bookings', [
+            'user_id'    => $firstUser->id,
             'object_id'  => $booking->object_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,

@@ -36,6 +36,56 @@ class UpdateTest extends TestCase
     }
 
     /**
+     * An administrator can change the user of a booking.
+     *
+     * @return void
+     */
+    public function testAdministratorCanChangeUserOfBooking()
+    {
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
+            'user_id'    => $user->id,
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect('/bookings');
+        $this->assertDatabaseHas('bookings', [
+            'id'      => $booking->id,
+            'user_id' => $user->id,
+        ]);
+    }
+
+    /**
+     * A regular user cannot change the user of a booking.
+     *
+     * @return void
+     */
+    public function testUserCannotChangeUserOfABooking()
+    {
+        $firstUser  = factory(User::class)->create();
+        $secondUser = factory(User::class)->create();
+        $booking    = factory(Booking::class)->create();
+
+        $response = $this->actingAs($firstUser)->put('bookings/' . $booking->id, [
+            'user_id'    => $secondUser->id,
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect('/bookings');
+        $this->assertDatabaseHas('bookings', [
+            'id'      => $booking->id,
+            'user_id' => $booking->user_id,
+        ]);
+    }
+
+    /**
      * Bookings must have an object.
      *
      * @return void
