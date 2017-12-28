@@ -31,6 +31,24 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_admin' => 'boolean',
+    ];
+
+    /**
+     * Whether user is administrator or not.
+     *
+     * @return boolean
+     */
+    public function isAdmin() {
+        return $this->is_admin;
+    }
+
+    /**
      * Bookings owned by user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

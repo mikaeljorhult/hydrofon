@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
+        factory(User::class)->states(['admin'])->create([
             'name'     => 'Default User',
             'email'    => 'default@hydrofon.se',
             'password' => bcrypt('default'),

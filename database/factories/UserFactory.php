@@ -21,3 +21,7 @@ $factory->define(Hydrofon\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->state(Hydrofon\User::class, 'admin', [
+    'is_admin' => true,
+]);
