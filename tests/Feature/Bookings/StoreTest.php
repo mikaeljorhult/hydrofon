@@ -253,4 +253,24 @@ class StoreTest extends TestCase
         $response->assertRedirect();
         $this->assertCount(0, Booking::all());
     }
+
+    /**
+     * Bookings can not overlap previous bookings.
+     *
+     * @return void
+     */
+    public function testBookingsCanNotOverlapPreviousBookings()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->post('bookings', [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect();
+        $this->assertCount(1, Booking::all());
+    }
 }

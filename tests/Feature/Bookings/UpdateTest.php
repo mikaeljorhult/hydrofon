@@ -128,4 +128,29 @@ class UpdateTest extends TestCase
             'object_id' => $booking->object_id,
         ]);
     }
+
+    /**
+     * Bookings can not overlap other bookings.
+     *
+     * @return void
+     */
+    public function testBookingsCanNotOverlapOtherBookings()
+    {
+        $user     = factory(User::class)->create();
+        $previous = factory(Booking::class)->create();
+        $booking  = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $previous->object_id,
+            'start_time' => $previous->start_time,
+            'end_time'   => $previous->end_time,
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('bookings', [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+    }
 }
