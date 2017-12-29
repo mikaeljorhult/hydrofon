@@ -2,6 +2,7 @@
 
 namespace Hydrofon;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
@@ -76,5 +77,40 @@ class Booking extends Model
     public function checkout()
     {
         return $this->hasOne(\Hydrofon\Checkout::class);
+    }
+
+    /**
+     * Scope a query to only include bookings between dates.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \Carbon\Carbon $startTime
+     * @param \Carbon\Carbon $endTime
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBetween($query, Carbon $startTime, Carbon $endTime)
+    {
+        // Add second and subtract second to allow booking to start or end at same time.
+        $startTime->addSecond();
+        $endTime->subSecond();
+
+        // Return any bookings with the same object and within the same time frame.
+        return $query->where(function ($query) use ($startTime, $endTime) {
+            $query
+                // Exactly the same time as given interval.
+                ->where([
+                    ['start_time', $startTime->copy()->subSecond()],
+                    ['end_time', $endTime->copy()->addSecond()]
+                ])
+                // Start before and end after interval.
+                ->orWhere([
+                    ['start_time', '<', $startTime],
+                    ['end_time', '>', $endTime]
+                ])
+                // Start in interval.
+                ->orWhereBetween('start_time', [$startTime, $endTime])
+                // End in interval.
+                ->orWhereBetween('end_time', [$startTime, $endTime]);
+        });
     }
 }

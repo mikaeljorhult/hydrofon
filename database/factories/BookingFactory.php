@@ -11,3 +11,8 @@ $factory->define(Hydrofon\Booking::class, function (Faker $faker) {
         'end_time'      => now()->addHours(3),
     ];
 });
+
+$factory->state(Hydrofon\Booking::class, 'past', [
+    'start_time' => now()->subYear(),
+    'end_time'   => now()->subYear()->addHour(),
+]);
