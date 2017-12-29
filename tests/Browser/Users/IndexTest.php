@@ -18,7 +18,7 @@ class IndexTest extends DuskTestCase
      */
     public function testUserCanNavigateToIndexPage()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->states('admin')->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
