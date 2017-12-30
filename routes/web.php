@@ -16,8 +16,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('home', 'AppController@index')->name('home');
 
-Route::get('/home', 'AppController@index')->name('home');
+Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');
+Route::post('calendar', 'CalendarController@store');
 
 Route::resources([
     'bookings'   => 'BookingController',
