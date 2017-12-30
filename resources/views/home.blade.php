@@ -9,8 +9,5 @@
                 {{ session('status') }}
             </div>
         @endif
-
-        <p>MAIN</p>
-        <button id="toggle-logged-in">Toggle</button>
     </main>
 @endsection

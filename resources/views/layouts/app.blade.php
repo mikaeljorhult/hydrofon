@@ -24,12 +24,6 @@
     @yield('content')
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        document.getElementById('toggle-logged-in').addEventListener('click', function(event) {
-            document.documentElement.classList.toggle('administrator');
-            event.preventDefault();
-        });
-    </script>
 </body>
 
 </html>
