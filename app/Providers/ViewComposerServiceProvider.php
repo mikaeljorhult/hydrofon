@@ -24,5 +24,9 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function register()
     {
         view()->composer('partials.object-list', 'Hydrofon\Http\ViewComposers\ObjectListComposer');
+        view()->composer([
+            'partials.object-list.category',
+            'partials.object-list.object',
+        ], 'Hydrofon\Http\ViewComposers\ObjectListSelectedComposer');
     }
 }

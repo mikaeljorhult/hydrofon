@@ -23,6 +23,11 @@ class ObjectListComposer
         ]);
     }
 
+    /**
+     * Get all categories without parents.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     private function categories()
     {
         return Category::whereNull('parent_id')
@@ -30,6 +35,11 @@ class ObjectListComposer
                        ->get();
     }
 
+    /**
+     * Get all objects without categories.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     private function objects()
     {
         return Object::doesntHave('categories')
