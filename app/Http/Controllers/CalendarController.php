@@ -55,7 +55,7 @@ class CalendarController extends Controller
      */
     public function store(CalendarRequest $request)
     {
-        session()->put('objects', array_unique($request->input('objects'), SORT_NUMERIC));
+        session()->put('objects', array_unique((array) $request->input('objects'), SORT_NUMERIC));
 
         return redirect('/calendar/' . $request->input('date'));
     }
