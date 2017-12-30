@@ -83,16 +83,16 @@ class Booking extends Model
      * Scope a query to only include bookings between dates.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param \Carbon\Carbon $startTime
-     * @param \Carbon\Carbon $endTime
+     * @param \Carbon\Carbon $start
+     * @param \Carbon\Carbon $end
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeBetween($query, Carbon $startTime, Carbon $endTime)
+    public function scopeBetween($query, Carbon $start, Carbon $end)
     {
         // Add second and subtract second to allow booking to start or end at same time.
-        $startTime->addSecond();
-        $endTime->subSecond();
+        $startTime = $start->copy()->addSecond();
+        $endTime   = $end->copy()->subSecond();
 
         // Return any bookings with the same object and within the same time frame.
         return $query->where(function ($query) use ($startTime, $endTime) {
