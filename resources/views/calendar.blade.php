@@ -8,9 +8,33 @@
 
         <section class="segel">
             <div class="segel-container">
+                <ul class="segel-grid">
+                    @for($i = 0; $i < 24; $i++)
+                        <li>&nbsp;</li>
+                    @endfor
+                </ul>
+
+                <aside class="segel-ruler">
+                    <ul>
+                        @for($i = 0; $i < 24; $i++)
+                            <li><span {{ now()->hour == $i ? 'class="current"' : '' }}>{{ $i }}</span></li>
+                        @endfor
+                    </ul>
+                </aside>
+
                 <ul class="segel-objects">
                     @foreach($objects as $object)
-                        <li class="segel-object">{{ $object->name }}</li>
+                        <li class="segel-object">
+                            {{ $object->name }}
+
+                            @if($object->bookings->count() > 0)
+                                <ul class="segel-bookings">
+                                    @foreach($object->bookings as $booking)
+                                        <li class="segel-booking"></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
                     @endforeach
                 </ul>
             </div>
