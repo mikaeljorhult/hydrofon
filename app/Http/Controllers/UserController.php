@@ -2,8 +2,10 @@
 
 namespace Hydrofon\Http\Controllers;
 
+use Hydrofon\Http\Requests\UserDestroyRequest;
+use Hydrofon\Http\Requests\UserStoreRequest;
+use Hydrofon\Http\Requests\UserUpdateRequest;
 use Hydrofon\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -14,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('name')->get();
+        $users = User::orderBy('email')->get();
 
         return view('users.index')->with('users', $users);
     }
@@ -32,13 +34,21 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\UserStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $input = $request->all();
+
+        if ($request->has('password')) {
+            $input['password'] = bcrypt($request->input('password'));
+        }
+
+        User::create($input);
+
+        return redirect('/users');
     }
 
     /**
@@ -68,25 +78,35 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param \Hydrofon\User $user
      *
      * @return void
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        //
+        $input = $request->all();
+
+        if ($request->has('password')) {
+            $input['password'] = bcrypt($request->input('password'));
+        }
+
+        $user->update($input);
+
+        return redirect('/users');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param \Hydrofon\User $user
+     * @param \Hydrofon\Http\Requests\UserDestroyRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function destroy($id)
+    public function destroy(User $user, UserDestroyRequest $request)
     {
-        //
+        $user->delete();
+
+        return redirect('/users');
     }
 }

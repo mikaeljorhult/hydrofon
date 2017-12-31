@@ -35,11 +35,11 @@ class UpdateTest extends DuskTestCase
     }
 
     /**
-     * Bookings can be updated through create form.
+     * Bookings must have an object.
      *
      * @return void
      */
-    public function testBookingsMustHaveAName()
+    public function testBookingsMustHaveAnObject()
     {
         $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();

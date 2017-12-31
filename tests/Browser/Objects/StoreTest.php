@@ -17,7 +17,7 @@ class StoreTest extends DuskTestCase
      *
      * @return void
      */
-    public function testobjectsCanBeStored()
+    public function testObjectsCanBeStored()
     {
         $user   = factory(User::class)->create();
         $object = factory(Object::class)->make();

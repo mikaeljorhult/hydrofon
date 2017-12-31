@@ -33,7 +33,7 @@ class UpdateTest extends DuskTestCase
     }
 
     /**
-     * Objects can be updated through create form.
+     * Objects must have a name.
      *
      * @return void
      */

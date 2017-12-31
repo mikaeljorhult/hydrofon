@@ -9,8 +9,8 @@
         <table class="table">
             <thead>
                 <th>#</th>
-                <th>Name</th>
                 <th>E-mail</th>
+                <th>Name</th>
                 <th>&nbsp;</th>
             </thead>
 
@@ -18,11 +18,11 @@
                 @forelse($users as $user)
                     <tr>
                         <td data-title="&nbsp;"></td>
-                        <td data-title="Name">
-                            <a href="{{ route('users.edit', $user) }}">{{ $user->name }}</a>
-                        </td>
                         <td data-title="E-mail">
-                            {{ $user->email }}
+                            <a href="{{ route('users.edit', $user) }}">{{ $user->email }}</a>
+                        </td>
+                        <td data-title="Name">
+                            {{ $user->name }}
                         </td>
                         <td data-title="&nbsp;">
                             {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
