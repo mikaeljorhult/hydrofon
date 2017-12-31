@@ -45,6 +45,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('name');
         $this->assertCount(0, Object::all());
     }
 }

@@ -102,6 +102,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('object_id');
         $this->assertDatabaseHas('bookings', [
             'object_id' => $booking->object_id,
         ]);
@@ -124,6 +125,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('object_id');
         $this->assertDatabaseHas('bookings', [
             'object_id' => $booking->object_id,
         ]);
@@ -147,10 +149,126 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('object_id');
         $this->assertDatabaseHas('bookings', [
             'object_id'  => $booking->object_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * A start time must be present.
+     *
+     * @return void
+     */
+    public function testBookingsMustHaveAStartTime()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => '',
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors('start_time');
+        $this->assertDatabaseHas('bookings', [
+            'start_time' => $booking->start_time,
+        ]);
+    }
+
+    /**
+     * Start time must be a valid timestamp.
+     *
+     * @return void
+     */
+    public function testStartTimeMustBeValidTimestamp()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => 'not-valid-time',
+            'end_time'   => $booking->end_time,
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors('start_time');
+        $this->assertDatabaseHas('bookings', [
+            'start_time' => $booking->start_time,
+        ]);
+    }
+
+    /**
+     * A end time must be present.
+     *
+     * @return void
+     */
+    public function testBookingsMustHaveAEndTime()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => '',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors('end_time');
+        $this->assertDatabaseHas('bookings', [
+            'end_time' => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * End time must be a valid timestamp.
+     *
+     * @return void
+     */
+    public function testEndTimeMustBeValidTimestamp()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => 'not-valid-time',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors('end_time');
+        $this->assertDatabaseHas('bookings', [
+            'end_time' => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * Booking have to start before it ends.
+     *
+     * @return void
+     */
+    public function testStartTimeMustBeBeforeEndTime()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->start_time->copy()->subHour(),
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors('end_time');
+        $this->assertDatabaseHas('bookings', [
+            'end_time' => $booking->end_time,
         ]);
     }
 }

@@ -124,13 +124,14 @@ class StoreTest extends TestCase
         $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
-        $response = $this->actingAs($user)->post('categories', [
+        $response = $this->actingAs($user)->post('bookings', [
             'object_id'  => '',
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('object_id');
         $this->assertCount(0, Booking::all());
     }
 
@@ -151,6 +152,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('object_id');
         $this->assertCount(0, Booking::all());
     }
 
@@ -171,6 +173,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('start_time');
         $this->assertCount(0, Booking::all());
     }
 
@@ -191,6 +194,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('start_time');
         $this->assertCount(0, Booking::all());
     }
 
@@ -211,6 +215,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('end_time');
         $this->assertCount(0, Booking::all());
     }
 
@@ -231,6 +236,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('end_time');
         $this->assertCount(0, Booking::all());
     }
 
@@ -251,6 +257,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('start_time');
         $this->assertCount(0, Booking::all());
     }
 
@@ -271,6 +278,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('object_id');
         $this->assertCount(1, Booking::all());
     }
 }

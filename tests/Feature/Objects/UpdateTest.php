@@ -46,6 +46,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('name');
         $this->assertDatabaseHas('objects', [
             'name' => $object->name,
         ]);

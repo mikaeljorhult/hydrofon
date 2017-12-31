@@ -48,6 +48,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('name');
         $this->assertCount(0, Category::all());
     }
 
@@ -67,6 +68,7 @@ class StoreTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('parent_id');
         $this->assertCount(0, Category::all());
     }
 }

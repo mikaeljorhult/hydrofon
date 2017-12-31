@@ -51,6 +51,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('name');
         $this->assertDatabaseHas('categories', [
             'name' => $category->name,
         ]);
@@ -74,6 +75,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('parent_id');
         $this->assertDatabaseHas('categories', [
             'name'      => $category->name,
             'parent_id' => $category->parent_id
@@ -98,6 +100,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response->assertRedirect();
+        $response->assertSessionHasErrors('parent_id');
         $this->assertDatabaseHas('categories', [
             'name'      => $category->name,
             'parent_id' => $category->parent_id
