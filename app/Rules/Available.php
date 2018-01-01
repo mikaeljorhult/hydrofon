@@ -66,10 +66,10 @@ class Available implements Rule
         }
 
         // Check if any bookings collide with requested objects within timestamps.
-        return Booking::where($attribute, $value)
-                      ->where('id', '!=', $this->ignore)
-                      ->between($this->startTime, $this->endTime)
-                      ->count() == 0;
+        return ! Booking::where($attribute, $value)
+                        ->where('id', '!=', $this->ignore)
+                        ->between($this->startTime, $this->endTime)
+                        ->exists();
     }
 
     /**
