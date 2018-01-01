@@ -113,4 +113,13 @@ class Booking extends Model
                 ->orWhereBetween('end_time', [$startTime, $endTime]);
         });
     }
+
+    /**
+     * Calculate duration in seconds.
+     *
+     * @return int
+     */
+    public function getDurationAttribute() {
+        return $this->start_time->diffInSeconds($this->end_time);
+    }
 }

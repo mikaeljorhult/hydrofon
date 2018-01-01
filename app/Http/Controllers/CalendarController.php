@@ -27,23 +27,14 @@ class CalendarController extends Controller
      */
     public function index($date = null)
     {
-        $date    = $this->date($date)->startOfDay();
-        $objects = $this->objects();
-
-        // Eager-load bookings if there are objects.
-        if ($objects->count() > 0) {
-            $objects->load([
-                'bookings' => function ($query) use ($date) {
-                    $query
-                        ->between($date, $date->copy()->endOfDay())
-                        ->orderBy('start_time');
-                }
-            ]);
-        }
+        $date       = $this->date($date)->startOfDay();
+        $objects    = $this->objects($date);
+        $timestamps = $this->timestamps($date);
 
         return view('calendar')
             ->with('date', $date)
-            ->with('objects', $objects);
+            ->with('objects', $objects)
+            ->with('timestamps', $timestamps);
     }
 
     /**
@@ -77,12 +68,42 @@ class CalendarController extends Controller
     /**
      * Return objects stored in session.
      *
+     * @param \Carbon\Carbon $date
+     *
      * @return \Illuminate\Support\Collection
      */
-    private function objects()
+    private function objects(Carbon $date)
     {
         return session()->has('objects')
-            ? Object::whereIn('id', session('objects'))->get()
+            ? Object::whereIn('id', session('objects'))
+                // Eager-load bookings within requested date.
+                    ->with([
+                    'bookings' => function ($query) use ($date) {
+                        $query
+                            ->between($date, $date->copy()->endOfDay())
+                            ->orderBy('start_time');
+                    }
+                ])
+                    ->get()
             : collect();
+    }
+
+    /**
+     * Build array of timestamps for use calendar.
+     *
+     * @param \Carbon\Carbon $date
+     *
+     * @return array
+     */
+    private function timestamps(Carbon $date)
+    {
+        $timestamps = [
+            'start' => $date->format('U'),
+            'end'   => $date->copy()->endOfDay()->format('U'),
+        ];
+
+        $timestamps['duration'] = $timestamps['end'] - $timestamps['start'];
+
+        return $timestamps;
     }
 }

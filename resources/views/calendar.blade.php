@@ -30,7 +30,12 @@
                             @if($object->bookings->count() > 0)
                                 <ul class="segel-bookings">
                                     @foreach($object->bookings as $booking)
-                                        <li class="segel-booking"></li>
+                                        <li class="segel-booking"
+                                            style="
+                                                width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
+                                                left: {{ ($booking->start_time->format('U') - $timestamps['start']) / $timestamps['duration'] * 100 }}%;
+                                            "
+                                        ></li>
                                     @endforeach
                                 </ul>
                             @endif

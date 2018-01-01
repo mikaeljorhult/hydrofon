@@ -2,6 +2,7 @@
 
 namespace Tests\Browser\Calendar;
 
+use Hydrofon\Booking;
 use Hydrofon\Object;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -47,11 +48,11 @@ class ObjectListTest extends DuskTestCase
     }
 
     /**
-     * A user can see the calendar page.
+     * Requested objects are shown in the calendar.
      *
      * @return void
      */
-    public function testUserCanVisitCalendar()
+    public function testObjectsAreShownInCalendar()
     {
         $user   = factory(User::class)->create();
         $object = factory(Object::class)->create();
@@ -62,7 +63,31 @@ class ObjectListTest extends DuskTestCase
                     ->check('objects[]', $object->id)
                     ->press('Show calendar')
                     ->assertPathBeginsWith('/calendar/')
-                    ->assertSeeIn('.segel', $object->name);
+                    ->assertSeeIn('.segel', $object->name)
+                    ->assertSourceMissing('segel-booking');
+        });
+    }
+
+    /**
+     * Bookings are shown in the calendar.
+     *
+     * @return void
+     */
+    public function testBookingsAreShownInCalendar()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create([
+            'start_time' => now()->startOfDay()->hour(1),
+            'end_time'   => now()->startOfDay()->hour(3),
+        ]);
+
+        $this->browse(function (Browser $browser) use ($user, $booking) {
+            $browser->loginAs($user)
+                    ->visit('/calendar')
+                    ->check('objects[]', $booking->object_id)
+                    ->press('Show calendar')
+                    ->assertSeeIn('.segel', $booking->object->name)
+                    ->assertSourceHas('"segel-booking"');
         });
     }
 }
