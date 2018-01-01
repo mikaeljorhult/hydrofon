@@ -1,12 +1,8 @@
 <aside class="sidebar">
     <header class="branding">
-        <h1 class="screen-reader">
+        <h1>
             <a href="{{ url('/') }}">{{ config('app.name', 'Hydrofon') }}</a>
         </h1>
-
-        <a href="{{ url('/') }}">
-            <img src="{{ asset('img/logo.png') }}" width="281" alt="{{ config('app.name', 'Hydrofon') }}"/>
-        </a>
     </header>
 
     @guest

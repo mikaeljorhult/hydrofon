@@ -17,14 +17,29 @@
 .user {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .user-avatar {
   width: 2rem;
-  margin-right: .5rem;
   border-radius: 50%;
 }
 
 .user-name {
+  margin-left: .5rem;
   padding-top: .25rem;
+}
+
+.administrator {
+  .user {
+    padding: 1rem .25rem;
+    background-color: rgba($brand-color, .8);
+    color: #fff;
+  }
+
+  .user-name {
+    font-size: .75rem;
+    line-height: 1.2;
+    text-align: left;
+  }
 }

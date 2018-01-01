@@ -1,0 +1,21 @@
+.branding {
+  padding: 2rem 1rem;
+  background-color: $brand-color;
+
+  h1 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  a {
+    color: #fff;
+  }
+}
+
+.administrator {
+  .branding {
+    padding: 3rem 0;
+  }
+}

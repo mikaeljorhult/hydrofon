@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 2rem 0 0;
 }
 
 .main-content {
@@ -17,9 +17,13 @@
   }
 
   .sidebar {
-    flex: 0 1 10rem;
+    flex: 0 1 8rem;
     flex-direction: column;
     justify-content: flex-start;
     padding: 0;
+
+    > * {
+      width: 100%;
+    }
   }
 }

@@ -5,6 +5,7 @@
 // Shared styles.
 @import './partials/shared/variables';
 @import './partials/shared/base';
+@import './partials/shared/typography';
 @import './partials/shared/layout';
 @import './partials/shared/forms';
 @import './partials/shared/button';
@@ -13,5 +14,6 @@
 
 // Partials.
 @import './partials/app/sidebar';
+@import './partials/app/branding';
 @import './partials/app/objectlist';
 @import './partials/app/calendar';
