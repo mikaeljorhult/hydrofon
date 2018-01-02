@@ -16,7 +16,7 @@ class HomeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee('Hydrofon');
+                    ->assertSeeLink('Hydrofon');
         });
     }
 }

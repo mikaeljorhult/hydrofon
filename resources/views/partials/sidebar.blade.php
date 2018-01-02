@@ -24,20 +24,25 @@
                 <div class="user-name">{{ auth()->user()->name }}</div>
             </a>
         </section>
-    @endauth
 
-    @admin
         <nav class="main-navigation">
             <ul>
-                <li><a href="{{ route('bookings.index') }}">Bookings</a></li>
-                <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                <li><a href="{{ route('objects.index') }}">Objects</a></li>
-                <li><a href="{{ route('users.index') }}">Users</a></li>
+                <li><a href="{{ route('home') }}">Book</a></li>
+                @admin
+                    <li><a href="{{ route('desk') }}">Desk</a></li>
+                @endadmin
             </ul>
-        </nav>
-    @endadmin
 
-    @auth
+            @admin
+                <ul>
+                    <li><a href="{{ route('bookings.index') }}">Bookings</a></li>
+                    <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                    <li><a href="{{ route('objects.index') }}">Objects</a></li>
+                    <li><a href="{{ route('users.index') }}">Users</a></li>
+                </ul>
+            @endadmin
+        </nav>
+
         <section>
             <ul>
                 <li>
