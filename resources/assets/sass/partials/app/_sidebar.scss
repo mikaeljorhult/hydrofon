@@ -34,7 +34,10 @@
   .user {
     padding: 1rem .25rem;
     background-color: rgba($brand-color, .8);
-    color: #fff;
+
+    a {
+      color: #fff;
+    }
   }
 
   .user-name {

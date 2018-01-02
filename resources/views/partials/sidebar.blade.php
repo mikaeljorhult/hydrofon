@@ -15,14 +15,18 @@
         </section>
     @endguest
 
-    @admin
+    @auth
         <section class="user">
-            <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
-                 class="user-avatar"
-                 alt="{{ auth()->user()->name }}"/>
-            <div class="user-name">{{ auth()->user()->name }}</div>
+            <a href="{{ route('profile') }}">
+                <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
+                     class="user-avatar"
+                     alt="{{ auth()->user()->name }}"/>
+                <div class="user-name">{{ auth()->user()->name }}</div>
+            </a>
         </section>
+    @endauth
 
+    @admin
         <nav class="main-navigation">
             <ul>
                 <li><a href="{{ route('bookings.index') }}">Bookings</a></li>

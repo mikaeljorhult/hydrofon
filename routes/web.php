@@ -21,6 +21,8 @@ Route::get('home', 'AppController@index')->name('home');
 Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');
 Route::post('calendar', 'CalendarController@store');
 
+Route::get('profile', 'ProfileController@index')->name('profile');
+
 Route::resources([
     'bookings'   => 'BookingController',
     'categories' => 'CategoryController',
