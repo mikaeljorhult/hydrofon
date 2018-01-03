@@ -18,10 +18,10 @@ class DestroyTest extends TestCase
      */
     public function testCategoriesCanBeDeleted()
     {
-        $user     = factory(User::class)->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
-        $response = $this->actingAs($user)->delete('categories/' . $category->id);
+        $response = $this->actingAs($admin)->delete('categories/' . $category->id);
 
         $response->assertRedirect('/categories');
         $this->assertDatabaseMissing('categories', [

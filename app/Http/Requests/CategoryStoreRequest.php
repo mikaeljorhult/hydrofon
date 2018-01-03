@@ -2,6 +2,7 @@
 
 namespace Hydrofon\Http\Requests;
 
+use Hydrofon\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,7 @@ class CategoryStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('create', Category::class);
     }
 
     /**
