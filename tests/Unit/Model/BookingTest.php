@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Model;
 
 use Hydrofon\Booking;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,6 +9,42 @@ use Tests\TestCase;
 class BookingTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * Booking has an owner.
+     *
+     * @return void
+     */
+    public function testBookingHasAnOwner()
+    {
+        $booking = factory(Booking::class)->create();
+
+        $this->assertInstanceOf(\Hydrofon\User::class, $booking->user);
+    }
+
+    /**
+     * Booking has a creator.
+     *
+     * @return void
+     */
+    public function testBookingHasACreator()
+    {
+        $booking = factory(Booking::class)->create();
+
+        $this->assertInstanceOf(\Hydrofon\User::class, $booking->created_by);
+    }
+
+    /**
+     * Booking has an object.
+     *
+     * @return void
+     */
+    public function testBookingHasAnObject()
+    {
+        $booking = factory(Booking::class)->create();
+
+        $this->assertInstanceOf(\Hydrofon\Object::class, $booking->object);
+    }
 
     /**
      * Bookings that end outside date range should be exluded in between scope.

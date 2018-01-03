@@ -36,7 +36,7 @@ class DeskTest extends DuskTestCase
     public function testAdminCanSearchForUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $user  = factory(User::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)

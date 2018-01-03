@@ -119,7 +119,8 @@ class Booking extends Model
      *
      * @return int
      */
-    public function getDurationAttribute() {
+    public function getDurationAttribute()
+    {
         return $this->start_time->diffInSeconds($this->end_time);
     }
 }
