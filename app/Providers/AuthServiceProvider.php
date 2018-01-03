@@ -12,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Hydrofon\Model' => 'Hydrofon\Policies\ModelPolicy',
+        \Hydrofon\User::class => \Hydrofon\Policies\UserPolicy::class,
     ];
 
     /**

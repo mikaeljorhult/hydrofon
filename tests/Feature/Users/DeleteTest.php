@@ -7,7 +7,7 @@ use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyTest extends TestCase
+class DeleteTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,7 +18,7 @@ class DestroyTest extends TestCase
      */
     public function testUsersCanBeDeleted()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->delete('users/' . $user->id);
@@ -36,7 +36,7 @@ class DestroyTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithUser()
     {
-        $admin   = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs($admin)->delete('users/' . $booking->user->id);
@@ -50,13 +50,31 @@ class DestroyTest extends TestCase
     }
 
     /**
+     * Non-admin users can not delete other users.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotDeleteUsers()
+    {
+        $notAdmin = factory(User::class)->create();
+        $user     = factory(User::class)->create();
+
+        $response = $this->actingAs($notAdmin)->delete('users/' . $user->id);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('users', [
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
      * Users can not delete themselves.
      *
      * @return void
      */
     public function testUsersCanNotDeleteThemselves()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
 
         $response = $this->actingAs($admin)->delete('users/' . $admin->id);
 

@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
      */
     public function testUsersCanBeUpdated()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/' . $user->id, [
@@ -39,7 +39,7 @@ class UpdateTest extends TestCase
      */
     public function testUsersMustHaveAName()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/' . $user->id, [
@@ -61,7 +61,7 @@ class UpdateTest extends TestCase
      */
     public function testUsersMustHaveAnEmailAddress()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/' . $user->id, [
@@ -83,7 +83,7 @@ class UpdateTest extends TestCase
      */
     public function testEmailAddressMustBeUnique()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/' . $user->id, [
@@ -105,7 +105,7 @@ class UpdateTest extends TestCase
      */
     public function testPasswordMustBeConfirmed()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/' . $user->id, [
@@ -129,7 +129,7 @@ class UpdateTest extends TestCase
      */
     public function testPasswordCanBeChanged()
     {
-        $admin = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/' . $user->id, [
@@ -143,5 +143,27 @@ class UpdateTest extends TestCase
 
         $response->assertRedirect();
         $this->assertTrue(Hash::check('new-password', $user->password));
+    }
+
+    /**
+     * Non admin users can not update users..
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotUpdateUsers()
+    {
+        $admin = factory(User::class)->states('admin')->create();
+        $user  = factory(User::class)->create();
+
+        $response = $this->actingAs($admin)->put('users/' . $user->id, [
+            'email' => 'test@hydrofon.se',
+            'name'  => $user->name,
+        ]);
+
+        $response->assertRedirect('/users');
+        $this->assertDatabaseMissing('users', [
+            'id'    => $user->id,
+            'email' => $user->email,
+        ]);
     }
 }

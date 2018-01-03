@@ -25,9 +25,11 @@
                             {{ $user->name }}
                         </td>
                         <td data-title="&nbsp;">
-                            {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
-                                {!! Form::submit('Delete') !!}
-                            {!! Form::close() !!}
+                            @can('delete', $user)
+                                {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
+                                    {!! Form::submit('Delete') !!}
+                                {!! Form::close() !!}
+                            @endcan
                         </td>
                     </tr>
                 @empty
