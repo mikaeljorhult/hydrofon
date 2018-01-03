@@ -18,10 +18,10 @@ class StoreTest extends TestCase
      */
     public function testObjectsCanBeStored()
     {
-        $user   = factory(User::class)->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->make();
 
-        $response = $this->actingAs($user)->post('objects', [
+        $response = $this->actingAs($admin)->post('objects', [
             'name' => $object->name,
         ]);
 
@@ -38,14 +38,34 @@ class StoreTest extends TestCase
      */
     public function testObjectsMustHaveAName()
     {
-        $user = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
 
-        $response = $this->actingAs($user)->post('objects', [
+        $response = $this->actingAs($admin)->post('objects', [
             'name' => '',
         ]);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('name');
         $this->assertCount(0, Object::all());
+    }
+
+    /**
+     * Non-admin users can not store objects.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotStoreObjects()
+    {
+        $user   = factory(User::class)->create();
+        $object = factory(Object::class)->make();
+
+        $response = $this->actingAs($user)->post('objects', [
+            'name' => $object->name,
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseMissing('objects', [
+            'name' => $object->name,
+        ]);
     }
 }

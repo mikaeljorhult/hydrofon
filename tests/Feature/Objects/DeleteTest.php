@@ -8,7 +8,7 @@ use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyTest extends TestCase
+class DeleteTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,10 +19,10 @@ class DestroyTest extends TestCase
      */
     public function testObjectsCanBeDeleted()
     {
-        $user   = factory(User::class)->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($user)->delete('objects/' . $object->id);
+        $response = $this->actingAs($admin)->delete('objects/' . $object->id);
 
         $response->assertRedirect('/objects');
         $this->assertDatabaseMissing('objects', [
@@ -37,16 +37,35 @@ class DestroyTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithObject()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $this->actingAs($user)->delete('objects/' . $booking->object->id);
+        $this->actingAs($admin)->delete('objects/' . $booking->object->id);
 
         $this->assertDatabaseMissing('objects', [
             'id' => $booking->object->id,
         ]);
         $this->assertDatabaseMissing('bookings', [
             'id' => $booking->id,
+        ]);
+    }
+
+    /**
+     * Non-admin users can not delete objects.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotDeleteObjects()
+    {
+        $user   = factory(User::class)->create();
+        $object = factory(Object::class)->create();
+
+        $response = $this->actingAs($user)->delete('objects/' . $object->id);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('objects', [
+            'id'   => $object->id,
+            'name' => $object->name,
         ]);
     }
 }

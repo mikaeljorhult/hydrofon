@@ -19,11 +19,11 @@ class UpdateTest extends DuskTestCase
      */
     public function testObjectsCanBeUpdated()
     {
-        $user   = factory(User::class)->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $this->browse(function (Browser $browser) use ($user, $object) {
-            $browser->loginAs($user)
+        $this->browse(function (Browser $browser) use ($admin, $object) {
+            $browser->loginAs($admin)
                     ->visit('/objects/' . $object->id . '/edit')
                     ->type('name', 'New object Name')
                     ->press('Update')
@@ -39,11 +39,11 @@ class UpdateTest extends DuskTestCase
      */
     public function testObjectsMustHaveAName()
     {
-        $user   = factory(User::class)->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $this->browse(function (Browser $browser) use ($user, $object) {
-            $browser->loginAs($user)
+        $this->browse(function (Browser $browser) use ($admin, $object) {
+            $browser->loginAs($admin)
                     ->visit('/objects/' . $object->id . '/edit')
                     ->type('name', '')
                     ->press('Update')

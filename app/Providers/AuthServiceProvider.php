@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         \Hydrofon\Category::class => \Hydrofon\Policies\CategoryPolicy::class,
+        \Hydrofon\Object::class   => \Hydrofon\Policies\ObjectPolicy::class,
         \Hydrofon\User::class     => \Hydrofon\Policies\UserPolicy::class,
     ];
 

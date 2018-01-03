@@ -18,10 +18,10 @@ class UpdateTest extends TestCase
      */
     public function testObjectsCanBeUpdated()
     {
-        $user   = factory(User::class)->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($user)->put('objects/' . $object->id, [
+        $response = $this->actingAs($admin)->put('objects/' . $object->id, [
             'name' => 'New Object Name',
         ]);
 
@@ -38,16 +38,37 @@ class UpdateTest extends TestCase
      */
     public function testObjectsMustHaveAName()
     {
-        $user   = factory(User::class)->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($user)->put('objects/' . $object->id, [
+        $response = $this->actingAs($admin)->put('objects/' . $object->id, [
             'name' => '',
         ]);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('name');
         $this->assertDatabaseHas('objects', [
+            'name' => $object->name,
+        ]);
+    }
+
+    /**
+     * Non-admin users can not update objects.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotUpdateObjects()
+    {
+        $user   = factory(User::class)->create();
+        $object = factory(Object::class)->create();
+
+        $response = $this->actingAs($user)->put('objects/' . $object->id, [
+            'name' => 'New Object Name',
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('objects', [
+            'id'   => $object->id,
             'name' => $object->name,
         ]);
     }
