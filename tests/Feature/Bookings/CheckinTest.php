@@ -19,17 +19,17 @@ class CheckinTest extends TestCase
      */
     public function testBookingCanBeCheckedIn()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $this->actingAs($user)->post('checkins', [
+        $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
         ]);
 
         $this->assertNotNull($booking->checkin);
         $this->assertDatabaseHas('checkins', [
             'booking_id' => $booking->id,
-            'user_id'    => $user->id,
+            'user_id'    => $admin->id,
         ]);
     }
 
@@ -40,10 +40,10 @@ class CheckinTest extends TestCase
      */
     public function testCheckinCanBeUndone()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $checkin = factory(Checkin::class)->create();
 
-        $this->actingAs($user)->delete('checkins/' . $checkin->id);
+        $this->actingAs($admin)->delete('checkins/' . $checkin->id);
 
         $this->assertDatabaseMissing('checkins', [
             'booking_id' => $checkin->booking_id,
@@ -58,17 +58,79 @@ class CheckinTest extends TestCase
      */
     public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create([
             'start_time' => now()->subHour(),
             'end_time'   => now()->addHour(5),
         ]);
 
-        $this->actingAs($user)->post('checkins', [
+        $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
         ]);
 
         $booking->refresh();
         $this->assertTrue($booking->end_time->lte(now()));
+    }
+
+    /**
+     * Booking to be checked in must exist in database.
+     *
+     * @return void
+     */
+    public function testBookingMustExist()
+    {
+        $admin = factory(User::class)->states('admin')->create();
+
+        $response = $this->actingAs($admin)->post('checkins', [
+            'booking_id' => 100,
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors('booking_id');
+        $this->assertDatabaseMissing('checkins', [
+            'booking_id' => 100,
+            'user_id'    => $admin->id,
+        ]);
+    }
+
+    /**
+     * Non-admin users can not check in bookings.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotCheckInBookings()
+    {
+        $admin   = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($admin)->post('checkins', [
+            'booking_id' => $booking->id,
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertNull($booking->checkin);
+        $this->assertDatabaseMissing('checkins', [
+            'booking_id' => $booking->id,
+            'user_id'    => $admin->id,
+        ]);
+    }
+
+    /**
+     * Non-admin users can not delete checkins.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotDeleteCheckins()
+    {
+        $admin   = factory(User::class)->create();
+        $checkin = factory(Checkin::class)->create();
+
+        $response = $this->actingAs($admin)->delete('checkins/' . $checkin->id);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('checkins', [
+            'booking_id' => $checkin->booking_id,
+            'user_id'    => $checkin->user_id,
+        ]);
     }
 }

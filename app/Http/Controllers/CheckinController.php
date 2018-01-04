@@ -4,18 +4,19 @@ namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Booking;
 use Hydrofon\Checkin;
-use Illuminate\Http\Request;
+use Hydrofon\Http\Requests\CheckinDestroyRequest;
+use Hydrofon\Http\Requests\CheckinStoreRequest;
 
 class CheckinController extends Controller
 {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\CheckinStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CheckinStoreRequest $request)
     {
         $booking = Booking::findOrFail($request->get('booking_id'));
         $booking->checkin()->create([
@@ -36,10 +37,11 @@ class CheckinController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \Hydrofon\Checkin $checkin
+     * @param \Hydrofon\Http\Requests\CheckinDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Checkin $checkin)
+    public function destroy(Checkin $checkin, CheckinDestroyRequest $request)
     {
         $checkin->delete();
 
