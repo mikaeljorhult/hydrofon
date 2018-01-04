@@ -50,6 +50,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if user owns another model.
+     *
+     * @return boolean
+     */
+    public function owns($related)
+    {
+        return $this->id === $related->user_id;
+    }
+
+    /**
      * Bookings owned by user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

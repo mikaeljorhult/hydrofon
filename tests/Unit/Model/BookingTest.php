@@ -3,6 +3,8 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Booking;
+use Hydrofon\Object;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +21,7 @@ class BookingTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $this->assertInstanceOf(\Hydrofon\User::class, $booking->user);
+        $this->assertInstanceOf(User::class, $booking->user);
     }
 
     /**
@@ -31,7 +33,7 @@ class BookingTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $this->assertInstanceOf(\Hydrofon\User::class, $booking->created_by);
+        $this->assertInstanceOf(User::class, $booking->created_by);
     }
 
     /**
@@ -43,7 +45,7 @@ class BookingTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $this->assertInstanceOf(\Hydrofon\Object::class, $booking->object);
+        $this->assertInstanceOf(Object::class, $booking->object);
     }
 
     /**
