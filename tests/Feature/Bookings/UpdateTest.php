@@ -3,6 +3,7 @@
 namespace Tests\Feature\Bookings;
 
 use Hydrofon\Booking;
+use Hydrofon\Checkout;
 use Hydrofon\Object;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,11 +20,11 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $user      = factory(User::class)->create();
+        $admin     = factory(User::class)->states('admin')->create();
         $booking   = factory(Booking::class)->create();
         $newObject = factory(Object::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $newObject->id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
@@ -78,10 +79,107 @@ class UpdateTest extends TestCase
             'end_time'   => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
             'id'      => $booking->id,
             'user_id' => $booking->user_id,
+        ]);
+    }
+
+    /**
+     * A user can change a booking it owns.
+     *
+     * @return void
+     */
+    public function testUserCanChangeBookingItOwns()
+    {
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($booking->user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time'   => $booking->end_time->copy()->addHour(),
+        ]);
+
+        $response->assertRedirect('/bookings');
+        $this->assertDatabaseHas('bookings', [
+            'id'         => $booking->id,
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time'   => $booking->end_time->copy()->addHour(),
+        ]);
+    }
+
+    /**
+     * A user can not change a booking it don't own.
+     *
+     * @return void
+     */
+    public function testUserCanNotChangeBookingItDontOwn()
+    {
+        $user    = factory(User::class)->create();
+        $booking = factory(Booking::class)->create();
+
+        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time'   => $booking->end_time->copy()->addHour(),
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('bookings', [
+            'id'         => $booking->id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * A user can not change a booking that has started.
+     *
+     * @return void
+     */
+    public function testUserCanNotChangeBookingThatHasStarted()
+    {
+        $booking = factory(Booking::class)->states('past')->create();
+
+        $response = $this->actingAs($booking->user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time'   => $booking->end_time->copy()->addHour(),
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('bookings', [
+            'id'         => $booking->id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
+        ]);
+    }
+
+    /**
+     * A user can not change a booking that has started.
+     *
+     * @return void
+     */
+    public function testUserCanNotChangeBookingThatHasBeenCheckedOut()
+    {
+        $booking = factory(Booking::class)->create();
+
+        factory(Checkout::class)->create([
+            'booking_id' => $booking->id,
+        ]);
+
+        $response = $this->actingAs($booking->user)->put('bookings/' . $booking->id, [
+            'object_id'  => $booking->object_id,
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time'   => $booking->end_time->copy()->addHour(),
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('bookings', [
+            'id'         => $booking->id,
+            'start_time' => $booking->start_time,
+            'end_time'   => $booking->end_time,
         ]);
     }
 
@@ -92,10 +190,10 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAnObject()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => '',
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
@@ -115,10 +213,10 @@ class UpdateTest extends TestCase
      */
     public function testObjectMustExist()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => 100,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
@@ -138,11 +236,11 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanNotOverlapOtherBookings()
     {
-        $user     = factory(User::class)->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $previous = factory(Booking::class)->create();
         $booking  = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $previous->object_id,
             'start_time' => $previous->start_time,
             'end_time'   => $previous->end_time,
@@ -164,10 +262,10 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAStartTime()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $booking->object_id,
             'start_time' => '',
             'end_time'   => $booking->end_time,
@@ -187,10 +285,10 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $booking->object_id,
             'start_time' => 'not-valid-time',
             'end_time'   => $booking->end_time,
@@ -210,10 +308,10 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAEndTime()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $booking->object_id,
             'start_time' => $booking->start_time,
             'end_time'   => '',
@@ -233,10 +331,10 @@ class UpdateTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $booking->object_id,
             'start_time' => $booking->start_time,
             'end_time'   => 'not-valid-time',
@@ -256,10 +354,10 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeBeforeEndTime()
     {
-        $user    = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('bookings/' . $booking->id, [
+        $response = $this->actingAs($admin)->put('bookings/' . $booking->id, [
             'object_id'  => $booking->object_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->start_time->copy()->subHour(),

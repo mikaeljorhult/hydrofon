@@ -2,6 +2,7 @@
 
 namespace Hydrofon\Http\Requests;
 
+use Hydrofon\Booking;
 use Hydrofon\Rules\Available;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,7 @@ class BookingStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('create', Booking::class);
     }
 
     /**

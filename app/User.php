@@ -56,7 +56,7 @@ class User extends Authenticatable
      */
     public function owns($related)
     {
-        return $this->id === $related->user_id;
+        return $this->id == $related->user_id;
     }
 
     /**

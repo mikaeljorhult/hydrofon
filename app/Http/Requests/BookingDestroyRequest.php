@@ -13,7 +13,7 @@ class BookingDestroyRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('delete', $this->route('booking'));
     }
 
     /**
