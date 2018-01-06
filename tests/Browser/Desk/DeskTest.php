@@ -41,8 +41,7 @@ class DeskTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)
                     ->visit('/desk')
-                    ->type('search', $user->email)
-                    ->press('Search')
+                    ->keys('[name="search"]', $user->email, '{enter}')
                     ->assertPathIs('/desk/' . $user->email)
                     ->assertSee($user->name);
         });

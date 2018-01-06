@@ -2,6 +2,8 @@
 
 @section('content')
     <main class="main-content">
-        <p>MAIN</p>
+        <section class="container">
+            <p>MAIN</p>
+        </section>
     </main>
 @endsection

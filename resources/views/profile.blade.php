@@ -2,8 +2,10 @@
 
 @section('content')
     <main class="main-content">
-        <header>
-            <h1>{{ $user->name }}</h1>
-        </header>
+        <section class="container">
+            <header>
+                <h1>{{ $user->name }}</h1>
+            </header>
+        </section>
     </main>
 @endsection

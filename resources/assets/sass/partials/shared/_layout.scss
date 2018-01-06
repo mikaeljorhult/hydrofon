@@ -8,7 +8,18 @@
 
 .main-content {
   flex: 1 1 auto;
-  padding: 1rem 2rem;
+  background-color: #eff4fa;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.main-content,
+.container {
+  > *:first-child {
+    margin-top: 0;
+  }
 }
 
 .administrator {

@@ -2,6 +2,8 @@
 
 @section('content')
     <main class="main-content">
-        <h1>{{ $category->name }}</h1>
+        <section class="container">
+            <h1>{{ $category->name }}</h1>
+        </section>
     </main>
 @endsection

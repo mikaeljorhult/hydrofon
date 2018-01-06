@@ -2,6 +2,8 @@
 
 @section('content')
     <main class="main-content">
-        <h1>{{ $booking->start_time }} - {{ $booking->end_time }}</h1>
+        <section class="container">
+            <h1>{{ $booking->start_time }} - {{ $booking->end_time }}</h1>
+        </section>
     </main>
 @endsection
