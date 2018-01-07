@@ -3,7 +3,6 @@
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding: 0 1rem;
   background-color: #313541;
   color: rgba(255, 255, 255, .6);
 
@@ -48,4 +47,20 @@
 
 .objectlist-children {
   margin: 0 0 .5rem .5rem;
+}
+
+.objectlist-date {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, .8);
+
+  input[type="text"] {
+    margin-bottom: 0;
+    padding: .5rem;
+    font-size: .8rem
+  }
+
+  input[type="submit"] {
+    margin: .25rem 0 0;
+    padding: .25rem;
+  }
 }
