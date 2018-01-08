@@ -2,7 +2,7 @@
     {!! Form::open(['route' => 'calendar']) !!}
         <section class="objectlist-date">
             {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d')) !!}
-            {!! Form::submit('Show calendar', ['class' => 'btn btn-block btn-primary']) !!}
+            {!! Form::submit('Show calendar', ['class' => 'btn btn-primary image-replacement']) !!}
         </section>
 
         <div class="container">

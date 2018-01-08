@@ -11,6 +11,12 @@
   clip-path: inset(50%);
 }
 
+.image-replacement {
+  overflow: hidden;
+  text-indent: 125%;
+  white-space: nowrap;
+}
+
 .narrow-content {
   max-width: 30rem;
   margin: 0 auto;
