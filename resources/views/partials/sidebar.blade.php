@@ -46,15 +46,28 @@
         <section>
             <ul>
                 <li>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        Log out
-                    </a>
+                    @if(auth()->user()->isImpersonated())
+                        <a href="{{ route('impersonation') }}"
+                           onclick="event.preventDefault();
+                            document.getElementById('impersonation-form').submit();">
+                            Stop impersonation
+                        </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
+                        <form id="impersonation-form" action="{{ route('impersonation') }}" method="POST" style="display: none;">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                        </form>
+                    @else
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            Log out
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    @endif
                 </li>
             </ul>
         </section>

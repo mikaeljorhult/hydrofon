@@ -1,6 +1,6 @@
 <section class="objectlist">
     {!! Form::open(['route' => 'calendar']) !!}
-        <section class="objectlist-date">
+        <section class="objectlist-date input-group">
             {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d')) !!}
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary image-replacement']) !!}
         </section>

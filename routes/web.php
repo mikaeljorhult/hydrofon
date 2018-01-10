@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('home', 'AppController@index')->name('home');
+Route::get('profile', 'ProfileController@index')->name('profile');
 
 Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');
 Route::post('calendar', 'CalendarController@store');
@@ -24,7 +25,8 @@ Route::post('calendar', 'CalendarController@store');
 Route::get('desk/{search?}', 'DeskController@index')->name('desk');
 Route::post('desk', 'DeskController@store');
 
-Route::get('profile', 'ProfileController@index')->name('profile');
+Route::post('impersonation', 'ImpersonationController@store')->middleware('admin')->name('impersonation');
+Route::delete('impersonation', 'ImpersonationController@destroy');
 
 Route::resources([
     'bookings'   => 'BookingController',

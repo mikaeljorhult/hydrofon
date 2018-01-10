@@ -16,10 +16,11 @@ textarea,
 select {
   width: 100%;
   margin-bottom: 1.5rem;
-  padding: 1.375rem;
+  padding: .5rem;
   background-color: #eee;
   border: none;
   border-radius: .25rem;
+  font-size: .8rem;
   appearance: none;
 
   .has-error {
@@ -37,4 +38,28 @@ input[type="checkbox"] {
   height: auto;
   margin-bottom: 0;
   appearance: checkbox;
+}
+
+.input-group {
+  display: flex;
+
+  :first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  :last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  > input,
+  > select {
+    margin-bottom: 0;
+  }
+
+  input[type="submit"] {
+    flex: 0 0 2rem;
+    padding: .25rem;
+  }
 }

@@ -50,6 +50,16 @@ class User extends Authenticatable
     }
 
     /**
+     * User is being impersonated by another user.
+     *
+     * @return bool
+     */
+    public function isImpersonated()
+    {
+        return session()->has('impersonate');
+    }
+
+    /**
      * Check if user owns another model.
      *
      * @return boolean
