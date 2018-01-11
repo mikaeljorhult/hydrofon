@@ -25,7 +25,7 @@ Route::post('calendar', 'CalendarController@store');
 Route::get('desk/{search?}', 'DeskController@index')->name('desk');
 Route::post('desk', 'DeskController@store');
 
-Route::post('impersonation', 'ImpersonationController@store')->middleware('admin')->name('impersonation');
+Route::post('impersonation', 'ImpersonationController@store')->name('impersonation');
 Route::delete('impersonation', 'ImpersonationController@destroy');
 
 Route::resources([

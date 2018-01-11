@@ -13,7 +13,7 @@
             {!! Form::open(['route' => 'impersonation']) !!}
                 <div class="input-group">
                     {!! Form::select('user_id', \Hydrofon\User::pluck('name', 'id'), session()->get('impersonate', null), ['placeholder' => 'Impersonate user...']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary image-replacement']) !!}
+                    {!! Form::submit('Impersonate', ['class' => 'btn btn-primary image-replacement']) !!}
                 </div>
             {!! Form::close() !!}
         </section>
