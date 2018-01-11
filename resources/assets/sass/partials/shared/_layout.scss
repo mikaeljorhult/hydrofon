@@ -1,8 +1,14 @@
+body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .sidebar {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex: 0 0 100%;
   padding: 0 2rem 0 0;
 }
 
@@ -24,7 +30,7 @@
 
 .administrator {
   body {
-    display: flex;
+    flex-wrap: nowrap;
   }
 
   .sidebar {
@@ -36,5 +42,9 @@
     > * {
       width: 100%;
     }
+  }
+
+  .main-content {
+    overflow-y: scroll;
   }
 }
