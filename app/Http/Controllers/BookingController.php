@@ -47,7 +47,12 @@ class BookingController extends Controller
             'created_by_id' => $currentUser->id,
         ]));
 
-        return redirect('/bookings');
+        // Redirect to index if from admin page, otherwise back to referer.
+        if (str_contains($request->headers->get('referer'), '/bookings')) {
+            return redirect('/bookings');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

@@ -27,7 +27,7 @@ class StoreTest extends TestCase
             'end_time'   => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'user_id'    => $user->id,
             'object_id'  => $booking->object_id,
@@ -54,7 +54,7 @@ class StoreTest extends TestCase
             'end_time'   => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'user_id'    => $user->id,
             'object_id'  => $booking->object_id,
@@ -81,7 +81,7 @@ class StoreTest extends TestCase
             'end_time'   => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'user_id'    => $firstUser->id,
             'object_id'  => $booking->object_id,
@@ -107,7 +107,7 @@ class StoreTest extends TestCase
             'end_time'   => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'user_id'   => $user->id,
             'object_id' => $booking->object_id,
