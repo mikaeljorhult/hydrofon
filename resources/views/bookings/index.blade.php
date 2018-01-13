@@ -48,6 +48,12 @@
                                     {!! Form::close() !!}
                                 @endif
 
+                                {!! Form::open(['route' => 'calendar']) !!}
+                                    {{ Form::hidden('date', $booking->start_time->format('Y-m-d')) }}
+                                    {{ Form::hidden('objects[]', $booking->object->id) }}
+                                    {!! Form::submit('View') !!}
+                                {!! Form::close() !!}
+
                                 {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
                                     {!! Form::submit('Delete') !!}
                                 {!! Form::close() !!}
