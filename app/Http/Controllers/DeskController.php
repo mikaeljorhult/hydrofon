@@ -28,6 +28,13 @@ class DeskController extends Controller
     {
         $user = $this->resolveUser($search);
 
+        $user->load([
+            'bookings' => function ($query) {
+                $query->between(now()->subDays(4), now()->addDays(4))
+                      ->orderBy('start_time', 'DESC');
+            }
+        ]);
+
         return view('desk')
             ->with('search', $search)
             ->with('user', $user);
