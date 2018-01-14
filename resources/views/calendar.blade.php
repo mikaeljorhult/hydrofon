@@ -17,22 +17,26 @@
                 @include('partials.segel')
 
                 @admin
-                    <div class="form-group">
+                    <div class="input-group">
                         {!! Form::label('user_id', 'User') !!}
                         {!! Form::select('user_id', \Hydrofon\User::pluck('name', 'id'), auth()->user()->id) !!}
                     </div>
                 @endadmin
 
-                <div class="form-group">
+                <div class="input-group">
                     {!! Form::label('object_id', 'Object') !!}
-                    {!! Form::select('object_id', \Hydrofon\Object::pluck('name', 'id'), null) !!}
+                    {!! Form::select('object_id', \Hydrofon\Object::pluck('name', 'id'), $objects ? $objects->first()->id : null) !!}
+                </div>
+
+                <div class="input-group">
+                    {!! Form::label('start_time', 'Time') !!}
+                    {!! Form::text('start_time', null, ['placeholder' => 'Start']) !!}
+                    {!! Form::label('end_time', '-') !!}
+                    {!! Form::text('end_time', null, ['placeholder' => 'End']) !!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('start_time', 'Time') !!}
-                    {!! Form::text('start_time', null, ['placeholder' => 'Start']) !!}
-                     - 
-                    {!! Form::text('end_time', null, ['placeholder' => 'End']) !!}
+                    {!! Form::submit('Book', ['class' => 'btn btn-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </section>

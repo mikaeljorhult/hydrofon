@@ -43,16 +43,6 @@ input[type="checkbox"] {
 .input-group {
   display: flex;
 
-  :first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
   > input,
   > select {
     margin-bottom: 0;
@@ -62,4 +52,31 @@ input[type="checkbox"] {
     flex: 0 0 2rem;
     padding: .25rem;
   }
+
+  label {
+    padding: .5rem;
+    background-color: #313541;
+    color: rgba(255, 255, 255, .6);
+    font-size: .8rem;
+
+    &:first-child {
+      padding-right: 1rem;
+      border-top-left-radius: .25rem;
+      border-bottom-left-radius: .25rem;
+    }
+  }
+
+  :first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  :last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.inline-form {
+  display: flex;
 }

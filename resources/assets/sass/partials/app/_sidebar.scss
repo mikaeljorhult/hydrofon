@@ -31,6 +31,10 @@
 }
 
 .administrator {
+  .sidebar {
+    overflow-y: scroll;
+  }
+
   .user {
     padding: 1rem .25rem;
     background-color: rgba($brand-color, .8);
