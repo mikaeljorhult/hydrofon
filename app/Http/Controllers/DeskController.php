@@ -26,22 +26,26 @@ class DeskController extends Controller
      */
     public function index($search = null)
     {
-        $user = $this->resolveUser($search);
+        // Only resolve user if a search string is available.
+        if ($search) {
+            $user = $this->resolveUser($search);
 
-        $user->load([
-            'bookings' => function ($query) {
-                $query->between(now()->subDays(4), now()->addDays(4))
-                      ->orderBy('start_time', 'DESC');
-            }
-        ]);
+            // Eager load all bookings 4 days in the past and in the future.
+            $user->load([
+                'bookings' => function ($query) {
+                    $query->between(now()->subDays(4), now()->addDays(4))
+                          ->orderBy('start_time', 'DESC');
+                }
+            ]);
+        }
 
         return view('desk')
             ->with('search', $search)
-            ->with('user', $user);
+            ->with('user', $user ?? null);
     }
 
     /**
-     * Retrieve user and redirect to desk view.
+     * Redirect to desk view with search term.
      *
      * @param \Hydrofon\Http\Requests\DeskRequest $request
      *
@@ -53,12 +57,18 @@ class DeskController extends Controller
     }
 
     /**
+     * Resolve user from search term.
+     * Checks against user e-mail address and otherwise against identifiers.
+     *
      * @param $search
      *
      * @return mixed
      */
     private function resolveUser($search)
     {
-        return User::where('email', $search)->first();
+        return User::where('email', $search)
+                   ->orWhereHas('identifiers', function ($query) use ($search) {
+                       $query->where('value', $search);
+                   })->first();
     }
 }

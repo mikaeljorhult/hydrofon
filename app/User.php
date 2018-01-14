@@ -70,6 +70,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all identifiers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function identifiers()
+    {
+        return $this->morphMany(\Hydrofon\Identifier::class, 'identifiable');
+    }
+
+    /**
      * Bookings owned by user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
