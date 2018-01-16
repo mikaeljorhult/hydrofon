@@ -25,7 +25,7 @@
 
                 <div class="input-group">
                     {!! Form::label('object_id', 'Object') !!}
-                    {!! Form::select('object_id', \Hydrofon\Object::pluck('name', 'id'), $objects ? $objects->first()->id : null) !!}
+                    {!! Form::select('object_id', \Hydrofon\Object::pluck('name', 'id'), $objects->count() > 0 ? $objects->first()->id : null) !!}
                 </div>
 
                 <div class="input-group">
