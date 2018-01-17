@@ -9,7 +9,23 @@ body {
   align-items: center;
   justify-content: space-between;
   flex: 0 0 100%;
-  padding: 0 2rem 0 0;
+  padding: 0 1rem 0 0;
+
+  > * {
+    flex-grow: 0;
+  }
+
+  .main-navigation {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+}
+
+.main-navigation {
+  ul {
+    margin: 0 1rem;
+  }
 }
 
 .main-content {
@@ -34,13 +50,21 @@ body {
   }
 
   .sidebar {
-    flex: 0 1 8rem;
+    flex: 0 1 7rem;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 0;
 
     > * {
       width: 100%;
+    }
+  }
+
+  .main-navigation {
+    flex-direction: column;
+
+    ul {
+      margin: 1rem 0;
     }
   }
 

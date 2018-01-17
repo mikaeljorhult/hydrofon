@@ -1,6 +1,6 @@
 .sidebar {
   background-color: #282c37;
-  color: #596073;
+  color: #757e96;
   text-align: center;
 
   ul {
@@ -9,7 +9,7 @@
   }
 
   a {
-    color: #596073;
+    color: #757e96;
     text-decoration: none;
   }
 }
@@ -30,6 +30,30 @@
   padding-top: .25rem;
 }
 
+.sidebar-link {
+  a {
+    display: block;
+    width: 100%;
+    padding: .5rem 0;
+    font-size: .75rem;
+    line-height: 1.2;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, .1);
+    }
+  }
+
+  svg {
+    display: block;
+    width: 2rem;
+    margin: 0 auto .25rem;
+
+    path {
+      fill: #757e96;
+    }
+  }
+}
+
 .administrator {
   .sidebar {
     overflow-y: scroll;
@@ -45,6 +69,7 @@
   }
 
   .user-name {
+    margin: 0;
     font-size: .75rem;
     line-height: 1.2;
     text-align: left;
