@@ -7,7 +7,7 @@
 
             <a href="{{ route('users.identifiers.create', [$user]) }}">New identifier</a>
 
-            <table class="table">
+            <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
                     <th>Value</th>

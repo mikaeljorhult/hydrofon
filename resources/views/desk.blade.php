@@ -9,7 +9,7 @@
                 <h1>{{ $user->name }}</h1>
 
                 <h2>Bookings</h2>
-                <table class="table">
+                <table class="table" cellspacing="0">
                     <thead>
                         <th>Object</th>
                         <th>Start</th>

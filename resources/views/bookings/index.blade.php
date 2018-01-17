@@ -7,7 +7,7 @@
 
             <a href="{{ route('bookings.create') }}">New booking</a>
 
-            <table class="table">
+            <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
                     <th>Object</th>

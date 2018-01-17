@@ -7,7 +7,7 @@
 
             <a href="{{ route('users.create') }}">New user</a>
 
-            <table class="table">
+            <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
                     <th>E-mail</th>

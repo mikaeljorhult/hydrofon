@@ -7,7 +7,7 @@
 
             <a href="{{ route('categories.create') }}">New category</a>
 
-            <table class="table">
+            <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
                     <th>Name</th>
