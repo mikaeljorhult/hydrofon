@@ -46,4 +46,24 @@ class DeskTest extends DuskTestCase
                     ->assertSee($user->name);
         });
     }
+
+    /**
+     * A user can be found by an identifier.
+     *
+     * @return void
+     */
+    public function testUserCanBeFoundByIdentifier()
+    {
+        $admin      = factory(User::class)->states('admin')->create();
+        $user       = factory(User::class)->create();
+        $identifier = $user->identifiers()->create(['value' => 'test-identifier']);
+
+        $this->browse(function (Browser $browser) use ($admin, $user, $identifier) {
+            $browser->loginAs($admin)
+                    ->visit('/desk')
+                    ->keys('[name="search"]', $identifier->value, '{enter}')
+                    ->assertPathIs('/desk/' . $identifier->value)
+                    ->assertSee($user->name);
+        });
+    }
 }
