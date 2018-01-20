@@ -7,4 +7,17 @@
   > * {
     width: 33%;
   }
+
+  label,
+  input,
+  select {
+    background: transparent none no-repeat center left;
+  }
+
+  .input-group {
+    label {
+      width: 1.5rem;
+      padding: 0;
+    }
+  }
 }

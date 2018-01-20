@@ -41,7 +41,11 @@ input[type="checkbox"] {
 }
 
 .input-group {
-  display: flex;
+  &,
+  label {
+    display: flex;
+    align-items: center;
+  }
 
   > input,
   > select {
