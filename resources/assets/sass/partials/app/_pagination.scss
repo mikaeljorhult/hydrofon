@@ -1,0 +1,17 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  list-style: none;
+
+  span,
+  a {
+    margin: 0 .25rem;
+    padding: .25rem;
+  }
+
+  .disabled {
+    opacity: .25;
+  }
+}
