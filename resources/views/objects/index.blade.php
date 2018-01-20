@@ -3,7 +3,9 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>Objects</h1>
+            <h1>
+                <a href="{{ route('objects.index') }}">Objects</a>
+            </h1>
 
             <a href="{{ route('objects.create') }}">New object</a>
 
@@ -38,6 +40,8 @@
                     @endforelse
                 </tbody>
             </table>
+
+            {{ $objects->links() }}
         </section>
     </main>
 @endsection

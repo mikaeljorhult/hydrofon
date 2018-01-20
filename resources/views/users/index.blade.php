@@ -3,7 +3,9 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>Users</h1>
+            <h1>
+                <a href="{{ route('users.index') }}">Users</a>
+            </h1>
 
             <a href="{{ route('users.create') }}">New user</a>
 
@@ -40,6 +42,8 @@
                     @endforelse
                 </tbody>
             </table>
+
+            {{ $users->links() }}
         </section>
     </main>
 @endsection

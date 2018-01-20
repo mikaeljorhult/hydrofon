@@ -3,7 +3,9 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>Bookings</h1>
+            <h1>
+                <a href="{{ route('bookings.index') }}">Bookings</a>
+            </h1>
 
             <a href="{{ route('bookings.create') }}">New booking</a>
 
@@ -66,6 +68,8 @@
                     @endforelse
                 </tbody>
             </table>
+
+            {{ $bookings->links() }}
         </section>
     </main>
 @endsection
