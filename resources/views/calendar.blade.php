@@ -9,8 +9,12 @@
         <section class="container">
             <header class="calendar-header">
                 <h1>{{ $date->format('Y-m-d') }}</h1>
-                <a href="{{ route('calendar', ['date' => $date->copy()->subDay()->format('Y-m-d')]) }}">Previous</a>
-                <a href="{{ route('calendar', ['date' => $date->copy()->addDay()->format('Y-m-d')]) }}">Next</a>
+                <a href="{{ route('calendar', ['date' => $date->copy()->subDay()->format('Y-m-d')]) }}" title="Previous">
+                    @svg('chevron-left')
+                </a>
+                <a href="{{ route('calendar', ['date' => $date->copy()->addDay()->format('Y-m-d')]) }}" title="Next">
+                    @svg('chevron-right')
+                </a>
             </header>
 
             {!! Form::open(['route' => 'bookings.store']) !!}
