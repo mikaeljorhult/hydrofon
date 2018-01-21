@@ -1,5 +1,6 @@
 <li class="objectlist-category">
     <span>
+        @svg('folder')
         {{ $category->name }}
     </span>
 

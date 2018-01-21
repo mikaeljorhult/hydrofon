@@ -13,5 +13,8 @@
         </div>
     {!! Form::close() !!}
 
-    <a href="#" id="objectlist-toggle" class="objectlist-toggle"></a>
+    <a href="#" id="objectlist-toggle" class="objectlist-toggle">
+        @svg('chevron-left', ['class' => 'objectlist-toggle-icon'])
+        @svg('chevron-right', ['class' => 'objectlist-toggle-icon'])
+    </a>
 </section>

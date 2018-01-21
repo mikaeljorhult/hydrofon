@@ -18,6 +18,13 @@
   li {
     margin: .25rem 0;
   }
+
+  svg {
+    width: 1.25rem;
+    height: auto;
+    vertical-align: text-bottom;
+    fill: #d45843;
+  }
 }
 
 .objectlist__collapsed {
@@ -29,24 +36,15 @@
 }
 
 .objectlist-toggle {
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
+  display: flex;
+  width: 2rem;
+  height: 3.9rem;
   position: absolute;
   top: 0;
   right: 0;
-  color: #fff;
-  line-height: 1.5rem;
-  text-align: center;
+  align-items: center;
+  justify-content: flex-end;
   text-decoration: none;
-
-  &:before {
-    content: '<';
-
-    .objectlist__collapsed & {
-      content: '>';
-    }
-  }
 }
 
 .objectlist-children {
@@ -54,6 +52,22 @@
 }
 
 .objectlist-date {
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 1rem;
   background-color: rgba(255, 255, 255, .8);
+}
+
+.objectlist-toggle-icon {
+  display: none;
+
+  &:first-child {
+    display: block;
+  }
+
+  .objectlist__collapsed & {
+    display: block;
+
+    &:first-child {
+      display: none;
+    }
+  }
 }
