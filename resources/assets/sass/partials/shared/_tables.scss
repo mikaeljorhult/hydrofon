@@ -23,8 +23,24 @@ th {
   text-transform: uppercase;
 }
 
-td {
-  a {
-    color: #73818d;
+.table-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    vertical-align: middle;
+    margin-left: .5rem;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  svg {
+    vertical-align: middle;
+
+    path {
+      fill: $link-color;
+    }
   }
 }

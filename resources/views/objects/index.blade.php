@@ -27,9 +27,11 @@
                             <td data-title="Description">
                                 {{ $object->description }}
                             </td>
-                            <td data-title="&nbsp;">
+                            <td data-title="&nbsp;" class="table-actions">
                                 {!! Form::model($object, ['route' => ['objects.destroy', $object->id], 'method' => 'DELETE' ]) !!}
-                                    {!! Form::submit('Delete') !!}
+                                <button type="submit" title="Delete">
+                                    @svg('delete')
+                                </button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

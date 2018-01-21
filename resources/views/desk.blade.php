@@ -30,7 +30,7 @@
                                     <td data-title="End">
                                         {{ $booking->end_time }}
                                     </td>
-                                    <td data-title="&nbsp;">
+                                    <td data-title="&nbsp;" class="table-actions">
                                         @unless($booking->checkin)
                                             {!! Form::open(['route' => ['checkins.store']]) !!}
                                                 {!! Form::hidden('booking_id', $booking->id) !!}

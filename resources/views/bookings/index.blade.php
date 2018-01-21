@@ -35,29 +35,37 @@
                             <td data-title="End">
                                 {{ $booking->end_time }}
                             </td>
-                            <td data-title="&nbsp;">
+                            <td data-title="&nbsp;" class="table-actions">
                                 @unless($booking->checkin)
                                     {!! Form::open(['route' => ['checkins.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
-                                        {!! Form::submit('Check in') !!}
+                                        <button type="submit" title="Check in">
+                                            @svg('login-variant')
+                                        </button>
                                     {!! Form::close() !!}
                                 @endif
 
                                 @unless($booking->checkout)
                                     {!! Form::open(['route' => ['checkouts.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
-                                        {!! Form::submit('Check out') !!}
+                                        <button type="submit" title="Check out">
+                                            @svg('logout-variant')
+                                        </button>
                                     {!! Form::close() !!}
                                 @endif
 
                                 {!! Form::open(['route' => 'calendar']) !!}
                                     {{ Form::hidden('date', $booking->start_time->format('Y-m-d')) }}
                                     {{ Form::hidden('objects[]', $booking->object->id) }}
-                                    {!! Form::submit('View') !!}
+                                    <button type="submit" title="View in calendar">
+                                        @svg('calendar')
+                                    </button>
                                 {!! Form::close() !!}
 
                                 {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
-                                    {!! Form::submit('Delete') !!}
+                                    <button type="submit" title="Delete">
+                                        @svg('delete')
+                                    </button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

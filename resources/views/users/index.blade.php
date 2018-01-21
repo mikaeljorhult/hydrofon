@@ -27,10 +27,12 @@
                             <td data-title="Name">
                                 {{ $user->name }}
                             </td>
-                            <td data-title="&nbsp;">
+                            <td data-title="&nbsp;" class="table-actions">
                                 @can('delete', $user)
                                     {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
-                                        {!! Form::submit('Delete') !!}
+                                    <button type="submit" title="Delete">
+                                        @svg('delete')
+                                    </button>
                                     {!! Form::close() !!}
                                 @endcan
                             </td>
