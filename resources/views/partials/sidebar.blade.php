@@ -57,6 +57,11 @@
                             </a>
                         </li>
                         <li class="sidebar-link">
+                            <a href="{{ route('groups.index') }}">
+                                @svg('lock-outline') Groups
+                            </a>
+                        </li>
+                        <li class="sidebar-link">
                             <a href="{{ route('objects.index') }}">
                                 @svg('cellphone-link') Objects
                             </a>
