@@ -3,7 +3,9 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Group;
-use Illuminate\Http\Request;
+use Hydrofon\Http\Requests\GroupDestroyRequest;
+use Hydrofon\Http\Requests\GroupStoreRequest;
+use Hydrofon\Http\Requests\GroupUpdateRequest;
 
 class GroupController extends Controller
 {
@@ -32,11 +34,11 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\GroupStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupStoreRequest $request)
     {
         Group::create($request->all());
 
@@ -70,12 +72,12 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\Http\Requests\GroupUpdateRequest $request
+     * @param \Hydrofon\Group $group
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(GroupUpdateRequest $request, Group $group)
     {
         $group->update($request->all());
 
@@ -85,11 +87,12 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\Group $group
+     * @param \Hydrofon\Http\Requests\GroupDestroyRequest $reqest
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Group $group, GroupDestroyRequest $reqest)
     {
         $group->delete();
 

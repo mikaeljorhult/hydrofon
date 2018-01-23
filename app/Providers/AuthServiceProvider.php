@@ -16,6 +16,7 @@ class AuthServiceProvider extends ServiceProvider
         \Hydrofon\Category::class   => \Hydrofon\Policies\CategoryPolicy::class,
         \Hydrofon\Checkin::class    => \Hydrofon\Policies\CheckinPolicy::class,
         \Hydrofon\Checkout::class   => \Hydrofon\Policies\CheckoutPolicy::class,
+        \Hydrofon\Group::class      => \Hydrofon\Policies\GroupPolicy::class,
         \Hydrofon\Identifier::class => \Hydrofon\Policies\IdentifierPolicy::class,
         \Hydrofon\Object::class     => \Hydrofon\Policies\ObjectPolicy::class,
         \Hydrofon\User::class       => \Hydrofon\Policies\UserPolicy::class,
