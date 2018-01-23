@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Browser\Objects;
+namespace Tests\Browser\Groups;
 
-use Hydrofon\Object;
+use Hydrofon\Group;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -24,25 +24,25 @@ class IndexTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)
                     ->visit('/home')
-                    ->clickLink('Objects')
-                    ->assertPathIs('/objects');
+                    ->clickLink('Groups')
+                    ->assertPathIs('/groups');
         });
     }
 
     /**
-     * Available objects are displayed on index page.
+     * Available groups are displayed on index page.
      *
      * @return void
      */
     public function testObjectIsListedOnIndexPage()
     {
-        $user   = factory(User::class)->create();
-        $object = factory(Object::class)->create();
+        $user  = factory(User::class)->create();
+        $group = factory(Group::class)->create();
 
-        $this->browse(function (Browser $browser) use ($user, $object) {
+        $this->browse(function (Browser $browser) use ($user, $group) {
             $browser->loginAs($user)
-                    ->visit('/objects')
-                    ->assertSee($object->name);
+                    ->visit('/groups')
+                    ->assertSee($group->name);
         });
     }
 }
