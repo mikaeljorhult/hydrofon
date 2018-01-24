@@ -12,8 +12,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Hydrofon\Events\Event' => [
-            'Hydrofon\Listeners\EventListener',
+        'Illuminate\Auth\Events\Login' => [
+            'Hydrofon\Listeners\UpdateLastLoggedInAt',
         ],
     ];
 

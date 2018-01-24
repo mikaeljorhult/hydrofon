@@ -36,7 +36,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'is_admin' => 'boolean',
+        'is_admin'          => 'boolean',
+        'last_logged_in_at' => 'datetime',
     ];
 
     /**
