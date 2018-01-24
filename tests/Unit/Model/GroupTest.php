@@ -3,8 +3,6 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Group;
-use Hydrofon\Object;
-use Hydrofon\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

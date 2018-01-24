@@ -40,7 +40,7 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidGroupIsRedirectedBackToCreateForm()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $group = factory(Object::class)->make();
 
         $this->browse(function (Browser $browser) use ($admin, $group) {
