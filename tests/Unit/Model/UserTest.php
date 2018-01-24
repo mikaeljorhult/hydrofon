@@ -25,6 +25,18 @@ class UserTest extends TestCase
     }
 
     /**
+     * User can belong to a group.
+     *
+     * @return void
+     */
+    public function testUserCanBelongToAGroup()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertInstanceOf(Collection::class, $user->groups);
+    }
+
+    /**
      * User is recognized as administrator if is_admin attribute is true.
      *
      * @return void

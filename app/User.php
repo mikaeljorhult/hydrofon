@@ -88,4 +88,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(\Hydrofon\Booking::class);
     }
+
+    /**
+     * Groups the user belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(\Hydrofon\Group::class);
+    }
 }

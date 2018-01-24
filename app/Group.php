@@ -14,4 +14,24 @@ class Group extends Model
     protected $fillable = [
         'name',
     ];
+
+    /**
+     * Objects in the group.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function objects()
+    {
+        return $this->belongsToMany(\Hydrofon\Object::class);
+    }
+
+    /**
+     * Users in the group.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(\Hydrofon\User::class);
+    }
 }

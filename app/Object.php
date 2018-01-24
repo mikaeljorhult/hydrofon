@@ -37,4 +37,14 @@ class Object extends Model
         return $this->belongsToMany(\Hydrofon\Category::class)
                     ->orderBy('name');
     }
+
+    /**
+     * Groups the object belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(\Hydrofon\Group::class);
+    }
 }

@@ -34,4 +34,16 @@ class ObjectTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $object->categories);
     }
+
+    /**
+     * Object can belong to a group.
+     *
+     * @return void
+     */
+    public function testObjectCanBelongToAGroup()
+    {
+        $object = factory(Object::class)->create();
+
+        $this->assertInstanceOf(Collection::class, $object->groups);
+    }
 }
