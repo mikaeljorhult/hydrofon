@@ -115,6 +115,43 @@ class Booking extends Model
     }
 
     /**
+     * Scope a query to only include bookings in the past.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCurrent($query)
+    {
+        return $query->where('start_time', '<=', now())
+                ->where('end_time', '>=', now());
+    }
+
+    /**
+     * Scope a query to only include bookings in the past.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePast($query)
+    {
+        return $query->where('end_time', '<=', now());
+    }
+
+    /**
+     * Scope a query to only include bookings in the future.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFuture($query)
+    {
+        return $query->where('start_time', '>=', now());
+    }
+
+    /**
      * Calculate duration in seconds.
      *
      * @return int

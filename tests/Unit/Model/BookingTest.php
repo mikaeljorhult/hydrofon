@@ -160,4 +160,70 @@ class BookingTest extends TestCase
         $this->assertCount(1, $bookings);
         $this->assertEquals($bookings->first()->id, $booking->id);
     }
+
+    /**
+     * Bookings that end before current time should be included.
+     *
+     * @return void
+     */
+    public function testPastScopeIncludePastBookings()
+    {
+        // Create a current and a future booking.
+        factory(Booking::class)->states('current')->create();
+        factory(Booking::class)->states('future')->create();
+
+        // Create a past booking.
+        $booking = factory(Booking::class)->states('past')->create();
+
+        // Get all past bookings.
+        $bookings = Booking::past()->get();
+
+        // Only past booking should be returned.
+        $this->assertCount(1, $bookings);
+        $this->assertEquals($bookings->first()->id, $booking->id);
+    }
+
+    /**
+     * Bookings that end before current time should be included.
+     *
+     * @return void
+     */
+    public function testFutureScopeIncludeFutureBookings()
+    {
+        // Create a current and a past booking.
+        factory(Booking::class)->states('current')->create();
+        factory(Booking::class)->states('past')->create();
+
+        // Create a future booking.
+        $booking = factory(Booking::class)->states('future')->create();
+
+        // Get all future bookings.
+        $bookings = Booking::future()->get();
+
+        // Only future booking should be returned.
+        $this->assertCount(1, $bookings);
+        $this->assertEquals($bookings->first()->id, $booking->id);
+    }
+
+    /**
+     * Bookings that has started but not ended should be included.
+     *
+     * @return void
+     */
+    public function testCurrentScopeIncludeCurrentBookings()
+    {
+        // Create a past and a future booking.
+        factory(Booking::class)->states('past')->create();
+        factory(Booking::class)->states('future')->create();
+
+        // Create a current booking.
+        $booking = factory(Booking::class)->states('current')->create();
+
+        // Get all current bookings.
+        $bookings = Booking::current()->get();
+
+        // Only future booking should be returned.
+        $this->assertCount(1, $bookings);
+        $this->assertEquals($bookings->first()->id, $booking->id);
+    }
 }

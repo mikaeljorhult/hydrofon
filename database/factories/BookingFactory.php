@@ -12,7 +12,17 @@ $factory->define(Hydrofon\Booking::class, function (Faker $faker) {
     ];
 });
 
+$factory->state(Hydrofon\Booking::class, 'current', [
+    'start_time' => now()->subHour(),
+    'end_time'   => now()->addHour(),
+]);
+
 $factory->state(Hydrofon\Booking::class, 'past', [
     'start_time' => now()->subYear(),
     'end_time'   => now()->subYear()->addHour(),
+]);
+
+$factory->state(Hydrofon\Booking::class, 'future', [
+    'start_time' => now()->addYear(),
+    'end_time'   => now()->addYear()->addHour(),
 ]);
