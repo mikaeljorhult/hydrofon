@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "cross-env": "^5.1",
-        "laravel-mix": "^1.0",
+        "laravel-mix": "^2.0",
         "normalize.css": "^7.0.0",
         "segel": "^0.0.10"
     }
