@@ -26,7 +26,11 @@ class IdentifierUpdateRequest extends FormRequest
     {
         // TODO: Validation should fail for __ANY__ e-mail address.
         return [
-            'value' => ['required', Rule::unique('identifiers')->ignore($this->route('identifier')->id), Rule::unique('users', 'email')]
+            'value' => [
+                'required',
+                Rule::unique('identifiers')->ignore($this->route('identifier')->id),
+                Rule::unique('users', 'email')
+            ]
         ];
     }
 }

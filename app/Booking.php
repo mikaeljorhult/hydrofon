@@ -124,7 +124,7 @@ class Booking extends Model
     public function scopeCurrent($query)
     {
         return $query->where('start_time', '<=', now())
-                ->where('end_time', '>=', now());
+                     ->where('end_time', '>=', now());
     }
 
     /**
