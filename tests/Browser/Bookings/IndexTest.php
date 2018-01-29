@@ -42,7 +42,7 @@ class IndexTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $booking) {
             $browser->loginAs($user)
                     ->visit('/bookings')
-                    ->assertSee($booking->start_time);
+                    ->assertSee($booking->start_time->format('Y-m-d H:i'));
         });
     }
 }

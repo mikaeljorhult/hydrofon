@@ -11,8 +11,10 @@
                 <h1>{{ $date->format('Y-m-d') }}</h1>
                 <a href="{{ route('calendar', ['date' => $date->copy()->subDay()->format('Y-m-d')]) }}" title="Previous">
                     @svg('chevron-left')
+                    <span class="screen-reader">Previous</span>
                 </a>
                 <a href="{{ route('calendar', ['date' => $date->copy()->addDay()->format('Y-m-d')]) }}" title="Next">
+                    <span class="screen-reader">Next</span>
                     @svg('chevron-right')
                 </a>
             </header>
