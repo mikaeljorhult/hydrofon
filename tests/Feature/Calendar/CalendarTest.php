@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Calendar;
 
 use Hydrofon\Object;
 use Hydrofon\User;
