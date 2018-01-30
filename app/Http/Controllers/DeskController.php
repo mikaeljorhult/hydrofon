@@ -30,13 +30,15 @@ class DeskController extends Controller
         if ($search) {
             $user = $this->resolveUser($search);
 
-            // Eager load all bookings 4 days in the past and in the future.
-            $user->load([
-                'bookings' => function ($query) {
-                    $query->between(now()->subDays(4), now()->addDays(4))
-                          ->orderBy('start_time', 'DESC');
-                }
-            ]);
+            if ($user) {
+                // Eager load all bookings 4 days in the past and in the future.
+                $user->load([
+                    'bookings' => function ($query) {
+                        $query->between(now()->subDays(4), now()->addDays(4))
+                              ->orderBy('start_time', 'DESC');
+                    }
+                ]);
+            }
         }
 
         return view('desk')
