@@ -12,8 +12,8 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\User $model
+     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User $model
      *
      * @return mixed
      */
@@ -25,7 +25,7 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Hydrofon\User $user
+     * @param \Hydrofon\User $user
      *
      * @return mixed
      */
@@ -37,8 +37,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\User $model
+     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User $model
      *
      * @return mixed
      */
@@ -50,8 +50,8 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\User $model
+     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User $model
      *
      * @return mixed
      */
