@@ -27,23 +27,18 @@ class DeskController extends Controller
     public function index($search = null)
     {
         // Only resolve user if a search string is available.
-        if ($search) {
-            $user = $this->resolveUser($search);
+        $user = $search ? $this->resolveUser($search) : null;
 
-            if ($user) {
-                // Eager load all bookings 4 days in the past and in the future.
-                $user->load([
-                    'bookings' => function ($query) {
-                        $query->between(now()->subDays(4), now()->addDays(4))
-                              ->orderBy('start_time', 'DESC');
-                    }
-                ]);
-            }
-        }
+        // Get all bookings 4 days in the past and in the future.
+        $bookings = $user ? $user->bookings()->where(function ($query) {
+            $query->between(now()->subDays(4), now()->addDays(4))
+                  ->orderBy('start_time', 'DESC');
+        })->paginate(15) : collect();
 
         return view('desk')
             ->with('search', $search)
-            ->with('user', $user ?? null);
+            ->with('user', $user)
+            ->with('bookings', $bookings);
     }
 
     /**

@@ -18,8 +18,8 @@
                     </thead>
 
                     <tbody>
-                        @if($user->bookings->count() > 0)
-                            @foreach($user->bookings as $booking)
+                        @if($bookings->count() > 0)
+                            @foreach($bookings as $booking)
                                 <tr>
                                     <td data-title="Object">
                                         <a href="{{ route('bookings.edit', $booking) }}">{{ $booking->object->name }}</a>
@@ -72,6 +72,8 @@
                         @endif
                     </tbody>
                 </table>
+
+                {{ $bookings->links() }}
             @else
                 <p>No user was found.</p>
             @endif
