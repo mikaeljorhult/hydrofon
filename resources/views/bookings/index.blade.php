@@ -36,20 +36,20 @@
                                 {{ $booking->end_time }}
                             </td>
                             <td data-title="&nbsp;" class="table-actions">
+                                @unless($booking->checkout)
+                                    {!! Form::open(['route' => ['checkouts.store']]) !!}
+                                    {!! Form::hidden('booking_id', $booking->id) !!}
+                                        <button type="submit" title="Check out">
+                                            @svg('logout-variant')
+                                        </button>
+                                    {!! Form::close() !!}
+                                @endif
+
                                 @unless($booking->checkin)
                                     {!! Form::open(['route' => ['checkins.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
                                         <button type="submit" title="Check in">
                                             @svg('login-variant')
-                                        </button>
-                                    {!! Form::close() !!}
-                                @endif
-
-                                @unless($booking->checkout)
-                                    {!! Form::open(['route' => ['checkouts.store']]) !!}
-                                        {!! Form::hidden('booking_id', $booking->id) !!}
-                                        <button type="submit" title="Check out">
-                                            @svg('logout-variant')
                                         </button>
                                     {!! Form::close() !!}
                                 @endif
