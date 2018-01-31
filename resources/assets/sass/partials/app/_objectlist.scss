@@ -5,6 +5,8 @@
   overflow-y: scroll;
   background-color: #313541;
   color: rgba(255, 255, 255, .6);
+  white-space: nowrap;
+  user-select: none;
 
   .container {
     padding: 1rem;
