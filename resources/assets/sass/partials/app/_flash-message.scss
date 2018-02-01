@@ -5,6 +5,10 @@
   font-size: .8rem;
   opacity: 1;
   visibility: visible;
+
+  .js & {
+    cursor: pointer;
+  }
 }
 
 .alert-hide {
