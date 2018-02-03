@@ -8,21 +8,23 @@ if (messages.length > 0) {
         message.addEventListener('click', clickListener, false);
     });
 
-    // Set timer to hide a message.
-    timer = setTimeout(nextMessage, 3000);
+    // Trigger hiding of next message.
+    nextMessage();
 }
 
 /**
  * Take last message in array and hide it.
  */
 function nextMessage() {
-    // Trigger hide on last message in DOM.
-    hideMessage(messages.pop());
+    timer = setTimeout(function () {
+        // Trigger hide on last message in DOM.
+        hideMessage(messages.pop());
 
-    // Retrigger timer if there are more messages.
-    if (messages.length > 0) {
-        timer = setTimeout(nextMessage, 3000)
-    }
+        // Trigger hiding of next message if there are more messages.
+        if (messages.length > 0) {
+            nextMessage();
+        }
+    }, 2500);
 }
 
 /**
@@ -46,8 +48,13 @@ function clickListener(event) {
     // Stop timer.
     clearTimeout(timer);
 
-    // Hide current message and start counter to hide next.
+    // Hide current message.
     hideMessage(this);
+    messages = messages.filter(function (message) {
+        return message.classList.contains('alert-hide') === false;
+    });
+
+    // Restart counter for next message.
     nextMessage();
 
     // Prevent default click behaviour.
