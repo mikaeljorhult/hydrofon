@@ -15,6 +15,7 @@ abstract class DuskTestCase extends BaseTestCase
      * Prepare for Dusk test execution.
      *
      * @beforeClass
+     *
      * @return void
      */
     public static function prepare()
@@ -29,9 +30,9 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver()
     {
-        $options = (new ChromeOptions)->addArguments([
+        $options = (new ChromeOptions())->addArguments([
             '--disable-gpu',
-            '--headless'
+            '--headless',
         ]);
 
         return RemoteWebDriver::create(

@@ -13,7 +13,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can see the object in listings.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User   $user
      * @param \Hydrofon\Object $object
      *
      * @return mixed
@@ -28,7 +28,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can view the object.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User   $user
      * @param \Hydrofon\Object $object
      *
      * @return mixed
@@ -53,7 +53,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can update the object.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User   $user
      * @param \Hydrofon\Object $object
      *
      * @return mixed
@@ -66,7 +66,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can delete the object.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User   $user
      * @param \Hydrofon\Object $object
      *
      * @return mixed

@@ -36,7 +36,7 @@ class CheckinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Checkin $checkin
+     * @param \Hydrofon\Checkin                             $checkin
      * @param \Hydrofon\Http\Requests\CheckinDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

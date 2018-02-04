@@ -18,7 +18,7 @@ class CalendarTest extends TestCase
      */
     public function testUserCanVisitCalendar()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
@@ -32,7 +32,7 @@ class CalendarTest extends TestCase
      */
     public function testObjectsAreAddedToSession()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
@@ -83,7 +83,7 @@ class CalendarTest extends TestCase
      */
     public function testObjectsAreShown()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
         $this->actingAs($user)->post('/calendar', [

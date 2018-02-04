@@ -13,8 +13,8 @@ class GroupPolicy
     /**
      * Determine whether the user can view the group.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\User  $user
+     * @param \Hydrofon\Group $group
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class GroupPolicy
     /**
      * Determine whether the user can create groups.
      *
-     * @param  \Hydrofon\User $user
+     * @param \Hydrofon\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class GroupPolicy
     /**
      * Determine whether the user can update the group.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\User  $user
+     * @param \Hydrofon\Group $group
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class GroupPolicy
     /**
      * Determine whether the user can delete the group.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\User  $user
+     * @param \Hydrofon\Group $group
      *
      * @return mixed
      */

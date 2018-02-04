@@ -7,7 +7,7 @@ use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyTest extends TestCase
+class DeleteTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,10 +18,10 @@ class DestroyTest extends TestCase
      */
     public function testCategoriesCanBeDeleted()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
-        $response = $this->actingAs($admin)->delete('categories/' . $category->id);
+        $response = $this->actingAs($admin)->delete('categories/'.$category->id);
 
         $response->assertRedirect('/categories');
         $this->assertDatabaseMissing('categories', [

@@ -57,7 +57,7 @@ class UserTest extends TestCase
      */
     public function testOwnMethodChecksIfModelBelongsToUser()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $this->assertFalse($user->owns($booking));

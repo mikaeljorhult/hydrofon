@@ -43,7 +43,7 @@ class User extends Authenticatable
     /**
      * Whether user is administrator or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAdmin()
     {
@@ -63,7 +63,7 @@ class User extends Authenticatable
     /**
      * Check if user owns another model.
      *
-     * @return boolean
+     * @return bool
      */
     public function owns($related)
     {

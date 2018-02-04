@@ -19,10 +19,10 @@ class DeleteTest extends TestCase
      */
     public function testObjectsCanBeDeleted()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($admin)->delete('objects/' . $object->id);
+        $response = $this->actingAs($admin)->delete('objects/'.$object->id);
 
         $response->assertRedirect('/objects');
         $this->assertDatabaseMissing('objects', [
@@ -37,10 +37,10 @@ class DeleteTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithObject()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $this->actingAs($admin)->delete('objects/' . $booking->object->id);
+        $this->actingAs($admin)->delete('objects/'.$booking->object->id);
 
         $this->assertDatabaseMissing('objects', [
             'id' => $booking->object->id,
@@ -57,10 +57,10 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteObjects()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($user)->delete('objects/' . $object->id);
+        $response = $this->actingAs($user)->delete('objects/'.$object->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('objects', [

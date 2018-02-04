@@ -19,7 +19,7 @@ class StoreTest extends DuskTestCase
      */
     public function testObjectsCanBeStored()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->make();
 
         $this->browse(function (Browser $browser) use ($admin, $object) {
@@ -39,7 +39,7 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidObjectIsRedirectedBackToCreateForm()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->make();
 
         $this->browse(function (Browser $browser) use ($admin, $object) {

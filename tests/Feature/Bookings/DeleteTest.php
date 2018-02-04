@@ -9,7 +9,7 @@ use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyTest extends TestCase
+class DeleteTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -20,10 +20,10 @@ class DestroyTest extends TestCase
      */
     public function testBookingsCanBeDeleted()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($admin)->delete('bookings/' . $booking->id);
+        $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
 
         $response->assertRedirect('/bookings');
         $this->assertDatabaseMissing('bookings', [
@@ -40,7 +40,7 @@ class DestroyTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($booking->user)->delete('bookings/' . $booking->id);
+        $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
         $response->assertRedirect('/bookings');
         $this->assertDatabaseMissing('bookings', [
@@ -57,7 +57,7 @@ class DestroyTest extends TestCase
     {
         $booking = factory(Booking::class)->states('past')->create();
 
-        $response = $this->actingAs($booking->user)->delete('bookings/' . $booking->id);
+        $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
@@ -77,7 +77,7 @@ class DestroyTest extends TestCase
             'booking_id' => $booking->id,
         ]);
 
-        $response = $this->actingAs($booking->user)->delete('bookings/' . $booking->id);
+        $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
@@ -92,13 +92,13 @@ class DestroyTest extends TestCase
      */
     public function testRelatedCheckinAndCheckoutAreDeletedWithBooking()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $booking->checkin()->save(factory(Checkin::class)->create());
         $booking->checkout()->save(factory(Checkout::class)->create());
 
-        $response = $this->actingAs($admin)->delete('bookings/' . $booking->id);
+        $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
 
         $response->assertRedirect('/bookings');
         $this->assertDatabaseMissing('checkins', [

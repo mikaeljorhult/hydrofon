@@ -19,7 +19,7 @@ class ObjectListTest extends TestCase
      */
     public function testObjectListIsAvailable()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/home');
 
         $response->assertStatus(200);
@@ -33,7 +33,7 @@ class ObjectListTest extends TestCase
      */
     public function testCategoriesAreListed()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
 
         $response = $this->actingAs($user)->get('/home');
@@ -49,7 +49,7 @@ class ObjectListTest extends TestCase
      */
     public function testObjectsWithoutGroupsAreListed()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
         $response = $this->actingAs($user)->get('/home');
@@ -65,7 +65,7 @@ class ObjectListTest extends TestCase
      */
     public function testObjectsWithGroupsAreNotListed()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
         $object->groups()->create(['name' => 'Group Name']);
 
@@ -82,9 +82,9 @@ class ObjectListTest extends TestCase
      */
     public function testObjectsWithGroupsAreListedToUsersWithSameGroup()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
-        $group  = $user->groups()->create(['name' => 'Group Name']);
+        $group = $user->groups()->create(['name' => 'Group Name']);
         $object->groups()->attach($group);
 
         $response = $this->actingAs($user)->get('/home');

@@ -48,7 +48,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Category $category
+     * @param \Hydrofon\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,7 +60,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Hydrofon\Category $category
+     * @param \Hydrofon\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +73,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\CategoryUpdateRequest $request
-     * @param \Hydrofon\Category $category
+     * @param \Hydrofon\Category                            $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,7 +87,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Category $category
+     * @param \Hydrofon\Category                             $category
      * @param \Hydrofon\Http\Requests\CategoryDestroyRequest $request
      *
      * @return void

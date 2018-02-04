@@ -13,8 +13,8 @@ class CategoryPolicy
     /**
      * Determine whether the user can view the category.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Category $category
+     * @param \Hydrofon\User     $user
+     * @param \Hydrofon\Category $category
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can create categories.
      *
-     * @param  \Hydrofon\User $user
+     * @param \Hydrofon\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class CategoryPolicy
     /**
      * Determine whether the user can update the category.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Category $category
+     * @param \Hydrofon\User     $user
+     * @param \Hydrofon\Category $category
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class CategoryPolicy
     /**
      * Determine whether the user can delete the category.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Category $category
+     * @param \Hydrofon\User     $user
+     * @param \Hydrofon\Category $category
      *
      * @return mixed
      */

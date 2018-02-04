@@ -17,11 +17,11 @@ class UpdateTest extends TestCase
      */
     public function testIdentifiersCanBeUpdated()
     {
-        $admin      = factory(User::class)->states('admin')->create();
-        $user       = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs($admin)->put('users/' . $user->id . '/identifiers/' . $identifier->id, [
+        $response = $this->actingAs($admin)->put('users/'.$user->id.'/identifiers/'.$identifier->id, [
             'value' => 'another-value',
         ]);
 
@@ -38,11 +38,11 @@ class UpdateTest extends TestCase
      */
     public function testIdentifierMustHaveAValue()
     {
-        $admin      = factory(User::class)->states('admin')->create();
-        $user       = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs($admin)->put('users/' . $user->id . '/identifiers/' . $identifier->id, [
+        $response = $this->actingAs($admin)->put('users/'.$user->id.'/identifiers/'.$identifier->id, [
             'value' => '',
         ]);
 
@@ -61,11 +61,11 @@ class UpdateTest extends TestCase
     public function testValueMustBeUnique()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $admin->identifiers()->create(['value' => 'another-value']);
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs($admin)->put('users/' . $user->id . '/identifiers/' . $identifier->id, [
+        $response = $this->actingAs($admin)->put('users/'.$user->id.'/identifiers/'.$identifier->id, [
             'value' => 'another-value',
         ]);
 
@@ -84,11 +84,11 @@ class UpdateTest extends TestCase
      */
     public function testValueCanNotBeAUserEmailAddress()
     {
-        $admin      = factory(User::class)->states('admin')->create();
-        $user       = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs($admin)->put('users/' . $user->id . '/identifiers/' . $identifier->id, [
+        $response = $this->actingAs($admin)->put('users/'.$user->id.'/identifiers/'.$identifier->id, [
             'value' => $admin->email,
         ]);
 
@@ -107,10 +107,10 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateObjects()
     {
-        $user       = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs($user)->put('users/' . $user->id . '/identifiers/' . $identifier->id, [
+        $response = $this->actingAs($user)->put('users/'.$user->id.'/identifiers/'.$identifier->id, [
             'value' => 'another-value',
         ]);
 

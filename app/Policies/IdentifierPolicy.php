@@ -13,7 +13,7 @@ class IdentifierPolicy
     /**
      * Determine whether the user can view the identifier.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User       $user
      * @param \Hydrofon\Identifier $identifier
      *
      * @return mixed
@@ -38,7 +38,7 @@ class IdentifierPolicy
     /**
      * Determine whether the user can update the identifier.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User       $user
      * @param \Hydrofon\Identifier $identifier
      *
      * @return mixed
@@ -51,7 +51,7 @@ class IdentifierPolicy
     /**
      * Determine whether the user can delete the identifier.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User       $user
      * @param \Hydrofon\Identifier $identifier
      *
      * @return mixed

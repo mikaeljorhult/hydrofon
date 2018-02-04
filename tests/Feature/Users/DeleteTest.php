@@ -19,9 +19,9 @@ class DeleteTest extends TestCase
     public function testUsersCanBeDeleted()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->delete('users/' . $user->id);
+        $response = $this->actingAs($admin)->delete('users/'.$user->id);
 
         $response->assertRedirect('/users');
         $this->assertDatabaseMissing('users', [
@@ -36,10 +36,10 @@ class DeleteTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithUser()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $this->actingAs($admin)->delete('users/' . $booking->user->id);
+        $this->actingAs($admin)->delete('users/'.$booking->user->id);
 
         $this->assertDatabaseMissing('users', [
             'id' => $booking->user->id,
@@ -57,9 +57,9 @@ class DeleteTest extends TestCase
     public function testNonAdminUsersCanNotDeleteUsers()
     {
         $notAdmin = factory(User::class)->create();
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($notAdmin)->delete('users/' . $user->id);
+        $response = $this->actingAs($notAdmin)->delete('users/'.$user->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('users', [
@@ -76,7 +76,7 @@ class DeleteTest extends TestCase
     {
         $admin = factory(User::class)->states('admin')->create();
 
-        $response = $this->actingAs($admin)->delete('users/' . $admin->id);
+        $response = $this->actingAs($admin)->delete('users/'.$admin->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('users', [

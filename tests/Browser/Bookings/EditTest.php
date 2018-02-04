@@ -19,14 +19,14 @@ class EditTest extends DuskTestCase
      */
     public function testUserCanNavigateToEditPage()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $booking) {
             $browser->loginAs($user)
                     ->visit('/bookings')
                     ->clickLink($booking->object->name)
-                    ->assertPathIs('/bookings/' . $booking->id . '/edit')
+                    ->assertPathIs('/bookings/'.$booking->id.'/edit')
                     ->assertSourceHas('form');
         });
     }

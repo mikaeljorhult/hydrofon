@@ -19,7 +19,7 @@ class StoreTest extends DuskTestCase
      */
     public function testBookingsCanBeStored()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $this->browse(function (Browser $browser) use ($user, $booking) {
@@ -41,7 +41,7 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidBookingIsRedirectedBackToCreateForm()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $this->browse(function (Browser $browser) use ($user, $booking) {

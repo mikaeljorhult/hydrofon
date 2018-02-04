@@ -36,7 +36,7 @@ class IndexTest extends DuskTestCase
      */
     public function testBookingIsListedOnIndexPage()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $booking) {

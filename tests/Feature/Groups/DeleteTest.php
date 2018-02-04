@@ -21,7 +21,7 @@ class DeleteTest extends TestCase
         $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($admin)->delete('groups/' . $group->id);
+        $response = $this->actingAs($admin)->delete('groups/'.$group->id);
 
         $response->assertRedirect('/groups');
         $this->assertDatabaseMissing('groups', [
@@ -36,10 +36,10 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteGroups()
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($user)->delete('groups/' . $group->id);
+        $response = $this->actingAs($user)->delete('groups/'.$group->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('groups', [

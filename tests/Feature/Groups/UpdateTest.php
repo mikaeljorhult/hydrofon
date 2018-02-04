@@ -21,7 +21,7 @@ class UpdateTest extends TestCase
         $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($admin)->put('groups/' . $group->id, [
+        $response = $this->actingAs($admin)->put('groups/'.$group->id, [
             'name' => 'New Group Name',
         ]);
 
@@ -41,7 +41,7 @@ class UpdateTest extends TestCase
         $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($admin)->put('groups/' . $group->id, [
+        $response = $this->actingAs($admin)->put('groups/'.$group->id, [
             'name' => '',
         ]);
 
@@ -59,10 +59,10 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateGroups()
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($user)->put('groups/' . $group->id, [
+        $response = $this->actingAs($user)->put('groups/'.$group->id, [
             'name' => 'New Group Name',
         ]);
 

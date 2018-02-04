@@ -18,7 +18,7 @@ class UserPolicyTest extends TestCase
     public function testOnlyAdminUsersCanViewAUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $userToView = factory(User::class)->create();
 
@@ -34,7 +34,7 @@ class UserPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateUsers()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', User::class));
         $this->assertFalse($user->can('create', User::class));
@@ -48,7 +48,7 @@ class UserPolicyTest extends TestCase
     public function testOnlyAdminUsersCanUpdateAUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $userToUpdate = factory(User::class)->create();
 
@@ -64,7 +64,7 @@ class UserPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteAUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $userToDelete = factory(User::class)->create();
 

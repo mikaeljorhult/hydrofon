@@ -19,7 +19,7 @@ class GroupPolicyTest extends TestCase
     public function testOnlyAdminUsersCanViewAGroup()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $group = factory(Group::class)->create();
 
@@ -35,7 +35,7 @@ class GroupPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateGroups()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', Group::class));
         $this->assertFalse($user->can('create', Group::class));
@@ -49,7 +49,7 @@ class GroupPolicyTest extends TestCase
     public function testOnlyAdminUsersCanUpdateAGroup()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $group = factory(Group::class)->create();
 
@@ -65,7 +65,7 @@ class GroupPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteAGroup()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $group = factory(Group::class)->create();
 

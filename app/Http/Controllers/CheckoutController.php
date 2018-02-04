@@ -29,7 +29,7 @@ class CheckoutController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Checkout $checkout
+     * @param \Hydrofon\Checkout                             $checkout
      * @param \Hydrofon\Http\Requests\CheckoutDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

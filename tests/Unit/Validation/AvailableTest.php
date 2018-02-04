@@ -20,7 +20,7 @@ class AvailableTest extends TestCase
      */
     public function testSameObjectAndTime()
     {
-        $booking       = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
         $availableRule = new Available($booking->start_time, $booking->end_time);
 
         $this->assertFalse($availableRule->passes('object_id', $booking->object_id));
@@ -33,7 +33,7 @@ class AvailableTest extends TestCase
      */
     public function testSameTimeDifferentObjects()
     {
-        $booking       = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
         $availableRule = new Available($booking->start_time, $booking->end_time);
 
         $this->assertTrue($availableRule->passes('object_id', factory(Object::class)->create()->id));
@@ -46,7 +46,7 @@ class AvailableTest extends TestCase
      */
     public function testOneBookingCanBeIgnored()
     {
-        $booking       = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
         $this->assertTrue($availableRule->passes('object_id', $booking->object_id));

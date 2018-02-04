@@ -19,12 +19,12 @@ class UpdateTest extends DuskTestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $booking   = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
         $newObject = factory(Object::class)->create();
 
         $this->browse(function (Browser $browser) use ($booking, $newObject) {
             $browser->loginAs($booking->user)
-                    ->visit('/bookings/' . $booking->id . '/edit')
+                    ->visit('/bookings/'.$booking->id.'/edit')
                     ->type('object_id', $newObject->id)
                     ->press('Update')
                     ->assertPathIs('/bookings')
@@ -43,10 +43,10 @@ class UpdateTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($booking) {
             $browser->loginAs($booking->user)
-                    ->visit('/bookings/' . $booking->id . '/edit')
+                    ->visit('/bookings/'.$booking->id.'/edit')
                     ->type('object_id', '')
                     ->press('Update')
-                    ->assertPathIs('/bookings/' . $booking->id . '/edit');
+                    ->assertPathIs('/bookings/'.$booking->id.'/edit');
         });
     }
 }
