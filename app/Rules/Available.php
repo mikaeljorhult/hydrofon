@@ -34,17 +34,17 @@ class Available implements Rule
      *
      * @param mixed $startTime
      * @param mixed $endTime
-     * @param int $ignore
+     * @param int   $ignore
      */
     public function __construct($startTime, $endTime, int $ignore = 0)
     {
         // Try to parse the supplied timestamps.
         try {
             $this->startTime = Carbon::parse($startTime);
-            $this->endTime   = Carbon::parse($endTime);
+            $this->endTime = Carbon::parse($endTime);
         } catch (\Exception $exception) {
             $this->startTime = null;
-            $this->endTime   = null;
+            $this->endTime = null;
         }
 
         $this->ignore = $ignore;
@@ -53,8 +53,8 @@ class Available implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string $attribute
-     * @param  mixed $value
+     * @param string $attribute
+     * @param mixed  $value
      *
      * @return bool
      */
@@ -66,7 +66,7 @@ class Available implements Rule
         }
 
         // Check if any bookings collide with requested objects within timestamps.
-        return ! Booking::where($attribute, $value)
+        return !Booking::where($attribute, $value)
                         ->where('id', '!=', $this->ignore)
                         ->between($this->startTime, $this->endTime)
                         ->exists();

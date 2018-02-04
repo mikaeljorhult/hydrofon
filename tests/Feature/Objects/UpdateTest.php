@@ -18,10 +18,10 @@ class UpdateTest extends TestCase
      */
     public function testObjectsCanBeUpdated()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($admin)->put('objects/' . $object->id, [
+        $response = $this->actingAs($admin)->put('objects/'.$object->id, [
             'name' => 'New Object Name',
         ]);
 
@@ -38,10 +38,10 @@ class UpdateTest extends TestCase
      */
     public function testObjectsMustHaveAName()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($admin)->put('objects/' . $object->id, [
+        $response = $this->actingAs($admin)->put('objects/'.$object->id, [
             'name' => '',
         ]);
 
@@ -59,10 +59,10 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateObjects()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
-        $response = $this->actingAs($user)->put('objects/' . $object->id, [
+        $response = $this->actingAs($user)->put('objects/'.$object->id, [
             'name' => 'New Object Name',
         ]);
 

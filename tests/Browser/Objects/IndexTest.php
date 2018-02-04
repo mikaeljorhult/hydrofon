@@ -36,7 +36,7 @@ class IndexTest extends DuskTestCase
      */
     public function testObjectIsListedOnIndexPage()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $object) {

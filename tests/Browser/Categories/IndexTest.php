@@ -36,7 +36,7 @@ class IndexTest extends DuskTestCase
      */
     public function testCategoryIsListedOnIndexPage()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {

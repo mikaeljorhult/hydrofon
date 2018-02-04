@@ -20,7 +20,7 @@ class ObjectPolicyTest extends TestCase
     public function testOnlyAdminUsersCanViewAnObject()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $object = factory(Object::class)->create();
 
@@ -36,7 +36,7 @@ class ObjectPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateObjects()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', Object::class));
         $this->assertFalse($user->can('create', Object::class));
@@ -50,7 +50,7 @@ class ObjectPolicyTest extends TestCase
     public function testOnlyAdminUsersCanUpdateAnObject()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $object = factory(Object::class)->create();
 
@@ -66,7 +66,7 @@ class ObjectPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteAnObject()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $object = factory(Object::class)->create();
 
@@ -81,8 +81,8 @@ class ObjectPolicyTest extends TestCase
      */
     public function testAnObjectCanBeListedIfUserIsAdministrator()
     {
-        $user               = factory(User::class)->states('admin')->create();
-        $objectWithGroup    = factory(Object::class)->create();
+        $user = factory(User::class)->states('admin')->create();
+        $objectWithGroup = factory(Object::class)->create();
         $objectWithoutGroup = factory(Object::class)->create();
 
         $objectWithGroup->groups()->attach(factory(Group::class)->create());
@@ -98,7 +98,7 @@ class ObjectPolicyTest extends TestCase
      */
     public function testAnObjectCanBeListedIfItHasNoGroup()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
         $this->assertTrue($user->can('list', $object));
@@ -111,10 +111,10 @@ class ObjectPolicyTest extends TestCase
      */
     public function testAnObjectCanBeListedIfItIsInSameGroupAsUser()
     {
-        $userWithGroup      = factory(User::class)->create();
-        $userWithoutGroup   = factory(User::class)->create();
+        $userWithGroup = factory(User::class)->create();
+        $userWithoutGroup = factory(User::class)->create();
         $userWithOtherGroup = factory(User::class)->create();
-        $object             = factory(Object::class)->create();
+        $object = factory(Object::class)->create();
 
         $userWithGroup->groups()->attach($group = factory(Group::class)->create());
         $userWithOtherGroup->groups()->attach(factory(Group::class)->create());

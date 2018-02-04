@@ -20,7 +20,7 @@ class CheckoutPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateCheckouts()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', Checkout::class));
         $this->assertFalse($user->can('create', Checkout::class));
@@ -34,7 +34,7 @@ class CheckoutPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteACheckout()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $checkout = factory(Booking::class)->create()->checkin()->create();
 

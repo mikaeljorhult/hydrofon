@@ -20,7 +20,7 @@ class CheckinPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateCheckins()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', Checkin::class));
         $this->assertFalse($user->can('create', Checkin::class));
@@ -34,7 +34,7 @@ class CheckinPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteACheckin()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $checkin = factory(Booking::class)->create()->checkin()->create();
 

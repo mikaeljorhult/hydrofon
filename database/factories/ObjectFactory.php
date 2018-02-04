@@ -6,6 +6,6 @@ $factory->define(Hydrofon\Object::class, function (Faker $faker) {
     return [
         'name'        => $faker->city,
         'description' => $faker->sentence,
-        'facility'    => $faker->boolean(25)
+        'facility'    => $faker->boolean(25),
     ];
 });

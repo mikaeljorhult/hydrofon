@@ -26,7 +26,7 @@ class EditTest extends DuskTestCase
             $browser->loginAs($admin)
                     ->visit('/groups')
                     ->clickLink($group->name)
-                    ->assertPathIs('/groups/' . $group->id . '/edit')
+                    ->assertPathIs('/groups/'.$group->id.'/edit')
                     ->assertSourceHas('form');
         });
     }

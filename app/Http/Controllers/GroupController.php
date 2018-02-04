@@ -48,7 +48,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\Group $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,7 +60,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Hydrofon\Group $group
+     * @param \Hydrofon\Group $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +73,7 @@ class GroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\GroupUpdateRequest $request
-     * @param \Hydrofon\Group $group
+     * @param \Hydrofon\Group                            $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,7 +87,7 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Group $group
+     * @param \Hydrofon\Group                             $group
      * @param \Hydrofon\Http\Requests\GroupDestroyRequest $reqest
      *
      * @return \Illuminate\Http\Response

@@ -18,7 +18,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanBeStored()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -43,8 +43,8 @@ class StoreTest extends TestCase
      */
     public function testAdministratorCanCreateBookingForOtherUser()
     {
-        $admin   = factory(User::class)->states('admin')->create();
-        $user    = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($admin)->post('bookings', [
@@ -70,9 +70,9 @@ class StoreTest extends TestCase
      */
     public function testUserCannotCreateBookingsForOtherUser()
     {
-        $firstUser  = factory(User::class)->create();
+        $firstUser = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking    = factory(Booking::class)->make();
+        $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($firstUser)->post('bookings', [
             'user_id'    => $secondUser->id,
@@ -97,7 +97,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanBeStoredWithoutUserID()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -121,7 +121,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsMustHaveAnObject()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -142,7 +142,7 @@ class StoreTest extends TestCase
      */
     public function testObjectMustExist()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -163,7 +163,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsMustHaveAStartTime()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -184,7 +184,7 @@ class StoreTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -205,7 +205,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsMustHaveAEndTime()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -226,7 +226,7 @@ class StoreTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -247,7 +247,7 @@ class StoreTest extends TestCase
      */
     public function testStartTimeMustBeBeforeEndTime()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -268,7 +268,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanNotOverlapPreviousBookings()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($user)->post('bookings', [

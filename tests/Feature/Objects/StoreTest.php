@@ -18,7 +18,7 @@ class StoreTest extends TestCase
      */
     public function testObjectsCanBeStored()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->make();
 
         $response = $this->actingAs($admin)->post('objects', [
@@ -56,7 +56,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreObjects()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->make();
 
         $response = $this->actingAs($user)->post('objects', [

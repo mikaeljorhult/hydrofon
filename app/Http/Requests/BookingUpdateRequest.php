@@ -30,7 +30,7 @@ class BookingUpdateRequest extends FormRequest
             'object_id'  => [
                 'required',
                 Rule::exists('objects', 'id'),
-                new Available($this->input('start_time'), $this->input('end_time'), $this->route('booking')->id)
+                new Available($this->input('start_time'), $this->input('end_time'), $this->route('booking')->id),
             ],
             'start_time' => ['required', 'date', 'required_with:object_id', 'before:end_time'],
             'end_time'   => ['required', 'date', 'required_with:object_id', 'after:start_time'],

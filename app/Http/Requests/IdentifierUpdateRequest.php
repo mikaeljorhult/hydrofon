@@ -29,8 +29,8 @@ class IdentifierUpdateRequest extends FormRequest
             'value' => [
                 'required',
                 Rule::unique('identifiers')->ignore($this->route('identifier')->id),
-                Rule::unique('users', 'email')
-            ]
+                Rule::unique('users', 'email'),
+            ],
         ];
     }
 }

@@ -98,7 +98,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\User                             $user
      * @param \Hydrofon\Http\Requests\UserDestroyRequest $request
      *
      * @return void

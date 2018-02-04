@@ -35,7 +35,7 @@ class IndexTest extends DuskTestCase
      */
     public function testUserIsListedOnIndexPage()
     {
-        $admin     = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $otherUser = factory(User::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $otherUser) {

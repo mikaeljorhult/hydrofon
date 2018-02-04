@@ -19,12 +19,12 @@ class UpdateTest extends DuskTestCase
      */
     public function testCategoriesCanBeUpdated()
     {
-        $user     = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)
-                    ->visit('/categories/' . $category->id . '/edit')
+                    ->visit('/categories/'.$category->id.'/edit')
                     ->type('name', 'New Category Name')
                     ->press('Update')
                     ->assertPathIs('/categories')
@@ -39,15 +39,15 @@ class UpdateTest extends DuskTestCase
      */
     public function testCategoriesMustHaveAName()
     {
-        $user     = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)
-                    ->visit('/categories/' . $category->id . '/edit')
+                    ->visit('/categories/'.$category->id.'/edit')
                     ->type('name', '')
                     ->press('Update')
-                    ->assertPathIs('/categories/' . $category->id . '/edit');
+                    ->assertPathIs('/categories/'.$category->id.'/edit');
         });
     }
 }

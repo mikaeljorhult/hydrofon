@@ -24,7 +24,7 @@ class UpdateTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($admin, $group) {
             $browser->loginAs($admin)
-                    ->visit('/groups/' . $group->id . '/edit')
+                    ->visit('/groups/'.$group->id.'/edit')
                     ->type('name', 'New group Name')
                     ->press('Update')
                     ->assertPathIs('/groups')
@@ -44,10 +44,10 @@ class UpdateTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($admin, $group) {
             $browser->loginAs($admin)
-                    ->visit('/groups/' . $group->id . '/edit')
+                    ->visit('/groups/'.$group->id.'/edit')
                     ->type('name', '')
                     ->press('Update')
-                    ->assertPathIs('/groups/' . $group->id . '/edit');
+                    ->assertPathIs('/groups/'.$group->id.'/edit');
         });
     }
 }

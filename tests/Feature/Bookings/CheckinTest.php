@@ -19,7 +19,7 @@ class CheckinTest extends TestCase
      */
     public function testBookingCanBeCheckedIn()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs($admin)->post('checkins', [
@@ -40,10 +40,10 @@ class CheckinTest extends TestCase
      */
     public function testCheckinCanBeUndone()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $checkin = factory(Checkin::class)->create();
 
-        $this->actingAs($admin)->delete('checkins/' . $checkin->id);
+        $this->actingAs($admin)->delete('checkins/'.$checkin->id);
 
         $this->assertDatabaseMissing('checkins', [
             'booking_id' => $checkin->booking_id,
@@ -58,7 +58,7 @@ class CheckinTest extends TestCase
      */
     public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create([
             'start_time' => now()->subHour(),
             'end_time'   => now()->addHour(5),
@@ -100,7 +100,7 @@ class CheckinTest extends TestCase
      */
     public function testNonAdminUsersCanNotCheckInBookings()
     {
-        $admin   = factory(User::class)->create();
+        $admin = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->post('checkins', [
@@ -122,10 +122,10 @@ class CheckinTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteCheckins()
     {
-        $admin   = factory(User::class)->create();
+        $admin = factory(User::class)->create();
         $checkin = factory(Checkin::class)->create();
 
-        $response = $this->actingAs($admin)->delete('checkins/' . $checkin->id);
+        $response = $this->actingAs($admin)->delete('checkins/'.$checkin->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('checkins', [

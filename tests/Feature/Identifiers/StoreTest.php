@@ -19,9 +19,9 @@ class StoreTest extends TestCase
     public function testIdentifiersCanBeStored()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->post('/users/' . $user->id . '/identifiers', [
+        $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => 'test-value',
         ]);
 
@@ -41,9 +41,9 @@ class StoreTest extends TestCase
     public function testIdentifierMustHaveAValue()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->post('/users/' . $user->id . '/identifiers', [
+        $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => '',
         ]);
 
@@ -60,10 +60,10 @@ class StoreTest extends TestCase
     public function testValueMustBeUnique()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $admin->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs($admin)->post('/users/' . $user->id . '/identifiers', [
+        $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => 'test-value',
         ]);
 
@@ -80,9 +80,9 @@ class StoreTest extends TestCase
     public function testValueCanNotBeAUserEmailAddress()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->post('/users/' . $user->id . '/identifiers', [
+        $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => $user->email,
         ]);
 
@@ -100,7 +100,7 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->post('/users/' . $user->id . '/identifiers', [
+        $response = $this->actingAs($user)->post('/users/'.$user->id.'/identifiers', [
             'value' => 'test-value',
         ]);
 

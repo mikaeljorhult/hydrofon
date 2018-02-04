@@ -24,8 +24,6 @@ class CleanupOldRecords extends Command
     protected $description = 'Delete old records from database';
 
     /**
-     *
-     *
      * @var array
      */
     private $models = [];
@@ -74,7 +72,7 @@ class CleanupOldRecords extends Command
             $count = $model::where($scope)->delete();
 
             // Print number of models that was deleted.
-            $this->info($count . ' ' . with(new $model)->getTable() . ' deleted.');
+            $this->info($count.' '.with(new $model())->getTable().' deleted.');
         }
 
         $this->info('Done.');
