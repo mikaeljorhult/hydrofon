@@ -27,8 +27,8 @@ class CalendarController extends Controller
      */
     public function index($date = null)
     {
-        $date       = $this->date($date)->startOfDay();
-        $objects    = $this->objects($date);
+        $date = $this->date($date)->startOfDay();
+        $objects = $this->objects($date);
         $timestamps = $this->timestamps($date);
 
         return view('calendar')
@@ -46,9 +46,9 @@ class CalendarController extends Controller
      */
     public function store(CalendarRequest $request)
     {
-        session()->put('objects', array_unique((array)$request->input('objects'), SORT_NUMERIC));
+        session()->put('objects', array_unique((array) $request->input('objects'), SORT_NUMERIC));
 
-        return redirect('/calendar/' . $request->input('date'));
+        return redirect('/calendar/'.$request->input('date'));
     }
 
     /**
@@ -82,7 +82,7 @@ class CalendarController extends Controller
                         $query
                             ->between($date, $date->copy()->endOfDay())
                             ->orderBy('start_time');
-                    }
+                    },
                 ])
                     ->get()
             : collect();

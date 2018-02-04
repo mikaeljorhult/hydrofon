@@ -54,7 +54,7 @@ class ObjectListTest extends DuskTestCase
      */
     public function testObjectsAreShownInCalendar()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $object = factory(Object::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $object) {
@@ -75,7 +75,7 @@ class ObjectListTest extends DuskTestCase
      */
     public function testBookingsAreShownInCalendar()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create([
             'start_time' => now()->startOfDay()->hour(1),
             'end_time'   => now()->startOfDay()->hour(3),

@@ -27,7 +27,7 @@ class IdentifierStoreRequest extends FormRequest
     {
         // TODO: Validation should fail for __ANY__ e-mail address.
         return [
-            'value' => ['required', Rule::unique('identifiers'), Rule::unique('users', 'email')]
+            'value' => ['required', Rule::unique('identifiers'), Rule::unique('users', 'email')],
         ];
     }
 }

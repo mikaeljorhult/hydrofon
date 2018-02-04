@@ -12,7 +12,7 @@ class BookingPolicy
 
     /**
      * @param \Hydrofon\User $user
-     * @param string $ability
+     * @param string         $ability
      *
      * @return bool
      */
@@ -27,8 +27,8 @@ class BookingPolicy
     /**
      * Determine whether the user can view the booking.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\User    $user
+     * @param \Hydrofon\Booking $booking
      *
      * @return mixed
      */
@@ -40,7 +40,7 @@ class BookingPolicy
     /**
      * Determine whether the user can create bookings.
      *
-     * @param  \Hydrofon\User $user
+     * @param \Hydrofon\User $user
      *
      * @return mixed
      */
@@ -52,8 +52,8 @@ class BookingPolicy
     /**
      * Determine whether the user can update the booking.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\User    $user
+     * @param \Hydrofon\Booking $booking
      *
      * @return mixed
      */
@@ -65,8 +65,8 @@ class BookingPolicy
     /**
      * Determine whether the user can delete the booking.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\User    $user
+     * @param \Hydrofon\Booking $booking
      *
      * @return mixed
      */

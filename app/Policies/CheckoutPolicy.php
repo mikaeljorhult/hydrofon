@@ -13,7 +13,7 @@ class CheckoutPolicy
     /**
      * Determine whether the user can create checkouts.
      *
-     * @param  \Hydrofon\User $user
+     * @param \Hydrofon\User $user
      *
      * @return mixed
      */
@@ -25,8 +25,8 @@ class CheckoutPolicy
     /**
      * Determine whether the user can delete the checkout.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Checkout $checkout
+     * @param \Hydrofon\User     $user
+     * @param \Hydrofon\Checkout $checkout
      *
      * @return mixed
      */

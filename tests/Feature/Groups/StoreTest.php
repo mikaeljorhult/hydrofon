@@ -56,7 +56,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreGroups()
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $group = factory(Group::class)->make();
 
         $response = $this->actingAs($user)->post('groups', [

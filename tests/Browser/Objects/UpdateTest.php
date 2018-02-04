@@ -19,12 +19,12 @@ class UpdateTest extends DuskTestCase
      */
     public function testObjectsCanBeUpdated()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $object) {
             $browser->loginAs($admin)
-                    ->visit('/objects/' . $object->id . '/edit')
+                    ->visit('/objects/'.$object->id.'/edit')
                     ->type('name', 'New object Name')
                     ->press('Update')
                     ->assertPathIs('/objects')
@@ -39,15 +39,15 @@ class UpdateTest extends DuskTestCase
      */
     public function testObjectsMustHaveAName()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $object = factory(Object::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $object) {
             $browser->loginAs($admin)
-                    ->visit('/objects/' . $object->id . '/edit')
+                    ->visit('/objects/'.$object->id.'/edit')
                     ->type('name', '')
                     ->press('Update')
-                    ->assertPathIs('/objects/' . $object->id . '/edit');
+                    ->assertPathIs('/objects/'.$object->id.'/edit');
         });
     }
 }

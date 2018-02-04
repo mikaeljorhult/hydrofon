@@ -18,8 +18,8 @@ class StoreTest extends TestCase
      */
     public function testCategoriesCanBeStored()
     {
-        $admin    = factory(User::class)->states('admin')->create();
-        $parent   = factory(Category::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $parent = factory(Category::class)->create();
         $category = factory(Category::class)->make();
 
         $response = $this->actingAs($admin)->post('categories', [
@@ -59,7 +59,7 @@ class StoreTest extends TestCase
      */
     public function testParentMustExist()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->make();
 
         $response = $this->actingAs($admin)->post('categories', [

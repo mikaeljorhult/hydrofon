@@ -50,7 +50,7 @@ class DeskController extends Controller
      */
     public function store(DeskRequest $request)
     {
-        return redirect('/desk/' . $request->input('search'));
+        return redirect('/desk/'.$request->input('search'));
     }
 
     /**

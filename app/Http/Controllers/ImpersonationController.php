@@ -19,7 +19,7 @@ class ImpersonationController extends Controller
         $user = User::findOrFail($request->get('user_id'));
 
         // Administrators can't be impersonated.
-        if ( ! $user->isAdmin()) {
+        if (!$user->isAdmin()) {
             session()->put('impersonate', $user->id);
         }
 

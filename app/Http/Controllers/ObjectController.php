@@ -48,7 +48,7 @@ class ObjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Object $object
+     * @param \Hydrofon\Object $object
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,7 +60,7 @@ class ObjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Hydrofon\Object $object
+     * @param \Hydrofon\Object $object
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +73,7 @@ class ObjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\ObjectUpdateRequest $request
-     * @param \Hydrofon\Object $object
+     * @param \Hydrofon\Object                            $object
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,7 +87,7 @@ class ObjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Object $object
+     * @param \Hydrofon\Object                             $object
      * @param \Hydrofon\Http\Requests\ObjectDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

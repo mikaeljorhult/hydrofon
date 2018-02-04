@@ -36,13 +36,13 @@ class DeskTest extends DuskTestCase
     public function testAdminCanSearchForUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)
                     ->visit('/desk')
                     ->keys('[name="search"]', $user->email, '{enter}')
-                    ->assertPathIs('/desk/' . $user->email)
+                    ->assertPathIs('/desk/'.$user->email)
                     ->assertSee($user->name);
         });
     }
@@ -54,15 +54,15 @@ class DeskTest extends DuskTestCase
      */
     public function testUserCanBeFoundByIdentifier()
     {
-        $admin      = factory(User::class)->states('admin')->create();
-        $user       = factory(User::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $user = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-identifier']);
 
         $this->browse(function (Browser $browser) use ($admin, $user, $identifier) {
             $browser->loginAs($admin)
                     ->visit('/desk')
                     ->keys('[name="search"]', $identifier->value, '{enter}')
-                    ->assertPathIs('/desk/' . $identifier->value)
+                    ->assertPathIs('/desk/'.$identifier->value)
                     ->assertSee($user->name);
         });
     }

@@ -83,8 +83,8 @@ class Booking extends Model
      * Scope a query to only include bookings between dates.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param \Carbon\Carbon $start
-     * @param \Carbon\Carbon $end
+     * @param \Carbon\Carbon                        $start
+     * @param \Carbon\Carbon                        $end
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -92,7 +92,7 @@ class Booking extends Model
     {
         // Add second and subtract second to allow booking to start or end at same time.
         $startTime = $start->copy()->addSecond();
-        $endTime   = $end->copy()->subSecond();
+        $endTime = $end->copy()->subSecond();
 
         // Return any bookings with the same object and within the same time frame.
         return $query->where(function ($query) use ($startTime, $endTime) {
@@ -100,12 +100,12 @@ class Booking extends Model
                 // Exactly the same time as given interval.
                 ->where([
                     ['start_time', $startTime->copy()->subSecond()],
-                    ['end_time', $endTime->copy()->addSecond()]
+                    ['end_time', $endTime->copy()->addSecond()],
                 ])
                 // Start before and end after interval.
                 ->orWhere([
                     ['start_time', '<', $startTime],
-                    ['end_time', '>', $endTime]
+                    ['end_time', '>', $endTime],
                 ])
                 // Start in interval.
                 ->orWhereBetween('start_time', [$startTime, $endTime])

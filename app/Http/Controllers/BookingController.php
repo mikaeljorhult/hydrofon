@@ -58,7 +58,7 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -70,7 +70,7 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +83,7 @@ class BookingController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\BookingUpdateRequest $request
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\Booking                            $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -101,7 +101,7 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Booking $booking
+     * @param \Hydrofon\Booking                             $booking
      * @param \Hydrofon\Http\Requests\BookingDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

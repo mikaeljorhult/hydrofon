@@ -40,7 +40,7 @@ class CalendarTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/calendar')
                     ->clickLink('Previous')
-                    ->assertPathIs('/calendar/' . now()->subDay()->format('Y-m-d'));
+                    ->assertPathIs('/calendar/'.now()->subDay()->format('Y-m-d'));
         });
     }
 
@@ -57,7 +57,7 @@ class CalendarTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/calendar')
                     ->clickLink('Next')
-                    ->assertPathIs('/calendar/' . now()->addDay()->format('Y-m-d'));
+                    ->assertPathIs('/calendar/'.now()->addDay()->format('Y-m-d'));
         });
     }
 }

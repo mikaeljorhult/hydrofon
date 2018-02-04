@@ -19,7 +19,7 @@ class CategoryPolicyTest extends TestCase
     public function testOnlyAdminUsersCanViewACategory()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create();
 
@@ -35,7 +35,7 @@ class CategoryPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateCategories()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', Category::class));
         $this->assertFalse($user->can('create', Category::class));
@@ -49,7 +49,7 @@ class CategoryPolicyTest extends TestCase
     public function testOnlyAdminUsersCanUpdateACategory()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create();
 
@@ -65,7 +65,7 @@ class CategoryPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteACategory()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create();
 

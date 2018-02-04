@@ -19,7 +19,7 @@ class IdentifierPolicyTest extends TestCase
     public function testOnlyAdminUsersCanViewAnIdentifier()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $identifier = factory(User::class)->create()->identifiers()->create(['value' => 'identifier']);
 
@@ -35,7 +35,7 @@ class IdentifierPolicyTest extends TestCase
     public function testOnlyAdminUsersCanCreateIdentifiers()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->assertTrue($admin->can('create', Identifier::class));
         $this->assertFalse($user->can('create', Identifier::class));
@@ -49,7 +49,7 @@ class IdentifierPolicyTest extends TestCase
     public function testOnlyAdminUsersCanUpdateAnIdentifier()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $identifier = factory(User::class)->create()->identifiers()->create(['value' => 'identifier']);
 
@@ -65,7 +65,7 @@ class IdentifierPolicyTest extends TestCase
     public function testOnlyAdminUsersCanDeleteAnIdentifier()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $identifier = factory(User::class)->create()->identifiers()->create(['value' => 'identifier']);
 

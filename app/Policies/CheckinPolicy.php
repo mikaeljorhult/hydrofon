@@ -13,7 +13,7 @@ class CheckinPolicy
     /**
      * Determine whether the user can create checkins.
      *
-     * @param  \Hydrofon\User $user
+     * @param \Hydrofon\User $user
      *
      * @return mixed
      */
@@ -25,8 +25,8 @@ class CheckinPolicy
     /**
      * Determine whether the user can delete the checkin.
      *
-     * @param  \Hydrofon\User $user
-     * @param  \Hydrofon\Checkin $checkin
+     * @param \Hydrofon\User    $user
+     * @param \Hydrofon\Checkin $checkin
      *
      * @return mixed
      */
