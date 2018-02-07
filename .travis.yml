@@ -13,8 +13,8 @@ matrix:
     - php: nightly
 
 install:
-  - composer install --no-interaction --prefer-dist --no-suggest
-  - cp .env.example .env          # Create a new .env file.
-  - php artisan key:generate      # Generate application key.
+  - cp .env.example .env                                         # Create a new .env file.
+  - composer install --no-interaction --prefer-dist --no-suggest # Install dependencies.
+  - php artisan key:generate                                     # Generate application key.
 
 script: vendor/bin/phpunit
