@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'Illuminate\Auth\Events\Login' => [
-            'Hydrofon\Listeners\UpdateLastLoggedInAt',
+            \Hydrofon\Listeners\UpdateLastLoggedInAt::class,
         ],
     ];
 
