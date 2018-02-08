@@ -4,7 +4,7 @@ namespace Hydrofon\Http\Controllers;
 
 use Carbon\Carbon;
 use Hydrofon\Http\Requests\CalendarRequest;
-use Hydrofon\Object;
+use Hydrofon\Resource;
 
 class CalendarController extends Controller
 {
@@ -28,17 +28,17 @@ class CalendarController extends Controller
     public function index($date = null)
     {
         $date = $this->date($date)->startOfDay();
-        $objects = $this->objects($date);
+        $resources = $this->resources($date);
         $timestamps = $this->timestamps($date);
 
         return view('calendar')
             ->with('date', $date)
-            ->with('objects', $objects)
+            ->with('resources', $resources)
             ->with('timestamps', $timestamps);
     }
 
     /**
-     * Retrieve objects and redirect to calendar view.
+     * Retrieve resources and redirect to calendar view.
      *
      * @param \Hydrofon\Http\Requests\CalendarRequest $request
      *
@@ -46,7 +46,7 @@ class CalendarController extends Controller
      */
     public function store(CalendarRequest $request)
     {
-        session()->put('objects', array_unique((array) $request->input('objects'), SORT_NUMERIC));
+        session()->put('resources', array_unique((array) $request->input('resources'), SORT_NUMERIC));
 
         return redirect('/calendar/'.$request->input('date'));
     }
@@ -66,25 +66,25 @@ class CalendarController extends Controller
     }
 
     /**
-     * Return objects stored in session.
+     * Return resources stored in session.
      *
      * @param \Carbon\Carbon $date
      *
      * @return \Illuminate\Support\Collection
      */
-    private function objects(Carbon $date)
+    private function resources(Carbon $date)
     {
-        return session()->has('objects')
-            ? Object::whereIn('id', session('objects'))
+        return session()->has('resources')
+            ? Resource::whereIn('id', session('resources'))
                 // Eager-load bookings within requested date.
-                    ->with([
+                      ->with([
                     'bookings' => function ($query) use ($date) {
                         $query
                             ->between($date, $date->copy()->endOfDay())
                             ->orderBy('start_time');
                     },
                 ])
-                    ->get()
+                      ->get()
             : collect();
     }
 

@@ -25,7 +25,7 @@ class EditTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $booking) {
             $browser->loginAs($user)
                     ->visit('/bookings')
-                    ->clickLink($booking->object->name)
+                    ->clickLink($booking->resource->name)
                     ->assertPathIs('/bookings/'.$booking->id.'/edit')
                     ->assertSourceHas('form');
         });

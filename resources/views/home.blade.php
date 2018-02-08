@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials.object-list')
+    @include('partials.resource-list')
 
     <main class="main-content">
         @include('partials/topbar')

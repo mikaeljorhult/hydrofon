@@ -16,13 +16,13 @@ class Group extends Model
     ];
 
     /**
-     * Objects in the group.
+     * Resources in the group.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function objects()
+    public function resources()
     {
-        return $this->belongsToMany(\Hydrofon\Object::class);
+        return $this->belongsToMany(\Hydrofon\Resource::class);
     }
 
     /**

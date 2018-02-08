@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials.object-list')
+    @include('partials.resource-list')
 
     <main class="main-content">
         @include('partials/topbar')
@@ -30,8 +30,8 @@
                 @endadmin
 
                 <div class="input-group">
-                    {!! Form::label('object_id', 'Object') !!}
-                    {!! Form::select('object_id', \Hydrofon\Object::pluck('name', 'id'), $objects->count() > 0 ? $objects->first()->id : null) !!}
+                    {!! Form::label('resource_id', 'Resource') !!}
+                    {!! Form::select('resource_id', \Hydrofon\Resource::pluck('name', 'id'), $resources->count() > 0 ? $resources->first()->id : null) !!}
                 </div>
 
                 <div class="input-group">

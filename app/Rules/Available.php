@@ -65,7 +65,7 @@ class Available implements Rule
             return false;
         }
 
-        // Check if any bookings collide with requested objects within timestamps.
+        // Check if any bookings collide with requested resources within timestamps.
         return !Booking::where($attribute, $value)
                         ->where('id', '!=', $this->ignore)
                         ->between($this->startTime, $this->endTime)
@@ -79,6 +79,6 @@ class Available implements Rule
      */
     public function message()
     {
-        return 'The object is not available during the given time frame.';
+        return 'The resource is not available during the given time frame.';
     }
 }

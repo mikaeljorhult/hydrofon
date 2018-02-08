@@ -25,12 +25,12 @@ class StoreTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $booking) {
             $browser->loginAs($user)
                     ->visit('/bookings/create')
-                    ->type('object_id', $booking->object_id)
+                    ->type('resource_id', $booking->resource_id)
                     ->type('start_time', $booking->start_time->format('Y-m-d H:i:s'))
                     ->type('end_time', $booking->end_time->format('Y-m-d H:i:s'))
                     ->press('Create')
                     ->assertPathIs('/bookings')
-                    ->assertSee($booking->object->name);
+                    ->assertSee($booking->resource->name);
         });
     }
 

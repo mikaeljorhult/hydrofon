@@ -62,8 +62,8 @@
                             </a>
                         </li>
                         <li class="sidebar-link">
-                            <a href="{{ route('objects.index') }}">
-                                @svg('cellphone-link') Objects
+                            <a href="{{ route('resources.index') }}">
+                                @svg('cellphone-link') Resources
                             </a>
                         </li>
                         <li class="sidebar-link">

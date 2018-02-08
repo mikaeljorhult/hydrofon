@@ -101,11 +101,11 @@ class UpdateTest extends TestCase
     }
 
     /**
-     * Non-admin users can not update objects.
+     * Non-admin users can not update identifiers.
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotUpdateObjects()
+    public function testNonAdminUsersCanNotUpdateIdentifiers()
     {
         $user = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);

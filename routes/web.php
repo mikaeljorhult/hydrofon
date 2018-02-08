@@ -32,7 +32,7 @@ Route::resources([
     'bookings'   => 'BookingController',
     'categories' => 'CategoryController',
     'groups'     => 'GroupController',
-    'objects'    => 'ObjectController',
+    'resources'  => 'ResourceController',
     'users'      => 'UserController',
 ]);
 

@@ -1,2 +1,2 @@
-import objectList from './modules/objectlist';
+import resourceList from './modules/resourcelist';
 import flashMessages from './modules/flashMessages';
