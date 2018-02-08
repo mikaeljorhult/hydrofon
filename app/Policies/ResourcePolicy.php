@@ -13,7 +13,7 @@ class ResourcePolicy
     /**
      * Determine whether the user can see the resource in listings.
      *
-     * @param \Hydrofon\User   $user
+     * @param \Hydrofon\User     $user
      * @param \Hydrofon\Resource $resource
      *
      * @return mixed
@@ -28,7 +28,7 @@ class ResourcePolicy
     /**
      * Determine whether the user can view the resource.
      *
-     * @param \Hydrofon\User   $user
+     * @param \Hydrofon\User     $user
      * @param \Hydrofon\Resource $resource
      *
      * @return mixed
@@ -53,7 +53,7 @@ class ResourcePolicy
     /**
      * Determine whether the user can update the resource.
      *
-     * @param \Hydrofon\User   $user
+     * @param \Hydrofon\User     $user
      * @param \Hydrofon\Resource $resource
      *
      * @return mixed
@@ -66,7 +66,7 @@ class ResourcePolicy
     /**
      * Determine whether the user can delete the resource.
      *
-     * @param \Hydrofon\User   $user
+     * @param \Hydrofon\User     $user
      * @param \Hydrofon\Resource $resource
      *
      * @return mixed
