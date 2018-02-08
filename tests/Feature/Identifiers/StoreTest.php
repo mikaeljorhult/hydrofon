@@ -29,7 +29,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('identifiers', [
             'value'             => 'test-value',
             'identifiable_id'   => $user->id,
-            'identifiable_type' => 'Hydrofon\User',
+            'identifiable_type' => \Hydrofon\User::class,
         ]);
     }
 
