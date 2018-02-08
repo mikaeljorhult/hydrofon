@@ -3,7 +3,7 @@
 namespace Tests\Browser\Bookings;
 
 use Hydrofon\Booking;
-use Hydrofon\Object;
+use Hydrofon\Resource;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -20,31 +20,31 @@ class UpdateTest extends DuskTestCase
     public function testBookingsCanBeUpdated()
     {
         $booking = factory(Booking::class)->create();
-        $newObject = factory(Object::class)->create();
+        $newResource = factory(Resource::class)->create();
 
-        $this->browse(function (Browser $browser) use ($booking, $newObject) {
+        $this->browse(function (Browser $browser) use ($booking, $newResource) {
             $browser->loginAs($booking->user)
                     ->visit('/bookings/'.$booking->id.'/edit')
-                    ->type('object_id', $newObject->id)
+                    ->type('resource_id', $newResource->id)
                     ->press('Update')
                     ->assertPathIs('/bookings')
-                    ->assertSee($newObject->name);
+                    ->assertSee($newResource->name);
         });
     }
 
     /**
-     * Bookings must have an object.
+     * Bookings must have an resource.
      *
      * @return void
      */
-    public function testBookingsMustHaveAnObject()
+    public function testBookingsMustHaveAResource()
     {
         $booking = factory(Booking::class)->create();
 
         $this->browse(function (Browser $browser) use ($booking) {
             $browser->loginAs($booking->user)
                     ->visit('/bookings/'.$booking->id.'/edit')
-                    ->type('object_id', '')
+                    ->type('resource_id', '')
                     ->press('Update')
                     ->assertPathIs('/bookings/'.$booking->id.'/edit');
         });

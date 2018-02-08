@@ -3,7 +3,7 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Booking;
-use Hydrofon\Object;
+use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -37,15 +37,15 @@ class BookingTest extends TestCase
     }
 
     /**
-     * Booking has an object.
+     * Booking has an resource.
      *
      * @return void
      */
-    public function testBookingHasAnObject()
+    public function testBookingHasAResource()
     {
         $booking = factory(Booking::class)->create();
 
-        $this->assertInstanceOf(Object::class, $booking->object);
+        $this->assertInstanceOf(Resource::class, $booking->resource);
     }
 
     /**

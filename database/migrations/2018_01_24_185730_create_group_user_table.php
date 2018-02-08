@@ -21,7 +21,7 @@ class CreateGroupUserTable extends Migration
             $table->foreign('group_id')->references('id')->on('groups')
                   ->onDelete('cascade');
 
-            // Delete relationship if object is deleted.
+            // Delete relationship if user is deleted.
             $table->foreign('user_id')->references('id')->on('users')
                   ->onDelete('cascade');
         });

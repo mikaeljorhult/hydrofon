@@ -16,7 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('object_id')->unsigned()->index();
+            $table->integer('resource_id')->unsigned()->index();
             $table->integer('created_by_id')->unsigned()->nullable();
             $table->dateTime('start_time')->index();
             $table->dateTime('end_time')->index();
@@ -26,8 +26,8 @@ class CreateBookingsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                   ->onDelete('cascade');
 
-            // Delete booking if object is deleted.
-            $table->foreign('object_id')->references('id')->on('objects')
+            // Delete booking if resource is deleted.
+            $table->foreign('resource_id')->references('id')->on('resources')
                   ->onDelete('cascade');
 
             // Set creator to NULL if creating user is deleted.

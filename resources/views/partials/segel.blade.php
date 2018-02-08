@@ -15,13 +15,13 @@
         </aside>
 
         <ul class="segel-objects">
-            @foreach($objects as $object)
+            @foreach($resources as $resource)
                 <li class="segel-object">
-                    {{ $object->name }}
+                    {{ $resource->name }}
 
-                    @if($object->bookings->count() > 0)
+                    @if($resource->bookings->count() > 0)
                         <ul class="segel-bookings">
-                            @foreach($object->bookings as $booking)
+                            @foreach($resource->bookings as $booking)
                                 <li class="segel-booking"
                                     style="
                                             width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;

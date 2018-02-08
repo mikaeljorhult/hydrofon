@@ -1,6 +1,6 @@
 <div class="form-group">
-    {!! Form::label('object_id', 'Object') !!}
-    {!! Form::text('object_id', null, ['placeholder' => 'Object']) !!}
+    {!! Form::label('resource_id', 'Resource') !!}
+    {!! Form::text('resource_id', null, ['placeholder' => 'Resource']) !!}
 </div>
 
 <div class="form-group">

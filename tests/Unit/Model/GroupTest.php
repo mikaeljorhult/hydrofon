@@ -12,19 +12,19 @@ class GroupTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Group can have objects.
+     * Group can have resources.
      *
      * @return void
      */
-    public function testGroupCanHaveObjects()
+    public function testGroupCanHaveResources()
     {
         $group = factory(Group::class)->create();
 
-        $this->assertInstanceOf(Collection::class, $group->objects);
+        $this->assertInstanceOf(Collection::class, $group->resources);
     }
 
     /**
-     * Group can have objects.
+     * Group can have users.
      *
      * @return void
      */

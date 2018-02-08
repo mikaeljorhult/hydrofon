@@ -26,8 +26,8 @@ class CalendarRequest extends FormRequest
     {
         return [
             'date'      => ['nullable', 'date'],
-            'objects'   => ['nullable', 'array'],
-            'objects.*' => ['nullable', Rule::exists('objects', 'id')],
+            'resources'   => ['nullable', 'array'],
+            'resources.*' => ['nullable', Rule::exists('resources', 'id')],
         ];
     }
 }

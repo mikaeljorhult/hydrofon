@@ -37,13 +37,13 @@ class Category extends Model
     }
 
     /**
-     * Objects assigned to model.
+     * Resources assigned to model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function objects()
+    public function resources()
     {
-        return $this->belongsToMany(\Hydrofon\Object::class)
+        return $this->belongsToMany(\Hydrofon\Resource::class)
                     ->orderBy('name');
     }
 }

@@ -4,7 +4,7 @@ namespace Tests\Feature\Bookings;
 
 use Hydrofon\Booking;
 use Hydrofon\Checkout;
-use Hydrofon\Object;
+use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,17 +22,17 @@ class UpdateTest extends TestCase
     {
         $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
-        $newObject = factory(Object::class)->create();
+        $newResource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $newObject->id,
+            'resource_id'  => $newResource->id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
 
         $response->assertRedirect('/bookings');
         $this->assertDatabaseHas('bookings', [
-            'object_id' => $newObject->id,
+            'resource_id' => $newResource->id,
         ]);
     }
 
@@ -49,7 +49,7 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'user_id'    => $user->id,
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
@@ -74,7 +74,7 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($firstUser)->put('bookings/'.$booking->id, [
             'user_id'    => $secondUser->id,
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
@@ -96,7 +96,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time->copy()->addHour(),
             'end_time'   => $booking->end_time->copy()->addHour(),
         ]);
@@ -120,7 +120,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($user)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time->copy()->addHour(),
             'end_time'   => $booking->end_time->copy()->addHour(),
         ]);
@@ -143,7 +143,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->states('past')->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time->copy()->addHour(),
             'end_time'   => $booking->end_time->copy()->addHour(),
         ]);
@@ -170,7 +170,7 @@ class UpdateTest extends TestCase
         ]);
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time->copy()->addHour(),
             'end_time'   => $booking->end_time->copy()->addHour(),
         ]);
@@ -184,48 +184,48 @@ class UpdateTest extends TestCase
     }
 
     /**
-     * Bookings must have an object.
+     * Bookings must have an resource.
      *
      * @return void
      */
-    public function testBookingsMustHaveAnObject()
+    public function testBookingsMustHaveAResource()
     {
         $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => '',
+            'resource_id'  => '',
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHasErrors('object_id');
+        $response->assertSessionHasErrors('resource_id');
         $this->assertDatabaseHas('bookings', [
-            'object_id' => $booking->object_id,
+            'resource_id' => $booking->resource_id,
         ]);
     }
 
     /**
-     * The requested object must exist in the database.
+     * The requested resource must exist in the database.
      *
      * @return void
      */
-    public function testObjectMustExist()
+    public function testResourceMustExist()
     {
         $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => 100,
+            'resource_id'  => 100,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHasErrors('object_id');
+        $response->assertSessionHasErrors('resource_id');
         $this->assertDatabaseHas('bookings', [
-            'object_id' => $booking->object_id,
+            'resource_id' => $booking->resource_id,
         ]);
     }
 
@@ -241,15 +241,15 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $previous->object_id,
+            'resource_id'  => $previous->resource_id,
             'start_time' => $previous->start_time,
             'end_time'   => $previous->end_time,
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHasErrors('object_id');
+        $response->assertSessionHasErrors('resource_id');
         $this->assertDatabaseHas('bookings', [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
         ]);
@@ -266,7 +266,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => '',
             'end_time'   => $booking->end_time,
         ]);
@@ -289,7 +289,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => 'not-valid-time',
             'end_time'   => $booking->end_time,
         ]);
@@ -312,7 +312,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time,
             'end_time'   => '',
         ]);
@@ -335,7 +335,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time,
             'end_time'   => 'not-valid-time',
         ]);
@@ -358,7 +358,7 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'object_id'  => $booking->object_id,
+            'resource_id'  => $booking->resource_id,
             'start_time' => $booking->start_time,
             'end_time'   => $booking->start_time->copy()->subHour(),
         ]);

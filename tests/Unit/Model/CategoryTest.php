@@ -36,14 +36,14 @@ class CategoryTest extends TestCase
     }
 
     /**
-     * Category can have child categories.
+     * Category can have child resources.
      *
      * @return void
      */
-    public function testCategoryCanHaveChildObjects()
+    public function testCategoryCanHaveChildResources()
     {
         $category = factory(Category::class)->create();
 
-        $this->assertInstanceOf(Collection::class, $category->objects);
+        $this->assertInstanceOf(Collection::class, $category->resources);
     }
 }

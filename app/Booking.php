@@ -14,7 +14,7 @@ class Booking extends Model
      */
     protected $fillable = [
         'user_id',
-        'object_id',
+        'resource_id',
         'start_time',
         'end_time',
     ];
@@ -40,13 +40,13 @@ class Booking extends Model
     }
 
     /**
-     * The booked object.
+     * The booked resource.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function object()
+    public function resource()
     {
-        return $this->belongsTo(\Hydrofon\Object::class);
+        return $this->belongsTo(\Hydrofon\Resource::class);
     }
 
     /**
@@ -94,7 +94,7 @@ class Booking extends Model
         $startTime = $start->copy()->addSecond();
         $endTime = $end->copy()->subSecond();
 
-        // Return any bookings with the same object and within the same time frame.
+        // Return any bookings with the same resource and within the same time frame.
         return $query->where(function ($query) use ($startTime, $endTime) {
             $query
                 // Exactly the same time as given interval.

@@ -12,7 +12,7 @@
             <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Object</th>
+                    <th>Resource</th>
                     <th>User</th>
                     <th>Start</th>
                     <th>End</th>
@@ -23,8 +23,8 @@
                     @forelse($bookings as $booking)
                         <tr>
                             <td data-title="&nbsp;"></td>
-                            <td data-title="Object">
-                                <a href="{{ route('bookings.edit', $booking) }}">{{ $booking->object->name }}</a>
+                            <td data-title="Resource">
+                                <a href="{{ route('bookings.edit', $booking) }}">{{ $booking->resource->name }}</a>
                             </td>
                             <td data-title="User">
                                 {{ $booking->user->name }}
@@ -56,7 +56,7 @@
 
                                 {!! Form::open(['route' => 'calendar']) !!}
                                     {{ Form::hidden('date', $booking->start_time->format('Y-m-d')) }}
-                                    {{ Form::hidden('objects[]', $booking->object->id) }}
+                                    {{ Form::hidden('resources[]', $booking->resource->id) }}
                                     <button type="submit" title="View in calendar">
                                         @svg('calendar')
                                     </button>

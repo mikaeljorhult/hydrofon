@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Calendar;
 
-use Hydrofon\Object;
+use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -26,38 +26,38 @@ class CalendarTest extends TestCase
     }
 
     /**
-     * Requested objects are stored in session.
+     * Requested resources are stored in session.
      *
      * @return void
      */
-    public function testObjectsAreAddedToSession()
+    public function testResourcesAreAddedToSession()
     {
         $user = factory(User::class)->create();
-        $object = factory(Object::class)->create();
+        $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
-            'objects' => [$object->id],
+            'resources' => [$resource->id],
         ]);
 
         $response->assertRedirect('/calendar');
-        $response->assertSessionHas('objects', [$object->id]);
+        $response->assertSessionHas('resources', [$resource->id]);
     }
 
     /**
-     * Requested objects are not stored in session if not in database.
+     * Requested resources are not stored in session if not in database.
      *
      * @return void
      */
-    public function testMissingObjectsAreNotAddedToSession()
+    public function testMissingResourcesAreNotAddedToSession()
     {
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
-            'objects' => 100,
+            'resources' => 100,
         ]);
 
         $response->assertRedirect('/');
-        $response->assertSessionMissing('objects');
+        $response->assertSessionMissing('resources');
     }
 
     /**
@@ -77,23 +77,23 @@ class CalendarTest extends TestCase
     }
 
     /**
-     * Requested objects are shown.
+     * Requested resources are shown.
      *
      * @return void
      */
-    public function testObjectsAreShown()
+    public function testResourcesAreShown()
     {
         $user = factory(User::class)->create();
-        $object = factory(Object::class)->create();
+        $resources = factory(Resource::class)->create();
 
         $this->actingAs($user)->post('/calendar', [
-            'objects' => [$object->id],
+            'resources' => [$resources->id],
         ]);
 
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
-        $response->assertViewHas('objects');
-        $response->assertSee('segel-object');
+        $response->assertViewHas('resources');
+        $response->assertSee('segel-objects');
     }
 }

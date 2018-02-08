@@ -3,7 +3,7 @@
 namespace Tests\Browser\Groups;
 
 use Hydrofon\Group;
-use Hydrofon\Object;
+use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -41,7 +41,7 @@ class StoreTest extends DuskTestCase
     public function testInvalidGroupIsRedirectedBackToCreateForm()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Object::class)->make();
+        $group = factory(Resource::class)->make();
 
         $this->browse(function (Browser $browser) use ($admin, $group) {
             $browser->loginAs($admin)
