@@ -23,16 +23,16 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
-            'user_id'    => $user->id,
+            'user_id'      => $user->id,
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
     }
 
@@ -48,18 +48,18 @@ class StoreTest extends TestCase
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($admin)->post('bookings', [
-            'user_id'    => $user->id,
+            'user_id'      => $user->id,
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
-            'user_id'    => $user->id,
+            'user_id'      => $user->id,
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
     }
 
@@ -75,18 +75,18 @@ class StoreTest extends TestCase
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($firstUser)->post('bookings', [
-            'user_id'    => $secondUser->id,
+            'user_id'      => $secondUser->id,
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
-            'user_id'    => $firstUser->id,
+            'user_id'      => $firstUser->id,
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
     }
 
@@ -101,15 +101,15 @@ class StoreTest extends TestCase
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
-            'user_id'    => '',
+            'user_id'      => '',
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
-            'user_id'   => $user->id,
+            'user_id'     => $user->id,
             'resource_id' => $booking->resource_id,
         ]);
     }
@@ -126,8 +126,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => '',
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -147,8 +147,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => 100,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -168,8 +168,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => '',
-            'end_time'   => $booking->end_time,
+            'start_time'   => '',
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -189,8 +189,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => 'not-valid-time',
-            'end_time'   => $booking->end_time,
+            'start_time'   => 'not-valid-time',
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -210,8 +210,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => '',
+            'start_time'   => $booking->start_time,
+            'end_time'     => '',
         ]);
 
         $response->assertRedirect();
@@ -231,8 +231,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => 'not-valid-time',
+            'start_time'   => $booking->start_time,
+            'end_time'     => 'not-valid-time',
         ]);
 
         $response->assertRedirect();
@@ -252,8 +252,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->start_time->copy()->subHour(),
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->start_time->copy()->subHour(),
         ]);
 
         $response->assertRedirect();
@@ -273,8 +273,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id'  => $booking->resource_id,
-            'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'start_time'   => $booking->start_time,
+            'end_time'     => $booking->end_time,
         ]);
 
         $response->assertRedirect();

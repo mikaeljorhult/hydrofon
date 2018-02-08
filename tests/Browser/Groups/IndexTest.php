@@ -36,7 +36,7 @@ class IndexTest extends DuskTestCase
      */
     public function testResourceIsListedOnIndexPage()
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $group) {

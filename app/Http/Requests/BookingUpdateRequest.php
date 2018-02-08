@@ -26,7 +26,7 @@ class BookingUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'    => ['sometimes', 'nullable', Rule::exists('users', 'id')],
+            'user_id'      => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'resource_id'  => [
                 'required',
                 Rule::exists('resources', 'id'),
