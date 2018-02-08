@@ -25,7 +25,7 @@ class CalendarRequest extends FormRequest
     public function rules()
     {
         return [
-            'date'      => ['nullable', 'date'],
+            'date'        => ['nullable', 'date'],
             'resources'   => ['nullable', 'array'],
             'resources.*' => ['nullable', Rule::exists('resources', 'id')],
         ];
