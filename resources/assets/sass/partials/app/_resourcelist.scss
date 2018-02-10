@@ -3,6 +3,7 @@
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding-top: 3.5rem;
   background-color: #313541;
   color: rgba(255, 255, 255, .6);
   white-space: nowrap;
@@ -54,8 +55,12 @@
 }
 
 .resourcelist-date {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   padding: 1rem 2rem 1rem 1rem;
-  background-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, .75);
 }
 
 .resourcelist-toggle-icon {
