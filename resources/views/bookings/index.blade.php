@@ -12,10 +12,10 @@
             <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Resource</th>
-                    <th>User</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th><a href="{{ route('bookings.index', ['order' => 'resource'] + request()->except('page')) }}">Resource</a></th>
+                    <th><a href="{{ route('bookings.index', ['order' => 'user'] + request()->except('page')) }}">User</a></th>
+                    <th><a href="{{ route('bookings.index', ['order' => 'start_time'] + request()->except('page')) }}">Start</a></th>
+                    <th><a href="{{ route('bookings.index', ['order' => 'end_time'] + request()->except('page')) }}">End</a></th>
                     <th>&nbsp;</th>
                 </thead>
 

@@ -168,9 +168,9 @@ class Booking extends Model
             // Pluralize to get table name.
             $plural = str_plural($field);
 
-            // Join tables and order by name.
+            // Join tables and order by relationship name.
             return $query
-                ->join($plural, $plural.'.id', '=', 'bookings.resource_id')
+                ->join($plural, $plural.'.id', '=', 'bookings.'.$field.'_id')
                 ->orderBy($plural.'.name');
         }
 
