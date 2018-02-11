@@ -33,7 +33,7 @@ class DeskController extends Controller
         $bookings = $user ? $user->bookings()->where(function ($query) {
             $query->between(now()->subDays(4), now()->addDays(4))
                   ->orderBy('start_time', 'DESC');
-        })->paginate(15) : collect();
+        })->orderByField(request()->get('order', 'start_time'))->paginate(15) : collect();
 
         return view('desk')
             ->with('search', $search)

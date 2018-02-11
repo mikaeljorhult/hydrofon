@@ -152,6 +152,32 @@ class Booking extends Model
     }
 
     /**
+     * Scope to order query by a specific field.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $field
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrderByField($query, $field)
+    {
+        // Check which field to order by.
+        if (in_array($field, ['start_time', 'end_time'])) {
+            return $query->orderBy($field);
+        } elseif (in_array($field, ['resource', 'user'])) {
+            // Pluralize to get table name.
+            $plural = str_plural($field);
+
+            // Join tables and order by name.
+            return $query
+                ->join($plural, $plural.'.id', '=', 'bookings.resource_id')
+                ->orderBy($plural.'.name');
+        }
+
+        return $query;
+    }
+
+    /**
      * Calculate duration in seconds.
      *
      * @return int
