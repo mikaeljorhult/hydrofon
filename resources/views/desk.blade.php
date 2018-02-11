@@ -11,9 +11,9 @@
                 <h2>Bookings</h2>
                 <table class="table" cellspacing="0">
                     <thead>
-                        <th>Resource</th>
-                        <th>Start</th>
-                        <th>End</th>
+                        <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'resource'] + request()->except('page')) }}">Resource</a></th>
+                        <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'start_time'] + request()->except('page')) }}">Start</a></th>
+                        <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'end_time'] + request()->except('page')) }}">End</a></th>
                         <th>&nbsp;</th>
                     </thead>
 

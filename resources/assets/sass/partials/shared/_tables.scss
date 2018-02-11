@@ -15,12 +15,16 @@ td {
 }
 
 th {
-  color: #bfc9d3;
   border-bottom: 1px solid #eef2f5;
   font-size: .8rem;
   font-weight: normal;
   text-align: left;
   text-transform: uppercase;
+  
+  &, a {
+    color: #bfc9d3;
+    text-decoration: none;
+  }
 }
 
 .table-actions {
