@@ -30,7 +30,8 @@ class ResourceListComposer
      */
     private function categories()
     {
-        return Category::whereNull('parent_id')
+        return Category::with(['categories.resources', 'resources'])
+                       ->whereNull('parent_id')
                        ->orderBy('name')
                        ->get();
     }
