@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         // Custom Blade if statement for administrators.
-        Blade::if ('admin', function () {
+        Blade::if('admin', function () {
             return auth()->check() && auth()->user()->isAdmin();
         });
     }
