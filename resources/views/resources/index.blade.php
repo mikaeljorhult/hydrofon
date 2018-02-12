@@ -12,8 +12,8 @@
             <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th><a href="{{ route('resources.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
+                    <th><a href="{{ route('resources.index', ['order' => 'description'] + request()->except('page')) }}">Description</a></th>
                     <th>&nbsp;</th>
                 </thead>
 
