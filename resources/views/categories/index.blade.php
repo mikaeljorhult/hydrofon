@@ -12,8 +12,8 @@
             <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Parent</th>
+                    <th><a href="{{ route('categories.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
+                    <th><a href="{{ route('categories.index', ['order' => 'parent'] + request()->except('page')) }}">Parent</a></th>
                     <th>&nbsp;</th>
                 </thead>
 
@@ -25,7 +25,7 @@
                                 <a href="{{ route('categories.edit', $category) }}">{{ $category->name }}</a>
                             </td>
                             <td data-title="Parent">
-                                {{ $category->parent_id }}
+                                {{ optional($category->parent)->name }}
                             </td>
                             <td data-title="&nbsp;" class="table-actions">
                                 {!! Form::model($category, ['route' => ['categories.destroy', $category->id], 'method' => 'DELETE' ]) !!}
