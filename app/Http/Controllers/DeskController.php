@@ -30,10 +30,12 @@ class DeskController extends Controller
         $user = $search ? $this->resolveUser($search) : null;
 
         // Get all bookings 4 days in the past and in the future.
-        $bookings = $user ? $user->bookings()->where(function ($query) {
-            $query->between(now()->subDays(4), now()->addDays(4))
-                  ->orderBy('start_time', 'DESC');
-        })->orderByField(request()->get('order', 'start_time'))->paginate(15) : collect();
+        $bookings = $user
+            ? $user->bookings()->with(['checkin', 'checkout', 'resource', 'user'])->where(function ($query) {
+                $query->between(now()->subDays(4), now()->addDays(4))
+                      ->orderBy('start_time', 'DESC');
+            })->orderByField(request()->get('order', 'start_time'))->paginate(15)
+            : collect();
 
         return view('desk')
             ->with('search', $search)
