@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name')->paginate(15);
+        $categories = Category::orderByField(request()->get('order', 'name'))
+            ->paginate(15);
 
         return view('categories.index')->with('categories', $categories);
     }
