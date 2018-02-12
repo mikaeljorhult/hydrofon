@@ -12,7 +12,7 @@
             <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Name</th>
+                    <th><a href="{{ route('groups.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
                     <th>&nbsp;</th>
                 </thead>
 
