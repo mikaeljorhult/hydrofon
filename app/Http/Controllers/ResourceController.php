@@ -16,7 +16,8 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resources = Resource::orderBy('name')->paginate(15);
+        $resources = Resource::orderByField(request()->get('order', 'name'))
+                             ->paginate(15);
 
         return view('resources.index')->with('resources', $resources);
     }

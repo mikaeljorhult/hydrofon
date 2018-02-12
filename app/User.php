@@ -99,4 +99,30 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\Hydrofon\Group::class);
     }
+
+    /**
+     * Scope to order query by a specific field.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string                                $field
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrderByField($query, $field)
+    {
+        // Check which field to order by.
+        if (in_array($field, ['name', 'email'])) {
+            return $query->orderBy($field);
+        } elseif (in_array($field, ['group'])) {
+            // Pluralize to get table name.
+            $plural = str_plural($field);
+
+            // Join tables and order by relationship name.
+            return $query
+                ->join($plural, $plural.'.id', '=', 'users.'.$field.'_id')
+                ->orderBy($plural.'.name');
+        }
+
+        return $query;
+    }
 }
