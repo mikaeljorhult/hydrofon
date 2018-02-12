@@ -155,7 +155,7 @@ class Booking extends Model
      * Scope to order query by a specific field.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $field
+     * @param string                                $field
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
