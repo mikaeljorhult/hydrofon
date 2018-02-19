@@ -74,7 +74,7 @@
                 </table>
 
                 {{ $bookings->links() }}
-            @else
+            @elseif($search)
                 <p>No user was found.</p>
             @endif
         </section>
