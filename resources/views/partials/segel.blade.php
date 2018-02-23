@@ -14,9 +14,9 @@
             </ul>
         </aside>
 
-        <ul class="segel-objects">
+        <ul class="segel-resources">
             @foreach($resources as $resource)
-                <li class="segel-object">
+                <li class="segel-resource">
                     {{ $resource->name }}
 
                     @if($resource->bookings->count() > 0)
