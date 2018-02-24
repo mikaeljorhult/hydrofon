@@ -61,6 +61,12 @@
   right: 0;
   padding: 1rem 2rem 1rem 1rem;
   background-color: rgba(255, 255, 255, .75);
+
+  input {
+    margin-bottom: 0;
+    font-size: .8rem;
+    line-height: 1;
+  }
 }
 
 .resourcelist-toggle-icon {

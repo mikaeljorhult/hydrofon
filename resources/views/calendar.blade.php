@@ -22,22 +22,22 @@
             {!! Form::open(['route' => 'bookings.store']) !!}
                 @include('partials.segel')
 
+                <h2>Create booking</h2>
                 @admin
-                    <div class="input-group">
+                    <div class="form-group">
                         {!! Form::label('user_id', 'User') !!}
                         {!! Form::select('user_id', \Hydrofon\User::pluck('name', 'id'), auth()->user()->id) !!}
                     </div>
                 @endadmin
 
-                <div class="input-group">
+                <div class="form-group">
                     {!! Form::label('resource_id', 'Resource') !!}
                     {!! Form::select('resource_id', \Hydrofon\Resource::pluck('name', 'id'), $resources->count() > 0 ? $resources->first()->id : null) !!}
                 </div>
 
-                <div class="input-group">
+                <div class="form-group">
                     {!! Form::label('start_time', 'Time') !!}
                     {!! Form::text('start_time', null, ['placeholder' => 'Start']) !!}
-                    {!! Form::label('end_time', '-') !!}
                     {!! Form::text('end_time', null, ['placeholder' => 'End']) !!}
                 </div>
 
