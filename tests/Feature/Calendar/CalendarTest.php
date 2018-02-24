@@ -22,7 +22,7 @@ class CalendarTest extends TestCase
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
-        $response->assertDontSee('"segel-object"');
+        $response->assertDontSee('"segel-resource"');
     }
 
     /**
@@ -94,6 +94,6 @@ class CalendarTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertViewHas('resources');
-        $response->assertSee('segel-objects');
+        $response->assertSee('segel-resources');
     }
 }

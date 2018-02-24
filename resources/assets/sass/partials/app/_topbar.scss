@@ -11,13 +11,14 @@
   label,
   input,
   select {
+    margin-bottom: 0;
     background: transparent none no-repeat center left;
+    font-size: .8rem;
+    line-height: 1;
   }
 
-  .input-group {
-    label {
-      width: 1.5rem;
-      padding: 0;
-    }
+  label {
+    display: flex;
+    align-items: center;
   }
 }

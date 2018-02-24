@@ -1,8 +1,8 @@
 <section class="resourcelist">
     {!! Form::open(['route' => 'calendar']) !!}
-        <section class="resourcelist-date input-group">
+        <section class="resourcelist-date">
             {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d')) !!}
-            {!! Form::submit('Show calendar', ['class' => 'btn btn-primary image-replacement']) !!}
+            {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
         </section>
 
         <div class="container">
