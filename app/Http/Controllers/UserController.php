@@ -47,7 +47,8 @@ class UserController extends Controller
             $input['password'] = bcrypt($request->input('password'));
         }
 
-        User::create($input);
+        $user = User::create($input);
+        $user->groups()->sync($request->get('groups'));
 
         return redirect('/users');
     }
@@ -79,7 +80,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\Http\Requests\UserUpdateRequest $request
+     * @param \Hydrofon\User                            $user
      *
      * @return void
      */
@@ -92,6 +94,7 @@ class UserController extends Controller
         }
 
         $user->update($input);
+        $user->groups()->sync($request->get('groups'));
 
         return redirect('/users');
     }
