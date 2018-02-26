@@ -8,6 +8,13 @@
     {!! Form::textarea('description', null, ['placeholder' => 'Description']) !!}
 </div>
 
+@if(\Hydrofon\Group::count() > 0)
+    <div class="form-group">
+        {!! Form::label('groups', 'Groups') !!}
+        {!! Form::select('groups', \Hydrofon\Group::pluck('name', 'id'), isset($resource) ? $resource->groups->pluck('id') : [], ['multiple' => true]) !!}
+    </div>
+@endif
+
 <div class="form-group">
     <a href="{{ route('resources.index') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}

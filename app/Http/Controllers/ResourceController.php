@@ -41,7 +41,8 @@ class ResourceController extends Controller
      */
     public function store(ResourceStoreRequest $request)
     {
-        Resource::create($request->all());
+        $resource = Resource::create($request->all());
+        $resource->groups()->sync($request->get('groups'));
 
         return redirect('/resources');
     }
@@ -81,6 +82,7 @@ class ResourceController extends Controller
     public function update(ResourceUpdateRequest $request, Resource $resource)
     {
         $resource->update($request->all());
+        $resource->groups()->sync($request->get('groups'));
 
         return redirect('/resources');
     }
