@@ -29,6 +29,7 @@ class UserStoreRequest extends FormRequest
             'name'     => ['required'],
             'email'    => ['required', 'email', Rule::unique('users')],
             'password' => ['required', 'confirmed'],
+            'groups.*' => [Rule::exists('groups', 'id')],
         ];
     }
 }
