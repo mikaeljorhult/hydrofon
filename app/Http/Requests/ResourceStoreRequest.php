@@ -4,6 +4,7 @@ namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Resource;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ResourceStoreRequest extends FormRequest
 {
@@ -25,7 +26,8 @@ class ResourceStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:60'],
+            'name'     => ['required', 'max:60'],
+            'groups.*' => [Rule::exists('groups', 'id')],
         ];
     }
 }

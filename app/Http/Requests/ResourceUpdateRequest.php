@@ -3,6 +3,7 @@
 namespace Hydrofon\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ResourceUpdateRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class ResourceUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:60'],
+            'name'     => ['required', 'max:60'],
+            'groups.*' => [Rule::exists('groups', 'id')],
         ];
     }
 }
