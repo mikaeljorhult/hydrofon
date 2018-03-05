@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" class="no-js {{ auth()->check() && auth()->user()->isAdmin() ? 'administrator' : '' }}">
+<html lang="{{ app()->getLocale() }}" class="no-js">
 
 <head>
     <meta charset="utf-8">

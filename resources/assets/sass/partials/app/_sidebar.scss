@@ -1,4 +1,5 @@
 .sidebar {
+  overflow-y: scroll;
   background-color: #282c37;
   color: #757e96;
   text-align: center;
@@ -18,6 +19,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem .25rem;
+  background-color: rgba($brand-color, .8);
+
+  a {
+    color: #fff;
+  }
 }
 
 .user-avatar {
@@ -26,8 +33,10 @@
 }
 
 .user-name {
-  margin-left: .5rem;
   padding-top: .25rem;
+  font-size: .75rem;
+  line-height: 1.2;
+  text-align: left;
 }
 
 .sidebar-link {
@@ -52,27 +61,5 @@
     path {
       fill: #757e96;
     }
-  }
-}
-
-.administrator {
-  .sidebar {
-    overflow-y: scroll;
-  }
-
-  .user {
-    padding: 1rem .25rem;
-    background-color: rgba($brand-color, .8);
-
-    a {
-      color: #fff;
-    }
-  }
-
-  .user-name {
-    margin: 0;
-    font-size: .75rem;
-    line-height: 1.2;
-    text-align: left;
   }
 }
