@@ -10,3 +10,6 @@ Clone the repository to your web server and install it using Composer:
 ```
 composer install
 ```
+
+## License
+Hydrofon is released under the [MIT license](http://mikaeljorhult.mit-license.org).
