@@ -52,6 +52,11 @@
                             </a>
                         </li>
                         <li class="sidebar-link">
+                            <a href="{{ route('buckets.index') }}">
+                                @svg('tag-multiple') Buckets
+                            </a>
+                        </li>
+                        <li class="sidebar-link">
                             <a href="{{ route('categories.index') }}">
                                 @svg('tag-multiple') Categories
                             </a>
