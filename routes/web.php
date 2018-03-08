@@ -30,6 +30,7 @@ Route::delete('impersonation', 'ImpersonationController@destroy');
 
 Route::resources([
     'bookings'   => 'BookingController',
+    'buckets'    => 'BucketController',
     'categories' => 'CategoryController',
     'groups'     => 'GroupController',
     'resources'  => 'ResourceController',
