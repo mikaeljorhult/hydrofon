@@ -11,6 +11,6 @@
 @endif
 
 <div class="form-group">
-    <a href="{{ route('buckets.index') }}" class="btn btn-link">Cancel</a>
+    <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

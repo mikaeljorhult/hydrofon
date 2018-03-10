@@ -19,6 +19,6 @@
 </div>
 
 <div class="form-group">
-    <a href="{{ route('bookings.index') }}" class="btn btn-link">Cancel</a>
+    <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>
