@@ -16,6 +16,16 @@ class Bucket extends Model
     ];
 
     /**
+     * Resources in the bucket.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function resources()
+    {
+        return $this->belongsToMany(\Hydrofon\Resource::class);
+    }
+
+    /**
      * Scope to order query by a specific field.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

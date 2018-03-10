@@ -6,7 +6,6 @@ use Hydrofon\Bucket;
 use Hydrofon\Http\Requests\BucketDestroyRequest;
 use Hydrofon\Http\Requests\BucketStoreRequest;
 use Hydrofon\Http\Requests\BucketUpdateRequest;
-use Illuminate\Http\Request;
 
 class BucketController extends Controller
 {
@@ -42,7 +41,8 @@ class BucketController extends Controller
      */
     public function store(BucketStoreRequest $request)
     {
-        Bucket::create($request->all());
+        $bucket = Bucket::create($request->all());
+        $bucket->resources()->sync($request->get('resources'));
 
         return redirect('/buckets');
     }
@@ -82,6 +82,7 @@ class BucketController extends Controller
     public function update(BucketUpdateRequest $request, Bucket $bucket)
     {
         $bucket->update($request->all());
+        $bucket->resources()->sync($request->get('resources'));
 
         return redirect('/buckets');
     }

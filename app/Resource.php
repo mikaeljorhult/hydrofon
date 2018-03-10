@@ -39,6 +39,16 @@ class Resource extends Model
     }
 
     /**
+     * Buckets the resource belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function buckets()
+    {
+        return $this->belongsToMany(\Hydrofon\Bucket::class);
+    }
+
+    /**
      * Groups the resource belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
