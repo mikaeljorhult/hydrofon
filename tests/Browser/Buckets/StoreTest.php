@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Browser\Groups;
+namespace Tests\Browser\Buckets;
 
-use Hydrofon\Group;
+use Hydrofon\Bucket;
 use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -14,22 +14,22 @@ class StoreTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * Groups can be stored through create form.
+     * Buckets can be stored through create form.
      *
      * @return void
      */
-    public function testGroupsCanBeStored()
+    public function testBucketsCanBeStored()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->make();
+        $bucket = factory(Bucket::class)->make();
 
-        $this->browse(function (Browser $browser) use ($admin, $group) {
+        $this->browse(function (Browser $browser) use ($admin, $bucket) {
             $browser->loginAs($admin)
-                    ->visit('/groups/create')
-                    ->type('name', $group->name)
+                    ->visit('/buckets/create')
+                    ->type('name', $bucket->name)
                     ->press('Create')
-                    ->assertPathIs('/groups')
-                    ->assertSee($group->name);
+                    ->assertPathIs('/buckets')
+                    ->assertSee($bucket->name);
         });
     }
 
@@ -38,15 +38,15 @@ class StoreTest extends DuskTestCase
      *
      * @return void
      */
-    public function testInvalidGroupIsRedirectedBackToCreateForm()
+    public function testInvalidBucketIsRedirectedBackToCreateForm()
     {
         $admin = factory(User::class)->states('admin')->create();
 
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)
-                    ->visit('/groups/create')
+                    ->visit('/buckets/create')
                     ->press('Create')
-                    ->assertPathIs('/groups/create');
+                    ->assertPathIs('/buckets/create');
         });
     }
 }
