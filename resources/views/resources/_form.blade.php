@@ -10,8 +10,8 @@
 
 @if(\Hydrofon\Group::count() > 0)
     <div class="form-group">
-        {!! Form::label('groups', 'Groups') !!}
-        {!! Form::select('groups', \Hydrofon\Group::pluck('name', 'id'), isset($resource) ? $resource->groups->pluck('id') : [], ['multiple' => true]) !!}
+        {!! Form::label('groups[]', 'Groups') !!}
+        {!! Form::select('groups[]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->groups->pluck('id') : [], ['multiple' => true]) !!}
     </div>
 @endif
 
