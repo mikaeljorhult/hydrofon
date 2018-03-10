@@ -3,6 +3,9 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Bucket;
+use Hydrofon\Http\Requests\BucketDestroyRequest;
+use Hydrofon\Http\Requests\BucketStoreRequest;
+use Hydrofon\Http\Requests\BucketUpdateRequest;
 use Illuminate\Http\Request;
 
 class BucketController extends Controller
@@ -33,11 +36,11 @@ class BucketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Hydrofon\Http\Requests\BucketStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BucketStoreRequest $request)
     {
         Bucket::create($request->all());
 
@@ -71,12 +74,12 @@ class BucketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Hydrofon\Bucket         $bucket
+     * @param \Hydrofon\Http\Requests\BucketUpdateRequest $request
+     * @param  \Hydrofon\Bucket                           $bucket
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bucket $bucket)
+    public function update(BucketUpdateRequest $request, Bucket $bucket)
     {
         $bucket->update($request->all());
 
@@ -86,11 +89,12 @@ class BucketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Bucket $bucket
+     * @param  \Hydrofon\Bucket                            $bucket
+     * @param \Hydrofon\Http\Requests\BucketDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bucket $bucket)
+    public function destroy(Bucket $bucket, BucketDestroyRequest $request)
     {
         $bucket->delete();
 

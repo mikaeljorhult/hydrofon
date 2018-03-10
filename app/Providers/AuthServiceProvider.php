@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         \Hydrofon\Booking::class    => \Hydrofon\Policies\BookingPolicy::class,
+        \Hydrofon\Bucket::class     => \Hydrofon\Policies\BucketPolicy::class,
         \Hydrofon\Category::class   => \Hydrofon\Policies\CategoryPolicy::class,
         \Hydrofon\Checkin::class    => \Hydrofon\Policies\CheckinPolicy::class,
         \Hydrofon\Checkout::class   => \Hydrofon\Policies\CheckoutPolicy::class,
