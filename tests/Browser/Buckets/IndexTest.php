@@ -36,7 +36,7 @@ class IndexTest extends DuskTestCase
      */
     public function testBucketIsListedOnIndexPage()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $bucket = factory(Bucket::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $bucket) {

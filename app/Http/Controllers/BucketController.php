@@ -50,7 +50,7 @@ class BucketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Bucket $bucket
+     * @param \Hydrofon\Bucket $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -62,7 +62,7 @@ class BucketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Hydrofon\Bucket $bucket
+     * @param \Hydrofon\Bucket $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -75,7 +75,7 @@ class BucketController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\BucketUpdateRequest $request
-     * @param  \Hydrofon\Bucket                           $bucket
+     * @param \Hydrofon\Bucket                            $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +90,7 @@ class BucketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Bucket                            $bucket
+     * @param \Hydrofon\Bucket                             $bucket
      * @param \Hydrofon\Http\Requests\BucketDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
