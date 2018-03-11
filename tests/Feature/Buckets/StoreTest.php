@@ -18,7 +18,7 @@ class StoreTest extends TestCase
      */
     public function testBucketsCanBeStored()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->make();
 
         $response = $this->actingAs($admin)->post('buckets', [
@@ -56,7 +56,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreBuckets()
     {
-        $user   = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $bucket = factory(Bucket::class)->make();
 
         $response = $this->actingAs($user)->post('buckets', [

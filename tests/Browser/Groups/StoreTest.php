@@ -3,7 +3,6 @@
 namespace Tests\Browser\Groups;
 
 use Hydrofon\Group;
-use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;

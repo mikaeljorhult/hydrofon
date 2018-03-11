@@ -19,7 +19,7 @@ class UpdateTest extends DuskTestCase
      */
     public function testBucketsCanBeUpdated()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $bucket) {
@@ -39,7 +39,7 @@ class UpdateTest extends DuskTestCase
      */
     public function testBucketsMustHaveAName()
     {
-        $admin  = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
         $this->browse(function (Browser $browser) use ($admin, $bucket) {
