@@ -1,4 +1,4 @@
-<section id="segel" class="segel">
+<section id="segel" class="segel" data-resources="{{ $resources }}">
     <div class="segel-container">
         <ul class="segel-grid">
             @for($i = 0; $i < 24; $i++)
