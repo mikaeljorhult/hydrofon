@@ -23,7 +23,6 @@ for (let resource of resources) {
     }
 }
 
-Segel.instance.$store.state.start = parseInt(segelElement.getAttribute('data-start'));
-Segel.instance.$store.state.end = parseInt(segelElement.getAttribute('data-end'));
+Segel.time.set(segelElement.getAttribute('data-start'), segelElement.getAttribute('data-end'));
 
 Segel('#segel');
