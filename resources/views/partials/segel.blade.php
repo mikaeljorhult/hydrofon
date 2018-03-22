@@ -1,4 +1,4 @@
-<section id="segel" class="segel">
+<section id="segel" class="segel" data-start="{{ $timestamps['start'] * 1000 }}" data-end="{{ $timestamps['end'] * 1000 }}" data-resources="{{ $resources }}">
     <div class="segel-container">
         <ul class="segel-grid">
             @for($i = 0; $i < 24; $i++)
