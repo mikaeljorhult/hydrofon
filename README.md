@@ -11,5 +11,15 @@ Clone the repository to your web server and install it using Composer:
 composer install
 ```
 
+## Terminology
+| Word       | Definition |
+| ---------- | ---------- |
+| Booking    | Reservation of one resource between two timestamps. |
+| Bucket     | Collection of resources that are interchangable. |
+| Category   | Grouping of resources that will be displayed together. |
+| Group      | Link that determines which resources should be visible to the user. |
+| Identifier | String of characters that a user can be identified by. |
+| Resource   | An item that can be reserved. |
+
 ## License
 Hydrofon is released under the [MIT license](http://mikaeljorhult.mit-license.org).
