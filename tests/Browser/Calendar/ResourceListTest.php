@@ -42,7 +42,7 @@ class ResourceListTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/calendar')
                     ->type('date', '2017-01-01')
-                    ->press('Show calendar')
+                    ->keys('[name="date"]', '{enter}')
                     ->assertPathIs('/calendar/2017-01-01');
         });
     }
@@ -61,7 +61,7 @@ class ResourceListTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/calendar')
                     ->check('resources[]', $resource->id)
-                    ->press('Show calendar')
+                    ->keys('[name="date"]', '{enter}')
                     ->assertPathBeginsWith('/calendar/')
                     ->assertSeeIn('.segel', $resource->name)
                     ->assertSourceMissing('segel-booking');
@@ -85,7 +85,7 @@ class ResourceListTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/calendar')
                     ->check('resources[]', $booking->resource_id)
-                    ->press('Show calendar')
+                    ->keys('[name="date"]', '{enter}')
                     ->assertSeeIn('.segel', $booking->resource->name)
                     ->assertSourceHas('"segel-booking"');
         });

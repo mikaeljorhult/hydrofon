@@ -27,7 +27,7 @@ class UpdateTest extends DuskTestCase
                     ->visit('/buckets/'.$bucket->id.'/edit')
                     ->type('name', 'New Bucket Name')
                     ->press('Update')
-                    ->assertPathIs('/groups')
+                    ->assertPathIs('/buckets')
                     ->assertSee('New Bucket Name');
         });
     }
