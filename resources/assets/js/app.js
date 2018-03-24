@@ -25,4 +25,4 @@ for (let resource of resources) {
 
 Segel.time.set(segelElement.getAttribute('data-start'), segelElement.getAttribute('data-end'));
 
-Segel('#segel');
+// Segel('#segel');
