@@ -9,6 +9,13 @@
 
             <a href="{{ route('users.create') }}">New user</a>
 
+            <div>
+                {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
+                    {!! Form::search('filter') !!}
+                    {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+                {!! Form::close() !!}
+            </div>
+
             <table class="table" cellspacing="0">
                 <thead>
                     <th>#</th>
