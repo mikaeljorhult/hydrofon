@@ -17,7 +17,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderByField(request()->get('order', 'email'))
-                     ->paginate(15);
+            ->filterByRequest()
+            ->paginate(15);
 
         return view('users.index')->with('users', $users);
     }

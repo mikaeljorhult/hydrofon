@@ -125,4 +125,21 @@ class User extends Authenticatable
 
         return $query;
     }
+
+    /**
+     * Scope to allow filtering models based on request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilterByRequest($query)
+    {
+        if (request()->has('filter')) {
+            $query->where('email', 'LIKE', '%'.request()->get('filter').'%')
+                  ->orWhere('name', 'LIKE', '%'.request()->get('filter').'%');
+        }
+
+        return $query;
+    }
 }
