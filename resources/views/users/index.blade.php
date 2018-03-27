@@ -52,7 +52,7 @@
                 </tbody>
             </table>
 
-            {{ $users->links() }}
+            {{ $users->appends(['filter' => request()->get('filter')])->links() }}
         </section>
     </main>
 @endsection
