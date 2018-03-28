@@ -77,7 +77,7 @@
                 </tbody>
             </table>
 
-            {{ $bookings->links() }}
+            {{ $bookings->appends(['order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

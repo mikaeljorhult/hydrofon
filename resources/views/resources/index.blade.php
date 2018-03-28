@@ -43,7 +43,7 @@
                 </tbody>
             </table>
 
-            {{ $resources->links() }}
+            {{ $resources->appends(['order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection
