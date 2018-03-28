@@ -43,7 +43,7 @@
                 </tbody>
             </table>
 
-            {{ $categories->links() }}
+            {{ $categories->appends(['order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

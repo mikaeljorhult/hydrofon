@@ -39,7 +39,7 @@
                 </tbody>
             </table>
 
-            {{ $groups->links() }}
+            {{ $groups->appends(['order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

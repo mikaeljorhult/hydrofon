@@ -39,7 +39,7 @@
                 </tbody>
             </table>
 
-            {{ $buckets->links() }}
+            {{ $buckets->appends(['order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection
