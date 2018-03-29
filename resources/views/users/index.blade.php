@@ -3,18 +3,18 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>
-                <a href="{{ route('users.index') }}">Users</a>
-            </h1>
+            <header>
+                <h1>
+                    <a href="{{ route('users.index') }}">Users</a>
+                </h1>
 
-            <a href="{{ route('users.create') }}">New user</a>
+                <a href="{{ route('users.create') }}">New user</a>
 
-            <div>
                 {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter') !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
                 {!! Form::close() !!}
-            </div>
+            </header>
 
             <table class="table" cellspacing="0">
                 <thead>
@@ -52,7 +52,7 @@
                 </tbody>
             </table>
 
-            {{ $users->appends(['filter' => request()->get('filter')])->links() }}
+            {{ $users->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

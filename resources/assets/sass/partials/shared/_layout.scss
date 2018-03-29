@@ -37,7 +37,8 @@ body {
 
 .main-content,
 .container {
-  > *:first-child {
+  > *:first-child,
+  > header > *:first-child {
     margin-top: 0;
   }
 }
