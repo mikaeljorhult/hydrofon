@@ -1,5 +1,5 @@
 .sidebar {
-  overflow-y: scroll;
+  overflow-y: hidden;
   background-color: #282c37;
   color: #757e96;
   text-align: center;
@@ -13,6 +13,10 @@
     color: #757e96;
     text-decoration: none;
   }
+}
+
+.main-navigation {
+  overflow-y: scroll;
 }
 
 .user {
