@@ -3,11 +3,20 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>
-                <a href="{{ route('resources.index') }}">Resources</a>
-            </h1>
+            <header class="main-header">
+                <h1>
+                    <a href="{{ route('resources.index') }}">Resources</a>
+                </h1>
 
-            <a href="{{ route('resources.create') }}">New resource</a>
+                <aside>
+                    <a href="{{ route('resources.create') }}">New resource</a>
+
+                    {!! Form::open(['route' => 'resources.index', 'method' => 'GET']) !!}
+                        {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                        {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                    {!! Form::close() !!}
+                </aside>
+            </header>
 
             <table class="table" cellspacing="0">
                 <thead>
@@ -43,7 +52,7 @@
                 </tbody>
             </table>
 
-            {{ $resources->appends(['order' => request()->get('order')])->links() }}
+            {{ $resources->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection
