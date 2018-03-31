@@ -3,11 +3,20 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>
-                <a href="{{ route('groups.index') }}">Groups</a>
-            </h1>
+            <header class="main-header">
+                <h1>
+                    <a href="{{ route('groups.index') }}">Groups</a>
+                </h1>
 
-            <a href="{{ route('groups.create') }}">New group</a>
+                <aside>
+                    <a href="{{ route('groups.create') }}">New group</a>
+
+                    {!! Form::open(['route' => 'groups.index', 'method' => 'GET']) !!}
+                        {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                        {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                    {!! Form::close() !!}
+                </aside>
+            </header>
 
             <table class="table" cellspacing="0">
                 <thead>
@@ -39,7 +48,7 @@
                 </tbody>
             </table>
 
-            {{ $groups->appends(['order' => request()->get('order')])->links() }}
+            {{ $groups->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

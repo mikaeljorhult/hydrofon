@@ -3,9 +3,13 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>Identifiers for {{ $user->name }}</h1>
+            <header class="main-header">
+                <h1>Identifiers for {{ $user->name }}</h1>
 
-            <a href="{{ route('users.identifiers.create', [$user]) }}">New identifier</a>
+                <aside>
+                    <a href="{{ route('users.identifiers.create', [$user]) }}">New identifier</a>
+                </aside>
+            </header>
 
             <table class="table" cellspacing="0">
                 <thead>
