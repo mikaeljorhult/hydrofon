@@ -3,17 +3,19 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <header>
+            <header class="main-header">
                 <h1>
                     <a href="{{ route('users.index') }}">Users</a>
                 </h1>
 
-                <a href="{{ route('users.create') }}">New user</a>
+                <aside>
+                    <a href="{{ route('users.create') }}">New user</a>
 
-                {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
-                {!! Form::close() !!}
+                    {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
+                        {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                        {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                    {!! Form::close() !!}
+                </aside>
             </header>
 
             <table class="table" cellspacing="0">
