@@ -18,6 +18,7 @@ class CategoryController extends Controller
     {
         $categories = Category::with(['parent'])
                               ->orderByField(request()->get('order', 'name'))
+                              ->filterByRequest()
                               ->paginate(15);
 
         return view('categories.index')->with('categories', $categories);
