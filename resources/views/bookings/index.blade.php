@@ -3,11 +3,20 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>
-                <a href="{{ route('bookings.index') }}">Bookings</a>
-            </h1>
+            <header class="main-header">
+                <h1>
+                    <a href="{{ route('bookings.index') }}">Bookings</a>
+                </h1>
 
-            <a href="{{ route('bookings.create') }}">New booking</a>
+                <aside>
+                    <a href="{{ route('bookings.create') }}">New booking</a>
+
+                    {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
+                        {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                        {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                    {!! Form::close() !!}
+                </aside>
+            </header>
 
             <table class="table" cellspacing="0">
                 <thead>
@@ -77,7 +86,7 @@
                 </tbody>
             </table>
 
-            {{ $bookings->appends(['order' => request()->get('order')])->links() }}
+            {{ $bookings->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

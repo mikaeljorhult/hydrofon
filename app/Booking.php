@@ -92,7 +92,7 @@ class Booking extends Model
     {
         // Add second and subtract second to allow booking to start or end at same time.
         $startTime = $start->copy()->addSecond();
-        $endTime = $end->copy()->subSecond();
+        $endTime   = $end->copy()->subSecond();
 
         // Return any bookings with the same resource and within the same time frame.
         return $query->where(function ($query) use ($startTime, $endTime) {
@@ -172,6 +172,28 @@ class Booking extends Model
             return $query
                 ->join($plural, $plural.'.id', '=', 'bookings.'.$field.'_id')
                 ->orderBy($plural.'.name');
+        }
+
+        return $query;
+    }
+
+    /**
+     * Scope to allow filtering models based on request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilterByRequest($query)
+    {
+        if (request()->has('filter')) {
+            $query
+                ->whereHas('resource', function ($q) {
+                    $q->where('name', 'LIKE', '%'.request()->get('filter').'%');
+                })
+                ->orWhereHas('user', function ($q) {
+                    $q->where('name', 'LIKE', '%'.request()->get('filter').'%');
+                });
         }
 
         return $query;
