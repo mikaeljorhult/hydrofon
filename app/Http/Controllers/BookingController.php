@@ -17,6 +17,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with(['checkin', 'checkout', 'resource', 'user'])
+                           ->filterByRequest()
                            ->orderByField(request()->get('order', 'start_time'))
                            ->paginate(15);
 
