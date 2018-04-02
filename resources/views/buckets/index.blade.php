@@ -3,11 +3,20 @@
 @section('content')
     <main class="main-content">
         <section class="container">
-            <h1>
-                <a href="{{ route('buckets.index') }}">Buckets</a>
-            </h1>
+            <header class="main-header">
+                <h1>
+                    <a href="{{ route('buckets.index') }}">Buckets</a>
+                </h1>
 
-            <a href="{{ route('buckets.create') }}">New bucket</a>
+                <aside>
+                    <a href="{{ route('buckets.create') }}">New bucket</a>
+
+                    {!! Form::open(['route' => 'buckets.index', 'method' => 'GET']) !!}
+                        {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                        {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                    {!! Form::close() !!}
+                </aside>
+            </header>
 
             <table class="table" cellspacing="0">
                 <thead>
@@ -33,13 +42,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">No buckets was found.</td>
+                            <td colspan="3">No buckets was found.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
 
-            {{ $buckets->appends(['order' => request()->get('order')])->links() }}
+            {{ $buckets->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
         </section>
     </main>
 @endsection

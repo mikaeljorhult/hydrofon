@@ -17,6 +17,7 @@ class BucketController extends Controller
     public function index()
     {
         $buckets = Bucket::orderByField(request()->get('order', 'name'))
+                         ->filterByRequest()
                          ->paginate(15);
 
         return view('buckets.index')->with('buckets', $buckets);

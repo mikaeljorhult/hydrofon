@@ -42,4 +42,20 @@ class Bucket extends Model
 
         return $query;
     }
+
+    /**
+     * Scope to allow filtering models based on request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilterByRequest($query)
+    {
+        if (request()->has('filter')) {
+            $query->where('name', 'LIKE', '%'.request()->get('filter').'%');
+        }
+
+        return $query;
+    }
 }
