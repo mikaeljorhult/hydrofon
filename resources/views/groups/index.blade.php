@@ -20,7 +20,7 @@
 
             <table class="table" cellspacing="0">
                 <thead>
-                    <th>#</th>
+                    <th class="table-column-check">#</th>
                     <th><a href="{{ route('groups.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
                     <th>&nbsp;</th>
                 </thead>
@@ -42,7 +42,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">No groups was found.</td>
+                            <td colspan="3">No groups was found.</td>
                         </tr>
                     @endforelse
                 </tbody>

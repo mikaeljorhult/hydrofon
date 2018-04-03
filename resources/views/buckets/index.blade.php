@@ -20,7 +20,7 @@
 
             <table class="table" cellspacing="0">
                 <thead>
-                    <th>#</th>
+                    <th class="table-column-check">#</th>
                     <th><a href="{{ route('buckets.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
                     <th>&nbsp;</th>
                 </thead>
