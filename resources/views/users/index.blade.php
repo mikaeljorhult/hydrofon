@@ -20,7 +20,7 @@
 
             <table class="table" cellspacing="0">
                 <thead>
-                    <th>#</th>
+                    <th class="table-column-check">#</th>
                     <th><a href="{{ route('users.index', ['order' => 'email'] + request()->except('page')) }}">E-mail</a></th>
                     <th><a href="{{ route('users.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
                     <th>&nbsp;</th>

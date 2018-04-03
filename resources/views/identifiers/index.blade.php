@@ -13,7 +13,7 @@
 
             <table class="table" cellspacing="0">
                 <thead>
-                    <th>#</th>
+                    <th class="table-column-check">#</th>
                     <th>Value</th>
                     <th>&nbsp;</th>
                 </thead>
