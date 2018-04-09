@@ -53,7 +53,7 @@
                         </li>
                         <li class="sidebar-link">
                             <a href="{{ route('buckets.index') }}">
-                                @svg('tag-multiple') Buckets
+                                @svg('package') Buckets
                             </a>
                         </li>
                         <li class="sidebar-link">
