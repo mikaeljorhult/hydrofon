@@ -12,7 +12,7 @@
                     <a href="{{ route('bookings.create') }}">New booking</a>
 
                     {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
-                        {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                        {!! Form::search('filter[search]', null, ['placeholder' => 'Filter']) !!}
                         {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
                     {!! Form::close() !!}
                 </aside>

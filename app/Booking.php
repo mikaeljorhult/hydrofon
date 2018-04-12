@@ -186,14 +186,26 @@ class Booking extends Model
      */
     public function scopeFilterByRequest($query)
     {
-        if (request()->has('filter')) {
-            $query
-                ->whereHas('resource', function ($q) {
-                    $q->where('name', 'LIKE', '%'.request()->get('filter').'%');
-                })
-                ->orWhereHas('user', function ($q) {
-                    $q->where('name', 'LIKE', '%'.request()->get('filter').'%');
-                });
+        if (request()->has('filter') && is_array(request('filter'))) {
+            $filter = request('filter');
+
+            if (isset($filter['query'])) {
+                $query
+                    ->orWhereHas('resource', function ($q) use ($filter) {
+                        $q->where('name', 'LIKE', '%'.$filter['query'].'%');
+                    })
+                    ->orWhereHas('user', function ($q) use ($filter) {
+                        $q->where('name', 'LIKE', '%'.$filter['query'].'%');
+                    });
+            }
+
+            if (isset($filter['user'])) {
+                $query->where('user_id', $filter['user']);
+            }
+
+            if (isset($filter['resource'])) {
+                $query->where('user_id', $filter['resource']);
+            }
         }
 
         return $query;
