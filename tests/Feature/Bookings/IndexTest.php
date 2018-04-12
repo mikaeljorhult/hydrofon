@@ -38,7 +38,9 @@ class IndexTest extends TestCase
 
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('bookings?'.http_build_query([
-                     'filter' => $visibleBooking->resource->name,
+                     'filter' => [
+                         'query' => $visibleBooking->resource->name,
+                     ],
                  ]))
              ->assertSuccessful()
              ->assertSee($visibleBooking->resource->name)
@@ -57,10 +59,54 @@ class IndexTest extends TestCase
 
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('bookings?'.http_build_query([
-                     'filter' => $visibleBooking->user->name,
+                     'filter' => [
+                         'query' => $visibleBooking->user->name,
+                     ],
                  ]))
              ->assertSuccessful()
              ->assertSee($visibleBooking->user->name)
              ->assertDontSee($notVisibleBooking->user->name);
+    }
+
+    /**
+     * Bookings index can be filtered by a user.
+     *
+     * @return void
+     */
+    public function testBookingsCanBeFilteredByUser()
+    {
+        $visibleBooking    = factory(Booking::class)->create();
+        $notVisibleBooking = factory(Booking::class)->create();
+
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->get('bookings?'.http_build_query([
+                     'filter' => [
+                         'user' => $visibleBooking->user->id,
+                     ],
+                 ]))
+             ->assertSuccessful()
+             ->assertSee($visibleBooking->user->name)
+             ->assertDontSee($notVisibleBooking->user->name);
+    }
+
+    /**
+     * Bookings index can be filtered by a resource.
+     *
+     * @return void
+     */
+    public function testBookingsCanBeFilteredByResource()
+    {
+        $visibleBooking    = factory(Booking::class)->create();
+        $notVisibleBooking = factory(Booking::class)->create();
+
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->get('bookings?'.http_build_query([
+                     'filter' => [
+                         'user' => $visibleBooking->resource->id,
+                     ],
+                 ]))
+             ->assertSuccessful()
+             ->assertSee($visibleBooking->resource->name)
+             ->assertDontSee($notVisibleBooking->resource->name);
     }
 }
