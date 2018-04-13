@@ -13,6 +13,7 @@ class Booking extends Model
      * @var array
      */
     protected $fillable = [
+        'created_by_id',
         'user_id',
         'resource_id',
         'start_time',
