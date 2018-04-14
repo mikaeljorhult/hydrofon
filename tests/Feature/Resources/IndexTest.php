@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testResourcesCanBeFilteredByName()
     {
-        $visibleResource    = factory(Resource::class)->create();
+        $visibleResource = factory(Resource::class)->create();
         $notVisibleResource = factory(Resource::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())

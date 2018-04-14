@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsCanBeFilteredByResourceName()
     {
-        $visibleBooking    = factory(Booking::class)->create();
+        $visibleBooking = factory(Booking::class)->create();
         $notVisibleBooking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -54,7 +54,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsCanBeFilteredByUserName()
     {
-        $visibleBooking    = factory(Booking::class)->create();
+        $visibleBooking = factory(Booking::class)->create();
         $notVisibleBooking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -75,7 +75,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsCanBeFilteredByUser()
     {
-        $visibleBooking    = factory(Booking::class)->create();
+        $visibleBooking = factory(Booking::class)->create();
         $notVisibleBooking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -96,7 +96,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsCanBeFilteredByResource()
     {
-        $visibleBooking    = factory(Booking::class)->create();
+        $visibleBooking = factory(Booking::class)->create();
         $notVisibleBooking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
