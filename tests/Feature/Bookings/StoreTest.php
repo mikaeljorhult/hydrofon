@@ -19,7 +19,7 @@ class StoreTest extends TestCase
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
-    public function makeBooking($overrides = [], $user = null)
+    public function storeBooking($overrides = [], $user = null)
     {
         $booking = factory(Booking::class)->make($overrides);
 
@@ -34,7 +34,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanBeStored()
     {
-        $this->makeBooking()
+        $this->storeBooking()
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
@@ -52,7 +52,7 @@ class StoreTest extends TestCase
         $admin = factory(User::class)->states('admin')->create();
         $user  = factory(User::class)->create();
 
-        $this->makeBooking(['user_id' => $user->id], $admin)
+        $this->storeBooking(['user_id' => $user->id], $admin)
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
@@ -71,7 +71,7 @@ class StoreTest extends TestCase
         $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
 
-        $this->makeBooking(['user_id' => $secondUser->id], $firstUser)
+        $this->storeBooking(['user_id' => $secondUser->id], $firstUser)
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
@@ -87,7 +87,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanBeStoredWithoutUserID()
     {
-        $this->makeBooking(['user_id' => null])
+        $this->storeBooking(['user_id' => null])
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
@@ -102,7 +102,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsMustHaveAResource()
     {
-        $this->makeBooking(['resource_id' => null])
+        $this->storeBooking(['resource_id' => null])
              ->assertRedirect()
              ->assertSessionHasErrors('resource_id');
 
@@ -116,7 +116,7 @@ class StoreTest extends TestCase
      */
     public function testResourceMustExist()
     {
-        $this->makeBooking(['resource_id' => 100])
+        $this->storeBooking(['resource_id' => 100])
              ->assertRedirect()
              ->assertSessionHasErrors('resource_id');
 
@@ -130,7 +130,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsMustHaveAStartTime()
     {
-        $this->makeBooking(['start_time' => null])
+        $this->storeBooking(['start_time' => null])
              ->assertRedirect()
              ->assertSessionHasErrors('start_time');
 
@@ -166,7 +166,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsMustHaveAEndTime()
     {
-        $this->makeBooking(['end_time' => null])
+        $this->storeBooking(['end_time' => null])
              ->assertRedirect()
              ->assertSessionHasErrors('end_time');
 
@@ -202,7 +202,7 @@ class StoreTest extends TestCase
      */
     public function testStartTimeMustBeBeforeEndTime()
     {
-        $this->makeBooking([
+        $this->storeBooking([
             'start_time' => now()->addMonth(),
             'end_time'   => now()->addMonth()->subHour(),
         ])
@@ -221,7 +221,7 @@ class StoreTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $this->makeBooking([
+        $this->storeBooking([
             'resource_id' => $booking->resource_id,
             'start_time'  => $booking->start_time,
             'end_time'    => $booking->end_time,

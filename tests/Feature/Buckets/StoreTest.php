@@ -12,22 +12,33 @@ class StoreTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Posts request to persist a bucket.
+     *
+     * @param array               $overrides
+     * @param \Hydrofon\User|null $user
+     *
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
+    public function storeBucket($overrides = [], $user = null)
+    {
+        $bucket = factory(Bucket::class)->make($overrides);
+
+        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+                    ->post('buckets', $bucket->toArray());
+    }
+
+    /**
      * Buckets can be created and stored.
      *
      * @return void
      */
     public function testBucketsCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $bucket = factory(Bucket::class)->make();
+        $this->storeBucket(['name' => 'New Bucket'])
+             ->assertRedirect('/buckets');
 
-        $response = $this->actingAs($admin)->post('buckets', [
-            'name' => $bucket->name,
-        ]);
-
-        $response->assertRedirect('/buckets');
         $this->assertDatabaseHas('buckets', [
-            'name' => $bucket->name,
+            'name' => 'New Bucket',
         ]);
     }
 
@@ -38,14 +49,10 @@ class StoreTest extends TestCase
      */
     public function testBucketsMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $this->storeBucket(['name' => null])
+             ->assertRedirect()
+             ->assertSessionHasErrors('name');
 
-        $response = $this->actingAs($admin)->post('buckets', [
-            'name' => '',
-        ]);
-
-        $response->assertRedirect();
-        $response->assertSessionHasErrors('name');
         $this->assertCount(0, Bucket::all());
     }
 
@@ -57,15 +64,12 @@ class StoreTest extends TestCase
     public function testNonAdminUsersCanNotStoreBuckets()
     {
         $user = factory(User::class)->create();
-        $bucket = factory(Bucket::class)->make();
 
-        $response = $this->actingAs($user)->post('buckets', [
-            'name' => $bucket->name,
-        ]);
+        $this->storeBucket(['name' => 'New Bucket'], $user)
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseMissing('buckets', [
-            'name' => $bucket->name,
+            'name' => 'New Bucket',
         ]);
     }
 }
