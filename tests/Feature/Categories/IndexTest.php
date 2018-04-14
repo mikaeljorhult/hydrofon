@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testCategoriesCanBeFilteredByName()
     {
-        $visibleCategory    = factory(Category::class)->create();
+        $visibleCategory = factory(Category::class)->create();
         $notVisibleCategory = factory(Category::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())

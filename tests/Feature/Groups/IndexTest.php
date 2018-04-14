@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testGroupsCanBeFilteredByName()
     {
-        $visibleGroup    = factory(Group::class)->create();
+        $visibleGroup = factory(Group::class)->create();
         $notVisibleGroup = factory(Group::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())

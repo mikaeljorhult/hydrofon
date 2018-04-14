@@ -32,7 +32,7 @@ class IndexTest extends TestCase
      */
     public function testUsersCanBeFilteredByEmail()
     {
-        $visibleUser    = factory(User::class)->create();
+        $visibleUser = factory(User::class)->create();
         $notVisibleUser = factory(User::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -51,7 +51,7 @@ class IndexTest extends TestCase
      */
     public function testUsersCanBeFilteredByName()
     {
-        $visibleUser    = factory(User::class)->create();
+        $visibleUser = factory(User::class)->create();
         $notVisibleUser = factory(User::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
