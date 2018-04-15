@@ -12,24 +12,38 @@ class StoreTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Posts request to persist a category.
+     *
+     * @param array               $overrides
+     * @param \Hydrofon\User|null $user
+     *
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
+    public function storeCategory($overrides = [], $user = null)
+    {
+        $category = factory(Category::class)->make($overrides);
+
+        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+                    ->post('categories', $category->toArray());
+    }
+
+    /**
      * Categories can be created and stored.
      *
      * @return void
      */
     public function testCategoriesCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $parent = factory(Category::class)->create();
-        $category = factory(Category::class)->make();
 
-        $response = $this->actingAs($admin)->post('categories', [
-            'name'      => $category->name,
+        $this->storeCategory([
+            'name' => 'New Category',
             'parent_id' => $parent->id,
-        ]);
+        ])
+             ->assertRedirect('/categories');
 
-        $response->assertRedirect('/categories');
         $this->assertDatabaseHas('categories', [
-            'name'      => $category->name,
+            'name' => 'New Category',
             'parent_id' => $parent->id,
         ]);
     }
@@ -41,14 +55,10 @@ class StoreTest extends TestCase
      */
     public function testCategoriesMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $this->storeCategory(['name' => null])
+             ->assertRedirect()
+             ->assertSessionHasErrors('name');
 
-        $response = $this->actingAs($admin)->post('categories', [
-            'name' => '',
-        ]);
-
-        $response->assertRedirect();
-        $response->assertSessionHasErrors('name');
         $this->assertCount(0, Category::all());
     }
 
@@ -59,16 +69,10 @@ class StoreTest extends TestCase
      */
     public function testParentMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->make();
+        $this->storeCategory(['parent_id' => 100])
+             ->assertRedirect()
+             ->assertSessionHasErrors('parent_id');
 
-        $response = $this->actingAs($admin)->post('categories', [
-            'name'      => $category->name,
-            'parent_id' => 100,
-        ]);
-
-        $response->assertRedirect();
-        $response->assertSessionHasErrors('parent_id');
         $this->assertCount(0, Category::all());
     }
 }
