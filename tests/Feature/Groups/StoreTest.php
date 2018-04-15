@@ -12,22 +12,35 @@ class StoreTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Posts request to persist a group.
+     *
+     * @param array               $overrides
+     * @param \Hydrofon\User|null $user
+     *
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
+    public function storeGroup($overrides = [], $user = null)
+    {
+        $group = factory(Group::class)->make($overrides);
+
+        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+                    ->post('groups', $group->toArray());
+    }
+
+    /**
      * Groups can be created and stored.
      *
      * @return void
      */
     public function testGroupsCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->make();
+        $this->storeGroup([
+            'name' => 'New Group',
+        ])
+             ->assertRedirect('/groups');
 
-        $response = $this->actingAs($admin)->post('groups', [
-            'name' => $group->name,
-        ]);
-
-        $response->assertRedirect('/groups');
         $this->assertDatabaseHas('groups', [
-            'name' => $group->name,
+            'name' => 'New Group',
         ]);
     }
 
@@ -38,14 +51,10 @@ class StoreTest extends TestCase
      */
     public function testGroupsMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $this->storeGroup(['name' => null])
+             ->assertRedirect()
+             ->assertSessionHasErrors('name');
 
-        $response = $this->actingAs($admin)->post('groups', [
-            'name' => '',
-        ]);
-
-        $response->assertRedirect();
-        $response->assertSessionHasErrors('name');
         $this->assertCount(0, Group::all());
     }
 
@@ -57,15 +66,12 @@ class StoreTest extends TestCase
     public function testNonAdminUsersCanNotStoreGroups()
     {
         $user = factory(User::class)->create();
-        $group = factory(Group::class)->make();
 
-        $response = $this->actingAs($user)->post('groups', [
-            'name' => $group->name,
-        ]);
+        $this->storeGroup(['name' => 'New Group'], $user)
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseMissing('groups', [
-            'name' => $group->name,
+            'name' => 'New Group',
         ]);
     }
 }
