@@ -49,6 +49,23 @@ class StoreTest extends TestCase
     }
 
     /**
+     * Non-admin users can not store categories.
+     *
+     * @return void
+     */
+    public function testNonAdminUsersCanNotStoreCategories()
+    {
+        $user = factory(User::class)->create();
+
+        $this->storeCategory(['name' => 'New Category'], $user)
+             ->assertStatus(403);
+
+        $this->assertDatabaseMissing('categories', [
+            'name' => 'New Category',
+        ]);
+    }
+
+    /**
      * Categories must have a name.
      *
      * @return void
