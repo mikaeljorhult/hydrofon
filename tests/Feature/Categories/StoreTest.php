@@ -57,12 +57,10 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->storeCategory(['name' => 'New Category'], $user)
+        $this->storeCategory([], $user)
              ->assertStatus(403);
 
-        $this->assertDatabaseMissing('categories', [
-            'name' => 'New Category',
-        ]);
+        $this->assertCount(0, Category::all());
     }
 
     /**

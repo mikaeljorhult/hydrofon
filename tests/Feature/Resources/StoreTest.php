@@ -12,22 +12,33 @@ class StoreTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Posts request to persist a group.
+     *
+     * @param array               $overrides
+     * @param \Hydrofon\User|null $user
+     *
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
+    public function storeResource($overrides = [], $user = null)
+    {
+        $resource = factory(Resource::class)->make($overrides);
+
+        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+                    ->post('resources', $resource->toArray());
+    }
+
+    /**
      * Resources can be created and stored.
      *
      * @return void
      */
     public function testResourcesCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->make();
+        $this->storeResource(['name' => 'New Resource'])
+             ->assertRedirect('/resources');
 
-        $response = $this->actingAs($admin)->post('resources', [
-            'name' => $resource->name,
-        ]);
-
-        $response->assertRedirect('/resources');
         $this->assertDatabaseHas('resources', [
-            'name' => $resource->name,
+            'name' => 'New Resource',
         ]);
     }
 
@@ -38,14 +49,10 @@ class StoreTest extends TestCase
      */
     public function testResourcesMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $this->storeResource(['name' => null])
+             ->assertRedirect()
+             ->assertSessionHasErrors('name');
 
-        $response = $this->actingAs($admin)->post('resources', [
-            'name' => '',
-        ]);
-
-        $response->assertRedirect();
-        $response->assertSessionHasErrors('name');
         $this->assertCount(0, Resource::all());
     }
 
@@ -57,15 +64,10 @@ class StoreTest extends TestCase
     public function testNonAdminUsersCanNotStoreResources()
     {
         $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->make();
 
-        $response = $this->actingAs($user)->post('resources', [
-            'name' => $resource->name,
-        ]);
+        $this->storeResource([], $user)
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
-        $this->assertDatabaseMissing('resources', [
-            'name' => $resource->name,
-        ]);
+        $this->assertCount(0, Resource::all());
     }
 }

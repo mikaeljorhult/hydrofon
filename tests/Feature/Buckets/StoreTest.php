@@ -65,11 +65,9 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->storeBucket(['name' => 'New Bucket'], $user)
+        $this->storeBucket([], $user)
              ->assertStatus(403);
 
-        $this->assertDatabaseMissing('buckets', [
-            'name' => 'New Bucket',
-        ]);
+        $this->assertCount(0, Bucket::all());
     }
 }
