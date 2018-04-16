@@ -67,11 +67,9 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->storeGroup(['name' => 'New Group'], $user)
+        $this->storeGroup([], $user)
              ->assertStatus(403);
 
-        $this->assertDatabaseMissing('groups', [
-            'name' => 'New Group',
-        ]);
+        $this->assertCount(0, Group::all());
     }
 }
