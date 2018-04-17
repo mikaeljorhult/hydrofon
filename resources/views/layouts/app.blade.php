@@ -19,9 +19,10 @@
 </head>
 
 <body>
-    @include('partials.sidebar')
-
-    @yield('content')
+    <div id="app" class="app">
+        @include('partials.sidebar')
+        @yield('content')
+    </div>
 
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
