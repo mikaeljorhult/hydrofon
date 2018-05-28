@@ -37,13 +37,13 @@ class StoreTest extends TestCase
         $parent = factory(Category::class)->create();
 
         $this->storeCategory([
-            'name' => 'New Category',
+            'name'      => 'New Category',
             'parent_id' => $parent->id,
         ])
              ->assertRedirect('/categories');
 
         $this->assertDatabaseHas('categories', [
-            'name' => 'New Category',
+            'name'      => 'New Category',
             'parent_id' => $parent->id,
         ]);
     }
