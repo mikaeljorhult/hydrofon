@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
-@section('content')
+@section('sidebar')
     @include('partials.resource-list')
+@endsection
 
-    <main class="main-content">
-        @include('partials/topbar')
-        @include('flash::message')
-
-        <section class="container">
-            &nbsp;
-        </section>
-    </main>
+@section('content')
+    <section class="container">
+        &nbsp;
+    </section>
 @endsection

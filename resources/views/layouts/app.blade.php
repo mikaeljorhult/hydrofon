@@ -21,7 +21,13 @@
 <body>
     <div id="app" class="app">
         @include('partials.sidebar')
-        @yield('content')
+        @yield('sidebar')
+
+        <main class="main-content">
+            @include('partials/topbar')
+            @include('flash::message')
+            @yield('content')
+        </main>
     </div>
 
     <script src="{{ asset('js/vendor.js') }}"></script>
