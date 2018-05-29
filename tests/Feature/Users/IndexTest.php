@@ -59,7 +59,7 @@ class IndexTest extends TestCase
                      'filter' => $visibleUser->name,
                  ]))
              ->assertSuccessful()
-             ->assertSee($visibleUser->name)
-             ->assertDontSee($notVisibleUser->name);
+             ->assertSee($visibleUser->email)
+             ->assertDontSee($notVisibleUser->email);
     }
 }

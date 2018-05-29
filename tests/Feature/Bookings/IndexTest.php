@@ -64,8 +64,8 @@ class IndexTest extends TestCase
                      ],
                  ]))
              ->assertSuccessful()
-             ->assertSee($visibleBooking->user->name)
-             ->assertDontSee($notVisibleBooking->user->name);
+             ->assertSee($visibleBooking->resource->name)
+             ->assertDontSee($notVisibleBooking->resource->name);
     }
 
     /**
@@ -85,8 +85,8 @@ class IndexTest extends TestCase
                      ],
                  ]))
              ->assertSuccessful()
-             ->assertSee($visibleBooking->user->name)
-             ->assertDontSee($notVisibleBooking->user->name);
+             ->assertSee($visibleBooking->resource->name)
+             ->assertDontSee($notVisibleBooking->resource->name);
     }
 
     /**
