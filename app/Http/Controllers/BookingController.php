@@ -50,6 +50,8 @@ class BookingController extends Controller
             'created_by_id' => $currentUser->id,
         ]));
 
+        flash('Booking was created');
+
         // Redirect to index if from admin page, otherwise back to referer.
         if (str_contains($request->headers->get('referer'), '/bookings')) {
             return redirect('/bookings');
@@ -98,6 +100,8 @@ class BookingController extends Controller
             'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $booking->user_id,
         ]));
 
+        flash('Booking was updated');
+
         return redirect('/bookings');
     }
 
@@ -112,6 +116,8 @@ class BookingController extends Controller
     public function destroy(Booking $booking, BookingDestroyRequest $request)
     {
         $booking->delete();
+
+        flash('Booking was deleted');
 
         return redirect('/bookings');
     }

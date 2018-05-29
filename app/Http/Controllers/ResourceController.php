@@ -45,6 +45,8 @@ class ResourceController extends Controller
         $resource = Resource::create($request->all());
         $resource->groups()->sync($request->get('groups'));
 
+        flash('Resource was created');
+
         return redirect('/resources');
     }
 
@@ -85,6 +87,8 @@ class ResourceController extends Controller
         $resource->update($request->all());
         $resource->groups()->sync($request->get('groups'));
 
+        flash('Resource was updated');
+
         return redirect('/resources');
     }
 
@@ -99,6 +103,8 @@ class ResourceController extends Controller
     public function destroy(Resource $resource, ResourceDestroyRequest $request)
     {
         $resource->delete();
+
+        flash('Resource was deleted');
 
         return redirect('/resources');
     }

@@ -51,6 +51,8 @@ class UserController extends Controller
         $user = User::create($input);
         $user->groups()->sync($request->get('groups'));
 
+        flash('User was created');
+
         return redirect('/users');
     }
 
@@ -97,6 +99,8 @@ class UserController extends Controller
         $user->update($input);
         $user->groups()->sync($request->get('groups'));
 
+        flash('User was updated');
+
         return redirect('/users');
     }
 
@@ -111,6 +115,8 @@ class UserController extends Controller
     public function destroy(User $user, UserDestroyRequest $request)
     {
         $user->delete();
+
+        flash('User was deleted');
 
         return redirect('/users');
     }

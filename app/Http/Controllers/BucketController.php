@@ -45,6 +45,8 @@ class BucketController extends Controller
         $bucket = Bucket::create($request->all());
         $bucket->resources()->sync($request->get('resources'));
 
+        flash('Bucket was created');
+
         return redirect('/buckets');
     }
 
@@ -85,6 +87,8 @@ class BucketController extends Controller
         $bucket->update($request->all());
         $bucket->resources()->sync($request->get('resources'));
 
+        flash('Bucket was updated');
+
         return redirect('/buckets');
     }
 
@@ -99,6 +103,8 @@ class BucketController extends Controller
     public function destroy(Bucket $bucket, BucketDestroyRequest $request)
     {
         $bucket->delete();
+
+        flash('Bucket was deleted');
 
         return redirect('/buckets');
     }

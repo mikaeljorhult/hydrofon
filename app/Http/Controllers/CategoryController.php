@@ -45,6 +45,8 @@ class CategoryController extends Controller
     {
         Category::create($request->all());
 
+        flash('Category was created');
+
         return redirect('/categories');
     }
 
@@ -84,6 +86,8 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
+        flash('Category was updated');
+
         return redirect('/categories');
     }
 
@@ -98,6 +102,8 @@ class CategoryController extends Controller
     public function destroy(Category $category, CategoryDestroyRequest $request)
     {
         $category->delete();
+
+        flash('Category was deleted');
 
         return redirect('/categories');
     }

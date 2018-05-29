@@ -30,6 +30,8 @@ class CheckinController extends Controller
             ]);
         }
 
+        flash('Booking was checked in.');
+
         return redirect()->back();
     }
 
@@ -44,6 +46,8 @@ class CheckinController extends Controller
     public function destroy(Checkin $checkin, CheckinDestroyRequest $request)
     {
         $checkin->delete();
+
+        flash('Checkin was deleted.');
 
         return redirect()->back();
     }

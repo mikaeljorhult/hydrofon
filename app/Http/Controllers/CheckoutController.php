@@ -23,6 +23,8 @@ class CheckoutController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
+        flash('Booking was checked in.');
+
         return redirect()->back();
     }
 
@@ -37,6 +39,8 @@ class CheckoutController extends Controller
     public function destroy(Checkout $checkout, CheckoutDestroyRequest $request)
     {
         $checkout->delete();
+
+        flash('Checkout was deleted.');
 
         return redirect()->back();
     }

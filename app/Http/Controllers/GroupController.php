@@ -44,6 +44,8 @@ class GroupController extends Controller
     {
         Group::create($request->all());
 
+        flash('Group was created');
+
         return redirect('/groups');
     }
 
@@ -83,6 +85,8 @@ class GroupController extends Controller
     {
         $group->update($request->all());
 
+        flash('Group was updated');
+
         return redirect('/groups');
     }
 
@@ -97,6 +101,8 @@ class GroupController extends Controller
     public function destroy(Group $group, GroupDestroyRequest $reqest)
     {
         $group->delete();
+
+        flash('Group was deleted');
 
         return redirect('/groups');
     }

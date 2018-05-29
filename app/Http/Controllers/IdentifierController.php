@@ -35,6 +35,8 @@ class IdentifierController extends Controller
     {
         $this->authorize('create', Identifier::class);
 
+        flash('Identifier was added');
+
         return view('identifiers.create')->with('user', $user);
     }
 
@@ -88,6 +90,8 @@ class IdentifierController extends Controller
     {
         $identifier->update($request->all());
 
+        flash('Identifier was updated');
+
         // Redirect to index if sent from edit form, otherwise redirect back.
         if (str_contains($request->headers->get('referer'), '/edit')) {
             return redirect()->route('users.identifiers.index', [$user]);
@@ -108,6 +112,8 @@ class IdentifierController extends Controller
     public function destroy(User $user, Identifier $identifier, IdentifierDestroyRequest $request)
     {
         $identifier->delete();
+
+        flash('Identifier was removed');
 
         return redirect()->back();
     }
