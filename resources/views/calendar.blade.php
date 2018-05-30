@@ -36,8 +36,8 @@
 
             <div class="form-group">
                 {!! Form::label('start_time', 'Time') !!}
-                {!! Form::text('start_time', null, ['placeholder' => 'Start']) !!}
-                {!! Form::text('end_time', null, ['placeholder' => 'End']) !!}
+                {!! Form::text('start_time', $date->format('Y-m-d ') . now()->addHours(1)->format('H:00:00'), ['placeholder' => 'Start']) !!}
+                {!! Form::text('end_time', $date->format('Y-m-d ') . now()->addHours(3)->format('H:00:00'), ['placeholder' => 'End']) !!}
             </div>
 
             <div class="form-group">
