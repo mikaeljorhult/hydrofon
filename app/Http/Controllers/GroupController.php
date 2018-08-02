@@ -6,6 +6,7 @@ use Hydrofon\Group;
 use Hydrofon\Http\Requests\GroupDestroyRequest;
 use Hydrofon\Http\Requests\GroupStoreRequest;
 use Hydrofon\Http\Requests\GroupUpdateRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller
 {
@@ -16,9 +17,11 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::orderByField(request()->get('order', 'name'))
-                       ->filterByRequest()
-                       ->paginate(15);
+        $groups = QueryBuilder::for(Group::class)
+                              ->allowedFilters('name')
+                              ->defaultSort('name')
+                              ->allowedSorts('name')
+                              ->paginate(15);
 
         return view('groups.index')->with('groups', $groups);
     }

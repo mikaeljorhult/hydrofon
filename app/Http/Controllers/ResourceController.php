@@ -6,6 +6,7 @@ use Hydrofon\Http\Requests\ResourceDestroyRequest;
 use Hydrofon\Http\Requests\ResourceStoreRequest;
 use Hydrofon\Http\Requests\ResourceUpdateRequest;
 use Hydrofon\Resource;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourceController extends Controller
 {
@@ -16,9 +17,11 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resources = Resource::orderByField(request()->get('order', 'name'))
-                             ->filterByRequest()
-                             ->paginate(15);
+        $resources = QueryBuilder::for(Resource::class)
+                                 ->allowedFilters('name')
+                                 ->defaultSort('name')
+                                 ->allowedSorts(['name', 'description'])
+                                 ->paginate(15);
 
         return view('resources.index')->with('resources', $resources);
     }

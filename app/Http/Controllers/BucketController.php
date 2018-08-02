@@ -6,6 +6,7 @@ use Hydrofon\Bucket;
 use Hydrofon\Http\Requests\BucketDestroyRequest;
 use Hydrofon\Http\Requests\BucketStoreRequest;
 use Hydrofon\Http\Requests\BucketUpdateRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BucketController extends Controller
 {
@@ -16,9 +17,11 @@ class BucketController extends Controller
      */
     public function index()
     {
-        $buckets = Bucket::orderByField(request()->get('order', 'name'))
-                         ->filterByRequest()
-                         ->paginate(15);
+        $buckets = QueryBuilder::for(Bucket::class)
+                               ->allowedFilters('name')
+                               ->defaultSort('name')
+                               ->allowedSorts('name')
+                               ->paginate(15);
 
         return view('buckets.index')->with('buckets', $buckets);
     }

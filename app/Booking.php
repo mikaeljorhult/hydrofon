@@ -153,66 +153,6 @@ class Booking extends Model
     }
 
     /**
-     * Scope to order query by a specific field.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string                                $field
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOrderByField($query, $field)
-    {
-        // Check which field to order by.
-        if (in_array($field, ['start_time', 'end_time'])) {
-            return $query->orderBy($field);
-        } elseif (in_array($field, ['resource', 'user'])) {
-            // Pluralize to get table name.
-            $plural = str_plural($field);
-
-            // Join tables and order by relationship name.
-            return $query
-                ->join($plural, $plural.'.id', '=', 'bookings.'.$field.'_id')
-                ->orderBy($plural.'.name');
-        }
-
-        return $query;
-    }
-
-    /**
-     * Scope to allow filtering models based on request.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeFilterByRequest($query)
-    {
-        if (request()->has('filter') && is_array(request('filter'))) {
-            $filter = request('filter');
-
-            if (isset($filter['query'])) {
-                $query
-                    ->orWhereHas('resource', function ($q) use ($filter) {
-                        $q->where('name', 'LIKE', '%'.$filter['query'].'%');
-                    })
-                    ->orWhereHas('user', function ($q) use ($filter) {
-                        $q->where('name', 'LIKE', '%'.$filter['query'].'%');
-                    });
-            }
-
-            if (isset($filter['user'])) {
-                $query->where('user_id', $filter['user']);
-            }
-
-            if (isset($filter['resource'])) {
-                $query->where('user_id', $filter['resource']);
-            }
-        }
-
-        return $query;
-    }
-
-    /**
      * Calculate duration in seconds.
      *
      * @return int

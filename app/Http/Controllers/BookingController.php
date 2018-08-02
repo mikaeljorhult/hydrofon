@@ -6,6 +6,7 @@ use Hydrofon\Booking;
 use Hydrofon\Http\Requests\BookingDestroyRequest;
 use Hydrofon\Http\Requests\BookingStoreRequest;
 use Hydrofon\Http\Requests\BookingUpdateRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingController extends Controller
 {
@@ -16,10 +17,14 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::with(['checkin', 'checkout', 'resource', 'user'])
-                           ->filterByRequest()
-                           ->orderByField(request()->get('order', 'start_time'))
-                           ->paginate(15);
+        $bookings = QueryBuilder::for(Booking::class)
+                                ->with(['checkin', 'checkout', 'resource', 'user'])
+                                ->join('resources', 'resources.id', '=', 'bookings.resource_id')
+                                ->join('users', 'users.id', '=', 'bookings.user_id')
+                                ->allowedFilters('start_time')
+                                ->defaultSort('start_time')
+                                ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
+                                ->paginate(15);
 
         return view('bookings.index')->with('bookings', $bookings);
     }

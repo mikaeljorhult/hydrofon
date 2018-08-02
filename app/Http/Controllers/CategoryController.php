@@ -6,6 +6,7 @@ use Hydrofon\Category;
 use Hydrofon\Http\Requests\CategoryDestroyRequest;
 use Hydrofon\Http\Requests\CategoryStoreRequest;
 use Hydrofon\Http\Requests\CategoryUpdateRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
@@ -16,10 +17,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with(['parent'])
-                              ->orderByField(request()->get('order', 'name'))
-                              ->filterByRequest()
-                              ->paginate(15);
+        $categories = QueryBuilder::for(Category::class)
+                                  ->with(['parent'])
+                                  ->leftJoin('categories as parent', 'parent.id', '=', 'categories.parent_id')
+                                  ->allowedFilters('name')
+                                  ->defaultSort('name')
+                                  ->allowedSorts(['name', 'parent.name'])
+                                  ->paginate(15);
 
         return view('categories.index')->with('categories', $categories);
     }

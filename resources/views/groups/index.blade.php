@@ -11,7 +11,7 @@
                 <a href="{{ route('groups.create') }}">New group</a>
 
                 {!! Form::open(['route' => 'groups.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                    {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
                     {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
                 {!! Form::close() !!}
             </aside>
@@ -20,7 +20,7 @@
         <table class="table" cellspacing="0">
             <thead>
                 <th class="table-column-check">#</th>
-                <th><a href="{{ route('groups.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
+                <th><a href="{{ route('groups.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
                 <th>&nbsp;</th>
             </thead>
 
@@ -47,6 +47,6 @@
             </tbody>
         </table>
 
-        {{ $groups->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
+        {{ $groups->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

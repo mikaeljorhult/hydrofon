@@ -6,6 +6,7 @@ use Hydrofon\Http\Requests\UserDestroyRequest;
 use Hydrofon\Http\Requests\UserStoreRequest;
 use Hydrofon\Http\Requests\UserUpdateRequest;
 use Hydrofon\User;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
@@ -16,9 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderByField(request()->get('order', 'email'))
-            ->filterByRequest()
-            ->paginate(15);
+        $users = QueryBuilder::for(User::class)
+                             ->allowedFilters('email')
+                             ->defaultSort('email')
+                             ->allowedSorts(['email', 'name'])
+                             ->paginate(15);
 
         return view('users.index')->with('users', $users);
     }

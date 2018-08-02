@@ -11,7 +11,7 @@
                 <a href="{{ route('users.create') }}">New user</a>
 
                 {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                    {!! Form::search('filter[email]', null, ['placeholder' => 'Filter']) !!}
                     {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
                 {!! Form::close() !!}
             </aside>
@@ -20,8 +20,8 @@
         <table class="table" cellspacing="0">
             <thead>
                 <th class="table-column-check">#</th>
-                <th><a href="{{ route('users.index', ['order' => 'email'] + request()->except('page')) }}">E-mail</a></th>
-                <th><a href="{{ route('users.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
+                <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->except('page')) }}">E-mail</a></th>
+                <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
                 <th>&nbsp;</th>
             </thead>
 
@@ -53,6 +53,6 @@
             </tbody>
         </table>
 
-        {{ $users->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
+        {{ $users->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

@@ -11,7 +11,7 @@
                 <a href="{{ route('categories.create') }}">New category</a>
 
                 {!! Form::open(['route' => 'categories.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter', null, ['placeholder' => 'Filter']) !!}
+                    {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
                     {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
                 {!! Form::close() !!}
             </aside>
@@ -20,8 +20,8 @@
         <table class="table" cellspacing="0">
             <thead>
                 <th class="table-column-check">#</th>
-                <th><a href="{{ route('categories.index', ['order' => 'name'] + request()->except('page')) }}">Name</a></th>
-                <th><a href="{{ route('categories.index', ['order' => 'parent'] + request()->except('page')) }}">Parent</a></th>
+                <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+                <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'parent.name' ? '-' : '') . 'parent.name'] + request()->except('page')) }}">Parent</a></th>
                 <th>&nbsp;</th>
             </thead>
 
@@ -51,6 +51,6 @@
             </tbody>
         </table>
 
-        {{ $categories->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
+        {{ $categories->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

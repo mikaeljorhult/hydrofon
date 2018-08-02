@@ -11,7 +11,7 @@
                 <a href="{{ route('bookings.create') }}">New booking</a>
 
                 {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter[search]', null, ['placeholder' => 'Filter']) !!}
+                    {!! Form::search('filter[start_time]', null, ['placeholder' => 'Filter']) !!}
                     {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
                 {!! Form::close() !!}
             </aside>
@@ -20,10 +20,10 @@
         <table class="table" cellspacing="0">
             <thead>
                 <th class="table-column-check">#</th>
-                <th><a href="{{ route('bookings.index', ['order' => 'resource'] + request()->except('page')) }}">Resource</a></th>
-                <th><a href="{{ route('bookings.index', ['order' => 'user'] + request()->except('page')) }}">User</a></th>
-                <th><a href="{{ route('bookings.index', ['order' => 'start_time'] + request()->except('page')) }}">Start</a></th>
-                <th><a href="{{ route('bookings.index', ['order' => 'end_time'] + request()->except('page')) }}">End</a></th>
+                <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'resources.name' ? '-' : '') . 'resources.name'] + request()->except('page')) }}">Resource</a></th>
+                <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'users.name' ? '-' : '') . 'users.name'] + request()->except('page')) }}">User</a></th>
+                <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'start_time' || request()->has('sort') === false ? '-' : '') . 'start_time'] + request()->except('page')) }}">Start</a></th>
+                <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'end_time' ? '-' : '') . 'end_time'] + request()->except('page')) }}">End</a></th>
                 <th>&nbsp;</th>
             </thead>
 
@@ -85,6 +85,6 @@
             </tbody>
         </table>
 
-        {{ $bookings->appends(['filter' => request()->get('filter'), 'order' => request()->get('order')])->links() }}
+        {{ $bookings->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection
