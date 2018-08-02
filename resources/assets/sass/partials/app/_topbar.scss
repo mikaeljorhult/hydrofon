@@ -8,17 +8,16 @@
     width: 33%;
   }
 
+  form {
+    display: flex;
+    align-items: center;
+  }
+
   label,
   input,
   select {
     margin-bottom: 0;
     background: transparent none no-repeat center left;
     font-size: .8rem;
-    line-height: 1;
-  }
-
-  label {
-    display: flex;
-    align-items: center;
   }
 }
