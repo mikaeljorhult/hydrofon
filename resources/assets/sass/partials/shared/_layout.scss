@@ -1,13 +1,4 @@
-.app {
-  height: 100%;
-  display: flex;
-}
-
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   flex: 0 0 7rem;
 
   > * {
@@ -16,19 +7,12 @@
 }
 
 .main-navigation {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-
   ul {
     margin: 1rem 0;
   }
 }
 
 .main-content {
-  flex: 1 1 auto;
-  overflow-y: scroll;
   background-color: #eff4fa;
 }
 

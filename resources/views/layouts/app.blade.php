@@ -18,12 +18,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
-    <div id="app" class="app">
+<body class="font-base font-light">
+    <div id="app" class="app h-full flex">
         @include('partials.sidebar')
         @yield('sidebar')
 
-        <main class="main-content">
+        <main class="main-content flex-grow overflow-scroll">
             @include('partials/topbar')
             @include('flash::message')
             @yield('content')
