@@ -14,7 +14,7 @@
     {!! Form::close() !!}
 
     <a href="#" id="resourcelist-toggle" class="resourcelist-toggle">
-        @svg('chevron-left', ['class' => 'resourcelist-toggle-icon'])
-        @svg('chevron-right', ['class' => 'resourcelist-toggle-icon'])
+        @svg('cheveron-left', ['class' => 'resourcelist-toggle-icon'])
+        @svg('cheveron-right', ['class' => 'resourcelist-toggle-icon'])
     </a>
 </section>

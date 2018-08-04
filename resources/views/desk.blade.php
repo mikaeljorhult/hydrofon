@@ -32,7 +32,7 @@
                                         {!! Form::open(['route' => ['checkouts.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
                                             <button type="submit" title="Check out">
-                                                @svg('logout-variant')
+                                                @svg('upload')
                                             </button>
                                         {!! Form::close() !!}
                                     @endif
@@ -41,7 +41,7 @@
                                         {!! Form::open(['route' => ['checkins.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
                                             <button type="submit" title="Check in">
-                                                @svg('login-variant')
+                                                @svg('download')
                                             </button>
                                         {!! Form::close() !!}
                                     @endif
@@ -56,7 +56,7 @@
 
                                     {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
                                         <button type="submit" title="Delete">
-                                            @svg('delete')
+                                            @svg('trash')
                                         </button>
                                     {!! Form::close() !!}
                                 </td>

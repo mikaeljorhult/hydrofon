@@ -19,7 +19,7 @@
 
     @auth
         <section class="user py-4 px-1 bg-brand-dark">
-            <a href="{{ route('profile') }}" class="text-white">
+            <a href="{{ route('profile') }}" class="text-white no-underline">
                 <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
                      class="w-8 rounded-full"
                      alt="{{ auth()->user()->name }}"/>
@@ -34,14 +34,14 @@
             <ul class="list-reset w-full">
                 <li>
                     <a href="{{ route('home') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker hover:bg-complementary-darker">
-                        @svg('calendar', 'block w-8 h-auto mt-0 mx-auto mb-1') Book
+                        @svg('calendar', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Book
                     </a>
                 </li>
 
                 @admin
                     <li class="sidebar-link">
                         <a href="{{ route('desk') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('desktop-mac', 'block w-8 h-auto mt-0 mx-auto mb-1') Desk
+                            @svg('computer-desktop', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Desk
                         </a>
                     </li>
                 @endadmin
@@ -51,32 +51,32 @@
                 <ul class="list-reset w-full">
                     <li class="sidebar-link">
                         <a href="{{ route('bookings.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('calendar-multiple', 'block w-8 h-auto mt-0 mx-auto mb-1') Bookings
+                            @svg('date-add', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Bookings
                         </a>
                     </li>
                     <li class="sidebar-link">
                         <a href="{{ route('buckets.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('package', 'block w-8 h-auto mt-0 mx-auto mb-1') Buckets
+                            @svg('box', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Buckets
                         </a>
                     </li>
                     <li class="sidebar-link">
                         <a href="{{ route('categories.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('tag-multiple', 'block w-8 h-auto mt-0 mx-auto mb-1') Categories
+                            @svg('tag', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Categories
                         </a>
                     </li>
                     <li class="sidebar-link">
                         <a href="{{ route('groups.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('lock-outline', 'block w-8 h-auto mt-0 mx-auto mb-1') Groups
+                            @svg('lock-closed', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Groups
                         </a>
                     </li>
                     <li class="sidebar-link">
                         <a href="{{ route('resources.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('cellphone-link', 'block w-8 h-auto mt-0 mx-auto mb-1') Resources
+                            @svg('mobile-devices', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Resources
                         </a>
                     </li>
                     <li class="sidebar-link">
                         <a href="{{ route('users.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('account-multiple', 'block w-8 h-auto mt-0 mx-auto mb-1') Users
+                            @svg('user-group', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Users
                         </a>
                     </li>
                 </ul>
@@ -88,7 +88,7 @@
                         <a href="{{ route('impersonation') }}"
                            onclick="event.preventDefault(); document.getElementById('impersonation-form').submit();"
                            class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('account-switch', 'block w-8 h-auto mt-0 mx-auto mb-1')
+                            @svg('view-hide', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current')
                             Stop impersonation
                         </a>
 
@@ -100,7 +100,7 @@
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                            class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker">
-                            @svg('power', 'block w-8 h-auto mt-0 mx-auto mb-1')
+                            @svg('stand-by', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current')
                             Log out
                         </a>
 

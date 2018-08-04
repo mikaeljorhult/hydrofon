@@ -2,7 +2,7 @@
     <nav class="topbar flex justify-between py-4 px-8 bg-white">
         <section class="topbar-desk w-1/3">
             {!! Form::open(['route' => 'desk', 'class' => 'flex items-center']) !!}
-                @svg('magnify')
+                @svg('search')
 
                 <label for="search" class="screen-reader">
                     Search for user
@@ -15,7 +15,7 @@
 
         <section class="topbar-impersonation w-1/3">
             {!! Form::open(['route' => 'impersonation', 'class' => 'flex items-center']) !!}
-                @svg('account-switch')
+                @svg('view-show')
 
                 <label for="user_id" class="screen-reader">
                     Select user to impersonate

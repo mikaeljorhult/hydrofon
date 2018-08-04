@@ -39,7 +39,7 @@
                             @can('delete', $user)
                                 {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
                                 <button type="submit" title="Delete">
-                                    @svg('delete')
+                                    @svg('trash')
                                 </button>
                                 {!! Form::close() !!}
                             @endcan
