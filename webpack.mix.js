@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,6 +13,10 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
+    .options({
+        processCssUrls: false,
+        postCss: [tailwindcss('./tailwind.js')],
+    })
     .combine([
         'node_modules/vue/dist/vue.min.js',
         'node_modules/interactjs/dist/interact.min.js',

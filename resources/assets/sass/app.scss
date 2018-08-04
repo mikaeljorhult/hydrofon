@@ -2,6 +2,11 @@
 @import '../../../node_modules/normalize.css/normalize.css';
 @import '../../../node_modules/segel/src/styles/main';
 
+// Tailwind CSS
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
 // Shared styles.
 @import './partials/shared/variables';
 @import './partials/shared/base';
