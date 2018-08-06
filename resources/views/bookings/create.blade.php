@@ -2,7 +2,9 @@
 
 @section('content')
     <section class="container">
-        <h1>Create booking</h1>
+        <header class="heading">
+            <h1>Create booking</h1>
+        </header>
 
         <section>
             {!! Form::open(['route' => 'bookings.store']) !!}

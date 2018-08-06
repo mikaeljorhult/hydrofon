@@ -1,9 +1,9 @@
-<div class="form-group">
-    {!! Form::label('value', 'Identifier') !!}
-    {!! Form::text('value', null, ['placeholder' => 'Value']) !!}
+<div class="mb-6">
+    {!! Form::label('value', 'Identifier', ['class' => 'label']) !!}
+    {!! Form::text('value', null, ['placeholder' => 'Value', 'class' => 'field']) !!}
 </div>
 
-<div class="form-group">
+<div class="mt-6">
     <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

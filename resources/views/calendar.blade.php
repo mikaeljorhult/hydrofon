@@ -23,24 +23,24 @@
 
             <h2>Create booking</h2>
             @admin
-                <div class="form-group">
-                    {!! Form::label('user_id', 'User') !!}
-                    {!! Form::select('user_id', \Hydrofon\User::pluck('name', 'id'), auth()->user()->id) !!}
+                <div class="mb-4">
+                    {!! Form::label('user_id', 'User', ['class' => 'label']) !!}
+                    {!! Form::select('user_id', \Hydrofon\User::pluck('name', 'id'), auth()->user()->id, ['class' => 'field']) !!}
                 </div>
             @endadmin
 
-            <div class="form-group">
-                {!! Form::label('resource_id', 'Resource') !!}
-                {!! Form::select('resource_id', \Hydrofon\Resource::pluck('name', 'id'), $resources->count() > 0 ? $resources->first()->id : null) !!}
+            <div class="mb-4">
+                {!! Form::label('resource_id', 'Resource', ['class' => 'label']) !!}
+                {!! Form::select('resource_id', \Hydrofon\Resource::pluck('name', 'id'), $resources->count() > 0 ? $resources->first()->id : null, ['class' => 'field']) !!}
             </div>
 
-            <div class="form-group">
-                {!! Form::label('start_time', 'Time') !!}
-                {!! Form::text('start_time', $date->format('Y-m-d ') . now()->addHours(1)->format('H:00:00'), ['placeholder' => 'Start']) !!}
-                {!! Form::text('end_time', $date->format('Y-m-d ') . now()->addHours(3)->format('H:00:00'), ['placeholder' => 'End']) !!}
+            <div class="mb-6">
+                {!! Form::label('start_time', 'Time', ['class' => 'label']) !!}
+                {!! Form::text('start_time', $date->format('Y-m-d ') . now()->addHours(1)->format('H:00:00'), ['placeholder' => 'Start', 'class' => 'field']) !!}
+                {!! Form::text('end_time', $date->format('Y-m-d ') . now()->addHours(3)->format('H:00:00'), ['placeholder' => 'End', 'class' => 'field']) !!}
             </div>
 
-            <div class="form-group">
+            <div class="mt-6">
                 {!! Form::submit('Book', ['class' => 'btn btn-primary']) !!}
             </div>
         {!! Form::close() !!}

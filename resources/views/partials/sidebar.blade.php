@@ -1,7 +1,7 @@
-<aside class="sidebar flex flex-col items-center justify-between overflow-hidden bg-complementary-darkest text-complementary text-center">
-    <header class="py-12 px-0 bg-brand">
+<aside class="sidebar w-32 flex flex-col items-center justify-between overflow-hidden bg-complementary-darkest text-complementary text-center">
+    <header class="w-full py-12 px-0 bg-brand">
         <h1 class="m-0 font-bold text-base leading-none uppercase">
-            <a href="{{ url('/') }}" class="text-white">
+            <a href="{{ url('/') }}" class="block text-white hover:text-white">
                 {{ config('app.name', 'Hydrofon') }}
             </a>
         </h1>
@@ -18,8 +18,8 @@
     @endguest
 
     @auth
-        <section class="user py-4 px-1 bg-brand-dark">
-            <a href="{{ route('profile') }}" class="text-white no-underline">
+        <section class="w-full py-4 px-1 bg-brand-dark">
+            <a href="{{ route('profile') }}" class="block text-white no-underline hover:text-white">
                 <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
                      class="w-8 rounded-full"
                      alt="{{ auth()->user()->name }}"/>
@@ -30,7 +30,7 @@
             </a>
         </section>
 
-        <nav class="flex flex-col flex-1 items-center content-between overflow-y-scroll my-4">
+        <nav class="w-full flex flex-col flex-1 items-center content-between overflow-y-scroll my-4">
             <ul class="list-reset w-full mb-3">
                 <li>
                     <a href="{{ route('home') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker hover:bg-complementary-darker">

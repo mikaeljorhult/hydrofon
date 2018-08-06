@@ -2,16 +2,20 @@
 @tailwind preflight;
 @tailwind components;
 
-// Third Party
+// Third Party.
 @import '../../../node_modules/segel/src/styles/main';
+
+// Components.
+@import './components/button';
+@import './components/container';
+@import './components/field';
+@import './components/label';
 
 // Hydrofon styles.
 @import './partials/shared/variables';
 @import './partials/shared/base';
 @import './partials/shared/layout';
 @import './partials/shared/header';
-@import './partials/shared/forms';
-@import './partials/shared/button';
 @import './partials/shared/tables';
 @import './partials/shared/helpers';
 @import './partials/app/resourcelist';
