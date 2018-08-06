@@ -13,7 +13,6 @@
         "cross-env": "^5.1",
         "laravel-mix": "^2.0",
         "laravel-mix-purgecss": "^2.2.3",
-        "normalize.css": "^8.0.0",
         "segel": "^0.0.13",
         "tailwindcss": "^0.6.4"
     }

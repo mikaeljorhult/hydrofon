@@ -1,10 +1,9 @@
-// Third Party
-@import '../../../node_modules/normalize.css/normalize.css';
-@import '../../../node_modules/segel/src/styles/main';
-
 // Tailwind CSS.
 @tailwind preflight;
 @tailwind components;
+
+// Third Party
+@import '../../../node_modules/segel/src/styles/main';
 
 // Hydrofon styles.
 @import './partials/shared/variables';
