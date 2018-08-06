@@ -1,0 +1,7 @@
+.field {
+  @apply appearance-none block w-full bg-white text-grey-darker border border-grey-lighter rounded py-2 px-2 font-light leading-tight;
+
+  &:focus {
+    @apply outline-none bg-white border-grey-light;
+  }
+}

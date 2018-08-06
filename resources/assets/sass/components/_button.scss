@@ -1,0 +1,16 @@
+.btn {
+  @apply py-2 px-4 rounded;
+
+  &.disabled,
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
+
+.btn-primary {
+  @apply bg-brand-dark text-white;
+}
+
+.btn-link {
+  @apply no-underline;
+}

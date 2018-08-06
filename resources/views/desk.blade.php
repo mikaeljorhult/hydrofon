@@ -47,8 +47,8 @@
                                     @endif
 
                                     {!! Form::open(['route' => 'calendar']) !!}
-                                    {{ Form::hidden('date', $booking->start_time->format('Y-m-d')) }}
-                                    {{ Form::hidden('resources[]', $booking->resource->id) }}
+                                    {!! Form::hidden('date', $booking->start_time->format('Y-m-d')) !!}
+                                    {!! Form::hidden('resources[]', $booking->resource->id) !!}
                                         <button type="submit" title="View in calendar">
                                             @svg('calendar', 'w-5')
                                         </button>
