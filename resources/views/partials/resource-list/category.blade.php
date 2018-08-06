@@ -1,6 +1,6 @@
 <li class="resourcelist-category">
     <span>
-        @svg('folder')
+        @svg('folder', 'w-5')
         {{ $category->name }}
     </span>
 

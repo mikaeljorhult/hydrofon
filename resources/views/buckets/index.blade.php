@@ -34,7 +34,7 @@
                         <td data-title="&nbsp;" class="table-actions">
                             {!! Form::model($bucket, ['route' => ['buckets.destroy', $bucket->id], 'method' => 'DELETE' ]) !!}
                             <button type="submit" title="Delete">
-                                @svg('trash')
+                                @svg('trash', 'w-5')
                             </button>
                             {!! Form::close() !!}
                         </td>

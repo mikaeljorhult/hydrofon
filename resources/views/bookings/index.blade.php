@@ -48,7 +48,7 @@
                                 {!! Form::open(['route' => ['checkouts.store']]) !!}
                                 {!! Form::hidden('booking_id', $booking->id) !!}
                                     <button type="submit" title="Check out">
-                                        @svg('upload')
+                                        @svg('upload', 'w-5')
                                     </button>
                                 {!! Form::close() !!}
                             @endif
@@ -57,7 +57,7 @@
                                 {!! Form::open(['route' => ['checkins.store']]) !!}
                                     {!! Form::hidden('booking_id', $booking->id) !!}
                                     <button type="submit" title="Check in">
-                                        @svg('download')
+                                        @svg('download', 'w-5')
                                     </button>
                                 {!! Form::close() !!}
                             @endif
@@ -66,13 +66,13 @@
                                 {{ Form::hidden('date', $booking->start_time->format('Y-m-d')) }}
                                 {{ Form::hidden('resources[]', $booking->resource->id) }}
                                 <button type="submit" title="View in calendar">
-                                    @svg('calendar')
+                                    @svg('calendar', 'w-5')
                                 </button>
                             {!! Form::close() !!}
 
                             {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
                                 <button type="submit" title="Delete">
-                                    @svg('trash')
+                                    @svg('trash', 'w-5')
                                 </button>
                             {!! Form::close() !!}
                         </td>
