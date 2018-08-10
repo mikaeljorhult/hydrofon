@@ -2,20 +2,14 @@
 
 @section('content')
     <section class="container">
-        <header class="flex justify-between items-baseline mb-4">
-            <h1>
-                <a href="{{ route('bookings.index') }}">Bookings</a>
-            </h1>
+        @component('components.heading', ['title' => 'Bookings', 'url' => route('bookings.index')])
+            <a href="{{ route('bookings.create') }}" class="btn btn-primary btn-pill mr-2">New booking</a>
 
-            <aside class="flex items-baseline">
-                <a href="{{ route('bookings.create') }}" class="btn btn-primary btn-pill mr-2">New booking</a>
-
-                {!! Form::open(['route' => 'bookings.index', 'method' => 'GET', 'class' => 'flex justify-between items-baseline']) !!}
-                    {!! Form::search('filter[start_time]', null, ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
-                {!! Form::close() !!}
-            </aside>
-        </header>
+            {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
+                {!! Form::search('filter[start_time]', null, ['placeholder' => 'Filter', 'class' => 'field']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+            {!! Form::close() !!}
+        @endcomponent
 
         <table class="table" cellspacing="0">
             <thead>

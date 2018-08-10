@@ -2,20 +2,14 @@
 
 @section('content')
     <section class="container">
-        <header class="main-header">
-            <h1>
-                <a href="{{ route('groups.index') }}">Groups</a>
-            </h1>
+        @component('components.heading', ['title' => 'Groups', 'url' => route('groups.index')])
+            <a href="{{ route('groups.create') }}" class="btn btn-primary btn-pill mr-2">New group</a>
 
-            <aside>
-                <a href="{{ route('groups.create') }}">New group</a>
-
-                {!! Form::open(['route' => 'groups.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
-                {!! Form::close() !!}
-            </aside>
-        </header>
+            {!! Form::open(['route' => 'groups.index', 'method' => 'GET']) !!}
+                {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+            {!! Form::close() !!}
+        @endcomponent
 
         <table class="table" cellspacing="0">
             <thead>

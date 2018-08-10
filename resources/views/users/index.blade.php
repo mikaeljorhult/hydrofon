@@ -2,20 +2,14 @@
 
 @section('content')
     <section class="container">
-        <header class="main-header">
-            <h1>
-                <a href="{{ route('users.index') }}">Users</a>
-            </h1>
+        @component('components.heading', ['title' => 'Users', 'url' => route('users.index')])
+            <a href="{{ route('users.create') }}" class="btn btn-primary btn-pill mr-2">New user</a>
 
-            <aside>
-                <a href="{{ route('users.create') }}">New user</a>
-
-                {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter[email]', null, ['placeholder' => 'Filter']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
-                {!! Form::close() !!}
-            </aside>
-        </header>
+            {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
+                {!! Form::search('filter[email]', null, ['placeholder' => 'Filter']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+            {!! Form::close() !!}
+        @endcomponent
 
         <table class="table" cellspacing="0">
             <thead>

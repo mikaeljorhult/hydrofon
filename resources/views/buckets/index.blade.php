@@ -2,20 +2,14 @@
 
 @section('content')
     <section class="container">
-        <header class="main-header">
-            <h1>
-                <a href="{{ route('buckets.index') }}">Buckets</a>
-            </h1>
+        @component('components.heading', ['title' => 'Buckets', 'url' => route('buckets.index')])
+            <a href="{{ route('buckets.create') }}" class="btn btn-primary btn-pill mr-2">New bucket</a>
 
-            <aside>
-                <a href="{{ route('buckets.create') }}">New bucket</a>
-
-                {!! Form::open(['route' => 'buckets.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
-                {!! Form::close() !!}
-            </aside>
-        </header>
+            {!! Form::open(['route' => 'buckets.index', 'method' => 'GET']) !!}
+                {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+            {!! Form::close() !!}
+        @endcomponent
 
         <table class="table" cellspacing="0">
             <thead>

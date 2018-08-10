@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="container">
-        <h1>Edit booking</h1>
+        @component('components.heading', ['title' => 'Edit booking'])
+        @endcomponent
 
         <section>
             {!! Form::model($booking, ['route' => ['bookings.update', $booking->id], 'method' => 'PUT' ]) !!}

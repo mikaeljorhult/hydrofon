@@ -2,6 +2,7 @@
 
 @section('content')
     <section class="container">
-        <h1>{{ $group->name }}</h1>
+        @component('components.heading', ['title' => $bucket->name])
+        @endcomponent
     </section>
 @endsection

@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="container">
-        <h1>Create category</h1>
+        @component('components.heading', ['title' => 'Create category'])
+        @endcomponent
 
         <section>
             {!! Form::open(['route' => 'categories.store']) !!}

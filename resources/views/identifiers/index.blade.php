@@ -2,13 +2,9 @@
 
 @section('content')
     <section class="container">
-        <header class="main-header">
-            <h1>Identifiers for {{ $user->name }}</h1>
-
-            <aside>
-                <a href="{{ route('users.identifiers.create', [$user]) }}">New identifier</a>
-            </aside>
-        </header>
+        @component('components.heading', ['title' => 'Identifiers for ' . $user->name])
+            <a href="{{ route('users.identifiers.create', [$user]) }}">New identifier</a>
+        @endcomponent
 
         <table class="table" cellspacing="0">
             <thead>

@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="container">
-        <h1>Create identifier</h1>
+        @component('components.heading', ['title' => 'Create identifier'])
+        @endcomponent
 
         <section>
             {!! Form::open(['route' => ['users.identifiers.store', $user]]) !!}

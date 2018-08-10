@@ -1,6 +1,10 @@
 .btn {
   @apply py-2 px-4 rounded no-underline;
 
+  &:hover {
+    @apply opacity-75;
+  }
+
   &.disabled,
   &:disabled {
     @apply opacity-50 cursor-not-allowed;
@@ -11,11 +15,11 @@
   @apply rounded-full;
 }
 
-.btn-link {
-  @apply no-underline;
-}
-
 .btn-primary {
   @apply bg-brand-dark text-white;
+
+  &:hover {
+    @apply text-white;
+  }
 }
 
