@@ -30,15 +30,15 @@ class ImpersonationTest extends DuskTestCase
 
                     // User is impersonated.
                     ->assertPathIs('/home')
-                    ->assertDontSeeIn('.sidebar .user', $admin->name)
-                    ->assertSeeIn('.sidebar .user', $user->name)
+                    ->assertDontSeeIn('.sidebar', $admin->name)
+                    ->assertSeeIn('.sidebar', $user->name)
                     ->assertSeeLink('Stop impersonation')
 
                     // Stop impersonating, recoqnized as administrator user again.
                     ->clickLink('Stop impersonation')
                     ->assertPathIs('/home')
-                    ->assertDontSeeIn('.sidebar .user', $user->name)
-                    ->assertSeeIn('.sidebar .user', $admin->name)
+                    ->assertDontSeeIn('.sidebar', $user->name)
+                    ->assertSeeIn('.sidebar', $admin->name)
                     ->assertDontSeeLink('Stop impersonation');
         });
     }
