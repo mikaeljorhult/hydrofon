@@ -38,7 +38,7 @@ class IndexTest extends TestCase
 
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('categories?'.http_build_query([
-                     'filter' => $visibleCategory->name,
+                     'filter[categories.name]' => $visibleCategory->name,
                  ]))
              ->assertSuccessful()
              ->assertSee($visibleCategory->name)

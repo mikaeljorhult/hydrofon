@@ -37,26 +37,7 @@ class IndexTest extends TestCase
 
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('users?'.http_build_query([
-                     'filter' => $visibleUser->email,
-                 ]))
-             ->assertSuccessful()
-             ->assertSee($visibleUser->email)
-             ->assertDontSee($notVisibleUser->email);
-    }
-
-    /**
-     * Users index can be filtered by name.
-     *
-     * @return void
-     */
-    public function testUsersCanBeFilteredByName()
-    {
-        $visibleUser = factory(User::class)->create();
-        $notVisibleUser = factory(User::class)->create();
-
-        $this->actingAs(factory(User::class)->states('admin')->create())
-             ->get('users?'.http_build_query([
-                     'filter' => $visibleUser->name,
+                     'filter[email]' => $visibleUser->email,
                  ]))
              ->assertSuccessful()
              ->assertSee($visibleUser->email)

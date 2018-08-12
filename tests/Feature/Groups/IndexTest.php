@@ -38,7 +38,7 @@ class IndexTest extends TestCase
 
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('groups?'.http_build_query([
-                     'filter' => $visibleGroup->name,
+                     'filter[name]' => $visibleGroup->name,
                  ]))
              ->assertSuccessful()
              ->assertSee($visibleGroup->name)

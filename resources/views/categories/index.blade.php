@@ -6,7 +6,7 @@
             <a href="{{ route('categories.create') }}" class="btn btn-primary btn-pill mr-2">New category</a>
 
             {!! Form::open(['route' => 'categories.index', 'method' => 'GET']) !!}
-                {!! Form::search('filter[name]', null, ['placeholder' => 'Filter']) !!}
+                {!! Form::search('filter[categories.name]', null, ['placeholder' => 'Filter']) !!}
                 {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
             {!! Form::close() !!}
         @endcomponent
@@ -14,7 +14,7 @@
         <table class="table" cellspacing="0">
             <thead>
                 <th class="table-column-check">#</th>
-                <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+                <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'categories.name' || request()->has('sort') === false ? '-' : '') . 'categories.name'] + request()->except('page')) }}">Name</a></th>
                 <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'parent.name' ? '-' : '') . 'parent.name'] + request()->except('page')) }}">Parent</a></th>
                 <th>&nbsp;</th>
             </thead>

@@ -38,7 +38,7 @@ class IndexTest extends TestCase
 
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('resources?'.http_build_query([
-                     'filter' => $visibleResource->name,
+                     'filter[name]' => $visibleResource->name,
                  ]))
              ->assertSuccessful()
              ->assertSee($visibleResource->name)
