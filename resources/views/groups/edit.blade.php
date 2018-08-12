@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="container">
-        <h1>Edit group</h1>
+        @component('components.heading', ['title' => 'Create group'])
+        @endcomponent
 
         <section>
             {!! Form::model($group, ['route' => ['groups.update', $group->id], 'method' => 'PUT' ]) !!}

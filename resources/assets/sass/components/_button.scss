@@ -1,5 +1,9 @@
 .btn {
-  @apply py-2 px-4 rounded;
+  @apply py-2 px-4 rounded no-underline;
+
+  &:hover {
+    @apply opacity-75;
+  }
 
   &.disabled,
   &:disabled {
@@ -7,10 +11,15 @@
   }
 }
 
-.btn-primary {
-  @apply bg-brand-dark text-white;
+.btn-pill {
+  @apply rounded-full;
 }
 
-.btn-link {
-  @apply no-underline;
+.btn-primary {
+  @apply bg-brand-dark text-white;
+
+  &:hover {
+    @apply text-white;
+  }
 }
+

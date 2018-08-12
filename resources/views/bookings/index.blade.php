@@ -2,20 +2,14 @@
 
 @section('content')
     <section class="container">
-        <header class="main-header">
-            <h1>
-                <a href="{{ route('bookings.index') }}">Bookings</a>
-            </h1>
+        @component('components.heading', ['title' => 'Bookings', 'url' => route('bookings.index')])
+            <a href="{{ route('bookings.create') }}" class="btn btn-primary btn-pill mr-2">New booking</a>
 
-            <aside>
-                <a href="{{ route('bookings.create') }}">New booking</a>
-
-                {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
-                    {!! Form::search('filter[start_time]', null, ['placeholder' => 'Filter']) !!}
-                    {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
-                {!! Form::close() !!}
-            </aside>
-        </header>
+            {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
+                {!! Form::search('filter[start_time]', null, ['placeholder' => 'Filter', 'class' => 'field']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+            {!! Form::close() !!}
+        @endcomponent
 
         <table class="table" cellspacing="0">
             <thead>

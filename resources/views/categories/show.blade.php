@@ -2,6 +2,7 @@
 
 @section('content')
     <section class="container">
-        <h1>{{ $category->name }}</h1>
+        @component('components.heading', ['title' => $category->name])
+        @endcomponent
     </section>
 @endsection

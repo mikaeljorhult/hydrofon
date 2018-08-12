@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="container">
-        <h1>Edit identifier</h1>
+        @component('components.heading', ['title' => 'Edit identifier'])
+        @endcomponent
 
         <section>
             {!! Form::model($identifier, ['route' => ['users.identifiers.update', $user, $identifier], 'method' => 'PUT' ]) !!}
