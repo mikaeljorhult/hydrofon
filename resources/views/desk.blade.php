@@ -3,7 +3,8 @@
 @section('content')
     <section class="container">
         @if($user)
-            <h1>{{ $user->name }}</h1>
+            @component('components.heading', ['title' => $user->name])
+            @endcomponent
 
             <h2>Bookings</h2>
             <table class="table" cellspacing="0">
