@@ -12,7 +12,7 @@
 
                 <div class="mb-4{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label class="label" for="email">E-mail</label>
-                    <input id="email" type="email" name="email" class="field" value="{{ $email or old('email') }}" required autofocus>
+                    <input id="email" type="email" name="email" class="field" value="{{ $email ?? old('email') }}" required autofocus>
 
                     @if ($errors->has('email'))
                         <div class="help-block">
