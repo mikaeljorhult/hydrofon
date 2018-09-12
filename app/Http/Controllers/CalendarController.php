@@ -83,7 +83,7 @@ class CalendarController extends Controller
                             ->between($date, $date->copy()->endOfDay())
                             ->orderBy('start_time');
                     },
-                ])
+                      ])
                       ->get()
             : collect();
     }
