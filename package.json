@@ -14,6 +14,6 @@
         "laravel-mix": "^2.0",
         "laravel-mix-purgecss": "^2.2.3",
         "segel": "^0.0.13",
-        "tailwindcss": "^0.6.4"
+        "tailwindcss": "^0.7.2"
     }
 }
