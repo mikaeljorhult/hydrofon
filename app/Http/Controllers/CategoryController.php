@@ -21,8 +21,9 @@ class CategoryController extends Controller
                                   ->with(['parent'])
                                   ->leftJoin('categories as parent', 'parent.id', '=', 'categories.parent_id')
                                   ->allowedFilters('categories.name')
-                                  ->defaultSort('name')
                                   ->allowedSorts(['categories.name', 'parent.name'])
+                                  ->defaultSort('categories.name')
+                                  ->select('categories.*')
                                   ->paginate(15);
 
         return view('categories.index')->with('categories', $categories);
