@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Identifiers')
+
 @section('content')
     <section class="container">
         @component('components.heading', ['title' => 'Identifiers for ' . $user->name])

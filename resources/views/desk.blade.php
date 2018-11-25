@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Desk')
+
 @section('content')
     <section class="container">
         @if($user)

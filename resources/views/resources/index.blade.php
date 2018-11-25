@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Resources')
+
 @section('content')
     <section class="container">
         @component('components.heading', ['title' => 'Resources', 'url' => route('resources.index')])
