@@ -6,6 +6,6 @@ import segelModule from './modules/segel';
 const app = new Vue({
     el: '#app',
     components: {
-        'resourcelist-root': require('./components/ResourceList'),
+        'resourcelist-root': require('./components/ResourceList').default,
     }
 });
