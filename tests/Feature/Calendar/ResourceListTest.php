@@ -55,7 +55,7 @@ class ResourceListTest extends TestCase
         $response = $this->actingAs($user)->get('/home');
 
         $response->assertStatus(200);
-        $response->assertSee($resource->name);
+        $response->assertSeeText($resource->name);
     }
 
     /**
@@ -72,7 +72,7 @@ class ResourceListTest extends TestCase
         $response = $this->actingAs($user)->get('/home');
 
         $response->assertStatus(200);
-        $response->assertDontSee($resource->name);
+        $response->assertDontSeeText($resource->name);
     }
 
     /**
