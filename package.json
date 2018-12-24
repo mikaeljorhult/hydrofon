@@ -12,10 +12,12 @@
     "devDependencies": {
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.0",
-        "laravel-mix-purgecss": "^2.2.3",
+        "laravel-mix-purgecss": "^4.0.0",
         "sass": "^1.15.2",
         "sass-loader": "7.*",
         "segel": "^0.0.13",
-        "tailwindcss": "^0.7.2"
+        "tailwindcss": "^0.7.2",
+        "vue": "^2.5.21",
+        "vue-template-compiler": "^2.5.21"
     }
 }
