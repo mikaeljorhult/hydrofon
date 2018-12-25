@@ -13,6 +13,8 @@
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.0",
         "laravel-mix-purgecss": "^4.0.0",
+        "laravel-mix-tailwind": "^0.1.0",
+        "resolve-url-loader": "2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "7.*",
         "segel": "^0.0.13",

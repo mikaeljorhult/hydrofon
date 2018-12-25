@@ -1,7 +1,7 @@
 let mix = require('laravel-mix');
 
-let tailwindcss = require('tailwindcss');
 require('laravel-mix-purgecss');
+require('laravel-mix-tailwind');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,10 +15,6 @@ require('laravel-mix-purgecss');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .options({
-        processCssUrls: false,
-        postCss: [tailwindcss('./tailwind.js')],
-    })
     .combine([
         'node_modules/vue/dist/vue.min.js',
         'node_modules/interactjs/dist/interact.min.js',
@@ -26,5 +22,6 @@ mix.js('resources/js/app.js', 'public/js')
     ], 'public/js/vendor.js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
+    .tailwind()
     .purgeCss()
     .version();
