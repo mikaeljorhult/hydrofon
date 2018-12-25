@@ -1,6 +1,7 @@
 <template>
     <li class="resourcelist-category">
         <span>
+            <icon icon="folder" class="w-5"></icon>
             {{ item.name }}
         </span>
 
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+    import Icon from 'laravel-mix-vue-svgicon/IconComponent';
     import ResourceListResource from './ResourceListResource';
 
     export default {
@@ -40,6 +42,7 @@
             },
         },
         components: {
+            'icon': Icon,
             'resourcelist-resource': ResourceListResource,
         },
     };

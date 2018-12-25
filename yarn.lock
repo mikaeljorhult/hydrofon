@@ -3760,6 +3760,14 @@ laravel-mix-tailwind@^0.1.0:
   resolved "https://registry.yarnpkg.com/laravel-mix-tailwind/-/laravel-mix-tailwind-0.1.0.tgz#5dee3cb7a85aef6354912982a31ba387997e3289"
   integrity sha512-thy+4VSAHeB6sCmozO+Oley3bu7q5pRarxyXVI3EPI+rKRRSbzZI5JlI++R/oQilVhi4xu+iJlMSFb31Rgwr8w==
 
+laravel-mix-vue-svgicon@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/laravel-mix-vue-svgicon/-/laravel-mix-vue-svgicon-1.1.1.tgz#534cd88ad616701f41f315ff4abe8e2f529b81e6"
+  integrity sha512-cxanx/RkIF/gGjS3S98BDtpXFstJI0MMDEpvrkWNjuTEUKGJTDujnjnaUZy4NK5A6gkJICies7pS134X1plgtA==
+  dependencies:
+    html-loader "^0.5.5"
+    vue-loader "^15.4.2"
+
 laravel-mix@^4.0.0:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-4.0.12.tgz#015fc66784d299c6c2420268f346951d4561f994"

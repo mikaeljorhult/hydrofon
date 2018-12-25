@@ -2,6 +2,7 @@ let mix = require('laravel-mix');
 
 require('laravel-mix-purgecss');
 require('laravel-mix-tailwind');
+require('laravel-mix-vue-svgicon');
 
 /*
  |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ mix.js('resources/js/app.js', 'public/js')
     ], 'public/js/vendor.js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
+    .svgicon('./resources/images/svg')
     .tailwind()
     .purgeCss()
     .version();
