@@ -4,6 +4,7 @@
             <input type="checkbox"
                    name="resources[]"
                    value="item.id"
+                   v-model="item.selected"
             />
             {{ item.name }}
         </label>

@@ -1,8 +1,13 @@
+@push('initial-json')
+    window.HYDROFON.categories = @json($categories);
+    window.HYDROFON.resources = @json($resources);
+@endpush
+
 <resourcelist-root
         class="resourcelist"
         date='{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}'
-        :categories='@json($categories)'
-        :resources='@json($resources)'
+        :categories='categories'
+        :resources='resources'
 >
     {!! Form::open(['route' => 'calendar']) !!}
         <section class="resourcelist-date">

@@ -33,7 +33,7 @@ class ResourceListComposer
         return Category::with(['categories.resources', 'resources'])
                        ->whereNull('parent_id')
                        ->orderBy('name')
-                       ->get();
+                       ->get(['id', 'name']);
     }
 
     /**
@@ -45,6 +45,6 @@ class ResourceListComposer
     {
         return Resource::doesntHave('categories')
                        ->orderBy('name')
-                       ->get();
+                       ->get(['id', 'name']);
     }
 }

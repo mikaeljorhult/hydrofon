@@ -12,6 +12,9 @@
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
+
+        window.HYDROFON = {};
+        @stack('initial-json')
     </script>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
@@ -30,6 +33,7 @@
         </main>
     </div>
 
+    <script src="{{ asset('js/manifest.js') }}"></script>
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

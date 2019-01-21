@@ -1,4 +1,9 @@
-<section id="segel" class="segel" data-start="{{ $timestamps['start'] * 1000 }}" data-end="{{ $timestamps['end'] * 1000 }}" data-resources="{{ $resources }}">
+<segel
+        id="segel"
+        class="segel"
+        :resources="selectedResources"
+        :bookings="bookings"
+>
     <div class="segel-container">
         <ul class="segel-grid">
             @for($i = 0; $i < 24; $i++)
@@ -35,4 +40,4 @@
             @endforeach
         </ul>
     </div>
-</section>
+</segel>
