@@ -17,7 +17,7 @@ require('laravel-mix-vue-svgicon');
 
 mix.js('resources/js/app.js', 'public/js')
     .combine([
-        'node_modules/vue/dist/vue.min.js',
+        'node_modules/vue/dist/vue.js',
         'node_modules/interactjs/dist/interact.min.js',
         'node_modules/segel/dist/index.js'
     ], 'public/js/vendor.js')

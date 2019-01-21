@@ -12,13 +12,13 @@
             <resourcelist-category
                     v-for="category in item.categories"
                     v-bind:item="category"
-                    v-bind:key="category.id"
+                    v-bind:key="'category' + category.id"
             ></resourcelist-category>
 
             <resourcelist-resource
-                    v-for="resource in item.resource"
+                    v-for="resource in item.resources"
                     v-bind:item="resource"
-                    v-bind:key="resource.id"
+                    v-bind:key="'category' + resource.id"
             ></resourcelist-resource>
         </ul>
     </li>
