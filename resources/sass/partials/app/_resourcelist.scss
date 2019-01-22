@@ -19,13 +19,13 @@
     vertical-align: text-bottom;
     fill: #d45843;
   }
-}
 
-.resourcelist__collapsed {
-  flex: 0 1 1rem;
+  &.collapsed {
+    flex: 0 1 1rem;
 
-  ul {
-    display: none;
+    ul {
+      display: none;
+    }
   }
 }
 
@@ -56,22 +56,6 @@
   input {
     margin-bottom: 0;
     font-size: .8rem;
-  }
-}
-
-.resourcelist-toggle-icon {
-  display: none;
-
-  &:first-child {
-    display: block;
-  }
-
-  .resourcelist__collapsed & {
-    display: block;
-
-    &:first-child {
-      display: none;
-    }
   }
 }
 

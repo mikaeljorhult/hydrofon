@@ -20,9 +20,4 @@
             @each('partials.resource-list.resource', $resources, 'resource')
         </ul>
     {!! Form::close() !!}
-
-    <a href="#" id="resourcelist-toggle" class="resourcelist-toggle">
-        @svg('cheveron-left', ['class' => 'resourcelist-toggle-icon'])
-        @svg('cheveron-right', ['class' => 'resourcelist-toggle-icon'])
-    </a>
 </resourcelist-root>

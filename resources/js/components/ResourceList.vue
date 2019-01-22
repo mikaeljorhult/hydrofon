@@ -1,5 +1,5 @@
 <template>
-    <section class="resourcelist">
+    <section v-bind:class="{ resourcelist: true, collapsed: this.collapsed }">
         <section class="resourcelist-date">
             <input type="text" class="field" v-model="date" />
             <input type="submit" value="Show calendar" class="btn btn-primary screen-reader" />
@@ -19,13 +19,15 @@
             ></resourcelist-resource>
         </ul>
 
-        <a href="#" id="resourcelist-toggle" class="resourcelist-toggle">
-
-        </a>
+        <button id="resourcelist-toggle" class="resourcelist-toggle" v-on:click="collapsed = !collapsed">
+            <icon icon="cheveron-left" v-if="!collapsed"></icon>
+            <icon icon="cheveron-right" v-if="collapsed"></icon>
+        </button>
     </section>
 </template>
 
 <script>
+    import Icon from 'laravel-mix-vue-svgicon/IconComponent';
     import ResourceListCategory from './ResourceListCategory';
     import ResourceListResource from './ResourceListResource';
 
@@ -36,7 +38,9 @@
             'resources': Array,
         },
         data: function () {
-            return {};
+            return {
+                collapsed: false
+            };
         },
         computed: {
             hasChildren: function () {
@@ -44,6 +48,7 @@
             },
         },
         components: {
+            'icon': Icon,
             'resourcelist-category': ResourceListCategory,
             'resourcelist-resource': ResourceListResource,
         },
