@@ -1,13 +1,13 @@
 <template>
-    <li class="resourcelist-category">
-        <span>
+    <li v-bind:class="{ 'resourcelist-category': true, 'has-children': hasChildren }">
+        <span v-on:click="expanded = !expanded">
             <icon icon="folder" class="w-5"></icon>
             {{ item.name }}
         </span>
 
         <ul
             class="list-reset resourcelist-children"
-            v-if="hasChildren"
+            v-if="hasChildren && expanded"
         >
             <resourcelist-category
                     v-for="category in item.categories"
@@ -34,7 +34,9 @@
             'item': Object,
         },
         data: function () {
-            return {};
+            return {
+                expanded: this.item.expanded
+            };
         },
         computed: {
             hasChildren: function () {

@@ -21,6 +21,8 @@ const app = new Vue({
             this.categories = window.HYDROFON.categories || [];
             this.resources = window.HYDROFON.resources || [];
             this.bookings = [];
+
+            this.categories.forEach(category => category.expanded = false);
         }
     },
 

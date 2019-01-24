@@ -63,4 +63,9 @@
   div {
     display: inline-block;
   }
+
+  &.has-children > span {
+    display: block;
+    cursor: pointer;
+  }
 }
