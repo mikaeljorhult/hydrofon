@@ -25,5 +25,9 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/admin.scss', 'public/css')
     .svgicon('./resources/images/svg')
     .tailwind()
-    .purgeCss()
+    .purgeCss({
+        globs: [
+            path.join(__dirname, 'node_modules/segel/dist/*.js'),
+        ],
+    })
     .version();
