@@ -4,7 +4,8 @@
             <input type="checkbox"
                    name="resources[]"
                    value="item.id"
-                   v-model="item.selected"
+                   v-model="checked"
+                   v-on:change="this.handleClick"
             />
             {{ item.name }}
         </label>
@@ -12,12 +13,24 @@
 </template>
 
 <script>
+    import Events from '../modules/events';
+
     export default {
         props: {
             'item': Object,
         },
         data: function () {
-            return {};
+            return {
+                checked: this.item.selected
+            };
         },
+        methods: {
+            handleClick: function () {
+                Events.$emit('resources-selected', {
+                    id: this.item.id,
+                    selected: this.checked
+                });
+            }
+        }
     };
 </script>

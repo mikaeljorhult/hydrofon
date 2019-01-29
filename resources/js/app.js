@@ -1,3 +1,5 @@
+import Events from './modules/events';
+
 import flashMessages from './modules/flashMessages';
 import impersonation from './modules/impersonation';
 
@@ -32,5 +34,17 @@ const app = new Vue({
 
     created: function() {
         this.fetchData();
+
+        Events.$on('resources-selected', event => {
+            // Find index of updated booking.
+            let index = this.resources.findIndex(function(stored) {
+                return stored.id === event.id;
+            });
+
+            // Replace object with copy of object with new status.
+            this.$set(this.resources, index, Object.assign(this.resources[index], {
+                selected: event.selected
+            }));
+        });
     }
 });
