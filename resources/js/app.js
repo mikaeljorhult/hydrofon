@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce';
 import Events from './modules/events';
 
 import flashMessages from './modules/flashMessages';
@@ -9,7 +10,8 @@ const app = new Vue({
     data: {
         categories: [],
         resources: [],
-        bookings: []
+        bookings: [],
+        updatedResources: new Map()
     },
 
     computed: {
@@ -25,7 +27,21 @@ const app = new Vue({
             this.bookings = [];
 
             this.categories.forEach(category => category.expanded = false);
-        }
+        },
+
+        updateSelectedResources: debounce(function() {
+            this.updatedResources.forEach((value, key) => {
+                // Find index of updated booking.
+                let index = this.resources.findIndex(function(stored) {
+                    return stored.id === key;
+                });
+
+                // Replace object with copy of object with new status.
+                this.$set(this.resources, index, Object.assign(this.resources[index], {
+                    selected: value
+                }));
+            });
+        }, 1250)
     },
 
     components: {
@@ -36,15 +52,8 @@ const app = new Vue({
         this.fetchData();
 
         Events.$on('resources-selected', event => {
-            // Find index of updated booking.
-            let index = this.resources.findIndex(function(stored) {
-                return stored.id === event.id;
-            });
-
-            // Replace object with copy of object with new status.
-            this.$set(this.resources, index, Object.assign(this.resources[index], {
-                selected: event.selected
-            }));
+            this.updatedResources.set(event.id, event.selected);
+            this.updateSelectedResources();
         });
     }
 });
