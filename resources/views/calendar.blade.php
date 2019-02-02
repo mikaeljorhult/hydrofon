@@ -2,6 +2,10 @@
 
 @section('title', 'Calendar')
 
+@push('initial-json')
+    window.HYDROFON.date = @json((int) $date->startOfDay()->format('U'));
+@endpush
+
 @section('sidebar')
     @include('partials.resource-list')
 @endsection

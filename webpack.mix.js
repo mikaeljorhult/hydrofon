@@ -28,6 +28,7 @@ mix.js('resources/js/app.js', 'public/js')
     .purgeCss({
         globs: [
             path.join(__dirname, 'node_modules/segel/dist/*.js'),
+            path.join(__dirname, 'node_modules/flatpickr/dist/*.js'),
         ],
     })
     .version();

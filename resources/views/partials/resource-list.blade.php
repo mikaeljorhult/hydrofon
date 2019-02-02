@@ -5,7 +5,7 @@
 
 <resourcelist-root
         class="resourcelist"
-        date='{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}'
+        :date='date'
         :categories='categories'
         :resources='resources'
 >

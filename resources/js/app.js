@@ -8,6 +8,7 @@ const app = new Vue({
     el: '#app',
 
     data: {
+        date: null,
         categories: [],
         resources: [],
         bookings: [],
@@ -22,6 +23,8 @@ const app = new Vue({
 
     methods: {
         fetchData: function() {
+            this.date = window.HYDROFON.date || new Date().setHours(0, 0, 0, 0) / 1000;
+
             this.categories = window.HYDROFON.categories || [];
             this.resources = window.HYDROFON.resources || [];
             this.bookings = [];
@@ -54,6 +57,10 @@ const app = new Vue({
         Events.$on('resources-selected', event => {
             this.updatedResources.set(event.id, event.selected);
             this.updateSelectedResources();
+        });
+
+        Events.$on('date-changed', newDate => {
+            this.date = newDate
         });
     }
 });

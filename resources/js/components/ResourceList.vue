@@ -1,7 +1,12 @@
 <template>
     <section v-bind:class="{ resourcelist: true, collapsed: this.collapsed }">
         <section class="resourcelist-date">
-            <input type="text" class="field" v-model="date" />
+            <flat-pickr
+                class="field"
+                v-bind:config="datepickerConfig"
+                v-bind:value="dateString"
+                v-on:input="handleDateChange"
+            ></flat-pickr>
             <input type="submit" value="Show calendar" class="btn btn-primary screen-reader" />
         </section>
 
@@ -27,27 +32,43 @@
 </template>
 
 <script>
+    import flatPickr from 'vue-flatpickr-component';
     import Icon from 'laravel-mix-vue-svgicon/IconComponent';
     import ResourceListCategory from './ResourceListCategory';
     import ResourceListResource from './ResourceListResource';
+    import Events from '../modules/events';
 
     export default {
         props: {
-            'date': String,
+            'date': Number,
             'categories': Array,
             'resources': Array,
         },
         data: function () {
             return {
-                collapsed: false
+                collapsed: false,
+                datepickerConfig: {
+                    locale: {
+                        firstDayOfWeek: 1
+                    }
+                }
             };
         },
         computed: {
+            dateString: function () {
+                return new Date(this.date * 1000).toISOString().split('T')[0];
+            },
             hasChildren: function () {
                 return (this.categories && this.categories.length > 0) || (this.resources && this.resources.length > 0);
             },
         },
+        methods: {
+            handleDateChange: function (selectedDate) {
+                Events.$emit('date-changed', new Date(selectedDate) / 1000);
+            }
+        },
         components: {
+            'flat-pickr': flatPickr,
             'icon': Icon,
             'resourcelist-category': ResourceListCategory,
             'resourcelist-resource': ResourceListResource,

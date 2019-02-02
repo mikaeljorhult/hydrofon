@@ -22,6 +22,7 @@
         "segel": "0.0.14",
         "tailwindcss": "^0.7.2",
         "vue": "^2.5.21",
+        "vue-flatpickr-component": "^8.1.1",
         "vue-template-compiler": "^2.5.21"
     }
 }
