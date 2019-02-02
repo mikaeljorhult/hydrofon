@@ -48,6 +48,7 @@ const app = new Vue({
     },
 
     components: {
+        'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,
     },
 

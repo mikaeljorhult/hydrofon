@@ -12,7 +12,10 @@
 
 @section('content')
     <section class="container">
-        <header class="calendar-header">
+        <calendar-header
+            class="calendar-header"
+            v-bind:date="date"
+        >
             <h1>{{ $date->format('Y-m-d') }}</h1>
             <a href="{{ route('calendar', ['date' => $date->copy()->subDay()->format('Y-m-d')]) }}" title="Previous">
                 @svg('cheveron-left', 'w-6')
@@ -22,7 +25,7 @@
                 <span class="screen-reader">Next</span>
                 @svg('cheveron-right', 'w-6')
             </a>
-        </header>
+        </calendar-header>
 
         {!! Form::open(['route' => 'bookings.store']) !!}
             @include('partials.segel')

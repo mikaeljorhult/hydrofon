@@ -72,6 +72,6 @@
             'icon': Icon,
             'resourcelist-category': ResourceListCategory,
             'resourcelist-resource': ResourceListResource,
-        },
+        }
     };
 </script>
