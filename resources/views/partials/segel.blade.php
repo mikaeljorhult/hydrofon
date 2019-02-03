@@ -1,8 +1,10 @@
 <segel
         id="segel"
         class="segel"
-        :resources="selectedResources"
-        :bookings="bookings"
+        v-bind:start="date"
+        v-bind:end="date + 86400"
+        v-bind:resources="selectedResources"
+        v-bind:bookings="bookings"
 >
     <div class="segel-container">
         <ul class="segel-grid">

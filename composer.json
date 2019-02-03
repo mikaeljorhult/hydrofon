@@ -15,10 +15,10 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "5.7.*",
         "nothingworks/blade-svg": "^0.2.2",
-        "spatie/laravel-query-builder": "^1.10"
+        "spatie/laravel-query-builder": "^1.13"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.1",
+        "barryvdh/laravel-debugbar": "^3.2",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "laravel/dusk": "^4.0",

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import debounce from 'lodash/debounce';
 import Events from './modules/events';
 
@@ -22,7 +23,7 @@ const app = new Vue({
     },
 
     methods: {
-        fetchData: function() {
+        initialData: function() {
             this.date = window.HYDROFON.date || new Date().setHours(0, 0, 0, 0) / 1000;
 
             this.categories = window.HYDROFON.categories || [];
@@ -30,6 +31,26 @@ const app = new Vue({
             this.bookings = [];
 
             this.categories.forEach(category => category.expanded = false);
+        },
+
+        fetchBookings: function() {
+            let selectedBookings = this.resources.filter(resource => resource.selected);
+
+            // Only make HTTP request if there are selected resources.
+            if (selectedBookings.length > 0) {
+                axios.get("api/bookings", {
+                    params: {
+                        "resource_id": selectedBookings.map(resource => resource.id),
+                        "filter[between]": this.date + "," + (this.date + 86400),
+                    }
+                })
+                    .then(response => {
+                        this.bookings = response.data.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
         },
 
         updateSelectedResources: debounce(function() {
@@ -44,7 +65,21 @@ const app = new Vue({
                     selected: value
                 }));
             });
+
+            // Clear map when all resources have been updated.
+            this.updatedResources.clear();
         }, 1250)
+    },
+
+    watch: {
+        resources: function () {
+            // Update bookings whenever resources our updated.
+            this.fetchBookings();
+        },
+        date: function () {
+            // Update bookings whenever date is changed.
+            this.fetchBookings();
+        }
     },
 
     components: {
@@ -53,7 +88,7 @@ const app = new Vue({
     },
 
     created: function() {
-        this.fetchData();
+        this.initialData();
 
         Events.$on('resources-selected', event => {
             this.updatedResources.set(event.id, event.selected);
@@ -61,7 +96,7 @@ const app = new Vue({
         });
 
         Events.$on('date-changed', newDate => {
-            this.date = newDate
+            this.date = newDate;
         });
     }
 });
