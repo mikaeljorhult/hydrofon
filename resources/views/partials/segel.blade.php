@@ -1,10 +1,14 @@
 <segel
         id="segel"
         class="segel"
+        v-bind:editable="true"
         v-bind:start="date"
         v-bind:end="date + 86400"
         v-bind:resources="selectedResources"
         v-bind:bookings="bookings"
+        v-on:bookings-create="handleCreateBooking"
+        v-on:bookings-update="handleUpdateBooking"
+        v-on:bookings-delete="handleDeleteBooking"
 >
     <div class="segel-container">
         <ul class="segel-grid">

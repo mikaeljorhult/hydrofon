@@ -34,13 +34,13 @@ const app = new Vue({
         },
 
         fetchBookings: function() {
-            let selectedBookings = this.resources.filter(resource => resource.selected);
+            let selectedResources = this.resources.filter(resource => resource.selected);
 
             // Only make HTTP request if there are selected resources.
-            if (selectedBookings.length > 0) {
+            if (selectedResources.length > 0) {
                 axios.get("api/bookings", {
                     params: {
-                        "resource_id": selectedBookings.map(resource => resource.id),
+                        "resource_id": selectedResources.map(resource => resource.id),
                         "filter[between]": this.date + "," + (this.date + 86400),
                     }
                 })
@@ -51,6 +51,76 @@ const app = new Vue({
                         console.log(error);
                     });
             }
+        },
+
+        handleCreateBooking: function(booking) {
+            let newID = Math.random().toString(36).substring(2);
+
+            this.bookings.push(Object.assign({
+                id: newID,
+                status: 'updating'
+            }, booking));
+
+            axios.post("api/bookings", booking, {withCredentials: true})
+                .then(response => {
+                    // Find index of created booking.
+                    let index = this.bookings.findIndex(function(stored) {
+                        return stored.id === newID;
+                    });
+
+                    // Replace object with copy of object with new status.
+                    this.bookings.splice(index, 1, response.data);
+                })
+                .catch(error => {
+                    // Find index of created booking.
+                    let index = this.bookings.findIndex(function(stored) {
+                        return stored.id === newID;
+                    });
+
+                    // Replace object with copy of object with new status.
+                    this.bookings.splice(index, 1);
+
+                    // Log error.
+                    console.log(error);
+                });
+        },
+
+        handleUpdateBooking: function(booking) {
+            // Find index of updated booking.
+            let index = this.bookings.findIndex(function(stored) {
+                return stored.id === booking.id;
+            });
+
+            this.$set(this.bookings, index, Object.assign({
+                status: 'updating'
+            }, booking));
+
+            axios.put("api/bookings/" + booking.id, booking, {withCredentials: true})
+                .then(response => {
+                    // Replace object with copy of object with new status.
+                    this.bookings.splice(index, 1, response.data);
+                })
+                .catch(error => {
+                    // Log error.
+                    console.log(error);
+                });
+        },
+
+        handleDeleteBooking: function(booking) {
+            axios.delete("api/bookings/" + booking.id, {withCredentials: true})
+                .then(response => {
+                    // Find index of deleted booking.
+                    let index = this.bookings.findIndex(function(stored) {
+                        return stored.id === booking.id;
+                    });
+
+                    // Remove object.
+                    this.bookings.splice(index, 1);
+                })
+                .catch(error => {
+                    // Log error.
+                    console.log(error);
+                });
         },
 
         updateSelectedResources: debounce(function() {

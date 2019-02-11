@@ -40,3 +40,7 @@ Route::resources([
 Route::resource('checkins', 'CheckinController', ['only' => ['store', 'destroy']]);
 Route::resource('checkouts', 'CheckoutController', ['only' => ['store', 'destroy']]);
 Route::resource('users.identifiers', 'IdentifierController', ['except' => ['show']]);
+
+Route::prefix('api')->namespace('Api')->group(function () {
+    Route::apiResource('bookings', 'BookingController');
+});

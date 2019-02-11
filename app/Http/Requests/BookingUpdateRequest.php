@@ -2,6 +2,7 @@
 
 namespace Hydrofon\Http\Requests;
 
+use Carbon\Carbon;
 use Hydrofon\Rules\Available;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -16,6 +17,30 @@ class BookingUpdateRequest extends FormRequest
     public function authorize()
     {
         return $this->user()->can('update', $this->route('booking'));
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $fields = collect(['resource_id' => 'resource', 'start_time' => 'start', 'end_time' => 'end'])
+            ->filter(function($apiField, $dbField) {
+                return !$this->has($dbField) && $this->has($apiField);
+            })
+            ->map(function($apiField, $dbField) {
+                $value = $this->get($apiField);
+
+                if (str_contains($dbField,'_time')) {
+                    $value = Carbon::parse('@' . $this->get($apiField));
+                }
+
+                return $value;
+            });
+
+        $this->merge($fields->toArray());
     }
 
     /**
