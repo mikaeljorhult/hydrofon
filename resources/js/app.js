@@ -34,13 +34,11 @@ const app = new Vue({
         },
 
         fetchBookings: function() {
-            let selectedResources = this.resources.filter(resource => resource.selected);
-
             // Only make HTTP request if there are selected resources.
-            if (selectedResources.length > 0) {
+            if (this.selectedResources.length > 0) {
                 axios.get("api/bookings", {
                     params: {
-                        "resource_id": selectedResources.map(resource => resource.id),
+                        "resource_id": this.selectedResources.map(resource => resource.id),
                         "filter[between]": this.date + "," + (this.date + 86400),
                     }
                 })
