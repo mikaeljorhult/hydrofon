@@ -28,14 +28,14 @@ class BookingStoreRequest extends FormRequest
     protected function prepareForValidation()
     {
         $fields = collect(['resource_id' => 'resource', 'start_time' => 'start', 'end_time' => 'end'])
-            ->filter(function($apiField, $dbField) {
+            ->filter(function ($apiField, $dbField) {
                 return !$this->has($dbField) && $this->has($apiField);
             })
-            ->map(function($apiField, $dbField) {
+            ->map(function ($apiField, $dbField) {
                 $value = $this->get($apiField);
 
-                if (str_contains($dbField,'_time')) {
-                    $value = Carbon::parse('@' . $this->get($apiField));
+                if (str_contains($dbField, '_time')) {
+                    $value = Carbon::parse('@'.$this->get($apiField));
                 }
 
                 return $value;

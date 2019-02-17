@@ -92,12 +92,12 @@ class Booking extends Model
     public function scopeBetween($query, $start, $end)
     {
         // Make sure dates are Carbon objects.
-        $start = Carbon::parse((is_numeric($start) ? '@' : '') . $start);
-        $end   = Carbon::parse((is_numeric($end) ? '@' : '') . $end);
+        $start = Carbon::parse((is_numeric($start) ? '@' : '').$start);
+        $end = Carbon::parse((is_numeric($end) ? '@' : '').$end);
 
         // Add second and subtract second to allow booking to start or end at same time.
         $startTime = $start->copy()->addSecond();
-        $endTime   = $end->copy()->subSecond();
+        $endTime = $end->copy()->subSecond();
 
         // Return any bookings with the same resource and within the same time frame.
         return $query->where(function ($query) use ($startTime, $endTime) {

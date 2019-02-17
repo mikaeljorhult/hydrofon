@@ -27,7 +27,7 @@ class Resource extends Model
     {
         parent::boot();
 
-        static::addGlobalScope(new GroupPolicyScope);
+        static::addGlobalScope(new GroupPolicyScope());
     }
 
     /**
