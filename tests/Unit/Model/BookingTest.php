@@ -43,6 +43,8 @@ class BookingTest extends TestCase
      */
     public function testBookingHasAResource()
     {
+        $this->actingAs(factory(User::class)->states('admin')->create());
+
         $booking = factory(Booking::class)->create();
 
         $this->assertInstanceOf(Resource::class, $booking->resource);

@@ -43,8 +43,7 @@ class ResourceListComposer
      */
     private function resources()
     {
-        return Resource::doesntHave('categories')
-                       ->orderBy('name')
+        return Resource::orderBy('name')
                        ->get(['id', 'name']);
     }
 }

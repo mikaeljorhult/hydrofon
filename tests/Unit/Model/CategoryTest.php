@@ -3,6 +3,7 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Category;
+use Hydrofon\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -42,6 +43,8 @@ class CategoryTest extends TestCase
      */
     public function testCategoryCanHaveChildResources()
     {
+        $this->actingAs(factory(User::class)->states('admin')->create());
+
         $category = factory(Category::class)->create();
 
         $this->assertInstanceOf(Collection::class, $category->resources);

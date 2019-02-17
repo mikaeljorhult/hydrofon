@@ -2,6 +2,7 @@
 
 namespace Hydrofon;
 
+use Hydrofon\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
@@ -16,6 +17,18 @@ class Resource extends Model
         'description',
         'facility',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new GroupPolicyScope);
+    }
 
     /**
      * Bookings of resource.
