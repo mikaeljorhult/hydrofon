@@ -3,13 +3,9 @@ language: php
 php:
   - 7.1
   - 7.2
-  - nightly
+  - 7.3
 
 sudo: false
-
-matrix:
-  allow_failures:
-    - php: nightly
 
 install:
   - cp .env.example .env                                         # Create a new .env file.
