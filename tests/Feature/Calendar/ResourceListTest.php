@@ -31,10 +31,45 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesAreListed()
+    public function testCategoriesWithoutGroupsAreListed()
     {
         $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
+
+        $response = $this->actingAs($user)->get('/home');
+
+        $response->assertStatus(200);
+        $response->assertSee($category->name);
+    }
+
+    /**
+     * Categories that have groups are not listed.
+     *
+     * @return void
+     */
+    public function testCategoriesWithGroupsAreNotListed()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $category->groups()->create(['name' => 'Group Name']);
+
+        $response = $this->actingAs($user)->get('/home');
+
+        $response->assertStatus(200);
+        $response->assertDontSeeText($category->name);
+    }
+
+    /**
+     * Resources that have groups are listed to user with same group.
+     *
+     * @return void
+     */
+    public function testCategoriesWithGroupsAreListedToUsersWithSameGroup()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $group = $user->groups()->create(['name' => 'Group Name']);
+        $category->groups()->attach($group);
 
         $response = $this->actingAs($user)->get('/home');
 
@@ -47,7 +82,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testResourcessWithoutGroupsAreListed()
+    public function testResourcesWithoutGroupsAreListed()
     {
         $user = factory(User::class)->create();
         $resource = factory(Resource::class)->create();

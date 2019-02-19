@@ -19,6 +19,8 @@ class CategoryTest extends TestCase
      */
     public function testCategoryCanHaveAParent()
     {
+        $this->actingAs(factory(User::class)->states('admin')->create());
+
         $category = factory(Category::class)->states('child')->create();
 
         $this->assertInstanceOf(Category::class, $category->parent);
@@ -31,6 +33,8 @@ class CategoryTest extends TestCase
      */
     public function testCategoryCanHaveChildCategories()
     {
+        $this->actingAs(factory(User::class)->states('admin')->create());
+
         $category = factory(Category::class)->create();
 
         $this->assertInstanceOf(Collection::class, $category->categories);

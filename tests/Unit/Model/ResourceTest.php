@@ -3,6 +3,7 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Resource;
+use Hydrofon\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -30,6 +31,8 @@ class ResourceTest extends TestCase
      */
     public function testResourceCanBelongToCategories()
     {
+        $this->actingAs(factory(User::class)->states('admin')->create());
+
         $resource = factory(Resource::class)->create();
 
         $this->assertInstanceOf(Collection::class, $resource->categories);

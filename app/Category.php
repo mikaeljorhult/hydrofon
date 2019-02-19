@@ -2,6 +2,7 @@
 
 namespace Hydrofon;
 
+use Hydrofon\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -15,6 +16,18 @@ class Category extends Model
         'parent_id',
         'name',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new GroupPolicyScope());
+    }
 
     /**
      * Parent category.
