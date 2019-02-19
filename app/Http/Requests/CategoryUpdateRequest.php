@@ -27,6 +27,7 @@ class CategoryUpdateRequest extends FormRequest
         return [
             'name'      => ['required', 'max:60'],
             'parent_id' => ['nullable', Rule::notIn($this->route('category')->id), Rule::exists('categories', 'id')],
+            'groups.*'  => [Rule::exists('groups', 'id')],
         ];
     }
 }

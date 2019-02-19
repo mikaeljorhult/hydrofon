@@ -48,7 +48,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
-        Category::create($request->all());
+        $category = Category::create($request->all());
+        $category->groups()->sync($request->get('groups'));
 
         flash('Category was created');
 
@@ -90,6 +91,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, Category $category)
     {
         $category->update($request->all());
+        $category->groups()->sync($request->get('groups'));
 
         flash('Category was updated');
 

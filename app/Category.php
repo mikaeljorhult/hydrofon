@@ -37,6 +37,16 @@ class Category extends Model
     }
 
     /**
+     * Groups the category belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(\Hydrofon\Group::class);
+    }
+
+    /**
      * Resources assigned to model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -28,6 +28,7 @@ class CategoryStoreRequest extends FormRequest
         return [
             'name'      => ['required', 'max:60'],
             'parent_id' => ['nullable', Rule::exists('categories', 'id')],
+            'groups.*'  => [Rule::exists('groups', 'id')],
         ];
     }
 }

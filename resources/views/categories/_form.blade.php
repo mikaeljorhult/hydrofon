@@ -8,6 +8,13 @@
     {!! Form::text('parent_id', null, ['placeholder' => 'Parent', 'class' => 'field']) !!}
 </div>
 
+@if(\Hydrofon\Group::count() > 0)
+    <div class="mb-6">
+        {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
+        {!! Form::select('groups[]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), isset($category) ? $category->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}
+    </div>
+@endif
+
 <div class="mt-6">
     <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}

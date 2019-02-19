@@ -16,6 +16,16 @@ class Group extends Model
     ];
 
     /**
+     * Categories in the group.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(\Hydrofon\Resource::class);
+    }
+
+    /**
      * Resources in the group.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
