@@ -4,6 +4,8 @@ namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Booking;
 use Hydrofon\Http\Controllers\Controller;
+use Hydrofon\Http\Requests\BookingDestroyRequest;
+use Hydrofon\Http\Requests\BookingStoreRequest;
 use Hydrofon\Http\Requests\BookingUpdateRequest;
 use Hydrofon\Http\Resources\Booking as BookingResource;
 use Hydrofon\Http\Resources\BookingCollection;
@@ -40,7 +42,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(\Hydrofon\Http\Requests\BookingStoreRequest $request)
+    public function store(BookingStoreRequest $request)
     {
         BookingResource::withoutWrapping();
         $currentUser = auth()->user();
@@ -94,11 +96,12 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Booking $booking
+     * @param \Hydrofon\Booking                             $booking
+     * @param \Hydrofon\Http\Requests\BookingDestroyRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking, BookingDestroyRequest $request)
     {
         $booking->delete();
 

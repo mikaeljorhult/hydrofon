@@ -49,6 +49,24 @@ class DeleteTest extends TestCase
     }
 
     /**
+     * A user can not delete a booking by another user.
+     *
+     * @return void
+     */
+    public function testUserCanNotDeleteBookingByAnotherUser()
+    {
+        $booking = factory(Booking::class)->states('future')->create();
+        $anotherUser = factory(User::class)->create();
+
+        $response = $this->actingAs($anotherUser)->delete('bookings/'.$booking->id);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('bookings', [
+            'id' => $booking->id,
+        ]);
+    }
+
+    /**
      * A user can not delete a booking that has started.
      *
      * @return void
