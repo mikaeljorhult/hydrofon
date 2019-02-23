@@ -3,8 +3,8 @@
         <label>
             <input type="checkbox"
                    name="resources[]"
-                   value="item.id"
                    v-model="checked"
+                   v-bind:value="item.id"
                    v-on:change="this.handleClick"
             />
             {{ item.name }}
