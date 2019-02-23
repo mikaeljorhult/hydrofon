@@ -4,6 +4,8 @@ namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Http\Requests\DeskRequest;
 use Hydrofon\User;
+use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class DeskController extends Controller
 {
@@ -14,7 +16,7 @@ class DeskController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -29,12 +31,9 @@ class DeskController extends Controller
         // Only resolve user if a search string is available.
         $user = $search ? $this->resolveUser($search) : null;
 
-        // Get all bookings 4 days in the past and in the future.
+        // Get bookings for user or empty collection.
         $bookings = $user
-            ? $user->bookings()->with(['checkin', 'checkout', 'resource', 'user'])->where(function ($query) {
-                $query->between(now()->subDays(4), now()->addDays(4))
-                      ->orderBy('start_time', 'DESC');
-            })->paginate(15)
+            ? $this->getUserBookings($user)
             : collect();
 
         return view('desk')
@@ -69,5 +68,33 @@ class DeskController extends Controller
                    ->orWhereHas('identifiers', function ($query) use ($search) {
                        $query->where('value', $search);
                    })->first();
+    }
+
+    /**
+     * Get bookings of user.
+     *
+     * @param \Hydrofon\User $user
+     *
+     * @return mixed
+     */
+    private function getUserBookings(User $user)
+    {
+        return QueryBuilder::for($user->bookings()->getQuery())
+                           ->with(['checkin', 'checkout', 'resource', 'user'])
+                           ->whereDoesntHave('checkin')
+                           ->where(function ($query) {
+                               $filter = request()->query->get('filter');
+
+                               // Set default time span to +/- 4 days if not in request.
+                               if (!isset($filter['between'])) {
+                                   $query->between(now()->subDays(4), now()->addDays(4));
+                               }
+                           })
+                           ->join('resources', 'resources.id', '=', 'bookings.resource_id')
+                           ->join('users', 'users.id', '=', 'bookings.user_id')
+                           ->allowedFilters(Filter::scope('between'))
+                           ->defaultSort('start_time')
+                           ->allowedSorts(['resources.name', 'start_time', 'end_time'])
+                           ->paginate(15);
     }
 }
