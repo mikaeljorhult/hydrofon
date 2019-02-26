@@ -18,7 +18,7 @@ class BookingsDeskTest extends TestCase
      */
     public function testCurrentBookingsAreDisplayed()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->states('current')->create(['user_id' => $user->id]);
 
         $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/'.$user->email);
@@ -34,7 +34,7 @@ class BookingsDeskTest extends TestCase
      */
     public function testOlderBookingsAreOmitted()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create([
             'user_id'    => $user->id,
             'start_time' => now()->subDays(5)->subHour(),
@@ -54,7 +54,7 @@ class BookingsDeskTest extends TestCase
      */
     public function testFutureBookingsAreOmitted()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create([
             'user_id'    => $user->id,
             'start_time' => now()->addDays(5),
@@ -74,7 +74,7 @@ class BookingsDeskTest extends TestCase
      */
     public function testCheckedInBookingsAreOmitted()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create(['user_id' => $user->id]);
         $booking->checkin()->create(['user_id' => $user->id]);
 
@@ -91,7 +91,7 @@ class BookingsDeskTest extends TestCase
      */
     public function testBookingsTimeSpanCanBeFiltered()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create([
             'user_id'    => $user->id,
             'start_time' => now()->subDays(5)->subHour(),

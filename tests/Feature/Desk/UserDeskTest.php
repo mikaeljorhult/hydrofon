@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Desk;
 
-use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -45,7 +44,7 @@ class UserDeskTest extends TestCase
     {
         $response = $this->actingAs(factory(User::class)->states('admin')->create())
                          ->post('/desk', [
-                             'search' => 'search-term'
+                             'search' => 'search-term',
                          ]);
 
         $response->assertStatus(302);
@@ -61,7 +60,7 @@ class UserDeskTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/' . $user->email);
+        $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/'.$user->email);
 
         $response->assertStatus(200);
         $response->assertSee($user->name);
