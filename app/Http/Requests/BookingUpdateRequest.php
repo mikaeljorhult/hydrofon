@@ -2,10 +2,10 @@
 
 namespace Hydrofon\Http\Requests;
 
-use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Hydrofon\Rules\Available;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class BookingUpdateRequest extends FormRequest
