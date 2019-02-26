@@ -2,6 +2,7 @@
 
 namespace Hydrofon\Http\Requests;
 
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Hydrofon\Booking;
 use Hydrofon\Rules\Available;
@@ -34,7 +35,7 @@ class BookingStoreRequest extends FormRequest
             ->map(function ($apiField, $dbField) {
                 $value = $this->get($apiField);
 
-                if (str_contains($dbField, '_time')) {
+                if (Str::contains($dbField, '_time')) {
                     $value = Carbon::parse('@'.$this->get($apiField));
                 }
 

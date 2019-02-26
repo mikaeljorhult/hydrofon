@@ -2,6 +2,7 @@
 
 namespace Hydrofon\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Hydrofon\Booking;
 use Hydrofon\Http\Requests\BookingDestroyRequest;
 use Hydrofon\Http\Requests\BookingStoreRequest;
@@ -58,7 +59,7 @@ class BookingController extends Controller
         flash('Booking was created');
 
         // Redirect to index if from admin page, otherwise back to referer.
-        if (str_contains($request->headers->get('referer'), '/bookings')) {
+        if (Str::contains($request->headers->get('referer'), '/bookings')) {
             return redirect('/bookings');
         } else {
             return redirect()->back();

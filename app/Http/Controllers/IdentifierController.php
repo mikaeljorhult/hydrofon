@@ -2,6 +2,7 @@
 
 namespace Hydrofon\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Hydrofon\Http\Requests\IdentifierDestroyRequest;
 use Hydrofon\Http\Requests\IdentifierStoreRequest;
 use Hydrofon\Http\Requests\IdentifierUpdateRequest;
@@ -53,7 +54,7 @@ class IdentifierController extends Controller
         $user->identifiers()->create($request->all());
 
         // Redirect to index if sent from create form, otherwise redirect back.
-        if (str_contains($request->headers->get('referer'), '/create')) {
+        if (Str::contains($request->headers->get('referer'), '/create')) {
             return redirect()->route('users.identifiers.index', [$user]);
         } else {
             return redirect()->back();
@@ -93,7 +94,7 @@ class IdentifierController extends Controller
         flash('Identifier was updated');
 
         // Redirect to index if sent from edit form, otherwise redirect back.
-        if (str_contains($request->headers->get('referer'), '/edit')) {
+        if (Str::contains($request->headers->get('referer'), '/edit')) {
             return redirect()->route('users.identifiers.index', [$user]);
         } else {
             return redirect()->back();
