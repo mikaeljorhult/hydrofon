@@ -38,8 +38,10 @@ class DeleteTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($booking->user)->delete('api/bookings/'.$booking->id,
-            ['ACCEPT' => 'application/json']);
+        $response = $this->actingAs($booking->user)->delete(
+            'api/bookings/'.$booking->id,
+            ['ACCEPT' => 'application/json']
+        );
 
         $response->assertStatus(204);
         $this->assertDatabaseMissing('bookings', [
@@ -56,8 +58,10 @@ class DeleteTest extends TestCase
     {
         $booking = factory(Booking::class)->states('past')->create();
 
-        $response = $this->actingAs($booking->user)->delete('api/bookings/'.$booking->id,
-            ['ACCEPT' => 'application/json']);
+        $response = $this->actingAs($booking->user)->delete(
+            'api/bookings/'.$booking->id,
+            ['ACCEPT' => 'application/json']
+        );
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
