@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Hydrofon\Booking;
 use Hydrofon\Http\Requests\BookingDestroyRequest;
 use Hydrofon\Http\Requests\BookingStoreRequest;
 use Hydrofon\Http\Requests\BookingUpdateRequest;
+use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingController extends Controller
