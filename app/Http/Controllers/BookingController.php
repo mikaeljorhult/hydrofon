@@ -19,6 +19,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = QueryBuilder::for(Booking::class)
+                                ->select('bookings.*')
                                 ->with(['checkin', 'checkout', 'resource', 'user'])
                                 ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                                 ->join('users', 'users.id', '=', 'bookings.user_id')

@@ -27,6 +27,7 @@ class ImpersonationTest extends DuskTestCase
                     // See impersonation form.
                     ->assertSourceHas('topbar-impersonation')
                     ->select('user_id', $user->id)
+                    ->keys('[name="user_id"]', '{enter}')
 
                     // User is impersonated.
                     ->assertPathIs('/home')
