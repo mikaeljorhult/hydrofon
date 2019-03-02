@@ -2,12 +2,12 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Hydrofon\Http\Requests\IdentifierDestroyRequest;
 use Hydrofon\Http\Requests\IdentifierStoreRequest;
 use Hydrofon\Http\Requests\IdentifierUpdateRequest;
 use Hydrofon\Identifier;
 use Hydrofon\User;
+use Illuminate\Support\Str;
 
 class IdentifierController extends Controller
 {

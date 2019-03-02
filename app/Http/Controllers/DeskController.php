@@ -86,9 +86,9 @@ class DeskController extends Controller
                                $filter = request()->query->get('filter');
 
                                // Set default time span to +/- 4 days if not in request.
-                            if (!isset($filter['between'])) {
-                                $query->between(now()->subDays(4), now()->addDays(4));
-                            }
+                               if (!isset($filter['between'])) {
+                                   $query->between(now()->subDays(4), now()->addDays(4));
+                               }
                            })
                            ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                            ->join('users', 'users.id', '=', 'bookings.user_id')
