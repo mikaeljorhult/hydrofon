@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('home', 'AppController@index')->name('home');
+Route::redirect('home', '/')->name('home');
 Route::get('profile', 'ProfileController@index')->name('profile');
 
 Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');

@@ -23,7 +23,7 @@ class IndexTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
-                    ->visit('/home')
+                    ->visit('/calendar')
                     ->clickLink('Categories')
                     ->assertPathIs('/categories');
         });

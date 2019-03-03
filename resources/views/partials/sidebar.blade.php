@@ -33,7 +33,7 @@
         <nav class="w-full flex flex-col flex-1 items-center content-between overflow-y-scroll my-6">
             <ul class="list-reset w-full mb-4">
                 <li>
-                    <a href="{{ route('home') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker hover:bg-complementary-darker">
+                    <a href="{{ route('calendar') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-light hover:bg-complementary-darker hover:bg-complementary-darker">
                         @svg('calendar', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Book
                     </a>
                 </li>

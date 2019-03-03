@@ -23,21 +23,21 @@ class ImpersonationTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)
-                    ->visit('/home')
+                    ->visit('/calendar')
                     // See impersonation form.
                     ->assertSourceHas('topbar-impersonation')
                     ->select('user_id', $user->id)
                     ->keys('[name="user_id"]', '{enter}')
 
                     // User is impersonated.
-                    ->assertPathIs('/home')
+                    ->assertPathIs('/calendar')
                     ->assertDontSeeIn('.sidebar', $admin->name)
                     ->assertSeeIn('.sidebar', $user->name)
                     ->assertSeeLink('Stop impersonation')
 
                     // Stop impersonating, recoqnized as administrator user again.
                     ->clickLink('Stop impersonation')
-                    ->assertPathIs('/home')
+                    ->assertPathIs('/calendar')
                     ->assertDontSeeIn('.sidebar', $user->name)
                     ->assertSeeIn('.sidebar', $admin->name)
                     ->assertDontSeeLink('Stop impersonation');
@@ -56,7 +56,7 @@ class ImpersonationTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($user1, $user2) {
             $browser->loginAs($user1)
-                    ->visit('/home')
+                    ->visit('/calendar')
                     ->assertSourceMissing('topbar-impersonation');
         });
     }

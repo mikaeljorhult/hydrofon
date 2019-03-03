@@ -20,7 +20,7 @@ class ResourceListTest extends TestCase
     public function testResourceListIsAvailable()
     {
         $user = factory(User::class)->create();
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertSee('resourcelist');
@@ -36,7 +36,7 @@ class ResourceListTest extends TestCase
         $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
 
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertSee($category->name);
@@ -53,7 +53,7 @@ class ResourceListTest extends TestCase
         $category = factory(Category::class)->create();
         $category->groups()->create(['name' => 'Group Name']);
 
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertDontSeeText($category->name);
@@ -71,7 +71,7 @@ class ResourceListTest extends TestCase
         $group = $user->groups()->create(['name' => 'Group Name']);
         $category->groups()->attach($group);
 
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertSee($category->name);
@@ -87,7 +87,7 @@ class ResourceListTest extends TestCase
         $user = factory(User::class)->create();
         $resource = factory(Resource::class)->create();
 
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertSeeText($resource->name);
@@ -104,7 +104,7 @@ class ResourceListTest extends TestCase
         $resource = factory(Resource::class)->create();
         $resource->groups()->create(['name' => 'Group Name']);
 
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertDontSeeText($resource->name);
@@ -122,7 +122,7 @@ class ResourceListTest extends TestCase
         $group = $user->groups()->create(['name' => 'Group Name']);
         $resource->groups()->attach($group);
 
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
         $response->assertSee($resource->name);

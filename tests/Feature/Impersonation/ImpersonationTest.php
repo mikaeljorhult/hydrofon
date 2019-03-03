@@ -18,7 +18,7 @@ class ImpersonationTest extends TestCase
     public function testAdministratorCanSeeImpersonationForm()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $response = $this->actingAs($admin)->get('/home');
+        $response = $this->actingAs($admin)->get('/');
 
         $response->assertStatus(200);
         $response->assertSee('topbar-impersonation');
@@ -106,7 +106,7 @@ class ImpersonationTest extends TestCase
     public function testUserCanNotSeeImpersonationForm()
     {
         $user = factory(User::class)->create();
-        $response = $this->actingAs($user)->get('/home');
+        $response = $this->actingAs($user)->get('/');
 
         $response->assertStatus(200);
         $response->assertDontSee('topbar-impersonation');

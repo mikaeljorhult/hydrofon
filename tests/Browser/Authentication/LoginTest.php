@@ -28,7 +28,7 @@ class LoginTest extends DuskTestCase
                     ->type('email', $user->email)
                     ->type('password', 'password')
                     ->press('Log in')
-                    ->assertPathIs('/home')
+                    ->assertPathIs('/')
                     ->assertSeeLink('Log out')
                     ->assertAuthenticatedAs($user);
         });
