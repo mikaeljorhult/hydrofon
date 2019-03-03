@@ -14,8 +14,8 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "5.8.*",
-        "nothingworks/blade-svg": "^0.2.2",
-        "spatie/laravel-query-builder": "^1.14"
+        "nothingworks/blade-svg": "^0.3.0",
+        "spatie/laravel-query-builder": "^1.15"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2.3",
