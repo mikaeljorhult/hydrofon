@@ -43,4 +43,5 @@ Route::resource('users.identifiers', 'IdentifierController', ['except' => ['show
 
 Route::prefix('api')->namespace('Api')->name('api.')->group(function () {
     Route::apiResource('bookings', 'BookingController');
+    Route::apiResource('users', 'UserController');
 });
