@@ -27,8 +27,9 @@ mix.js('resources/js/app.js', 'public/js')
     .tailwind()
     .purgeCss({
         globs: [
-            path.join(__dirname, 'node_modules/segel/dist/*.js'),
             path.join(__dirname, 'node_modules/flatpickr/dist/*.js'),
+            path.join(__dirname, 'node_modules/segel/dist/*.js'),
+            path.join(__dirname, 'node_modules/vue-multiselect/dist/*.js'),
         ],
     })
     .version();
