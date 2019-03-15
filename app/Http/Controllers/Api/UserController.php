@@ -9,6 +9,7 @@ use Hydrofon\Http\Requests\UserUpdateRequest;
 use Hydrofon\Http\Resources\User as UserResource;
 use Hydrofon\Http\Resources\UserCollection;
 use Hydrofon\User;
+use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
@@ -24,6 +25,7 @@ class UserController extends Controller
                              ->allowedFilters([
                                  'name',
                                  'email',
+                                 Filter::exact('is_admin')
                              ])
                              ->defaultSort('name')
                              ->allowedSorts(['name', 'email'])

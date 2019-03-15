@@ -24,6 +24,7 @@
         "tailwindcss": "^0.7.2",
         "vue": "^2.5.21",
         "vue-flatpickr-component": "^8.1.1",
+        "vue-multiselect": "^2.1.4",
         "vue-template-compiler": "^2.5.21"
     }
 }

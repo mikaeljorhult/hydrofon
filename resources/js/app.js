@@ -2,9 +2,6 @@ import axios from 'axios';
 import debounce from 'lodash/debounce';
 import Events from './modules/events';
 
-import flashMessages from './modules/flashMessages';
-import impersonation from './modules/impersonation';
-
 const app = new Vue({
     el: '#app',
 
@@ -17,13 +14,13 @@ const app = new Vue({
     },
 
     computed: {
-        selectedResources: function() {
+        selectedResources: function () {
             return this.resources.filter(resources => resources.selected)
         }
     },
 
     methods: {
-        initialData: function() {
+        initialData: function () {
             this.date = window.HYDROFON.date || new Date().setHours(0, 0, 0, 0) / 1000;
 
             this.categories = window.HYDROFON.categories || [];
@@ -33,7 +30,7 @@ const app = new Vue({
             this.categories.forEach(category => category.expanded = false);
         },
 
-        fetchBookings: function() {
+        fetchBookings: function () {
             // Only make HTTP request if there are selected resources.
             if (this.selectedResources.length > 0) {
                 axios.get("api/bookings", {
@@ -51,7 +48,7 @@ const app = new Vue({
             }
         },
 
-        handleCreateBooking: function(booking) {
+        handleCreateBooking: function (booking) {
             let newID = Math.random().toString(36).substring(2);
 
             this.bookings.push(Object.assign({
@@ -62,7 +59,7 @@ const app = new Vue({
             axios.post("api/bookings", booking, {withCredentials: true})
                 .then(response => {
                     // Find index of created booking.
-                    let index = this.bookings.findIndex(function(stored) {
+                    let index = this.bookings.findIndex(function (stored) {
                         return stored.id === newID;
                     });
 
@@ -71,7 +68,7 @@ const app = new Vue({
                 })
                 .catch(error => {
                     // Find index of created booking.
-                    let index = this.bookings.findIndex(function(stored) {
+                    let index = this.bookings.findIndex(function (stored) {
                         return stored.id === newID;
                     });
 
@@ -83,9 +80,9 @@ const app = new Vue({
                 });
         },
 
-        handleUpdateBooking: function(booking) {
+        handleUpdateBooking: function (booking) {
             // Find index of updated booking.
-            let index = this.bookings.findIndex(function(stored) {
+            let index = this.bookings.findIndex(function (stored) {
                 return stored.id === booking.id;
             });
 
@@ -104,11 +101,11 @@ const app = new Vue({
                 });
         },
 
-        handleDeleteBooking: function(booking) {
+        handleDeleteBooking: function (booking) {
             axios.delete("api/bookings/" + booking.id, {withCredentials: true})
                 .then(response => {
                     // Find index of deleted booking.
-                    let index = this.bookings.findIndex(function(stored) {
+                    let index = this.bookings.findIndex(function (stored) {
                         return stored.id === booking.id;
                     });
 
@@ -121,10 +118,10 @@ const app = new Vue({
                 });
         },
 
-        updateSelectedResources: debounce(function() {
+        updateSelectedResources: debounce(function () {
             this.updatedResources.forEach((value, key) => {
                 // Find index of updated booking.
-                let index = this.resources.findIndex(function(stored) {
+                let index = this.resources.findIndex(function (stored) {
                     return stored.id === key;
                 });
 
@@ -153,9 +150,10 @@ const app = new Vue({
     components: {
         'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,
+        'topbar-impersonation': require('./components/TopbarImpersonation').default,
     },
 
-    created: function() {
+    created: function () {
         this.initialData();
 
         Events.$on('resources-selected', event => {
