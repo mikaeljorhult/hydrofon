@@ -25,7 +25,7 @@ class UserController extends Controller
                              ->allowedFilters([
                                  'name',
                                  'email',
-                                 Filter::exact('is_admin')
+                                 Filter::exact('is_admin'),
                              ])
                              ->defaultSort('name')
                              ->allowedSorts(['name', 'email'])
