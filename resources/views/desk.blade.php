@@ -35,7 +35,7 @@
                                         {!! Form::open(['route' => ['checkouts.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
                                             <button type="submit" title="Check out">
-                                                @svg('upload', 'w-5')
+                                                Check out
                                             </button>
                                         {!! Form::close() !!}
                                     @endif
@@ -44,7 +44,7 @@
                                         {!! Form::open(['route' => ['checkins.store']]) !!}
                                         {!! Form::hidden('booking_id', $booking->id) !!}
                                             <button type="submit" title="Check in">
-                                                @svg('download', 'w-5')
+                                                Check in
                                             </button>
                                         {!! Form::close() !!}
                                     @endif
@@ -53,13 +53,13 @@
                                     {!! Form::hidden('date', $booking->start_time->format('Y-m-d')) !!}
                                     {!! Form::hidden('resources[]', $booking->resource->id) !!}
                                         <button type="submit" title="View in calendar">
-                                            @svg('calendar', 'w-5')
+                                            View
                                         </button>
                                     {!! Form::close() !!}
 
                                     {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
                                         <button type="submit" title="Delete">
-                                            @svg('trash', 'w-5')
+                                            Delete
                                         </button>
                                     {!! Form::close() !!}
                                 </td>

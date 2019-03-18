@@ -9,9 +9,18 @@ tr:nth-child(even) {
   background-color: #f4f7fc;
 }
 
+tbody tr:hover {
+  @apply .bg-brand-lightest;
+
+  .table-actions form {
+    visibility: visible;
+  }
+}
+
+
 th,
 td {
-  padding: .5rem;
+  padding: .875rem;
 }
 
 th {
@@ -37,14 +46,29 @@ th {
 
   button {
     vertical-align: middle;
-    margin-left: .5rem;
     padding: 0;
     background-color: transparent;
+    color: #e65940;
     border: none;
     cursor: pointer;
+    font-size: .875rem;
+    font-weight: inherit;
   }
 
-  svg {
-    vertical-align: middle;
+  form {
+    visibility: hidden;
+    font-size: 0;
+
+    &::before {
+      content: '|';
+      vertical-align: bottom;
+      padding: 0 .25rem;
+      color: #bfc9d3;
+      font-size: 1rem;
+    }
+
+    &:first-of-type::before {
+      visibility: hidden;
+    }
   }
 }

@@ -23,7 +23,7 @@ class CheckoutController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        flash('Booking was checked in.');
+        flash('Booking was checked out.');
 
         return redirect()->back();
     }

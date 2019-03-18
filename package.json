@@ -17,7 +17,7 @@
         "laravel-mix-tailwind": "^0.1.0",
         "laravel-mix-vue-svgicon": "^1.1.1",
         "lodash": "^4.17.11",
-        "resolve-url-loader": "2.3.1",
+        "resolve-url-loader": "^2.3.1",
         "sass": "^1.17.2",
         "sass-loader": "7.*",
         "segel": "0.0.14",

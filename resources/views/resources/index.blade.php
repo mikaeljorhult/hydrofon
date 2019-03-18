@@ -34,7 +34,7 @@
                         <td data-title="&nbsp;" class="table-actions">
                             {!! Form::model($resource, ['route' => ['resources.destroy', $resource->id], 'method' => 'DELETE' ]) !!}
                             <button type="submit" title="Delete">
-                                @svg('trash', 'w-5')
+                                Delete
                             </button>
                             {!! Form::close() !!}
                         </td>
