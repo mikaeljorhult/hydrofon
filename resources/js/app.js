@@ -2,6 +2,11 @@ import axios from 'axios';
 import debounce from 'lodash/debounce';
 import Events from './modules/events';
 
+const axiosInstance = axios.create({
+    baseURL: HYDROFON.baseURL,
+    withCredentials: true
+});
+
 const app = new Vue({
     el: '#app',
 
@@ -33,14 +38,18 @@ const app = new Vue({
         fetchBookings: function () {
             // Only make HTTP request if there are selected resources.
             if (this.selectedResources.length > 0) {
-                axios.get("api/bookings", {
+                axiosInstance.get("api/bookings", {
                     params: {
                         "resource_id": this.selectedResources.map(resource => resource.id),
                         "filter[between]": this.date + "," + (this.date + 86400),
                     }
                 })
                     .then(response => {
-                        this.bookings = response.data.data;
+                        let bookings = response.data.data;
+
+                        bookings.forEach(booking => booking.editable = HYDROFON.isAdmin || HYDROFON.user === booking.user);
+
+                        this.bookings = bookings;
                     })
                     .catch(error => {
                         console.log(error);
@@ -56,7 +65,7 @@ const app = new Vue({
                 status: 'updating'
             }, booking));
 
-            axios.post("api/bookings", booking, {withCredentials: true})
+            axiosInstance.post("api/bookings", booking)
                 .then(response => {
                     // Find index of created booking.
                     let index = this.bookings.findIndex(function (stored) {
@@ -90,7 +99,7 @@ const app = new Vue({
                 status: 'updating'
             }, booking));
 
-            axios.put("api/bookings/" + booking.id, booking, {withCredentials: true})
+            axiosInstance.put("api/bookings/" + booking.id, booking)
                 .then(response => {
                     // Replace object with copy of object with new status.
                     this.bookings.splice(index, 1, response.data);
@@ -102,7 +111,7 @@ const app = new Vue({
         },
 
         handleDeleteBooking: function (booking) {
-            axios.delete("api/bookings/" + booking.id, {withCredentials: true})
+            axiosInstance.delete("api/bookings/" + booking.id)
                 .then(response => {
                     // Find index of deleted booking.
                     let index = this.bookings.findIndex(function (stored) {

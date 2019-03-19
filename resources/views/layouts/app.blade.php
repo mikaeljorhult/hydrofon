@@ -13,7 +13,11 @@
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
 
-        window.HYDROFON = {};
+        window.HYDROFON = {
+            baseURL: @json(url('/')),
+            user:  @json(optional(auth()->user())->id),
+            isAdmin: @json(auth()->user() ? auth()->user()->isAdmin() : false)
+        };
         @stack('initial-json')
     </script>
 
