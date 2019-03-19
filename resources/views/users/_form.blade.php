@@ -18,7 +18,7 @@
     {!! Form::password('password_confirmation', ['placeholder' => 'Confirm password', 'class' => 'field']) !!}
 </div>
 
-@if(\Hydrofon\Group::count() > 0)
+@if(\Hydrofon\Group::exists())
     <div class="mb-6">
         {!! Form::label('groups', 'Groups', ['class' => 'label']) !!}
         {!! Form::select('groups', \Hydrofon\Group::pluck('name', 'id'), isset($user) ? $user->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}

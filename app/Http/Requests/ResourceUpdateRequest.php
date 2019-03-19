@@ -25,8 +25,9 @@ class ResourceUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => ['required', 'max:60'],
-            'groups.*' => [Rule::exists('groups', 'id')],
+            'name'         => ['required', 'max:60'],
+            'categories.*' => [Rule::exists('categories', 'id')],
+            'groups.*'     => [Rule::exists('groups', 'id')],
         ];
     }
 }

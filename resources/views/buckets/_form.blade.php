@@ -3,7 +3,7 @@
     {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'field']) !!}
 </div>
 
-@if(\Hydrofon\Resource::count() > 0)
+@if(\Hydrofon\Resource::exists())
     <div class="mb-6">
         {!! Form::label('resources[]', 'Resources', ['class' => 'label']) !!}
         {!! Form::select('resources[]', \Hydrofon\Resource::orderBy('name')->pluck('name', 'id'), isset($bucket) ? $bucket->resources->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}

@@ -8,7 +8,14 @@
     {!! Form::textarea('description', null, ['placeholder' => 'Description', 'class' => 'field']) !!}
 </div>
 
-@if(\Hydrofon\Group::count() > 0)
+@if(\Hydrofon\Category::exists())
+    <div class="mb-6">
+        {!! Form::label('categories[]', 'Categories', ['class' => 'label']) !!}
+        {!! Form::select('categories[]', \Hydrofon\Category::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->categories->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}
+    </div>
+@endif
+
+@if(\Hydrofon\Group::exists())
     <div class="mb-6">
         {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
         {!! Form::select('groups[]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}

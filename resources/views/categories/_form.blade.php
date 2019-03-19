@@ -3,12 +3,14 @@
     {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'field']) !!}
 </div>
 
-<div class="mb-6">
-    {!! Form::label('parent_id', 'Parent', ['class' => 'label']) !!}
-    {!! Form::text('parent_id', null, ['placeholder' => 'Parent', 'class' => 'field']) !!}
-</div>
+@if(\Hydrofon\Category::exists())
+    <div class="mb-6">
+        {!! Form::label('parent_id', 'Parent', ['class' => 'label']) !!}
+        {!! Form::select('parent_id', \Hydrofon\Category::orderBy('name')->pluck('name', 'id'), isset($category) ? $category->parent_id : null, ['placeholder' => 'Select a parent...', 'class' => 'field']) !!}
+    </div>
+@endif
 
-@if(\Hydrofon\Group::count() > 0)
+@if(\Hydrofon\Group::exists())
     <div class="mb-6">
         {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
         {!! Form::select('groups[]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), isset($category) ? $category->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}

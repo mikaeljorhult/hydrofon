@@ -46,6 +46,7 @@ class ResourceController extends Controller
     public function store(ResourceStoreRequest $request)
     {
         $resource = Resource::create($request->all());
+        $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
         flash('Resource was created');
@@ -88,6 +89,7 @@ class ResourceController extends Controller
     public function update(ResourceUpdateRequest $request, Resource $resource)
     {
         $resource->update($request->all());
+        $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
         flash('Resource was updated');
