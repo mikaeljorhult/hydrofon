@@ -29,7 +29,7 @@
     {!! Form::label('is_admin', 'Attributes', ['class' => 'label']) !!}
 
     <label>
-        {!! Form::checkbox('is_admin', 1, null) !!}
+        {!! Form::checkbox('is_admin', 1, null, ['disabled' => isset($user) && $user->is(auth()->user())]) !!}
         Administrator
     </label>
 </div>

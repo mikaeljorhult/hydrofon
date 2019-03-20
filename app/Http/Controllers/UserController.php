@@ -46,6 +46,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         $input = $request->all();
+        $input['is_admin'] = $request->has('is_admin');
 
         if ($request->has('password')) {
             $input['password'] = bcrypt($request->input('password'));
@@ -94,6 +95,10 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $input = $request->all();
+
+        if (!$user->is(auth()->user())) {
+            $input['is_admin'] = $request->has('is_admin');
+        }
 
         if ($request->has('password')) {
             $input['password'] = bcrypt($request->input('password'));
