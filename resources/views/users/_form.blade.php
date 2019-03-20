@@ -25,6 +25,15 @@
     </div>
 @endif
 
+<div class="mb-4">
+    {!! Form::label('is_admin', 'Attributes', ['class' => 'label']) !!}
+
+    <label>
+        {!! Form::checkbox('is_admin', 1, null) !!}
+        Administrator
+    </label>
+</div>
+
 <div class="mt-6">
     <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
