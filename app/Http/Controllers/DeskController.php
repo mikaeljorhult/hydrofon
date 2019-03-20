@@ -82,6 +82,9 @@ class DeskController extends Controller
         return QueryBuilder::for($user->bookings()->getQuery())
                            ->with(['checkin', 'checkout', 'resource', 'user'])
                            ->whereDoesntHave('checkin')
+                           ->whereHas('resource', function ($query) {
+                               $query->where('is_facility', '=', 0);
+                           })
                            ->where(function ($query) {
                                $filter = request()->query->get('filter');
 
