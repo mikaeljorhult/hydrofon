@@ -17,7 +17,7 @@ class CreateResourcesTable extends Migration
             $table->increments('id');
             $table->string('name', 60);
             $table->text('description')->nullable();
-            $table->boolean('facility')->default(0);
+            $table->boolean('is_facility')->default(0);
             $table->timestamps();
         });
     }

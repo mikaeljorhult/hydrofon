@@ -15,7 +15,7 @@ class Resource extends Model
     protected $fillable = [
         'name',
         'description',
-        'facility',
+        'is_facility',
     ];
 
     /**

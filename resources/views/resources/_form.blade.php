@@ -22,6 +22,15 @@
     </div>
 @endif
 
+<div class="mb-4">
+    {!! Form::label('is_facility', 'Attributes', ['class' => 'label']) !!}
+
+    <label>
+        {!! Form::checkbox('is_facility', 1, null) !!}
+        Facility
+    </label>
+</div>
+
 <div class="mt-6">
     <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
