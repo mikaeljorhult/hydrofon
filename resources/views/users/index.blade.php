@@ -32,6 +32,12 @@
                             {{ $user->name }}
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
+                            {!! Form::open(['route' => ['users.identifiers.index', $user->id], 'method' => 'GET' ]) !!}
+                            <button type="submit" title="Identifiers">
+                                Identifiers
+                            </button>
+                            {!! Form::close() !!}
+
                             @can('delete', $user)
                                 {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
                                 <button type="submit" title="Delete">

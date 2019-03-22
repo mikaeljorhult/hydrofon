@@ -20,7 +20,7 @@ class IdentifierController extends Controller
      */
     public function index(User $user)
     {
-        $this->authorize('view', Identifier::class);
+        $this->authorize('view', [$user, Identifier::class]);
 
         return view('identifiers.index')->with('user', $user);
     }
@@ -36,8 +36,6 @@ class IdentifierController extends Controller
     {
         $this->authorize('create', Identifier::class);
 
-        flash('Identifier was added');
-
         return view('identifiers.create')->with('user', $user);
     }
 
@@ -52,6 +50,8 @@ class IdentifierController extends Controller
     public function store(IdentifierStoreRequest $request, User $user)
     {
         $user->identifiers()->create($request->all());
+
+        flash('Identifier was added');
 
         // Redirect to index if sent from create form, otherwise redirect back.
         if (Str::contains($request->headers->get('referer'), '/create')) {
