@@ -28,11 +28,16 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Collection macro to walk through and return nested resources.
-        Collection::macro('nested', function($parameter) {
-            $items = collect($this->items);
+        Collection::macro('nested', function ($type, $within = null, $includeSelf = true) {
+            $within = $within ?? $type;
 
-            foreach ($items as $item) {
-                $items = $items->merge($item->$parameter->nested($parameter));
+            $traversables = collect($this->items);
+            $items        = collect($includeSelf ? $this->items : []);
+
+            foreach ($traversables as $traversable) {
+                $items = $items
+                    ->merge($traversable->$type)
+                    ->merge($traversable->$within->nested($type, $within, false));
             }
 
             return $items;

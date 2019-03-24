@@ -1,6 +1,6 @@
 @push('initial-json')
     window.HYDROFON.categories = @json($categories);
-    window.HYDROFON.resources = @json($resources);
+    window.HYDROFON.resources = @json($categories->nested('resources', 'categories', false)->merge($resources));
 @endpush
 
 <resourcelist-root
