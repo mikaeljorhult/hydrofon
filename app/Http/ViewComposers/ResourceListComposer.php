@@ -3,6 +3,8 @@
 namespace Hydrofon\Http\ViewComposers;
 
 use Hydrofon\Category;
+use Hydrofon\Http\Resources\Category as CategoryResource;
+use Hydrofon\Http\Resources\Resource as ResourceResource;
 use Hydrofon\Resource;
 use Illuminate\View\View;
 
@@ -17,9 +19,31 @@ class ResourceListComposer
      */
     public function compose(View $view)
     {
+        $categories = $this->categories();
+        $resources  = $this->resources();
+
+        $jsCategories = $categories
+            ->nested('categories')
+            ->except([
+                'categories',
+                'resources',
+            ])
+            ->map(function ($category) {
+                return new CategoryResource($category);
+            });
+
+        $jsResources = $categories
+            ->nested('resources', 'categories', false)
+            ->merge($resources)
+            ->map(function ($resource) {
+                return new ResourceResource($resource);
+            });
+
         $view->with([
-            'categories' => $this->categories(),
-            'resources'  => $this->resources(),
+            'categories'   => $categories,
+            'resources'    => $resources,
+            'jsCategories' => $jsCategories,
+            'jsResources'  => $jsResources,
         ]);
     }
 
@@ -45,6 +69,6 @@ class ResourceListComposer
     {
         return Resource::orderBy('name')
                        ->doesntHave('categories')
-                       ->get(['id', 'name']);
+                       ->get(['id', 'name', 'is_facility']);
     }
 }

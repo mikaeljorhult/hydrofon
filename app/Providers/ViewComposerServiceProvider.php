@@ -23,7 +23,9 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        view()->composer('partials.resource-list', \Hydrofon\Http\ViewComposers\ResourceListComposer::class);
+        view()->composer([
+            'partials.resource-list'
+        ], \Hydrofon\Http\ViewComposers\ResourceListComposer::class);
         view()->composer([
             'partials.resource-list.category',
             'partials.resource-list.resource',
