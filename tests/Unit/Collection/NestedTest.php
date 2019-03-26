@@ -20,7 +20,7 @@ class NestedTest extends TestCase
     public function testItemsInCollectionAreIncluded()
     {
         $collection = collect([factory(Category::class)->make()]);
-        $returned   = $collection->nested('categories');
+        $returned = $collection->nested('categories');
 
         $this->assertCount(1, $returned);
         $this->assertContains($collection->get(0), $returned);
@@ -39,7 +39,7 @@ class NestedTest extends TestCase
         $parent->categories()->create(factory(Category::class)->make()->toArray());
 
         $collection = collect([$parent]);
-        $returned   = $collection->nested('categories');
+        $returned = $collection->nested('categories');
 
         $this->assertCount(2, $returned);
     }
@@ -53,12 +53,12 @@ class NestedTest extends TestCase
     {
         $this->actingAs(factory(User::class)->states('admin')->create());
 
-        $parent           = factory(Category::class)->create();
+        $parent = factory(Category::class)->create();
         $includedResource = factory(Resource::class)->create();
         $parent->resources()->attach($includedResource);
 
         $collection = collect([$parent]);
-        $returned   = $collection->nested('resources', 'categories', false);
+        $returned = $collection->nested('resources', 'categories', false);
 
         $this->assertCount(1, $returned);
         $this->assertEquals($includedResource->id, $returned->get(0)->id);

@@ -4,7 +4,6 @@ namespace Hydrofon;
 
 use Hydrofon\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 class Category extends Model
 {
