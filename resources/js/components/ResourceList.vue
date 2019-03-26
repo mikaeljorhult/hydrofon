@@ -12,13 +12,13 @@
 
         <ul class="list-reset p-4" v-if="hasChildren">
             <resourcelist-category
-                    v-for="category in categories"
-                    v-bind:item="category"
+                    v-for="category in tree"
                     v-bind:key="'category' + category.id"
+                    v-bind:item="category"
             ></resourcelist-category>
 
             <resourcelist-resource
-                    v-for="resource in resources"
+                    v-for="resource in rootResources"
                     v-bind:item="resource"
                     v-bind:key="'resource' + resource.id"
             ></resourcelist-resource>
@@ -61,6 +61,19 @@
             hasChildren: function () {
                 return (this.categories && this.categories.length > 0) || (this.resources && this.resources.length > 0);
             },
+            rootResources: function () {
+                return this.resources.filter(resource => resource.categories.length === 0)
+            },
+            tree: function () {
+                let categories = this.categories;
+
+                categories.forEach(treeCategory => {
+                    treeCategory.categories = this.categories.filter(category => category.parent === treeCategory.id);
+                    treeCategory.resources = this.resources.filter(resource => resource.categories.indexOf(treeCategory.id) > -1);
+                });
+
+                return categories.filter(category => category.parent === null);
+            }
         },
         methods: {
             handleDateChange: function (selectedDate) {

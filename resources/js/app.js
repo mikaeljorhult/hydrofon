@@ -20,7 +20,7 @@ const app = new Vue({
 
     computed: {
         selectedResources: function () {
-            return this.resources.filter(resources => resources.selected)
+            return this.resources.filter(resource => resource.selected)
         }
     },
 
