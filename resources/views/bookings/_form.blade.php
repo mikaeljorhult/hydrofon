@@ -1,11 +1,11 @@
-<div class="mb-4">
+<div class="mb-6">
     {!! Form::label('resource_id', 'Resource', ['class' => 'label']) !!}
-    {!! Form::text('resource_id', null, ['class' => 'field', 'placeholder' => 'Resource']) !!}
+    {!! Form::select('resource_id', \Hydrofon\Resource::orderBy('name')->pluck('name', 'id'), isset($booking) ? $booking->resource_id : null, ['placeholder' => 'Select a resource...', 'class' => 'field']) !!}
 </div>
 
-<div class="mb-4">
+<div class="mb-6">
     {!! Form::label('user_id', 'User', ['class' => 'label']) !!}
-    {!! Form::text('user_id', null, ['class' => 'field', 'placeholder' => 'User']) !!}
+    {!! Form::select('user_id', \Hydrofon\User::orderBy('name')->pluck('name', 'id'), isset($booking) ? $booking->user_id : null, ['placeholder' => 'Select a user...', 'class' => 'field']) !!}
 </div>
 
 <div class="flex flex-wrap mb-6">
