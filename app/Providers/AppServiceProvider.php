@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $within = $within ?? $type;
 
             $traversables = collect($this->items);
-            $items        = collect($includeSelf ? $this->items : []);
+            $items = collect($includeSelf ? $this->items : []);
 
             foreach ($traversables as $traversable) {
                 $items = $items

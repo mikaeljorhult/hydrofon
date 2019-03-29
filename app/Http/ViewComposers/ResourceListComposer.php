@@ -20,7 +20,7 @@ class ResourceListComposer
     public function compose(View $view)
     {
         $categories = $this->categories();
-        $resources  = $this->resources();
+        $resources = $this->resources();
 
         $jsCategories = $categories
             ->nested('categories')
