@@ -8,7 +8,7 @@
             <a href="{{ route('users.create') }}" class="btn btn-primary btn-pill mr-2">New user</a>
 
             {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-                {!! Form::search('filter[email]', null, ['placeholder' => 'Filter', 'class' => 'field']) !!}
+                {!! Form::search('filter[email]', request('filter.email'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
                 {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
             {!! Form::close() !!}
         @endcomponent

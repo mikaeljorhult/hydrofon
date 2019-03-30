@@ -8,7 +8,7 @@
             <a href="{{ route('groups.create') }}" class="btn btn-primary btn-pill mr-2">New group</a>
 
             {!! Form::open(['route' => 'groups.index', 'method' => 'GET']) !!}
-                {!! Form::search('filter[name]', null, ['placeholder' => 'Filter', 'class' => 'field']) !!}
+                {!! Form::search('filter[name]', request('filter.name'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
                 {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
             {!! Form::close() !!}
         @endcomponent
