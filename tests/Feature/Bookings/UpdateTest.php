@@ -20,14 +20,14 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin       = factory(User::class)->states('admin')->create();
+        $booking     = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $newResource->id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->end_time,
+            'resource_id' => $newResource->id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertRedirect('/bookings');
@@ -43,15 +43,15 @@ class UpdateTest extends TestCase
      */
     public function testAdministratorCanChangeUserOfBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'user_id'      => $user->id,
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->end_time,
+            'user_id'     => $user->id,
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertRedirect('/bookings');
@@ -68,15 +68,15 @@ class UpdateTest extends TestCase
      */
     public function testUserCannotChangeUserOfABooking()
     {
-        $firstUser = factory(User::class)->create();
+        $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $booking    = factory(Booking::class)->create();
 
         $response = $this->actingAs($firstUser)->put('bookings/'.$booking->id, [
-            'user_id'      => $secondUser->id,
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->end_time,
+            'user_id'     => $secondUser->id,
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertStatus(403);
@@ -96,9 +96,9 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time->copy()->addHour(),
-            'end_time'     => $booking->end_time->copy()->addHour(),
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->copy()->addHour(),
+            'end_time'    => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertRedirect('/bookings');
@@ -116,13 +116,13 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingItDontOwn()
     {
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($user)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time->copy()->addHour(),
-            'end_time'     => $booking->end_time->copy()->addHour(),
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->copy()->addHour(),
+            'end_time'    => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertStatus(403);
@@ -143,9 +143,9 @@ class UpdateTest extends TestCase
         $booking = factory(Booking::class)->states('past')->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time->copy()->addHour(),
-            'end_time'     => $booking->end_time->copy()->addHour(),
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->copy()->addHour(),
+            'end_time'    => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertStatus(403);
@@ -170,9 +170,9 @@ class UpdateTest extends TestCase
         ]);
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time->copy()->addHour(),
-            'end_time'     => $booking->end_time->copy()->addHour(),
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->copy()->addHour(),
+            'end_time'    => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertStatus(403);
@@ -190,13 +190,13 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => '',
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->end_time,
+            'resource_id' => '',
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -213,13 +213,13 @@ class UpdateTest extends TestCase
      */
     public function testResourceMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => 100,
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->end_time,
+            'resource_id' => 100,
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -236,22 +236,22 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanNotOverlapOtherBookings()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $previous = factory(Booking::class)->create();
-        $booking = factory(Booking::class)->create();
+        $booking  = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $previous->resource_id,
-            'start_time'   => $previous->start_time,
-            'end_time'     => $previous->end_time,
+            'resource_id' => $previous->resource_id,
+            'start_time'  => $previous->start_time,
+            'end_time'    => $previous->end_time,
         ]);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('resource_id');
         $this->assertDatabaseHas('bookings', [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->end_time,
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->end_time,
         ]);
     }
 
@@ -262,13 +262,13 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAStartTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => '',
-            'end_time'     => $booking->end_time,
+            'resource_id' => $booking->resource_id,
+            'start_time'  => '',
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -285,13 +285,13 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => 'not-valid-time',
-            'end_time'     => $booking->end_time,
+            'resource_id' => $booking->resource_id,
+            'start_time'  => 'not-valid-time',
+            'end_time'    => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -308,13 +308,13 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAEndTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => '',
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => '',
         ]);
 
         $response->assertRedirect();
@@ -331,13 +331,13 @@ class UpdateTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => 'not-valid-time',
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => 'not-valid-time',
         ]);
 
         $response->assertRedirect();
@@ -354,13 +354,13 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeBeforeEndTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id'  => $booking->resource_id,
-            'start_time'   => $booking->start_time,
-            'end_time'     => $booking->start_time->copy()->subHour(),
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time,
+            'end_time'    => $booking->start_time->copy()->subHour(),
         ]);
 
         $response->assertRedirect();

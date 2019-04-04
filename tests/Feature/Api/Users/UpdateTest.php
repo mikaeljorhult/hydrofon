@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
     public function testUsersCanBeUpdated()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('api/users/'.$user->id, [
             'name'  => 'Updated Name',

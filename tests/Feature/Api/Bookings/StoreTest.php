@@ -51,8 +51,8 @@ class StoreTest extends TestCase
      */
     public function testAdministratorCanCreateBookingForOtherUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->make([
             'user_id' => $user->id,
         ]);
@@ -74,9 +74,9 @@ class StoreTest extends TestCase
      */
     public function testUserCannotCreateBookingsForOtherUser()
     {
-        $firstUser = factory(User::class)->create();
+        $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->make([
+        $booking    = factory(Booking::class)->make([
             'user_id' => $secondUser->id,
         ]);
 

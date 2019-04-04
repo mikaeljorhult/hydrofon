@@ -14,8 +14,8 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a bucket.
      *
-     * @param array               $overrides
-     * @param \Hydrofon\User|null $user
+     * @param  array  $overrides
+     * @param  \Hydrofon\User|null  $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */

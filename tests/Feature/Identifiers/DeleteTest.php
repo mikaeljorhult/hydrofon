@@ -17,8 +17,8 @@ class DeleteTest extends TestCase
      */
     public function testIdentifiersCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin      = factory(User::class)->states('admin')->create();
+        $user       = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->delete('users/'.$user->id.'/identifiers/'.$identifier->id);
@@ -36,7 +36,7 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteIdentifiers()
     {
-        $user = factory(User::class)->create();
+        $user       = factory(User::class)->create();
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($user)->delete('users/'.$user->id.'/identifiers/'.$identifier->id);

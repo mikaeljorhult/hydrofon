@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
      */
     public function testBucketsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
         $response = $this->actingAs($admin)->put('buckets/'.$bucket->id, [
@@ -38,7 +38,7 @@ class UpdateTest extends TestCase
      */
     public function testBucketsMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin  = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
         $response = $this->actingAs($admin)->put('buckets/'.$bucket->id, [
@@ -59,7 +59,7 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateBuckets()
     {
-        $user = factory(User::class)->create();
+        $user   = factory(User::class)->create();
         $bucket = factory(Bucket::class)->create();
 
         $response = $this->actingAs($user)->put('buckets/'.$bucket->id, [

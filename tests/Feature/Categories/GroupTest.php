@@ -19,8 +19,8 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenCreatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
+        $admin    = factory(User::class)->states('admin')->create();
+        $group    = factory(Group::class)->create();
         $category = factory(Category::class)->make();
 
         $this->actingAs($admin)->post('categories', [
@@ -41,7 +41,7 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->make();
 
         $response = $this->actingAs($admin)->post('categories', [
@@ -62,8 +62,8 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
+        $admin    = factory(User::class)->states('admin')->create();
+        $group    = factory(Group::class)->create();
         $category = factory(Category::class)->create();
 
         $this->actingAs($admin)->put('categories/'.$category->id, [
@@ -84,8 +84,8 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
+        $admin    = factory(User::class)->states('admin')->create();
+        $group    = factory(Group::class)->create();
         $category = factory(Category::class)->create();
 
         $category->groups()->attach($group);
@@ -113,7 +113,7 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [

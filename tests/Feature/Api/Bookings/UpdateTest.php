@@ -19,8 +19,8 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin       = factory(User::class)->states('admin')->create();
+        $booking     = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('api/bookings/'.$booking->id, [
@@ -58,8 +58,8 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdatedWithApiFieldNames()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin       = factory(User::class)->states('admin')->create();
+        $booking     = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('api/bookings/'.$booking->id, [
@@ -81,8 +81,8 @@ class UpdateTest extends TestCase
      */
     public function testAdministratorCanChangeUserOfBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('api/bookings/'.$booking->id, [
@@ -106,9 +106,9 @@ class UpdateTest extends TestCase
      */
     public function testUserCannotChangeUserOfABooking()
     {
-        $firstUser = factory(User::class)->create();
+        $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $booking    = factory(Booking::class)->create();
 
         $response = $this->actingAs($firstUser)->put('api/bookings/'.$booking->id, [
             'user_id'     => $secondUser->id,
@@ -154,7 +154,7 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingItDontOwn()
     {
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($user)->put('api/bookings/'.$booking->id, [

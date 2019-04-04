@@ -20,7 +20,7 @@ class DeleteTest extends TestCase
      */
     public function testBookingsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
@@ -55,7 +55,7 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteBookingByAnotherUser()
     {
-        $booking = factory(Booking::class)->states('future')->create();
+        $booking     = factory(Booking::class)->states('future')->create();
         $anotherUser = factory(User::class)->create();
 
         $response = $this->actingAs($anotherUser)->delete('bookings/'.$booking->id);
@@ -110,7 +110,7 @@ class DeleteTest extends TestCase
      */
     public function testRelatedCheckinAndCheckoutAreDeletedWithBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $booking->checkin()->save(factory(Checkin::class)->create());

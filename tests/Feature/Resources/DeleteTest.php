@@ -19,7 +19,7 @@ class DeleteTest extends TestCase
      */
     public function testResourcesCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->delete('resources/'.$resource->id);
@@ -37,7 +37,7 @@ class DeleteTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs($admin)->delete('resources/'.$booking->resource->id);
@@ -57,7 +57,7 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteResources()
     {
-        $user = factory(User::class)->create();
+        $user     = factory(User::class)->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($user)->delete('resources/'.$resource->id);

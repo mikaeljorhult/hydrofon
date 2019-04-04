@@ -20,7 +20,7 @@ class GroupTest extends TestCase
     {
         $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -44,7 +44,7 @@ class GroupTest extends TestCase
     public function testNonExistingGroupsCannotBeAddedWhenStoringUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -69,7 +69,7 @@ class GroupTest extends TestCase
     {
         $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
-        $user = factory(User::class)->create();
+        $user  = factory(User::class)->create();
 
         $this->actingAs($admin)->put('users/'.$user->id, [
             'email'  => 'test@hydrofon.se',
@@ -92,7 +92,7 @@ class GroupTest extends TestCase
     {
         $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
-        $user = factory(User::class)->create();
+        $user  = factory(User::class)->create();
 
         $user->groups()->attach($group);
 
@@ -121,7 +121,7 @@ class GroupTest extends TestCase
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $user  = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email'  => 'test@hydrofon.se',

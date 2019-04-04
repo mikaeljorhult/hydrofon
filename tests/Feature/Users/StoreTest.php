@@ -18,7 +18,7 @@ class StoreTest extends TestCase
     public function testUsersCanBeStored()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -41,7 +41,7 @@ class StoreTest extends TestCase
     public function testUsersMustHaveAName()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -66,7 +66,7 @@ class StoreTest extends TestCase
     public function testUsersMustHaveAnEmailAddress()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => '',
@@ -91,7 +91,7 @@ class StoreTest extends TestCase
     public function testEmailAddressMustBeUnique()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $admin->email,
@@ -116,7 +116,7 @@ class StoreTest extends TestCase
     public function testUsersMustHaveAPassword()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -141,7 +141,7 @@ class StoreTest extends TestCase
     public function testPasswordMustBeConfirmed()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -166,7 +166,7 @@ class StoreTest extends TestCase
     public function testNonAdminUsersCanNotStoreUsers()
     {
         $admin = factory(User::class)->create();
-        $user = factory(User::class)->make();
+        $user  = factory(User::class)->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,

@@ -19,7 +19,7 @@ class CategoryTest extends TestCase
      */
     public function testCategoryRelationshipsAreStoredWhenCreatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
         $resource = factory(Resource::class)->make();
 
@@ -41,7 +41,7 @@ class CategoryTest extends TestCase
      */
     public function testNonExistingCategoriesCannotBeAddedWhenStoringResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->make();
 
         $response = $this->actingAs($admin)->post('resources', [
@@ -62,7 +62,7 @@ class CategoryTest extends TestCase
      */
     public function testCategoryRelationshipsAreStoredWhenUpdatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
         $resource = factory(Resource::class)->create();
 
@@ -84,7 +84,7 @@ class CategoryTest extends TestCase
      */
     public function testCategoryRelationshipsAreRemovedWhenUpdatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
         $resource = factory(Resource::class)->create();
 
@@ -113,7 +113,7 @@ class CategoryTest extends TestCase
      */
     public function testNonExistingCategoriesCannotBeAddedWhenUpdatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [

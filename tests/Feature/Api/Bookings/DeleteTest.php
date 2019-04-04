@@ -18,7 +18,7 @@ class DeleteTest extends TestCase
      */
     public function testBookingsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->delete('api/bookings/'.$booking->id, ['ACCEPT' => 'application/json']);
