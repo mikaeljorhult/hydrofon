@@ -23,7 +23,7 @@ class BookingController extends Controller
                                 ->with(['checkin', 'checkout', 'resource', 'user'])
                                 ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                                 ->join('users', 'users.id', '=', 'bookings.user_id')
-                                ->allowedFilters('start_time')
+                                ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
                                 ->defaultSort('start_time')
                                 ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
                                 ->paginate(15);

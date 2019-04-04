@@ -9,3 +9,7 @@ $factory->define(Hydrofon\Resource::class, function (Faker $faker) {
         'is_facility' => false,
     ];
 });
+
+$factory->state(Hydrofon\Resource::class, 'facility', [
+    'is_facility' => true,
+]);

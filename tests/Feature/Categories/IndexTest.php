@@ -27,21 +27,39 @@ class IndexTest extends TestCase
     }
 
     /**
-     * Categories index can be filtered by name.
+     * Categories can be filtered by the name.
      *
      * @return void
      */
-    public function testCategoriesCanBeFilteredByName()
+    public function testCategoriesAreFilteredByName()
     {
-        $visibleCategory = factory(Category::class)->create();
+        $visibleCategory    = factory(Category::class)->create();
         $notVisibleCategory = factory(Category::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
-             ->get('categories?'.http_build_query([
-                     'filter[categories.name]' => $visibleCategory->name,
-                 ]))
+             ->get('categories?filter[categories.name]='.$visibleCategory->name)
              ->assertSuccessful()
-             ->assertSee($visibleCategory->name)
-             ->assertDontSee($notVisibleCategory->name);
+             ->assertSee(route('categories.edit', $visibleCategory))
+             ->assertDontSee(route('categories.edit', $notVisibleCategory));
+    }
+
+    /**
+     * Categories can be filtered by parent category.
+     *
+     * @return void
+     */
+    public function testCategoriesAreFilteredByParent()
+    {
+        $visibleCategory    = factory(Category::class)->create();
+        $notVisibleCategory = factory(Category::class)->create();
+
+        $visibleCategory->parent()->associate(factory(Category::class)->create());
+        $visibleCategory->save();
+
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->get('categories?filter[categories.parent_id]='.$visibleCategory->parent->id)
+             ->assertSuccessful()
+             ->assertSee(route('categories.edit', $visibleCategory))
+             ->assertDontSee(route('categories.edit', $notVisibleCategory));
     }
 }

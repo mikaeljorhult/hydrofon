@@ -20,7 +20,7 @@ class CategoryController extends Controller
         $categories = QueryBuilder::for(Category::class)
                                   ->with(['parent'])
                                   ->leftJoin('categories as parent', 'parent.id', '=', 'categories.parent_id')
-                                  ->allowedFilters('categories.name')
+                                  ->allowedFilters('categories.name', 'categories.parent_id')
                                   ->allowedSorts(['categories.name', 'parent.name'])
                                   ->defaultSort('categories.name')
                                   ->select('categories.*')

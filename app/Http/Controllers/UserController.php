@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = QueryBuilder::for(User::class)
-                             ->allowedFilters('email')
+                             ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
                              ->defaultSort('email')
                              ->allowedSorts(['email', 'name'])
                              ->paginate(15);
