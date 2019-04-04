@@ -14,8 +14,8 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a booking.
      *
-     * @param  array  $overrides
-     * @param  \Hydrofon\User|null  $user
+     * @param array               $overrides
+     * @param \Hydrofon\User|null $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
@@ -50,7 +50,7 @@ class StoreTest extends TestCase
     public function testAdministratorCanCreateBookingForOtherUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->storeBooking(['user_id' => $user->id], $admin)
              ->assertRedirect('/');
@@ -68,7 +68,7 @@ class StoreTest extends TestCase
      */
     public function testUserCannotCreateBookingsForOtherUser()
     {
-        $firstUser  = factory(User::class)->create();
+        $firstUser = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
 
         $this->storeBooking(['user_id' => $secondUser->id], $firstUser)
@@ -144,7 +144,7 @@ class StoreTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [
@@ -180,7 +180,7 @@ class StoreTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
         $response = $this->actingAs($user)->post('bookings', [

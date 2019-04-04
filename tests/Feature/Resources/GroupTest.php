@@ -19,8 +19,8 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenCreatingResource()
     {
-        $admin    = factory(User::class)->states('admin')->create();
-        $group    = factory(Group::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $group = factory(Group::class)->create();
         $resource = factory(Resource::class)->make();
 
         $this->actingAs($admin)->post('resources', [
@@ -41,7 +41,7 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringResource()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->make();
 
         $response = $this->actingAs($admin)->post('resources', [
@@ -62,8 +62,8 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingResource()
     {
-        $admin    = factory(User::class)->states('admin')->create();
-        $group    = factory(Group::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $group = factory(Group::class)->create();
         $resource = factory(Resource::class)->create();
 
         $this->actingAs($admin)->put('resources/'.$resource->id, [
@@ -84,8 +84,8 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingResource()
     {
-        $admin    = factory(User::class)->states('admin')->create();
-        $group    = factory(Group::class)->create();
+        $admin = factory(User::class)->states('admin')->create();
+        $group = factory(Group::class)->create();
         $resource = factory(Resource::class)->create();
 
         $resource->groups()->attach($group);
@@ -113,7 +113,7 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingResource()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [

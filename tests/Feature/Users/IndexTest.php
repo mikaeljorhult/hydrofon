@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testUsersAreFilteredByName()
     {
-        $visibleUser    = factory(User::class)->create();
+        $visibleUser = factory(User::class)->create();
         $notVisibleUser = factory(User::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -50,7 +50,7 @@ class IndexTest extends TestCase
      */
     public function testUsersAreFilteredByEmail()
     {
-        $visibleUser    = factory(User::class)->create();
+        $visibleUser = factory(User::class)->create();
         $notVisibleUser = factory(User::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -67,7 +67,7 @@ class IndexTest extends TestCase
      */
     public function testUsersAreFilteredByGroup()
     {
-        $visibleUser    = factory(User::class)->states('admin')->create();
+        $visibleUser = factory(User::class)->states('admin')->create();
         $notVisibleUser = factory(User::class)->create();
 
         $visibleUser->groups()->attach(factory(Group::class)->create());

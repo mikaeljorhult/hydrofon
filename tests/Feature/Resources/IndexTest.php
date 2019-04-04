@@ -35,7 +35,7 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByName()
     {
-        $visibleResource    = factory(Resource::class)->create();
+        $visibleResource = factory(Resource::class)->create();
         $notVisibleResource = factory(Resource::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -52,7 +52,7 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByCategory()
     {
-        $visibleResource    = factory(Resource::class)->create();
+        $visibleResource = factory(Resource::class)->create();
         $notVisibleResource = factory(Resource::class)->create();
 
         $visibleResource->categories()->attach(factory(Category::class)->create());
@@ -71,7 +71,7 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByGroup()
     {
-        $visibleResource    = factory(Resource::class)->create();
+        $visibleResource = factory(Resource::class)->create();
         $notVisibleResource = factory(Resource::class)->create();
 
         $visibleResource->groups()->attach(factory(Group::class)->create());
@@ -90,7 +90,7 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByFacility()
     {
-        $visibleResource    = factory(Resource::class)->states('facility')->create();
+        $visibleResource = factory(Resource::class)->states('facility')->create();
         $notVisibleResource = factory(Resource::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())

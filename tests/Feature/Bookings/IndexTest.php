@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByResource()
     {
-        $visibleBooking    = factory(Booking::class)->create();
+        $visibleBooking = factory(Booking::class)->create();
         $notVisibleBooking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -50,7 +50,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByUser()
     {
-        $visibleBooking    = factory(Booking::class)->create();
+        $visibleBooking = factory(Booking::class)->create();
         $notVisibleBooking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -67,7 +67,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByStartTime()
     {
-        $visibleBooking    = factory(Booking::class)->states('future')->create();
+        $visibleBooking = factory(Booking::class)->states('future')->create();
         $notVisibleBooking = factory(Booking::class)->states('past')->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -84,7 +84,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByEndTime()
     {
-        $visibleBooking    = factory(Booking::class)->states('future')->create();
+        $visibleBooking = factory(Booking::class)->states('future')->create();
         $notVisibleBooking = factory(Booking::class)->states('past')->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())

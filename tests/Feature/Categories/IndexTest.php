@@ -33,7 +33,7 @@ class IndexTest extends TestCase
      */
     public function testCategoriesAreFilteredByName()
     {
-        $visibleCategory    = factory(Category::class)->create();
+        $visibleCategory = factory(Category::class)->create();
         $notVisibleCategory = factory(Category::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -50,7 +50,7 @@ class IndexTest extends TestCase
      */
     public function testCategoriesAreFilteredByParent()
     {
-        $visibleCategory    = factory(Category::class)->create();
+        $visibleCategory = factory(Category::class)->create();
         $notVisibleCategory = factory(Category::class)->create();
 
         $visibleCategory->parent()->associate(factory(Category::class)->create());

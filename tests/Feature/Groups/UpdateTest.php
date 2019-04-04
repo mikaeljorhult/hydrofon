@@ -59,7 +59,7 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateGroups()
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
 
         $response = $this->actingAs($user)->put('groups/'.$group->id, [
