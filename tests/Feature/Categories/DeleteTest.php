@@ -18,7 +18,7 @@ class DeleteTest extends TestCase
      */
     public function testCategoriesCanBeDeleted()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
         $response = $this->actingAs($admin)->delete('categories/'.$category->id);

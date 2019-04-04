@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
      */
     public function testResourcesCanBeUpdated()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
@@ -38,7 +38,7 @@ class UpdateTest extends TestCase
      */
     public function testResourcesMustHaveAName()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
@@ -59,7 +59,7 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateResources()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $resource = factory(Resource::class)->create();
 
         $response = $this->actingAs($user)->put('resources/'.$resource->id, [

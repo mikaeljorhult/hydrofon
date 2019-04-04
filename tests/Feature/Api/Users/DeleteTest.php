@@ -18,7 +18,7 @@ class DeleteTest extends TestCase
     public function testUsersCanBeDeleted()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->delete('api/users/'.$user->id, ['ACCEPT' => 'application/json']);
 

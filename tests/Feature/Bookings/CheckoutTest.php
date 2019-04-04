@@ -19,7 +19,7 @@ class CheckoutTest extends TestCase
      */
     public function testBookingCanBeCheckedOut()
     {
-        $admin   = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs($admin)->post('checkouts', [
@@ -40,7 +40,7 @@ class CheckoutTest extends TestCase
      */
     public function testCheckoutCanBeUndone()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $checkout = factory(Checkout::class)->create();
 
         $this->actingAs($admin)->delete('checkouts/'.$checkout->id);
@@ -79,7 +79,7 @@ class CheckoutTest extends TestCase
      */
     public function testNonAdminUsersCanNotCheckOutBookings()
     {
-        $admin   = factory(User::class)->create();
+        $admin = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->post('checkouts', [
@@ -101,7 +101,7 @@ class CheckoutTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteCheckouts()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $checkout = factory(Checkout::class)->create();
 
         $response = $this->actingAs($user)->delete('checkouts/'.$checkout->id);

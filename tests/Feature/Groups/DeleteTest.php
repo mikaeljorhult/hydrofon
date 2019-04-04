@@ -36,7 +36,7 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteGroups()
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
 
         $response = $this->actingAs($user)->delete('groups/'.$group->id);
