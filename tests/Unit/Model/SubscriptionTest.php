@@ -32,7 +32,7 @@ class SubscriptionTest extends TestCase
      */
     public function testUserSubscriptionIsRendered()
     {
-        $user         = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\User',
             'subscribable_id'   => $user->id,
@@ -52,7 +52,7 @@ class SubscriptionTest extends TestCase
      */
     public function testResourceSubscriptionIsRendered()
     {
-        $resource     = factory(Resource::class)->create();
+        $resource = factory(Resource::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\Resource',
             'subscribable_id'   => $resource->id,

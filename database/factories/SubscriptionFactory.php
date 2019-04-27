@@ -9,7 +9,7 @@ $factory->define(Hydrofon\Subscription::class, function (Faker $faker) {
     ];
 
     $subscribableType = $faker->randomElement($subscribables);
-    $subscribable     = factory($subscribableType)->create();
+    $subscribable = factory($subscribableType)->create();
 
     return [
         'subscribable_id'   => $subscribable->id,

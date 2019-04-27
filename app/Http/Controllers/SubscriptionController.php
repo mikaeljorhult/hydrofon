@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $uuid
+     * @param string $uuid
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +33,7 @@ class SubscriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\SubscriptionStoreRequest  $request
+     * @param \Hydrofon\Http\Requests\SubscriptionStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,8 +52,8 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Subscription  $subscription
-     * @param  \Hydrofon\Http\Requests\SubscriptionDestroyRequest  $request
+     * @param \Hydrofon\Subscription                             $subscription
+     * @param \Hydrofon\Http\Requests\SubscriptionDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */
