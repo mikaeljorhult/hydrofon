@@ -15,8 +15,8 @@ class DeleteTest extends TestCase
     /**
      * Posts request to delete a subscription.
      *
-     * @param  \Hydrofon\Subscription  $subscription
-     * @param  \Hydrofon\User|null  $user
+     * @param \Hydrofon\Subscription $subscription
+     * @param \Hydrofon\User|null    $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
@@ -33,7 +33,7 @@ class DeleteTest extends TestCase
      */
     public function testUserSubscriptionsCanBeDeleted()
     {
-        $user         = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\User',
             'subscribable_id'   => $user->id,
@@ -56,7 +56,7 @@ class DeleteTest extends TestCase
      */
     public function testAdministratorCanDeleteAnyUserSubscription()
     {
-        $user         = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\User',
             'subscribable_id'   => $user->id,
@@ -79,7 +79,7 @@ class DeleteTest extends TestCase
      */
     public function testAdministratorCanDeleteAResourceSubscription()
     {
-        $resource     = factory(Resource::class)->create();
+        $resource = factory(Resource::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\Resource',
             'subscribable_id'   => $resource->id,
@@ -102,7 +102,7 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteAResourceSubscription()
     {
-        $resource     = factory(Resource::class)->create();
+        $resource = factory(Resource::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\Resource',
             'subscribable_id'   => $resource->id,

@@ -15,8 +15,8 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a subscription.
      *
-     * @param  array  $overrides
-     * @param  \Hydrofon\User|null  $user
+     * @param array               $overrides
+     * @param \Hydrofon\User|null $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */

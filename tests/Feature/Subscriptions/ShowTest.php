@@ -18,7 +18,7 @@ class ShowTest extends TestCase
      */
     public function testUserSubscriptionIsShown()
     {
-        $user         = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
             'subscribable_type' => '\Hydrofon\User',
             'subscribable_id'   => $user->id,
