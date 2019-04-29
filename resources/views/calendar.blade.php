@@ -4,6 +4,7 @@
 
 @push('initial-json')
     window.HYDROFON.date = @json((int) $date->startOfDay()->format('U'));
+    window.HYDROFON.selectedResources = @json($resources->pluck('id'));
 @endpush
 
 @section('sidebar')

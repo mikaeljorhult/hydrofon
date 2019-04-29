@@ -33,6 +33,9 @@ const app = new Vue({
             this.bookings = [];
 
             this.categories.forEach(category => category.expanded = false);
+
+            let selectedResources = window.HYDROFON.selectedResources || [];
+            this.resources.forEach(resource => resource.selected = selectedResources.indexOf(resource.id) > -1);
         },
 
         fetchBookings: function () {
