@@ -175,6 +175,7 @@ const app = new Vue({
 
         Events.$on('date-changed', newDate => {
             this.date = newDate;
+            history.pushState(null, null, window.HYDROFON.baseURL + '/calendar/' + new Date(newDate * 1000).toISOString().split('T')[0]);
         });
     }
 });
