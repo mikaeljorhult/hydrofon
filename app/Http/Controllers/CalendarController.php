@@ -46,7 +46,7 @@ class CalendarController extends Controller
      */
     public function store(CalendarRequest $request)
     {
-        session()->put('resources', array_unique((array) $request->input('resources'), SORT_NUMERIC));
+        session()->flash('resources', array_unique((array) $request->input('resources'), SORT_NUMERIC));
 
         return redirect('/calendar/'.$request->input('date'));
     }
