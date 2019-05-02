@@ -157,6 +157,24 @@ class Booking extends Model
     }
 
     /**
+     * Scope a query to only include bookings that are to be returned.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOverdue($query)
+    {
+        return $query
+            ->whereHas('resource', function ($query) {
+                $query->where('is_facility', '=', 0);
+            })
+            ->past()
+            ->has('checkout')
+            ->doesntHave('checkin');
+    }
+
+    /**
      * Calculate duration in seconds.
      *
      * @return int

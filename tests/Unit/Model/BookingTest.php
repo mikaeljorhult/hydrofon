@@ -228,4 +228,30 @@ class BookingTest extends TestCase
         $this->assertCount(1, $bookings);
         $this->assertEquals($bookings->first()->id, $booking->id);
     }
+
+    /**
+     * Past bookings that has been checked out but not yet checked back in should be included.
+     *
+     * @return void
+     */
+    public function testOverdueScopeIncludeOverdueBookings()
+    {
+        // Create a past and a future booking.
+        factory(Booking::class)->states('past')->create();
+        factory(Booking::class)->states('future')->create();
+        $checkedInBooking = factory(Booking::class)->states('past')->create();
+        $checkedInBooking->checkout()->save(factory(\Hydrofon\Checkout::class)->create());
+        $checkedInBooking->checkin()->save(factory(\Hydrofon\Checkin::class)->create());
+
+        // Create a current booking.
+        $booking = factory(Booking::class)->states('past')->create();
+        $booking->checkout()->save(factory(\Hydrofon\Checkout::class)->create());
+
+        // Get all current bookings.
+        $bookings = Booking::overdue()->get();
+
+        // Only future booking should be returned.
+        $this->assertCount(1, $bookings);
+        $this->assertEquals($bookings->first()->id, $booking->id);
+    }
 }
