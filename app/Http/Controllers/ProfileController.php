@@ -23,7 +23,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user     = auth()->user();
+        $user = auth()->user();
         $upcoming = $this->upcomingBookings($user);
         $overdue = $user->bookings()->overdue()->get();
 
@@ -38,7 +38,7 @@ class ProfileController extends Controller
     /**
      * Retrieve upcoming bookings for the next week from the database.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
+     * @param \Illuminate\Contracts\Auth\Authenticatable|null $user
      *
      * @return \Illuminate\Support\Collection
      */
