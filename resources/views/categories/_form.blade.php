@@ -6,7 +6,7 @@
 @if(\Hydrofon\Category::exists())
     <div class="mb-6">
         {!! Form::label('parent_id', 'Parent', ['class' => 'label']) !!}
-        {!! Form::select('parent_id', \Hydrofon\Category::orderBy('name')->pluck('name', 'id'), isset($category) ? $category->parent_id : null, ['placeholder' => 'Select a parent...', 'class' => 'field']) !!}
+        {!! Form::select('parent_id', \Hydrofon\Category::where('id', '!=', isset($category) ? $category->id : 0)->orderBy('name')->pluck('name', 'id'), isset($category) ? $category->parent_id : null, ['placeholder' => 'Select a parent...', 'class' => 'field']) !!}
     </div>
 @endif
 
