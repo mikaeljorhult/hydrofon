@@ -18,7 +18,7 @@
             <resourcelist-resource
                     v-for="resource in item.resources"
                     v-bind:item="resource"
-                    v-bind:key="'category' + resource.id"
+                    v-bind:key="'resource' + resource.id"
             ></resourcelist-resource>
         </ul>
     </li>

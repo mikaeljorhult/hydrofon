@@ -34,7 +34,14 @@ const app = new Vue({
 
             this.categories.forEach(category => category.expanded = false);
 
-            let selectedResources = window.HYDROFON.selectedResources || [];
+            let selectedResources = [];
+
+            if (window.HYDROFON.selectedResources && window.HYDROFON.selectedResources.length > 0) {
+                selectedResources = window.HYDROFON.selectedResources;
+            } else if (sessionStorage.getItem('resources-selected')) {
+                selectedResources = JSON.parse(sessionStorage.getItem('resources-selected'));
+            }
+
             this.resources.forEach(resource => resource.selected = selectedResources.indexOf(resource.id) > -1);
         },
 
@@ -149,13 +156,16 @@ const app = new Vue({
     },
 
     watch: {
+        date: function () {
+            // Update bookings whenever date is changed.
+            this.fetchBookings();
+        },
         resources: function () {
             // Update bookings whenever resources our updated.
             this.fetchBookings();
         },
-        date: function () {
-            // Update bookings whenever date is changed.
-            this.fetchBookings();
+        selectedResources: function () {
+            sessionStorage.setItem('resources-selected', JSON.stringify(this.selectedResources.map(resource => resource.id)));
         }
     },
 
