@@ -1,6 +1,6 @@
 <template>
     <li v-bind:class="{ 'resourcelist-category': true, 'has-children': hasChildren }">
-        <span v-on:click="expanded = !expanded">
+        <span v-on:click="this.handleClick">
             <icon icon="folder" class="w-5"></icon>
             {{ item.name }}
         </span>
@@ -27,6 +27,7 @@
 <script>
     import Icon from 'laravel-mix-vue-svgicon/IconComponent';
     import ResourceListResource from './ResourceListResource';
+    import Events from '../modules/events';
 
     export default {
         name: 'resourcelist-category',
@@ -41,7 +42,17 @@
         computed: {
             hasChildren: function () {
                 return (this.item.categories && this.item.categories.length > 0) || (this.item.resources && this.item.resources.length > 0);
-            },
+            }
+        },
+        methods: {
+            handleClick: function () {
+                this.expanded = !this.expanded;
+
+                Events.$emit('categories-expanded', {
+                    id: this.item.id,
+                    expanded: this.expanded
+                });
+            }
         },
         components: {
             'icon': Icon,

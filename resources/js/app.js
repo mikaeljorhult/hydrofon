@@ -19,6 +19,9 @@ const app = new Vue({
     },
 
     computed: {
+        expandedCategories: function () {
+            return this.categories.filter(category => category.expanded)
+        },
         selectedResources: function () {
             return this.resources.filter(resource => resource.selected)
         }
@@ -32,7 +35,13 @@ const app = new Vue({
             this.resources = window.HYDROFON.resources || [];
             this.bookings = [];
 
-            this.categories.forEach(category => category.expanded = false);
+            let expandedCategories = [];
+
+            if (sessionStorage.getItem('categories-expanded')) {
+                expandedCategories = JSON.parse(sessionStorage.getItem('categories-expanded'));
+            }
+
+            this.categories.forEach(category => category.expanded = expandedCategories.indexOf(category.id) > -1);
 
             let selectedResources = [];
 
@@ -164,6 +173,9 @@ const app = new Vue({
             // Update bookings whenever resources our updated.
             this.fetchBookings();
         },
+        expandedCategories: function () {
+            sessionStorage.setItem('categories-expanded', JSON.stringify(this.expandedCategories.map(category => category.id)));
+        },
         selectedResources: function () {
             sessionStorage.setItem('resources-selected', JSON.stringify(this.selectedResources.map(resource => resource.id)));
         }
@@ -178,9 +190,20 @@ const app = new Vue({
     created: function () {
         this.initialData();
 
-        Events.$on('resources-selected', event => {
-            this.updatedResources.set(event.id, event.selected);
+        Events.$on('resources-selected', resource => {
+            this.updatedResources.set(resource.id, resource.selected);
             this.updateSelectedResources();
+        });
+
+        Events.$on('categories-expanded', category => {
+            let index = this.categories.findIndex(function (stored) {
+                return stored.id === category.id;
+            });
+
+            // Replace object with copy of object with new status.
+            this.$set(this.categories, index, Object.assign(this.categories[index], {
+                expanded: category.expanded
+            }));
         });
 
         Events.$on('date-changed', newDate => {
