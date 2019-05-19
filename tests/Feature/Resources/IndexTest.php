@@ -25,7 +25,7 @@ class IndexTest extends TestCase
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('resources')
              ->assertSuccessful()
-             ->assertSee($resource->name);
+             ->assertSee(e($resource->name));
     }
 
     /**
