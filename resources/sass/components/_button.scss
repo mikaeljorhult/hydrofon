@@ -1,5 +1,5 @@
 .btn {
-  @apply py-2 px-4 rounded no-underline;
+  @apply py-2 px-4 rounded;
 
   &:hover {
     @apply opacity-75;
@@ -16,7 +16,7 @@
 }
 
 .btn-primary {
-  @apply bg-brand-dark text-white;
+  @apply bg-brand-600 text-white;
 
   &:hover {
     @apply text-white;

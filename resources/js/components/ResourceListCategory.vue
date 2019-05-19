@@ -6,7 +6,7 @@
         </span>
 
         <ul
-            class="list-reset resourcelist-children"
+            class="list-none resourcelist-children"
             v-if="hasChildren && expanded"
         >
             <resourcelist-category

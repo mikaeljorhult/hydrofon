@@ -10,7 +10,7 @@
             <input type="submit" value="Show calendar" class="btn btn-primary screen-reader" />
         </section>
 
-        <ul class="list-reset p-4" v-if="hasChildren">
+        <ul class="list-none p-4" v-if="hasChildren">
             <resourcelist-category
                     v-for="category in tree"
                     v-bind:key="'category' + category.id"

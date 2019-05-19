@@ -24,7 +24,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .svgicon('./resources/images/svg')
-    .tailwind()
+    .tailwind('./tailwind.config.js')
     .purgeCss({
         globs: [
             path.join(__dirname, 'node_modules/flatpickr/dist/*.js'),

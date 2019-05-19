@@ -5,7 +5,7 @@
     </span>
 
     @if($category->categories->count() > 0 || $category->resources->count() > 0)
-        <ul class="list-reset resourcelist-children">
+        <ul class="list-none resourcelist-children">
             @each('partials.resource-list.category', $category->categories, 'category')
             @each('partials.resource-list.resource', $category->resources, 'resource')
         </ul>

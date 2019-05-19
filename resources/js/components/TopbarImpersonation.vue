@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="flex items-center">
-            <icon icon="view-show" class="w-4 flex-no-shrink"></icon>
+            <icon icon="view-show" class="w-4 flex-shrink-0"></icon>
 
             <label for="user_id" class="screen-reader">
                 Select user to impersonate

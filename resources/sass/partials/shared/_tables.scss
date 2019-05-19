@@ -10,7 +10,7 @@ tr:nth-child(even) {
 }
 
 tbody tr:hover {
-  @apply .bg-brand-lightest;
+  @apply .bg-brand-100;
 
   .table-actions form {
     visibility: visible;

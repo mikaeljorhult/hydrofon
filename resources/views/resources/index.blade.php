@@ -14,7 +14,7 @@
         @endcomponent
 
         {!! Form::open(['route' => 'resources.index', 'method' => 'GET']) !!}
-            <section class="lg:flex py-2 px-3 bg-grey-lightest">
+            <section class="lg:flex py-2 px-3 bg-gray-100">
                 <div class="lg:mr-4">
                     {!! Form::label('filter[name]', 'Name', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::text('filter[name]', request('filter.name'), ['placeholder' => 'Name', 'class' => 'field inline-block lg:w-auto']) !!}
