@@ -11,6 +11,7 @@
         <ul class="list-none w-full">
             <li>
                 <a href="{{ route('login') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
+                    @svg('stand-by', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current')
                     Log in
                 </a>
             </li>
