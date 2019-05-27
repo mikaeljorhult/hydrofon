@@ -14,6 +14,7 @@
   }
 
   svg {
+    display: inline-block;
     width: 1.25rem;
     height: auto;
     vertical-align: text-bottom;
@@ -67,5 +68,13 @@
   &.has-children > span {
     display: block;
     cursor: pointer;
+  }
+}
+
+.resourcelist-resource {
+  font-size: .9rem;
+
+  input {
+    margin-right: .1rem;
   }
 }

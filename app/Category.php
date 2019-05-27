@@ -46,7 +46,8 @@ class Category extends Model
      */
     public function categories()
     {
-        return $this->hasMany(\Hydrofon\Category::class, 'parent_id');
+        return $this->hasMany(\Hydrofon\Category::class, 'parent_id')
+                    ->orderBy('name');
     }
 
     /**
