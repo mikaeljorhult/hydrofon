@@ -9,13 +9,14 @@ class Resource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return array
      */
     public function toArray($request)
     {
         return [
+            'type'        => 'resource',
             'id'          => (int) $this->id,
             'name'        => $this->name,
             'description' => $this->description,

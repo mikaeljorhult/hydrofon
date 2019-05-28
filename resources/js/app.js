@@ -61,6 +61,7 @@ const app = new Vue({
                     params: {
                         "resource_id": this.selectedResources.map(resource => resource.id),
                         "filter[between]": this.date + "," + (this.date + 86400),
+                        "include": "user"
                     }
                 })
                     .then(response => {

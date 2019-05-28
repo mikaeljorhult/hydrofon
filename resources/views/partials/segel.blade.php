@@ -34,6 +34,7 @@
                         <ul class="segel-bookings">
                             @foreach($resource->bookings as $booking)
                                 <li class="segel-booking"
+                                    title="{{ $booking->user->name }}"
                                     style="
                                             width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
                                             left: {{ ($booking->start_time->format('U') - $timestamps['start']) / $timestamps['duration'] * 100 }}%;

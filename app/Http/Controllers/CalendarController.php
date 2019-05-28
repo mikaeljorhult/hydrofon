@@ -80,6 +80,7 @@ class CalendarController extends Controller
                       ->with([
                     'bookings' => function ($query) use ($date) {
                         $query
+                            ->with('user')
                             ->between($date, $date->copy()->endOfDay())
                             ->orderBy('start_time');
                     },

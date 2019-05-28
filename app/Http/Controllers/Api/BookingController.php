@@ -22,14 +22,20 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = QueryBuilder::for(Booking::class)
+            ->allowedIncludes([
+                'user'
+            ])
             ->allowedFilters([
                 'start_time',
                 'end_time',
                 'resource_id',
                 Filter::scope('between'),
             ])
+            ->allowedSorts([
+                'start_time',
+                'end_time'
+            ])
             ->defaultSort('start_time')
-            ->allowedSorts(['start_time', 'end_time'])
             ->paginate(15);
 
         return new BookingCollection($bookings);
