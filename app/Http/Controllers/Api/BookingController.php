@@ -23,7 +23,7 @@ class BookingController extends Controller
     {
         $bookings = QueryBuilder::for(Booking::class)
             ->allowedIncludes([
-                'user'
+                'user',
             ])
             ->allowedFilters([
                 'start_time',
@@ -33,7 +33,7 @@ class BookingController extends Controller
             ])
             ->allowedSorts([
                 'start_time',
-                'end_time'
+                'end_time',
             ])
             ->defaultSort('start_time')
             ->paginate(15);
