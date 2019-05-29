@@ -37,13 +37,13 @@
                 @admin
                     <div class="mb-4">
                         {!! Form::label('user_id', 'User', ['class' => 'label']) !!}
-                        {!! Form::select('user_id', \Hydrofon\User::pluck('name', 'id'), auth()->user()->id, ['class' => 'field']) !!}
+                        {!! Form::select('user_id', \Hydrofon\User::orderBy('name')->pluck('name', 'id'), auth()->user()->id, ['class' => 'field']) !!}
                     </div>
                 @endadmin
 
                 <div class="mb-4">
                     {!! Form::label('resource_id', 'Resource', ['class' => 'label']) !!}
-                    {!! Form::select('resource_id', \Hydrofon\Resource::pluck('name', 'id'), $resources->count() > 0 ? $resources->first()->id : null, ['class' => 'field']) !!}
+                    {!! Form::select('resource_id', \Hydrofon\Resource::orderBy('name')->pluck('name', 'id'), $resources->count() > 0 ? $resources->first()->id : null, ['class' => 'field']) !!}
                 </div>
 
                 <div class="flex flex-wrap mb-6">
