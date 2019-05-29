@@ -20,8 +20,8 @@
 
 @if(\Hydrofon\Group::exists())
     <div class="mb-6">
-        {!! Form::label('groups', 'Groups', ['class' => 'label']) !!}
-        {!! Form::select('groups', \Hydrofon\Group::pluck('name', 'id'), isset($user) ? $user->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}
+        {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
+        {!! Form::select('groups[]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), isset($user) ? $user->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field']) !!}
     </div>
 @endif
 
