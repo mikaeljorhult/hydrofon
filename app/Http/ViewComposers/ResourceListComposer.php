@@ -35,7 +35,8 @@ class ResourceListComposer
         $jsResources = $categories
             ->nested('resources', 'categories', false)
             ->merge($resources)
-            ->unique('id')
+            ->unique()
+            ->values()
             ->map(function ($resource) {
                 return new ResourceResource($resource);
             });
@@ -43,8 +44,8 @@ class ResourceListComposer
         $view->with([
             'categories'   => $categories,
             'resources'    => $resources,
-            'jsCategories' => $jsCategories,
-            'jsResources'  => $jsResources,
+            'jsCategories' => $jsCategories->toArray(),
+            'jsResources'  => $jsResources->toArray(),
         ]);
     }
 
