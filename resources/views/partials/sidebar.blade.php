@@ -40,7 +40,7 @@
                 </li>
 
                 @admin
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('desk') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('computer-desktop', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Desk
                         </a>
@@ -50,32 +50,32 @@
 
             @admin
                 <ul class="list-none w-full mb-4">
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('bookings.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('date-add', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Bookings
                         </a>
                     </li>
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('buckets.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('box', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Buckets
                         </a>
                     </li>
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('categories.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('tag', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Categories
                         </a>
                     </li>
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('groups.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('lock-closed', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Groups
                         </a>
                     </li>
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('resources.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('mobile-devices', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Resources
                         </a>
                     </li>
-                    <li class="sidebar-link">
+                    <li>
                         <a href="{{ route('users.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight hover:text-complementary-400 hover:bg-complementary-800">
                             @svg('user-group', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Users
                         </a>
@@ -84,7 +84,7 @@
             @endadmin
 
             <ul class="list-none w-full mb-4">
-                <li class="sidebar-link">
+                <li>
                     @if(auth()->user()->isImpersonated())
                         <a href="{{ route('impersonation') }}"
                            onclick="event.preventDefault(); document.getElementById('impersonation-form').submit();"
