@@ -30,7 +30,7 @@ class UpdateTest extends TestCase
             'end_time'    => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'resource_id' => $newResource->id,
         ]);
@@ -54,7 +54,7 @@ class UpdateTest extends TestCase
             'end_time'    => $booking->end_time,
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'id'      => $booking->id,
             'user_id' => $user->id,
@@ -101,7 +101,7 @@ class UpdateTest extends TestCase
             'end_time'    => $booking->end_time->copy()->addHour(),
         ]);
 
-        $response->assertRedirect('/bookings');
+        $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
             'id'         => $booking->id,
             'start_time' => $booking->start_time->copy()->addHour(),

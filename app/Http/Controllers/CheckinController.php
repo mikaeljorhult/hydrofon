@@ -10,6 +10,16 @@ use Hydrofon\Http\Requests\CheckinStoreRequest;
 class CheckinController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Hydrofon\Http\Requests\CheckinStoreRequest $request

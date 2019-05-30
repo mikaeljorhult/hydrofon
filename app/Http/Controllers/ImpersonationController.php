@@ -8,6 +8,16 @@ use Hydrofon\User;
 class ImpersonationController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('admin')->except('destroy');
+    }
+
+    /**
      * Create impersonation of user.
      *
      * @param \Hydrofon\Http\Requests\ImpersonationRequest $request

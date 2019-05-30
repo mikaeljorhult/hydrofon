@@ -12,6 +12,17 @@ use Spatie\QueryBuilder\QueryBuilder;
 class BookingController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->except(['store', 'update', 'destroy']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -109,7 +120,12 @@ class BookingController extends Controller
 
         flash('Booking was updated');
 
-        return redirect('/bookings');
+        // Redirect to index if from admin page, otherwise back to referer.
+        if (Str::contains($request->headers->get('referer'), '/bookings')) {
+            return redirect('/bookings');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -126,6 +142,11 @@ class BookingController extends Controller
 
         flash('Booking was deleted');
 
-        return redirect('/bookings');
+        // Redirect to index if from admin page, otherwise back to referer.
+        if (Str::contains($request->headers->get('referer'), '/bookings')) {
+            return redirect('/bookings');
+        } else {
+            return redirect()->back();
+        }
     }
 }

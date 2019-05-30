@@ -17,7 +17,7 @@ class Administrator
     public function handle($request, Closure $next)
     {
         if (!$request->user()->isAdmin()) {
-            return redirect('/home');
+            abort(403);
         }
 
         return $next($request);

@@ -19,8 +19,7 @@ class UserDeskTest extends TestCase
     {
         $response = $this->actingAs(factory(User::class)->create())->get('/desk');
 
-        $response->assertStatus(302);
-        $response->assertRedirect('/home');
+        $response->assertStatus(403);
     }
 
     /**
