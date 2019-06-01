@@ -84,7 +84,10 @@ class StoreTest extends TestCase
      */
     public function testParentMustExist()
     {
-        $this->storeCategory(['parent_id' => 100])
+        $category = factory(Category::class)->make();
+
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->post('categories', array_merge($category->toArray(), ['parent_id' => 100]))
              ->assertRedirect()
              ->assertSessionHasErrors('parent_id');
 
