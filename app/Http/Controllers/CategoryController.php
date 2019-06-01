@@ -118,6 +118,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category, CategoryDestroyRequest $request)
     {
+        // Make any direct descending category root to prevent deletion.
+        $category->children->each(function ($child) {
+            $child->makeRoot()->save();
+        });
+        
         $category->delete();
 
         flash('Category was deleted');
