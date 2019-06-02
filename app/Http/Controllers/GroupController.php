@@ -55,9 +55,9 @@ class GroupController extends Controller
      */
     public function store(GroupStoreRequest $request)
     {
-        Group::create($request->all());
+        $group = Group::create($request->all());
 
-        flash('Group was created');
+        flash('Group "'.$group->name.'" was created');
 
         return redirect('/groups');
     }
@@ -98,7 +98,7 @@ class GroupController extends Controller
     {
         $group->update($request->all());
 
-        flash('Group was updated');
+        flash('Group "'.$group->name.'" was updated');
 
         return redirect('/groups');
     }

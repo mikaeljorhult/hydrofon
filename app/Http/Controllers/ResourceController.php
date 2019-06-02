@@ -62,7 +62,7 @@ class ResourceController extends Controller
         $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
-        flash('Resource was created');
+        flash('Resource "'.$resource->name.'" was created');
 
         return redirect('/resources');
     }
@@ -108,7 +108,7 @@ class ResourceController extends Controller
         $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
-        flash('Resource was updated');
+        flash('Resource "'.$resource->name.'" was updated');
 
         return redirect('/resources');
     }

@@ -58,7 +58,7 @@ class BucketController extends Controller
         $bucket = Bucket::create($request->all());
         $bucket->resources()->sync($request->get('resources'));
 
-        flash('Bucket was created');
+        flash('Bucket "'.$bucket->name.'" was created');
 
         return redirect('/buckets');
     }
@@ -100,7 +100,7 @@ class BucketController extends Controller
         $bucket->update($request->all());
         $bucket->resources()->sync($request->get('resources'));
 
-        flash('Bucket was updated');
+        flash('Bucket "'.$bucket->name.'" was updated');
 
         return redirect('/buckets');
     }

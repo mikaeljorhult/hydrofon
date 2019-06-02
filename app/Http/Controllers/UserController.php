@@ -66,7 +66,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->groups()->sync($request->get('groups'));
 
-        flash('User was created');
+        flash('User "'.$user->email.'" was created');
 
         return redirect('/users');
     }
@@ -118,7 +118,7 @@ class UserController extends Controller
         $user->update($input);
         $user->groups()->sync($request->get('groups'));
 
-        flash('User was updated');
+        flash('User "'.$user->email.'" was updated');
 
         return redirect('/users');
     }

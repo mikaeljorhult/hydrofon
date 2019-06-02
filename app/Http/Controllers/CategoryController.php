@@ -61,7 +61,7 @@ class CategoryController extends Controller
         $category = Category::create($request->all());
         $category->groups()->sync($request->get('groups'));
 
-        flash('Category was created');
+        flash('Category "'.$category->name.'" was created');
 
         return redirect('/categories');
     }
@@ -103,7 +103,7 @@ class CategoryController extends Controller
         $category->update($request->all());
         $category->groups()->sync($request->get('groups'));
 
-        flash('Category was updated');
+        flash('Category "'.$category->name.'" was updated');
 
         return redirect('/categories');
     }
@@ -122,7 +122,7 @@ class CategoryController extends Controller
         $category->children->each(function ($child) {
             $child->makeRoot()->save();
         });
-        
+
         $category->delete();
 
         flash('Category was deleted');
