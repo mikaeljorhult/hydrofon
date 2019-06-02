@@ -15,7 +15,7 @@
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
         </section>
 
-        <ul class="list-none p-4">
+        <ul class="resourcelist-base list-none px-4 py-2">
             @each('partials.resource-list.category', $categories, 'category')
             @each('partials.resource-list.resource', $resources, 'resource')
         </ul>

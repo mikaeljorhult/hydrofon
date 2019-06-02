@@ -1,9 +1,9 @@
 .resourcelist {
+  display: flex;
   flex: 0 1 14rem;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-top: 3.5rem;
+  overflow: hidden;
+  padding-top: 4.1rem;
   background-color: #313541;
   color: rgba(255, 255, 255, .6);
   white-space: nowrap;
@@ -57,6 +57,16 @@
   input {
     margin-bottom: 0;
     font-size: .8rem;
+  }
+}
+
+.resourcelist-base {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  > :last-child {
+    margin-bottom: 2rem;
   }
 }
 
