@@ -23,6 +23,7 @@ img {
 
 a {
   color: $link-color;
+  text-decoration: underline;
 
   &:hover {
     color: $link-hover-color;
