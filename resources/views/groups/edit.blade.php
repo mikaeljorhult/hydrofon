@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create group'])
+        @component('components.heading', ['title' => 'Edit group'])
         @endcomponent
 
         <section>

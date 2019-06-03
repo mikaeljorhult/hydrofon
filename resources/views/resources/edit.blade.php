@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create resource'])
+        @component('components.heading', ['title' => 'Edit resource'])
         @endcomponent
 
         <section>
