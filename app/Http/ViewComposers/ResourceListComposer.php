@@ -13,18 +13,18 @@ class ResourceListComposer
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
+     * @param View $view
      *
      * @return void
      */
     public function compose(View $view)
     {
-        $categories    = $this->getCategories();
+        $categories = $this->getCategories();
         $rootResources = $this->getRootResources();
 
         $flatCategories = $categories->toFlatTree();
-        $jsCategories   = $this->getJavaScriptCategories($flatCategories);
-        $jsResources    = $this->getJavaScriptResources($flatCategories);
+        $jsCategories = $this->getJavaScriptCategories($flatCategories);
+        $jsResources = $this->getJavaScriptResources($flatCategories);
 
         $view->with([
             'categories'   => $categories->load('resources', 'resources.groups')->toTree(),
@@ -65,6 +65,7 @@ class ResourceListComposer
      * Map all categories to JavaScript resources.
      *
      * @param $categories
+     *
      * @return \Illuminate\Support\Collection
      */
     private function getJavaScriptCategories($categories)
@@ -78,6 +79,7 @@ class ResourceListComposer
      * Retrieve resources and map them to JavaScript resources.
      *
      * @param $categories
+     *
      * @return \Illuminate\Support\Collection
      */
     private function getJavaScriptResources($categories)
