@@ -26,10 +26,10 @@
         },
         methods: {
             handleClick: function () {
-                Events.$emit('resources-selected', {
+                Events.$emit('resources-selected', [{
                     id: this.item.id,
                     selected: this.checked
-                });
+                }]);
             }
         }
     };
