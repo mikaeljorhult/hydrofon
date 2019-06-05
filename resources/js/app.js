@@ -200,7 +200,6 @@ const app = new Vue({
 
     created: function () {
         Events.$on('resources-selected', resources => {
-            console.log(resources);
             resources.forEach((resource) => {
                 this.updatedResources.set(resource.id, resource.selected);
             });

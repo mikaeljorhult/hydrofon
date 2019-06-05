@@ -98,7 +98,7 @@
                                 </button>
                             {!! Form::close() !!}
 
-                            {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE' ]) !!}
+                            {!! Form::model($booking, ['route' => ['bookings.destroy', $booking->id], 'method' => 'DELETE']) !!}
                                 <button type="submit" title="Delete">
                                     Delete
                                 </button>

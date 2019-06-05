@@ -40,7 +40,7 @@ class SubscriptionController extends Controller
     public function store(SubscriptionStoreRequest $request)
     {
         Subscription::firstOrCreate([
-            'subscribable_type' => '\\Hydrofon\\'.Str::ucfirst($request->get('subscribable_type')),
+            'subscribable_type' => 'Hydrofon\\'.Str::ucfirst($request->get('subscribable_type')),
             'subscribable_id'   => $request->get('subscribable_id'),
         ]);
 

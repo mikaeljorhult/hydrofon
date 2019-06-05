@@ -100,4 +100,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\Hydrofon\Group::class);
     }
+
+    /**
+     * Subscription of user bookings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function subscription()
+    {
+        return $this->morphOne(\Hydrofon\Subscription::class, 'subscribable');
+    }
 }
