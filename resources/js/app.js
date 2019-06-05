@@ -15,6 +15,7 @@ const app = new Vue({
         categories: [],
         resources: [],
         bookings: [],
+        treeSelected: [],
         updatedResources: new Map()
     },
 
@@ -23,7 +24,13 @@ const app = new Vue({
             return this.categories.filter(category => category.expanded)
         },
         selectedResources: function () {
-            return this.resources.filter(resource => resource.selected)
+            return this.resources.filter(resource => this.treeSelected.indexOf(resource.id) > -1)
+        }
+    },
+
+    provide: function () {
+        return {
+            treeSelected: this.treeSelected
         }
     },
 
@@ -51,7 +58,9 @@ const app = new Vue({
                 selectedResources = JSON.parse(sessionStorage.getItem('resources-selected'));
             }
 
-            this.resources.forEach(resource => resource.selected = selectedResources.indexOf(resource.id) > -1);
+            Events.$emit('resources-selected', selectedResources.map(function (id) {
+                return { id: id, selected: true };
+            }));
         },
 
         fetchBookings: function () {
@@ -149,15 +158,17 @@ const app = new Vue({
 
         updateSelectedResources: debounce(function () {
             this.updatedResources.forEach((value, key) => {
-                // Find index of updated booking.
-                let index = this.resources.findIndex(function (stored) {
-                    return stored.id === key;
-                });
+                if (value) {
+                    this.treeSelected.push(key);
+                } else {
+                    let i = this.treeSelected.length;
 
-                // Replace object with copy of object with new status.
-                this.$set(this.resources, index, Object.assign(this.resources[index], {
-                    selected: value
-                }));
+                    while(i--) {
+                        if (this.treeSelected[i] === key) {
+                            this.treeSelected.splice(i, 1);
+                        }
+                    }
+                }
             });
 
             // Clear map when all resources have been updated.
@@ -170,15 +181,14 @@ const app = new Vue({
             // Update bookings whenever date is changed.
             this.fetchBookings();
         },
-        resources: function () {
-            // Update bookings whenever resources our updated.
-            this.fetchBookings();
-        },
         expandedCategories: function () {
             sessionStorage.setItem('categories-expanded', JSON.stringify(this.expandedCategories.map(category => category.id)));
         },
         selectedResources: function () {
-            sessionStorage.setItem('resources-selected', JSON.stringify(this.selectedResources.map(resource => resource.id)));
+            // Update bookings whenever resources are updated.
+            this.fetchBookings();
+
+            sessionStorage.setItem('resources-selected', JSON.stringify(this.treeSelected));
         }
     },
 
@@ -189,8 +199,6 @@ const app = new Vue({
     },
 
     created: function () {
-        this.initialData();
-
         Events.$on('resources-selected', resources => {
             resources.forEach((resource) => {
                 this.updatedResources.set(resource.id, resource.selected);
@@ -214,5 +222,8 @@ const app = new Vue({
             this.date = newDate;
             history.pushState(null, null, window.HYDROFON.baseURL + '/calendar/' + new Date(newDate * 1000).toISOString().split('T')[0]);
         });
+
+        // Read initial data.
+        this.initialData();
     }
 });

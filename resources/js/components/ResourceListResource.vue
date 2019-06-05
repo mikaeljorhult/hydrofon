@@ -21,15 +21,24 @@
         },
         data: function () {
             return {
-                checked: this.item.selected
+                checked: this.treeSelected.indexOf(this.item.id) > -1
             };
         },
+        inject: ['treeSelected'],
         methods: {
             handleClick: function () {
                 Events.$emit('resources-selected', [{
                     id: this.item.id,
                     selected: this.checked
                 }]);
+            }
+        },
+        watch: {
+            treeSelected: {
+                handler: function () {
+                    this.checked = this.treeSelected.indexOf(this.item.id) > -1;
+                },
+                deep: true
             }
         }
     };
