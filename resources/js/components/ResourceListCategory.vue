@@ -34,6 +34,7 @@
         props: {
             'item': Object,
         },
+        inject: ['treeSelected'],
         data: function () {
             return {
                 expanded: this.item.expanded
@@ -45,13 +46,24 @@
             }
         },
         methods: {
-            handleClick: function () {
-                this.expanded = !this.expanded;
+            handleClick: function (event) {
+                if (event.altKey) {
+                    let notSelected = this.item.resources.findIndex((resource) => this.treeSelected.indexOf(resource.id) === -1);
 
-                Events.$emit('categories-expanded', {
-                    id: this.item.id,
-                    expanded: this.expanded
-                });
+                    Events.$emit('resources-selected', this.item.resources.map((resource) => {
+                        return {
+                            id: resource.id,
+                            selected: notSelected > -1
+                        }
+                    }));
+                } else {
+                    this.expanded = !this.expanded;
+
+                    Events.$emit('categories-expanded', {
+                        id: this.item.id,
+                        expanded: this.expanded
+                    });
+                }
             }
         },
         components: {

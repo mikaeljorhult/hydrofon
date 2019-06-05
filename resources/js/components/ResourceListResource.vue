@@ -19,12 +19,12 @@
         props: {
             'item': Object,
         },
+        inject: ['treeSelected'],
         data: function () {
             return {
                 checked: this.treeSelected.indexOf(this.item.id) > -1
             };
         },
-        inject: ['treeSelected'],
         methods: {
             handleClick: function () {
                 Events.$emit('resources-selected', [{
