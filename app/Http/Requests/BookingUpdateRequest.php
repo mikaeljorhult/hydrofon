@@ -27,21 +27,8 @@ class BookingUpdateRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $fields = collect(['resource_id' => 'resource', 'start_time' => 'start', 'end_time' => 'end'])
-            ->filter(function ($apiField, $dbField) {
-                return !$this->has($dbField) && $this->has($apiField);
-            })
-            ->map(function ($apiField, $dbField) {
-                $value = $this->get($apiField);
-
-                if (Str::contains($dbField, '_time')) {
-                    $value = Carbon::parse('@'.$this->get($apiField));
-                }
-
-                return $value;
-            });
-
-        $this->merge($fields->toArray());
+        $this->prepareApiFields();
+        $this->conformDateFormat();
     }
 
     /**
@@ -61,5 +48,47 @@ class BookingUpdateRequest extends FormRequest
             'start_time'  => ['required', 'date', 'required_with:resource_id', 'before:end_time'],
             'end_time'    => ['required', 'date', 'required_with:resource_id', 'after:start_time'],
         ];
+    }
+
+    /**
+     * Rename API fields and parse timestamps as UNIX timestamps.
+     */
+    protected function prepareApiFields()
+    {
+        $fields = collect(['resource_id' => 'resource', 'start_time' => 'start', 'end_time' => 'end'])
+            ->filter(function ($apiField, $dbField) {
+                return !$this->has($dbField) && $this->has($apiField);
+            })
+            ->mapWithKeys(function ($apiField, $dbField) {
+                $value = $this->get($apiField);
+
+                if (Str::contains($dbField, '_time')) {
+                    $value = Carbon::parse('@'.$value);
+                }
+
+                return [$dbField => $value];
+            });
+
+        $this->merge($fields->toArray());
+    }
+
+
+    /**
+     * Allow dates to be entered both with and without seconds.
+     */
+    protected function conformDateFormat()
+    {
+        $fields = collect(['start_time', 'end_time'])
+            ->mapWithKeys(function ($field) {
+                $value = $this->get($field);
+
+                if ($value && preg_match('/\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}$/', $value)) {
+                    return [$field => Carbon::parse($value.':00')];
+                }
+
+                return [$field => $value];
+            });
+
+        $this->merge($fields->toArray());
     }
 }
