@@ -45,7 +45,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => '\Hydrofon\User',
+            'subscribable_type' => 'Hydrofon\User',
             'subscribable_id'   => $user->id,
         ]);
     }
@@ -58,7 +58,7 @@ class StoreTest extends TestCase
     public function testOnlyOneSubscriptionIsCreatedForEachObject()
     {
         $subscription = factory(Subscription::class)->create($attributes = [
-            'subscribable_type' => '\Hydrofon\User',
+            'subscribable_type' => 'Hydrofon\User',
             'subscribable_id'   => factory(User::class)->create()->id,
         ]);
 
@@ -105,7 +105,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => '\Hydrofon\Resource',
+            'subscribable_type' => 'Hydrofon\Resource',
             'subscribable_id'   => $resource->id,
         ]);
     }

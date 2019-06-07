@@ -32,14 +32,14 @@ class BookingStoreRequest extends FormRequest
             ->filter(function ($apiField, $dbField) {
                 return !$this->has($dbField) && $this->has($apiField);
             })
-            ->map(function ($apiField, $dbField) {
+            ->mapWithKeys(function ($apiField, $dbField) {
                 $value = $this->get($apiField);
 
                 if (Str::contains($dbField, '_time')) {
                     $value = Carbon::parse('@'.$this->get($apiField));
                 }
 
-                return $value;
+                return [$dbField => $value];
             });
 
         $this->merge($fields->toArray());

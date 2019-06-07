@@ -90,7 +90,7 @@ class ResourceListTest extends TestCase
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
-        $response->assertSeeText($resource->name);
+        $response->assertSeeText(e($resource->name));
     }
 
     /**
