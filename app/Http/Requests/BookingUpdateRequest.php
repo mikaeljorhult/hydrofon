@@ -72,7 +72,6 @@ class BookingUpdateRequest extends FormRequest
         $this->merge($fields->toArray());
     }
 
-
     /**
      * Allow dates to be entered both with and without seconds.
      */
