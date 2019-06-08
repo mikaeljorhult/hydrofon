@@ -178,7 +178,7 @@ class StoreTest extends TestCase
         $response->assertRedirect();
         $this->assertDatabaseHas('bookings', [
             'start_time' => $booking->start_time->format('Y-m-d H:i:00'),
-            'end_time' => $booking->end_time->format('Y-m-d H:i:00'),
+            'end_time'   => $booking->end_time->format('Y-m-d H:i:00'),
         ]);
     }
 
