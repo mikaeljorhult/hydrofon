@@ -20,8 +20,8 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin       = factory(User::class)->states('admin')->create();
+        $booking     = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -43,8 +43,8 @@ class UpdateTest extends TestCase
      */
     public function testAdministratorCanChangeUserOfBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -68,9 +68,9 @@ class UpdateTest extends TestCase
      */
     public function testUserCannotChangeUserOfABooking()
     {
-        $firstUser = factory(User::class)->create();
+        $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $booking    = factory(Booking::class)->create();
 
         $response = $this->actingAs($firstUser)->put('bookings/'.$booking->id, [
             'user_id'     => $secondUser->id,
@@ -116,7 +116,7 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingItDontOwn()
     {
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($user)->put('bookings/'.$booking->id, [
@@ -190,7 +190,7 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -213,7 +213,7 @@ class UpdateTest extends TestCase
      */
     public function testResourceMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -236,9 +236,9 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanNotOverlapOtherBookings()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin    = factory(User::class)->states('admin')->create();
         $previous = factory(Booking::class)->create();
-        $booking = factory(Booking::class)->create();
+        $booking  = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $previous->resource_id,
@@ -262,7 +262,7 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAStartTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -285,7 +285,7 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -302,13 +302,37 @@ class UpdateTest extends TestCase
     }
 
     /**
+     * Timestamps can be entered without seconds.
+     *
+     * @return void
+     */
+    public function testTimestampsCanBeEnteredWithoutSeconds()
+    {
+        $admin   = factory(User::class)->states('admin')->create();
+        $booking = factory(Booking::class)->create();
+        $now     = now();
+
+        $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $now->format('Y-m-d H:i'),
+            'end_time'    => $now->copy()->addHour()->format('Y-m-d H:i'),
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('bookings', [
+            'start_time' => $now->format('Y-m-d H:i:00'),
+            'end_time'   => $now->copy()->addHour()->format('Y-m-d H:i:00'),
+        ]);
+    }
+
+    /**
      * A end time must be present.
      *
      * @return void
      */
     public function testBookingsMustHaveAEndTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -331,7 +355,7 @@ class UpdateTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
@@ -354,7 +378,7 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeBeforeEndTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
