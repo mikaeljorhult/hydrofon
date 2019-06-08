@@ -36,6 +36,8 @@ class CategoryController extends Controller
                                   ->select('categories.*')
                                   ->paginate(15);
 
+        session()->flash('index-referer-url', request()->fullUrl());
+
         return view('categories.index')->with('categories', $categories);
     }
 
@@ -46,6 +48,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('categories.create');
     }
 
@@ -63,7 +69,9 @@ class CategoryController extends Controller
 
         flash('Category "'.$category->name.'" was created');
 
-        return redirect('/categories');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/categories');
     }
 
     /**
@@ -87,6 +95,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('categories.edit')->with('category', $category);
     }
 
@@ -105,7 +117,9 @@ class CategoryController extends Controller
 
         flash('Category "'.$category->name.'" was updated');
 
-        return redirect('/categories');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/categories');
     }
 
     /**

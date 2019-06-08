@@ -33,6 +33,8 @@ class ResourceController extends Controller
                                  ->allowedSorts(['name', 'description'])
                                  ->paginate(15);
 
+        session()->flash('index-referer-url', request()->fullUrl());
+
         return view('resources.index')->with('resources', $resources);
     }
 
@@ -43,6 +45,10 @@ class ResourceController extends Controller
      */
     public function create()
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('resources.create');
     }
 
@@ -64,7 +70,9 @@ class ResourceController extends Controller
 
         flash('Resource "'.$resource->name.'" was created');
 
-        return redirect('/resources');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/resources');
     }
 
     /**
@@ -88,6 +96,10 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('resources.edit')->with('resource', $resource);
     }
 
@@ -110,7 +122,9 @@ class ResourceController extends Controller
 
         flash('Resource "'.$resource->name.'" was updated');
 
-        return redirect('/resources');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/resources');
     }
 
     /**

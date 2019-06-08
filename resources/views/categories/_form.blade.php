@@ -18,6 +18,6 @@
 @endif
 
 <div class="mt-6">
-    <a href="{{ request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
+    <a href="{{ ($backUrl = session()->get('index-referer-url')) ? $backUrl : request()->headers->get('referer') }}" class="btn btn-link">Cancel</a>
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

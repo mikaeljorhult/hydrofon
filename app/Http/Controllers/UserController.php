@@ -34,6 +34,8 @@ class UserController extends Controller
                              ->allowedSorts(['email', 'name'])
                              ->paginate(15);
 
+        session()->flash('index-referer-url', request()->fullUrl());
+
         return view('users.index')->with('users', $users);
     }
 
@@ -44,6 +46,10 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('users.create');
     }
 
@@ -68,7 +74,9 @@ class UserController extends Controller
 
         flash('User "'.$user->email.'" was created');
 
-        return redirect('/users');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/users');
     }
 
     /**
@@ -92,6 +100,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('users.edit')->with('user', $user);
     }
 
@@ -120,7 +132,9 @@ class UserController extends Controller
 
         flash('User "'.$user->email.'" was updated');
 
-        return redirect('/users');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/users');
     }
 
     /**

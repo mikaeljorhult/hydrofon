@@ -33,6 +33,8 @@ class GroupController extends Controller
                               ->allowedSorts('name')
                               ->paginate(15);
 
+        session()->flash('index-referer-url', request()->fullUrl());
+
         return view('groups.index')->with('groups', $groups);
     }
 
@@ -43,6 +45,10 @@ class GroupController extends Controller
      */
     public function create()
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('groups.create');
     }
 
@@ -59,7 +65,9 @@ class GroupController extends Controller
 
         flash('Group "'.$group->name.'" was created');
 
-        return redirect('/groups');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/groups');
     }
 
     /**
@@ -83,6 +91,10 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('groups.edit')->with('group', $group);
     }
 
@@ -100,7 +112,9 @@ class GroupController extends Controller
 
         flash('Group "'.$group->name.'" was updated');
 
-        return redirect('/groups');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/groups');
     }
 
     /**

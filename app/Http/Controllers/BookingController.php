@@ -39,6 +39,8 @@ class BookingController extends Controller
                                 ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
                                 ->paginate(15);
 
+        session()->flash('index-referer-url', request()->fullUrl());
+
         return view('bookings.index')->with('bookings', $bookings);
     }
 
@@ -49,6 +51,10 @@ class BookingController extends Controller
      */
     public function create()
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('bookings.create');
     }
 
@@ -72,7 +78,9 @@ class BookingController extends Controller
 
         // Redirect to index if from admin page, otherwise back to referer.
         if (Str::contains($request->headers->get('referer'), '/bookings')) {
-            return redirect('/bookings');
+            return ($backUrl = session()->get('index-referer-url'))
+                ? redirect()->to($backUrl)
+                : redirect('/bookings');
         } else {
             return redirect()->back();
         }
@@ -99,6 +107,10 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('bookings.edit')->with('booking', $booking);
     }
 
@@ -122,7 +134,9 @@ class BookingController extends Controller
 
         // Redirect to index if from admin page, otherwise back to referer.
         if (Str::contains($request->headers->get('referer'), '/bookings')) {
-            return redirect('/bookings');
+            return ($backUrl = session()->get('index-referer-url'))
+                ? redirect()->to($backUrl)
+                : redirect('/bookings');
         } else {
             return redirect()->back();
         }

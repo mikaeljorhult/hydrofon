@@ -33,6 +33,8 @@ class BucketController extends Controller
                                ->allowedSorts('name')
                                ->paginate(15);
 
+        session()->flash('index-referer-url', request()->fullUrl());
+
         return view('buckets.index')->with('buckets', $buckets);
     }
 
@@ -43,6 +45,10 @@ class BucketController extends Controller
      */
     public function create()
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('buckets.create');
     }
 
@@ -60,7 +66,9 @@ class BucketController extends Controller
 
         flash('Bucket "'.$bucket->name.'" was created');
 
-        return redirect('/buckets');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/buckets');
     }
 
     /**
@@ -84,6 +92,10 @@ class BucketController extends Controller
      */
     public function edit(Bucket $bucket)
     {
+        if (session()->has('index-referer-url')) {
+            session()->keep('index-referer-url');
+        }
+
         return view('buckets.edit')->with('bucket', $bucket);
     }
 
@@ -102,7 +114,9 @@ class BucketController extends Controller
 
         flash('Bucket "'.$bucket->name.'" was updated');
 
-        return redirect('/buckets');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/buckets');
     }
 
     /**
