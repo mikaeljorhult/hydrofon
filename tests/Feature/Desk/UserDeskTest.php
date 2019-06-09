@@ -78,6 +78,6 @@ class UserDeskTest extends TestCase
         $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/user-identifier');
 
         $response->assertStatus(200);
-        $response->assertSee($user->name);
+        $response->assertSee(e($user->name));
     }
 }

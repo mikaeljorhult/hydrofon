@@ -27,8 +27,8 @@ class BookingUpdateRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->prepareApiFields();
         $this->conformDateFormat();
+        $this->prepareApiFields();
     }
 
     /**
@@ -78,6 +78,9 @@ class BookingUpdateRequest extends FormRequest
     protected function conformDateFormat()
     {
         $fields = collect(['start_time', 'end_time'])
+            ->filter(function ($field) {
+                return $this->has($field);
+            })
             ->mapWithKeys(function ($field) {
                 $value = $this->get($field);
 
