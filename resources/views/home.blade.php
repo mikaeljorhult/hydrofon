@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Calendar')
+@section('title', 'Hydrofon')
 
 @section('sidebar')
     @include('partials.resource-list')
@@ -8,6 +8,6 @@
 
 @section('content')
     <section class="container">
-        &nbsp;
+        &nbsp;MAIN
     </section>
 @endsection

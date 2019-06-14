@@ -19,6 +19,10 @@
                                 <li>{{ $booking->start_time->format('Y-m-d H:i') }}: {{ $booking->resource->name }}</li>
                             </ul>
                         @endforeach
+
+                        <div class="text-right">
+                            <a href="{{ url('profile/bookings') }}">See all bookings</a>
+                        </div>
                     </div>
                 @endif
 

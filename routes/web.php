@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'welcome');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 Route::redirect('home', '/')->name('home');

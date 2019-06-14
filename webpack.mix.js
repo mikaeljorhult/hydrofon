@@ -21,6 +21,7 @@ mix.js('resources/js/app.js', 'public/js')
         'node_modules/interactjs/dist/interact.min.js',
         'node_modules/segel/dist/index.js'
     ], 'public/js/vendor.js')
+    .copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .svgicon('./resources/images/svg')
