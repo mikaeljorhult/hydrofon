@@ -144,12 +144,10 @@ class SubscriptionTest extends TestCase
     public function testFacilityResourceSubscriptionHaveUserName()
     {
         $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => '\Hydrofon\User',
-            'subscribable_id'   => factory(User::class)->create()->id,
+            'subscribable_type' => '\Hydrofon\Resource',
+            'subscribable_id'   => factory(Resource::class)->states('facility')->create()->id,
         ]);
-        $subscription->subscribable->bookings()->save($booking = factory(Booking::class)->create([
-            'resource_id' => factory(Resource::class)->states('facility')->create()->id,
-        ]));
+        $subscription->subscribable->bookings()->save($booking = factory(Booking::class)->create());
 
         $rendered = $subscription->toCalendar();
 
