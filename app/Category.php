@@ -39,7 +39,7 @@ class Category extends Model
      */
     public function parent()
     {
-        return $this->belongsTo(\Hydrofon\Category::class);
+        return $this->belongsTo(self::class);
     }
 
     /**
@@ -49,7 +49,7 @@ class Category extends Model
      */
     public function categories()
     {
-        return $this->hasMany(\Hydrofon\Category::class, 'parent_id')
+        return $this->hasMany(self::class, 'parent_id')
                     ->orderBy('name');
     }
 
