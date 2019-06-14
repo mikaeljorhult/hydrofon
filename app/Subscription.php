@@ -111,7 +111,7 @@ class Subscription extends Model
             ->map(function ($item, $key) {
                 $vEvent = new Event();
 
-                $summary = $this instanceof User
+                $summary = $this->subscribable instanceof User
                     ? $item->resource->name
                     : $item->user->name;
 
