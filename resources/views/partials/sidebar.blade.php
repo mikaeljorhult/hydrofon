@@ -1,4 +1,4 @@
-<aside class="sidebar w-32 flex flex-col items-center justify-between overflow-hidden bg-complementary-900 text-complementary text-center">
+<aside class="sidebar w-32 flex flex-col flex-shrink-0 items-center justify-between overflow-hidden bg-complementary-900 text-complementary text-center">
     <header class="w-full py-12 px-0 bg-brand">
         <h1 class="m-0 font-bold text-base leading-none uppercase">
             <a href="{{ url('/') }}" class="block text-white hover:text-white">

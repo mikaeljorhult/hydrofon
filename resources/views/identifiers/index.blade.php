@@ -8,7 +8,7 @@
             <a href="{{ route('users.identifiers.create', [$user]) }}" class="btn btn-primary btn-pill mr-2">New identifier</a>
         @endcomponent
 
-        <table class="table" cellspacing="0">
+        <table class="table">
             <thead>
                 <th class="table-column-check">#</th>
                 <th>Value</th>

@@ -14,13 +14,13 @@
         @endcomponent
 
         {!! Form::open(['route' => 'categories.index', 'method' => 'GET']) !!}
-            <section class="lg:flex py-2 px-3 bg-gray-100">
-                <div class="lg:mr-4">
+            <section class="lg:flex items-end py-2 px-3 bg-gray-100">
+                <div class="mb-2 lg:mb-0 lg:mr-4">
                     {!! Form::label('filter[categories.name]', 'Name', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::text('filter[categories.name]', request('filter')['categories.name'] ?? null, ['placeholder' => 'Name', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mx-4">
+                <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[categories.parent_id]', 'Parent', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::select('filter[categories.parent_id]', \Hydrofon\Category::orderBy('name')->pluck('name', 'id'), request('filter')['categories.parent_id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
@@ -35,7 +35,7 @@
             </section>
         {!! Form::close() !!}
 
-        <table class="table" cellspacing="0">
+        <table class="table">
             <thead>
                 <th class="table-column-check">#</th>
                 <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'categories.name' || request()->has('sort') === false ? '-' : '') . 'categories.name'] + request()->except('page')) }}">Name</a></th>

@@ -9,7 +9,7 @@
             @endcomponent
 
             <h2>Bookings</h2>
-            <table class="table" cellspacing="0">
+            <table class="table">
                 <thead>
                     <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'resource'] + request()->except('page')) }}">Resource</a></th>
                     <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'start_time'] + request()->except('page')) }}">Start</a></th>

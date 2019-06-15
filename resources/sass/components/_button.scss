@@ -1,5 +1,5 @@
 .btn {
-  @apply py-2 px-4 rounded no-underline;
+  @apply py-2 px-4 rounded no-underline whitespace-no-wrap;
 
   &:hover {
     @apply opacity-75;

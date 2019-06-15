@@ -13,7 +13,7 @@
             {!! Form::close() !!}
         @endcomponent
 
-        <table class="table" cellspacing="0">
+        <table class="table">
             <thead>
                 <th class="table-column-check">#</th>
                 <th><a href="{{ route('groups.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>

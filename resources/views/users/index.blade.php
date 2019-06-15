@@ -14,23 +14,23 @@
         @endcomponent
 
         {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-            <section class="lg:flex py-2 px-3 bg-gray-100">
-                <div class="lg:mr-4">
+            <section class="lg:flex items-end py-2 px-3 bg-gray-100">
+                <div class="mb-2 lg:mb-0 lg:mr-4">
                     {!! Form::label('filter[email]', 'E-mail', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::text('filter[email]', request('filter.email'), ['placeholder' => 'E-mail', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mr-4">
+                <div class="mb-2 lg:mb-0 lg:mr-4">
                     {!! Form::label('filter[name]', 'Name', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::text('filter[name]', request('filter.name'), ['placeholder' => 'Name', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mx-4">
+                <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[groups.id]', 'Group', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::select('filter[groups.id]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), request('filter')['groups.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mx-4 flex items-center">
+                <div class="mt-4 mb-2 lg:my-0 lg:mx-4 flex items-center self-center">
                     {!! Form::checkbox('filter[is_admin]', 1, request('filter.is_admin'), ['class' => 'mr-1']) !!}
                     {!! Form::label('filter[is_admin]', 'Administrator', ['class' => 'text-xs uppercase']) !!}
                 </div>
@@ -45,7 +45,7 @@
             </section>
         {!! Form::close() !!}
 
-        <table class="table" cellspacing="0">
+        <table class="table">
             <thead>
                 <th class="table-column-check">#</th>
                 <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->except('page')) }}">E-mail</a></th>

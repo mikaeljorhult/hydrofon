@@ -14,23 +14,23 @@
         @endcomponent
 
         {!! Form::open(['route' => 'resources.index', 'method' => 'GET']) !!}
-            <section class="lg:flex py-2 px-3 bg-gray-100">
-                <div class="lg:mr-4">
+            <section class="lg:flex items-end py-2 px-3 bg-gray-100">
+                <div class="mb-2 lg:mb-0 lg:mr-4">
                     {!! Form::label('filter[name]', 'Name', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::text('filter[name]', request('filter.name'), ['placeholder' => 'Name', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mx-4">
+                <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[categories.id]', 'Category', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::select('filter[categories.id]', \Hydrofon\Category::orderBy('name')->pluck('name', 'id'), request('filter')['categories.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mx-4">
+                <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[groups.id]', 'Group', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
                     {!! Form::select('filter[groups.id]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), request('filter')['groups.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
-                <div class="lg:mx-4 flex items-center">
+                <div class="mt-4 mb-2 lg:my-0 lg:mx-4 flex items-center self-center">
                     {!! Form::checkbox('filter[is_facility]', 1, request('filter.is_facility'), ['class' => 'mr-1']) !!}
                     {!! Form::label('filter[is_facility]', 'Facility', ['class' => 'text-xs uppercase']) !!}
                 </div>
@@ -45,7 +45,7 @@
             </section>
         {!! Form::close() !!}
 
-        <table class="table" cellspacing="0">
+        <table class="table">
             <thead>
                 <th class="table-column-check">#</th>
                 <th><a href="{{ route('resources.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
