@@ -4,6 +4,10 @@
   &:focus {
     @apply outline-none bg-white border-gray-400;
   }
+
+  &.is-invalid {
+    @apply border-red-400;
+  }
 }
 
 select.field {

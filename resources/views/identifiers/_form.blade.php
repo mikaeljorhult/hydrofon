@@ -1,6 +1,6 @@
 <div class="mb-6">
     {!! Form::label('value', 'Identifier', ['class' => 'label']) !!}
-    {!! Form::text('value', null, ['placeholder' => 'Value', 'class' => 'field']) !!}
+    {!! Form::text('value', null, ['placeholder' => 'Value', 'class' => 'field' . ($errors->has('value') ? ' is-invalid' : '')]) !!}
 </div>
 
 <div class="mt-6">
