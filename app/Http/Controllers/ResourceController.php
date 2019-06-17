@@ -141,6 +141,8 @@ class ResourceController extends Controller
 
         flash('Resource was deleted');
 
-        return redirect('/resources');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/resources');
     }
 }

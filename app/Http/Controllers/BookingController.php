@@ -158,7 +158,9 @@ class BookingController extends Controller
 
         // Redirect to index if from admin page, otherwise back to referer.
         if (Str::contains($request->headers->get('referer'), '/bookings')) {
-            return redirect('/bookings');
+            return ($backUrl = session()->get('index-referer-url'))
+                ? redirect()->to($backUrl)
+                : redirect('/bookings');
         } else {
             return redirect()->back();
         }

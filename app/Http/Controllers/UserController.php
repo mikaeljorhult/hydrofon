@@ -151,6 +151,8 @@ class UserController extends Controller
 
         flash('User was deleted');
 
-        return redirect('/users');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/users');
     }
 }

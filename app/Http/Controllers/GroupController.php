@@ -131,6 +131,8 @@ class GroupController extends Controller
 
         flash('Group was deleted');
 
-        return redirect('/groups');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/groups');
     }
 }

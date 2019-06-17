@@ -141,6 +141,8 @@ class CategoryController extends Controller
 
         flash('Category was deleted');
 
-        return redirect('/categories');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/categories');
     }
 }

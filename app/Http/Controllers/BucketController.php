@@ -133,6 +133,8 @@ class BucketController extends Controller
 
         flash('Bucket was deleted');
 
-        return redirect('/buckets');
+        return ($backUrl = session()->get('index-referer-url'))
+            ? redirect()->to($backUrl)
+            : redirect('/buckets');
     }
 }
