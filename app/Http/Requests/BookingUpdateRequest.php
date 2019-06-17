@@ -3,6 +3,7 @@
 namespace Hydrofon\Http\Requests;
 
 use Carbon\Carbon;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 use Hydrofon\Rules\Available;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -10,6 +11,8 @@ use Illuminate\Validation\Rule;
 
 class BookingUpdateRequest extends FormRequest
 {
+    use PreserveReferer;
+
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -4,13 +4,17 @@ namespace Hydrofon\Http\Requests;
 
 use Carbon\Carbon;
 use Hydrofon\Booking;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 use Hydrofon\Rules\Available;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class BookingStoreRequest extends FormRequest
 {
+    use PreserveReferer;
+
     /**
      * Determine if the user is authorized to make this request.
      *
