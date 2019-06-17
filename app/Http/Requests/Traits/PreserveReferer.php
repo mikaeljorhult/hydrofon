@@ -9,7 +9,8 @@ trait PreserveReferer
     /**
      * Make sure flashed referer is preserved if validation fails.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     protected function failedValidation(Validator $validator)
