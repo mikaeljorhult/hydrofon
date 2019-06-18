@@ -80,6 +80,7 @@ class DeskController extends Controller
     private function getUserBookings(User $user)
     {
         return QueryBuilder::for($user->bookings()->getQuery())
+                           ->select('bookings.*')
                            ->with(['checkin', 'checkout', 'resource', 'user'])
                            ->whereDoesntHave('checkin')
                            ->whereHas('resource', function ($query) {
