@@ -76,7 +76,10 @@ const app = new Vue({
                     .then(response => {
                         let bookings = response.data.data;
 
-                        bookings.forEach(booking => booking.editable = HYDROFON.isAdmin || HYDROFON.user === booking.user);
+                        bookings.forEach((booking) => {
+                            booking.editable = HYDROFON.isAdmin || HYDROFON.user === booking.user;
+                            booking.classes = HYDROFON.user === booking.user ? ['owner', 'bg-indigo-300'] : [];
+                        });
 
                         this.bookings = bookings;
                     })
