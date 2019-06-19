@@ -69,7 +69,6 @@
                 this.getUsers(query, loading);
             },
             onSelect: function (selected) {
-                return;
                 axios.post("impersonation", {
                     "user_id": selected,
                 })

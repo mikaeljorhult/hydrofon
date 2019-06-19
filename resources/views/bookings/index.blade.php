@@ -72,7 +72,7 @@
                             {{ $booking->end_time }}
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
-                            @unless($booking->checkout)
+                            @unless($booking->checkout || $booking->checkin)
                                 {!! Form::open(['route' => ['checkouts.store']]) !!}
                                 {!! Form::hidden('booking_id', $booking->id) !!}
                                     <button type="submit" title="Check out">
