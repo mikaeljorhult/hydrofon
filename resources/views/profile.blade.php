@@ -28,7 +28,7 @@
 
                 @if($upcoming->count() > 0)
                     <div class="p-4 border border-solid border-gray-400 md:w-1/2 lg:w-1/3">
-                        <h3 class="mb-2">Upcoming</h3>
+                        <h3 class="mt-0 mb-2">Upcoming</h3>
                         @foreach($upcoming as $day)
                             <h3 class="mb-1 text-sm font-normal">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
                             <ul class="mb-3">
@@ -42,7 +42,7 @@
 
                 @if($overdue->count() > 0)
                     <div class="p-4 border border-solid border-gray-400 md:w-1/2 lg:w-1/3">
-                        <h3 class="mb-2">Overdue</h3>
+                        <h3 class="mt-0 mb-2">Overdue</h3>
                         <ul class="mb-3">
                             @foreach($overdue as $booking)
                                 <li>
