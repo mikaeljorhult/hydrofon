@@ -30,7 +30,7 @@ mix.js('resources/js/app.js', 'public/js')
         globs: [
             path.join(__dirname, 'node_modules/flatpickr/dist/*.js'),
             path.join(__dirname, 'node_modules/segel/dist/*.js'),
-            path.join(__dirname, 'node_modules/vue-multiselect/dist/*.js'),
+            path.join(__dirname, 'node_modules/vue-select/dist/*.js'),
         ],
     })
     .version();

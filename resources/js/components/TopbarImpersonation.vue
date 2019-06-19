@@ -7,20 +7,22 @@
                 Select user to impersonate
             </label>
 
-            <Multiselect
-                    name="user_id"
-                    placeholder="Impersonate user..."
-                    label="name"
-                    trackBy="id"
-                    v-model="selectedUser"
-                    v-bind:options="users"
-                    v-bind:searchable="true"
-                    v-bind:showNoOptions="false"
-                    v-bind:showNoResults="false"
-                    v-bind:loading="isLoading"
-                    v-on:search-change="onSearchChange"
-                    v-on:select="onSelect"
-            ></Multiselect>
+            <v-select
+                name="user_id"
+                placeholder="Impersonate user..."
+                label="name"
+                v-model="selectedUser"
+                v-bind:class="{ 'flex-grow': true, 'vs__empty': users.length === 0 }"
+                v-bind:searchable="true"
+                v-bind:clearable="false"
+                v-bind:options="users"
+                v-bind:reduce="user => user.id"
+                v-on:input="onSelect"
+                v-on:search="onSearchChange"
+            >
+                <span slot="open-indicator"></span>
+                <span slot="no-options">Type to start search...</span>
+            </v-select>
         </div>
     </section>
 </template>
@@ -28,20 +30,19 @@
 <script>
     import axios from 'axios';
     import debounce from 'lodash/debounce';
-    import Multiselect from 'vue-multiselect';
+    import vSelect from 'vue-select';
     import Icon from 'laravel-mix-vue-svgicon/IconComponent';
 
     export default {
         props: {},
         data: function () {
             return {
-                isLoading: false,
                 users: [],
                 selectedUser: []
             };
         },
         methods: {
-            getUsers: debounce(function (query) {
+            getUsers: debounce(function (query, loading) {
                 axios.get("api/users", {
                     params: {
                         "filter[name]": query,
@@ -55,21 +56,22 @@
                         console.log(error);
                     })
                     .finally(() => {
-                        this.isLoading = false;
+                        loading(false);
                     });
             }, 200),
-            onSearchChange: function (query) {
+            onSearchChange: function (query, loading) {
                 if (query.length < 3) {
                     this.users = [];
                     return;
                 }
 
-                this.isLoading = true;
-                this.getUsers(query);
+                loading(true);
+                this.getUsers(query, loading);
             },
             onSelect: function (selected) {
+                return;
                 axios.post("impersonation", {
-                    "user_id": selected.id,
+                    "user_id": selected,
                 })
                     .then(response => {
                         window.location = '/calendar';
@@ -81,7 +83,7 @@
         },
         components: {
             'icon': Icon,
-            'Multiselect': Multiselect,
+            'v-select': vSelect,
         }
     };
 </script>

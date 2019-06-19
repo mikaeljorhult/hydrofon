@@ -1,11 +1,39 @@
-.multiselect__tags {
-  border: none;
+.v-select,
+.vs__dropdown-menu {
+  &, * {
+    font-size: inherit;
+    font-weight: inherit;
+  }
 }
 
-.multiselect,
-.multiselect__input,
-.multiselect__option--selected,
-.multiselect__content-wrapper {
-  font-size: inherit;
-  font-weight: inherit;
+.vs__empty {
+  .vs__dropdown-menu {
+    display: none;
+  }
+}
+
+.vs__actions {
+  @apply p-0;
+}
+
+.vs__spinner {
+  font-size: .22rem;
+}
+
+.vs__selected {
+  @apply m-0 p-2 text-sm;
+}
+
+.topbar {
+  .vs__dropdown-toggle {
+    @apply p-0;
+  }
+
+  .vs__search {
+    @apply m-0 p-2 text-sm;
+  }
+
+  .vs__dropdown-menu {
+    @apply text-sm;
+  }
 }
