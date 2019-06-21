@@ -1,3 +1,6 @@
+import Vue from 'vue';
+import Segel from 'segel';
+
 import axios from 'axios';
 import debounce from 'lodash/debounce';
 import Events from './modules/events';
@@ -196,6 +199,7 @@ const app = new Vue({
     },
 
     components: {
+        'segel': Segel,
         'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,
         'topbar-impersonation': require('./components/TopbarImpersonation').default,

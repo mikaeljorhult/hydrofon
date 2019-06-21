@@ -15,12 +15,15 @@ require('laravel-mix-vue-svgicon');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .combine([
-        'node_modules/vue/dist/vue.min.js',
-        'node_modules/interactjs/dist/interact.min.js',
-        'node_modules/segel/dist/index.js'
-    ], 'public/js/vendor.js')
+mix.webpackConfig({
+        resolve: {
+            alias: {
+                vue: path.resolve(__dirname, 'node_modules/vue')
+            }
+        }
+    })
+    .js('resources/js/app.js', 'public/js')
+    .extract()
     .copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')

@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 /**
  * Create base events object.
  * This is just a separate Vue instance that only handles emitting and listening to events.
