@@ -66,6 +66,44 @@ const app = new Vue({
             }));
         },
 
+        addBooking: function (booking) {
+            this.bookings.push({
+                id: booking.id,
+                resource: booking.resource,
+                user: booking.user,
+                start: booking.start,
+                end: booking.end,
+                status: booking.status || 'confirmed',
+                editable: HYDROFON.isAdmin || HYDROFON.user === booking.user,
+                classes: HYDROFON.user === booking.user ? ['owner', 'bg-indigo-300'] : []
+            });
+        },
+
+        replaceBooking: function (id, booking) {
+            let index = this.bookings.findIndex(function (stored) {
+                return stored.id === id;
+            });
+
+            this.bookings.splice(index, 1, {
+                id: booking.id,
+                resource: booking.resource,
+                user: booking.user,
+                start: booking.start,
+                end: booking.end,
+                status: booking.status || 'confirmed',
+                editable: HYDROFON.isAdmin || HYDROFON.user === booking.user,
+                classes: HYDROFON.user === booking.user ? ['owner', 'bg-indigo-300'] : []
+            });
+        },
+
+        removeBooking: function (id) {
+            let index = this.bookings.findIndex(function (stored) {
+                return stored.id === id;
+            });
+
+            this.bookings.splice(index, 1);
+        },
+
         fetchBookings: function () {
             // Only make HTTP request if there are selected resources.
             if (this.selectedResources.length > 0) {
@@ -95,29 +133,18 @@ const app = new Vue({
         handleCreateBooking: function (booking) {
             let newID = Math.random().toString(36).substring(2);
 
-            this.bookings.push(Object.assign({
+            this.addBooking(Object.assign({
                 id: newID,
+                user: HYDROFON.user,
                 status: 'updating'
             }, booking));
 
             axiosInstance.post("api/bookings", booking)
                 .then(response => {
-                    // Find index of created booking.
-                    let index = this.bookings.findIndex(function (stored) {
-                        return stored.id === newID;
-                    });
-
-                    // Replace object with copy of object with new status.
-                    this.bookings.splice(index, 1, response.data);
+                    this.replaceBooking(newID, response.data);
                 })
                 .catch(error => {
-                    // Find index of created booking.
-                    let index = this.bookings.findIndex(function (stored) {
-                        return stored.id === newID;
-                    });
-
-                    // Replace object with copy of object with new status.
-                    this.bookings.splice(index, 1);
+                    this.removeBooking(newID);
 
                     // Log error.
                     console.log(error);
@@ -125,19 +152,13 @@ const app = new Vue({
         },
 
         handleUpdateBooking: function (booking) {
-            // Find index of updated booking.
-            let index = this.bookings.findIndex(function (stored) {
-                return stored.id === booking.id;
-            });
-
-            this.$set(this.bookings, index, Object.assign({
+            this.replaceBooking(booking.id, Object.assign({
                 status: 'updating'
             }, booking));
 
             axiosInstance.put("api/bookings/" + booking.id, booking)
                 .then(response => {
-                    // Replace object with copy of object with new status.
-                    this.bookings.splice(index, 1, response.data);
+                    this.replaceBooking(booking.id, response.data);
                 })
                 .catch(error => {
                     // Log error.
@@ -148,13 +169,7 @@ const app = new Vue({
         handleDeleteBooking: function (booking) {
             axiosInstance.delete("api/bookings/" + booking.id)
                 .then(response => {
-                    // Find index of deleted booking.
-                    let index = this.bookings.findIndex(function (stored) {
-                        return stored.id === booking.id;
-                    });
-
-                    // Remove object.
-                    this.bookings.splice(index, 1);
+                    this.removeBooking(booking.id);
                 })
                 .catch(error => {
                     // Log error.
