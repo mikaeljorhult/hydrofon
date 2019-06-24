@@ -9,7 +9,7 @@ use Hydrofon\Identifier;
 use Hydrofon\User;
 use Illuminate\Support\Str;
 
-class IdentifierController extends Controller
+class UserIdentifierController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -32,7 +32,7 @@ class IdentifierController extends Controller
     {
         $this->authorize('view', [$user, Identifier::class]);
 
-        return view('identifiers.index')->with('user', $user);
+        return view('identifiers.index')->with('identifiable', $user);
     }
 
     /**
@@ -46,7 +46,7 @@ class IdentifierController extends Controller
     {
         $this->authorize('create', Identifier::class);
 
-        return view('identifiers.create')->with('user', $user);
+        return view('identifiers.create')->with('identifiable', $user);
     }
 
     /**
@@ -84,7 +84,7 @@ class IdentifierController extends Controller
         $this->authorize('update', $identifier);
 
         return view('identifiers.edit')
-            ->with('user', $user)
+            ->with('identifiable', $user)
             ->with('identifier', $identifier);
     }
 

@@ -6,7 +6,7 @@
         @endcomponent
 
         <section>
-            {!! Form::model($identifier, ['route' => ['users.identifiers.update', $user, $identifier], 'method' => 'PUT' ]) !!}
+            {!! Form::model($identifier, ['route' => [$identifiable->getTable().'.identifiers.update', $identifiable, $identifier], 'method' => 'PUT' ]) !!}
                 @include('identifiers._form', ['submitButtonText' => 'Update'])
             {!! Form::close() !!}
         </section>

@@ -6,7 +6,7 @@
         @endcomponent
 
         <section>
-            {!! Form::open(['route' => ['users.identifiers.store', $user]]) !!}
+            {!! Form::open(['route' => [$identifiable->getTable().'.identifiers.store', $identifiable]]) !!}
                 @include('identifiers._form', ['submitButtonText' => 'Create'])
             {!! Form::close() !!}
         </section>

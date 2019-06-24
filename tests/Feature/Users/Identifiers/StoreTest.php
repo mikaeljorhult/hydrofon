@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Identifiers;
+namespace Tests\Feature\Users\Identifiers;
 
 use Hydrofon\Identifier;
 use Hydrofon\User;
