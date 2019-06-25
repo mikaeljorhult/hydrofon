@@ -38,6 +38,7 @@ Route::resources([
 Route::resource('checkins', 'CheckinController')->only(['store', 'destroy']);
 Route::resource('checkouts', 'CheckoutController')->only(['store', 'destroy']);
 
+Route::resource('resources.identifiers', 'ResourceIdentifierController')->except(['show']);
 Route::resource('users.identifiers', 'UserIdentifierController')->except(['show']);
 
 Route::resource('subscriptions', 'SubscriptionController')->only(['store', 'destroy']);

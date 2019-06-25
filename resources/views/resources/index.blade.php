@@ -64,6 +64,12 @@
                             {{ $resource->description }}
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
+                            {!! Form::open(['route' => ['resources.identifiers.index', $resource->id], 'method' => 'GET' ]) !!}
+                            <button type="submit" title="Identifiers">
+                                Identifiers
+                            </button>
+                            {!! Form::close() !!}
+
                             {!! Form::model($resource, ['route' => ['resources.destroy', $resource->id], 'method' => 'DELETE' ]) !!}
                             <button type="submit" title="Delete">
                                 Delete

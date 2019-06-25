@@ -71,6 +71,16 @@ class Resource extends Model
     }
 
     /**
+     * Get all identifiers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function identifiers()
+    {
+        return $this->morphMany(\Hydrofon\Identifier::class, 'identifiable');
+    }
+
+    /**
      * Groups the resource belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
