@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Resources\Identifiers;
 
-use Hydrofon\Identifier;
 use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -7,7 +7,6 @@ use Hydrofon\Http\Requests\IdentifierStoreRequest;
 use Hydrofon\Http\Requests\IdentifierUpdateRequest;
 use Hydrofon\Identifier;
 use Hydrofon\Resource;
-use Hydrofon\User;
 use Illuminate\Support\Str;
 
 class ResourceIdentifierController extends Controller
@@ -54,7 +53,7 @@ class ResourceIdentifierController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Hydrofon\Http\Requests\IdentifierStoreRequest $request
-     * @param \Hydrofon\Resource                                 $resource
+     * @param \Hydrofon\Resource                             $resource
      *
      * @return void
      */
@@ -75,7 +74,7 @@ class ResourceIdentifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\Resource       $resource
+     * @param \Hydrofon\Resource   $resource
      * @param \Hydrofon\Identifier $identifier
      *
      * @return \Illuminate\Http\Response
@@ -93,7 +92,7 @@ class ResourceIdentifierController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\IdentifierUpdateRequest $request
-     * @param \Hydrofon\Resource                                  $resource
+     * @param \Hydrofon\Resource                              $resource
      * @param \Hydrofon\Identifier                            $identifier
      *
      * @return \Illuminate\Http\Response
@@ -115,7 +114,7 @@ class ResourceIdentifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Resource                                   $resource
+     * @param \Hydrofon\Resource                               $resource
      * @param \Hydrofon\Identifier                             $identifier
      * @param \Hydrofon\Http\Requests\IdentifierDestroyRequest $request
      *
