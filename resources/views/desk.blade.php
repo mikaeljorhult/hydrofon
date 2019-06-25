@@ -4,16 +4,20 @@
 
 @section('content')
     <section class="container">
-        @if($user)
-            @component('components.heading', ['title' => $user->name])
+        @if($identifiable)
+            @component('components.heading', ['title' => $identifiable->name])
             @endcomponent
 
             <h2>Bookings</h2>
             <table class="table">
                 <thead>
-                    <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'resource'] + request()->except('page')) }}">Resource</a></th>
-                    <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'start_time'] + request()->except('page')) }}">Start</a></th>
-                    <th><a href="{{ route('desk', ['search' => request()->route('search'), 'order' => 'end_time'] + request()->except('page')) }}">End</a></th>
+                    @if(class_basename($identifiable) === 'User')
+                        <th><a href="{{ route('desk', ['search' => request()->route('search'), 'sort' => (request('sort') === 'resources.name' ? '-' : '') . 'resources.name'] + request()->except('page')) }}">Resource</a></th>
+                    @else
+                        <th><a href="{{ route('desk', ['search' => request()->route('search'), 'sort' => (request('sort') === 'users.name' ? '-' : '') . 'users.name'] + request()->except('page')) }}">User</a></th>
+                    @endif
+                    <th><a href="{{ route('desk', ['search' => request()->route('search'), 'sort' => (request('sort') === 'start_time' ? '-' : '') . 'start_time'] + request()->except('page')) }}">Start</a></th>
+                    <th><a href="{{ route('desk', ['search' => request()->route('search'), 'sort' => (request('sort') === 'end_time' ? '-' : '') . 'end_time'] + request()->except('page')) }}">End</a></th>
                     <th>&nbsp;</th>
                 </thead>
 
@@ -21,9 +25,15 @@
                     @if($bookings->count() > 0)
                         @foreach($bookings as $booking)
                             <tr>
-                                <td data-title="Resource">
-                                    <a href="{{ route('bookings.edit', $booking) }}">{{ $booking->resource->name }}</a>
-                                </td>
+                                @if(class_basename($identifiable) === 'User')
+                                    <td data-title="Resource">
+                                        <a href="{{ route('bookings.edit', $booking) }}">{{ $booking->resource->name }}</a>
+                                    </td>
+                                @else
+                                    <td data-title="User">
+                                        <a href="{{ route('bookings.edit', $booking) }}">{{ $booking->user->name }}</a>
+                                    </td>
+                                @endif
                                 <td data-title="Start">
                                     {{ $booking->start_time }}
                                 </td>
@@ -75,7 +85,7 @@
 
             {{ $bookings->links() }}
         @elseif($search)
-            <p>No user was found.</p>
+            <p>No resource or user was found.</p>
         @endif
     </section>
 @endsection

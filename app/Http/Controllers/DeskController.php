@@ -3,6 +3,7 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Http\Requests\DeskRequest;
+use Hydrofon\Identifier;
 use Hydrofon\User;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -28,17 +29,17 @@ class DeskController extends Controller
      */
     public function index($search = null)
     {
-        // Only resolve user if a search string is available.
-        $user = $search ? $this->resolveUser($search) : null;
+        // Only resolve resource or user if a search string is available.
+        $identifiable = $search ? $this->resolveIdentifiable($search) : null;
 
-        // Get bookings for user or empty collection.
-        $bookings = $user
-            ? $this->getUserBookings($user)
+        // Get bookings for resource/user or empty collection.
+        $bookings = $identifiable
+            ? $this->getBookings($identifiable)
             : collect();
 
         return view('desk')
             ->with('search', $search)
-            ->with('user', $user)
+            ->with('identifiable', $identifiable)
             ->with('bookings', $bookings);
     }
 
@@ -55,31 +56,38 @@ class DeskController extends Controller
     }
 
     /**
-     * Resolve user from search term.
+     * Resolve resource or user from search term.
      * Checks against user e-mail address and otherwise against identifiers.
      *
      * @param $search
      *
      * @return mixed
      */
-    private function resolveUser($search)
+    private function resolveIdentifiable($search)
     {
-        return User::where('email', $search)
-                   ->orWhereHas('identifiers', function ($query) use ($search) {
-                       $query->where('value', $search);
-                   })->first();
+        $identifiable = User::where('email', $search)->first();
+
+        if (!$identifiable) {
+            $identifier = Identifier::with('identifiable')
+                                      ->where('value', $search)
+                                      ->first();
+
+            $identifiable = optional($identifier)->identifiable;
+        }
+
+        return $identifiable;
     }
 
     /**
-     * Get bookings of user.
+     * Get bookings of identifiable.
      *
-     * @param \Hydrofon\User $user
+     * @param \Hydrofon\Resource|\Hydrofon\User $identifiable
      *
      * @return mixed
      */
-    private function getUserBookings(User $user)
+    private function getBookings($identifiable)
     {
-        return QueryBuilder::for($user->bookings()->getQuery())
+        return QueryBuilder::for($identifiable->bookings()->getQuery())
                            ->select('bookings.*')
                            ->with(['checkin', 'checkout', 'resource', 'user'])
                            ->whereDoesntHave('checkin')
@@ -98,7 +106,7 @@ class DeskController extends Controller
                            ->join('users', 'users.id', '=', 'bookings.user_id')
                            ->allowedFilters(Filter::scope('between'))
                            ->defaultSort('start_time')
-                           ->allowedSorts(['resources.name', 'start_time', 'end_time'])
+                           ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
                            ->paginate(15);
     }
 }

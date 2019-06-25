@@ -5,10 +5,10 @@
                 @svg('search', 'w-4 flex-shrink-0')
 
                 <label for="search" class="screen-reader">
-                    Search for user
+                    Search for resource or user
                 </label>
 
-                {!! Form::text('search', $search ?? null, ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Search user...']) !!}
+                {!! Form::text('search', $search ?? null, ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Search resource or user...']) !!}
                 {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
             {!! Form::close() !!}
         </section>
