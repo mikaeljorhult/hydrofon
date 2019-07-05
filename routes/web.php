@@ -44,6 +44,8 @@ Route::resource('users.identifiers', 'UserIdentifierController')->except(['show'
 Route::resource('subscriptions', 'SubscriptionController')->only(['store', 'destroy']);
 Route::get('feeds/{feed}', 'SubscriptionController@show')->name('feed');
 
+Route::resource('datarequests', 'DataRequestController')->only(['store']);
+
 Route::prefix('api')->namespace('Api')->name('api.')->group(function () {
     Route::apiResource('bookings', 'BookingController');
     Route::apiResource('users', 'UserController');

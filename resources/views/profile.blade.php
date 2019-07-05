@@ -88,5 +88,20 @@
                 @endif
             </div>
         </div>
+
+        <div>
+            <h2>Personal Data</h2>
+
+            <div class="max-w-xl">
+                <p class="mb-4">
+                    You can request an export of all the data attached to your account. A file containing JSON will be
+                    generated and downloaded.
+                </p>
+
+                {!! Form::open(['route' => 'datarequests.store']) !!}
+                    {!! Form::submit('Request Data', ['class' => 'btn btn-primary']) !!}
+                {!! Form::close() !!}
+            </div>
+        </div>
     </section>
 @endsection

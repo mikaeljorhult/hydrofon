@@ -3,6 +3,7 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Booking;
+use Hydrofon\Identifier;
 use Hydrofon\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -63,5 +64,56 @@ class UserTest extends TestCase
         $this->assertFalse($user->owns($booking));
         $booking->user_id = $user->id;
         $this->assertTrue($user->owns($booking));
+    }
+
+    /**
+     * A user data request export can be rendered.
+     *
+     * @return void
+     */
+    public function testDataRequestExportIsRendered()
+    {
+        $user = factory(User::class)->create();
+
+        $rendered = $user->exportToJson();
+
+        $this->assertJson($rendered);
+        $this->assertContains($user->name, $rendered);
+    }
+
+    /**
+     * Bookings are included in export.
+     *
+     * @return void
+     */
+    public function testBookingsAreIncludedInExport()
+    {
+        $user = factory(User::class)->create();
+        $user->bookings()->save($booking = factory(Booking::class)->create());
+
+        $rendered = $user->exportToJson();
+
+        $this->assertJson($rendered);
+        $this->assertContains($booking->resource->name, $rendered);
+    }
+
+    /**
+     * Identifiers are included in export.
+     *
+     * @return void
+     */
+    public function testIdentifiersAreIncludedInExport()
+    {
+        $user = factory(User::class)->create();
+        $user->identifiers()->create($identifier = [
+            'identifiable_type' => User::class,
+            'identifiable_id' => $user->id,
+            'value' => 'new-identifier'
+        ]);
+
+        $rendered = $user->exportToJson();
+
+        $this->assertJson($rendered);
+        $this->assertContains('new-identifier', $rendered);
     }
 }

@@ -110,4 +110,31 @@ class User extends Authenticatable
     {
         return $this->morphOne(\Hydrofon\Subscription::class, 'subscribable');
     }
+
+    /**
+     * Export user personal data to JSON.
+     *
+     * @return false|string
+     */
+    public function exportToJson()
+    {
+        $user = $this->load([
+            'bookings.resource',
+            'identifiers'
+        ]);
+
+        $user->bookings->transform(function($item, $key) {
+            return (object) [
+                'resource' => $item->resource->name,
+                'start' => $item->start_time->format('U'),
+                'end' => $item->end_time->format('U'),
+            ];
+        });
+
+        $user->identifiers->transform(function($item, $key) {
+            return $item->value;
+        });
+
+        return json_encode($user->only(['email', 'name', 'bookings', 'identifiers']));
+    }
 }
