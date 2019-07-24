@@ -3,7 +3,6 @@
 namespace Tests\Unit\Model;
 
 use Hydrofon\Booking;
-use Hydrofon\Identifier;
 use Hydrofon\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -107,8 +106,8 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
         $user->identifiers()->create($identifier = [
             'identifiable_type' => User::class,
-            'identifiable_id' => $user->id,
-            'value' => 'new-identifier'
+            'identifiable_id'   => $user->id,
+            'value'             => 'new-identifier',
         ]);
 
         $rendered = $user->exportToJson();
