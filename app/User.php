@@ -120,18 +120,18 @@ class User extends Authenticatable
     {
         $user = $this->load([
             'bookings.resource',
-            'identifiers'
+            'identifiers',
         ]);
 
-        $user->bookings->transform(function($item, $key) {
+        $user->bookings->transform(function ($item, $key) {
             return (object) [
                 'resource' => $item->resource->name,
-                'start' => $item->start_time->format('U'),
-                'end' => $item->end_time->format('U'),
+                'start'    => $item->start_time->format('U'),
+                'end'      => $item->end_time->format('U'),
             ];
         });
 
-        $user->identifiers->transform(function($item, $key) {
+        $user->identifiers->transform(function ($item, $key) {
             return $item->value;
         });
 
