@@ -48,5 +48,6 @@ Route::resource('datarequests', 'DataRequestController')->only(['store']);
 
 Route::prefix('api')->namespace('Api')->name('api.')->group(function () {
     Route::apiResource('bookings', 'BookingController');
+    Route::apiResource('buckets', 'BucketController');
     Route::apiResource('users', 'UserController');
 });

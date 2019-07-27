@@ -60,7 +60,7 @@ class IndexTest extends TestCase
     }
 
     /**
-     * Users can be filtered by name.
+     * Users can be filtered by e-mail address.
      *
      * @return void
      */
