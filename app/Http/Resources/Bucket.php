@@ -4,7 +4,7 @@ namespace Hydrofon\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BucketResource extends JsonResource
+class Bucket extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -7,8 +7,7 @@ use Hydrofon\Http\Requests\BucketDestroyRequest;
 use Hydrofon\Http\Requests\BucketStoreRequest;
 use Hydrofon\Http\Requests\BucketUpdateRequest;
 use Hydrofon\Http\Resources\BucketCollection;
-use Hydrofon\Http\Resources\BucketResource;
-use Illuminate\Http\Request;
+use Hydrofon\Http\Resources\Bucket as BucketResource;
 use Hydrofon\Http\Controllers\Controller;
 use Spatie\QueryBuilder\QueryBuilder;
 
