@@ -51,5 +51,6 @@ Route::prefix('api')->namespace('Api')->name('api.')->group(function () {
     Route::apiResource('buckets', 'BucketController');
     Route::apiResource('categories', 'CategoryController');
     Route::apiResource('groups', 'GroupController');
+    Route::apiResource('identifiers', 'IdentifierController');
     Route::apiResource('users', 'UserController');
 });

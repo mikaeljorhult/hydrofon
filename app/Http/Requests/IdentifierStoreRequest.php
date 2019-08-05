@@ -4,6 +4,7 @@ namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Identifier;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class IdentifierStoreRequest extends FormRequest
@@ -27,7 +28,20 @@ class IdentifierStoreRequest extends FormRequest
     {
         // TODO: Validation should fail for __ANY__ e-mail address.
         return [
-            'value' => ['required', Rule::unique('identifiers'), Rule::unique('users', 'email')],
+            'value' => [
+                'required',
+                Rule::unique('identifiers'),
+                Rule::unique('users', 'email')
+            ],
+            'identifiable_type' => [
+                'sometimes',
+                'required',
+                Rule::in(['resource', 'user'])
+            ],
+            'identifiable_id' => array_merge(['bail', 'sometimes'], (in_array($this->input('identifiable_type'), ['resource', 'user'])
+                ? ['required', Rule::exists(Str::plural($this->input('identifiable_type')), 'id')]
+                : []
+            )),
         ];
     }
 }
