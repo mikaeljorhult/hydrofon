@@ -20,21 +20,20 @@ class StoreTest extends TestCase
     {
         $bucket = factory(Bucket::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/buckets', $bucket->toArray(), ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(201)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                 ])
-                 ->assertJsonFragment([
-                     'name'  => $bucket->name,
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/buckets', $bucket->toArray())
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+             ])
+             ->assertJsonFragment([
+                 'name' => $bucket->name,
+             ]);
 
         $this->assertDatabaseHas('buckets', [
-            'id'    => 1,
-            'name'  => $bucket->name,
+            'id'   => 1,
+            'name' => $bucket->name,
         ]);
     }
 
@@ -47,11 +46,10 @@ class StoreTest extends TestCase
     {
         $bucket = factory(Bucket::class)->make(['name' => null]);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/buckets', $bucket->toArray(), ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/buckets', $bucket->toArray())
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
         $this->assertEquals(0, \Hydrofon\Bucket::count());
     }

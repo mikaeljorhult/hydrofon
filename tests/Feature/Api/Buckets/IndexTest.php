@@ -21,7 +21,7 @@ class IndexTest extends TestCase
         $bucket = factory(Bucket::class)->create();
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/buckets', ['ACCEPT' => 'application/json'])
+             ->getJson('api/buckets')
              ->assertStatus(200)
              ->assertJsonStructure([
                  'data' => [
@@ -32,8 +32,8 @@ class IndexTest extends TestCase
                  ],
              ])
              ->assertJsonFragment([
-                 'id'    => $bucket->id,
-                 'name'  => $bucket->name,
+                 'id'   => $bucket->id,
+                 'name' => $bucket->name,
              ]);
     }
 
@@ -48,7 +48,7 @@ class IndexTest extends TestCase
         $includedBucket = factory(Bucket::class)->create(['name' => 'Included Bucket']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/buckets?filter[name]=included', ['ACCEPT' => 'application/json'])
+             ->getJson('api/buckets?filter[name]=included')
              ->assertStatus(200)
              ->assertJsonFragment([
                  'id' => $includedBucket->id,

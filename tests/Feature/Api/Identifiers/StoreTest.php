@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api\Identifiers;
 
 use Hydrofon\Group;
-use Hydrofon\Identifier;
 use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,29 +20,28 @@ class StoreTest extends TestCase
     public function testIdentifiersCanBeStored()
     {
         $identifier = [
-            'value' => 'New Identifier',
+            'value'             => 'New Identifier',
             'identifiable_type' => 'resource',
-            'identifiable_id' => factory(Resource::class)->create()->id,
+            'identifiable_id'   => factory(Resource::class)->create()->id,
         ];
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/identifiers', $identifier, ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(201)
-                 ->assertJsonStructure([
-                     'type',
-                     'id',
-                     'value',
-                     'identifiable_type',
-                     'identifiable_id',
-                 ])
-                 ->assertJsonFragment([
-                     'value'  => $identifier['value'],
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/identifiers', $identifier)
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                 'type',
+                 'id',
+                 'value',
+                 'identifiable_type',
+                 'identifiable_id',
+             ])
+             ->assertJsonFragment([
+                 'value' => $identifier['value'],
+             ]);
 
         $this->assertDatabaseHas('identifiers', [
             'id'    => 1,
-            'value'  => $identifier['value'],
+            'value' => $identifier['value'],
         ]);
     }
 
@@ -55,16 +53,15 @@ class StoreTest extends TestCase
     public function testIdentifiersMustHaveAValue()
     {
         $identifier = [
-            'value' => null,
+            'value'             => null,
             'identifiable_type' => 'resource',
-            'identifiable_id' => factory(Resource::class)->create()->id,
+            'identifiable_id'   => factory(Resource::class)->create()->id,
         ];
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/identifiers', $identifier, ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('value');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/identifiers', $identifier)
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('value');
 
         $this->assertEquals(0, \Hydrofon\Identifier::count());
     }
@@ -77,16 +74,15 @@ class StoreTest extends TestCase
     public function testIdentifiersMustHaveAnIdentifiableType()
     {
         $identifier = [
-            'value' => 'New Identifier',
+            'value'             => 'New Identifier',
             'identifiable_type' => null,
-            'identifiable_id' => factory(Resource::class)->create()->id,
+            'identifiable_id'   => factory(Resource::class)->create()->id,
         ];
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/identifiers', $identifier, ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_type');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/identifiers', $identifier)
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_type');
 
         $this->assertEquals(0, \Hydrofon\Identifier::count());
     }
@@ -99,16 +95,15 @@ class StoreTest extends TestCase
     public function testIdentifiableMustBeResourceOrUser()
     {
         $identifier = [
-            'value' => 'New Identifier',
+            'value'             => 'New Identifier',
             'identifiable_type' => 'group',
-            'identifiable_id' => factory(Group::class)->create()->id,
+            'identifiable_id'   => factory(Group::class)->create()->id,
         ];
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/identifiers', $identifier, ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_type');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/identifiers', $identifier)
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_type');
 
         $this->assertEquals(0, \Hydrofon\Identifier::count());
     }
@@ -121,16 +116,15 @@ class StoreTest extends TestCase
     public function testIdentifiersMustHaveAnIdentifiableID()
     {
         $identifier = [
-            'value' => 'New Identifier',
+            'value'             => 'New Identifier',
             'identifiable_type' => 'resource',
-            'identifiable_id' => null,
+            'identifiable_id'   => null,
         ];
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/identifiers', $identifier, ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_id');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/identifiers', $identifier)
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_id');
 
         $this->assertEquals(0, \Hydrofon\Identifier::count());
     }
@@ -143,16 +137,15 @@ class StoreTest extends TestCase
     public function testIdentifiableMustExist()
     {
         $identifier = [
-            'value' => 'New Identifier',
+            'value'             => 'New Identifier',
             'identifiable_type' => 'resource',
-            'identifiable_id' => 100,
+            'identifiable_id'   => 100,
         ];
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/identifiers', $identifier, ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_id');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/identifiers', $identifier)
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_id');
 
         $this->assertEquals(0, \Hydrofon\Identifier::count());
     }

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Identifiers;
 
-use Hydrofon\Identifier;
 use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +21,7 @@ class IndexTest extends TestCase
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/identifiers', ['ACCEPT' => 'application/json'])
+             ->getJson('api/identifiers')
              ->assertStatus(200)
              ->assertJsonStructure([
                  'data' => [
@@ -34,7 +33,7 @@ class IndexTest extends TestCase
              ])
              ->assertJsonFragment([
                  'id'    => $identifier->id,
-                 'value'  => $identifier->value,
+                 'value' => $identifier->value,
              ]);
     }
 
@@ -49,7 +48,7 @@ class IndexTest extends TestCase
         $includedIdentifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'Included Identifier']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/identifiers?filter[value]=included', ['ACCEPT' => 'application/json'])
+             ->getJson('api/identifiers?filter[value]=included')
              ->assertStatus(200)
              ->assertJsonFragment([
                  'id' => $includedIdentifier->id,

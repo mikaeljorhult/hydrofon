@@ -18,12 +18,12 @@ class DeleteTest extends TestCase
      */
     public function testGroupsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($admin)->delete('api/groups/'.$group->id, ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->deleteJson('api/groups/'.$group->id)
+             ->assertStatus(204);
 
-        $response->assertStatus(204);
         $this->assertDatabaseMissing('groups', [
             'id' => $group->id,
         ]);

@@ -18,22 +18,21 @@ class UpdateTest extends TestCase
      */
     public function testBucketsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/buckets/'.$bucket->id, [
-            'name'  => 'Updated Name',
-        ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(202)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                 ])
-                 ->assertJsonFragment([
-                     'id'    => $bucket->id,
-                     'name'  => 'Updated Name',
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/buckets/'.$bucket->id, [
+                 'name' => 'Updated Name',
+             ])
+             ->assertStatus(202)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+             ])
+             ->assertJsonFragment([
+                 'id'   => $bucket->id,
+                 'name' => 'Updated Name',
+             ]);
 
         $this->assertDatabaseHas('buckets', [
             'name' => 'Updated Name',
@@ -47,15 +46,14 @@ class UpdateTest extends TestCase
      */
     public function testBucketsMustHaveName()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/buckets/'.$bucket->id, [
-            'name'  => '',
-        ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/buckets/'.$bucket->id, [
+                 'name' => '',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
         $this->assertDatabaseHas('buckets', [
             'name' => $bucket->name,

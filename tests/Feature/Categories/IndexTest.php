@@ -23,7 +23,7 @@ class IndexTest extends TestCase
         $this->actingAs(factory(User::class)->states('admin')->create())
              ->get('categories')
              ->assertSuccessful()
-             ->assertSee($category->name);
+             ->assertSee(e($category->name));
     }
 
     /**

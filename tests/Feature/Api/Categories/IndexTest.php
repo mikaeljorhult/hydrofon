@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Categories;
 
-use Hydrofon\Bucket;
 use Hydrofon\Category;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +21,7 @@ class IndexTest extends TestCase
         $category = factory(Category::class)->create();
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/categories', ['ACCEPT' => 'application/json'])
+             ->getJson('api/categories')
              ->assertStatus(200)
              ->assertJsonStructure([
                  'data' => [
@@ -33,8 +32,8 @@ class IndexTest extends TestCase
                  ],
              ])
              ->assertJsonFragment([
-                 'id'    => $category->id,
-                 'name'  => $category->name,
+                 'id'   => $category->id,
+                 'name' => $category->name,
              ]);
     }
 
@@ -49,7 +48,7 @@ class IndexTest extends TestCase
         $includedCategory = factory(Category::class)->create(['name' => 'Included Category']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/categories?filter[categories.name]=included', ['ACCEPT' => 'application/json'])
+             ->getJson('api/categories?filter[categories.name]=included')
              ->assertStatus(200)
              ->assertJsonFragment([
                  'id' => $includedCategory->id,

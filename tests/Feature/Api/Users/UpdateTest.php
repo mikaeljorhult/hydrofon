@@ -17,25 +17,25 @@ class UpdateTest extends TestCase
      */
     public function testUsersCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/users/'.$user->id, [
-            'name'  => 'Updated Name',
-            'email' => $user->email,
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/users/'.$user->id, [
+                 'name'  => 'Updated Name',
+                 'email' => $user->email,
+             ])
+             ->assertStatus(202)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+                 'email',
+             ])
+             ->assertJsonFragment([
+                 'id'    => $user->id,
+                 'email' => $user->email,
+                 'name'  => 'Updated Name',
+             ]);
 
-        $response->assertStatus(202)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                     'email',
-                 ])
-                 ->assertJsonFragment([
-                     'id'    => $user->id,
-                     'email' => $user->email,
-                     'name'  => 'Updated Name',
-                 ]);
         $this->assertDatabaseHas('users', [
             'name' => 'Updated Name',
         ]);
@@ -50,12 +50,13 @@ class UpdateTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->put('api/users/'.$user->id, [
-            'name'  => 'Updated Name',
-            'email' => $user->email,
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs($user)
+             ->putJson('api/users/'.$user->id, [
+                 'name'  => 'Updated Name',
+                 'email' => $user->email,
+             ])
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseHas('users', [
             'id'   => $user->id,
             'name' => $user->name,
@@ -71,12 +72,13 @@ class UpdateTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs(factory(User::class)->create())->put('api/users/'.$user->id, [
-            'name'  => 'Updated Name',
-            'email' => $user->email,
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->create())
+             ->putJson('api/users/'.$user->id, [
+                 'name'  => 'Updated Name',
+                 'email' => $user->email,
+             ])
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseHas('users', [
             'id'   => $user->id,
             'name' => $user->name,

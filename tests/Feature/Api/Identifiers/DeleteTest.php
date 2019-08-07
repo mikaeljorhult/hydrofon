@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Identifiers;
 
-use Hydrofon\Identifier;
 use Hydrofon\Resource;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,12 +18,12 @@ class DeleteTest extends TestCase
      */
     public function testIdentifiersCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs($admin)->delete('api/identifiers/'.$identifier->id, ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->deleteJson('api/identifiers/'.$identifier->id)
+             ->assertStatus(204);
 
-        $response->assertStatus(204);
         $this->assertDatabaseMissing('identifiers', [
             'id' => $identifier->id,
         ]);

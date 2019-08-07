@@ -18,22 +18,21 @@ class UpdateTest extends TestCase
      */
     public function testGroupsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/groups/'.$group->id, [
-            'name'  => 'Updated Name',
-        ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(202)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                 ])
-                 ->assertJsonFragment([
-                     'id'    => $group->id,
-                     'name'  => 'Updated Name',
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/groups/'.$group->id, [
+                 'name' => 'Updated Name',
+             ])
+             ->assertStatus(202)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+             ])
+             ->assertJsonFragment([
+                 'id'   => $group->id,
+                 'name' => 'Updated Name',
+             ]);
 
         $this->assertDatabaseHas('groups', [
             'name' => 'Updated Name',
@@ -47,15 +46,14 @@ class UpdateTest extends TestCase
      */
     public function testGroupsMustHaveName()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $group = factory(Group::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/groups/'.$group->id, [
-            'name'  => '',
-        ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/groups/'.$group->id, [
+                 'name' => '',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
         $this->assertDatabaseHas('groups', [
             'name' => $group->name,

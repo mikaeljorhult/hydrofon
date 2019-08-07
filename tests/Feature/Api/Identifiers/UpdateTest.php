@@ -20,23 +20,22 @@ class UpdateTest extends TestCase
     {
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'value' => 'Updated Value',
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(202)
-                 ->assertJsonStructure([
-                     'type',
-                     'id',
-                     'value',
-                     'identifiable_type',
-                     'identifiable_id',
-                 ])
-                 ->assertJsonFragment([
-                     'id'    => $identifier->id,
-                     'value' => 'Updated Value',
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'value' => 'Updated Value',
+             ])
+             ->assertStatus(202)
+             ->assertJsonStructure([
+                 'type',
+                 'id',
+                 'value',
+                 'identifiable_type',
+                 'identifiable_id',
+             ])
+             ->assertJsonFragment([
+                 'id'    => $identifier->id,
+                 'value' => 'Updated Value',
+             ]);
 
         $this->assertDatabaseHas('identifiers', [
             'value' => 'Updated Value',
@@ -52,13 +51,12 @@ class UpdateTest extends TestCase
     {
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'value' => '',
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('value');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'value' => '',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('value');
 
         $this->assertDatabaseHas('identifiers', [
             'value' => $identifier->value,
@@ -75,13 +73,12 @@ class UpdateTest extends TestCase
         factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'Current Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'value' => 'New Identifier',
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('value');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'value' => 'New Identifier',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('value');
 
         $this->assertDatabaseHas('identifiers', [
             'value' => $identifier->value,
@@ -97,13 +94,12 @@ class UpdateTest extends TestCase
     {
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'identifiable_type' => '',
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_type');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'identifiable_type' => '',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_type');
 
         $this->assertDatabaseHas('identifiers', [
             'identifiable_type' => $identifier->identifiable_type,
@@ -119,13 +115,12 @@ class UpdateTest extends TestCase
     {
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'identifiable_type' => 'group',
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_type');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'identifiable_type' => 'group',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_type');
 
         $this->assertDatabaseHas('identifiers', [
             'identifiable_type' => $identifier->identifiable_type,
@@ -141,13 +136,12 @@ class UpdateTest extends TestCase
     {
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'identifiable_id' => '',
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_id');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'identifiable_id' => '',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_id');
 
         $this->assertDatabaseHas('identifiers', [
             'identifiable_id' => $identifier->identifiable_id,
@@ -163,14 +157,13 @@ class UpdateTest extends TestCase
     {
         $identifier = factory(Resource::class)->create()->identifiers()->create(['value' => 'New Identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->put('api/identifiers/'.$identifier->id,
-            [
-                'identifiable_type' => 'resource',
-                'identifiable_id'   => 100,
-            ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('identifiable_id');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/identifiers/'.$identifier->id, [
+                 'identifiable_type' => 'resource',
+                 'identifiable_id'   => 100,
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('identifiable_id');
 
         $this->assertDatabaseHas('identifiers', [
             'identifiable_id' => $identifier->identifiable_id,

@@ -18,12 +18,12 @@ class DeleteTest extends TestCase
      */
     public function testBucketsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $bucket = factory(Bucket::class)->create();
 
-        $response = $this->actingAs($admin)->delete('api/buckets/'.$bucket->id, ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->deleteJson('api/buckets/'.$bucket->id)
+             ->assertStatus(204);
 
-        $response->assertStatus(204);
         $this->assertDatabaseMissing('buckets', [
             'id' => $bucket->id,
         ]);

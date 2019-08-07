@@ -17,35 +17,35 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsCanBeUpdated()
+    public function testABookingsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $booking     = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/bookings/'.$booking->id, [
-            'resource_id' => $newResource->id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/bookings/'.$booking->id, [
+                 'resource_id' => $newResource->id,
+                 'start_time'  => $booking->start_time->format('Y-m-d H:i:s'),
+                 'end_time'    => $booking->end_time->format('Y-m-d H:i:s'),
+             ])
+             ->assertStatus(202)
+             ->assertJsonStructure([
+                 'id',
+                 'user',
+                 'resource',
+                 'created_by',
+                 'start',
+                 'end',
+             ])
+             ->assertJsonFragment([
+                 'id'         => $booking->id,
+                 'user'       => $booking->user_id,
+                 'resource'   => $newResource->id,
+                 'created_by' => $booking->created_by_id,
+                 'start'      => (int) $booking->start_time->format('U'),
+                 'end'        => (int) $booking->end_time->format('U'),
+             ]);
 
-        $response->assertStatus(202)
-                 ->assertJsonStructure([
-                     'id',
-                     'user',
-                     'resource',
-                     'created_by',
-                     'start',
-                     'end',
-                 ])
-                 ->assertJsonFragment([
-                     'id'         => $booking->id,
-                     'user'       => $booking->user_id,
-                     'resource'   => $newResource->id,
-                     'created_by' => $booking->created_by_id,
-                     'start'      => (int) $booking->start_time->format('U'),
-                     'end'        => (int) $booking->end_time->format('U'),
-                 ]);
         $this->assertDatabaseHas('bookings', [
             'resource_id' => $newResource->id,
         ]);
@@ -58,17 +58,17 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdatedWithApiFieldNames()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $booking     = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/bookings/'.$booking->id, [
-            'resource' => $newResource->id,
-            'start'    => (int) $booking->start_time->format('U'),
-            'end'      => (int) $booking->end_time->format('U'),
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/bookings/'.$booking->id, [
+                 'resource' => $newResource->id,
+                 'start'    => (int) $booking->start_time->format('U'),
+                 'end'      => (int) $booking->end_time->format('U'),
+             ])
+             ->assertStatus(202);
 
-        $response->assertStatus(202);
         $this->assertDatabaseHas('bookings', [
             'resource_id' => $newResource->id,
         ]);
@@ -81,18 +81,18 @@ class UpdateTest extends TestCase
      */
     public function testAdministratorCanChangeUserOfBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/bookings/'.$booking->id, [
-            'user_id'     => $user->id,
-            'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/bookings/'.$booking->id, [
+                 'user_id'     => $user->id,
+                 'resource_id' => $booking->resource_id,
+                 'start_time'  => $booking->start_time->format('Y-m-d H:i:s'),
+                 'end_time'    => $booking->end_time->format('Y-m-d H:i:s'),
+             ])
+             ->assertStatus(202);
 
-        $response->assertStatus(202);
         $this->assertDatabaseHas('bookings', [
             'id'      => $booking->id,
             'user_id' => $user->id,
@@ -106,18 +106,19 @@ class UpdateTest extends TestCase
      */
     public function testUserCannotChangeUserOfABooking()
     {
-        $firstUser = factory(User::class)->create();
+        $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $booking    = factory(Booking::class)->create();
 
-        $response = $this->actingAs($firstUser)->put('api/bookings/'.$booking->id, [
-            'user_id'     => $secondUser->id,
-            'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs($firstUser)
+             ->putJson('api/bookings/'.$booking->id, [
+                 'user_id'     => $secondUser->id,
+                 'resource_id' => $booking->resource_id,
+                 'start_time'  => $booking->start_time->format('Y-m-d H:i:s'),
+                 'end_time'    => $booking->end_time->format('Y-m-d H:i:s'),
+             ])
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
             'id'      => $booking->id,
             'user_id' => $booking->user_id,
@@ -133,13 +134,14 @@ class UpdateTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($booking->user)->put('api/bookings/'.$booking->id, [
-            'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->copy()->addHour(),
-            'end_time'    => $booking->end_time->copy()->addHour(),
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs($booking->user)
+             ->putJson('api/bookings/'.$booking->id, [
+                 'resource_id' => $booking->resource_id,
+                 'start_time'  => $booking->start_time->copy()->addHour()->format('Y-m-d H:i:s'),
+                 'end_time'    => $booking->end_time->copy()->addHour()->format('Y-m-d H:i:s'),
+             ])
+             ->assertStatus(202);
 
-        $response->assertStatus(202);
         $this->assertDatabaseHas('bookings', [
             'id'         => $booking->id,
             'start_time' => $booking->start_time->copy()->addHour(),
@@ -154,16 +156,17 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingItDontOwn()
     {
-        $user = factory(User::class)->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($user)->put('api/bookings/'.$booking->id, [
-            'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->copy()->addHour(),
-            'end_time'    => $booking->end_time->copy()->addHour(),
-        ], ['ACCEPT' => 'application/json']);
+        $this->actingAs($user)
+             ->putJson('api/bookings/'.$booking->id, [
+                 'resource_id' => $booking->resource_id,
+                 'start_time'  => $booking->start_time->copy()->addHour()->format('Y-m-d H:i:s'),
+                 'end_time'    => $booking->end_time->copy()->addHour()->format('Y-m-d H:i:s'),
+             ])
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
             'id'         => $booking->id,
             'start_time' => $booking->start_time,

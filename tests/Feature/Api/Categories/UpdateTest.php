@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Categories;
 
-use Hydrofon\Bucket;
 use Hydrofon\Category;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,22 +18,21 @@ class UpdateTest extends TestCase
      */
     public function testCategoriesCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/categories/'.$category->id, [
-            'name'  => 'Updated Name',
-        ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(202)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                 ])
-                 ->assertJsonFragment([
-                     'id'    => $category->id,
-                     'name'  => 'Updated Name',
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/categories/'.$category->id, [
+                 'name' => 'Updated Name',
+             ])
+             ->assertStatus(202)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+             ])
+             ->assertJsonFragment([
+                 'id'   => $category->id,
+                 'name' => 'Updated Name',
+             ]);
 
         $this->assertDatabaseHas('categories', [
             'name' => 'Updated Name',
@@ -48,15 +46,14 @@ class UpdateTest extends TestCase
      */
     public function testCategoriesMustHaveName()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->create();
 
-        $response = $this->actingAs($admin)->put('api/categories/'.$category->id, [
-            'name'  => '',
-        ], ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->putJson('api/categories/'.$category->id, [
+                 'name' => '',
+             ])
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
         $this->assertDatabaseHas('categories', [
             'name' => $category->name,

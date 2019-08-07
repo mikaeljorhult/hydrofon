@@ -20,7 +20,7 @@ class IndexTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/users', ['ACCEPT' => 'application/json'])
+             ->getJson('api/users')
              ->assertStatus(200)
              ->assertJsonStructure([
                  'data' => [
@@ -49,7 +49,7 @@ class IndexTest extends TestCase
         $includedUser = factory(User::class)->create(['name' => 'Included User']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/users?filter[name]=included', ['ACCEPT' => 'application/json'])
+             ->getJson('api/users?filter[name]=included')
              ->assertStatus(200)
              ->assertJsonFragment([
                  'id' => $includedUser->id,
@@ -70,7 +70,7 @@ class IndexTest extends TestCase
         $includedUser = factory(User::class)->create(['email' => 'included@hydrofon.se']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/users?filter[email]=included', ['ACCEPT' => 'application/json'])
+             ->getJson('api/users?filter[email]=included')
              ->assertStatus(200)
              ->assertJsonFragment([
                  'id' => $includedUser->id,

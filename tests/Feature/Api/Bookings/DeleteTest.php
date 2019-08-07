@@ -18,12 +18,12 @@ class DeleteTest extends TestCase
      */
     public function testBookingsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin   = factory(User::class)->states('admin')->create();
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($admin)->delete('api/bookings/'.$booking->id, ['ACCEPT' => 'application/json']);
+        $this->actingAs($admin)->deleteJson('api/bookings/'.$booking->id)
+             ->assertStatus(204);
 
-        $response->assertStatus(204);
         $this->assertDatabaseMissing('bookings', [
             'id' => $booking->id,
         ]);
@@ -38,12 +38,10 @@ class DeleteTest extends TestCase
     {
         $booking = factory(Booking::class)->create();
 
-        $response = $this->actingAs($booking->user)->delete(
-            'api/bookings/'.$booking->id,
-            ['ACCEPT' => 'application/json']
-        );
+        $this->actingAs($booking->user)
+             ->deleteJson('api/bookings/'.$booking->id)
+             ->assertStatus(204);
 
-        $response->assertStatus(204);
         $this->assertDatabaseMissing('bookings', [
             'id' => $booking->id,
         ]);
@@ -58,12 +56,10 @@ class DeleteTest extends TestCase
     {
         $booking = factory(Booking::class)->states('past')->create();
 
-        $response = $this->actingAs($booking->user)->delete(
-            'api/bookings/'.$booking->id,
-            ['ACCEPT' => 'application/json']
-        );
+        $this->actingAs($booking->user)
+             ->deleteJson('api/bookings/'.$booking->id)
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
             'id' => $booking->id,
         ]);

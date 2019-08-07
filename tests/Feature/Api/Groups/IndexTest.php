@@ -21,7 +21,7 @@ class IndexTest extends TestCase
         $group = factory(Group::class)->create();
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/groups', ['ACCEPT' => 'application/json'])
+             ->getJson('api/groups')
              ->assertStatus(200)
              ->assertJsonStructure([
                  'data' => [
@@ -32,8 +32,8 @@ class IndexTest extends TestCase
                  ],
              ])
              ->assertJsonFragment([
-                 'id'    => $group->id,
-                 'name'  => $group->name,
+                 'id'   => $group->id,
+                 'name' => $group->name,
              ]);
     }
 
@@ -48,7 +48,7 @@ class IndexTest extends TestCase
         $includedGroup = factory(Group::class)->create(['name' => 'Included Group']);
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/groups?filter[name]=included', ['ACCEPT' => 'application/json'])
+             ->getJson('api/groups?filter[name]=included')
              ->assertStatus(200)
              ->assertJsonFragment([
                  'id' => $includedGroup->id,

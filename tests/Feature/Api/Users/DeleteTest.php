@@ -17,12 +17,12 @@ class DeleteTest extends TestCase
      */
     public function testUsersCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->delete('api/users/'.$user->id, ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->deleteJson('api/users/'.$user->id)
+             ->assertStatus(204);
 
-        $response->assertStatus(204);
         $this->assertDatabaseMissing('users', [
             'id' => $user->id,
         ]);
@@ -37,12 +37,10 @@ class DeleteTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->delete(
-            'api/users/'.$user->id,
-            ['ACCEPT' => 'application/json']
-        );
+        $this->actingAs($user)
+             ->deleteJson('api/users/'.$user->id)
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
         ]);

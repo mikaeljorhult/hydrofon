@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Categories;
 
-use Hydrofon\Bucket;
 use Hydrofon\Category;
 use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,23 +18,22 @@ class StoreTest extends TestCase
      */
     public function testCategoriesCanBeStored()
     {
-        $category = factory(Bucket::class)->make();
+        $category = factory(Category::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/categories', $category->toArray(), ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(201)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                 ])
-                 ->assertJsonFragment([
-                     'name'  => $category->name,
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/categories', $category->toArray())
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+             ])
+             ->assertJsonFragment([
+                 'name' => $category->name,
+             ]);
 
         $this->assertDatabaseHas('categories', [
-            'id'    => 1,
-            'name'  => $category->name,
+            'id'   => 1,
+            'name' => $category->name,
         ]);
     }
 
@@ -48,11 +46,10 @@ class StoreTest extends TestCase
     {
         $category = factory(Category::class)->make(['name' => null]);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/categories', $category->toArray(), ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/categories', $category->toArray())
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
         $this->assertEquals(0, Category::count());
     }

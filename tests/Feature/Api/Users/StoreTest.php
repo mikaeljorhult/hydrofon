@@ -19,24 +19,24 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/users', array_merge(
-                             $user->toArray(), [
-                                 'password'              => 'secret',
-                                 'password_confirmation' => 'secret',
-                             ]
-                         ), ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/users', array_merge(
+                 $user->toArray(), [
+                     'password'              => 'secret',
+                     'password_confirmation' => 'secret',
+                 ]
+             ))
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+                 'email',
+             ])
+             ->assertJsonFragment([
+                 'name'  => $user->name,
+                 'email' => $user->email,
+             ]);
 
-        $response->assertStatus(201)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                     'email',
-                 ])
-                 ->assertJsonFragment([
-                     'name'  => $user->name,
-                     'email' => $user->email,
-                 ]);
         $this->assertDatabaseHas('users', [
             'id'    => 2,
             'name'  => $user->name,
@@ -53,15 +53,15 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->create())
-                         ->post('api/users', array_merge(
-                             $user->toArray(), [
-                                 'password'              => 'secret',
-                                 'password_confirmation' => 'secret',
-                             ]
-                         ), ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->create())
+             ->postJson('api/users', array_merge(
+                 $user->toArray(), [
+                     'password'              => 'secret',
+                     'password_confirmation' => 'secret',
+                 ]
+             ))
+             ->assertStatus(403);
 
-        $response->assertStatus(403);
         $this->assertDatabaseMissing('users', [
             'name' => $user->name,
         ]);
@@ -76,11 +76,11 @@ class StoreTest extends TestCase
     {
         $user = factory(User::class)->make(['name' => null]);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/users', $user->toArray(), ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/users', $user->toArray())
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
         $this->assertDatabaseMissing('users', [
             'email' => $user->email,
         ]);

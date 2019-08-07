@@ -20,23 +20,23 @@ class StoreTest extends TestCase
     {
         $booking = factory(Booking::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->create())
-                         ->post('api/bookings', $booking->toArray(), ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->create())
+             ->postJson('api/bookings', $booking->toArray())
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                 'id',
+                 'user',
+                 'resource',
+                 'created_by',
+                 'start',
+                 'end',
+             ])
+             ->assertJsonFragment([
+                 'resource' => $booking->resource_id,
+                 'start'    => (int) $booking->start_time->format('U'),
+                 'end'      => (int) $booking->end_time->format('U'),
+             ]);
 
-        $response->assertStatus(201)
-                 ->assertJsonStructure([
-                     'id',
-                     'user',
-                     'resource',
-                     'created_by',
-                     'start',
-                     'end',
-                 ])
-                 ->assertJsonFragment([
-                     'resource' => $booking->resource_id,
-                     'start'    => (int) $booking->start_time->format('U'),
-                     'end'      => (int) $booking->end_time->format('U'),
-                 ]);
         $this->assertDatabaseHas('bookings', [
             'user_id'    => 2,
             'start_time' => $booking->start_time,
@@ -51,16 +51,16 @@ class StoreTest extends TestCase
      */
     public function testAdministratorCanCreateBookingForOtherUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin   = factory(User::class)->states('admin')->create();
+        $user    = factory(User::class)->create();
         $booking = factory(Booking::class)->make([
             'user_id' => $user->id,
         ]);
 
-        $response = $this->actingAs($admin)
-                         ->post('api/bookings', $booking->toArray(), ['ACCEPT' => 'application/json']);
+        $this->actingAs($admin)
+             ->postJson('api/bookings', $booking->toArray())
+             ->assertStatus(201);
 
-        $response->assertStatus(201);
         $this->assertDatabaseHas('bookings', [
             'user_id'       => $user->id,
             'created_by_id' => $admin->id,
@@ -74,16 +74,16 @@ class StoreTest extends TestCase
      */
     public function testUserCannotCreateBookingsForOtherUser()
     {
-        $firstUser = factory(User::class)->create();
+        $firstUser  = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->make([
+        $booking    = factory(Booking::class)->make([
             'user_id' => $secondUser->id,
         ]);
 
-        $response = $this->actingAs($firstUser)
-                         ->post('api/bookings', $booking->toArray(), ['ACCEPT' => 'application/json']);
+        $this->actingAs($firstUser)
+             ->postJson('api/bookings', $booking->toArray())
+             ->assertStatus(201);
 
-        $response->assertStatus(201);
         $this->assertDatabaseHas('bookings', [
             'user_id'       => $firstUser->id,
             'created_by_id' => $firstUser->id,
@@ -99,14 +99,14 @@ class StoreTest extends TestCase
     {
         $booking = factory(Booking::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->create())
-                         ->post('api/bookings', [
-                             'resource' => $booking->resource_id,
-                             'start'    => (int) $booking->start_time->format('U'),
-                             'end'      => (int) $booking->start_time->format('U'),
-                         ], ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->create())
+             ->postJson('api/bookings', [
+                 'resource' => $booking->resource_id,
+                 'start'    => (int) $booking->start_time->format('U'),
+                 'end'      => (int) $booking->start_time->format('U'),
+             ])
+             ->assertStatus(422);
 
-        $response->assertStatus(422);
         $this->assertDatabaseMissing('bookings', [
             'start_time' => $booking->start_time,
             'end_time'   => $booking->end_time,
@@ -122,11 +122,11 @@ class StoreTest extends TestCase
     {
         $booking = factory(Booking::class)->make(['resource_id' => null]);
 
-        $response = $this->actingAs(factory(User::class)->create())
-                         ->post('api/bookings', $booking->toArray(), ['ACCEPT' => 'application/json']);
+        $this->actingAs(factory(User::class)->create())
+             ->postJson('api/bookings', $booking->toArray())
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('resource_id');
 
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('resource_id');
         $this->assertCount(0, Booking::all());
     }
 }

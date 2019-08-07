@@ -21,7 +21,7 @@ class IndexTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/bookings', ['ACCEPT' => 'application/json'])
+             ->getJson('api/bookings')
              ->assertStatus(200)
              ->assertJsonStructure([
                  'data' => [
@@ -55,7 +55,7 @@ class IndexTest extends TestCase
         $booking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->create())
-             ->get('api/bookings?filter[between]=100,200', ['ACCEPT' => 'application/json'])
+             ->getJson('api/bookings?filter[between]=100,200')
              ->assertStatus(200)
              ->assertJsonMissing([
                  'id' => $booking->id,

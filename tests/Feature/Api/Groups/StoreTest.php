@@ -20,21 +20,20 @@ class StoreTest extends TestCase
     {
         $group = factory(Group::class)->make();
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/groups', $group->toArray(), ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(201)
-                 ->assertJsonStructure([
-                     'id',
-                     'name',
-                 ])
-                 ->assertJsonFragment([
-                     'name'  => $group->name,
-                 ]);
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/groups', $group->toArray())
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                 'id',
+                 'name',
+             ])
+             ->assertJsonFragment([
+                 'name' => $group->name,
+             ]);
 
         $this->assertDatabaseHas('groups', [
-            'id'    => 1,
-            'name'  => $group->name,
+            'id'   => 1,
+            'name' => $group->name,
         ]);
     }
 
@@ -47,11 +46,10 @@ class StoreTest extends TestCase
     {
         $group = factory(Group::class)->make(['name' => null]);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
-                         ->post('api/groups', $group->toArray(), ['ACCEPT' => 'application/json']);
-
-        $response->assertStatus(422)
-                 ->assertJsonValidationErrors('name');
+        $this->actingAs(factory(User::class)->states('admin')->create())
+             ->postJson('api/groups', $group->toArray())
+             ->assertStatus(422)
+             ->assertJsonValidationErrors('name');
 
         $this->assertEquals(0, \Hydrofon\Group::count());
     }
