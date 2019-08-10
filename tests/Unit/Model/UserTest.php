@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Model;
 
-use Hydrofon\Booking;
 use Hydrofon\User;
+use Tests\TestCase;
+use Hydrofon\Booking;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 class UserTest extends TestCase
 {

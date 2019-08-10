@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\Identifier;
 use Hydrofon\User;
+use Hydrofon\Identifier;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class IdentifierPolicy

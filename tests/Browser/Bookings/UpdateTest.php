@@ -4,9 +4,9 @@ namespace Tests\Browser\Bookings;
 
 use Hydrofon\Booking;
 use Hydrofon\Resource;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class UpdateTest extends DuskTestCase
 {

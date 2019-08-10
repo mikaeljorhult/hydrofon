@@ -3,9 +3,9 @@
 namespace Tests\Feature\Authentication;
 
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
 use Tests\TestCase;
+use Illuminate\Support\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase
 {

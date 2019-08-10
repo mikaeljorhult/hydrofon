@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Checkout;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CheckoutStoreRequest extends FormRequest
 {

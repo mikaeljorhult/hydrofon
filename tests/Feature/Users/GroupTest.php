@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Users;
 
-use Hydrofon\Group;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Hydrofon\Group;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GroupTest extends TestCase
 {

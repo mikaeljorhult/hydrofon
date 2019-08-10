@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class DataRequestController extends Controller
 {

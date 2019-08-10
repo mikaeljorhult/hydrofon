@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\Bucket;
 use Hydrofon\User;
+use Hydrofon\Bucket;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BucketPolicy

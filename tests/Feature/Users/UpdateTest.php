@@ -3,9 +3,9 @@
 namespace Tests\Feature\Users;
 
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateTest extends TestCase
 {

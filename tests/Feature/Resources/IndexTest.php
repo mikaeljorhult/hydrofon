@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Resources;
 
-use Hydrofon\Category;
-use Hydrofon\Group;
-use Hydrofon\Resource;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Hydrofon\Group;
 use Tests\TestCase;
+use Hydrofon\Category;
+use Hydrofon\Resource;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class IndexTest extends TestCase
 {

@@ -3,10 +3,10 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Category;
-use Hydrofon\Http\Requests\CategoryDestroyRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Requests\CategoryStoreRequest;
 use Hydrofon\Http\Requests\CategoryUpdateRequest;
-use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\CategoryDestroyRequest;
 
 class CategoryController extends Controller
 {

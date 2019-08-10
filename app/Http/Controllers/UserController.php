@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\Http\Requests\UserDestroyRequest;
-use Hydrofon\Http\Requests\UserStoreRequest;
-use Hydrofon\Http\Requests\UserUpdateRequest;
 use Hydrofon\User;
 use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\UserStoreRequest;
+use Hydrofon\Http\Requests\UserUpdateRequest;
+use Hydrofon\Http\Requests\UserDestroyRequest;
 
 class UserController extends Controller
 {
@@ -119,7 +119,7 @@ class UserController extends Controller
     {
         $input = $request->all();
 
-        if (!$user->is(auth()->user())) {
+        if (! $user->is(auth()->user())) {
             $input['is_admin'] = $request->has('is_admin');
         }
 

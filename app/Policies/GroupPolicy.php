@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\Group;
 use Hydrofon\User;
+use Hydrofon\Group;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GroupPolicy

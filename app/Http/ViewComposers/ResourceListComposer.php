@@ -3,10 +3,10 @@
 namespace Hydrofon\Http\ViewComposers;
 
 use Hydrofon\Category;
-use Hydrofon\Http\Resources\Category as CategoryResource;
-use Hydrofon\Http\Resources\Resource as ResourceResource;
 use Hydrofon\Resource;
 use Illuminate\View\View;
+use Hydrofon\Http\Resources\Category as CategoryResource;
+use Hydrofon\Http\Resources\Resource as ResourceResource;
 
 class ResourceListComposer
 {

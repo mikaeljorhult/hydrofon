@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Resources;
 
-use Hydrofon\Resource;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Hydrofon\Resource;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StoreTest extends TestCase
 {

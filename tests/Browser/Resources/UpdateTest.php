@@ -2,11 +2,11 @@
 
 namespace Tests\Browser\Resources;
 
-use Hydrofon\Resource;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Laravel\Dusk\Browser;
+use Hydrofon\Resource;
 use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class UpdateTest extends DuskTestCase
 {

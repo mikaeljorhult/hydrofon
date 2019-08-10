@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\Http\Requests\SubscriptionDestroyRequest;
-use Hydrofon\Http\Requests\SubscriptionStoreRequest;
-use Hydrofon\Scopes\GroupPolicyScope;
 use Hydrofon\Subscription;
 use Illuminate\Support\Str;
+use Hydrofon\Scopes\GroupPolicyScope;
+use Hydrofon\Http\Requests\SubscriptionStoreRequest;
+use Hydrofon\Http\Requests\SubscriptionDestroyRequest;
 
 class SubscriptionController extends Controller
 {

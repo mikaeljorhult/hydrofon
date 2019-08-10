@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Bucket;
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 
 class BucketStoreRequest extends FormRequest
 {

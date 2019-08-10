@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Buckets;
 
-use Hydrofon\Bucket;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Hydrofon\Bucket;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateTest extends TestCase
 {
