@@ -3,12 +3,12 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Category;
+use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Requests\CategoryDestroyRequest;
 use Hydrofon\Http\Requests\CategoryStoreRequest;
 use Hydrofon\Http\Requests\CategoryUpdateRequest;
-use Hydrofon\Http\Resources\CategoryCollection;
 use Hydrofon\Http\Resources\Category as CategoryResource;
-use Hydrofon\Http\Controllers\Controller;
+use Hydrofon\Http\Resources\CategoryCollection;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
@@ -35,7 +35,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\CategoryStoreRequest  $request
+     * @param \Hydrofon\Http\Requests\CategoryStoreRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Category  $category
+     * @param \Hydrofon\Category $category
      *
      * @return \Hydrofon\Http\Resources\CategoryResource
      */
@@ -68,8 +68,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\CategoryUpdateRequest  $request
-     * @param  \Hydrofon\Category  $category
+     * @param \Hydrofon\Http\Requests\CategoryUpdateRequest $request
+     * @param \Hydrofon\Category                            $category
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -86,8 +86,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Category  $category
-     * @param  \Hydrofon\Http\Requests\CategoryDestroyRequest  $request
+     * @param \Hydrofon\Category                             $category
+     * @param \Hydrofon\Http\Requests\CategoryDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */

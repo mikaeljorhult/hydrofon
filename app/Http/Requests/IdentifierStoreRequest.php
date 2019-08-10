@@ -31,12 +31,12 @@ class IdentifierStoreRequest extends FormRequest
             'value' => [
                 'required',
                 Rule::unique('identifiers'),
-                Rule::unique('users', 'email')
+                Rule::unique('users', 'email'),
             ],
             'identifiable_type' => [
                 'sometimes',
                 'required',
-                Rule::in(['resource', 'user'])
+                Rule::in(['resource', 'user']),
             ],
             'identifiable_id' => array_merge(['bail', 'sometimes'], (in_array($this->input('identifiable_type'), ['resource', 'user'])
                 ? ['required', Rule::exists(Str::plural($this->input('identifiable_type')), 'id')]

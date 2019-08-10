@@ -3,13 +3,13 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Group;
+use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Requests\GroupDestroyRequest;
 use Hydrofon\Http\Requests\GroupStoreRequest;
 use Hydrofon\Http\Requests\GroupUpdateRequest;
-use Hydrofon\Http\Resources\GroupCollection;
 use Hydrofon\Http\Resources\Group as GroupResource;
+use Hydrofon\Http\Resources\GroupCollection;
 use Illuminate\Http\Request;
-use Hydrofon\Http\Controllers\Controller;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller
@@ -33,7 +33,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\GroupStoreRequest  $request
+     * @param \Hydrofon\Http\Requests\GroupStoreRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -51,7 +51,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Group  $group
+     * @param \Hydrofon\Group $group
      *
      * @return \Hydrofon\Http\Resources\Group
      */
@@ -65,8 +65,8 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\GroupUpdateRequest  $request
-     * @param  \Hydrofon\Group  $group
+     * @param \Hydrofon\Http\Requests\GroupUpdateRequest $request
+     * @param \Hydrofon\Group                            $group
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -82,8 +82,8 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Group  $group
-     * @param  \Hydrofon\Http\Requests\GroupDestroyRequest  $reqest
+     * @param \Hydrofon\Group                             $group
+     * @param \Hydrofon\Http\Requests\GroupDestroyRequest $reqest
      *
      * @return \Illuminate\Http\Response
      */

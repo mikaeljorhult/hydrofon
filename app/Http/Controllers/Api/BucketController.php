@@ -3,12 +3,12 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Bucket;
+use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Requests\BucketDestroyRequest;
 use Hydrofon\Http\Requests\BucketStoreRequest;
 use Hydrofon\Http\Requests\BucketUpdateRequest;
-use Hydrofon\Http\Resources\BucketCollection;
 use Hydrofon\Http\Resources\Bucket as BucketResource;
-use Hydrofon\Http\Controllers\Controller;
+use Hydrofon\Http\Resources\BucketCollection;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BucketController extends Controller
@@ -32,7 +32,7 @@ class BucketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -51,7 +51,7 @@ class BucketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Bucket  $bucket
+     * @param \Hydrofon\Bucket $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -66,7 +66,7 @@ class BucketController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Hydrofon\Http\Requests\BucketUpdateRequest $request
-     * @param  \Hydrofon\Bucket  $bucket
+     * @param \Hydrofon\Bucket                            $bucket
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -83,8 +83,8 @@ class BucketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Bucket  $bucket
-     * @param  \Hydrofon\Http\Requests\BucketDestroyRequest  $request
+     * @param \Hydrofon\Bucket                             $bucket
+     * @param \Hydrofon\Http\Requests\BucketDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */

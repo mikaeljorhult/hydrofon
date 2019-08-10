@@ -19,7 +19,7 @@ class UpdateTest extends TestCase
      */
     public function testABookingsCanBeUpdated()
     {
-        $booking     = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -58,7 +58,7 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdatedWithApiFieldNames()
     {
-        $booking     = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
         $newResource = factory(Resource::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -81,7 +81,7 @@ class UpdateTest extends TestCase
      */
     public function testAdministratorCanChangeUserOfBooking()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
@@ -106,9 +106,9 @@ class UpdateTest extends TestCase
      */
     public function testUserCannotChangeUserOfABooking()
     {
-        $firstUser  = factory(User::class)->create();
+        $firstUser = factory(User::class)->create();
         $secondUser = factory(User::class)->create();
-        $booking    = factory(Booking::class)->create();
+        $booking = factory(Booking::class)->create();
 
         $this->actingAs($firstUser)
              ->putJson('api/bookings/'.$booking->id, [
@@ -156,7 +156,7 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingItDontOwn()
     {
-        $user    = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs($user)
