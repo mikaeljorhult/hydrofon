@@ -33,7 +33,7 @@ class IdentifierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\IdentifierStoreRequest  $request
+     * @param \Hydrofon\Http\Requests\IdentifierStoreRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -54,7 +54,7 @@ class IdentifierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Identifier  $identifier
+     * @param \Hydrofon\Identifier $identifier
      *
      * @return \Hydrofon\Http\Resources\Identifier
      */
@@ -68,8 +68,8 @@ class IdentifierController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\IdentifierUpdateRequest  $request
-     * @param  \Hydrofon\Identifier  $identifier
+     * @param \Hydrofon\Http\Requests\IdentifierUpdateRequest $request
+     * @param \Hydrofon\Identifier                            $identifier
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -87,7 +87,7 @@ class IdentifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Identifier  $identifier
+     * @param \Hydrofon\Identifier $identifier
      *
      * @return \Illuminate\Http\Response
      */

@@ -31,7 +31,7 @@ class ResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\ResourceStoreRequest  $request
+     * @param \Hydrofon\Http\Requests\ResourceStoreRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -53,7 +53,7 @@ class ResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Hydrofon\Resource  $resource
+     * @param \Hydrofon\Resource $resource
      *
      * @return \Hydrofon\Http\Resources\Resource
      */
@@ -67,8 +67,8 @@ class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Hydrofon\Http\Requests\ResourceUpdateRequest  $request
-     * @param  \Hydrofon\Resource  $resource
+     * @param \Hydrofon\Http\Requests\ResourceUpdateRequest $request
+     * @param \Hydrofon\Resource                            $resource
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -88,7 +88,7 @@ class ResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Hydrofon\Resource  $resource
+     * @param \Hydrofon\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
