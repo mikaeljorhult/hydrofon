@@ -3,11 +3,11 @@
 namespace Tests\Unit\Validation;
 
 use Carbon\Carbon;
+use Tests\TestCase;
 use Hydrofon\Booking;
 use Hydrofon\Resource;
 use Hydrofon\Rules\Available;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 
 class AvailableTest extends TestCase
 {

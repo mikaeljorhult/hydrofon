@@ -3,9 +3,9 @@
 namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Category;
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 
 class CategoryStoreRequest extends FormRequest
 {

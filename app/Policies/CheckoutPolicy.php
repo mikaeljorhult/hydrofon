@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\Checkout;
 use Hydrofon\User;
+use Hydrofon\Checkout;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CheckoutPolicy

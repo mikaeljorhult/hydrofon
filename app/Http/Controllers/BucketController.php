@@ -3,10 +3,10 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Bucket;
-use Hydrofon\Http\Requests\BucketDestroyRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Requests\BucketStoreRequest;
 use Hydrofon\Http\Requests\BucketUpdateRequest;
-use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\BucketDestroyRequest;
 
 class BucketController extends Controller
 {

@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Policies;
 
+use Hydrofon\User;
+use Tests\TestCase;
 use Hydrofon\Booking;
 use Hydrofon\Checkin;
-use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 class CheckinPolicyTest extends TestCase
 {

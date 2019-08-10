@@ -3,14 +3,14 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Booking;
-use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\Http\Requests\BookingDestroyRequest;
-use Hydrofon\Http\Requests\BookingStoreRequest;
-use Hydrofon\Http\Requests\BookingUpdateRequest;
-use Hydrofon\Http\Resources\Booking as BookingResource;
-use Hydrofon\Http\Resources\BookingCollection;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Controllers\Controller;
+use Hydrofon\Http\Resources\BookingCollection;
+use Hydrofon\Http\Requests\BookingStoreRequest;
+use Hydrofon\Http\Requests\BookingUpdateRequest;
+use Hydrofon\Http\Requests\BookingDestroyRequest;
+use Hydrofon\Http\Resources\Booking as BookingResource;
 
 class BookingController extends Controller
 {

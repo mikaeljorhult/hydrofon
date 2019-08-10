@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\Http\Requests\ImpersonationRequest;
 use Hydrofon\User;
+use Hydrofon\Http\Requests\ImpersonationRequest;
 
 class ImpersonationController extends Controller
 {
@@ -29,7 +29,7 @@ class ImpersonationController extends Controller
         $user = User::findOrFail($request->get('user_id'));
 
         // Administrators can't be impersonated.
-        if (!$user->isAdmin()) {
+        if (! $user->isAdmin()) {
             session()->put('impersonate', $user->id);
         }
 

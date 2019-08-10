@@ -2,10 +2,10 @@
 
 namespace Hydrofon\Http\Requests;
 
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
 use Hydrofon\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 
 class UserStoreRequest extends FormRequest
 {

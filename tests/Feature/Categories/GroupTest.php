@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Categories;
 
-use Hydrofon\Category;
-use Hydrofon\Group;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Hydrofon\Group;
 use Tests\TestCase;
+use Hydrofon\Category;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GroupTest extends TestCase
 {

@@ -3,10 +3,10 @@
 namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Group;
-use Hydrofon\Http\Requests\GroupDestroyRequest;
+use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Requests\GroupStoreRequest;
 use Hydrofon\Http\Requests\GroupUpdateRequest;
-use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\GroupDestroyRequest;
 
 class GroupController extends Controller
 {

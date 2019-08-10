@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Controllers;
 
 use Carbon\Carbon;
-use Hydrofon\Http\Requests\CalendarRequest;
 use Hydrofon\Resource;
+use Hydrofon\Http\Requests\CalendarRequest;
 
 class CalendarController extends Controller
 {

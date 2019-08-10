@@ -3,11 +3,11 @@
 namespace Hydrofon\Http\Requests;
 
 use Carbon\Carbon;
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
-use Hydrofon\Rules\Available;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Hydrofon\Rules\Available;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 
 class BookingUpdateRequest extends FormRequest
 {
@@ -60,7 +60,7 @@ class BookingUpdateRequest extends FormRequest
     {
         $fields = collect(['resource_id' => 'resource', 'start_time' => 'start', 'end_time' => 'end'])
             ->filter(function ($apiField, $dbField) {
-                return !$this->has($dbField) && $this->has($apiField);
+                return ! $this->has($dbField) && $this->has($apiField);
             })
             ->mapWithKeys(function ($apiField, $dbField) {
                 $value = $this->get($apiField);

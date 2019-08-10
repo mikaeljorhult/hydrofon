@@ -2,9 +2,9 @@
 
 namespace Hydrofon\Scopes;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\Builder;
 
 class GroupPolicyScope implements Scope
 {
@@ -19,7 +19,7 @@ class GroupPolicyScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         // Only limit query if user is not an administrator.
-        if (auth()->check() && !auth()->user()->isAdmin()) {
+        if (auth()->check() && ! auth()->user()->isAdmin()) {
             // Get IDs of users groups.
             $userGroups = auth()->user()->groups->pluck('id');
 

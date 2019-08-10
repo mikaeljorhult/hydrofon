@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Commands;
 
-use Hydrofon\Booking;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Hydrofon\Booking;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CleanTest extends TestCase
 {

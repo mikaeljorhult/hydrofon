@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Users;
 
-use Hydrofon\Booking;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Hydrofon\Booking;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeleteTest extends TestCase
 {

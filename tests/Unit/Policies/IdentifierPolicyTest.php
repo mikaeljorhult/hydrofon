@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Policies;
 
-use Hydrofon\Identifier;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Hydrofon\Identifier;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class IdentifierPolicyTest extends TestCase
 {

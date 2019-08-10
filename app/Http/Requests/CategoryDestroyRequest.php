@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Http\Requests;
 
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
+use Hydrofon\Http\Requests\Traits\PreserveReferer;
 
 class CategoryDestroyRequest extends FormRequest
 {

@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Console\Commands;
 
-use Hydrofon\Booking;
 use Hydrofon\User;
+use Hydrofon\Booking;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 

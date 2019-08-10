@@ -2,15 +2,15 @@
 
 namespace Hydrofon\Http\Controllers\Api;
 
-use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\Http\Requests\IdentifierDestroyRequest;
-use Hydrofon\Http\Requests\IdentifierStoreRequest;
-use Hydrofon\Http\Requests\IdentifierUpdateRequest;
-use Hydrofon\Http\Resources\Identifier as IdentifierResource;
-use Hydrofon\Http\Resources\IdentifierCollection;
 use Hydrofon\Identifier;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Controllers\Controller;
+use Hydrofon\Http\Resources\IdentifierCollection;
+use Hydrofon\Http\Requests\IdentifierStoreRequest;
+use Hydrofon\Http\Requests\IdentifierUpdateRequest;
+use Hydrofon\Http\Requests\IdentifierDestroyRequest;
+use Hydrofon\Http\Resources\Identifier as IdentifierResource;
 
 class IdentifierController extends Controller
 {

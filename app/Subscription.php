@@ -2,10 +2,10 @@
 
 namespace Hydrofon;
 
-use Eluceo\iCal\Component\Calendar;
-use Eluceo\iCal\Component\Event;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Eluceo\iCal\Component\Event;
+use Eluceo\iCal\Component\Calendar;
+use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
@@ -79,7 +79,7 @@ class Subscription extends Model
     {
         return $this->subscribable->bookings
             ->filter(function ($item, $key) {
-                return !$item->resource->is_facility;
+                return ! $item->resource->is_facility;
             })
             ->groupBy(function ($item, $key) {
                 return $item->start_time->format('YmdHis');

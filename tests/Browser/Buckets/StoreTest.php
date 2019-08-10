@@ -2,11 +2,11 @@
 
 namespace Tests\Browser\Buckets;
 
-use Hydrofon\Bucket;
 use Hydrofon\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Laravel\Dusk\Browser;
+use Hydrofon\Bucket;
 use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class StoreTest extends DuskTestCase
 {

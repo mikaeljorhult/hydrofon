@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\Http\Requests\DeskRequest;
-use Hydrofon\Identifier;
 use Hydrofon\User;
+use Hydrofon\Identifier;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\DeskRequest;
 
 class DeskController extends Controller
 {
@@ -67,7 +67,7 @@ class DeskController extends Controller
     {
         $identifiable = User::where('email', $search)->first();
 
-        if (!$identifiable) {
+        if (! $identifiable) {
             $identifier = Identifier::with('identifiable')
                                       ->where('value', $search)
                                       ->first();
@@ -98,7 +98,7 @@ class DeskController extends Controller
                                $filter = request()->query->get('filter');
 
                                // Set default time span to +/- 4 days if not in request.
-                               if (!isset($filter['between'])) {
+                               if (! isset($filter['between'])) {
                                    $query->between(now()->subDays(4), now()->addDays(4));
                                }
                            })
