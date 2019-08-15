@@ -26,7 +26,7 @@
 </head>
 
 <body class="font-base font-light">
-    <div id="app" class="app h-full flex">
+    <div id="app" class="app h-full md:flex">
         @include('partials.sidebar')
         @yield('sidebar')
 
