@@ -1,14 +1,10 @@
 import Vue from 'vue';
+
 import Segel from 'segel';
-
-import axios from 'axios';
 import debounce from 'lodash/debounce';
-import Events from './modules/events';
 
-const axiosInstance = axios.create({
-    baseURL: HYDROFON.baseURL,
-    withCredentials: true
-});
+import Api from './api';
+import Events from './modules/events';
 
 const app = new Vue({
     el: '#app',
@@ -107,7 +103,7 @@ const app = new Vue({
         fetchBookings: function () {
             // Only make HTTP request if there are selected resources.
             if (this.selectedResources.length > 0) {
-                axiosInstance.get("api/bookings", {
+                Api.get("bookings", {
                     params: {
                         "resource_id": this.selectedResources.map(resource => resource.id),
                         "filter[between]": this.date + "," + (this.date + 86400),
@@ -139,7 +135,7 @@ const app = new Vue({
                 status: 'updating'
             }, booking));
 
-            axiosInstance.post("api/bookings", booking)
+            Api.post("bookings", booking)
                 .then(response => {
                     this.replaceBooking(newID, response.data);
                 })
@@ -156,7 +152,7 @@ const app = new Vue({
                 status: 'updating'
             }, booking));
 
-            axiosInstance.put("api/bookings/" + booking.id, booking)
+            Api.put("bookings/" + booking.id, booking)
                 .then(response => {
                     this.replaceBooking(booking.id, response.data);
                 })
@@ -167,7 +163,7 @@ const app = new Vue({
         },
 
         handleDeleteBooking: function (booking) {
-            axiosInstance.delete("api/bookings/" + booking.id)
+            Api.delete("bookings/" + booking.id)
                 .then(response => {
                     this.removeBooking(booking.id);
                 })
