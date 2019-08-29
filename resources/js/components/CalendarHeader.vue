@@ -3,14 +3,14 @@
         <h1>{{ dateString }}</h1>
         <button
             title="Previous"
-            v-on:click="handleUpdateDate(date - 86400)"
+            v-on:click="handleUpdateDate($store.state.date - 86400)"
         >
             <icon icon="cheveron-left" class="inline-block w-6"></icon>
             <span class="screen-reader">Previous</span>
         </button>
         <button
             title="Next"
-            v-on:click="handleUpdateDate(date + 86400)"
+            v-on:click="handleUpdateDate($store.state.date + 86400)"
         >
             <span class="screen-reader">Next</span>
             <icon icon="cheveron-right" class="inline-block w-6"></icon>
@@ -31,12 +31,12 @@
         },
         computed: {
             dateString: function () {
-                return new Date(this.date * 1000).toISOString().split('T')[0];
+                return new Date(this.$store.state.date * 1000).toISOString().split('T')[0];
             }
         },
         methods: {
             handleUpdateDate: function (newDate) {
-                Events.$emit('date-changed', newDate);
+                this.$store.commit('setDate', newDate);
             }
         },
         components: {

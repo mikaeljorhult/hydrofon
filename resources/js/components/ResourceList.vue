@@ -56,7 +56,7 @@
         },
         computed: {
             dateString: function () {
-                return new Date(this.date * 1000).toISOString().split('T')[0];
+                return new Date(this.$store.state.date * 1000).toISOString().split('T')[0];
             },
             hasChildren: function () {
                 return (this.categories && this.categories.length > 0) || (this.resources && this.resources.length > 0);
@@ -77,7 +77,7 @@
         },
         methods: {
             handleDateChange: function (selectedDate) {
-                Events.$emit('date-changed', new Date(selectedDate) / 1000);
+                this.$store.commit('setDate', new Date(selectedDate) / 1000);
             }
         },
         components: {

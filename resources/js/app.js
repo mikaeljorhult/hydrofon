@@ -5,12 +5,12 @@ import debounce from 'lodash/debounce';
 
 import Api from './api';
 import Events from './modules/events';
+import Store from './store';
 
 const app = new Vue({
     el: '#app',
 
     data: {
-        date: null,
         categories: [],
         resources: [],
         bookings: [],
@@ -19,6 +19,9 @@ const app = new Vue({
     },
 
     computed: {
+        date: function () {
+            return this.$store.state.date;
+        },
         expandedCategories: function () {
             return this.categories.filter(category => category.expanded)
         },
@@ -26,6 +29,8 @@ const app = new Vue({
             return this.resources.filter(resource => this.treeSelected.indexOf(resource.id) > -1)
         }
     },
+
+    store: Store,
 
     provide: function () {
         return {
@@ -35,7 +40,7 @@ const app = new Vue({
 
     methods: {
         initialData: function () {
-            this.date = window.HYDROFON.date || new Date().setHours(0, 0, 0, 0) / 1000;
+            this.$store.commit('setDate', window.HYDROFON.date || new Date().setHours(0, 0, 0, 0) / 1000);
 
             this.categories = window.HYDROFON.categories || [];
             this.resources = window.HYDROFON.resources || [];
@@ -106,7 +111,7 @@ const app = new Vue({
                 Api.get("bookings", {
                     params: {
                         "resource_id": this.selectedResources.map(resource => resource.id),
-                        "filter[between]": this.date + "," + (this.date + 86400),
+                        "filter[between]": this.$store.state.date + "," + (this.$store.state.date + 86400),
                         "include": "user"
                     }
                 })
@@ -234,11 +239,6 @@ const app = new Vue({
             this.$set(this.categories, index, Object.assign(this.categories[index], {
                 expanded: category.expanded
             }));
-        });
-
-        Events.$on('date-changed', newDate => {
-            this.date = newDate;
-            history.pushState(null, null, window.HYDROFON.baseURL + '/calendar/' + new Date(newDate * 1000).toISOString().split('T')[0]);
         });
 
         // Read initial data.
