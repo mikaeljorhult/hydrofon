@@ -3,7 +3,6 @@ import Vue from 'vue';
 import Segel from 'segel';
 import debounce from 'lodash/debounce';
 
-import Api from './api';
 import Events from './modules/events';
 import Store from './store';
 
@@ -13,7 +12,6 @@ const app = new Vue({
     data: {
         categories: [],
         resources: [],
-        bookings: [],
         treeSelected: [],
         updatedResources: new Map()
     },
@@ -44,7 +42,6 @@ const app = new Vue({
 
             this.categories = window.HYDROFON.categories || [];
             this.resources = window.HYDROFON.resources || [];
-            this.bookings = [];
 
             let expandedCategories = [];
 
@@ -67,115 +64,27 @@ const app = new Vue({
             }));
         },
 
-        addBooking: function (booking) {
-            this.bookings.push({
-                id: booking.id,
-                resource: booking.resource,
-                user: booking.user,
-                start: booking.start,
-                end: booking.end,
-                status: booking.status || 'confirmed',
-                editable: HYDROFON.isAdmin || HYDROFON.user === booking.user,
-                classes: HYDROFON.user === booking.user ? ['owner', 'bg-indigo-300'] : []
-            });
-        },
-
-        replaceBooking: function (id, booking) {
-            let index = this.bookings.findIndex(function (stored) {
-                return stored.id === id;
-            });
-
-            this.bookings.splice(index, 1, {
-                id: booking.id,
-                resource: booking.resource,
-                user: booking.user,
-                start: booking.start,
-                end: booking.end,
-                status: booking.status || 'confirmed',
-                editable: HYDROFON.isAdmin || HYDROFON.user === booking.user,
-                classes: HYDROFON.user === booking.user ? ['owner', 'bg-indigo-300'] : []
-            });
-        },
-
-        removeBooking: function (id) {
-            let index = this.bookings.findIndex(function (stored) {
-                return stored.id === id;
-            });
-
-            this.bookings.splice(index, 1);
-        },
-
         fetchBookings: function () {
             // Only make HTTP request if there are selected resources.
             if (this.selectedResources.length > 0) {
-                Api.get("bookings", {
-                    params: {
-                        "resource_id": this.selectedResources.map(resource => resource.id),
-                        "filter[between]": this.$store.state.date + "," + (this.$store.state.date + 86400),
-                        "include": "user"
-                    }
-                })
-                    .then(response => {
-                        let bookings = response.data.data;
-
-                        bookings.forEach((booking) => {
-                            booking.editable = HYDROFON.isAdmin || HYDROFON.user === booking.user;
-                            booking.classes = HYDROFON.user === booking.user ? ['owner', 'bg-indigo-300'] : [];
-                        });
-
-                        this.bookings = bookings;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                this.$store.dispatch('bookings/fetch', {
+                    "resource_id": this.selectedResources.map(resource => resource.id),
+                    "filter[between]": this.$store.state.date + "," + (this.$store.state.date + 86400),
+                    "include": "user"
+                });
             }
         },
 
         handleCreateBooking: function (booking) {
-            let newID = Math.random().toString(36).substring(2);
-
-            this.addBooking(Object.assign({
-                id: newID,
-                user: HYDROFON.user,
-                status: 'updating'
-            }, booking));
-
-            Api.post("bookings", booking)
-                .then(response => {
-                    this.replaceBooking(newID, response.data);
-                })
-                .catch(error => {
-                    this.removeBooking(newID);
-
-                    // Log error.
-                    console.log(error);
-                });
+            this.$store.dispatch('bookings/store', booking);
         },
 
         handleUpdateBooking: function (booking) {
-            this.replaceBooking(booking.id, Object.assign({
-                status: 'updating'
-            }, booking));
-
-            Api.put("bookings/" + booking.id, booking)
-                .then(response => {
-                    this.replaceBooking(booking.id, response.data);
-                })
-                .catch(error => {
-                    // Log error.
-                    console.log(error);
-                });
+            this.$store.dispatch('bookings/update', booking);
         },
 
         handleDeleteBooking: function (booking) {
-            Api.delete("bookings/" + booking.id)
-                .then(response => {
-                    this.removeBooking(booking.id);
-                })
-                .catch(error => {
-                    // Log error.
-                    console.log(error);
-                });
+            this.$store.dispatch('bookings/delete', booking.id);
         },
 
         updateSelectedResources: debounce(function () {

@@ -5,7 +5,7 @@
         v-bind:start="date"
         v-bind:end="date + 86400"
         v-bind:resources="selectedResources"
-        v-bind:bookings="bookings"
+        v-bind:bookings="$store.state.bookings.items"
         v-on:bookings-create="handleCreateBooking"
         v-on:bookings-update="handleUpdateBooking"
         v-on:bookings-delete="handleDeleteBooking"
