@@ -77,7 +77,7 @@ class UserTest extends TestCase
         $rendered = $user->exportToJson();
 
         $this->assertJson($rendered);
-        $this->assertContains($user->name, $rendered);
+        $this->assertStringContainsString($user->name, $rendered);
     }
 
     /**
@@ -93,7 +93,7 @@ class UserTest extends TestCase
         $rendered = $user->exportToJson();
 
         $this->assertJson($rendered);
-        $this->assertContains($booking->resource->name, $rendered);
+        $this->assertStringContainsString($booking->resource->name, $rendered);
     }
 
     /**
@@ -113,6 +113,6 @@ class UserTest extends TestCase
         $rendered = $user->exportToJson();
 
         $this->assertJson($rendered);
-        $this->assertContains('new-identifier', $rendered);
+        $this->assertStringContainsString('new-identifier', $rendered);
     }
 }

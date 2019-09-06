@@ -41,8 +41,8 @@ class SubscriptionTest extends TestCase
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
-        $this->assertContains('VCALENDAR', $rendered);
-        $this->assertContains($user->name, $rendered);
+        $this->assertStringContainsString('VCALENDAR', $rendered);
+        $this->assertStringContainsString($user->name, $rendered);
     }
 
     /**
@@ -61,8 +61,8 @@ class SubscriptionTest extends TestCase
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
-        $this->assertContains('VCALENDAR', $rendered);
-        $this->assertContains($resource->name, $rendered);
+        $this->assertStringContainsString('VCALENDAR', $rendered);
+        $this->assertStringContainsString($resource->name, $rendered);
     }
 
     /**
@@ -81,8 +81,8 @@ class SubscriptionTest extends TestCase
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
-        $this->assertContains('VEVENT', $rendered);
-        $this->assertContains($booking->resource->name, $rendered);
+        $this->assertStringContainsString('VEVENT', $rendered);
+        $this->assertStringContainsString($booking->resource->name, $rendered);
     }
 
     /**
@@ -104,7 +104,7 @@ class SubscriptionTest extends TestCase
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
-        $this->assertContains('VEVENT', $rendered);
+        $this->assertStringContainsString('VEVENT', $rendered);
         $this->assertEquals(1, substr_count($rendered, 'BEGIN:VEVENT'));
     }
 
@@ -132,7 +132,7 @@ class SubscriptionTest extends TestCase
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
-        $this->assertContains('VEVENT', $rendered);
+        $this->assertStringContainsString('VEVENT', $rendered);
         $this->assertEquals(2, substr_count($rendered, 'BEGIN:VEVENT'));
     }
 
@@ -151,6 +151,6 @@ class SubscriptionTest extends TestCase
 
         $rendered = $subscription->toCalendar();
 
-        $this->assertContains('SUMMARY:'.$booking->user->name, $rendered);
+        $this->assertStringContainsString('SUMMARY:'.$booking->user->name, $rendered);
     }
 }
