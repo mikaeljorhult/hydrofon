@@ -3,7 +3,7 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\User;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Resources\UserCollection;
@@ -25,7 +25,7 @@ class UserController extends Controller
                              ->allowedFilters([
                                  'name',
                                  'email',
-                                 Filter::exact('is_admin'),
+                                 AllowedFilter::exact('is_admin'),
                              ])
                              ->defaultSort('name')
                              ->allowedSorts(['name', 'email'])

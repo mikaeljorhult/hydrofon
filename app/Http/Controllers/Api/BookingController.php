@@ -3,7 +3,7 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Booking;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Resources\BookingCollection;
@@ -29,7 +29,7 @@ class BookingController extends Controller
                 'start_time',
                 'end_time',
                 'resource_id',
-                Filter::scope('between'),
+                AllowedFilter::scope('between'),
             ])
             ->allowedSorts([
                 'start_time',

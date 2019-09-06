@@ -4,7 +4,7 @@ namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\User;
 use Hydrofon\Identifier;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Requests\DeskRequest;
 
@@ -104,7 +104,7 @@ class DeskController extends Controller
                            })
                            ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                            ->join('users', 'users.id', '=', 'bookings.user_id')
-                           ->allowedFilters(Filter::scope('between'))
+                           ->allowedFilters(AllowedFilter::scope('between'))
                            ->defaultSort('start_time')
                            ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
                            ->paginate(15);

@@ -11,7 +11,7 @@
         "php": "^7.2",
         "eluceo/ical": "^0.15.0",
         "fideloper/proxy": "^4.0",
-        "kalnoy/nestedset": "^4.3",
+        "kalnoy/nestedset": "^5.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
