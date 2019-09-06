@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Booking;
-use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Resources\BookingCollection;
 use Hydrofon\Http\Requests\BookingStoreRequest;
