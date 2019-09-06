@@ -35,7 +35,7 @@ class DeleteTest extends TestCase
     {
         $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => '\Hydrofon\User',
+            'subscribable_type' => \Hydrofon\User::class,
             'subscribable_id'   => $user->id,
         ]);
 
@@ -44,7 +44,7 @@ class DeleteTest extends TestCase
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseMissing('subscriptions', [
-            'subscribable_type' => '\Hydrofon\User',
+            'subscribable_type' => \Hydrofon\User::class,
             'subscribable_id'   => $user->id,
         ]);
     }
@@ -58,7 +58,7 @@ class DeleteTest extends TestCase
     {
         $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => '\Hydrofon\User',
+            'subscribable_type' => \Hydrofon\User::class,
             'subscribable_id'   => $user->id,
         ]);
 
@@ -67,7 +67,7 @@ class DeleteTest extends TestCase
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseMissing('subscriptions', [
-            'subscribable_type' => '\Hydrofon\User',
+            'subscribable_type' => \Hydrofon\User::class,
             'subscribable_id'   => $user->id,
         ]);
     }
@@ -81,7 +81,7 @@ class DeleteTest extends TestCase
     {
         $resource = factory(Resource::class)->create();
         $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => '\Hydrofon\Resource',
+            'subscribable_type' => \Hydrofon\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
 
@@ -90,7 +90,7 @@ class DeleteTest extends TestCase
              ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseMissing('subscriptions', [
-            'subscribable_type' => '\Hydrofon\Resource',
+            'subscribable_type' => \Hydrofon\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
     }
@@ -104,7 +104,7 @@ class DeleteTest extends TestCase
     {
         $resource = factory(Resource::class)->create();
         $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => '\Hydrofon\Resource',
+            'subscribable_type' => \Hydrofon\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
 
@@ -113,7 +113,7 @@ class DeleteTest extends TestCase
              ->assertStatus(403);
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => '\Hydrofon\Resource',
+            'subscribable_type' => \Hydrofon\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
     }
