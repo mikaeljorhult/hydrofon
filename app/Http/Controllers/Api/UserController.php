@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\User;
-use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 use Hydrofon\Http\Controllers\Controller;
 use Hydrofon\Http\Resources\UserCollection;
 use Hydrofon\Http\Requests\UserStoreRequest;

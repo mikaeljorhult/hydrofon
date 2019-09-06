@@ -4,8 +4,8 @@ namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\User;
 use Hydrofon\Identifier;
-use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 use Hydrofon\Http\Requests\DeskRequest;
 
 class DeskController extends Controller
