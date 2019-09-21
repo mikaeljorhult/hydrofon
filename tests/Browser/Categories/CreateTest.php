@@ -3,9 +3,9 @@
 namespace Tests\Browser\Categories;
 
 use Hydrofon\User;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class CreateTest extends DuskTestCase
 {

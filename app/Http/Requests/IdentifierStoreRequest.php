@@ -3,9 +3,9 @@
 namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Identifier;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
 
 class IdentifierStoreRequest extends FormRequest
 {

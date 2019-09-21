@@ -3,8 +3,8 @@
 namespace Tests\Feature\Users\Identifiers;
 
 use Hydrofon\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class IndexTest extends TestCase
 {

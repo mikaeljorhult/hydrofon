@@ -3,14 +3,14 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Group;
-use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\Http\Resources\GroupCollection;
+use Hydrofon\Http\Requests\GroupDestroyRequest;
 use Hydrofon\Http\Requests\GroupStoreRequest;
 use Hydrofon\Http\Requests\GroupUpdateRequest;
-use Hydrofon\Http\Requests\GroupDestroyRequest;
 use Hydrofon\Http\Resources\Group as GroupResource;
+use Hydrofon\Http\Resources\GroupCollection;
+use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller
 {

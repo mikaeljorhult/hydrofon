@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\User;
 use Hydrofon\Checkin;
+use Hydrofon\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CheckinPolicy

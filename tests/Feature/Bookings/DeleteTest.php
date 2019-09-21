@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Bookings;
 
-use Hydrofon\User;
-use Tests\TestCase;
 use Hydrofon\Booking;
 use Hydrofon\Checkin;
 use Hydrofon\Checkout;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DeleteTest extends TestCase
 {

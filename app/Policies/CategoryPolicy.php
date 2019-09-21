@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\User;
 use Hydrofon\Category;
+use Hydrofon\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CategoryPolicy

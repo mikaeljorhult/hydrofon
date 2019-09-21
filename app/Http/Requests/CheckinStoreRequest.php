@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Checkin;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CheckinStoreRequest extends FormRequest
 {

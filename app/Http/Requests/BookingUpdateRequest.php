@@ -3,11 +3,11 @@
 namespace Hydrofon\Http\Requests;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
-use Hydrofon\Rules\Available;
-use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
 use Hydrofon\Http\Requests\Traits\PreserveReferer;
+use Hydrofon\Rules\Available;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class BookingUpdateRequest extends FormRequest
 {

@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\User;
-use Hydrofon\Identifier;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
 use Hydrofon\Http\Requests\DeskRequest;
+use Hydrofon\Identifier;
+use Hydrofon\User;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class DeskController extends Controller
 {
