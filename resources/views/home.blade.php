@@ -8,6 +8,6 @@
 
 @section('content')
     <section class="container">
-        &nbsp;MAIN
+        MAIN
     </section>
 @endsection

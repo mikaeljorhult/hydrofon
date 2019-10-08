@@ -15,7 +15,10 @@ export default new Vuex.Store({
 
     mutations: {
         setDate: function (state, newDate) {
-            history.pushState(null, null, window.HYDROFON.baseURL + '/calendar/' + new Date(newDate * 1000).toISOString().split('T')[0]);
+            if (location.href.indexOf(window.HYDROFON.baseURL + '/calendar/') > 0) {
+                history.pushState(null, null, window.HYDROFON.baseURL + '/calendar/' + new Date(newDate * 1000).toISOString().split('T')[0]);
+            }
+
             state.date = newDate;
         }
     }
