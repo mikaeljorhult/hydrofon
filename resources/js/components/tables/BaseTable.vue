@@ -18,9 +18,10 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody is="transition-group" name="slide-fade">
             <tr
                 v-for="item in items"
+                v-bind:key="item.id"
                 v-on:click="selectItem(item.id)"
             >
                 <td data-title="&nbsp;">
