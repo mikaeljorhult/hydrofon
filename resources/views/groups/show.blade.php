@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => $group->name)
+        @component('components.heading', ['title' => $group->name])
         @endcomponent
     </section>
 @endsection

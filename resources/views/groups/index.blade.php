@@ -15,9 +15,11 @@
 
         <table class="table">
             <thead>
-                <th class="table-column-check">#</th>
-                <th><a href="{{ route('groups.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
-                <th>&nbsp;</th>
+                <tr>
+                    <th class="table-column-check">#</th>
+                    <th><a href="{{ route('groups.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+                    <th>&nbsp;</th>
+                </tr>
             </thead>
 
             <tbody>

@@ -1,74 +1,86 @@
 table {
-  width: 100%;
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: #fff;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #fff;
 }
 
 tr:nth-child(even) {
-  background-color: #f4f7fc;
+    background-color: #f4f7fc;
 }
 
 tbody tr:hover {
-  @apply .bg-brand-100;
+    @apply .bg-brand-100;
 
-  .table-actions form {
-    visibility: visible;
-  }
+    .table-actions form {
+        visibility: visible;
+    }
+
+    .js & {
+        cursor: pointer;
+    }
 }
 
 
 th,
 td {
-  padding: .875rem;
+    padding: .875rem;
 }
 
 th {
-  border-bottom: 1px solid #eef2f5;
-  font-size: .8rem;
-  font-weight: normal;
-  text-align: left;
-  text-transform: uppercase;
-  
-  &, a {
-    color: #bfc9d3;
-    text-decoration: none;
-  }
+    font-weight: normal;
+    text-align: left;
+    text-transform: uppercase;
+
+    &, a {
+        color: #bfc9d3;
+        text-decoration: none;
+    }
+
+    thead & {
+        border-bottom: 1px solid #eef2f5;
+        font-size: .8rem;
+    }
+
+    tfoot & {
+        border-top: 1px solid #eef2f5;
+        font-size: .9rem;
+    }
 }
 
 .table-column-check {
-  width: 2rem;
+    width: 2rem;
 }
 
 .table-actions {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 
-  button {
-    vertical-align: middle;
-    padding: 0;
-    background-color: transparent;
-    color: #e65940;
-    border: none;
-    cursor: pointer;
-    font-size: .875rem;
-    font-weight: inherit;
-  }
-
-  form {
-    visibility: hidden;
-    font-size: 0;
-
-    &::before {
-      content: '|';
-      vertical-align: bottom;
-      padding: 0 .25rem;
-      color: #bfc9d3;
-      font-size: 1rem;
+    button {
+        vertical-align: middle;
+        padding: 0;
+        background-color: transparent;
+        color: #e65940;
+        border: none;
+        cursor: pointer;
+        font-size: .875rem;
+        font-weight: inherit;
     }
 
-    &:first-of-type::before {
-      visibility: hidden;
+    form {
+        visibility: hidden;
+        font-size: 0;
+
+        &::before {
+            content: '|';
+            vertical-align: bottom;
+            padding: 0 .25rem;
+            color: #bfc9d3;
+            font-size: 1rem;
+        }
+
+        &:first-of-type::before {
+            visibility: hidden;
+        }
     }
-  }
 }
