@@ -3,11 +3,13 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import Bookings from './bookings';
+import Buckets from './buckets';
 import Groups from './groups';
 
 export default new Vuex.Store({
     modules: {
         bookings: Bookings,
+        buckets: Buckets,
         groups: Groups,
     },
 

@@ -89,7 +89,7 @@
                 v-if="!hasItems"
                 key="no-items"
             >
-                <td v-bind:colspan="numberOfColumns">No groups was found.</td>
+                <td v-bind:colspan="numberOfColumns">No items was found.</td>
             </tr>
         </tbody>
 

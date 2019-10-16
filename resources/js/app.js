@@ -12,6 +12,7 @@ const app = new Vue({
     components: {
         'segel': Segel,
         'table-groups': require('./components/tables/GroupsTable').default,
+        'table-buckets': require('./components/tables/BucketsTable').default,
         'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,
         'topbar-impersonation': require('./components/TopbarImpersonation').default,

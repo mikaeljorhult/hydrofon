@@ -13,37 +13,42 @@
             {!! Form::close() !!}
         @endcomponent
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="table-column-check">#</th>
-                    <th><a href="{{ route('groups.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
+        <table-groups
+            v-bind:items='@json($groups->all())'
+            sort="{{ request('sort', 'name') }}"
+        >
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-column-check">#</th>
+                        <th><a href="{{ route('groups.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                @forelse($groups as $group)
-                    <tr>
-                        <td data-title="&nbsp;"></td>
-                        <td data-title="Name">
-                            <a href="{{ route('groups.edit', $group) }}">{{ $group->name }}</a>
-                        </td>
-                        <td data-title="&nbsp;" class="table-actions">
-                            {!! Form::model($group, ['route' => ['groups.destroy', $group->id], 'method' => 'DELETE' ]) !!}
-                            <button type="submit" title="Delete">
-                                Delete
-                            </button>
-                            {!! Form::close() !!}
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3">No groups was found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                <tbody>
+                    @forelse($groups as $group)
+                        <tr>
+                            <td data-title="&nbsp;"></td>
+                            <td data-title="Name">
+                                <a href="{{ route('groups.edit', $group) }}">{{ $group->name }}</a>
+                            </td>
+                            <td data-title="&nbsp;" class="table-actions">
+                                {!! Form::model($group, ['route' => ['groups.destroy', $group->id], 'method' => 'DELETE' ]) !!}
+                                <button type="submit" title="Delete">
+                                    Delete
+                                </button>
+                                {!! Form::close() !!}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3">No groups was found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </table-groups>
 
         {{ $groups->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>

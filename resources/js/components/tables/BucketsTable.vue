@@ -1,7 +1,7 @@
 <template>
     <table-base
         v-bind:resource="resource"
-        v-bind:items="$store.state.groups.items"
+        v-bind:items="$store.state.buckets.items"
         v-bind:columns="columns"
         v-bind:sort="sort"
         v-bind:editItem="editItem"
@@ -35,7 +35,7 @@
 
         data: function () {
             return {
-                resource: 'groups',
+                resource: 'buckets',
                 columns: ['name'],
                 editItem: 0,
                 isSaving: false,

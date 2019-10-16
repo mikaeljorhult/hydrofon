@@ -72,6 +72,8 @@ class BucketController extends Controller
      */
     public function update(BucketUpdateRequest $request, Bucket $bucket)
     {
+        BucketResource::withoutWrapping();
+
         $bucket->update($request->all());
         $bucket->resources()->sync($request->get('resources'));
 
