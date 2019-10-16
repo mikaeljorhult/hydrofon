@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\Resource;
-use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\ResourceDestroyRequest;
 use Hydrofon\Http\Requests\ResourceStoreRequest;
 use Hydrofon\Http\Requests\ResourceUpdateRequest;
-use Hydrofon\Http\Requests\ResourceDestroyRequest;
+use Hydrofon\Resource;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourceController extends Controller
 {

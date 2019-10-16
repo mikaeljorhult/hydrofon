@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Policies;
 
-use Hydrofon\User;
 use Hydrofon\Resource;
+use Hydrofon\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResourcePolicy

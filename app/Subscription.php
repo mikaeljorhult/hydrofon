@@ -2,10 +2,10 @@
 
 namespace Hydrofon;
 
-use Illuminate\Support\Str;
-use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Component\Calendar;
+use Eluceo\iCal\Component\Event;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Subscription extends Model
 {

@@ -4,8 +4,8 @@ namespace Hydrofon\Http\Controllers;
 
 use Hydrofon\Booking;
 use Hydrofon\Checkin;
-use Hydrofon\Http\Requests\CheckinStoreRequest;
 use Hydrofon\Http\Requests\CheckinDestroyRequest;
+use Hydrofon\Http\Requests\CheckinStoreRequest;
 
 class CheckinController extends Controller
 {

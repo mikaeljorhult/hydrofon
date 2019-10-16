@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\User;
-use Spatie\QueryBuilder\QueryBuilder;
+use Hydrofon\Http\Requests\UserDestroyRequest;
 use Hydrofon\Http\Requests\UserStoreRequest;
 use Hydrofon\Http\Requests\UserUpdateRequest;
-use Hydrofon\Http\Requests\UserDestroyRequest;
+use Hydrofon\User;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {

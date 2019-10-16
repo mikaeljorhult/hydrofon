@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Api\Categories;
 
-use Hydrofon\User;
-use Tests\TestCase;
 use Hydrofon\Category;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UpdateTest extends TestCase
 {

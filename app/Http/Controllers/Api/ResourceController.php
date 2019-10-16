@@ -2,13 +2,13 @@
 
 namespace Hydrofon\Http\Controllers\Api;
 
-use Hydrofon\Resource;
-use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\Http\Resources\ResourceCollection;
 use Hydrofon\Http\Requests\ResourceStoreRequest;
 use Hydrofon\Http\Requests\ResourceUpdateRequest;
 use Hydrofon\Http\Resources\Resource as ResourceResource;
+use Hydrofon\Http\Resources\ResourceCollection;
+use Hydrofon\Resource;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourceController extends Controller
 {
