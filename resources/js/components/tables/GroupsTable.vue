@@ -5,6 +5,7 @@
         v-bind:columns="columns"
         v-bind:editItem="editItem"
         v-bind:isSaving="isSaving"
+        v-on:delete="onDelete"
         v-on:edit="onEdit"
         v-on:save="onSave"
         v-on:cancel="onCancel"
@@ -31,13 +32,18 @@
             return {
                 resource: 'groups',
                 columns: ['name'],
-                storedItems: this.items,
                 editItem: 0,
                 isSaving: false,
             };
         },
 
         methods: {
+            onDelete: function (ids) {
+                ids.forEach((id) => {
+                    this.$store.dispatch('groups/delete', id);
+                });
+            },
+
             onEdit: function (ids) {
                 this.editItem = ids[0];
             },
@@ -45,10 +51,10 @@
             onSave: function (item) {
                 this.isSaving = true;
 
-                this.$store.dispatch('groups/update', item);
-
-                this.isSaving = false;
-                this.editItem = 0;
+                this.$store.dispatch('groups/update', item).then(() => {
+                    this.isSaving = false;
+                    this.editItem = 0;
+                });
             },
 
             onCancel: function () {

@@ -41,7 +41,7 @@ export default {
 
     actions: {
         fetch: function (context, parameters) {
-            Api.get("groups", {params: parameters})
+            return Api.get("groups", {params: parameters})
                 .then(response => {
                     context.commit('items', response.data.data);
                 })
@@ -51,7 +51,7 @@ export default {
         },
 
         store: function (context, item) {
-            Api.post("groups", item)
+            return Api.post("groups", item)
                 .then(response => {
                     context.commit('add', response.data);
                 })
@@ -62,7 +62,7 @@ export default {
         },
 
         update: function (context, item) {
-            Api.put("groups/" + item.id, item)
+            return Api.put("groups/" + item.id, item)
                 .then(response => {
                     context.commit('replace', response.data);
                 })
@@ -73,7 +73,7 @@ export default {
         },
 
         delete: function (context, id) {
-            Api.delete("groups/" + id)
+            return Api.delete("groups/" + id)
                 .then(response => {
                     context.commit('remove', id);
                 })
