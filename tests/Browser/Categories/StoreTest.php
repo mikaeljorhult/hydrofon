@@ -2,11 +2,11 @@
 
 namespace Tests\Browser\Categories;
 
-use Hydrofon\User;
 use Hydrofon\Category;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class StoreTest extends DuskTestCase
 {

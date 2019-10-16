@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\User;
 use Hydrofon\Http\Requests\ImpersonationRequest;
+use Hydrofon\User;
 
 class ImpersonationController extends Controller
 {

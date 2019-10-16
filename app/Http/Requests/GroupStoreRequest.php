@@ -3,8 +3,8 @@
 namespace Hydrofon\Http\Requests;
 
 use Hydrofon\Group;
-use Illuminate\Foundation\Http\FormRequest;
 use Hydrofon\Http\Requests\Traits\PreserveReferer;
+use Illuminate\Foundation\Http\FormRequest;
 
 class GroupStoreRequest extends FormRequest
 {

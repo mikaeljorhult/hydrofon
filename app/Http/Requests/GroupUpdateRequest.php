@@ -2,8 +2,8 @@
 
 namespace Hydrofon\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Hydrofon\Http\Requests\Traits\PreserveReferer;
+use Illuminate\Foundation\Http\FormRequest;
 
 class GroupUpdateRequest extends FormRequest
 {

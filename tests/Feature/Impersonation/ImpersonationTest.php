@@ -3,8 +3,8 @@
 namespace Tests\Feature\Impersonation;
 
 use Hydrofon\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ImpersonationTest extends TestCase
 {

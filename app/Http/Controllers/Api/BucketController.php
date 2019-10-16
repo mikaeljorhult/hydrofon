@@ -3,13 +3,13 @@
 namespace Hydrofon\Http\Controllers\Api;
 
 use Hydrofon\Bucket;
-use Spatie\QueryBuilder\QueryBuilder;
 use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\Http\Resources\BucketCollection;
+use Hydrofon\Http\Requests\BucketDestroyRequest;
 use Hydrofon\Http\Requests\BucketStoreRequest;
 use Hydrofon\Http\Requests\BucketUpdateRequest;
-use Hydrofon\Http\Requests\BucketDestroyRequest;
 use Hydrofon\Http\Resources\Bucket as BucketResource;
+use Hydrofon\Http\Resources\BucketCollection;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BucketController extends Controller
 {

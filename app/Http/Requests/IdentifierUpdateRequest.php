@@ -2,9 +2,9 @@
 
 namespace Hydrofon\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
 
 class IdentifierUpdateRequest extends FormRequest
 {

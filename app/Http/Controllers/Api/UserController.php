@@ -2,15 +2,15 @@
 
 namespace Hydrofon\Http\Controllers\Api;
 
-use Hydrofon\User;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
 use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\Http\Resources\UserCollection;
+use Hydrofon\Http\Requests\UserDestroyRequest;
 use Hydrofon\Http\Requests\UserStoreRequest;
 use Hydrofon\Http\Requests\UserUpdateRequest;
-use Hydrofon\Http\Requests\UserDestroyRequest;
 use Hydrofon\Http\Resources\User as UserResource;
+use Hydrofon\Http\Resources\UserCollection;
+use Hydrofon\User;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {

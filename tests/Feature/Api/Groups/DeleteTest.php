@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Api\Groups;
 
-use Hydrofon\User;
 use Hydrofon\Group;
-use Tests\TestCase;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DeleteTest extends TestCase
 {

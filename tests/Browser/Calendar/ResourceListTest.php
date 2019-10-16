@@ -2,12 +2,12 @@
 
 namespace Tests\Browser\Calendar;
 
-use Hydrofon\User;
 use Hydrofon\Booking;
 use Hydrofon\Resource;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class ResourceListTest extends DuskTestCase
 {

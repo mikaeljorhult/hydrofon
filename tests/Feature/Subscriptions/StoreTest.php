@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use Hydrofon\User;
-use Tests\TestCase;
 use Hydrofon\Resource;
 use Hydrofon\Subscription;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class StoreTest extends TestCase
 {

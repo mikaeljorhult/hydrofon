@@ -2,11 +2,11 @@
 
 namespace Hydrofon\Http\Controllers\Auth;
 
-use Hydrofon\User;
 use Hydrofon\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use Hydrofon\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {

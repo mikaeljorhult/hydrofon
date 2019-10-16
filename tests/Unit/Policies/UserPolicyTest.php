@@ -3,8 +3,8 @@
 namespace Tests\Unit\Policies;
 
 use Hydrofon\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UserPolicyTest extends TestCase
 {

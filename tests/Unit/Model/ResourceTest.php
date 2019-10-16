@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Model;
 
-use Hydrofon\User;
-use Tests\TestCase;
 use Hydrofon\Resource;
+use Hydrofon\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ResourceTest extends TestCase
 {

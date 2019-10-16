@@ -2,11 +2,11 @@
 
 namespace Tests\Browser\Groups;
 
-use Hydrofon\User;
 use Hydrofon\Group;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Hydrofon\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class IndexTest extends DuskTestCase
 {

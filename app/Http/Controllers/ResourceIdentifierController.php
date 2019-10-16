@@ -2,12 +2,12 @@
 
 namespace Hydrofon\Http\Controllers;
 
-use Hydrofon\Resource;
-use Hydrofon\Identifier;
-use Illuminate\Support\Str;
+use Hydrofon\Http\Requests\IdentifierDestroyRequest;
 use Hydrofon\Http\Requests\IdentifierStoreRequest;
 use Hydrofon\Http\Requests\IdentifierUpdateRequest;
-use Hydrofon\Http\Requests\IdentifierDestroyRequest;
+use Hydrofon\Identifier;
+use Hydrofon\Resource;
+use Illuminate\Support\Str;
 
 class ResourceIdentifierController extends Controller
 {
