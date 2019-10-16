@@ -11,7 +11,9 @@
                 </th>
 
                 <th v-for="key in columns">
-                    {{ key | capitalize }}
+                    <a v-bind:href="'/' + resource + '?sort=' + (sort === key ? '-' : '') + key">
+                        {{ key | capitalize }}
+                    </a>
                 </th>
 
                 <th>&nbsp;</th>
@@ -127,6 +129,10 @@
             columns: {
                 type: Array,
                 required: true,
+            },
+            sort: {
+                type: String,
+                required: false,
             },
             actions: {
                 type: Array,

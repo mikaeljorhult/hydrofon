@@ -3,6 +3,7 @@
         v-bind:resource="resource"
         v-bind:items="$store.state.groups.items"
         v-bind:columns="columns"
+        v-bind:sort="sort"
         v-bind:editItem="editItem"
         v-bind:isSaving="isSaving"
         v-on:delete="onDelete"
@@ -26,6 +27,10 @@
                     return [];
                 },
             },
+            sort: {
+                type: String,
+                required: false,
+            }
         },
 
         data: function () {
@@ -62,7 +67,7 @@
             },
         },
 
-        mounted: function () {
+        created: function () {
             if (this.items.length > 0) {
                 this.$store.commit('groups/items', this.items);
             }
