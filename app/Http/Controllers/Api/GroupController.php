@@ -72,6 +72,8 @@ class GroupController extends Controller
      */
     public function update(GroupUpdateRequest $request, Group $group)
     {
+        GroupResource::withoutWrapping();
+
         $group->update($request->all());
 
         return (new GroupResource($group))
