@@ -9,6 +9,14 @@ import Store from './store';
 const app = new Vue({
     el: '#app',
 
+    components: {
+        'segel': Segel,
+        'table-groups': require('./components/tables/GroupsTable').default,
+        'calendar-header': require('./components/CalendarHeader').default,
+        'resourcelist-root': require('./components/ResourceList').default,
+        'topbar-impersonation': require('./components/TopbarImpersonation').default,
+    },
+
     data: {
         categories: [],
         resources: [],
@@ -121,14 +129,6 @@ const app = new Vue({
 
             sessionStorage.setItem('resources-selected', JSON.stringify(this.treeSelected));
         }
-    },
-
-    components: {
-        'segel': Segel,
-        'table-groups': require('./components/tables/GroupsTable').default,
-        'calendar-header': require('./components/CalendarHeader').default,
-        'resourcelist-root': require('./components/ResourceList').default,
-        'topbar-impersonation': require('./components/TopbarImpersonation').default,
     },
 
     created: function () {

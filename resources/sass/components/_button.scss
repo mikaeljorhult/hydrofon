@@ -6,7 +6,8 @@
   }
 
   &.disabled,
-  &:disabled {
+  &:disabled,
+  &[disabled] {
     @apply opacity-50 cursor-not-allowed;
   }
 }

@@ -33,33 +33,68 @@
                 </td>
 
                 <td v-for="(key, index) in columns">
-                    <a
-                        v-if="index === 0"
-                        v-bind:href="'/' + resource + '/' + item.id + '/edit'"
-                        v-on:click.stop=""
-                    >
-                        {{ item[key] }}
-                    </a>
+                    <template v-if="editItem === item.id">
+                        <input
+                            v-model="editValues[key]"
+                            v-bind:disabled="isSaving"
+                            v-on:click.stop=""
+                            type="text"
+                            class="field"
+                        />
+                    </template>
 
-                    <span v-else>
-                        {{ item[key] }}
-                    </span>
+                    <template v-else>
+                        <a
+                            v-if="index === 0"
+                            v-bind:href="'/' + resource + '/' + item.id + '/edit'"
+                            v-on:click.stop=""
+                        >
+                            {{ item[key] }}
+                        </a>
+
+                        <span v-else>
+                            {{ item[key] }}
+                        </span>
+                    </template>
                 </td>
 
                 <td data-title="&nbsp;" class="table-actions">
-                    <form v-for="action in actions">
-                        <button
-                            v-on:click.prevent.stop="$emit(action.event, [item.id])"
-                        >{{ action.title }}</button>
-                    </form>
+                    <template v-if="editItem === item.id">
+                        <a
+                            v-bind:disabled="isSaving"
+                            v-on:click.prevent.stop="$emit('save', { id: item.id, ...editValues })"
+                            class="btn btn-primary"
+                        >{{ isSaving ? 'Saving' : 'Save' }}</a>
+
+                        <a
+                            v-bind:disabled="isSaving"
+                            v-on:click.prevent.stop="$emit('cancel')"
+                            class="btn"
+                        >Cancel</a>
+                    </template>
+
+                    <template v-else>
+                        <form v-for="action in actions">
+                            <button
+                                v-on:click.prevent.stop="$emit(action.event, [item.id])"
+                            >{{ action.title }}</button>
+                        </form>
+                    </template>
                 </td>
+            </tr>
+
+            <tr
+                v-if="!hasItems"
+                key="no-items"
+            >
+                <td v-bind:colspan="numberOfColumns">No groups was found.</td>
             </tr>
         </tbody>
 
-        <tfoot v-if="multipleActions.length > 0">
+        <tfoot v-if="multipleActions.length > 0 && hasItems">
             <tr>
                 <th
-                    v-bind:colspan="this.columns.length + 2"
+                    v-bind:colspan="numberOfColumns"
                     class="text-right"
                 >
                     <form v-for="action in multipleActions">
@@ -103,12 +138,23 @@
                     ];
                 },
             },
+            editItem: {
+                type: Number,
+                required: false,
+                default: 0,
+            },
+            isSaving: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
         },
 
         data: function () {
             return {
                 selectedItems: [],
                 isSelected: false,
+                editValues: {},
             };
         },
 
@@ -116,11 +162,31 @@
             multipleActions: function () {
                 return this.actions.filter(action => action.multiple);
             },
+
+            editIndex: function () {
+                return this.items.findIndex((item) => this.editItem === item.id);
+            },
+
+            hasItems: function () {
+                return this.items.length > 0;
+            },
+
+            numberOfColumns: function () {
+                return this.columns.length + 2;
+            },
         },
 
         watch: {
             selectedItems: function () {
                 this.isSelected = this.selectedItems.length === this.items.length;
+            },
+
+            editItem: function () {
+                if (this.editItem !== 0) {
+                    this.columns.forEach((key) => this.$set(this.editValues, key, this.items[this.editIndex][key]));
+                } else {
+                    this.resetEdit();
+                }
             },
         },
 
@@ -151,6 +217,10 @@
                         return item.id;
                     });
                 }
+            },
+
+            resetEdit: function () {
+                this.columns.forEach((key) => this.$set(this.editValues, key, null));
             },
         },
     };

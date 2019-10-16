@@ -3,10 +3,12 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import Bookings from './bookings';
+import Groups from './groups';
 
 export default new Vuex.Store({
     modules: {
         bookings: Bookings,
+        groups: Groups,
     },
 
     state: {

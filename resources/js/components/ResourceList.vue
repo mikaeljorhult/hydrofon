@@ -36,7 +36,6 @@
     import Icon from 'laravel-mix-vue-svgicon/IconComponent';
     import ResourceListCategory from './ResourceListCategory';
     import ResourceListResource from './ResourceListResource';
-    import Events from '../modules/events';
 
     export default {
         props: {
