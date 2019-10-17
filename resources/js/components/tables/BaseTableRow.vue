@@ -8,29 +8,17 @@
             />
         </td>
 
-        <td v-for="(key, index) in columns">
-            <template v-if="isEditing">
-                <input
-                    v-model="editValues[key]"
-                    v-bind:disabled="isSaving"
-                    type="text"
-                    class="field"
-                />
-            </template>
-
-            <template v-else>
-                <a
-                    v-if="index === 0"
-                    v-bind:href="'/' + resource + '/' + item.id + '/edit'"
-                >
-                    {{ item[key] }}
-                </a>
-
-                <span v-else>
-                    {{ item[key] }}
-                </span>
-            </template>
-        </td>
+        <td
+            v-for="(key, index) in columns"
+            v-bind:is="isEditing ? 'table-base-cell-text' : 'table-base-cell'"
+            v-bind:key="index"
+            v-model="editValues[key]"
+            v-bind:index="index"
+            v-bind:resource="resource"
+            v-bind:item="item"
+            v-bind:property="key"
+            v-bind:isSaving="isSaving"
+        ></td>
 
         <td data-title="&nbsp;" class="table-actions">
             <template v-if="isEditing">
@@ -59,7 +47,15 @@
 </template>
 
 <script>
+    import BaseTableCell from "./BaseTableCell";
+    import BaseTableCellText from "./BaseTableCellText";
+
     export default {
+        components: {
+            'table-base-cell': BaseTableCell,
+            'table-base-cell-text': BaseTableCellText,
+        },
+
         props: {
             resource: {
                 type: String,
