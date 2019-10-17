@@ -21,69 +21,22 @@
         </thead>
 
         <tbody is="transition-group" name="slide-fade">
-            <tr
+            <table-base-row
                 v-for="item in items"
                 v-bind:key="item.id"
-                v-on:click="selectItem(item.id)"
-            >
-                <td data-title="&nbsp;">
-                    <input
-                        type="checkbox"
-                        v-model="selectedItems"
-                        v-bind:value="item.id"
-                    />
-                </td>
-
-                <td v-for="(key, index) in columns">
-                    <template v-if="editItem === item.id">
-                        <input
-                            v-model="editValues[key]"
-                            v-bind:disabled="isSaving"
-                            v-on:click.stop=""
-                            type="text"
-                            class="field"
-                        />
-                    </template>
-
-                    <template v-else>
-                        <a
-                            v-if="index === 0"
-                            v-bind:href="'/' + resource + '/' + item.id + '/edit'"
-                            v-on:click.stop=""
-                        >
-                            {{ item[key] }}
-                        </a>
-
-                        <span v-else>
-                            {{ item[key] }}
-                        </span>
-                    </template>
-                </td>
-
-                <td data-title="&nbsp;" class="table-actions">
-                    <template v-if="editItem === item.id">
-                        <a
-                            v-bind:disabled="isSaving"
-                            v-on:click.prevent.stop="$emit('save', { id: item.id, ...editValues })"
-                            class="btn btn-primary"
-                        >{{ isSaving ? 'Saving' : 'Save' }}</a>
-
-                        <a
-                            v-bind:disabled="isSaving"
-                            v-on:click.prevent.stop="$emit('cancel')"
-                            class="btn"
-                        >Cancel</a>
-                    </template>
-
-                    <template v-else>
-                        <form v-for="action in actions">
-                            <button
-                                v-on:click.prevent.stop="$emit(action.event, [item.id])"
-                            >{{ action.title }}</button>
-                        </form>
-                    </template>
-                </td>
-            </tr>
+                v-bind:resource="resource"
+                v-bind:item="item"
+                v-bind:columns="columns"
+                v-bind:actions="actions"
+                v-bind:isSelected="selectedItems.indexOf(item.id) > -1"
+                v-bind:isEditing="editItem === item.id"
+                v-bind:isSaving="isSaving"
+                v-on:select="selectItem"
+                v-on:delete="$emit('delete', $event)"
+                v-on:edit="$emit('edit', $event)"
+                v-on:save="$emit('save', $event)"
+                v-on:cancel="$emit('cancel', $event)"
+            ></table-base-row>
 
             <tr
                 v-if="!hasItems"
@@ -113,7 +66,13 @@
 </template>
 
 <script>
+    import BaseTableRow from "./BaseTableRow";
+
     export default {
+        components: {
+            'table-base-row': BaseTableRow,
+        },
+
         props: {
             resource: {
                 type: String,
@@ -160,7 +119,6 @@
             return {
                 selectedItems: [],
                 isSelected: false,
-                editValues: {},
             };
         },
 
@@ -186,14 +144,6 @@
             selectedItems: function () {
                 this.isSelected = this.selectedItems.length === this.items.length;
             },
-
-            editItem: function () {
-                if (this.editItem !== 0) {
-                    this.columns.forEach((key) => this.$set(this.editValues, key, this.items[this.editIndex][key]));
-                } else {
-                    this.resetEdit();
-                }
-            },
         },
 
         filters: {
@@ -203,13 +153,13 @@
         },
 
         methods: {
-            selectItem: function (id) {
+            selectItem: function (item) {
                 let index = this.selectedItems.findIndex(function (selected) {
-                    return selected === id;
+                    return selected === item.id;
                 });
 
                 if (index === -1) {
-                    this.selectedItems.push(id);
+                    this.selectedItems.push(item.id);
                 } else {
                     this.selectedItems.splice(index, 1);
                 }
@@ -223,10 +173,6 @@
                         return item.id;
                     });
                 }
-            },
-
-            resetEdit: function () {
-                this.columns.forEach((key) => this.$set(this.editValues, key, null));
             },
         },
     };
