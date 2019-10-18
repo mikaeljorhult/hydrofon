@@ -47,8 +47,8 @@
 </template>
 
 <script>
-    import BaseTableCell from "./BaseTableCell";
-    import BaseTableCellText from "./BaseTableCellText";
+    import BaseTableCell from "./cells/BaseTableCell";
+    import BaseTableCellText from "./cells/BaseTableCellText";
 
     export default {
         components: {
