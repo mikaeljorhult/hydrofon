@@ -36,7 +36,11 @@
         data: function () {
             return {
                 resource: 'buckets',
-                columns: ['name'],
+                columns: [{
+                    type: 'text',
+                    name: 'Name',
+                    prop: 'name'
+                }],
                 editItem: 0,
                 isSaving: false,
             };

@@ -9,14 +9,14 @@
         </td>
 
         <td
-            v-for="(key, index) in columns"
-            v-bind:is="isEditing ? 'table-base-cell-text' : 'table-base-cell'"
+            v-for="(column, index) in columns"
+            v-bind:is="isEditing ? 'table-base-cell-' + (column.type || 'text') : 'table-base-cell'"
             v-bind:key="index"
-            v-model="editValues[key]"
+            v-model="editValues[column.prop]"
             v-bind:index="index"
             v-bind:resource="resource"
             v-bind:item="item"
-            v-bind:property="key"
+            v-bind:property="column.prop"
             v-bind:isSaving="isSaving"
         ></td>
 
@@ -47,13 +47,10 @@
 </template>
 
 <script>
-    import BaseTableCell from "./cells/BaseTableCell";
-    import BaseTableCellText from "./cells/BaseTableCellText";
-
     export default {
         components: {
-            'table-base-cell': BaseTableCell,
-            'table-base-cell-text': BaseTableCellText,
+            'table-base-cell': require('./cells/BaseTableCell').default,
+            'table-base-cell-text': require('./cells/BaseTableCellText').default,
         },
 
         props: {
@@ -99,7 +96,7 @@
         watch: {
             isEditing: function () {
                 if (this.isEditing) {
-                    this.columns.forEach((key) => this.$set(this.editValues, key, this.item[key]));
+                    this.columns.forEach((column) => this.$set(this.editValues, column.prop, this.item[column.prop]));
                 } else {
                     this.resetEdit();
                 }
@@ -118,7 +115,7 @@
             },
 
             resetEdit: function () {
-                this.columns.forEach((key) => this.$set(this.editValues, key, null));
+                this.columns.forEach((column) => this.$set(this.editValues, column.prop, null));
             },
         },
     };

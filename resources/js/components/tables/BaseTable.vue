@@ -10,9 +10,9 @@
                     />
                 </th>
 
-                <th v-for="key in columns">
-                    <a v-bind:href="'/' + resource + '?sort=' + (sort === key ? '-' : '') + key">
-                        {{ key | capitalize }}
+                <th v-for="column in columns">
+                    <a v-bind:href="'/' + resource + '?sort=' + (sort === column.prop ? '-' : '') + column.prop">
+                        {{ column.name }}
                     </a>
                 </th>
 
@@ -143,12 +143,6 @@
         watch: {
             selectedItems: function () {
                 this.isSelected = this.selectedItems.length === this.items.length;
-            },
-        },
-
-        filters: {
-            capitalize: function (str) {
-                return str.charAt(0).toUpperCase() + str.slice(1);
             },
         },
 
