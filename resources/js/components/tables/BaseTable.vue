@@ -11,7 +11,7 @@
                 </th>
 
                 <th v-for="column in columns">
-                    <a v-bind:href="'/' + resource + '?sort=' + (sort === column.prop ? '-' : '') + column.prop">
+                    <a v-bind:href="'/' + resource + '?sort=' + (sort === (column.sort || column.prop) ? '-' : '') + (column.sort || column.prop)">
                         {{ column.name }}
                     </a>
                 </th>

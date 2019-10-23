@@ -4,11 +4,11 @@
             v-if="index === 0"
             v-bind:href="url"
         >
-            {{ item[property] }}
+            {{ value }}
         </a>
 
         <span v-else>
-            {{ item[property] }}
+            {{ value }}
         </span>
     </td>
 </template>
@@ -21,6 +21,15 @@
             url: function () {
                 return '/' + this.resource + '/' + this.item.id + '/edit';
             },
+
+            value: function () {
+                //return this.item[this.property];
+                return this.property.indexOf('_id') > -1 && this.relationships[this.property.replace('_id', '')].length > 0
+                    ? this.relationships[this.property.replace('_id', '')].find((item) => item.id === this.item[this.property]).name
+                    : this.item[this.property];
+            },
         },
+
+        inject: ['relationships'],
     };
 </script>

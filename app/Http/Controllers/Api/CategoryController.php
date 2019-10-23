@@ -9,6 +9,7 @@ use Hydrofon\Http\Requests\CategoryStoreRequest;
 use Hydrofon\Http\Requests\CategoryUpdateRequest;
 use Hydrofon\Http\Resources\Category as CategoryResource;
 use Hydrofon\Http\Resources\CategoryCollection;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
@@ -23,7 +24,11 @@ class CategoryController extends Controller
         $categories = QueryBuilder::for(Category::class)
                                   ->with(['parent'])
                                   ->leftJoin('categories as parent', 'parent.id', '=', 'categories.parent_id')
-                                  ->allowedFilters('categories.name', 'categories.parent_id')
+                                  ->allowedFilters([
+                                      AllowedFilter::exact('categories.id'),
+                                      'categories.name',
+                                      'categories.parent_id',
+                                  ])
                                   ->allowedSorts(['categories.name', 'parent.name'])
                                   ->defaultSort('categories.name')
                                   ->select('categories.*')

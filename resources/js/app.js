@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import ReactiveProvide from 'vue-reactive-provide';
+Vue.use(ReactiveProvide);
 
 import Segel from 'segel';
 import debounce from 'lodash/debounce';
@@ -12,6 +14,7 @@ const app = new Vue({
     components: {
         'segel': Segel,
         'table-buckets': require('./components/tables/BucketsTable').default,
+        'table-categories': require('./components/tables/CategoriesTable').default,
         'table-groups': require('./components/tables/GroupsTable').default,
         'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,

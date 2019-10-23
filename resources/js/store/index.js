@@ -4,12 +4,14 @@ Vue.use(Vuex);
 
 import Bookings from './bookings';
 import Buckets from './buckets';
+import Categories from './categories';
 import Groups from './groups';
 
 export default new Vuex.Store({
     modules: {
         bookings: Bookings,
         buckets: Buckets,
+        categories: Categories,
         groups: Groups,
     },
 

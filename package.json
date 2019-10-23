@@ -24,7 +24,8 @@
         "tailwindcss": "^1.0",
         "vue": "^2.6.0",
         "vue-flatpickr-component": "^8.1.1",
-        "vue-select": "^3.1.0",
+        "vue-reactive-provide": "^0.3.0",
+        "vue-select": "^3.2.0",
         "vue-template-compiler": "^2.6.0",
         "vuex": "^3.1.1"
     }
