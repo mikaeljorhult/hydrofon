@@ -29,6 +29,13 @@
                     return [];
                 },
             },
+            parentItems: {
+                type: Array,
+                required: false,
+                default: function () {
+                    return [];
+                },
+            },
             sort: {
                 type: String,
                 required: false,
@@ -90,6 +97,9 @@
                 this.$store.commit(this.resource + '/items', this.items);
             }
 
+            if (this.parentItems.length > 0) {
+                this.parent = this.parentItems;
+            } else {
                 axios.get('api/categories', {
                     params: {
                         'filter[categories.id]': this.$store.state.categories.items.map((item) => item.parent_id).join(','),
@@ -101,6 +111,7 @@
                     .catch(error => {
                         console.log(error);
                     });
+            }
         },
     };
 </script>

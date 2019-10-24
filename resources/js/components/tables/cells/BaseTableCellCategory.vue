@@ -1,7 +1,7 @@
 <template>
     <td>
         <v-select
-            class="field p-0"
+            class="field p-1"
             placeholder="Category"
             v-model="value"
             v-bind:name="property"
