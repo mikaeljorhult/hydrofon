@@ -33,9 +33,20 @@
                     name: 'Description',
                     prop: 'description'
                 }],
+                actions: [
+                    { event: 'identifiers', title: 'Identifiers' },
+                    { event: 'edit', title: 'Edit' },
+                    { event: 'delete', title: 'Delete', multiple: true },
+                ],
                 editItem: 0,
                 isSaving: false,
             };
+        },
+
+        methods: {
+            onIdentifiers: function (ids) {
+                window.location = '/resources/' + ids[0] + '/identifiers';
+            },
         },
     };
 </script>

@@ -32,10 +32,7 @@
                 v-bind:isEditing="editItem === item.id"
                 v-bind:isSaving="isSaving"
                 v-on:select="selectItem"
-                v-on:delete="$emit('delete', $event)"
-                v-on:edit="$emit('edit', $event)"
-                v-on:save="$emit('save', $event)"
-                v-on:cancel="$emit('cancel', $event)"
+                v-on="$listeners"
             ></table-base-row>
 
             <tr
