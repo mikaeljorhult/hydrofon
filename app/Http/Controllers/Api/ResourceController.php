@@ -74,6 +74,8 @@ class ResourceController extends Controller
      */
     public function update(ResourceUpdateRequest $request, Resource $resource)
     {
+        ResourceResource::withoutWrapping();
+
         $input = $request->all();
 
         $resource->update($input);

@@ -37,7 +37,7 @@
 
         <table-categories
             v-bind:items='@json($categories->all())'
-            v-bind:parent-items='@json($categories->pluck('parent')->unique()->flatten())'
+            v-bind:items-parent='@json($categories->pluck('parent')->unique()->flatten())'
             sort="{{ request('sort', 'name') }}"
         >
             <table class="table">

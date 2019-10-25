@@ -80,6 +80,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
+        CategoryResource::withoutWrapping();
+
         $category->update($request->all());
         $category->groups()->sync($request->get('groups'));
 
