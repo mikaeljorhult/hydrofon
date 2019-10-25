@@ -6,6 +6,7 @@ import Bookings from './bookings';
 import Buckets from './buckets';
 import Categories from './categories';
 import Groups from './groups';
+import Resources from './resources';
 
 export default new Vuex.Store({
     modules: {
@@ -13,6 +14,7 @@ export default new Vuex.Store({
         buckets: Buckets,
         categories: Categories,
         groups: Groups,
+        resources: Resources,
     },
 
     state: {

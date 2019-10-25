@@ -16,6 +16,7 @@ const app = new Vue({
         'table-buckets': require('./components/tables/BucketsTable').default,
         'table-categories': require('./components/tables/CategoriesTable').default,
         'table-groups': require('./components/tables/GroupsTable').default,
+        'table-resources': require('./components/tables/ResourcesTable').default,
         'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,
         'topbar-impersonation': require('./components/TopbarImpersonation').default,

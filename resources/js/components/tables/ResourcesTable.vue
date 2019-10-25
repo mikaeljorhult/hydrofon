@@ -1,11 +1,13 @@
 <template>
     <table-base
         v-bind:resource="resource"
-        v-bind:items="$store.state.buckets.items"
+        v-bind:items="$store.state.resources.items"
         v-bind:columns="columns"
+        v-bind:actions="actions"
         v-bind:sort="sort"
         v-bind:editItem="editItem"
         v-bind:isSaving="isSaving"
+        v-on:identifiers="onIdentifiers"
         v-on:delete="onDelete"
         v-on:edit="onEdit"
         v-on:save="onSave"
@@ -21,11 +23,15 @@
 
         data: function () {
             return {
-                resource: 'buckets',
+                resource: 'resources',
                 columns: [{
                     type: 'text',
                     name: 'Name',
                     prop: 'name'
+                }, {
+                    type: 'text',
+                    name: 'Description',
+                    prop: 'description'
                 }],
                 editItem: 0,
                 isSaving: false,
