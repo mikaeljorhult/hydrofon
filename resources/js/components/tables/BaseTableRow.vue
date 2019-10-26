@@ -52,6 +52,7 @@
             'table-base-cell': require('./cells/BaseTableCell').default,
             'table-base-cell-text': require('./cells/BaseTableCellText').default,
             'table-base-cell-category': require('./cells/BaseTableCellCategory').default,
+            'table-base-cell-email': require('./cells/BaseTableCellEmail').default,
         },
 
         props: {
