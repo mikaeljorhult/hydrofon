@@ -12,6 +12,6 @@
 
 <script>
     export default {
-        props: ['index', 'resource', 'item', 'property', 'isSaving', 'value'],
+        props: ['index', 'resource', 'item', 'column', 'isSaving', 'value'],
     };
 </script>

@@ -10,7 +10,10 @@
                     />
                 </th>
 
-                <th v-for="column in columns">
+                <th
+                    v-for="column in columns"
+                    v-bind:class="{ 'text-center': column.type === 'checkbox' }"
+                >
                     <a v-bind:href="'/' + resource + '?sort=' + (sort === (column.sort || column.prop) ? '-' : '') + (column.sort || column.prop)">
                         {{ column.name }}
                     </a>

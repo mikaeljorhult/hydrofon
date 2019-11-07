@@ -1,21 +1,31 @@
 <template>
-    <td>
-        <a
-            v-if="index === 0"
-            v-bind:href="url"
-        >
-            {{ value }}
-        </a>
+    <td v-bind:class="{ 'text-center': column.type === 'checkbox' }">
+        <template v-if="column.type === 'checkbox'">
+            <input
+                v-bind:checked="value"
+                type="checkbox"
+                disabled="disabled"
+            />
+        </template>
 
-        <span v-else>
-            {{ value }}
-        </span>
+        <template v-else>
+            <a
+                v-if="index === 0"
+                v-bind:href="url"
+            >
+                {{ value }}
+            </a>
+
+            <span v-else>
+                {{ value }}
+            </span>
+        </template>
     </td>
 </template>
 
 <script>
     export default {
-        props: ['index', 'resource', 'item', 'property', 'isSaving'],
+        props: ['index', 'resource', 'item', 'column', 'isSaving'],
 
         computed: {
             url: function () {
@@ -23,10 +33,9 @@
             },
 
             value: function () {
-                //return this.item[this.property];
-                return this.property.indexOf('_id') > -1 && this.relationships[this.property.replace('_id', '')].length > 0
-                    ? this.relationships[this.property.replace('_id', '')].find((item) => item.id === this.item[this.property]).name
-                    : this.item[this.property];
+                return this.column.prop.indexOf('_id') > -1 && this.relationships[this.column.prop.replace('_id', '')].length > 0
+                    ? this.relationships[this.column.prop.replace('_id', '')].find((item) => item.id === this.item[this.column.prop]).name
+                    : this.item[this.column.prop];
             },
         },
 

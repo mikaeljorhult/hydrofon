@@ -30,6 +30,10 @@
                     type: 'text',
                     name: 'Name',
                     prop: 'name'
+                }, {
+                    type: 'checkbox',
+                    name: 'Administrator',
+                    prop: 'is_admin'
                 }],
                 editItem: 0,
                 isSaving: false,

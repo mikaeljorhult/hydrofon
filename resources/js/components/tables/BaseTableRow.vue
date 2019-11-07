@@ -16,7 +16,7 @@
             v-bind:index="index"
             v-bind:resource="resource"
             v-bind:item="item"
-            v-bind:property="column.prop"
+            v-bind:column="column"
             v-bind:isSaving="isSaving"
         ></td>
 
@@ -52,6 +52,7 @@
             'table-base-cell': require('./cells/BaseTableCell').default,
             'table-base-cell-text': require('./cells/BaseTableCellText').default,
             'table-base-cell-category': require('./cells/BaseTableCellCategory').default,
+            'table-base-cell-checkbox': require('./cells/BaseTableCellCheckbox').default,
             'table-base-cell-email': require('./cells/BaseTableCellEmail').default,
         },
 

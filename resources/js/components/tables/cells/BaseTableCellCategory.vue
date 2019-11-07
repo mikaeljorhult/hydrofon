@@ -4,10 +4,10 @@
             class="field p-1"
             placeholder="Category"
             v-model="value"
-            v-bind:name="property"
+            v-bind:name="column.prop"
             v-bind:searchable="true"
             v-bind:clearable="false"
-            v-bind:options="relationships[property.replace('_id', '')]"
+            v-bind:options="relationships[column.prop.replace('_id', '')]"
             v-bind:reduce="category => category.id"
             label="name"
         >
@@ -25,7 +25,7 @@
             'v-select': vSelect,
         },
 
-        props: ['index', 'resource', 'item', 'property', 'isSaving', 'value'],
+        props: ['index', 'resource', 'item', 'column', 'isSaving', 'value'],
 
         inject: ['relationships'],
     };
