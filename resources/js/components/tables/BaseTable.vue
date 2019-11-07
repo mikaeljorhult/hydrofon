@@ -14,7 +14,7 @@
                     v-for="column in columns"
                     v-bind:class="{ 'text-center': column.type === 'checkbox' }"
                 >
-                    <a v-bind:href="'/' + resource + '?sort=' + (sort === (column.sort || column.prop) ? '-' : '') + (column.sort || column.prop)">
+                    <a v-bind:href="'/' + type + '?sort=' + (sort === (column.sort || column.prop) ? '-' : '') + (column.sort || column.prop)">
                         {{ column.name }}
                     </a>
                 </th>
@@ -27,7 +27,7 @@
             <table-base-row
                 v-for="item in items"
                 v-bind:key="item.id"
-                v-bind:resource="resource"
+                v-bind:type="type"
                 v-bind:item="item"
                 v-bind:columns="columns"
                 v-bind:actions="actions"
@@ -74,7 +74,7 @@
         },
 
         props: {
-            resource: {
+            type: {
                 type: String,
                 required: true,
             },

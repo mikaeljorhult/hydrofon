@@ -25,11 +25,11 @@
 
 <script>
     export default {
-        props: ['index', 'resource', 'item', 'column', 'isSaving'],
+        props: ['index', 'type', 'item', 'column', 'isSaving'],
 
         computed: {
             url: function () {
-                return '/' + this.resource + '/' + this.item.id + '/edit';
+                return '/' + this.type + '/' + this.item.id + '/edit';
             },
 
             value: function () {

@@ -1,6 +1,6 @@
 <template>
     <table-base
-        v-bind:resource="resource"
+        v-bind:type="type"
         v-bind:items="$store.state.categories.items"
         v-bind:columns="columns"
         v-bind:sort="sort"
@@ -32,7 +32,7 @@
 
         data: function () {
             return {
-                resource: 'categories',
+                type: 'categories',
                 columns: [{
                     type: 'text',
                     name: 'Name',
@@ -57,7 +57,7 @@
 
         created: function () {
             if (this.items.length > 0) {
-                this.$store.commit(this.resource + '/items', this.items);
+                this.$store.commit(this.type + '/items', this.items);
             }
 
             if (this.itemsParent.length > 0) {

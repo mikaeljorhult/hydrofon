@@ -1,6 +1,6 @@
 <template>
     <table-base
-        v-bind:resource="resource"
+        v-bind:type="type"
         v-bind:items="$store.state.resources.items"
         v-bind:columns="columns"
         v-bind:actions="actions"
@@ -23,7 +23,7 @@
 
         data: function () {
             return {
-                resource: 'resources',
+                type: 'resources',
                 columns: [{
                     type: 'text',
                     name: 'Name',
