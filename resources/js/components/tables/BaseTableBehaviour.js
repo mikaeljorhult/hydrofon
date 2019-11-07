@@ -25,7 +25,7 @@ export default {
     methods: {
         onDelete: function (ids) {
             ids.forEach((id) => {
-                this.$store.dispatch(this.resource + '/delete', id);
+                this.$store.dispatch(this.type + '/delete', id);
             });
         },
 
@@ -36,7 +36,7 @@ export default {
         onSave: function (item) {
             this.isSaving = true;
 
-            this.$store.dispatch(this.resource + '/update', item).then(() => {
+            this.$store.dispatch(this.type + '/update', item).then(() => {
                 this.isSaving = false;
                 this.editItem = 0;
             });
@@ -49,7 +49,7 @@ export default {
 
     created: function () {
         if (this.items.length > 0) {
-            this.$store.commit(this.resource + '/items', this.items);
+            this.$store.commit(this.type + '/items', this.items);
         }
     },
 };

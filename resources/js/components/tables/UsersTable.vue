@@ -1,6 +1,6 @@
 <template>
     <table-base
-        v-bind:resource="resource"
+        v-bind:type="type"
         v-bind:items="$store.state.users.items"
         v-bind:columns="columns"
         v-bind:sort="sort"
@@ -21,7 +21,7 @@
 
         data: function () {
             return {
-                resource: 'users',
+                type: 'users',
                 columns: [{
                     type: 'email',
                     name: 'E-mail',

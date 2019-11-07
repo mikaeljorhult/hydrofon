@@ -14,7 +14,7 @@
             v-bind:key="index"
             v-model="editValues[column.prop]"
             v-bind:index="index"
-            v-bind:resource="resource"
+            v-bind:type="type"
             v-bind:item="item"
             v-bind:column="column"
             v-bind:isSaving="isSaving"
@@ -57,7 +57,7 @@
         },
 
         props: {
-            resource: {
+            type: {
                 type: String,
                 required: true,
             },
