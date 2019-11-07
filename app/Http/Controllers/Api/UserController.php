@@ -81,11 +81,19 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         UserResource::withoutWrapping();
-        $currentUser = auth()->user();
+        $input = $request->all();
 
-        $user->update(array_merge($request->all(), [
-            'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $user->user_id,
-        ]));
+        if (! $user->is(auth()->user())) {
+            $input['is_admin'] = ($request->has('is_admin') ? $request->get('is_admin') : false);
+        } else {
+            unset($input['is_admin']);
+        }
+
+        if ($request->has('password')) {
+            $input['password'] = bcrypt($request->input('password'));
+        }
+
+        $user->update($input);
 
         return (new UserResource($user))
             ->response()

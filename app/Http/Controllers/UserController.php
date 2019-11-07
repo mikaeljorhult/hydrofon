@@ -121,6 +121,8 @@ class UserController extends Controller
 
         if (! $user->is(auth()->user())) {
             $input['is_admin'] = $request->has('is_admin');
+        } else {
+            unset($input['is_admin']);
         }
 
         if ($request->has('password')) {
