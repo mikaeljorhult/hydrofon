@@ -43,6 +43,7 @@
                     name: 'Parent',
                     prop: 'parent_id',
                     sort: 'parent.name',
+                    relationship: true,
                 }],
                 editItem: 0,
                 isSaving: false,

@@ -8,6 +8,10 @@
             />
         </template>
 
+        <template v-else-if="column.type === 'datetime'">
+            {{ new Date(value * 1000).toLocaleString() }}
+        </template>
+
         <template v-else>
             <a
                 v-if="index === 0"
@@ -33,7 +37,7 @@
             },
 
             value: function () {
-                return this.column.prop.indexOf('_id') > -1 && this.relationships[this.column.prop.replace('_id', '')].length > 0
+                return this.column.relationship && this.relationships[this.column.prop.replace('_id', '')].length > 0
                     ? this.relationships[this.column.prop.replace('_id', '')].find((item) => item.id === this.item[this.column.prop]).name
                     : this.item[this.column.prop];
             },
