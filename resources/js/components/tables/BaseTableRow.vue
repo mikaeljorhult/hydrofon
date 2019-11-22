@@ -53,7 +53,10 @@
             'table-base-cell-text': require('./cells/BaseTableCellText').default,
             'table-base-cell-category': require('./cells/BaseTableCellCategory').default,
             'table-base-cell-checkbox': require('./cells/BaseTableCellCheckbox').default,
+            'table-base-cell-datetime': require('./cells/BaseTableCellDateTime').default,
             'table-base-cell-email': require('./cells/BaseTableCellEmail').default,
+            'table-base-cell-resource': require('./cells/BaseTableCellResource').default,
+            'table-base-cell-user': require('./cells/BaseTableCellUser').default,
         },
 
         props: {

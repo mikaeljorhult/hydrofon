@@ -48,17 +48,16 @@
 
         <tfoot v-if="multipleActions.length > 0 && hasItems">
             <tr>
-                <th
-                    v-bind:colspan="numberOfColumns"
-                    class="text-right"
-                >
-                    <form v-for="action in multipleActions">
-                        <button
-                            v-bind:disabled="selectedItems.length === 0"
-                            v-on:click.prevent.stop="$emit(action.event, selectedItems)"
-                            class="btn"
-                        >{{ action.title }}</button>
-                    </form>
+                <th v-bind:colspan="numberOfColumns">
+                    <div class="flex justify-end">
+                        <form v-for="action in multipleActions">
+                            <button
+                                v-bind:disabled="selectedItems.length === 0"
+                                v-on:click.prevent.stop="$emit(action.event, selectedItems)"
+                                class="btn"
+                            >{{ action.title }}</button>
+                        </form>
+                    </div>
                 </th>
             </tr>
         </tfoot>
