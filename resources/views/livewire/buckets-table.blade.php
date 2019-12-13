@@ -4,7 +4,7 @@
             <th class="table-column-check">
                 <input
                     type="checkbox"
-                    {{ count($this->selectedRows) === count($buckets) ? 'checked="checked"' : '' }}
+                    {{ count($this->selectedRows) === count($items) ? 'checked="checked"' : '' }}
                     wire:click="$emit('selectAll', $event.target.checked)"
                 />
             </th>
@@ -13,13 +13,13 @@
         </thead>
 
         <tbody>
-            @forelse($buckets as $bucket)
-                @if($this->isEditing === $bucket->id)
+            @forelse($items as $item)
+                @if($this->isEditing === $item->id)
                     <tr>
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Name">
                             <input
-                                value="{{ $bucket->name }}"
+                                value="{{ $item->name }}"
                                 type="text"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.name"
@@ -47,29 +47,29 @@
                         <td data-title="&nbsp;">
                             <input
                                 type="checkbox"
-                                value="{{ $bucket->id }}"
-                                {{ in_array($bucket->id, $this->selectedRows) ? 'checked="checked"' : '' }}
-                                wire:click="$emit('select', {{ $bucket->id }}, $event.target.checked)"
+                                value="{{ $item->id }}"
+                                {{ in_array($item->id, $this->selectedRows) ? 'checked="checked"' : '' }}
+                                wire:click="$emit('select', {{ $item->id }}, $event.target.checked)"
                             />
                         </td>
                         <td data-title="Name">
-                            <a href="{{ route('buckets.edit', $bucket) }}">{{ $bucket->name }}</a>
+                            <a href="{{ route('buckets.edit', $item) }}">{{ $item->name }}</a>
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
                             <div>
                                 <a
-                                    href="{{ route('buckets.edit', $bucket) }}"
+                                    href="{{ route('buckets.edit', $item) }}"
                                     title="Edit"
-                                    wire:click.prevent="$emit('edit', {{ $bucket->id }})"
+                                    wire:click.prevent="$emit('edit', {{ $item->id }})"
                                 >Edit</a>
                             </div>
 
                             <div>
-                                {!! Form::model($bucket, ['route' => ['buckets.destroy', $bucket->id], 'method' => 'DELETE' ]) !!}
+                                {!! Form::model($item, ['route' => ['buckets.destroy', $item->id], 'method' => 'DELETE' ]) !!}
                                     <button
                                         type="submit"
                                         title="Delete"
-                                        wire:click.prevent="$emit('delete', {{ $bucket->id }})"
+                                        wire:click.prevent="$emit('delete', {{ $item->id }})"
                                         wire:loading.attr="disabled"
                                     >Delete</button>
                                 {!! Form::close() !!}
