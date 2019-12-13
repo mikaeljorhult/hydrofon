@@ -13,7 +13,6 @@ const app = new Vue({
 
     components: {
         'segel': Segel,
-        'table-buckets': require('./components/tables/BucketsTable').default,
         'table-bookings': require('./components/tables/BookingsTable').default,
         'table-categories': require('./components/tables/CategoriesTable').default,
         'table-groups': require('./components/tables/GroupsTable').default,

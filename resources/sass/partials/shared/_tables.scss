@@ -12,7 +12,7 @@ tr:nth-child(even) {
 tbody tr:hover {
     @apply .bg-brand-100;
 
-    .table-actions form {
+    .table-actions > div {
         visibility: visible;
     }
 
@@ -56,18 +56,27 @@ th {
     display: flex;
     justify-content: flex-end;
 
-    button {
-        vertical-align: middle;
-        padding: 0;
-        background-color: transparent;
-        color: #e65940;
-        border: none;
-        cursor: pointer;
-        font-size: .875rem;
-        font-weight: inherit;
+    form {
+        display: inline;
     }
 
-    form {
+    a,
+    button {
+        &:not(.btn) {
+            vertical-align: middle;
+            padding: 0;
+            background-color: transparent;
+            color: #e65940;
+            border: none;
+            cursor: pointer;
+            font-weight: inherit;
+            text-decoration: none;
+        }
+
+        font-size: .875rem;
+    }
+
+    > div {
         visibility: hidden;
         font-size: 0;
 

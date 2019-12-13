@@ -23,6 +23,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @livewireAssets
 </head>
 
 <body class="font-base font-light">
