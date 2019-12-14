@@ -9,6 +9,7 @@ class BaseTable extends Component
 {
     protected $model;
     protected $modelInstance;
+    protected $relationships = [];
     public $itemIDs;
     public $selectedRows;
     public $isEditing;
@@ -40,10 +41,16 @@ class BaseTable extends Component
 
     public function items()
     {
-        return $this->modelInstance
+        $items = $this->modelInstance
             ->whereIn('id', $this->itemIDs)
             ->orderByRaw(DB::raw('FIELD(id, ' . implode(',', $this->itemIDs) . ')'))
             ->get();
+
+        if (count($this->relationships) > 0) {
+            $items->load($this->relationships);
+        }
+
+        return $items;
     }
 
     public function onSelect($id, $checked)
@@ -63,7 +70,11 @@ class BaseTable extends Component
 
     public function onEdit($id)
     {
-        $this->editValues = $this->modelInstance->findOrFail($id, $this->editFields)->toArray();
+        $query = count($this->relationships) > 0
+            ? $this->modelInstance->with($this->relationships)
+            : $this->modelInstance;
+
+        $this->editValues = $query->findOrFail($id, $this->editFields)->toArray();
 
         $this->isEditing = $id;
     }
