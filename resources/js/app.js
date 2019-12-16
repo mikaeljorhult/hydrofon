@@ -14,7 +14,6 @@ const app = new Vue({
     components: {
         'segel': Segel,
         'table-bookings': require('./components/tables/BookingsTable').default,
-        'table-categories': require('./components/tables/CategoriesTable').default,
         'table-resources': require('./components/tables/ResourcesTable').default,
         'table-users': require('./components/tables/UsersTable').default,
         'calendar-header': require('./components/CalendarHeader').default,
