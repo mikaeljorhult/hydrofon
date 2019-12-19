@@ -45,52 +45,7 @@
             </section>
         {!! Form::close() !!}
 
-        <table-users
-            v-bind:items='@json($users->all())'
-            sort="{{ request('sort', 'email') }}"
-        >
-            <table class="table">
-                <thead>
-                    <th class="table-column-check">#</th>
-                    <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->except('page')) }}">E-mail</a></th>
-                    <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
-                    <th>&nbsp;</th>
-                </thead>
-
-                <tbody>
-                    @forelse($users as $user)
-                        <tr>
-                            <td data-title="&nbsp;"></td>
-                            <td data-title="E-mail">
-                                <a href="{{ route('users.edit', $user) }}">{{ $user->email }}</a>
-                            </td>
-                            <td data-title="Name">
-                                {{ $user->name }}
-                            </td>
-                            <td data-title="&nbsp;" class="table-actions">
-                                {!! Form::open(['route' => ['users.identifiers.index', $user->id], 'method' => 'GET' ]) !!}
-                                <button type="submit" title="Identifiers">
-                                    Identifiers
-                                </button>
-                                {!! Form::close() !!}
-
-                                @can('delete', $user)
-                                    {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE' ]) !!}
-                                    <button type="submit" title="Delete">
-                                        Delete
-                                    </button>
-                                    {!! Form::close() !!}
-                                @endcan
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4">No users was found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </table-users>
+        @livewire('users-table', $users)
 
         {{ $users->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
