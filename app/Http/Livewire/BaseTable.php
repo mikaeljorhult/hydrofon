@@ -36,7 +36,7 @@ class BaseTable extends Component
         $this->selectedRows = [];
         $this->isEditing    = false;
 
-        $this->itemIDs = $this->itemIDs = $items->pluck('id')->toArray();
+        $this->itemIDs = $items->pluck('id')->toArray();
     }
 
     public function items()

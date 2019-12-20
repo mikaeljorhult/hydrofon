@@ -13,7 +13,6 @@ const app = new Vue({
 
     components: {
         'segel': Segel,
-        'table-bookings': require('./components/tables/BookingsTable').default,
         'calendar-header': require('./components/CalendarHeader').default,
         'resourcelist-root': require('./components/ResourceList').default,
         'topbar-impersonation': require('./components/TopbarImpersonation').default,
