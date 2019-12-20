@@ -30,7 +30,7 @@ class ResourceController extends Controller
         $resources = QueryBuilder::for(Resource::class)
                                  ->allowedFilters(['name', 'is_facility', 'categories.id', 'groups.id'])
                                  ->defaultSort('name')
-                                 ->allowedSorts(['name', 'description'])
+                                 ->allowedSorts(['name', 'description', 'is_facility'])
                                  ->paginate(15);
 
         session()->flash('index-referer-url', request()->fullUrl());
