@@ -35,46 +35,6 @@
             </section>
         {!! Form::close() !!}
 
-        <table-categories
-            v-bind:items='@json($categories->all())'
-            v-bind:items-parent='@json($categories->pluck('parent')->unique()->flatten())'
-            sort="{{ request('sort', 'name') }}"
-        >
-            <table class="table">
-                <thead>
-                    <th class="table-column-check">#</th>
-                    <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'categories.name' || request()->has('sort') === false ? '-' : '') . 'categories.name'] + request()->except('page')) }}">Name</a></th>
-                    <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'parent.name' ? '-' : '') . 'parent.name'] + request()->except('page')) }}">Parent</a></th>
-                    <th>&nbsp;</th>
-                </thead>
-
-                <tbody>
-                    @forelse($categories as $category)
-                        <tr>
-                            <td data-title="&nbsp;"></td>
-                            <td data-title="Name">
-                                <a href="{{ route('categories.edit', $category) }}">{{ $category->name }}</a>
-                            </td>
-                            <td data-title="Parent">
-                                {{ optional($category->parent)->name }}
-                            </td>
-                            <td data-title="&nbsp;" class="table-actions">
-                                {!! Form::model($category, ['route' => ['categories.destroy', $category->id], 'method' => 'DELETE' ]) !!}
-                                <button type="submit" title="Delete">
-                                    Delete
-                                </button>
-                                {!! Form::close() !!}
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4">No categories was found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </table-categories>
-
-        {{ $categories->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        @livewire('categories-table')
     </section>
 @endsection

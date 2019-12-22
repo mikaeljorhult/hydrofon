@@ -16,6 +16,7 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "6.0.*",
+        "livewire/livewire": "^0.5.0",
         "nothingworks/blade-svg": "^0.3.0",
         "spatie/laravel-query-builder": "^2.1"
     },
