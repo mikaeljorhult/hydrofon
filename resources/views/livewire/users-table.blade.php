@@ -8,7 +8,8 @@
                     wire:click="$emit('selectAll', $event.target.checked)"
                 />
             </th>
-            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->except('page')) }}">E-mail</a></th>
+            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
             <th>&nbsp;</th>
         </thead>
 
@@ -17,18 +18,6 @@
                 @if($this->isEditing === $item->id)
                     <tr>
                         <td data-title="&nbsp;">&nbsp;</td>
-                        <td data-title="Name">
-                            <input
-                                value="{{ $item->name }}"
-                                type="text"
-                                class="field"
-                                wire:model.debounce.500ms="editValues.name"
-                            />
-
-                            @error('editValues.name')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </td>
                         <td data-title="E-mail">
                             <input
                                 value="{{ $item->email }}"
@@ -38,6 +27,18 @@
                             />
 
                             @error('editValues.email')
+                            <span class="error">{{ $message }}</span>
+                            @enderror
+                        </td>
+                        <td data-title="Name">
+                            <input
+                                value="{{ $item->name }}"
+                                type="text"
+                                class="field"
+                                wire:model.debounce.500ms="editValues.name"
+                            />
+
+                            @error('editValues.name')
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
@@ -64,11 +65,11 @@
                                 wire:click="$emit('select', {{ $item->id }}, $event.target.checked)"
                             />
                         </td>
-                        <td data-title="Name">
-                            <a href="{{ route('users.edit', $item) }}">{{ $item->name }}</a>
-                        </td>
                         <td data-title="E-mail">
                             <a href="{{ route('users.edit', $item) }}">{{ $item->email }}</a>
+                        </td>
+                        <td data-title="Name">
+                            <a href="{{ route('users.edit', $item) }}">{{ $item->name }}</a>
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
                             <div>
@@ -77,6 +78,14 @@
                                     title="Edit"
                                     wire:click.prevent="$emit('edit', {{ $item->id }})"
                                 >Edit</a>
+                            </div>
+
+                            <div>
+                                {!! Form::open(['route' => ['users.identifiers.index', $item->id], 'method' => 'GET' ]) !!}
+                                    <button type="submit" title="Identifiers">
+                                        Identifiers
+                                    </button>
+                                {!! Form::close() !!}
                             </div>
 
                             <div>

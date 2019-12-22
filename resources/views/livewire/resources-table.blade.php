@@ -100,6 +100,14 @@
                             </div>
 
                             <div>
+                                {!! Form::open(['route' => ['resources.identifiers.index', $item->id], 'method' => 'GET' ]) !!}
+                                    <button type="submit" title="Identifiers">
+                                        Identifiers
+                                    </button>
+                                {!! Form::close() !!}
+                            </div>
+
+                            <div>
                                 {!! Form::model($item, ['route' => ['resources.destroy', $item->id], 'method' => 'DELETE' ]) !!}
                                 <button
                                     type="submit"

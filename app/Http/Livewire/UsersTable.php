@@ -11,7 +11,7 @@ class UsersTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \Hydrofon\User::class;
-    protected $editFields = ['id', 'name', 'email'];
+    protected $editFields = ['id', 'email', 'name'];
 
     public function items()
     {
