@@ -4,6 +4,7 @@ namespace Hydrofon\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UsersTable extends BaseTable
 {
@@ -11,6 +12,19 @@ class UsersTable extends BaseTable
 
     protected $model = \Hydrofon\User::class;
     protected $editFields = ['id', 'name', 'email'];
+
+    public function items()
+    {
+        $items = QueryBuilder::for($this->model)
+                             ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
+                             ->defaultSort('email')
+                             ->allowedSorts(['email', 'name'])
+                             ->paginate(15);
+
+        $this->itemIDs = $items->pluck('id')->toArray();
+
+        return $items;
+    }
 
     public function onSave()
     {

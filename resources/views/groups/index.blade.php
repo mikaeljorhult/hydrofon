@@ -13,8 +13,6 @@
             {!! Form::close() !!}
         @endcomponent
 
-        @livewire('groups-table', $groups)
-
-        {{ $groups->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        @livewire('groups-table')
     </section>
 @endsection

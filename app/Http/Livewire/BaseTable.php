@@ -2,11 +2,14 @@
 
 namespace Hydrofon\Http\Livewire;
 
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BaseTable extends Component
 {
+    use WithPagination;
+
     protected $model;
     protected $modelInstance;
     protected $relationships = [];
@@ -31,20 +34,21 @@ class BaseTable extends Component
         $this->modelInstance = app($this->model);
     }
 
-    public function mount($items)
+    public function mount()
     {
         $this->selectedRows = [];
         $this->isEditing    = false;
-
-        $this->itemIDs = $items->pluck('id')->toArray();
     }
 
     public function items()
     {
-        $items = $this->modelInstance
-            ->whereIn('id', $this->itemIDs)
-            ->orderByRaw(DB::raw('FIELD(id, ' . implode(',', $this->itemIDs) . ')'))
-            ->get();
+        $items = QueryBuilder::for($this->model)
+                             ->allowedFilters($this->editFields)
+                             ->defaultSort($this->editFields[1])
+                             ->allowedSorts($this->editFields)
+                             ->paginate(15);
+
+        $this->itemIDs = $items->pluck('id')->toArray();
 
         if (count($this->relationships) > 0) {
             $items->load($this->relationships);

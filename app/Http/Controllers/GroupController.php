@@ -27,15 +27,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = QueryBuilder::for(Group::class)
-                              ->allowedFilters('name')
-                              ->defaultSort('name')
-                              ->allowedSorts('name')
-                              ->paginate(15);
-
         session()->flash('index-referer-url', request()->fullUrl());
 
-        return view('groups.index')->with('groups', $groups);
+        return view('groups.index');
     }
 
     /**

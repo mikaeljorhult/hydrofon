@@ -5,6 +5,7 @@ namespace Hydrofon\Http\Livewire;
 use Hydrofon\Rules\Available;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingsTable extends BaseTable
 {
@@ -23,6 +24,23 @@ class BookingsTable extends BaseTable
         'checkin'   => 'onCheckin',
         'checkout'  => 'onCheckout',
     ];
+
+    public function items()
+    {
+        $items = QueryBuilder::for($this->model)
+                           ->select('bookings.*')
+                           ->with(['checkin', 'checkout', 'resource', 'user'])
+                           ->join('resources', 'resources.id', '=', 'bookings.resource_id')
+                           ->join('users', 'users.id', '=', 'bookings.user_id')
+                           ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
+                           ->defaultSort('start_time')
+                           ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
+                           ->paginate(15);
+
+        $this->itemIDs = $items->pluck('id')->toArray();
+
+        return $items;
+    }
 
     public function onSave()
     {

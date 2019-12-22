@@ -27,15 +27,9 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resources = QueryBuilder::for(Resource::class)
-                                 ->allowedFilters(['name', 'is_facility', 'categories.id', 'groups.id'])
-                                 ->defaultSort('name')
-                                 ->allowedSorts(['name', 'description', 'is_facility'])
-                                 ->paginate(15);
-
         session()->flash('index-referer-url', request()->fullUrl());
 
-        return view('resources.index')->with('resources', $resources);
+        return view('resources.index');
     }
 
     /**

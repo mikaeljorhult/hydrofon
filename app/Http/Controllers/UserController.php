@@ -28,15 +28,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = QueryBuilder::for(User::class)
-                             ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
-                             ->defaultSort('email')
-                             ->allowedSorts(['email', 'name'])
-                             ->paginate(15);
-
         session()->flash('index-referer-url', request()->fullUrl());
 
-        return view('users.index')->with('users', $users);
+        return view('users.index');
     }
 
     /**

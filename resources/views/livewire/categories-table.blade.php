@@ -112,4 +112,6 @@
             </tr>
         </tfoot>
     </table>
+
+    {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
 </div>

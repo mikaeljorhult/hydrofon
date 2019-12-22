@@ -27,18 +27,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = QueryBuilder::for(Category::class)
-                                  ->with(['parent'])
-                                  ->leftJoin('categories as parent', 'parent.id', '=', 'categories.parent_id')
-                                  ->allowedFilters('categories.name', 'categories.parent_id')
-                                  ->allowedSorts(['categories.name', 'parent.name'])
-                                  ->defaultSort('categories.name')
-                                  ->select('categories.*')
-                                  ->paginate(15);
-
         session()->flash('index-referer-url', request()->fullUrl());
 
-        return view('categories.index')->with('categories', $categories);
+        return view('categories.index');
     }
 
     /**

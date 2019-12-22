@@ -1,17 +1,31 @@
 .pagination {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-  background-color: #fff;
-  list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    list-style: none;
 
-  span,
-  a {
-    margin: 0 .25rem;
-    padding: .25rem;
-  }
+    span,
+    button,
+    a {
+        margin: 0 .25rem;
+        padding: .25rem;
+        font-size: inherit;
+        font-weight: inherit;
+    }
 
-  .disabled {
-    opacity: .25;
-  }
+    button,
+    a {
+        text-decoration: underline;
+    }
+
+    [rel="prev"],
+    [rel="next"] {
+        text-decoration: none;
+    }
+
+    .disabled {
+        opacity: .25;
+    }
 }
