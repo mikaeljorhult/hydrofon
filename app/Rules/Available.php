@@ -49,10 +49,10 @@ class Available implements Rule
         // Try to parse the supplied timestamps.
         try {
             $this->startTime = Carbon::parse($startTime);
-            $this->endTime   = Carbon::parse($endTime);
+            $this->endTime = Carbon::parse($endTime);
         } catch (\Exception $exception) {
             $this->startTime = null;
-            $this->endTime   = null;
+            $this->endTime = null;
         }
 
         $this->ignore = $ignore;
@@ -75,7 +75,7 @@ class Available implements Rule
         }
 
         // Check if any bookings collide with requested resources within timestamps.
-        return !Booking::where(!empty($this->column) ? $this->column : $attribute, $value)
+        return ! Booking::where(! empty($this->column) ? $this->column : $attribute, $value)
                        ->where('id', '!=', $this->ignore)
                        ->between($this->startTime, $this->endTime)
                        ->exists();

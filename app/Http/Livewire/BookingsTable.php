@@ -75,7 +75,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with('checkin')->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (!$item->checkin) {
+            if (! $item->checkin) {
                 $item->checkin()->create([
                     'user_id' => auth()->id(),
                 ]);
@@ -97,7 +97,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with('checkout')->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (!$item->checkout) {
+            if (! $item->checkout) {
                 $item->checkout()->create([
                     'user_id' => auth()->id(),
                 ]);

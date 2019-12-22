@@ -37,7 +37,7 @@ class BaseTable extends Component
     public function mount()
     {
         $this->selectedRows = [];
-        $this->isEditing    = false;
+        $this->isEditing = false;
     }
 
     public function items()
