@@ -25,6 +25,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     @livewireAssets
+    @stack('scripts')
 </head>
 
 <body class="font-base font-light">

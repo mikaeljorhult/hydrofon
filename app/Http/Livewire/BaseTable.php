@@ -81,6 +81,8 @@ class BaseTable extends Component
         $this->editValues = $query->findOrFail($id, $this->editFields)->toArray();
 
         $this->isEditing = $id;
+
+        $this->emit('editing');
     }
 
     public function onSave()

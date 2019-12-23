@@ -10,7 +10,7 @@
         <tbody>
             @forelse($items as $item)
                 @if($this->isEditing === $item->id)
-                    <tr>
+                    <tr class="is-editing">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Name">
                             <input
@@ -115,3 +115,5 @@
 
     {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
 </div>
+
+@include('livewire.partials.table-scripts')
