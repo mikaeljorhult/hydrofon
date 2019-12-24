@@ -12,6 +12,7 @@
     "devDependencies": {
         "axios": "^0.19.0",
         "cross-env": "^6.0.0",
+        "flatpickr": "^4.6.3",
         "laravel-mix": "^5.0.0",
         "laravel-mix-purgecss": "^4.2.0",
         "laravel-mix-tailwind": "^0.1.0",

@@ -2,6 +2,9 @@ import Vue from 'vue';
 import ReactiveProvide from 'vue-reactive-provide';
 Vue.use(ReactiveProvide);
 
+import flatpickr from 'flatpickr';
+window.flatpickr = flatpickr;
+
 import Segel from 'segel';
 import debounce from 'lodash/debounce';
 
