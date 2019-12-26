@@ -51,26 +51,30 @@
                             @enderror
                         </td>
                         <td data-title="Start">
-                            <input
-                                type="text"
-                                name="start_time"
-                                value="{{ $item->start_time }}"
-                                class="field"
-                                wire:model.debounce.500ms="editValues.start_time"
-                            />
+                            <div wire:ignore>
+                                <input
+                                    type="text"
+                                    name="start_time"
+                                    value="{{ $item->start_time }}"
+                                    class="field"
+                                    wire:model.debounce.500ms="editValues.start_time"
+                                />
+                            </div>
 
                             @error('editValues.start_time')
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
                         <td data-title="End">
-                            <input
-                                type="text"
-                                name="end_time"
-                                value="{{ $item->end_time }}"
-                                class="field"
-                                wire:model.debounce.500ms="editValues.end_time"
-                            />
+                            <div wire:ignore>
+                                <input
+                                    type="text"
+                                    name="end_time"
+                                    value="{{ $item->end_time }}"
+                                    class="field"
+                                    wire:model.debounce.500ms="editValues.end_time"
+                                />
+                            </div>
 
                             @error('editValues.end_time')
                                 <span class="error">{{ $message }}</span>
@@ -216,3 +220,31 @@
 </div>
 
 @include('livewire.partials.table-scripts')
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @this.on('editing', function () {
+                let startTime = @this.root.el.querySelector('input[name="start_time"]');
+                let endTime = @this.root.el.querySelector('input[name="end_time"]');
+
+                flatpickr(startTime, {
+                    allowInput: true,
+                    enableTime: true,
+                    altInput: true,
+                    altFormat: "Y-m-d H:i",
+                    dateFormat: 'Y-m-d H:i:S',
+                    time_24hr: true,
+                });
+                flatpickr(endTime, {
+                    allowInput: true,
+                    enableTime: true,
+                    altInput: true,
+                    altFormat: "Y-m-d H:i",
+                    dateFormat: 'Y-m-d H:i:S',
+                    time_24hr: true,
+                });
+            });
+        });
+    </script>
+@endpush

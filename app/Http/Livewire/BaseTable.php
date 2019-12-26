@@ -82,6 +82,9 @@ class BaseTable extends Component
 
         $this->isEditing = $id;
 
+        // Reset validation errors when editing a new row.
+        $this->validate([]);
+
         $this->emit('editing');
     }
 
