@@ -22,6 +22,7 @@
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Resource">
                             <select
+                                name="resource_id"
                                 class="field"
                                 wire:model="editValues.resource_id"
                             >
@@ -36,6 +37,7 @@
                         </td>
                         <td data-title="User">
                             <select
+                                name="user_id"
                                 class="field"
                                 wire:model="editValues.user_id"
                             >
@@ -50,8 +52,9 @@
                         </td>
                         <td data-title="Start">
                             <input
-                                value="{{ $item->start_time }}"
                                 type="text"
+                                name="start_time"
+                                value="{{ $item->start_time }}"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.start_time"
                             />
@@ -62,8 +65,9 @@
                         </td>
                         <td data-title="End">
                             <input
-                                value="{{ $item->end_time }}"
                                 type="text"
+                                name="end_time"
+                                value="{{ $item->end_time }}"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.end_time"
                             />

@@ -14,8 +14,9 @@
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Name">
                             <input
-                                value="{{ $item->name }}"
                                 type="text"
+                                name="name"
+                                value="{{ $item->name }}"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.name"
                             />
@@ -26,6 +27,7 @@
                         </td>
                         <td data-title="Parent">
                             <select
+                                name="parent_id"
                                 class="field"
                                 wire:model="editValues.parent_id"
                             >

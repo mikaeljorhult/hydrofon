@@ -20,8 +20,9 @@
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="E-mail">
                             <input
-                                value="{{ $item->email }}"
                                 type="email"
+                                name="email"
+                                value="{{ $item->email }}"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.email"
                             />
@@ -32,8 +33,9 @@
                         </td>
                         <td data-title="Name">
                             <input
-                                value="{{ $item->name }}"
                                 type="text"
+                                name="name"
+                                value="{{ $item->name }}"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.name"
                             />

@@ -21,8 +21,9 @@
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Name">
                             <input
-                                value="{{ $item->name }}"
                                 type="text"
+                                name="name"
+                                value="{{ $item->name }}"
                                 class="field"
                                 wire:model.debounce.500ms="editValues.name"
                             />
@@ -33,6 +34,7 @@
                         </td>
                         <td data-title="Description">
                             <textarea
+                                name="description"
                                 cols="20"
                                 rows="1"
                                 class="field"
@@ -45,8 +47,9 @@
                         </td>
                         <td data-title="Facility">
                             <input
-                                {{ $item->is_facility ? 'checked="checked"' : '' }}
                                 type="checkbox"
+                                name="is_facility"
+                                {{ $item->is_facility ? 'checked="checked"' : '' }}
                                 wire:model.debounce.500ms="editValues.is_facility"
                             />
 
