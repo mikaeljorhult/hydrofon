@@ -13,6 +13,8 @@
             {!! Form::close() !!}
         @endcomponent
 
-        @livewire('buckets-table')
+        @livewire('buckets-table', $buckets)
+
+        {{ $buckets->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

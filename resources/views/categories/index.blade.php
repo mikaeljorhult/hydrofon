@@ -35,6 +35,8 @@
             </section>
         {!! Form::close() !!}
 
-        @livewire('categories-table')
+        @livewire('categories-table', $categories)
+
+        {{ $categories->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

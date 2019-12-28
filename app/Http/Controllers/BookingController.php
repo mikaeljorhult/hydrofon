@@ -29,9 +29,19 @@ class BookingController extends Controller
      */
     public function index()
     {
+        $bookings = QueryBuilder::for(Booking::class)
+                                ->select('bookings.*')
+                                ->with(['checkin', 'checkout', 'resource', 'user'])
+                                ->join('resources', 'resources.id', '=', 'bookings.resource_id')
+                                ->join('users', 'users.id', '=', 'bookings.user_id')
+                                ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
+                                ->defaultSort('start_time')
+                                ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
+                                ->paginate(15);
+
         session()->flash('index-referer-url', request()->fullUrl());
 
-        return view('bookings.index');
+        return view('bookings.index')->with('bookings', $bookings);
     }
 
     /**

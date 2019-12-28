@@ -28,7 +28,7 @@ class BucketsTable extends BaseTable
     public function render()
     {
         return view('livewire.buckets-table', [
-            'items' => $this->items(),
+            'items' => $this->items,
         ]);
     }
 }

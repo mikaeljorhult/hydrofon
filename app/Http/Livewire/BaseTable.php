@@ -3,17 +3,13 @@
 namespace Hydrofon\Http\Livewire;
 
 use Livewire\Component;
-use Livewire\WithPagination;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class BaseTable extends Component
 {
-    use WithPagination;
-
     protected $model;
     protected $modelInstance;
     protected $relationships = [];
-    public $itemIDs;
+    protected $items = [];
     public $selectedRows;
     public $isEditing;
     public $editValues;
@@ -34,27 +30,11 @@ class BaseTable extends Component
         $this->modelInstance = app($this->model);
     }
 
-    public function mount()
+    public function mount($items)
     {
+        $this->items = $items;
         $this->selectedRows = [];
         $this->isEditing = false;
-    }
-
-    public function items()
-    {
-        $items = QueryBuilder::for($this->model)
-                             ->allowedFilters($this->editFields)
-                             ->defaultSort($this->editFields[1])
-                             ->allowedSorts($this->editFields)
-                             ->paginate(15);
-
-        $this->itemIDs = $items->pluck('id')->toArray();
-
-        if (count($this->relationships) > 0) {
-            $items->load($this->relationships);
-        }
-
-        return $items;
     }
 
     public function onSelect($id, $checked)
@@ -69,7 +49,7 @@ class BaseTable extends Component
 
     public function onSelectAll($checked)
     {
-        $this->selectedRows = $checked ? $this->itemIDs : [];
+        $this->selectedRows = $checked ? $this->items->pluck('id')->toArray() : [];
     }
 
     public function onEdit($id)

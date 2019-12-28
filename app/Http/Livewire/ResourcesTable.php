@@ -2,9 +2,7 @@
 
 namespace Hydrofon\Http\Livewire;
 
-use Hydrofon\Resource;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourcesTable extends BaseTable
 {
@@ -12,19 +10,6 @@ class ResourcesTable extends BaseTable
 
     protected $model = \Hydrofon\Resource::class;
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
-
-    public function items()
-    {
-        $items = QueryBuilder::for($this->model)
-                             ->allowedFilters(['name', 'is_facility', 'categories.id', 'groups.id'])
-                             ->defaultSort('name')
-                             ->allowedSorts(['name', 'description', 'is_facility'])
-                             ->paginate(15);
-
-        $this->itemIDs = $items->pluck('id')->toArray();
-
-        return $items;
-    }
 
     public function onSave()
     {
@@ -46,7 +31,7 @@ class ResourcesTable extends BaseTable
     public function render()
     {
         return view('livewire.resources-table', [
-            'items' => $this->items(),
+            'items' => $this->items,
         ]);
     }
 }

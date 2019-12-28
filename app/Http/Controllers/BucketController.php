@@ -27,9 +27,15 @@ class BucketController extends Controller
      */
     public function index()
     {
+        $buckets = QueryBuilder::for(Bucket::class)
+                               ->allowedFilters('name')
+                               ->defaultSort('name')
+                               ->allowedSorts('name')
+                               ->paginate(15);
+
         session()->flash('index-referer-url', request()->fullUrl());
 
-        return view('buckets.index');
+        return view('buckets.index')->with('buckets', $buckets);
     }
 
     /**

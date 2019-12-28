@@ -45,6 +45,8 @@
             </section>
         {!! Form::close() !!}
 
-        @livewire('bookings-table')
+        @livewire('bookings-table', $bookings)
+
+        {{ $bookings->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

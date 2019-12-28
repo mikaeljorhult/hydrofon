@@ -28,7 +28,7 @@ class GroupsTable extends BaseTable
     public function render()
     {
         return view('livewire.groups-table', [
-            'items' => $this->items(),
+            'items' => $this->items,
         ]);
     }
 }
