@@ -45,7 +45,7 @@
             </section>
         {!! Form::close() !!}
 
-        @livewire('resources-table', $resources)
+        @livewire('resources-table', $resources->getCollection())
 
         {{ $resources->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>

@@ -9,7 +9,7 @@ class BaseTable extends Component
     protected $model;
     protected $modelInstance;
     protected $relationships = [];
-    protected $items = [];
+    public $items;
     public $selectedRows;
     public $isEditing;
     public $editValues;
