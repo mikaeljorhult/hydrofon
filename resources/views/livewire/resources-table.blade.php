@@ -10,7 +10,7 @@
             </th>
             <th><a href="{{ route('resources.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
             <th><a href="{{ route('resources.index', ['sort' => (request('sort') === 'description' ? '-' : '') . 'description'] + request()->except('page')) }}">Description</a></th>
-            <th><a href="{{ route('resources.index', ['sort' => (request('sort') === 'is_facility' ? '-' : '') . 'is_facility'] + request()->except('page')) }}">Facility</a></th>
+            <th class="text-center"><a href="{{ route('resources.index', ['sort' => (request('sort') === 'is_facility' ? '-' : '') . 'is_facility'] + request()->except('page')) }}">Facility</a></th>
             <th>&nbsp;</th>
         </thead>
 
@@ -45,7 +45,7 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
-                        <td data-title="Facility">
+                        <td data-title="Facility" class="text-center">
                             <input
                                 type="checkbox"
                                 name="is_facility"
@@ -86,7 +86,7 @@
                         <td data-title="Description">
                             {{ $item->description }}
                         </td>
-                        <td data-title="Facility">
+                        <td data-title="Facility" class="text-center">
                             <input
                                 {{ $item->is_facility ? 'checked="checked"' : '' }}
                                 disabled="disabled"

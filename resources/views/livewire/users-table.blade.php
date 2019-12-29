@@ -10,6 +10,7 @@
             </th>
             <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->except('page')) }}">E-mail</a></th>
             <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+            <th class="text-center"><a href="{{ route('users.index', ['sort' => (request('sort') === 'is_admin' ? '-' : '') . 'is_admin'] + request()->except('page')) }}">Administrator</a></th>
             <th>&nbsp;</th>
         </thead>
 
@@ -44,6 +45,18 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
+                        <td data-title="Administrator" class="text-center">
+                            <input
+                                type="checkbox"
+                                name="is_admin"
+                                {{ $item->is_admin ? 'checked="checked"' : '' }}
+                                wire:model.debounce.500ms="editValues.is_facility"
+                            />
+
+                            @error('editValues.is_admin')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </td>
                         <td data-title="&nbsp;" class="table-actions">
                             <a
                                 class="btn btn-primary"
@@ -72,6 +85,13 @@
                         </td>
                         <td data-title="Name">
                             <a href="{{ route('users.edit', $item) }}">{{ $item->name }}</a>
+                        </td>
+                        <td data-title="Administrator" class="text-center">
+                            <input
+                                {{ $item->is_admin ? 'checked="checked"' : '' }}
+                                disabled="disabled"
+                                type="checkbox"
+                            />
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
                             <div>
@@ -105,14 +125,14 @@
                 @endif
             @empty
                 <tr>
-                    <td colspan="4">No users was found.</td>
+                    <td colspan="5">No users was found.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="4">
+                <th colspan="5">
                     <div class="flex justify-end">
                         <form>
                             <button
