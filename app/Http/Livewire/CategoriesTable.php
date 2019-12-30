@@ -15,7 +15,7 @@ class CategoriesTable extends BaseTable
 
     public function onSave()
     {
-        $item = $this->modelInstance->findOrFail($this->editValues['id']);
+        $item = $this->items->find($this->editValues['id']);
 
         $this->authorize('update', $item);
 
