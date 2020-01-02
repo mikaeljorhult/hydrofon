@@ -105,6 +105,12 @@
                         </td>
                         <td data-title="Resource">
                             <a href="{{ route('bookings.edit', $item) }}">{{ $item->resource->name }}</a>
+
+                            @if(count($item->resource->buckets) > 0)
+                                <button
+                                    wire:click.prevent="$emit('switch', {{ $item->id }})"
+                                >@svg('refresh', 'w-4')</button>
+                            @endif
                         </td>
                         <td data-title="User">
                             {{ $item->user->name }}

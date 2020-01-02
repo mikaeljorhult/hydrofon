@@ -87,7 +87,7 @@ class BaseTable extends Component
     {
         $itemsToDelete = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->findOrFail($itemsToDelete);
+        $items = $this->items->find($itemsToDelete);
 
         $items
             ->each(function ($item, $key) {

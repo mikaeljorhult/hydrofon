@@ -22,11 +22,11 @@ class BookingsTable extends BaseTable
         'delete'    => 'onDelete',
         'checkin'   => 'onCheckin',
         'checkout'  => 'onCheckout',
+        'switch'    => 'onSwitch',
     ];
 
     public function onSave()
     {
-        $item = $this->modelInstance->findOrFail($this->editValues['id']);
         $item = $this->items->find($this->editValues['id']);
 
         $this->authorize('update', $item);
@@ -58,7 +58,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with('checkin')->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (! $item->checkin) {
+            if (!$item->checkin) {
                 $item->checkin()->create([
                     'user_id' => auth()->id(),
                 ]);
@@ -80,12 +80,29 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with('checkout')->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (! $item->checkout) {
+            if (!$item->checkout) {
                 $item->checkout()->create([
                     'user_id' => auth()->id(),
                 ]);
             }
         });
+    }
+
+    public function onSwitch($id)
+    {
+        $item = $this->modelInstance->with('resource')->findOrFail($id);
+
+        // Get buckets with available resources.
+        $buckets = $item->resource->buckets()->with(['resources' => function ($query) use ($item) {
+            $query->whereDoesntHave('bookings', function ($subQuery) use ($item) {
+                $subQuery->between($item->start_time, $item->end_time);
+            });
+        }])->get();
+
+        $availableResources = $buckets->pluck('resources')->flatten();
+
+        $item->resource()->associate($availableResources->first());
+        $item->save();
     }
 
     public function render()

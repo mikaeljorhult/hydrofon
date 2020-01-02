@@ -31,7 +31,7 @@ class BookingController extends Controller
     {
         $bookings = QueryBuilder::for(Booking::class)
                                 ->select('bookings.*')
-                                ->with(['checkin', 'checkout', 'resource', 'user'])
+                                ->with(['checkin', 'checkout', 'resource.buckets', 'user'])
                                 ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                                 ->join('users', 'users.id', '=', 'bookings.user_id')
                                 ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
