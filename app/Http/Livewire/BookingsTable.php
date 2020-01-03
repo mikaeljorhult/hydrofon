@@ -56,10 +56,10 @@ class BookingsTable extends BaseTable
     {
         $itemsToCheckin = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with('checkin')->findOrFail($itemsToCheckin);
+        $items = $this->modelInstance->with(['resource', 'checkin'])->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (!$item->checkin) {
+            if (!$item->resource->is_facility && !$item->checkin) {
                 $item->checkin()->create([
                     'user_id' => auth()->id(),
                 ]);
@@ -80,10 +80,10 @@ class BookingsTable extends BaseTable
     {
         $itemsToCheckout = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with('checkout')->findOrFail($itemsToCheckout);
+        $items = $this->modelInstance->with(['resource', 'checkout'])->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (!$item->checkout) {
+            if (!$item->resource->is_facility && !$item->checkout) {
                 $item->checkout()->create([
                     'user_id' => auth()->id(),
                 ]);

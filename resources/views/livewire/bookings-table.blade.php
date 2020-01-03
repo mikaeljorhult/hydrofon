@@ -123,7 +123,7 @@
                         </td>
 
                         <td data-title="&nbsp;" class="table-actions">
-                            @unless($item->checkout || $item->checkin)
+                            @unless($item->resource->is_facility || $item->checkout || $item->checkin)
                                 <div>
                                     {!! Form::open(['route' => ['checkouts.store']]) !!}
                                         {!! Form::hidden('booking_id', $item->id) !!}
@@ -137,7 +137,7 @@
                                 </div>
                             @endif
 
-                            @unless($item->checkin)
+                            @unless($item->resource->is_facility || $item->checkin)
                                 <div>
                                     {!! Form::open(['route' => ['checkins.store']]) !!}
                                         {!! Form::hidden('booking_id', $item->id) !!}
