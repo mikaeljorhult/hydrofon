@@ -109,7 +109,7 @@ class BookingsTable extends BaseTable
         $item->resource()->associate($availableResources->first());
         $item->save();
 
-        $this->refreshItems([$item->id]);
+        $this->refreshItems([$id]);
     }
 
     public function render()

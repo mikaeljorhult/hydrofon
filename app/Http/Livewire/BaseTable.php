@@ -103,11 +103,9 @@ class BaseTable extends Component
 
     protected function refreshItems($ids = [])
     {
-        if (empty($ids)) {
-            $this->items->fresh($this->relationships);
-        } else {
-            $this->items->find($ids)->fresh($this->relationships);
-        }
+        $this->items = empty($ids)
+            ? $this->items->fresh($this->relationships)
+            : $this->items->merge($this->items->find($ids)->fresh($this->relationships));
     }
 
     protected function removeItems($ids = [])
