@@ -32,9 +32,9 @@ class BaseTable extends Component
 
     public function mount($items)
     {
-        $this->items = $items;
+        $this->items        = $items;
         $this->selectedRows = [];
-        $this->isEditing = false;
+        $this->isEditing    = false;
     }
 
     public function onSelect($id, $checked)
@@ -80,6 +80,7 @@ class BaseTable extends Component
 
         $item->update($validatedData['editValues']);
 
+        $this->refreshItems([$item->id]);
         $this->isEditing = false;
     }
 
@@ -96,5 +97,23 @@ class BaseTable extends Component
             ->each(function ($item, $key) {
                 $item->delete();
             });
+
+        $this->removeItems($itemsToDelete);
+    }
+
+    protected function refreshItems($ids = [])
+    {
+        if (empty($ids)) {
+            $this->items->fresh($this->relationships);
+        } else {
+            $this->items->find($ids)->fresh($this->relationships);
+        }
+    }
+
+    protected function removeItems($ids = [])
+    {
+        $this->items = empty($ids)
+            ? collect()
+            : $this->items->except($ids);
     }
 }

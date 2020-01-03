@@ -22,6 +22,7 @@ class BucketsTable extends BaseTable
 
         $item->update($validatedData['editValues']);
 
+        $this->refreshItems([$item->id]);
         $this->isEditing = false;
     }
 

@@ -11,7 +11,7 @@ class BookingsTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \Hydrofon\Booking::class;
-    protected $relationships = ['checkin', 'checkout', 'resource', 'user'];
+    protected $relationships = ['checkin', 'checkout', 'resource.buckets', 'user'];
     protected $editFields = ['id', 'resource_id', 'user_id', 'start_time', 'end_time'];
 
     protected $listeners = [
@@ -48,6 +48,7 @@ class BookingsTable extends BaseTable
 
         $item->update($validatedData['editValues']);
 
+        $this->refreshItems([$item->id]);
         $this->isEditing = false;
     }
 
@@ -71,6 +72,8 @@ class BookingsTable extends BaseTable
                 }
             }
         });
+
+        $this->refreshItems($itemsToCheckin);
     }
 
     public function onCheckout($id, $multiple)
@@ -86,6 +89,8 @@ class BookingsTable extends BaseTable
                 ]);
             }
         });
+
+        $this->refreshItems($itemsToCheckout);
     }
 
     public function onSwitch($id)
@@ -103,6 +108,8 @@ class BookingsTable extends BaseTable
 
         $item->resource()->associate($availableResources->first());
         $item->save();
+
+        $this->refreshItems([$item->id]);
     }
 
     public function render()
