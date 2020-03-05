@@ -45,7 +45,7 @@
             </section>
         {!! Form::close() !!}
 
-        @livewire('users-table', $users->getCollection())
+        @livewire('users-table', ['items' => $users->getCollection()])
 
         {{ $users->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
