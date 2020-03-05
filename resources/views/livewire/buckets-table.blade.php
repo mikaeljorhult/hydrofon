@@ -15,7 +15,7 @@
         <tbody>
             @forelse($items as $item)
                 @if($this->isEditing === $item->id)
-                    <tr class="is-editing">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even' }} is-editing">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Name">
                             <input
@@ -44,7 +44,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr>
+                    <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                         <td data-title="&nbsp;">
                             <input
                                 type="checkbox"
