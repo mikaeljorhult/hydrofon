@@ -25,7 +25,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     @livewireStyles
-    @stack('scripts')
 </head>
 
 <body class="font-base font-light">
@@ -44,6 +43,7 @@
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>
