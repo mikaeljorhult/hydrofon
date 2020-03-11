@@ -5,11 +5,6 @@
 // Config.
 @import './partials/shared/variables';
 
-// Third Party.
-@import '../../node_modules/segel/src/styles/main';
-@import '../../node_modules/flatpickr/dist/flatpickr';
-@import '../../node_modules/vue-select/src/scss/vue-select.scss';
-
 // Components.
 @import './components/button';
 @import './components/container';
@@ -21,12 +16,12 @@
 @import './partials/shared/base';
 @import './partials/shared/tables';
 @import './partials/shared/helpers';
-@import './partials/shared/overrides';
 @import './partials/shared/transitions';
 @import './partials/app/resourcelist';
 @import './partials/app/calendar';
 @import './partials/app/pagination';
 @import './partials/app/flash-message';
+@import './partials/app/segel';
 
 // Tailwind CSS.
 @tailwind utilities;

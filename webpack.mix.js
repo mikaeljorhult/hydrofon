@@ -2,7 +2,6 @@ let mix = require('laravel-mix');
 
 require('laravel-mix-purgecss');
 require('laravel-mix-tailwind');
-require('laravel-mix-vue-svgicon');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,25 +14,12 @@ require('laravel-mix-vue-svgicon');
  |
  */
 
-mix.webpackConfig({
-        resolve: {
-            alias: {
-                vue: path.resolve(__dirname, 'node_modules/vue')
-            }
-        }
-    })
+mix
     .js('resources/js/app.js', 'public/js')
     .extract()
     .copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
-    .svgicon('./resources/images/svg')
     .tailwind('./tailwind.config.js')
-    .purgeCss({
-        globs: [
-            path.join(__dirname, 'node_modules/flatpickr/dist/*.js'),
-            path.join(__dirname, 'node_modules/segel/dist/*.js'),
-            path.join(__dirname, 'node_modules/vue-select/dist/*.js'),
-        ],
-    })
+    .purgeCss()
     .version();

@@ -1,91 +1,88 @@
 .resourcelist {
-  display: flex;
-  flex: 0 1 14rem;
-  position: relative;
-  overflow: hidden;
-  padding-top: 4.1rem;
-  background-color: #313541;
-  color: rgba(255, 255, 255, .6);
-  white-space: nowrap;
-  user-select: none;
+    display: flex;
+    flex: 0 1 14rem;
+    position: relative;
+    overflow: hidden;
+    padding-top: 4.1rem;
+    background-color: #313541;
+    color: rgba(255, 255, 255, .6);
+    white-space: nowrap;
+    user-select: none;
 
-  li {
-    margin: .25rem 0;
-  }
-
-  svg {
-    display: inline-block;
-    width: 1.25rem;
-    height: auto;
-    vertical-align: text-bottom;
-    fill: #d45843;
-  }
-
-  &.collapsed {
-    flex: 0 1 1rem;
-
-    ul {
-      display: none;
+    li {
+        margin: .25rem 0;
     }
-  }
+
+    svg {
+        display: inline-block;
+        width: 1.25rem;
+        height: auto;
+        vertical-align: text-bottom;
+        fill: #d45843;
+    }
 }
 
 .resourcelist-toggle {
-  display: flex;
-  width: 2rem;
-  height: 3.9rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  align-items: center;
-  justify-content: flex-end;
-  text-decoration: none;
+    display: flex;
+    width: 2rem;
+    height: 3.9rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
 }
 
 .resourcelist-children {
-  margin: 0 0 .5rem .5rem;
+    display: none;
+    margin: 0 0 .5rem .5rem;
+
+    .expanded > & {
+        display: block;
+    }
 }
 
 .resourcelist-date {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem 2rem 1rem 1rem;
-  background-color: rgba(255, 255, 255, .75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 2rem 1rem 1rem;
+    background-color: rgba(255, 255, 255, .75);
 
-  input {
-    margin-bottom: 0;
-    padding: .525rem;
-    font-size: .8rem;
-  }
+    input {
+        margin-bottom: 0;
+        padding: .525rem;
+        font-size: .8rem;
+    }
 }
 
 .resourcelist-base {
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
-  > :last-child {
-    margin-bottom: 2rem;
-  }
+    > :last-child {
+        margin-bottom: 2rem;
+    }
 }
 
 .resourcelist-category {
-  div {
-    display: inline-block;
-  }
+    div {
+        display: inline-block;
+    }
 
-  &.has-children > span {
-    display: block;
-    cursor: pointer;
-  }
+    &.has-children > span {
+        display: block;
+        cursor: pointer;
+    }
 }
 
 .resourcelist-resource {
-  font-size: .9rem;
+    font-size: .9rem;
 
-  input {
-    margin-right: .1rem;
-  }
+    input {
+        margin-right: .1rem;
+    }
 }

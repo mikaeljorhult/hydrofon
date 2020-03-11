@@ -3,7 +3,7 @@
 @section('title', 'Hydrofon')
 
 @section('sidebar')
-    @include('partials.resource-list')
+    @include('partials.resource-tree')
 @endsection
 
 @section('content')

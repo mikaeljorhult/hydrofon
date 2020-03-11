@@ -5,6 +5,7 @@ namespace Hydrofon\Http\Controllers;
 use Carbon\Carbon;
 use Hydrofon\Http\Requests\CalendarRequest;
 use Hydrofon\Resource;
+use Illuminate\Database\Eloquent\Collection;
 
 class CalendarController extends Controller
 {
@@ -21,14 +22,14 @@ class CalendarController extends Controller
     /**
      * Show the calendar view.
      *
-     * @param null|string $date
+     * @param  null|string  $date
      *
      * @return \Illuminate\Http\Response
      */
     public function index($date = null)
     {
-        $date = $this->date($date)->startOfDay();
-        $resources = $this->resources($date);
+        $date       = $this->date($date)->startOfDay();
+        $resources  = $this->resources($date);
         $timestamps = $this->timestamps($date);
 
         return view('calendar')
@@ -40,7 +41,7 @@ class CalendarController extends Controller
     /**
      * Retrieve resources and redirect to calendar view.
      *
-     * @param \Hydrofon\Http\Requests\CalendarRequest $request
+     * @param  \Hydrofon\Http\Requests\CalendarRequest  $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -68,7 +69,7 @@ class CalendarController extends Controller
     /**
      * Return resources stored in session.
      *
-     * @param \Carbon\Carbon $date
+     * @param  \Carbon\Carbon  $date
      *
      * @return \Illuminate\Support\Collection
      */
@@ -84,23 +85,24 @@ class CalendarController extends Controller
                             ->between($date, $date->copy()->endOfDay())
                             ->orderBy('start_time');
                     },
-                      ])
+                ])
                       ->get()
-            : collect();
+            : new Collection();
     }
 
     /**
      * Build array of timestamps for use calendar.
      *
-     * @param \Carbon\Carbon $date
+     * @param  \Carbon\Carbon  $date
      *
      * @return array
      */
     private function timestamps(Carbon $date)
     {
         $timestamps = [
-            'start' => $date->format('U'),
-            'end'   => $date->copy()->endOfDay()->format('U'),
+            'current' => now()->format('U'),
+            'start'   => $date->format('U'),
+            'end'     => $date->copy()->endOfDay()->format('U'),
         ];
 
         $timestamps['duration'] = $timestamps['end'] - $timestamps['start'];

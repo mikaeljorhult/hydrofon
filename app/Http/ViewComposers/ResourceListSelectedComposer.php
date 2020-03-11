@@ -15,6 +15,9 @@ class ResourceListSelectedComposer
      */
     public function compose(View $view)
     {
-        $view->with('selected', session('resources') ?: []);
+        $view->with([
+            'expanded' => session('expanded') ?: [],
+            'selected' => session('resources') ?: [],
+        ]);
     }
 }

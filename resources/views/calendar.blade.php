@@ -2,34 +2,26 @@
 
 @section('title', 'Calendar')
 
-@push('initial-json')
-    window.HYDROFON.date = @json((int) $date->startOfDay()->format('U'));
-    window.HYDROFON.selectedResources = @json($resources->pluck('id'));
-@endpush
-
 @section('sidebar')
-    @include('partials.resource-list')
+    @include('partials.resource-tree')
 @endsection
 
 @section('content')
     <section class="container">
-        <calendar-header
-            class="calendar-header"
-            v-bind:date="date"
-        >
+        <div class="calendar-header">
             <h1>{{ $date->format('Y-m-d') }}</h1>
-            <a href="{{ route('calendar', ['date' => $date->copy()->subDay()->format('Y-m-d')]) }}" title="Previous">
+            <a title="Previous">
                 @svg('cheveron-left', 'w-6')
                 <span class="screen-reader">Previous</span>
             </a>
-            <a href="{{ route('calendar', ['date' => $date->copy()->addDay()->format('Y-m-d')]) }}" title="Next">
+            <a title="Next">
                 <span class="screen-reader">Next</span>
                 @svg('cheveron-right', 'w-6')
             </a>
-        </calendar-header>
+        </div>
 
         {!! Form::open(['route' => 'bookings.store']) !!}
-            @include('partials.segel')
+            @livewire('segel', ['resources' => $resources, 'timestamps' => $timestamps])
 
             <section>
                 <h2>Create booking</h2>
