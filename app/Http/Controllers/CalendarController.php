@@ -79,13 +79,13 @@ class CalendarController extends Controller
             ? Resource::whereIn('id', session('resources'))
                 // Eager-load bookings within requested date.
                       ->with([
-                    'bookings' => function ($query) use ($date) {
-                        $query
-                            ->with('user')
-                            ->between($date, $date->copy()->endOfDay())
-                            ->orderBy('start_time');
-                    },
-                ])
+                          'bookings' => function ($query) use ($date) {
+                              $query
+                                  ->with('user')
+                                  ->between($date, $date->copy()->endOfDay())
+                                  ->orderBy('start_time');
+                          },
+                      ])
                       ->get()
             : new Collection();
     }

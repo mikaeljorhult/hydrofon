@@ -32,9 +32,9 @@ class BaseTable extends Component
 
     public function mount($items)
     {
-        $this->items        = $items;
+        $this->items = $items;
         $this->selectedRows = [];
-        $this->isEditing    = false;
+        $this->isEditing = false;
     }
 
     public function onSelect($id, $checked)
