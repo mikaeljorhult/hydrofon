@@ -16,7 +16,7 @@
 >
     {!! Form::open(['route' => 'calendar', 'class' => 'w-full']) !!}
         <section class="resourcelist-date">
-            {!! Form::text('date', isset($date) ? \Carbon\Carbon::createFromTimestamp($date)->format('Y-m-d') : now()->format('Y-m-d'), ['class' => 'field']) !!}
+            {!! Form::text('date', $date->format('Y-m-d'), ['class' => 'field']) !!}
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
         </section>
 

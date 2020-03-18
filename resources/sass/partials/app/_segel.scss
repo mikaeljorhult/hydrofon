@@ -147,11 +147,11 @@
     text-align: center;
 
     .segel-booking:hover &,
-    .segel-booking.resizing & {
+    .segel-booking.is-resizing & {
         display: flex;
     }
 
-    .segel-booking.dragging & {
+    .segel-booking.is-dragging & {
         display: none;
     }
 }

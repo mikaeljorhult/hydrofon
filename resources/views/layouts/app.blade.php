@@ -18,7 +18,6 @@
             user:  @json(optional(auth()->user())->id),
             isAdmin: @json(auth()->user() ? auth()->user()->isAdmin() : false)
         };
-        @stack('initial-json')
     </script>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">

@@ -100,9 +100,9 @@ class CalendarController extends Controller
     private function timestamps(Carbon $date)
     {
         $timestamps = [
-            'current' => now()->format('U'),
-            'start'   => $date->format('U'),
-            'end'     => $date->copy()->endOfDay()->format('U'),
+            'current' => (int) now()->format('U'),
+            'start'   => (int) $date->format('U'),
+            'end'     => (int) $date->copy()->endOfDay()->format('U'),
         ];
 
         $timestamps['duration'] = $timestamps['end'] - $timestamps['start'];

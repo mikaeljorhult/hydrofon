@@ -16,8 +16,8 @@ class ResourceListSelectedComposer
     public function compose(View $view)
     {
         $view->with([
-            'expanded' => session('expanded') ?: [],
-            'selected' => session('resources') ?: [],
+            'expanded' => session('expanded') ? array_map('intval', session('expanded')) : [],
+            'selected' => session('resources') ? array_map('intval', session('resources')): [],
         ]);
     }
 }

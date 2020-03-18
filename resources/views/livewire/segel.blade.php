@@ -46,7 +46,10 @@
                                         width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
                                         left: {{ ($booking->start_time->format('U') - $timestamps['start']) / $timestamps['duration'] * 100 }}%;
                                         "
-                                ></li>
+                                >
+                                    <span class="segel-resize-handle segel-resize-handle__left">&#8942;</span>
+                                    <span class="segel-resize-handle segel-resize-handle__right">&#8942;</span>
+                                </li>
                             @endforeach
                         </ul>
                     @endif
@@ -59,3 +62,90 @@
         </ul>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            HYDROFON.Segel.component = @this;
+
+            const _this = @this;
+            const containerElement = _this.el.el;
+            let bookings = containerElement.querySelectorAll('.segel-booking');
+
+            for (const booking of bookings) {
+                const position = {x: 0, y: 0};
+
+                interact(booking)
+                    .draggable({
+                        listeners: {
+                            start: function(event) {
+                                event.target.classList.add('is-dragging');
+                            },
+                            move: function (event) {
+                                position.x += event.dx;
+                                position.y += event.dy;
+
+                                event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+                            },
+                            end: function (event) {
+                                event.target.classList.remove('is-dragging');
+                            }
+                        },
+                        modifiers: [
+                            interact.modifiers.restrict({
+                                restriction: '.segel-resources'
+                            }),
+                            interact.modifiers.snap({
+                                targets: HYDROFON.Segel.grid,
+                                offset: 'startCoords'
+                            })
+                        ],
+                    });
+
+                interact(booking)
+                    .resizable({
+                        edges: {
+                            top: false,
+                            bottom: false,
+                            left: ".segel-resize-handle__left",
+                            right: ".segel-resize-handle__right"
+                        },
+                        listeners: {
+                            start: function(event) {
+                                event.target.classList.add('is-resizing');
+                            },
+                            move: function (event) {
+                                let {x, y} = event.target.dataset;
+
+                                x = (parseFloat(x) || 0) + event.deltaRect.left;
+                                y = (parseFloat(y) || 0) + event.deltaRect.top;
+
+                                Object.assign(event.target.style, {
+                                    width: `${event.rect.width}px`,
+                                    height: `${event.rect.height}px`,
+                                    transform: `translate(${x}px, ${y}px)`
+                                });
+
+                                Object.assign(event.target.dataset, {x, y});
+                            },
+                            end: function (event) {
+                                event.target.classList.remove('is-resizing');
+                            }
+                        },
+                        modifiers: [
+                            interact.modifiers.restrict({
+                                restriction: '.segel-resources'
+                            }),
+                            interact.modifiers.restrictSize(
+                                HYDROFON.Segel.size
+                            ),
+                            interact.modifiers.snap({
+                                targets: HYDROFON.Segel.grid,
+                                offset: 'startCoords'
+                            }),
+                        ],
+                    })
+            }
+        });
+    </script>
+@endpush
