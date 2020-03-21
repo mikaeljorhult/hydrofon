@@ -1,4 +1,5 @@
 import Grid from './grid';
+import {debounce} from 'alpinejs/src/utils';
 
 HYDROFON.Segel = {
     _component: null,
@@ -9,14 +10,14 @@ HYDROFON.Segel = {
         this._component = component;
         this._element = component.el.el;
 
-        this.grid = Grid.create(this._element.clientWidth, 40, this.component.data.steps);
+        this.grid = Grid.create(this.element.clientWidth, 40, this.component.data.steps);
         this.size = {
             min: {
-                width: this._element.clientWidth / this.component.data.steps,
+                width: this.element.clientWidth / this.component.data.steps,
                 height: 1
             },
             max: {
-                width: this._element.clientWidth,
+                width: this.element.clientWidth,
                 height: 40
             }
         };
@@ -27,6 +28,10 @@ HYDROFON.Segel = {
     get element() {
         return this._element;
     },
+    set resources(resources) {
+        this._debounceResources(resources);
+    },
+    _debounceResources: debounce(function (resources) {
+        HYDROFON.Segel.component.call('setResources', resources);
+    }, 1000)
 };
-
-// Object.defineProperty(HYDROFON.Segel.grid, 'context', { get: function() { return HYDROFON.Segel; } });

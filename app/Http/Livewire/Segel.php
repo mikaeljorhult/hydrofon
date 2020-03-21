@@ -23,6 +23,8 @@ class Segel extends Component
     public function setResources($id)
     {
         $this->resources = $id;
+        
+        session()->put('resources', $id);
     }
 
     private function getResources()

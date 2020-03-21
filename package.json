@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "alpinejs": "^2.1.0",
+        "alpinejs": "^2.2.0",
         "cross-env": "^7.0.0",
         "interactjs": "^1.9.3",
         "laravel-mix": "^5.0.0",

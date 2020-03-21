@@ -13,7 +13,7 @@
             }
         }
     }"
-    x-init="$watch('selected', function(value) { HYDROFON.Segel.component.call('setResources', value) })"
+    x-init="$watch('selected', function(value) { HYDROFON.Segel.resources = value; })"
 >
     {!! Form::open(['route' => 'calendar', 'class' => 'w-full']) !!}
         <section class="resourcelist-date">
