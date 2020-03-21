@@ -4,8 +4,6 @@ namespace Hydrofon\Http\Controllers;
 
 use Carbon\Carbon;
 use Hydrofon\Http\Requests\CalendarRequest;
-use Hydrofon\Resource;
-use Illuminate\Database\Eloquent\Collection;
 
 class CalendarController extends Controller
 {
@@ -29,8 +27,8 @@ class CalendarController extends Controller
     public function index($date = null)
     {
         $date       = $this->date($date)->startOfDay();
-        $resources  = $this->resources($date);
         $timestamps = $this->timestamps($date);
+        $resources  = $this->resources();
 
         return view('calendar')
             ->with('date', $date)
@@ -69,25 +67,11 @@ class CalendarController extends Controller
     /**
      * Return resources stored in session.
      *
-     * @param  \Carbon\Carbon  $date
-     *
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
-    private function resources(Carbon $date)
+    private function resources()
     {
-        return session()->has('resources')
-            ? Resource::whereIn('id', session('resources'))
-                // Eager-load bookings within requested date.
-                      ->with([
-                          'bookings' => function ($query) use ($date) {
-                              $query
-                                  ->with('user')
-                                  ->between($date, $date->copy()->endOfDay())
-                                  ->orderBy('start_time');
-                          },
-                      ])
-                      ->get()
-            : new Collection();
+        return session('resources', []);
     }
 
     /**

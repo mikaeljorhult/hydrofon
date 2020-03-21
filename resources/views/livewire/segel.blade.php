@@ -33,7 +33,7 @@
         ></div>
 
         <ul class="segel-resources">
-            @forelse($resources as $resource)
+            @forelse($items as $resource)
                 <li class="segel-resource">
                     {{ $resource->name }}
 
@@ -68,9 +68,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             HYDROFON.Segel.component = @this;
 
-            const _this = @this;
-            const containerElement = _this.el.el;
-            let bookings = containerElement.querySelectorAll('.segel-booking');
+            let bookings = HYDROFON.Segel.element.querySelectorAll('.segel-booking');
 
             for (const booking of bookings) {
                 const position = {x: 0, y: 0};

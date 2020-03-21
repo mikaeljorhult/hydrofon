@@ -24,6 +24,9 @@ HYDROFON.Segel = {
     get component() {
         return this._component;
     },
+    get element() {
+        return this._element;
+    },
 };
 
 // Object.defineProperty(HYDROFON.Segel.grid, 'context', { get: function() { return HYDROFON.Segel; } });
