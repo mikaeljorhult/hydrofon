@@ -20,10 +20,15 @@ class Segel extends Component
         $this->steps      = 48;
     }
 
+    public function setExpanded($id)
+    {
+        session()->put('expanded', $id);
+    }
+
     public function setResources($id)
     {
         $this->resources = $id;
-        
+
         session()->put('resources', $id);
     }
 

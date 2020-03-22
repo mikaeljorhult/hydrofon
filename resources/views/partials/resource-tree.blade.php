@@ -11,6 +11,8 @@
             } else {
                 this.expanded.splice(index, 1);
             }
+
+            HYDROFON.Segel.expanded = this.expanded;
         }
     }"
     x-init="$watch('selected', function(value) { HYDROFON.Segel.resources = value; })"

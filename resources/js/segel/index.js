@@ -31,6 +31,12 @@ HYDROFON.Segel = {
     set resources(resources) {
         this._debounceResources(resources);
     },
+    set expanded(categories) {
+        this._debounceExpanded(categories);
+    },
+    _debounceExpanded: debounce(function (expanded) {
+        HYDROFON.Segel.component.call('setExpanded', expanded);
+    }, 1000),
     _debounceResources: debounce(function (resources) {
         HYDROFON.Segel.component.call('setResources', resources);
     }, 1000)
