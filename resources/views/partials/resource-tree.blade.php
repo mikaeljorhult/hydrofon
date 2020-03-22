@@ -2,7 +2,7 @@
     class="resourcelist"
     x-data="{
         expanded: @json($expanded),
-        selected: @json($selected),
+        selected: {{ str_replace("\"", "'", json_encode(array_map('strval', $selected))) }},
         toggleCategory: function(id) {
             let index = this.expanded.indexOf(id);
 
