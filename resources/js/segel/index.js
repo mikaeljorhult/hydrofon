@@ -9,18 +9,7 @@ HYDROFON.Segel = {
     set component(component) {
         this._component = component;
         this._element = component.el.el;
-
-        this.grid = Grid.create(this.element.clientWidth, 40, this.component.data.steps);
-        this.size = {
-            min: {
-                width: this.element.clientWidth / this.component.data.steps,
-                height: 1
-            },
-            max: {
-                width: this.element.clientWidth,
-                height: 40
-            }
-        };
+        this.calculateGrid();
     },
     get component() {
         return this._component;
@@ -39,5 +28,33 @@ HYDROFON.Segel = {
     }, 1000),
     _debounceResources: debounce(function (resources) {
         HYDROFON.Segel.component.call('setResources', resources);
-    }, 1000)
+    }, 1000),
+    calculateGrid: function () {
+        this.grid = Grid.create(this.element.clientWidth, 40, this.component.data.steps);
+        this.size = {
+            min: {
+                width: this.element.clientWidth / this.component.data.steps,
+                height: 1
+            },
+            max: {
+                width: this.element.clientWidth,
+                height: 40
+            }
+        };
+    },
+    handleResize: function () {
+        this.calculateGrid();
+
+        let bookings = this.element.querySelectorAll('.segel-booking');
+
+        for (const booking of bookings) {
+            let draggable = interact(booking).draggable();
+            let resizable = interact(booking).resizable();
+
+            draggable.modifiers[1].options.targets = this.grid;
+            resizable.modifiers[2].options.targets = this.grid;
+            resizable.modifiers[1].options.min = this.size.min;
+            resizable.modifiers[1].options.max = this.size.max;
+        }
+    }
 };

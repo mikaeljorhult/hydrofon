@@ -2,6 +2,7 @@
     id="segel"
     class="segel"
     x-data="{}"
+    x-on:resize.window.debounce.500="HYDROFON.Segel.handleResize()"
 >
     <div class="segel-container">
         <ul class="segel-grid">
