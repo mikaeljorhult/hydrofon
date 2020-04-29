@@ -1,4 +1,5 @@
 import Grid from './grid';
+import Interactions from './interactions';
 import {debounce} from 'alpinejs/src/utils';
 
 HYDROFON.Segel = {
@@ -6,6 +7,7 @@ HYDROFON.Segel = {
     _element: null,
     grid: null,
     size: null,
+    interactions: Interactions,
     set component(component) {
         this._component = component;
         this._element = component.el.el;
