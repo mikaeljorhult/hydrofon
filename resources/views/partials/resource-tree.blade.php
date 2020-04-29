@@ -2,7 +2,7 @@
     class="resourcelist"
     x-data="{
         expanded: @json($expanded),
-        selected: @json($selected),
+        selected: {{ str_replace("\"", "'", json_encode(array_map('strval', $selected))) }},
         toggleCategory: function(id) {
             let index = this.expanded.indexOf(id);
 
@@ -11,12 +11,15 @@
             } else {
                 this.expanded.splice(index, 1);
             }
+
+            HYDROFON.Segel.expanded = this.expanded;
         }
     }"
+    x-init="$watch('selected', function(value) { HYDROFON.Segel.resources = value; })"
 >
     {!! Form::open(['route' => 'calendar', 'class' => 'w-full']) !!}
         <section class="resourcelist-date">
-            {!! Form::text('date', $date->format('Y-m-d'), ['class' => 'field']) !!}
+            {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d'), ['class' => 'field']) !!}
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
         </section>
 

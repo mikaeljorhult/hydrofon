@@ -2,6 +2,7 @@
     id="segel"
     class="segel"
     x-data="{}"
+    x-on:resize.window.debounce.500="HYDROFON.Segel.handleResize()"
 >
     <div class="segel-container">
         <ul class="segel-grid">
@@ -33,8 +34,11 @@
         ></div>
 
         <ul class="segel-resources">
-            @forelse($resources as $resource)
-                <li class="segel-resource">
+            @forelse($items as $resource)
+                <li
+                    class="segel-resource"
+                    data-id="{{ $resource->id }}"
+                >
                     {{ $resource->name }}
 
                     @if($resource->bookings->count() > 0)
@@ -46,6 +50,10 @@
                                         width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
                                         left: {{ ($booking->start_time->format('U') - $timestamps['start']) / $timestamps['duration'] * 100 }}%;
                                         "
+                                    data-id="{{ $booking->id }}"
+                                    data-user="{{ $booking->user_id }}"
+                                    data-start="{{ $booking->start_time->format('U') }}"
+                                    data-end="{{ $booking->end_time->format('U') }}"
                                 >
                                     <span class="segel-resize-handle segel-resize-handle__left">&#8942;</span>
                                     <span class="segel-resize-handle segel-resize-handle__right">&#8942;</span>
@@ -67,85 +75,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             HYDROFON.Segel.component = @this;
+            HYDROFON.Segel.element.querySelectorAll('.segel-resource').forEach(HYDROFON.Segel.interactions.resource);
+            HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)
+        });
 
-            const _this = @this;
-            const containerElement = _this.el.el;
-            let bookings = containerElement.querySelectorAll('.segel-booking');
-
-            for (const booking of bookings) {
-                const position = {x: 0, y: 0};
-
-                interact(booking)
-                    .draggable({
-                        listeners: {
-                            start: function(event) {
-                                event.target.classList.add('is-dragging');
-                            },
-                            move: function (event) {
-                                position.x += event.dx;
-                                position.y += event.dy;
-
-                                event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
-                            },
-                            end: function (event) {
-                                event.target.classList.remove('is-dragging');
-                            }
-                        },
-                        modifiers: [
-                            interact.modifiers.restrict({
-                                restriction: '.segel-resources'
-                            }),
-                            interact.modifiers.snap({
-                                targets: HYDROFON.Segel.grid,
-                                offset: 'startCoords'
-                            })
-                        ],
-                    });
-
-                interact(booking)
-                    .resizable({
-                        edges: {
-                            top: false,
-                            bottom: false,
-                            left: ".segel-resize-handle__left",
-                            right: ".segel-resize-handle__right"
-                        },
-                        listeners: {
-                            start: function(event) {
-                                event.target.classList.add('is-resizing');
-                            },
-                            move: function (event) {
-                                let {x, y} = event.target.dataset;
-
-                                x = (parseFloat(x) || 0) + event.deltaRect.left;
-                                y = (parseFloat(y) || 0) + event.deltaRect.top;
-
-                                Object.assign(event.target.style, {
-                                    width: `${event.rect.width}px`,
-                                    height: `${event.rect.height}px`,
-                                    transform: `translate(${x}px, ${y}px)`
-                                });
-
-                                Object.assign(event.target.dataset, {x, y});
-                            },
-                            end: function (event) {
-                                event.target.classList.remove('is-resizing');
-                            }
-                        },
-                        modifiers: [
-                            interact.modifiers.restrict({
-                                restriction: '.segel-resources'
-                            }),
-                            interact.modifiers.restrictSize(
-                                HYDROFON.Segel.size
-                            ),
-                            interact.modifiers.snap({
-                                targets: HYDROFON.Segel.grid,
-                                offset: 'startCoords'
-                            }),
-                        ],
-                    })
-            }
+        document.addEventListener('livewire:load', function(event) {
+            window.livewire.hook('afterDomUpdate', () => {
+                HYDROFON.Segel.element.querySelectorAll('.segel-resource').forEach(HYDROFON.Segel.interactions.resource);
+                HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)
+            });
         });
     </script>
 @endpush

@@ -33,21 +33,5 @@ Grid.create = function(width, height, steps) {
     });
 };
 
-/**
- * Round timestamp to closest step.
- *
- * @param {Number} timestamp - Timestamp to round.
- * @param {Number} duration - Duration of the calendar.
- * @param {Number} steps - Number of steps within the duration of the calendar.
- * @returns {Number} - Rounded timestamp.
- */
-Grid.round = function(timestamp, duration, steps) {
-    let size = duration / steps;
-    let offset = timestamp % size;
-    let rounded = timestamp - offset;
-
-    return offset >= size / 2 ? rounded + size : rounded;
-};
-
 // Return the instance.
 export default Grid;
