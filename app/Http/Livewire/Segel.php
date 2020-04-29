@@ -25,9 +25,9 @@ class Segel extends Component
 
     public function mount($resources, $timestamps)
     {
-        $this->resources  = $resources;
+        $this->resources = $resources;
         $this->timestamps = $timestamps;
-        $this->steps      = 48;
+        $this->steps = 48;
     }
 
     public function setExpanded($id)

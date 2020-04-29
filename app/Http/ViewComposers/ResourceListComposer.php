@@ -17,7 +17,7 @@ class ResourceListComposer
      */
     public function compose(View $view)
     {
-        $categories    = $this->getCategories();
+        $categories = $this->getCategories();
         $rootResources = $this->getRootResources();
 
         $view->with([
