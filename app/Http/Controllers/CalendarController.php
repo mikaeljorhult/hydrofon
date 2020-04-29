@@ -26,9 +26,9 @@ class CalendarController extends Controller
      */
     public function index($date = null)
     {
-        $date       = $this->date($date)->startOfDay();
+        $date = $this->date($date)->startOfDay();
         $timestamps = $this->timestamps($date);
-        $resources  = $this->resources();
+        $resources = $this->resources();
 
         return view('calendar')
             ->with('date', $date)
