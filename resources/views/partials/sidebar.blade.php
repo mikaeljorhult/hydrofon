@@ -21,9 +21,7 @@
     @auth
         <section class="w-full py-4 px-1 bg-brand-600">
             <a href="{{ route('profile') }}" class="block text-white no-underline hover:text-white">
-                <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}?d=mm"
-                     class="inline w-8 rounded-full"
-                     alt="{{ auth()->user()->name }}"/>
+                @svg('user', 'icon w-6 h-auto mt-0 mx-auto mb-1 opacity-75 fill-current')
 
                 <div class="pt-1 text-xs">
                     {{ auth()->user()->name }}
