@@ -15,9 +15,17 @@
             HYDROFON.Segel.expanded = this.expanded;
         }
     }"
-    x-init="$watch('selected', function(value) { HYDROFON.Segel.resources = value; })"
+    x-init="
+        $watch('selected', value => {
+            if (HYDROFON.Segel.initialized) {
+                HYDROFON.Segel.resources = value;
+            } else {
+                $refs.form.submit();
+            }
+        });
+    "
 >
-    {!! Form::open(['route' => 'calendar', 'class' => 'w-full']) !!}
+    {!! Form::open(['route' => 'calendar', 'class' => 'w-full', 'x-ref' => 'form']) !!}
         <section class="resourcelist-date">
             {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d'), ['class' => 'field']) !!}
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}

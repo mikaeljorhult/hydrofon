@@ -5,6 +5,7 @@ import {debounce} from 'alpinejs/src/utils';
 HYDROFON.Segel = {
     _component: null,
     _element: null,
+    initialized: false,
     grid: null,
     size: null,
     interactions: Interactions,
@@ -12,6 +13,7 @@ HYDROFON.Segel = {
         this._component = component;
         this._element = component.el.el;
         this.calculateGrid();
+        this.initialized = true;
     },
     get component() {
         return this._component;
