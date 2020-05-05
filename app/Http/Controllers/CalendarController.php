@@ -28,10 +28,12 @@ class CalendarController extends Controller
     {
         $date = $this->date($date)->startOfDay();
         $timestamps = $this->timestamps($date);
+        $expanded = $this->categories();
         $resources = $this->resources();
 
         return view('calendar')
             ->with('date', $date)
+            ->with('expanded', $expanded)
             ->with('resources', $resources)
             ->with('timestamps', $timestamps);
     }
@@ -45,6 +47,7 @@ class CalendarController extends Controller
      */
     public function store(CalendarRequest $request)
     {
+        session()->put('expanded', array_unique((array) $request->input('categories'), SORT_NUMERIC));
         session()->flash('resources', array_unique((array) $request->input('resources'), SORT_NUMERIC));
 
         return redirect('/calendar/'.$request->input('date'));
@@ -72,6 +75,16 @@ class CalendarController extends Controller
     private function resources()
     {
         return session('resources', []);
+    }
+
+    /**
+     * Return categories stored in session.
+     *
+     * @return array
+     */
+    private function categories()
+    {
+        return session('expanded', []);
     }
 
     /**

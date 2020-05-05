@@ -1,21 +1,16 @@
 <div
     class="resourcelist"
     x-data="{
-        expanded: @json($expanded),
+        expanded: {{ str_replace("\"", "'", json_encode(array_map('strval', $expanded))) }},
         selected: {{ str_replace("\"", "'", json_encode(array_map('strval', $selected))) }},
-        toggleCategory: function(id) {
-            let index = this.expanded.indexOf(id);
-
-            if (index === -1) {
-                this.expanded.push(id);
-            } else {
-                this.expanded.splice(index, 1);
-            }
-
-            HYDROFON.Segel.expanded = this.expanded;
-        }
     }"
     x-init="
+        $watch('expanded', value => {
+            if (HYDROFON.Segel.initialized) {
+                HYDROFON.Segel.expanded = value;
+            }
+        });
+
         $watch('selected', value => {
             if (HYDROFON.Segel.initialized) {
                 HYDROFON.Segel.resources = value;
