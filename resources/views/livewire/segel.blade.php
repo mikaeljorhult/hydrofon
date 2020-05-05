@@ -31,6 +31,8 @@
                 current: {{ $timestamps['current'] }},
             }"
             x-bind:style="'left: ' + (((current - start) / duration) * 100) + '%';"
+            x-show="current > start && current < start + duration"
+            x-cloak
         ></div>
 
         <ul class="segel-resources">
