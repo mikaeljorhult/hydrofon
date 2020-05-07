@@ -94,7 +94,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
                         <td data-title="&nbsp;">
                             <input
                                 type="checkbox"
