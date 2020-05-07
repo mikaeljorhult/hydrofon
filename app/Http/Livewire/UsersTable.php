@@ -23,9 +23,9 @@ class UsersTable extends BaseTable
             'editValues.email'    => ['required', 'email', Rule::unique('users', 'email')->ignore($item->id)],
             'editValues.password' => ['nullable', 'confirmed'],
             'editValues.is_admin' => ['nullable'],
-        ]);
+        ])['editValues'];
 
-        $item->update($validatedData['editValues']);
+        $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;

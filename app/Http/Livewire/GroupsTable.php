@@ -18,9 +18,9 @@ class GroupsTable extends BaseTable
 
         $validatedData = $this->validate([
             'editValues.name' => ['required'],
-        ]);
+        ])['editValues'];
 
-        $item->update($validatedData['editValues']);
+        $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;

@@ -21,9 +21,9 @@ class ResourcesTable extends BaseTable
             'editValues.name'        => ['required', 'max:60'],
             'editValues.description' => ['nullable'],
             'editValues.is_facility' => ['nullable'],
-        ]);
+        ])['editValues'];
 
-        $item->update($validatedData['editValues']);
+        $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;

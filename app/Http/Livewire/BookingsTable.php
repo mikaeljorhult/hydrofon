@@ -44,9 +44,9 @@ class BookingsTable extends BaseTable
             'editValues.end_time'    => [
                 'required', 'date', 'required_with:editValues.resource_id', 'after:editValues.start_time',
             ],
-        ]);
+        ])['editValues'];
 
-        $item->update($validatedData['editValues']);
+        $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
