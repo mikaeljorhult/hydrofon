@@ -53,6 +53,26 @@
                             >Cancel</a>
                         </td>
                     </tr>
+                    <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
+                        <td>&nbsp;</td>
+                        <td colspan="3">
+                            <div class="flex pb-4">
+                                <div class="w-1/3">
+                                    <label class="block mb-2 text-xs uppercase">Groups</label>
+                                    <select
+                                        name="groups[]"
+                                        class="field"
+                                        multiple
+                                        wire:model="editValues.groups"
+                                    >
+                                        @foreach(\Hydrofon\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                            <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 @else
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                         <td data-title="&nbsp;">

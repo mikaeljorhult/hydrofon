@@ -10,7 +10,7 @@ class CategoriesTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \Hydrofon\Category::class;
-    protected $relationships = ['parent'];
+    protected $relationships = ['parent', 'groups'];
     protected $editFields = ['id', 'name', 'parent_id'];
 
     public function onSave()
@@ -24,9 +24,15 @@ class CategoriesTable extends BaseTable
             'editValues.parent_id' => [
                 'nullable', Rule::notIn($item->id), Rule::exists('categories', 'id'),
             ],
-        ]);
+            'editValues.groups.*'  => [Rule::exists('groups', 'id')],
+        ])['editValues'];
 
-        $item->update($validatedData['editValues']);
+        if (isset($validatedData['groups'])) {
+            $item->groups()->sync($validatedData['groups']);
+            unset($validatedData['groups']);
+        }
+
+        $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
