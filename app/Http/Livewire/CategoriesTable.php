@@ -24,6 +24,7 @@ class CategoriesTable extends BaseTable
             'editValues.parent_id' => [
                 'nullable', Rule::notIn($item->id), Rule::exists('categories', 'id'),
             ],
+            'editValues.groups'    => ['nullable', 'array'],
             'editValues.groups.*'  => [Rule::exists('groups', 'id')],
         ])['editValues'];
 
