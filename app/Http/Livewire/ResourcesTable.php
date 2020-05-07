@@ -3,12 +3,14 @@
 namespace Hydrofon\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 
 class ResourcesTable extends BaseTable
 {
     use AuthorizesRequests;
 
     protected $model = \Hydrofon\Resource::class;
+    protected $relationships = ['groups'];
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
 
     public function onSave()
@@ -21,7 +23,14 @@ class ResourcesTable extends BaseTable
             'editValues.name'        => ['required', 'max:60'],
             'editValues.description' => ['nullable'],
             'editValues.is_facility' => ['nullable'],
+            'editValues.groups'      => ['nullable', 'array'],
+            'editValues.groups.*'    => [Rule::exists('groups', 'id')],
         ])['editValues'];
+
+        if (isset($validatedData['groups'])) {
+            $item->groups()->sync($validatedData['groups']);
+            unset($validatedData['groups']);
+        }
 
         $item->update($validatedData);
 

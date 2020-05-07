@@ -10,6 +10,7 @@ class UsersTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \Hydrofon\User::class;
+    protected $relationships = ['groups'];
     protected $editFields = ['id', 'email', 'name', 'is_admin'];
 
     public function onSave()
@@ -23,7 +24,14 @@ class UsersTable extends BaseTable
             'editValues.email'    => ['required', 'email', Rule::unique('users', 'email')->ignore($item->id)],
             'editValues.password' => ['nullable', 'confirmed'],
             'editValues.is_admin' => ['nullable'],
+            'editValues.groups'   => ['nullable', 'array'],
+            'editValues.groups.*' => [Rule::exists('groups', 'id')],
         ])['editValues'];
+
+        if (isset($validatedData['groups'])) {
+            $item->groups()->sync($validatedData['groups']);
+            unset($validatedData['groups']);
+        }
 
         $item->update($validatedData);
 
