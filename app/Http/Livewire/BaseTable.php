@@ -58,7 +58,8 @@ class BaseTable extends Component
             ? $this->modelInstance->with($this->relationships)
             : $this->modelInstance;
 
-        $this->editValues = $query->findOrFail($id, $this->editFields)->toArray();
+        $item = $query->findOrFail($id, $this->editFields);
+        $this->setEditValues($item);
 
         $this->isEditing = $id;
 
@@ -76,9 +77,9 @@ class BaseTable extends Component
 
         $validatedData = $this->validate([
             'editValues.name' => ['required'],
-        ]);
+        ])['editValues'];
 
-        $item->update($validatedData['editValues']);
+        $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
@@ -113,5 +114,18 @@ class BaseTable extends Component
         $this->items = empty($ids)
             ? collect()
             : $this->items->except($ids);
+    }
+
+    private function setEditValues($item): void
+    {
+        $this->editValues = $item->attributesToArray();
+
+        if (count($this->relationships) > 0) {
+            foreach ($this->relationships as $relationship) {
+                if (!in_array($relationship.'_id', $this->editFields)) {
+                    $this->editValues[$relationship] = $item->$relationship->pluck('id')->toArray();
+                }
+            }
+        }
     }
 }
