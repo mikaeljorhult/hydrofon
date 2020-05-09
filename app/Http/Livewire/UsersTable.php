@@ -42,7 +42,7 @@ class UsersTable extends BaseTable
     public function render()
     {
         return view('livewire.users-table', [
-            'items' => $this->items,
+            'items' => $this->items->loadMissing($this->relationships),
         ]);
     }
 }

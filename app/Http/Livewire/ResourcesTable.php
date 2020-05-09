@@ -41,7 +41,7 @@ class ResourcesTable extends BaseTable
     public function render()
     {
         return view('livewire.resources-table', [
-            'items' => $this->items,
+            'items' => $this->items->loadMissing($this->relationships),
         ]);
     }
 }

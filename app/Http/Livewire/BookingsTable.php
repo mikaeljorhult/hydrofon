@@ -115,7 +115,7 @@ class BookingsTable extends BaseTable
     public function render()
     {
         return view('livewire.bookings-table', [
-            'items' => $this->items,
+            'items' => $this->items->loadMissing($this->relationships),
         ]);
     }
 }
