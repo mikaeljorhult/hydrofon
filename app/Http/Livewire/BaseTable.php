@@ -122,7 +122,7 @@ class BaseTable extends Component
 
         if (count($this->relationships) > 0) {
             foreach ($this->relationships as $relationship) {
-                if (!in_array($relationship.'_id', $this->editFields) && $item->$relationship) {
+                if (! in_array($relationship.'_id', $this->editFields) && $item->$relationship) {
                     $this->editValues[$relationship] = $item->$relationship->pluck('id')->toArray();
                 }
             }
