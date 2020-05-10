@@ -72,7 +72,7 @@
                     </tr>
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                         <td>&nbsp;</td>
-                        <td colspan="3">
+                        <td colspan="4">
                             <div class="flex pb-4">
                                 <div class="w-full lg:w-1/2 xl:w-1/3">
                                     <label class="block mb-2 text-xs uppercase">Groups</label>
