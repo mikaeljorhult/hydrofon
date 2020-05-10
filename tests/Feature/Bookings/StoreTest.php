@@ -160,29 +160,6 @@ class StoreTest extends TestCase
     }
 
     /**
-     * Bookings can be created with timestamp without seconds.
-     *
-     * @return void
-     */
-    public function testBookingsCanBeStoredWithoutSeconds()
-    {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
-
-        $response = $this->actingAs($user)->post('bookings', [
-            'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->format('Y-m-d H:i'),
-            'end_time'    => $booking->end_time->format('Y-m-d H:i'),
-        ]);
-
-        $response->assertRedirect();
-        $this->assertDatabaseHas('bookings', [
-            'start_time' => $booking->start_time->format('Y-m-d H:i:00'),
-            'end_time'   => $booking->end_time->format('Y-m-d H:i:00'),
-        ]);
-    }
-
-    /**
      * Bookings must have a end time.
      *
      * @return void

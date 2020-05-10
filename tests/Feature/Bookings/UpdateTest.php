@@ -302,30 +302,6 @@ class UpdateTest extends TestCase
     }
 
     /**
-     * Timestamps can be entered without seconds.
-     *
-     * @return void
-     */
-    public function testTimestampsCanBeEnteredWithoutSeconds()
-    {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
-        $now = now();
-
-        $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'resource_id' => $booking->resource_id,
-            'start_time'  => $now->format('Y-m-d H:i'),
-            'end_time'    => $now->copy()->addHour()->format('Y-m-d H:i'),
-        ]);
-
-        $response->assertRedirect();
-        $this->assertDatabaseHas('bookings', [
-            'start_time' => $now->format('Y-m-d H:i:00'),
-            'end_time'   => $now->copy()->addHour()->format('Y-m-d H:i:00'),
-        ]);
-    }
-
-    /**
      * A end time must be present.
      *
      * @return void
