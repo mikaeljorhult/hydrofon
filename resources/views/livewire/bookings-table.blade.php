@@ -152,6 +152,14 @@
                             @endif
 
                             <div>
+                                <a
+                                    href="{{ route('bookings.edit', $item) }}"
+                                    title="Edit"
+                                    wire:click.prevent="$emit('edit', {{ $item->id }})"
+                                >Edit</a>
+                            </div>
+
+                            <div>
                                 {!! Form::open(['route' => 'calendar']) !!}
                                     {{ Form::hidden('date', $item->start_time->format('Y-m-d')) }}
                                     {{ Form::hidden('resources[]', $item->resource->id) }}
@@ -159,14 +167,6 @@
                                         View
                                     </button>
                                 {!! Form::close() !!}
-                            </div>
-
-                            <div>
-                                <a
-                                    href="{{ route('bookings.edit', $item) }}"
-                                    title="Edit"
-                                    wire:click.prevent="$emit('edit', {{ $item->id }})"
-                                >Edit</a>
                             </div>
 
                             <div>
