@@ -87,6 +87,32 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div>
+                                    <label class="block mb-2 text-xs uppercase">Categories</label>
+                                    <select
+                                        name="categories[]"
+                                        class="field"
+                                        multiple
+                                        wire:model="editValues.categories"
+                                    >
+                                        @foreach(\Hydrofon\Category::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                            <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-2 text-xs uppercase">Buckets</label>
+                                    <select
+                                        name="buckets[]"
+                                        class="field"
+                                        multiple
+                                        wire:model="editValues.buckets"
+                                    >
+                                        @foreach(\Hydrofon\Bucket::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                            <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </td>
                     </tr>

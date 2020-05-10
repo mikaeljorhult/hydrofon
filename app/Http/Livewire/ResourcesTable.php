@@ -10,7 +10,7 @@ class ResourcesTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \Hydrofon\Resource::class;
-    protected $relationships = ['groups'];
+    protected $relationships = ['buckets', 'categories', 'groups'];
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
 
     public function onSave()
@@ -20,12 +20,26 @@ class ResourcesTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name'        => ['required', 'max:60'],
-            'editValues.description' => ['nullable'],
-            'editValues.is_facility' => ['nullable'],
-            'editValues.groups'      => ['nullable', 'array'],
-            'editValues.groups.*'    => [Rule::exists('groups', 'id')],
+            'editValues.name'         => ['required', 'max:60'],
+            'editValues.description'  => ['nullable'],
+            'editValues.is_facility'  => ['nullable'],
+            'editValues.buckets'      => ['nullable', 'array'],
+            'editValues.buckets.*'    => [Rule::exists('buckets', 'id')],
+            'editValues.categories'   => ['nullable', 'array'],
+            'editValues.categories.*' => [Rule::exists('categories', 'id')],
+            'editValues.groups'       => ['nullable', 'array'],
+            'editValues.groups.*'     => [Rule::exists('groups', 'id')],
         ])['editValues'];
+
+        if (isset($validatedData['buckets'])) {
+            $item->buckets()->sync($validatedData['buckets']);
+            unset($validatedData['buckets']);
+        }
+
+        if (isset($validatedData['categories'])) {
+            $item->categories()->sync($validatedData['categories']);
+            unset($validatedData['categories']);
+        }
 
         if (isset($validatedData['groups'])) {
             $item->groups()->sync($validatedData['groups']);
