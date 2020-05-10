@@ -73,8 +73,8 @@
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                         <td>&nbsp;</td>
                         <td colspan="4">
-                            <div class="flex pb-4">
-                                <div class="w-full lg:w-1/2 xl:w-1/3">
+                            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-4">
+                                <div>
                                     <label class="block mb-2 text-xs uppercase">Groups</label>
                                     <select
                                         name="groups[]"
