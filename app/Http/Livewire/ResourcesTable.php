@@ -31,21 +31,9 @@ class ResourcesTable extends BaseTable
             'editValues.groups.*'     => [Rule::exists('groups', 'id')],
         ])['editValues'];
 
-        if (isset($validatedData['buckets'])) {
-            $item->buckets()->sync($validatedData['buckets']);
-            unset($validatedData['buckets']);
-        }
-
-        if (isset($validatedData['categories'])) {
-            $item->categories()->sync($validatedData['categories']);
-            unset($validatedData['categories']);
-        }
-
-        if (isset($validatedData['groups'])) {
-            $item->groups()->sync($validatedData['groups']);
-            unset($validatedData['groups']);
-        }
-
+        $this->syncRelationship($item, $validatedData, 'buckets');
+        $this->syncRelationship($item, $validatedData, 'categories');
+        $this->syncRelationship($item, $validatedData, 'groups');
         $item->update($validatedData);
 
         $this->refreshItems([$item->id]);

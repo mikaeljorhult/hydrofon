@@ -28,11 +28,7 @@ class CategoriesTable extends BaseTable
             'editValues.groups.*'  => [Rule::exists('groups', 'id')],
         ])['editValues'];
 
-        if (isset($validatedData['groups'])) {
-            $item->groups()->sync($validatedData['groups']);
-            unset($validatedData['groups']);
-        }
-
+        $this->syncRelationship($item, $validatedData, 'groups');
         $item->update($validatedData);
 
         $this->refreshItems([$item->id]);

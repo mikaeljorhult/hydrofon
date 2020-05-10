@@ -116,7 +116,7 @@ class BaseTable extends Component
             : $this->items->except($ids);
     }
 
-    private function setEditValues($item): void
+    private function setEditValues($item)
     {
         $this->editValues = $item->attributesToArray();
 
@@ -126,6 +126,14 @@ class BaseTable extends Component
                     $this->editValues[$relationship] = $item->$relationship->pluck('id')->toArray();
                 }
             }
+        }
+    }
+
+    protected function syncRelationship($item, &$data, $relationship)
+    {
+        if (isset($data[$relationship])) {
+            $item->$relationship()->sync($data[$relationship]);
+            unset($data[$relationship]);
         }
     }
 }
