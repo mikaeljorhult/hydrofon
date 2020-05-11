@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Groups;
 
-use Hydrofon\Group;
-use Hydrofon\User;
+use App\Group;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,7 +15,7 @@ class StoreTest extends TestCase
      * Posts request to persist a group.
      *
      * @param array               $overrides
-     * @param \Hydrofon\User|null $user
+     * @param \App\User|null $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */

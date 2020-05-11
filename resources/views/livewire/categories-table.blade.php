@@ -31,7 +31,7 @@
                                 class="field"
                                 wire:model="editValues.parent_id"
                             >
-                                @foreach(\Hydrofon\Category::where('id', '!=', $item->id)->orderBy('name')->get(['id', 'name']) as $optionItem)
+                                @foreach(\App\Category::where('id', '!=', $item->id)->orderBy('name')->get(['id', 'name']) as $optionItem)
                                     <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                 @endforeach
                             </select>
@@ -65,7 +65,7 @@
                                         multiple
                                         wire:model="editValues.groups"
                                     >
-                                        @foreach(\Hydrofon\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>

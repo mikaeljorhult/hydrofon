@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Hydrofon\Group::class, function (Faker $faker) {
+$factory->define(App\Group::class, function (Faker $faker) {
     return [
         'name' => $faker->colorName,
     ];

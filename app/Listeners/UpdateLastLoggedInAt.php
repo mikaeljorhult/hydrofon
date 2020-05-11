@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Listeners;
+namespace App\Listeners;
 
 use Illuminate\Auth\Events\Login;
 

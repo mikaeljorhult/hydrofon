@@ -1,11 +1,11 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Booking;
-use Hydrofon\Checkin;
-use Hydrofon\Http\Requests\CheckinDestroyRequest;
-use Hydrofon\Http\Requests\CheckinStoreRequest;
+use App\Booking;
+use App\Checkin;
+use App\Http\Requests\CheckinDestroyRequest;
+use App\Http\Requests\CheckinStoreRequest;
 
 class CheckinController extends Controller
 {
@@ -22,7 +22,7 @@ class CheckinController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\CheckinStoreRequest $request
+     * @param \App\Http\Requests\CheckinStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,8 +48,8 @@ class CheckinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Checkin                             $checkin
-     * @param \Hydrofon\Http\Requests\CheckinDestroyRequest $request
+     * @param \App\Checkin                             $checkin
+     * @param \App\Http\Requests\CheckinDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */

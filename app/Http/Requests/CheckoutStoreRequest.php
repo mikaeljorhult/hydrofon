@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydrofon\Http\Requests;
+namespace App\Http\Requests;
 
-use Hydrofon\Checkout;
+use App\Checkout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

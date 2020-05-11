@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
-use Hydrofon\Scopes\GroupPolicyScope;
+use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
@@ -46,7 +46,7 @@ class Resource extends Model
      */
     public function bookings()
     {
-        return $this->hasMany(\Hydrofon\Booking::class);
+        return $this->hasMany(\App\Booking::class);
     }
 
     /**
@@ -56,7 +56,7 @@ class Resource extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(\Hydrofon\Category::class)
+        return $this->belongsToMany(\App\Category::class)
                     ->orderBy('name');
     }
 
@@ -67,7 +67,7 @@ class Resource extends Model
      */
     public function buckets()
     {
-        return $this->belongsToMany(\Hydrofon\Bucket::class);
+        return $this->belongsToMany(\App\Bucket::class);
     }
 
     /**
@@ -77,7 +77,7 @@ class Resource extends Model
      */
     public function identifiers()
     {
-        return $this->morphMany(\Hydrofon\Identifier::class, 'identifiable');
+        return $this->morphMany(\App\Identifier::class, 'identifiable');
     }
 
     /**
@@ -87,6 +87,6 @@ class Resource extends Model
      */
     public function groups()
     {
-        return $this->belongsToMany(\Hydrofon\Group::class);
+        return $this->belongsToMany(\App\Group::class);
     }
 }

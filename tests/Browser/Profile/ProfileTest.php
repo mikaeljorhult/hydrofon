@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Profile;
 
-use Hydrofon\User;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;

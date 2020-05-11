@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 

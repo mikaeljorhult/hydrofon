@@ -1,10 +1,10 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Http\Requests\DeskRequest;
-use Hydrofon\Identifier;
-use Hydrofon\User;
+use App\Http\Requests\DeskRequest;
+use App\Identifier;
+use App\User;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -46,7 +46,7 @@ class DeskController extends Controller
     /**
      * Redirect to desk view with search term.
      *
-     * @param \Hydrofon\Http\Requests\DeskRequest $request
+     * @param \App\Http\Requests\DeskRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -81,7 +81,7 @@ class DeskController extends Controller
     /**
      * Get bookings of identifiable.
      *
-     * @param \Hydrofon\Resource|\Hydrofon\User $identifiable
+     * @param \App\Resource|\App\User $identifiable
      *
      * @return mixed
      */

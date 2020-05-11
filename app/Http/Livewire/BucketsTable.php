@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -8,7 +8,7 @@ class BucketsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \Hydrofon\Bucket::class;
+    protected $model = \App\Bucket::class;
 
     public function onSave()
     {

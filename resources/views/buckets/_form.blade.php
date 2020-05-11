@@ -3,10 +3,10 @@
     {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'field' . ($errors->has('name') ? ' is-invalid' : '')]) !!}
 </div>
 
-@if(\Hydrofon\Resource::exists())
+@if(\App\Resource::exists())
     <div class="mb-6">
         {!! Form::label('resources[]', 'Resources', ['class' => 'label']) !!}
-        {!! Form::select('resources[]', \Hydrofon\Resource::orderBy('name')->pluck('name', 'id'), isset($bucket) ? $bucket->resources->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('resources') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('resources[]', \App\Resource::orderBy('name')->pluck('name', 'id'), isset($bucket) ? $bucket->resources->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('resources') ? ' is-invalid' : '')]) !!}
     </div>
 @endif
 

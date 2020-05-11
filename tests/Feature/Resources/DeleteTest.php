@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Resources;
 
-use Hydrofon\Booking;
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Booking;
+use App\Resource;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

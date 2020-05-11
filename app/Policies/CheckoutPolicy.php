@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Checkout;
-use Hydrofon\User;
+use App\Checkout;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CheckoutPolicy
@@ -13,7 +13,7 @@ class CheckoutPolicy
     /**
      * Determine whether the user can create checkouts.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -25,8 +25,8 @@ class CheckoutPolicy
     /**
      * Determine whether the user can delete the checkout.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Checkout $checkout
+     * @param \App\User     $user
+     * @param \App\Checkout $checkout
      *
      * @return mixed
      */

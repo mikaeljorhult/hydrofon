@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Hydrofon\User::class, function (Faker $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     return [
         'name'           => $faker->name,
         'email'          => $faker->unique()->safeEmail,
@@ -23,6 +23,6 @@ $factory->define(Hydrofon\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Hydrofon\User::class, 'admin', [
+$factory->state(App\User::class, 'admin', [
     'is_admin' => true,
 ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,9 +25,9 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer([
             'partials.resource-tree',
-        ], \Hydrofon\Http\ViewComposers\ResourceListComposer::class);
+        ], \App\Http\ViewComposers\ResourceListComposer::class);
         view()->composer([
             'partials.resource-tree',
-        ], \Hydrofon\Http\ViewComposers\ResourceListSelectedComposer::class);
+        ], \App\Http\ViewComposers\ResourceListSelectedComposer::class);
     }
 }

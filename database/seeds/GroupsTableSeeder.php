@@ -1,6 +1,6 @@
 <?php
 
-use Hydrofon\Group;
+use App\Group;
 use Illuminate\Database\Seeder;
 
 class GroupsTableSeeder extends Seeder

@@ -3,9 +3,9 @@
 namespace Tests\Unit\Validation;
 
 use Carbon\Carbon;
-use Hydrofon\Booking;
-use Hydrofon\Resource;
-use Hydrofon\Rules\Available;
+use App\Booking;
+use App\Resource;
+use App\Rules\Available;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

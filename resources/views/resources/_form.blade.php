@@ -8,17 +8,17 @@
     {!! Form::textarea('description', null, ['placeholder' => 'Description', 'class' => 'field' . ($errors->has('description') ? ' is-invalid' : '')]) !!}
 </div>
 
-@if(\Hydrofon\Category::exists())
+@if(\App\Category::exists())
     <div class="mb-6">
         {!! Form::label('categories[]', 'Categories', ['class' => 'label']) !!}
-        {!! Form::select('categories[]', \Hydrofon\Category::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->categories->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('categories') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('categories[]', \App\Category::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->categories->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('categories') ? ' is-invalid' : '')]) !!}
     </div>
 @endif
 
-@if(\Hydrofon\Group::exists())
+@if(\App\Group::exists())
     <div class="mb-6">
         {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
-        {!! Form::select('groups[]', \Hydrofon\Group::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('groups') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('groups[]', \App\Group::orderBy('name')->pluck('name', 'id'), isset($resource) ? $resource->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('groups') ? ' is-invalid' : '')]) !!}
     </div>
 @endif
 

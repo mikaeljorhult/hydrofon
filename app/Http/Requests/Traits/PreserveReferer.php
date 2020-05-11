@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Requests\Traits;
+namespace App\Http\Requests\Traits;
 
 use Illuminate\Contracts\Validation\Validator;
 

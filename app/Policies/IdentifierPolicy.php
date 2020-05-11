@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Identifier;
-use Hydrofon\User;
+use App\Identifier;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class IdentifierPolicy
@@ -13,8 +13,8 @@ class IdentifierPolicy
     /**
      * Determine whether the user can view the identifier.
      *
-     * @param \Hydrofon\User       $user
-     * @param \Hydrofon\Identifier $identifier
+     * @param \App\User       $user
+     * @param \App\Identifier $identifier
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class IdentifierPolicy
     /**
      * Determine whether the user can create identifiers.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class IdentifierPolicy
     /**
      * Determine whether the user can update the identifier.
      *
-     * @param \Hydrofon\User       $user
-     * @param \Hydrofon\Identifier $identifier
+     * @param \App\User       $user
+     * @param \App\Identifier $identifier
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class IdentifierPolicy
     /**
      * Determine whether the user can delete the identifier.
      *
-     * @param \Hydrofon\User       $user
-     * @param \Hydrofon\Identifier $identifier
+     * @param \App\User       $user
+     * @param \App\Identifier $identifier
      *
      * @return mixed
      */

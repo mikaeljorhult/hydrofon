@@ -1,12 +1,12 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Http\Requests\IdentifierDestroyRequest;
-use Hydrofon\Http\Requests\IdentifierStoreRequest;
-use Hydrofon\Http\Requests\IdentifierUpdateRequest;
-use Hydrofon\Identifier;
-use Hydrofon\User;
+use App\Http\Requests\IdentifierDestroyRequest;
+use App\Http\Requests\IdentifierStoreRequest;
+use App\Http\Requests\IdentifierUpdateRequest;
+use App\Identifier;
+use App\User;
 use Illuminate\Support\Str;
 
 class UserIdentifierController extends Controller
@@ -24,7 +24,7 @@ class UserIdentifierController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class UserIdentifierController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,8 +52,8 @@ class UserIdentifierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\IdentifierStoreRequest $request
-     * @param \Hydrofon\User                                 $user
+     * @param \App\Http\Requests\IdentifierStoreRequest $request
+     * @param \App\User                                 $user
      *
      * @return void
      */
@@ -74,8 +74,8 @@ class UserIdentifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\User       $user
-     * @param \Hydrofon\Identifier $identifier
+     * @param \App\User       $user
+     * @param \App\Identifier $identifier
      *
      * @return \Illuminate\Http\Response
      */
@@ -91,9 +91,9 @@ class UserIdentifierController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\IdentifierUpdateRequest $request
-     * @param \Hydrofon\User                                  $user
-     * @param \Hydrofon\Identifier                            $identifier
+     * @param \App\Http\Requests\IdentifierUpdateRequest $request
+     * @param \App\User                                  $user
+     * @param \App\Identifier                            $identifier
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,9 +114,9 @@ class UserIdentifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\User                                   $user
-     * @param \Hydrofon\Identifier                             $identifier
-     * @param \Hydrofon\Http\Requests\IdentifierDestroyRequest $request
+     * @param \App\User                                   $user
+     * @param \App\Identifier                             $identifier
+     * @param \App\Http\Requests\IdentifierDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */

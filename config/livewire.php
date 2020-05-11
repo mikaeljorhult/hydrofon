@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'class_namespace' => 'Hydrofon\\Http\\Livewire',
+    'class_namespace' => 'App\\Http\\Livewire',
 
     /*
     |--------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Category;
-use Hydrofon\User;
+use App\Category;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CategoryPolicy
@@ -13,8 +13,8 @@ class CategoryPolicy
     /**
      * Determine whether the user can view the category.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Category $category
+     * @param \App\User     $user
+     * @param \App\Category $category
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can create categories.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class CategoryPolicy
     /**
      * Determine whether the user can update the category.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Category $category
+     * @param \App\User     $user
+     * @param \App\Category $category
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class CategoryPolicy
     /**
      * Determine whether the user can delete the category.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Category $category
+     * @param \App\User     $user
+     * @param \App\Category $category
      *
      * @return mixed
      */

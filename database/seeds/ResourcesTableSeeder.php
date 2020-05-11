@@ -1,6 +1,6 @@
 <?php
 
-use Hydrofon\Resource;
+use App\Resource;
 use Illuminate\Database\Seeder;
 
 class ResourcesTableSeeder extends Seeder

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Bucket;
-use Hydrofon\User;
+use App\Bucket;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BucketPolicy
@@ -13,8 +13,8 @@ class BucketPolicy
     /**
      * Determine whether the user can view the bucket.
      *
-     * @param \Hydrofon\User   $user
-     * @param \Hydrofon\Bucket $bucket
+     * @param \App\User   $user
+     * @param \App\Bucket $bucket
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class BucketPolicy
     /**
      * Determine whether the user can create buckets.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class BucketPolicy
     /**
      * Determine whether the user can update the bucket.
      *
-     * @param \Hydrofon\User   $user
-     * @param \Hydrofon\Bucket $bucket
+     * @param \App\User   $user
+     * @param \App\Bucket $bucket
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class BucketPolicy
     /**
      * Determine whether the user can delete the bucket.
      *
-     * @param \Hydrofon\User   $user
-     * @param \Hydrofon\Bucket $bucket
+     * @param \App\User   $user
+     * @param \App\Bucket $bucket
      *
      * @return mixed
      */

@@ -26,7 +26,7 @@
                                 class="field"
                                 wire:model="editValues.resource_id"
                             >
-                                @foreach(\Hydrofon\Resource::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                @foreach(\App\Resource::orderBy('name')->get(['id', 'name']) as $optionItem)
                                     <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                 @endforeach
                             </select>
@@ -41,7 +41,7 @@
                                 class="field"
                                 wire:model="editValues.user_id"
                             >
-                                @foreach(\Hydrofon\User::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                @foreach(\App\User::orderBy('name')->get(['id', 'name']) as $optionItem)
                                     <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                 @endforeach
                             </select>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http;
+namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -14,11 +14,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Hydrofon\Http\Middleware\CheckForMaintenanceMode::class,
+        \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Hydrofon\Http\Middleware\TrimStrings::class,
+        \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Hydrofon\Http\Middleware\TrustProxies::class,
+        \App\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -28,14 +28,14 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Hydrofon\Http\Middleware\EncryptCookies::class,
+            \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Hydrofon\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Hydrofon\Http\Middleware\Impersonate::class,
+            \App\Http\Middleware\Impersonate::class,
         ],
 
         'api' => [
@@ -52,13 +52,13 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'admin'         => \Hydrofon\Http\Middleware\Administrator::class,
-        'auth'          => \Hydrofon\Http\Middleware\Authenticate::class,
+        'admin'         => \App\Http\Middleware\Administrator::class,
+        'auth'          => \App\Http\Middleware\Authenticate::class,
         'auth.basic'    => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings'      => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can'           => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'         => \Hydrofon\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest'         => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed'        => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'      => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
@@ -74,7 +74,7 @@ class Kernel extends HttpKernel
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Hydrofon\Http\Middleware\Authenticate::class,
+        \App\Http\Middleware\Authenticate::class,
         \Illuminate\Routing\Middleware\ThrottleRequests::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,

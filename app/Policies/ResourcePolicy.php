@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Resource;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResourcePolicy
@@ -13,8 +13,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can see the resource in listings.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Resource $resource
+     * @param \App\User     $user
+     * @param \App\Resource $resource
      *
      * @return mixed
      */
@@ -28,8 +28,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can view the resource.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Resource $resource
+     * @param \App\User     $user
+     * @param \App\Resource $resource
      *
      * @return mixed
      */
@@ -41,7 +41,7 @@ class ResourcePolicy
     /**
      * Determine whether the user can create resources.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -53,8 +53,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can update the resource.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Resource $resource
+     * @param \App\User     $user
+     * @param \App\Resource $resource
      *
      * @return mixed
      */
@@ -66,8 +66,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can delete the resource.
      *
-     * @param \Hydrofon\User     $user
-     * @param \Hydrofon\Resource $resource
+     * @param \App\User     $user
+     * @param \App\Resource $resource
      *
      * @return mixed
      */

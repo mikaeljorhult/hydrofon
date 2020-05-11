@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +22,7 @@ class Group extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(\Hydrofon\Resource::class);
+        return $this->belongsToMany(\App\Resource::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class Group extends Model
      */
     public function resources()
     {
-        return $this->belongsToMany(\Hydrofon\Resource::class);
+        return $this->belongsToMany(\App\Resource::class);
     }
 
     /**
@@ -42,6 +42,6 @@ class Group extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\Hydrofon\User::class);
+        return $this->belongsToMany(\App\User::class);
     }
 }

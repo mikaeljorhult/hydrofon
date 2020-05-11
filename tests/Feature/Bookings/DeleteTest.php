@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Bookings;
 
-use Hydrofon\Booking;
-use Hydrofon\Checkin;
-use Hydrofon\Checkout;
-use Hydrofon\User;
+use App\Booking;
+use App\Checkin;
+use App\Checkout;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

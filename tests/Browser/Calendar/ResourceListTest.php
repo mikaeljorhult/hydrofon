@@ -2,9 +2,9 @@
 
 namespace Tests\Browser\Calendar;
 
-use Hydrofon\Booking;
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Booking;
+use App\Resource;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;

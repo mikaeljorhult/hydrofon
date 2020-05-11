@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use Hydrofon\Subscription;
-use Hydrofon\User;
+use App\Subscription;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,7 +20,7 @@ class ShowTest extends TestCase
     {
         $user = factory(User::class)->create();
         $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => \Hydrofon\User::class,
+            'subscribable_type' => \App\User::class,
             'subscribable_id'   => $user->id,
         ]);
 

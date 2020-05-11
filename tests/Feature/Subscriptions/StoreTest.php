@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use Hydrofon\Resource;
-use Hydrofon\Subscription;
-use Hydrofon\User;
+use App\Resource;
+use App\Subscription;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class StoreTest extends TestCase
      * Posts request to persist a subscription.
      *
      * @param array               $overrides
-     * @param \Hydrofon\User|null $user
+     * @param \App\User|null $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
@@ -45,7 +45,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \Hydrofon\User::class,
+            'subscribable_type' => \App\User::class,
             'subscribable_id'   => $user->id,
         ]);
     }
@@ -58,7 +58,7 @@ class StoreTest extends TestCase
     public function testOnlyOneSubscriptionIsCreatedForEachObject()
     {
         $subscription = factory(Subscription::class)->create($attributes = [
-            'subscribable_type' => \Hydrofon\User::class,
+            'subscribable_type' => \App\User::class,
             'subscribable_id'   => factory(User::class)->create()->id,
         ]);
 
@@ -105,7 +105,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \Hydrofon\Resource::class,
+            'subscribable_type' => \App\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
     }

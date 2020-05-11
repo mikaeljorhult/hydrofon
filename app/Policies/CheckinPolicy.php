@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Checkin;
-use Hydrofon\User;
+use App\Checkin;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CheckinPolicy
@@ -13,7 +13,7 @@ class CheckinPolicy
     /**
      * Determine whether the user can create checkins.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -25,8 +25,8 @@ class CheckinPolicy
     /**
      * Determine whether the user can delete the checkin.
      *
-     * @param \Hydrofon\User    $user
-     * @param \Hydrofon\Checkin $checkin
+     * @param \App\User    $user
+     * @param \App\Checkin $checkin
      *
      * @return mixed
      */

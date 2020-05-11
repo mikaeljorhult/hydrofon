@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Desk;
 
-use Hydrofon\User;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Routing\Controller;

@@ -1,6 +1,6 @@
 <?php
 
-use Hydrofon\Category;
+use App\Category;
 use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder

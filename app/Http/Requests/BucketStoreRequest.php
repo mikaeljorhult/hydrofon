@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\Requests;
+namespace App\Http\Requests;
 
-use Hydrofon\Bucket;
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
+use App\Bucket;
+use App\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BucketStoreRequest extends FormRequest

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -9,7 +9,7 @@ class ResourcesTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \Hydrofon\Resource::class;
+    protected $model = \App\Resource::class;
     protected $relationships = ['buckets', 'categories', 'groups'];
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
 

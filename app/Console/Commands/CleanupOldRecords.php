@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Console\Commands;
+namespace App\Console\Commands;
 
-use Hydrofon\Booking;
-use Hydrofon\User;
+use App\Booking;
+use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 

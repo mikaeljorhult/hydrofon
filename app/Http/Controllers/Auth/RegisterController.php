@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use Hydrofon\Http\Controllers\Controller;
-use Hydrofon\User;
+use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -61,7 +61,7 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return \Hydrofon\User
+     * @return \App\User
      */
     protected function create(array $data)
     {

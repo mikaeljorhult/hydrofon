@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Policies;
 
-use Hydrofon\Identifier;
-use Hydrofon\User;
+use App\Identifier;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Http\Requests\ImpersonationRequest;
-use Hydrofon\User;
+use App\Http\Requests\ImpersonationRequest;
+use App\User;
 
 class ImpersonationController extends Controller
 {
@@ -20,7 +20,7 @@ class ImpersonationController extends Controller
     /**
      * Create impersonation of user.
      *
-     * @param \Hydrofon\Http\Requests\ImpersonationRequest $request
+     * @param \App\Http\Requests\ImpersonationRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */

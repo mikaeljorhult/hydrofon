@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Bookings;
 
-use Hydrofon\Booking;
-use Hydrofon\User;
+use App\Booking;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,7 +15,7 @@ class StoreTest extends TestCase
      * Posts request to persist a booking.
      *
      * @param array               $overrides
-     * @param \Hydrofon\User|null $user
+     * @param \App\User|null $user
      *
      * @return \Illuminate\Foundation\Testing\TestResponse
      */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
 class HomeController extends Controller
 {

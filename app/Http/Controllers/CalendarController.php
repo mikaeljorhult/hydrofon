@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Hydrofon\Http\Requests\CalendarRequest;
+use App\Http\Requests\CalendarRequest;
 
 class CalendarController extends Controller
 {
@@ -41,7 +41,7 @@ class CalendarController extends Controller
     /**
      * Retrieve resources and redirect to calendar view.
      *
-     * @param  \Hydrofon\Http\Requests\CalendarRequest  $request
+     * @param  \App\Http\Requests\CalendarRequest  $request
      *
      * @return \Illuminate\Http\Response
      */

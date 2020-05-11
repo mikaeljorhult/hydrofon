@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +23,6 @@ class Checkout extends Model
      */
     public function booking()
     {
-        return $this->belongsTo(\Hydrofon\Booking::class);
+        return $this->belongsTo(\App\Booking::class);
     }
 }

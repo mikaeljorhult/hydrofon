@@ -1,11 +1,11 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Http\Requests\UserDestroyRequest;
-use Hydrofon\Http\Requests\UserStoreRequest;
-use Hydrofon\Http\Requests\UserUpdateRequest;
-use Hydrofon\User;
+use App\Http\Requests\UserDestroyRequest;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\User;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
@@ -56,7 +56,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\UserStoreRequest $request
+     * @param \App\Http\Requests\UserStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -82,7 +82,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -94,7 +94,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -110,8 +110,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\UserUpdateRequest $request
-     * @param \Hydrofon\User                            $user
+     * @param \App\Http\Requests\UserUpdateRequest $request
+     * @param \App\User                            $user
      *
      * @return void
      */
@@ -142,8 +142,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\User                             $user
-     * @param \Hydrofon\Http\Requests\UserDestroyRequest $request
+     * @param \App\User                             $user
+     * @param \App\Http\Requests\UserDestroyRequest $request
      *
      * @return void
      */

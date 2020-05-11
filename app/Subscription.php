@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
 use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;
@@ -51,7 +51,7 @@ class Subscription extends Model
      */
     public function toCalendar()
     {
-        $vCalendar = new Calendar('Hydrofon\\EN');
+        $vCalendar = new Calendar('App\\EN');
         $vCalendar->setName($this->subscribable->name.' | Hydrofon');
 
         $this->subscribable->load([

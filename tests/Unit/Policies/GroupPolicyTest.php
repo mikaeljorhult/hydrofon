@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Policies;
 
-use Hydrofon\Group;
-use Hydrofon\User;
+use App\Group;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

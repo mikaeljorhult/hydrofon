@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Groups;
 
-use Hydrofon\Group;
-use Hydrofon\User;
+use App\Group;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Http\Requests\ResourceDestroyRequest;
-use Hydrofon\Http\Requests\ResourceStoreRequest;
-use Hydrofon\Http\Requests\ResourceUpdateRequest;
-use Hydrofon\Resource;
+use App\Http\Requests\ResourceDestroyRequest;
+use App\Http\Requests\ResourceStoreRequest;
+use App\Http\Requests\ResourceUpdateRequest;
+use App\Resource;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourceController extends Controller
@@ -55,7 +55,7 @@ class ResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\ResourceStoreRequest $request
+     * @param \App\Http\Requests\ResourceStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,7 +78,7 @@ class ResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \Hydrofon\Resource $resource
+     * @param \App\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +90,7 @@ class ResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\Resource $resource
+     * @param \App\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -106,8 +106,8 @@ class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\ResourceUpdateRequest $request
-     * @param \Hydrofon\Resource                            $resource
+     * @param \App\Http\Requests\ResourceUpdateRequest $request
+     * @param \App\Resource                            $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -130,8 +130,8 @@ class ResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Resource                             $resource
-     * @param \Hydrofon\Http\Requests\ResourceDestroyRequest $request
+     * @param \App\Resource                             $resource
+     * @param \App\Http\Requests\ResourceDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */

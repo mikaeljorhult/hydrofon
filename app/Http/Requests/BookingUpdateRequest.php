@@ -1,10 +1,10 @@
 <?php
 
-namespace Hydrofon\Http\Requests;
+namespace App\Http\Requests;
 
 use Carbon\Carbon;
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
-use Hydrofon\Rules\Available;
+use App\Http\Requests\Traits\PreserveReferer;
+use App\Rules\Available;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;

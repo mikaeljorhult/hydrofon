@@ -1,11 +1,11 @@
 <div class="mb-6">
     {!! Form::label('resource_id', 'Resource', ['class' => 'label']) !!}
-    {!! Form::select('resource_id', \Hydrofon\Resource::orderBy('name')->pluck('name', 'id'), isset($booking) ? $booking->resource_id : null, ['placeholder' => 'Select a resource...', 'class' => 'field' . ($errors->has('resource_id') ? ' is-invalid' : '')]) !!}
+    {!! Form::select('resource_id', \App\Resource::orderBy('name')->pluck('name', 'id'), isset($booking) ? $booking->resource_id : null, ['placeholder' => 'Select a resource...', 'class' => 'field' . ($errors->has('resource_id') ? ' is-invalid' : '')]) !!}
 </div>
 
 <div class="mb-6">
     {!! Form::label('user_id', 'User', ['class' => 'label']) !!}
-    {!! Form::select('user_id', \Hydrofon\User::orderBy('name')->pluck('name', 'id'), isset($booking) ? $booking->user_id : null, ['placeholder' => 'Select a user...', 'class' => 'field' . ($errors->has('user_id') ? ' is-invalid' : '')]) !!}
+    {!! Form::select('user_id', \App\User::orderBy('name')->pluck('name', 'id'), isset($booking) ? $booking->user_id : null, ['placeholder' => 'Select a user...', 'class' => 'field' . ($errors->has('user_id') ? ' is-invalid' : '')]) !!}
 </div>
 
 <div class="flex flex-wrap mb-6">

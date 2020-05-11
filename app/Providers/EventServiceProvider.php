@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Providers;
+namespace App\Providers;
 
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Login::class      => [
-            \Hydrofon\Listeners\UpdateLastLoggedInAt::class,
+            \App\Listeners\UpdateLastLoggedInAt::class,
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

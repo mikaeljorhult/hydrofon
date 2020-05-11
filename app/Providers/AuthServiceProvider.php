@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Providers;
+namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -12,15 +12,15 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \Hydrofon\Booking::class    => \Hydrofon\Policies\BookingPolicy::class,
-        \Hydrofon\Bucket::class     => \Hydrofon\Policies\BucketPolicy::class,
-        \Hydrofon\Category::class   => \Hydrofon\Policies\CategoryPolicy::class,
-        \Hydrofon\Checkin::class    => \Hydrofon\Policies\CheckinPolicy::class,
-        \Hydrofon\Checkout::class   => \Hydrofon\Policies\CheckoutPolicy::class,
-        \Hydrofon\Group::class      => \Hydrofon\Policies\GroupPolicy::class,
-        \Hydrofon\Identifier::class => \Hydrofon\Policies\IdentifierPolicy::class,
-        \Hydrofon\Resource::class   => \Hydrofon\Policies\ResourcePolicy::class,
-        \Hydrofon\User::class       => \Hydrofon\Policies\UserPolicy::class,
+        \App\Booking::class    => \App\Policies\BookingPolicy::class,
+        \App\Bucket::class     => \App\Policies\BucketPolicy::class,
+        \App\Category::class   => \App\Policies\CategoryPolicy::class,
+        \App\Checkin::class    => \App\Policies\CheckinPolicy::class,
+        \App\Checkout::class   => \App\Policies\CheckoutPolicy::class,
+        \App\Group::class      => \App\Policies\GroupPolicy::class,
+        \App\Identifier::class => \App\Policies\IdentifierPolicy::class,
+        \App\Resource::class   => \App\Policies\ResourcePolicy::class,
+        \App\User::class       => \App\Policies\UserPolicy::class,
     ];
 
     /**

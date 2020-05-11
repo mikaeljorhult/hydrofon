@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\User;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -12,8 +12,8 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \Hydrofon\User $user
-     * @param \Hydrofon\User $model
+     * @param \App\User $user
+     * @param \App\User $model
      *
      * @return mixed
      */
@@ -25,7 +25,7 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -37,8 +37,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \Hydrofon\User $user
-     * @param \Hydrofon\User $model
+     * @param \App\User $user
+     * @param \App\User $model
      *
      * @return mixed
      */
@@ -50,8 +50,8 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \Hydrofon\User $user
-     * @param \Hydrofon\User $model
+     * @param \App\User $user
+     * @param \App\User $model
      *
      * @return mixed
      */

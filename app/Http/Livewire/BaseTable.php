@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 

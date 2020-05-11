@@ -1,11 +1,11 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Category;
-use Hydrofon\Http\Requests\CategoryDestroyRequest;
-use Hydrofon\Http\Requests\CategoryStoreRequest;
-use Hydrofon\Http\Requests\CategoryUpdateRequest;
+use App\Category;
+use App\Http\Requests\CategoryDestroyRequest;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\CategoryStoreRequest $request
+     * @param \App\Http\Requests\CategoryStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \Hydrofon\Category $category
+     * @param \App\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -89,7 +89,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\Category $category
+     * @param \App\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -105,8 +105,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\CategoryUpdateRequest $request
-     * @param \Hydrofon\Category                            $category
+     * @param \App\Http\Requests\CategoryUpdateRequest $request
+     * @param \App\Category                            $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,8 +125,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Category                             $category
-     * @param \Hydrofon\Http\Requests\CategoryDestroyRequest $request
+     * @param \App\Category                             $category
+     * @param \App\Http\Requests\CategoryDestroyRequest $request
      *
      * @return void
      */

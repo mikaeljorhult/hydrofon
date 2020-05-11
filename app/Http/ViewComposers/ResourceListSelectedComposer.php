@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\ViewComposers;
+namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
 

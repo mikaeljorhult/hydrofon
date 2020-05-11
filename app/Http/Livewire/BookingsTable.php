@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
-use Hydrofon\Rules\Available;
+use App\Rules\Available;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 
@@ -10,7 +10,7 @@ class BookingsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \Hydrofon\Booking::class;
+    protected $model = \App\Booking::class;
     protected $relationships = ['checkin', 'checkout', 'resource.buckets', 'user'];
     protected $editFields = ['id', 'resource_id', 'user_id', 'start_time', 'end_time'];
 

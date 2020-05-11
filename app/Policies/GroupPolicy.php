@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Group;
-use Hydrofon\User;
+use App\Group;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GroupPolicy
@@ -13,8 +13,8 @@ class GroupPolicy
     /**
      * Determine whether the user can view the group.
      *
-     * @param \Hydrofon\User  $user
-     * @param \Hydrofon\Group $group
+     * @param \App\User  $user
+     * @param \App\Group $group
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class GroupPolicy
     /**
      * Determine whether the user can create groups.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class GroupPolicy
     /**
      * Determine whether the user can update the group.
      *
-     * @param \Hydrofon\User  $user
-     * @param \Hydrofon\Group $group
+     * @param \App\User  $user
+     * @param \App\Group $group
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class GroupPolicy
     /**
      * Determine whether the user can delete the group.
      *
-     * @param \Hydrofon\User  $user
-     * @param \Hydrofon\Group $group
+     * @param \App\User  $user
+     * @param \App\Group $group
      *
      * @return mixed
      */

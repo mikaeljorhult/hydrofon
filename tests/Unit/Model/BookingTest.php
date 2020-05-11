@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Model;
 
-use Hydrofon\Booking;
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Booking;
+use App\Resource;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -240,12 +240,12 @@ class BookingTest extends TestCase
         factory(Booking::class)->states('past')->create();
         factory(Booking::class)->states('future')->create();
         $checkedInBooking = factory(Booking::class)->states('past')->create();
-        $checkedInBooking->checkout()->save(factory(\Hydrofon\Checkout::class)->create());
-        $checkedInBooking->checkin()->save(factory(\Hydrofon\Checkin::class)->create());
+        $checkedInBooking->checkout()->save(factory(\App\Checkout::class)->create());
+        $checkedInBooking->checkin()->save(factory(\App\Checkin::class)->create());
 
         // Create a current booking.
         $booking = factory(Booking::class)->states('past')->create();
-        $booking->checkout()->save(factory(\Hydrofon\Checkout::class)->create());
+        $booking->checkout()->save(factory(\App\Checkout::class)->create());
 
         // Get all current bookings.
         $bookings = Booking::overdue()->get();

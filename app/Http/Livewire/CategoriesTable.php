@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -9,7 +9,7 @@ class CategoriesTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \Hydrofon\Category::class;
+    protected $model = \App\Category::class;
     protected $relationships = ['parent', 'groups'];
     protected $editFields = ['id', 'name', 'parent_id'];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 

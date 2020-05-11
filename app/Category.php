@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
-use Hydrofon\Scopes\GroupPolicyScope;
+use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
@@ -60,7 +60,7 @@ class Category extends Model
      */
     public function groups()
     {
-        return $this->belongsToMany(\Hydrofon\Group::class);
+        return $this->belongsToMany(\App\Group::class);
     }
 
     /**
@@ -70,7 +70,7 @@ class Category extends Model
      */
     public function resources()
     {
-        return $this->belongsToMany(\Hydrofon\Resource::class)
+        return $this->belongsToMany(\App\Resource::class)
                     ->orderBy('name');
     }
 }

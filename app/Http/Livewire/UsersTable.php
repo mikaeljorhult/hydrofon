@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -9,7 +9,7 @@ class UsersTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \Hydrofon\User::class;
+    protected $model = \App\User::class;
     protected $relationships = ['groups'];
     protected $editFields = ['id', 'email', 'name', 'is_admin'];
 

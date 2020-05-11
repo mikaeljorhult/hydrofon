@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 

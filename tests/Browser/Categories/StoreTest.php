@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Categories;
 
-use Hydrofon\Category;
-use Hydrofon\User;
+use App\Category;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;

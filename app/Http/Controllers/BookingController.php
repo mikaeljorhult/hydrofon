@@ -1,11 +1,11 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Booking;
-use Hydrofon\Http\Requests\BookingDestroyRequest;
-use Hydrofon\Http\Requests\BookingStoreRequest;
-use Hydrofon\Http\Requests\BookingUpdateRequest;
+use App\Booking;
+use App\Http\Requests\BookingDestroyRequest;
+use App\Http\Requests\BookingStoreRequest;
+use App\Http\Requests\BookingUpdateRequest;
 use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -61,7 +61,7 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\BookingStoreRequest $request
+     * @param \App\Http\Requests\BookingStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -89,7 +89,7 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \Hydrofon\Booking $booking
+     * @param \App\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -101,7 +101,7 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\Booking $booking
+     * @param \App\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -117,8 +117,8 @@ class BookingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\BookingUpdateRequest $request
-     * @param \Hydrofon\Booking                            $booking
+     * @param \App\Http\Requests\BookingUpdateRequest $request
+     * @param \App\Booking                            $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -145,8 +145,8 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Booking                             $booking
-     * @param \Hydrofon\Http\Requests\BookingDestroyRequest $request
+     * @param \App\Booking                             $booking
+     * @param \App\Http\Requests\BookingDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
      */

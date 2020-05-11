@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Policies;
+namespace App\Policies;
 
-use Hydrofon\Booking;
-use Hydrofon\User;
+use App\Booking;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BookingPolicy
@@ -11,7 +11,7 @@ class BookingPolicy
     use HandlesAuthorization;
 
     /**
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      * @param string         $ability
      *
      * @return bool
@@ -27,8 +27,8 @@ class BookingPolicy
     /**
      * Determine whether the user can view the booking.
      *
-     * @param \Hydrofon\User    $user
-     * @param \Hydrofon\Booking $booking
+     * @param \App\User    $user
+     * @param \App\Booking $booking
      *
      * @return mixed
      */
@@ -40,7 +40,7 @@ class BookingPolicy
     /**
      * Determine whether the user can create bookings.
      *
-     * @param \Hydrofon\User $user
+     * @param \App\User $user
      *
      * @return mixed
      */
@@ -52,8 +52,8 @@ class BookingPolicy
     /**
      * Determine whether the user can update the booking.
      *
-     * @param \Hydrofon\User    $user
-     * @param \Hydrofon\Booking $booking
+     * @param \App\User    $user
+     * @param \App\Booking $booking
      *
      * @return mixed
      */
@@ -65,8 +65,8 @@ class BookingPolicy
     /**
      * Determine whether the user can delete the booking.
      *
-     * @param \Hydrofon\User    $user
-     * @param \Hydrofon\Booking $booking
+     * @param \App\User    $user
+     * @param \App\Booking $booking
      *
      * @return mixed
      */

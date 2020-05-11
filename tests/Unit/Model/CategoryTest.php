@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Model;
 
-use Hydrofon\Category;
-use Hydrofon\User;
+use App\Category;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

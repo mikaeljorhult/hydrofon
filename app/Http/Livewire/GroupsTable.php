@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -8,7 +8,7 @@ class GroupsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \Hydrofon\Group::class;
+    protected $model = \App\Group::class;
 
     public function onSave()
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Rules;
+namespace App\Rules;
 
 use Carbon\Carbon;
-use Hydrofon\Booking;
+use App\Booking;
 use Illuminate\Contracts\Validation\Rule;
 
 class Available implements Rule

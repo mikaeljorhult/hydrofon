@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\Requests;
+namespace App\Http\Requests;
 
-use Hydrofon\Group;
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
+use App\Group;
+use App\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GroupStoreRequest extends FormRequest

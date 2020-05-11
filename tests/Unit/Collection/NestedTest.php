@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Collection;
 
-use Hydrofon\Category;
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Category;
+use App\Resource;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon\Providers;
+namespace App\Providers;
 
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Collection;

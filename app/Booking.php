@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydrofon;
+namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +37,7 @@ class Booking extends Model
      */
     public function created_by()
     {
-        return $this->belongsTo(\Hydrofon\User::class);
+        return $this->belongsTo(\App\User::class);
     }
 
     /**
@@ -47,7 +47,7 @@ class Booking extends Model
      */
     public function resource()
     {
-        return $this->belongsTo(\Hydrofon\Resource::class);
+        return $this->belongsTo(\App\Resource::class);
     }
 
     /**
@@ -57,7 +57,7 @@ class Booking extends Model
      */
     public function user()
     {
-        return $this->belongsTo(\Hydrofon\User::class);
+        return $this->belongsTo(\App\User::class);
     }
 
     /**
@@ -67,7 +67,7 @@ class Booking extends Model
      */
     public function checkin()
     {
-        return $this->hasOne(\Hydrofon\Checkin::class);
+        return $this->hasOne(\App\Checkin::class);
     }
 
     /**
@@ -77,7 +77,7 @@ class Booking extends Model
      */
     public function checkout()
     {
-        return $this->hasOne(\Hydrofon\Checkout::class);
+        return $this->hasOne(\App\Checkout::class);
     }
 
     /**

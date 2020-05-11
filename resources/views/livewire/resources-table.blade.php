@@ -82,7 +82,7 @@
                                         multiple
                                         wire:model="editValues.groups"
                                     >
-                                        @foreach(\Hydrofon\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>
@@ -95,7 +95,7 @@
                                         multiple
                                         wire:model="editValues.categories"
                                     >
-                                        @foreach(\Hydrofon\Category::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Category::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>
@@ -108,7 +108,7 @@
                                         multiple
                                         wire:model="editValues.buckets"
                                     >
-                                        @foreach(\Hydrofon\Bucket::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Bucket::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>

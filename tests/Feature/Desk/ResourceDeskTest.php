@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Desk;
 
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Resource;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

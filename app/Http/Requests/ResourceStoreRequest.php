@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\Requests;
+namespace App\Http\Requests;
 
-use Hydrofon\Http\Requests\Traits\PreserveReferer;
-use Hydrofon\Resource;
+use App\Http\Requests\Traits\PreserveReferer;
+use App\Resource;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

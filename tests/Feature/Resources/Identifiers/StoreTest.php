@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Resources\Identifiers;
 
-use Hydrofon\Identifier;
-use Hydrofon\Resource;
-use Hydrofon\User;
+use App\Identifier;
+use App\Resource;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -30,7 +30,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('identifiers', [
             'value'             => 'test-value',
             'identifiable_id'   => $resource->id,
-            'identifiable_type' => \Hydrofon\Resource::class,
+            'identifiable_type' => \App\Resource::class,
         ]);
     }
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Hydrofon\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hydrofon\Group;
-use Hydrofon\Http\Requests\GroupDestroyRequest;
-use Hydrofon\Http\Requests\GroupStoreRequest;
-use Hydrofon\Http\Requests\GroupUpdateRequest;
+use App\Group;
+use App\Http\Requests\GroupDestroyRequest;
+use App\Http\Requests\GroupStoreRequest;
+use App\Http\Requests\GroupUpdateRequest;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller
@@ -55,7 +55,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\GroupStoreRequest $request
+     * @param \App\Http\Requests\GroupStoreRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +73,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \Hydrofon\Group $group
+     * @param \App\Group $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -85,7 +85,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Hydrofon\Group $group
+     * @param \App\Group $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -101,8 +101,8 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Hydrofon\Http\Requests\GroupUpdateRequest $request
-     * @param \Hydrofon\Group                            $group
+     * @param \App\Http\Requests\GroupUpdateRequest $request
+     * @param \App\Group                            $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -120,8 +120,8 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Hydrofon\Group                             $group
-     * @param \Hydrofon\Http\Requests\GroupDestroyRequest $reqest
+     * @param \App\Group                             $group
+     * @param \App\Http\Requests\GroupDestroyRequest $reqest
      *
      * @return \Illuminate\Http\Response
      */

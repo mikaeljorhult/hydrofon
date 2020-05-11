@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydrofon\Http\ViewComposers;
+namespace App\Http\ViewComposers;
 
-use Hydrofon\Category;
-use Hydrofon\Resource;
+use App\Category;
+use App\Resource;
 use Illuminate\View\View;
 
 class ResourceListComposer
