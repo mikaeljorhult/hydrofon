@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Http\Requests\CalendarRequest;
+use Carbon\Carbon;
 
 class CalendarController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use Carbon\Carbon;
 use App\Booking;
+use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Rule;
 
 class Available implements Rule

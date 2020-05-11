@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Validation;
 
-use Carbon\Carbon;
 use App\Booking;
 use App\Resource;
 use App\Rules\Available;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
