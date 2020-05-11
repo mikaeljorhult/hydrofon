@@ -18,7 +18,7 @@ class DeleteTest extends TestCase
      * @param \App\Subscription $subscription
      * @param \App\User|null    $user
      *
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \Illuminate\Testing\TestResponse
      */
     public function deleteSubscription($subscription, $user = null)
     {

@@ -17,7 +17,7 @@ class StoreTest extends TestCase
      * @param array               $overrides
      * @param \App\User|null $user
      *
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \Illuminate\Testing\TestResponse
      */
     public function storeResource($overrides = [], $user = null)
     {
