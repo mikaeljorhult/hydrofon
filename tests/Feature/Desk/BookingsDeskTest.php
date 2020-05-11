@@ -102,6 +102,6 @@ class BookingsDeskTest extends TestCase
                          ->get('/desk/'.$user->email.'?filter[between]='.now()->subDays(6)->format('U').','.now()->subDays(4)->format('U'));
 
         $response->assertStatus(200);
-        $response->assertSee(e($booking->resource->name));
+        $response->assertSee($booking->resource->name);
     }
 }

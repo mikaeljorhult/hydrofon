@@ -24,6 +24,6 @@ class ResourceDeskTest extends TestCase
         $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/resource-identifier');
 
         $response->assertStatus(200);
-        $response->assertSee(e($resource->name));
+        $response->assertSee($resource->name);
     }
 }

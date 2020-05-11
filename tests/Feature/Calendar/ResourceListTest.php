@@ -56,7 +56,7 @@ class ResourceListTest extends TestCase
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
-        $response->assertDontSeeText(e($category->name));
+        $response->assertDontSeeText($category->name);
     }
 
     /**
@@ -74,7 +74,7 @@ class ResourceListTest extends TestCase
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
-        $response->assertSee(e($category->name));
+        $response->assertSee($category->name);
     }
 
     /**
@@ -90,7 +90,7 @@ class ResourceListTest extends TestCase
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
-        $response->assertSeeText(e($resource->name));
+        $response->assertSeeText($resource->name);
     }
 
     /**
