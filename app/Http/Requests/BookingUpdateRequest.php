@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use App\Http\Requests\Traits\PreserveReferer;
 use App\Rules\Available;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;

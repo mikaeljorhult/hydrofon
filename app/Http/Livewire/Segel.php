@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use Carbon\Carbon;
 use App\Booking;
 use App\Resource;
 use App\Rules\Available;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
