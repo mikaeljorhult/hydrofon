@@ -99,7 +99,7 @@ class CalendarController extends Controller
         $timestamps = [
             'current' => (int) now()->format('U'),
             'start'   => (int) $date->format('U'),
-            'end'     => (int) $date->copy()->endOfDay()->format('U'),
+            'end'     => (int) $date->copy()->addDay()->format('U'),
         ];
 
         $timestamps['duration'] = $timestamps['end'] - $timestamps['start'];

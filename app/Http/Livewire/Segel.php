@@ -42,6 +42,16 @@ class Segel extends Component
         session()->put('resources', $id);
     }
 
+    public function previousTimeScope()
+    {
+        $this->setTimestamps($this->timestamps['duration'] * -1);
+    }
+
+    public function nextTimeScope()
+    {
+        $this->setTimestamps($this->timestamps['duration']);
+    }
+
     public function createBooking($values)
     {
         $this->authorize('create', Booking::class);
@@ -125,7 +135,7 @@ class Segel extends Component
 
     private function roundTimestamp($timestamp)
     {
-        $precision = ($this->timestamps['duration'] + 1) / $this->steps;
+        $precision = ($this->timestamps['duration']) / $this->steps;
 
         return round($timestamp / $precision) * $precision;
     }
@@ -134,6 +144,25 @@ class Segel extends Component
     {
         return view('livewire.segel')->with([
             'items' => $this->getResources(),
+        ]);
+    }
+
+    private function setTimestamps($difference)
+    {
+        $start      = Carbon::createFromTimestamp($this->timestamps['start'] + $difference);
+        $end        = Carbon::createFromTimestamp($this->timestamps['end'] + $difference);
+        $dateString = $start->format('Y-m-d');
+
+        $this->timestamps = [
+            'current'  => (int) now()->format('U'),
+            'start'    => (int) $start->format('U'),
+            'end'      => (int) $end->format('U'),
+            'duration' => $this->timestamps['duration'],
+        ];
+
+        $this->emit('dateChanged', [
+            'date' => $dateString,
+            'url'  => route('calendar', [$dateString]),
         ]);
     }
 }
