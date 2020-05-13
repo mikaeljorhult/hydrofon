@@ -79,6 +79,11 @@
             HYDROFON.Segel.component = @this;
             HYDROFON.Segel.element.querySelectorAll('.segel-resource').forEach(HYDROFON.Segel.interactions.resource);
             HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)
+
+            history.pushState({
+                date: null,
+                timestamps: @json($timestamps)
+            }, 'initial');
         });
 
         document.addEventListener('livewire:load', function(event) {
@@ -87,5 +92,13 @@
                 HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)
             });
         });
+
+        window.onpopstate = function (event) {
+            HYDROFON.Segel.component.call('setTimestamps', event.state.timestamps);
+        };
+
+        window.livewire.on('dateChanged', (state) => {
+            history.pushState({date: state.date, timestamps: state.timestamps}, state.date, state.url);
+        })
     </script>
 @endpush

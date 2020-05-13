@@ -42,14 +42,20 @@ class Segel extends Component
         session()->put('resources', $id);
     }
 
+    public function setTimestamps($timestamps)
+    {
+        $this->timestamps = (array) $timestamps;
+        $this->changeTimestamps(0);
+    }
+
     public function previousTimeScope()
     {
-        $this->setTimestamps($this->timestamps['duration'] * -1);
+        $this->changeTimestamps($this->timestamps['duration'] * -1);
     }
 
     public function nextTimeScope()
     {
-        $this->setTimestamps($this->timestamps['duration']);
+        $this->changeTimestamps($this->timestamps['duration']);
     }
 
     public function createBooking($values)
@@ -147,7 +153,7 @@ class Segel extends Component
         ]);
     }
 
-    private function setTimestamps($difference)
+    private function changeTimestamps($difference)
     {
         $start      = Carbon::createFromTimestamp($this->timestamps['start'] + $difference);
         $end        = Carbon::createFromTimestamp($this->timestamps['end'] + $difference);
@@ -161,8 +167,9 @@ class Segel extends Component
         ];
 
         $this->emit('dateChanged', [
-            'date' => $dateString,
-            'url'  => route('calendar', [$dateString]),
+            'date'       => $dateString,
+            'timestamps' => $this->timestamps,
+            'url'        => route('calendar', [$dateString]),
         ]);
     }
 }

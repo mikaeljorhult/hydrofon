@@ -3,6 +3,7 @@
     x-data="{
         expanded: {{ str_replace("\"", "'", json_encode(array_map('strval', $expanded))) }},
         selected: {{ str_replace("\"", "'", json_encode(array_map('strval', $selected))) }},
+        date: '{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}',
     }"
     x-init="
         $watch('expanded', value => {
@@ -18,11 +19,15 @@
                 $refs.form.submit();
             }
         });
+
+        window.livewire.on('dateChanged', (state) => {
+            date = state.date;
+        })
     "
 >
     {!! Form::open(['route' => 'calendar', 'class' => 'w-full', 'x-ref' => 'form']) !!}
         <section class="resourcelist-date">
-            {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d'), ['class' => 'field']) !!}
+            {!! Form::text('date', isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d'), ['class' => 'field', 'x-bind:value' => 'date']) !!}
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
         </section>
 
