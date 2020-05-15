@@ -21,5 +21,9 @@ mix
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .tailwind('./tailwind.config.js')
-    .purgeCss()
+    .purgeCss({
+        globs: [
+            path.join(__dirname, 'node_modules/tiny-date-picker/dist/tiny-date-picker.js'),
+        ],
+    })
     .version();
