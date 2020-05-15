@@ -28,11 +28,19 @@
             x-data="{
                 start: {{ $timestamps['start'] }},
                 duration: {{ $timestamps['duration'] }},
-                current: {{ $timestamps['current'] }},
+                current: 0,
             }"
             x-bind:style="'left: ' + (((current - start) / duration) * 100) + '%';"
             x-show="current > start && current < start + duration"
             x-cloak
+            x-init="
+                setInterval(() => {
+                    current = Math.round(
+                        (new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000))
+                        / 1000
+                    );
+                }, 1000);
+            "
         ></div>
 
         <ul class="segel-resources">
