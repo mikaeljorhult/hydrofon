@@ -1,8 +1,20 @@
 <div
     id="segel"
     class="segel"
-    x-data="{}"
+    x-data="{
+        start: {{ $timestamps['start'] }},
+        duration: {{ $timestamps['duration'] }},
+        current: 0,
+    }"
     x-on:resize.window.debounce.500="HYDROFON.Segel.handleResize()"
+    x-init="
+        setInterval(() => {
+            current = Math.round(
+                (new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000))
+                / 1000
+            );
+        }, 1000);
+    "
 >
     <div class="segel-container">
         <ul class="segel-grid">
@@ -23,25 +35,12 @@
             </ul>
         </aside>
 
-        <div
-            class="segel-indicator"
-            x-data="{
-                start: {{ $timestamps['start'] }},
-                duration: {{ $timestamps['duration'] }},
-                current: 0,
-            }"
-            x-bind:style="'left: ' + (((current - start) / duration) * 100) + '%';"
-            x-show="current > start && current < start + duration"
-            x-cloak
-            x-init="
-                setInterval(() => {
-                    current = Math.round(
-                        (new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000))
-                        / 1000
-                    );
-                }, 1000);
-            "
-        ></div>
+        <template x-if="current > start && current < start + duration">
+            <div
+                class="segel-indicator"
+                x-bind:style="'left: ' + (((current - start) / duration) * 100) + '%';"
+            ></div>
+        </template>
 
         <ul class="segel-resources">
             @forelse($items as $resource)
