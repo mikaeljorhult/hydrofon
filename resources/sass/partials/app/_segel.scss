@@ -146,7 +146,7 @@
     color: #fff;
     text-align: center;
 
-    .segel-booking:hover &,
+    .segel-booking.editable:hover &,
     .segel-booking.is-resizing & {
         display: flex;
     }

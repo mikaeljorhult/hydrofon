@@ -90,7 +90,11 @@ Interactions.resource = function (resource) {
 
 Interactions.booking = function (booking) {
     // Bail if interact has already been setup.
-    if (interact.isSet(booking)) {
+    if (interact.isSet(booking) || !booking.classList.contains('editable')) {
+        if (!booking.classList.contains('editable')) {
+            interact(booking).unset();
+        }
+
         return;
     }
 

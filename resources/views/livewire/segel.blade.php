@@ -53,7 +53,8 @@
                     @if($resource->bookings->count() > 0)
                         <ul class="segel-bookings">
                             @foreach($resource->bookings as $booking)
-                                <li class="segel-booking"
+                                <li
+                                    class="segel-booking @can('update', $booking) editable @endcan"
                                     title="{{ $booking->user->name }}"
                                     style="
                                         width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
