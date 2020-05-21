@@ -89,13 +89,8 @@
         </section>
 
         <ul class="resourcelist-base list-none px-4 py-2">
-            @foreach($categories as $category)
-                @include('partials.resource-tree.category', ['category' => $category])
-            @endforeach
-
-            @foreach($resources as $resource)
-                @include('partials.resource-tree.resource', ['resource' => $resource])
-            @endforeach
+            @each('partials.resource-tree.category', $categories, 'category')
+            @each('partials.resource-tree.resource', $resources, 'resource')
         </ul>
     {!! Form::close() !!}
 </div>

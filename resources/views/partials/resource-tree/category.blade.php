@@ -21,13 +21,8 @@
 
     @if($category->children->count() > 0 || $category->resources->count() > 0)
         <ul class="list-none resourcelist-children">
-            @foreach($category->children as $category)
-                @include('partials.resource-tree.category', ['category' => $category])
-            @endforeach
-
-            @foreach($category->resources as $resource)
-                @include('partials.resource-tree.resource', ['resource' => $resource])
-            @endforeach
+            @each('partials.resource-tree.category', $category->children, 'category')
+            @each('partials.resource-tree.resource', $category->resources, 'resource')
         </ul>
     @endif
 </li>

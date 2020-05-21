@@ -28,6 +28,8 @@ class ViewComposerServiceProvider extends ServiceProvider
         ], \App\Http\ViewComposers\ResourceListComposer::class);
         view()->composer([
             'partials.resource-tree',
+            'partials.resource-tree.category',
+            'partials.resource-tree.resource',
         ], \App\Http\ViewComposers\ResourceListSelectedComposer::class);
     }
 }
