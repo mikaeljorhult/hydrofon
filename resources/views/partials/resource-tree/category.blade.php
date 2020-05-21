@@ -4,7 +4,7 @@
 >
     <label
         class="cursor-pointer"
-        x-on:click="multipleSelect($event)"
+        x-on:click.stop="multipleSelect($event)"
     >
         <input
             type="checkbox"

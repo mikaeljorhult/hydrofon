@@ -8,7 +8,7 @@
         multipleSelect: function ($event) {
             if (!$event.target.classList.contains('hidden') && $event.altKey) {
                 var category = $event.target.closest('.resourcelist-category');
-                var checkboxes = Array.from(category.querySelectorAll('.resourcelist-resource input'));
+                var checkboxes = Array.from(category.querySelectorAll(':scope > .resourcelist-children > .resourcelist-resource input'));
                 var checked = checkboxes.filter(item => item.checked);
 
                 if (checkboxes.length === checked.length) {
