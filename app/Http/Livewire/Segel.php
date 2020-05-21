@@ -155,8 +155,8 @@ class Segel extends Component
 
     private function changeTimestamps($difference)
     {
-        $start      = Carbon::createFromTimestamp($this->timestamps['start'] + $difference);
-        $end        = Carbon::createFromTimestamp($this->timestamps['end'] + $difference);
+        $start = Carbon::createFromTimestamp($this->timestamps['start'] + $difference);
+        $end = Carbon::createFromTimestamp($this->timestamps['end'] + $difference);
         $dateString = $start->format('Y-m-d');
 
         $this->timestamps = [
