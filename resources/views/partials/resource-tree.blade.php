@@ -5,6 +5,27 @@
         selected: {{ str_replace("\"", "'", json_encode(array_map('strval', $selected))) }},
         date: '{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}',
         datepicker: null,
+        multipleSelect: function ($event) {
+            if (!$event.target.classList.contains('hidden') && $event.altKey) {
+                var category = $event.target.closest('.resourcelist-category');
+                var checkboxes = Array.from(category.querySelectorAll('.resourcelist-resource input'));
+                var checked = checkboxes.filter(item => item.checked);
+
+                if (checkboxes.length === checked.length) {
+                    var itemsToDeselect = checked.map(item => item.value);
+
+                    this.selected = this.selected.filter(id => itemsToDeselect.indexOf(id) === -1);
+                } else {
+                    var itemsToSelect = checkboxes
+                        .filter(item => !item.checked)
+                        .map(item => item.value);
+
+                    this.selected = this.selected.concat(itemsToSelect);
+                }
+
+                $event.preventDefault();
+            };
+        },
     }"
     x-init="
         $watch('expanded', value => {
