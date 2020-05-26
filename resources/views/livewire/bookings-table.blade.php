@@ -116,10 +116,10 @@
                             {{ $item->user->name }}
                         </td>
                         <td data-title="Start">
-                            {{ $item->start_time }}
+                            {{ $item->start_time->format('Y-m-d H:i') }}
                         </td>
                         <td data-title="End">
-                            {{ $item->end_time }}
+                            {{ $item->end_time->format('Y-m-d H:i') }}
                         </td>
 
                         <td data-title="&nbsp;" class="table-actions">
