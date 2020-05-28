@@ -60,12 +60,14 @@ Interactions.resource = function (resource) {
     });
 
     interact(resource).on('doubletap', function (event) {
-        let resourceNode = event.target;
-
         // Ignore propagating clicks from other elements.
-        if (resourceNode.className !== 'segel-resource') {
+        if (event.target.className !== 'segel-resource' && event.target.className !== 'segel-bookings') {
             return;
         }
+
+        let resourceNode = event.target.className === 'segel-resource'
+            ? event.target
+            : event.target.parentNode;
 
         let position = Math.round(
             (event.offsetX / resourceNode.clientWidth)
@@ -81,7 +83,7 @@ Interactions.resource = function (resource) {
         let endTime = startTime + size * 2;
 
         HYDROFON.Segel.component.call('createBooking', {
-            resource_id: parseInt(event.target.dataset.id),
+            resource_id: parseInt(resourceNode.dataset.id),
             start_time: startTime,
             end_time: endTime,
         });
