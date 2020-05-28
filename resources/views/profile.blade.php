@@ -10,9 +10,9 @@
         <div>
             <h2>Bookings</h2>
 
-            <div class="md:flex">
+            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 @if($latest->count() > 0)
-                    <div class="p-4 border border-solid border-gray-400 md:w-1/2 lg:w-1/3">
+                    <div class="p-4 pt-3 bg-gray-100">
                         <h3 class="mt-0 mb-2">Latest bookings</h3>
                         @foreach($latest as $booking)
                             <ul class="mb-3">
@@ -27,10 +27,10 @@
                 @endif
 
                 @if($upcoming->count() > 0)
-                    <div class="p-4 border border-solid border-gray-400 md:w-1/2 lg:w-1/3">
+                    <div class="p-4 pt-3 bg-gray-100">
                         <h3 class="mt-0 mb-2">Upcoming</h3>
                         @foreach($upcoming as $day)
-                            <h3 class="mb-1 text-sm font-normal">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
+                            <h3 class="mt-0 mb-1 text-sm font-normal">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
                             <ul class="mb-3">
                                 @foreach($day as $booking)
                                     <li>{{ $booking->resource->name }}</li>
@@ -41,7 +41,7 @@
                 @endif
 
                 @if($overdue->count() > 0)
-                    <div class="p-4 border border-solid border-gray-400 md:w-1/2 lg:w-1/3">
+                    <div class="p-4 pt-3 bg-gray-100">
                         <h3 class="mt-0 mb-2">Overdue</h3>
                         <ul class="mb-3">
                             @foreach($overdue as $booking)
