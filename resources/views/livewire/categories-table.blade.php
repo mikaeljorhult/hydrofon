@@ -2,8 +2,8 @@
     <table class="table">
         <thead>
             <th class="table-column-check">#</th>
-            <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'categories.name' || request()->has('sort') === false ? '-' : '') . 'categories.name'] + request()->except('page')) }}">Name</a></th>
-            <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'parent.name' ? '-' : '') . 'parent.name'] + request()->except('page')) }}">Parent</a></th>
+            <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'categories.name' || request()->has('sort') === false ? '-' : '') . 'categories.name'] + request()->only(['filter', 'sort'])) }}">Name</a></th>
+            <th><a href="{{ route('categories.index', ['sort' => (request('sort') === 'parent.name' ? '-' : '') . 'parent.name'] + request()->only(['filter', 'sort'])) }}">Parent</a></th>
             <th>&nbsp;</th>
         </thead>
 

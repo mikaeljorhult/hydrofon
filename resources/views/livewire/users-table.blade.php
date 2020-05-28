@@ -8,9 +8,9 @@
                     wire:click="$emit('selectAll', $event.target.checked)"
                 />
             </th>
-            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->except('page')) }}">E-mail</a></th>
-            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
-            <th class="text-center"><a href="{{ route('users.index', ['sort' => (request('sort') === 'is_admin' ? '-' : '') . 'is_admin'] + request()->except('page')) }}">Administrator</a></th>
+            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'email' || request()->has('sort') === false ? '-' : '') . 'email'] + request()->only(['filter', 'sort'])) }}">E-mail</a></th>
+            <th><a href="{{ route('users.index', ['sort' => (request('sort') === 'name' ? '-' : '') . 'name'] + request()->only(['filter', 'sort'])) }}">Name</a></th>
+            <th class="text-center"><a href="{{ route('users.index', ['sort' => (request('sort') === 'is_admin' ? '-' : '') . 'is_admin'] + request()->only(['filter', 'sort'])) }}">Administrator</a></th>
             <th>&nbsp;</th>
         </thead>
 

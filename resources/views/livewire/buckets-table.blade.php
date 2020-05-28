@@ -8,7 +8,7 @@
                     wire:click="$emit('selectAll', $event.target.checked)"
                 />
             </th>
-            <th><a href="{{ route('buckets.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->except('page')) }}">Name</a></th>
+            <th><a href="{{ route('buckets.index', ['sort' => (request('sort') === 'name' || request()->has('sort') === false ? '-' : '') . 'name'] + request()->only(['filter', 'sort'])) }}">Name</a></th>
             <th>&nbsp;</th>
         </thead>
 

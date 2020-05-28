@@ -8,10 +8,10 @@
                     wire:click="$emit('selectAll', $event.target.checked)"
                 />
             </th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'resources.name' ? '-' : '') . 'resources.name'] + request()->except('page')) }}">Resource</a></th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'users.name' ? '-' : '') . 'users.name'] + request()->except('page')) }}">User</a></th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'start_time' || request()->has('sort') === false ? '-' : '') . 'start_time'] + request()->except('page')) }}">Start</a></th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'end_time' ? '-' : '') . 'end_time'] + request()->except('page')) }}">End</a></th>
+            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'resources.name' ? '-' : '') . 'resources.name'] + request()->only(['filter', 'sort'])) }}">Resource</a></th>
+            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'users.name' ? '-' : '') . 'users.name'] + request()->only(['filter', 'sort'])) }}">User</a></th>
+            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'start_time' || request()->has('sort') === false ? '-' : '') . 'start_time'] + request()->only(['filter', 'sort'])) }}">Start</a></th>
+            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'end_time' ? '-' : '') . 'end_time'] + request()->only(['filter', 'sort'])) }}">End</a></th>
             <th>&nbsp;</th>
         </thead>
 
