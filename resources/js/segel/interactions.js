@@ -8,6 +8,9 @@ import interact from 'interactjs';
  */
 const Interactions = {};
 
+let position = { x: 0, y: 0 };
+let bookingClone = null;
+
 Interactions.resource = function (resource) {
     // Bail if interact has already been setup.
     if (interact.isSet(resource)) {
@@ -52,9 +55,13 @@ Interactions.resource = function (resource) {
                 progressBar.classList.add('progress');
                 bookingNode.appendChild(progressBar);
 
-                HYDROFON.Segel.component.call('updateBooking', booking);
+                HYDROFON.Segel.component.call(
+                    event.dragEvent.altKey ? 'createBooking' : 'updateBooking',
+                    booking
+                );
 
                 bookingNode.classList.remove('droppable');
+                position = { x: 0, y: 0 };
             }
         }
     });
@@ -100,11 +107,14 @@ Interactions.booking = function (booking) {
         return;
     }
 
-    const position = {x: 0, y: 0};
-
     interact(booking).draggable({
         listeners: {
             start: function (event) {
+                if (event.altKey) {
+                    bookingClone = event.target.cloneNode(false);
+                    event.target.parentNode.appendChild(bookingClone);
+                }
+
                 event.target.classList.add('is-dragging');
             },
             move: function (event) {
@@ -115,6 +125,16 @@ Interactions.booking = function (booking) {
             },
             end: function (event) {
                 event.target.classList.remove('is-dragging');
+
+                if (bookingClone) {
+                    if (event.altKey) {
+                        HYDROFON.Segel.interactions.booking(bookingClone);
+                    } else {
+                        bookingClone.parentNode.removeChild(bookingClone);
+                    }
+
+                    bookingClone = null;
+                }
             }
         },
         modifiers: [
