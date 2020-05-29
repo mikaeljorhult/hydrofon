@@ -23,7 +23,7 @@ mix
     .tailwind('./tailwind.config.js')
     .purgeCss({
         globs: [
-            path.join(__dirname, 'node_modules/tiny-date-picker/dist/tiny-date-picker.js'),
+            path.join(__dirname, 'node_modules/flatpickr/dist/flatpickr.js'),
         ],
     })
     .version();
