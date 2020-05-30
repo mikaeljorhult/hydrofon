@@ -44,9 +44,10 @@
 
         window.livewire.on('dateChanged', (state) => {
             date = state.date;
+            datepicker.setDate(date, false);
         });
 
-        flatpickr($refs.datepicker, {
+        datepicker = flatpickr($refs.datepicker, {
             allowInput: true,
             altFormat: 'Y-m-d',
             dateFormat: 'Y-m-d',
