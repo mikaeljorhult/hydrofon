@@ -14,6 +14,14 @@ class BookingsTable extends BaseTable
     protected $relationships = ['checkin', 'checkout', 'resource.buckets', 'user'];
     protected $editFields = ['id', 'resource_id', 'user_id', 'start_time', 'end_time'];
 
+    public $tableDefaultSort = 'start_time';
+    public $tableHeaders = [
+        'resources.name' => 'Resource',
+        'users.name'     => 'User',
+        'start_time'     => 'Start',
+        'end_time'       => 'End',
+    ];
+
     protected $listeners = [
         'select'    => 'onSelect',
         'selectAll' => 'onSelectAll',
@@ -59,7 +67,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with(['resource', 'checkin'])->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->checkin) {
+            if (!$item->resource->is_facility && !$item->checkin) {
                 $item->checkin()->create([
                     'user_id' => auth()->id(),
                 ]);
@@ -83,7 +91,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with(['resource', 'checkout'])->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->checkout) {
+            if (!$item->resource->is_facility && !$item->checkout) {
                 $item->checkout()->create([
                     'user_id' => auth()->id(),
                 ]);
@@ -98,11 +106,13 @@ class BookingsTable extends BaseTable
         $item = $this->modelInstance->with('resource')->findOrFail($id);
 
         // Get buckets with available resources.
-        $buckets = $item->resource->buckets()->with(['resources' => function ($query) use ($item) {
-            $query->whereDoesntHave('bookings', function ($subQuery) use ($item) {
-                $subQuery->between($item->start_time, $item->end_time);
-            });
-        }])->get();
+        $buckets = $item->resource->buckets()->with([
+            'resources' => function ($query) use ($item) {
+                $query->whereDoesntHave('bookings', function ($subQuery) use ($item) {
+                    $subQuery->between($item->start_time, $item->end_time);
+                });
+            },
+        ])->get();
 
         $availableResources = $buckets->pluck('resources')->flatten();
 

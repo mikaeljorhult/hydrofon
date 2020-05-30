@@ -13,6 +13,12 @@ class ResourcesTable extends BaseTable
     protected $relationships = ['buckets', 'categories', 'groups'];
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
 
+    public $tableHeaders = [
+        'name'        => 'Name',
+        'description' => 'Description',
+        'is_facility' => 'Facility',
+    ];
+
     public function onSave()
     {
         $item = $this->items->find($this->editValues['id']);

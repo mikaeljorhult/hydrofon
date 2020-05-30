@@ -13,6 +13,12 @@ class CategoriesTable extends BaseTable
     protected $relationships = ['parent', 'groups'];
     protected $editFields = ['id', 'name', 'parent_id'];
 
+    public $tableDefaultSort = 'categories.name';
+    public $tableHeaders = [
+        'categories.name' => 'Name',
+        'parent.name' => 'Parent',
+    ];
+
     public function onSave()
     {
         $item = $this->items->find($this->editValues['id']);

@@ -13,7 +13,7 @@
             <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 @if($latest->count() > 0)
                     <div class="p-4 pt-3 bg-gray-100">
-                        <h3 class="mt-0 mb-2">Latest bookings</h3>
+                        <h3 class="mt-0 mb-2">Latest</h3>
                         @foreach($latest as $booking)
                             <ul class="mb-3">
                                 <li>{{ $booking->start_time->format('Y-m-d H:i') }}: {{ $booking->resource->name }}</li>

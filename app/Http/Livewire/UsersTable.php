@@ -13,6 +13,13 @@ class UsersTable extends BaseTable
     protected $relationships = ['groups'];
     protected $editFields = ['id', 'email', 'name', 'is_admin'];
 
+    public $tableDefaultSort = 'email';
+    public $tableHeaders = [
+        'email'    => 'email',
+        'name'     => 'Name',
+        'is_admin' => 'Administrator',
+    ];
+
     public function onSave()
     {
         $item = $this->items->find($this->editValues['id']);

@@ -1,19 +1,6 @@
 <div>
     <table class="table">
-        <thead>
-            <th class="table-column-check">
-                <input
-                    type="checkbox"
-                    {{ count($this->selectedRows) === count($items) ? 'checked="checked"' : '' }}
-                    wire:click="$emit('selectAll', $event.target.checked)"
-                />
-            </th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'resources.name' ? '-' : '') . 'resources.name'] + request()->only(['filter', 'sort'])) }}">Resource</a></th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'users.name' ? '-' : '') . 'users.name'] + request()->only(['filter', 'sort'])) }}">User</a></th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'start_time' || request()->has('sort') === false ? '-' : '') . 'start_time'] + request()->only(['filter', 'sort'])) }}">Start</a></th>
-            <th><a href="{{ route('bookings.index', ['sort' => (request('sort') === 'end_time' ? '-' : '') . 'end_time'] + request()->only(['filter', 'sort'])) }}">End</a></th>
-            <th>&nbsp;</th>
-        </thead>
+        @include('livewire.partials.table-header')
 
         <tbody>
             @forelse($items as $item)
