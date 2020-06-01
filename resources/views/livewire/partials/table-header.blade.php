@@ -2,7 +2,7 @@
     <th class="table-column-check">
         <input
             type="checkbox"
-            {{ count($this->selectedRows) === count($items) ? 'checked="checked"' : '' }}
+            {{ count($items) > 0 && count($this->selectedRows) === count($items) ? 'checked="checked"' : '' }}
             wire:click="$emit('selectAll', $event.target.checked)"
         />
     </th>
