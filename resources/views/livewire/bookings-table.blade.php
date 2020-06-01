@@ -171,14 +171,14 @@
                 @endif
             @empty
                 <tr>
-                    <td colspan="6">No bookings was found.</td>
+                    <td colspan="{{ count($this->tableHeaders) + 2 }}">No bookings was found.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="6">
+                <th colspan="{{ count($this->tableHeaders) + 2 }}">
                     <div class="flex justify-end">
                         <form>
                             <button

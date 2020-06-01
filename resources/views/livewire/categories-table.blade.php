@@ -50,7 +50,7 @@
                     </tr>
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                         <td>&nbsp;</td>
-                        <td colspan="3">
+                        <td colspan="{{ count($this->tableHeaders) + 1 }}">
                             <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-4">
                                 <div>
                                     <label class="block mb-2 text-xs uppercase">Groups</label>
@@ -108,14 +108,14 @@
                 @endif
             @empty
                 <tr>
-                    <td colspan="4">No categories was found.</td>
+                    <td colspan="{{ count($this->tableHeaders) + 2 }}">No categories was found.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="4">
+                <th colspan="{{ count($this->tableHeaders) + 2 }}">
                     <div class="flex justify-end">
                         <form>
                             <button

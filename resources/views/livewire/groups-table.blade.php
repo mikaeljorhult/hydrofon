@@ -70,14 +70,14 @@
                 @endif
             @empty
                 <tr>
-                    <td colspan="3">No groups was found.</td>
+                    <td colspan="{{ count($this->tableHeaders) + 2 }}">No groups was found.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="3">
+                <th colspan="{{ count($this->tableHeaders) + 2 }}">
                     <div class="flex justify-end">
                         <form>
                             <button
