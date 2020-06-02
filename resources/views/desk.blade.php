@@ -9,7 +9,7 @@
             @endcomponent
 
             <h2>Bookings</h2>
-            @livewire('bookings-table', ['items' => $bookings->getCollection(), 'baseUrl' => url()->current()])
+            @livewire('bookings-table', ['items' => $bookings->getCollection()])
 
             {{ $bookings->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
         @elseif($search)

@@ -35,7 +35,7 @@ class BaseTable extends Component
         parent::__construct($id);
 
         $this->modelInstance = app($this->model);
-        $this->tableBaseUrl = url($this->modelInstance->getTable());
+        $this->tableBaseUrl = url()->current();
     }
 
     public function mount($items, $baseUrl = null)

@@ -18,6 +18,7 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreListed()
     {
+        $this->withoutExceptionHandling();
         $booking = factory(Booking::class)->create();
 
         $this->actingAs(factory(User::class)->states('admin')->create())
