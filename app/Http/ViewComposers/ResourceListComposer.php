@@ -17,11 +17,11 @@ class ResourceListComposer
      */
     public function compose(View $view)
     {
-        $categories = $this->getCategories();
+        $categories = $this->getCategories()->toTree();
         $rootResources = $this->getRootResources();
 
         $view->with([
-            'categories' => $categories->load('resources', 'resources.groups')->toTree(),
+            'categories' => $categories,
             'resources'  => $rootResources,
         ]);
     }
@@ -33,7 +33,7 @@ class ResourceListComposer
      */
     private function getCategories()
     {
-        return Category::with(['groups'])
+        return Category::with(['groups', 'resources', 'resources.groups'])
                        ->orderBy('name')
                        ->get();
     }
