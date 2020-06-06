@@ -85,9 +85,6 @@
             {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
         </section>
 
-        <ul class="resourcelist-base list-none px-4 py-2">
-            @each('partials.resource-tree.category', $categories, 'category')
-            @each('partials.resource-tree.resource', $resources, 'resource')
-        </ul>
+        @include('partials.resource-tree.base')
     {!! Form::close() !!}
 </div>

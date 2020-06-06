@@ -24,7 +24,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function register()
     {
         view()->composer([
-            'partials.resource-tree',
+            'partials.resource-tree.base',
         ], \App\Http\ViewComposers\ResourceListComposer::class);
         view()->composer([
             'partials.resource-tree',
