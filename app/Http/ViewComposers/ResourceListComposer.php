@@ -33,7 +33,7 @@ class ResourceListComposer
      */
     private function getCategories()
     {
-        return Category::with(['groups', 'resources', 'resources.groups'])
+        return Category::with(['resources'])
                        ->orderBy('name')
                        ->get();
     }
@@ -45,8 +45,7 @@ class ResourceListComposer
      */
     private function getRootResources()
     {
-        return Resource::with(['groups'])
-                       ->orderBy('name')
+        return Resource::orderBy('name')
                        ->whereDoesntHave('categories', function ($query) {
                            $query->withoutGlobalScopes();
                        })
