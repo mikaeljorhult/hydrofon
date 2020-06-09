@@ -34,7 +34,7 @@ HYDROFON.Segel = {
         HYDROFON.Segel.component.call('setResources', resources);
     }, 1000),
     calculateGrid: function () {
-        this.grid = Grid.create(this.element.clientWidth, 40, this.component.data.steps);
+        this.grid = Grid.create(this.element.clientWidth, 41, this.component.data.steps);
         this.size = {
             min: {
                 width: this.element.clientWidth / this.component.data.steps,
@@ -42,7 +42,7 @@ HYDROFON.Segel = {
             },
             max: {
                 width: this.element.clientWidth,
-                height: 40
+                height: 41
             }
         };
     },
