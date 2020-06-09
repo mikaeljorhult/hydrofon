@@ -21,7 +21,7 @@
                         @endforeach
 
                         <div class="text-right">
-                            <a href="{{ url('profile/bookings') }}">See all bookings</a>
+                            <a href="{{ route('profile.bookings') }}">See all bookings</a>
                         </div>
                     </div>
                 @endif

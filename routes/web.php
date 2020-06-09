@@ -15,7 +15,8 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 Route::redirect('home', '/')->name('home');
-Route::get('profile', 'ProfileController@index')->name('profile');
+
+Route::get('profile', 'ProfileController')->name('profile');
 
 Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');
 Route::post('calendar', 'CalendarController@store');
@@ -45,13 +46,3 @@ Route::resource('subscriptions', 'SubscriptionController')->only(['store', 'dest
 Route::get('feeds/{feed}', 'SubscriptionController@show')->name('feed');
 
 Route::resource('datarequests', 'DataRequestController')->only(['store']);
-
-Route::prefix('api')->namespace('Api')->name('api.')->group(function () {
-    Route::apiResource('bookings', 'BookingController');
-    Route::apiResource('buckets', 'BucketController');
-    Route::apiResource('categories', 'CategoryController');
-    Route::apiResource('groups', 'GroupController');
-    Route::apiResource('identifiers', 'IdentifierController');
-    Route::apiResource('resources', 'ResourceController');
-    Route::apiResource('users', 'UserController');
-});
