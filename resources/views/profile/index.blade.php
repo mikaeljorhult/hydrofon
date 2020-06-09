@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => $user->name])
+        @component('components.heading', ['title' => $user->name, 'url' => route('profile')])
         @endcomponent
 
         <div>
