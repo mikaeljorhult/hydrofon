@@ -26,7 +26,7 @@ class ProfileBookingsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user     = auth()->user();
+        $user = auth()->user();
         $bookings = QueryBuilder::for(auth()->user()->bookings()->getQuery())
                                 ->select('bookings.*')
                                 ->with(['checkin', 'checkout', 'user'])

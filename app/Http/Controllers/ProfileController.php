@@ -23,10 +23,10 @@ class ProfileController extends Controller
      */
     public function __invoke()
     {
-        $user     = auth()->user();
-        $latest   = $user->bookings()->latest()->limit(10)->get();
+        $user = auth()->user();
+        $latest = $user->bookings()->latest()->limit(10)->get();
         $upcoming = $this->upcomingBookings($user);
-        $overdue  = $user->bookings()->overdue()->get();
+        $overdue = $user->bookings()->overdue()->get();
 
         return view('profile.index')
             ->with([
