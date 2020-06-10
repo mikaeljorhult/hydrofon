@@ -17,18 +17,18 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Handle the incoming request.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function __invoke()
     {
-        $user = auth()->user();
-        $latest = $user->bookings()->latest()->limit(10)->get();
+        $user     = auth()->user();
+        $latest   = $user->bookings()->latest()->limit(10)->get();
         $upcoming = $this->upcomingBookings($user);
-        $overdue = $user->bookings()->overdue()->get();
+        $overdue  = $user->bookings()->overdue()->get();
 
-        return view('profile')
+        return view('profile.index')
             ->with([
                 'user'     => $user,
                 'latest'   => $latest,
@@ -40,7 +40,7 @@ class ProfileController extends Controller
     /**
      * Retrieve upcoming bookings for the next week from the database.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable|null $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
      *
      * @return \Illuminate\Support\Collection
      */

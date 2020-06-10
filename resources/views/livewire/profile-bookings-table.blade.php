@@ -22,21 +22,6 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
-                        <td data-title="User">
-                            <select
-                                name="user_id"
-                                class="field"
-                                wire:model="editValues.user_id"
-                            >
-                                @foreach(\App\User::orderBy('name')->get(['id', 'name']) as $optionItem)
-                                    <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
-                                @endforeach
-                            </select>
-
-                            @error('editValues.user_id')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </td>
                         <td data-title="Start">
                             <div wire:ignore>
                                 <input
@@ -92,15 +77,6 @@
                         </td>
                         <td data-title="Resource">
                             <a href="{{ route('bookings.edit', $item) }}">{{ $item->resource->name }}</a>
-
-                            @if(count($item->resource->buckets) > 0)
-                                <button
-                                    wire:click.prevent="$emit('switch', {{ $item->id }})"
-                                >@svg('refresh', 'w-4 text-gray-600 fill-current')</button>
-                            @endif
-                        </td>
-                        <td data-title="User">
-                            {{ $item->user->name }}
                         </td>
                         <td data-title="Start">
                             {{ $item->start_time->format('Y-m-d H:i') }}
@@ -110,34 +86,6 @@
                         </td>
 
                         <td data-title="&nbsp;" class="table-actions">
-                            @unless($item->resource->is_facility || $item->checkout || $item->checkin)
-                                <div>
-                                    {!! Form::open(['route' => ['checkouts.store']]) !!}
-                                        {!! Form::hidden('booking_id', $item->id) !!}
-                                        <button
-                                            type="submit"
-                                            title="Check out"
-                                            wire:click.prevent="$emit('checkout', {{ $item->id }})"
-                                            wire:loading.attr="disabled"
-                                        >Check out</button>
-                                    {!! Form::close() !!}
-                                </div>
-                            @endif
-
-                            @unless($item->resource->is_facility || $item->checkin)
-                                <div>
-                                    {!! Form::open(['route' => ['checkins.store']]) !!}
-                                        {!! Form::hidden('booking_id', $item->id) !!}
-                                        <button
-                                            type="submit"
-                                            title="Check in"
-                                            wire:click.prevent="$emit('checkin', {{ $item->id }})"
-                                            wire:loading.attr="disabled"
-                                        >Check in</button>
-                                    {!! Form::close() !!}
-                                </div>
-                            @endif
-
                             <div>
                                 <a
                                     href="{{ route('bookings.edit', $item) }}"
@@ -180,22 +128,6 @@
             <tr>
                 <th colspan="{{ count($this->tableHeaders) + 2 }}">
                     <div class="flex justify-end">
-                        <form>
-                            <button
-                                {{ count($this->selectedRows) === 0 ? 'disabled="disabled"' : '' }}
-                                class="btn"
-                                wire:click.prevent="$emit('checkout', false, true)"
-                            >Check out</button>
-                        </form>
-
-                        <form>
-                            <button
-                                {{ count($this->selectedRows) === 0 ? 'disabled="disabled"' : '' }}
-                                class="btn"
-                                wire:click.prevent="$emit('checkin', false, true)"
-                            >Check in</button>
-                        </form>
-
                         <form>
                             <button
                                 {{ count($this->selectedRows) === 0 ? 'disabled="disabled"' : '' }}
