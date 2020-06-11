@@ -92,7 +92,7 @@ class Segel extends Component
 
         $this->values = [
             'user_id'     => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : $booking->user_id,
-            'resource_id' => auth()->user()->isAdmin() && isset($values['resource_id']) ? $values['resource_id'] : $booking->resource_id,
+            'resource_id' => isset($values['resource_id']) ? $values['resource_id'] : $booking->resource_id,
             'start_time'  => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
             'end_time'    => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
