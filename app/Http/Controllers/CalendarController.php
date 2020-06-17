@@ -27,15 +27,13 @@ class CalendarController extends Controller
     public function index($date = null)
     {
         $date = $this->date($date)->startOfDay();
-        $timestamps = $this->timestamps($date);
         $expanded = $this->categories();
         $resources = $this->resources();
 
         return view('calendar')
             ->with('date', $date)
             ->with('expanded', $expanded)
-            ->with('resources', $resources)
-            ->with('timestamps', $timestamps);
+            ->with('resources', $resources);
     }
 
     /**
@@ -85,25 +83,5 @@ class CalendarController extends Controller
     private function categories()
     {
         return session('expanded', []);
-    }
-
-    /**
-     * Build array of timestamps for use calendar.
-     *
-     * @param  \Carbon\Carbon  $date
-     *
-     * @return array
-     */
-    private function timestamps(Carbon $date)
-    {
-        $timestamps = [
-            'current' => (int) now()->format('U'),
-            'start'   => (int) $date->format('U'),
-            'end'     => (int) $date->copy()->addDay()->format('U'),
-        ];
-
-        $timestamps['duration'] = $timestamps['end'] - $timestamps['start'];
-
-        return $timestamps;
     }
 }

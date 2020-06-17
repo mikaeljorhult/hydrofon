@@ -18,20 +18,18 @@
 >
     <div class="segel-container">
         <ul class="segel-grid">
-            @for($i = 0; $i < 24; $i++)
+            @for($i = 0; $i < count($this->headings); $i++)
                 <li>&nbsp;</li>
             @endfor
         </ul>
 
         <aside class="segel-ruler">
             <ul>
-                @for($i = 0; $i < 24; $i++)
+                @foreach($this->headings as $heading)
                     <li>
-                        <span {{ now()->hour == $i ? 'class="current"' : '' }}>
-                            {{ str_pad($i, 2, '0', STR_PAD_LEFT) }}
-                        </span>
+                        <span>{{ $heading }}</span>
                     </li>
-                @endfor
+                @endforeach
             </ul>
         </aside>
 

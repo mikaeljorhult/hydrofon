@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Booking;
+use App\Helpers\Grid;
 use App\Resource;
 use App\Rules\Available;
 use Carbon\Carbon;
@@ -17,17 +18,17 @@ class Segel extends Component
 
     public $resources;
     public $timestamps;
+    public $dateString;
+    public $type;
     public $steps;
+    public $headings;
 
     public $values;
 
-    protected $listeners = ['updateBooking'];
-
-    public function mount($resources, $timestamps)
+    public function mount($resources, $date)
     {
         $this->resources = $resources;
-        $this->timestamps = $timestamps;
-        $this->steps = 48;
+        $this->setGrid($date, 'day');
     }
 
     public function setExpanded($id)
@@ -40,6 +41,17 @@ class Segel extends Component
         $this->resources = $id;
 
         session()->put('resources', $id);
+    }
+
+    public function setGrid($date, $type = null)
+    {
+        $grid = new Grid($date, $type);
+
+        $this->type     = $grid->type;
+        $this->headings = $grid->headings;
+        $this->steps    = $grid->steps;
+        $this->timestamps   = $grid->timestamps;
+        $this->dateString   = $grid->dateString;
     }
 
     public function setTimestamps($timestamps)
@@ -123,15 +135,16 @@ class Segel extends Component
 
     private function getResources()
     {
-        $date = Carbon::createFromTimestamp($this->timestamps['start']);
+        $startDate = Carbon::createFromTimestamp($this->timestamps['start']);
+        $endDate   = Carbon::createFromTimestamp($this->timestamps['end']);
 
         return count($this->resources) > 0
             ? Resource::whereIn('id', $this->resources)
                       ->with([
-                          'bookings' => function ($query) use ($date) {
+                          'bookings' => function ($query) use ($startDate, $endDate) {
                               $query
                                   ->with('user')
-                                  ->between($date, $date->copy()->endOfDay())
+                                  ->between($startDate, $endDate)
                                   ->orderBy('start_time');
                           },
                       ])
@@ -156,20 +169,12 @@ class Segel extends Component
     private function changeTimestamps($difference)
     {
         $start = Carbon::createFromTimestamp($this->timestamps['start'] + $difference);
-        $end = Carbon::createFromTimestamp($this->timestamps['end'] + $difference);
-        $dateString = $start->format('Y-m-d');
-
-        $this->timestamps = [
-            'current'  => (int) now()->format('U'),
-            'start'    => (int) $start->format('U'),
-            'end'      => (int) $end->format('U'),
-            'duration' => $this->timestamps['duration'],
-        ];
+        $this->setGrid($start, $this->type);
 
         $this->emit('dateChanged', [
-            'date'       => $dateString,
+            'date'       => $this->dateString,
             'timestamps' => $this->timestamps,
-            'url'        => route('calendar', [$dateString]),
+            'url'        => route('calendar', [$start->format('Y-m-d')]),
         ]);
     }
 }

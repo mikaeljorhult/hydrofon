@@ -45,6 +45,6 @@
             </div>
         </div>
 
-        @livewire('segel', ['resources' => $resources, 'timestamps' => $timestamps])
+        @livewire('segel', ['resources' => $resources, 'date' => $date])
     </section>
 @endsection
