@@ -31,6 +31,13 @@ class Segel extends Component
         $this->setGrid($date, 'day');
     }
 
+    public function render()
+    {
+        return view('livewire.segel')->with([
+            'items' => $this->getResources(),
+        ]);
+    }
+
     public function setExpanded($id)
     {
         session()->put('expanded', $id);
@@ -68,6 +75,14 @@ class Segel extends Component
     public function nextTimeScope()
     {
         $this->changeTimestamps($this->timestamps['duration']);
+    }
+
+    public function updatedType()
+    {
+        $this->setGrid(
+            Carbon::createFromTimestamp($this->timestamps['start']),
+            $this->type
+        );
     }
 
     public function createBooking($values)
@@ -157,13 +172,6 @@ class Segel extends Component
         $precision = ($this->timestamps['duration']) / $this->steps;
 
         return round($timestamp / $precision) * $precision;
-    }
-
-    public function render()
-    {
-        return view('livewire.segel')->with([
-            'items' => $this->getResources(),
-        ]);
     }
 
     private function changeTimestamps($difference)

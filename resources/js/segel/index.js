@@ -1,6 +1,7 @@
+import interact from 'interactjs';
+import {debounce} from 'alpinejs/src/utils';
 import Grid from './grid';
 import Interactions from './interactions';
-import {debounce} from 'alpinejs/src/utils';
 
 HYDROFON.Segel = {
     _component: null,
@@ -52,6 +53,10 @@ HYDROFON.Segel = {
         let bookings = this.element.querySelectorAll('.segel-booking');
 
         for (const booking of bookings) {
+            if (!interact.isSet(booking)) {
+                continue;
+            }
+
             let draggable = interact(booking).draggable();
             let resizable = interact(booking).resizable();
 
