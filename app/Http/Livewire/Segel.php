@@ -54,11 +54,11 @@ class Segel extends Component
     {
         $grid = new Grid($date, $type);
 
-        $this->type     = $grid->type;
+        $this->type = $grid->type;
         $this->headings = $grid->headings;
-        $this->steps    = $grid->steps;
-        $this->timestamps   = $grid->timestamps;
-        $this->dateString   = $grid->dateString;
+        $this->steps = $grid->steps;
+        $this->timestamps = $grid->timestamps;
+        $this->dateString = $grid->dateString;
     }
 
     public function setTimestamps($timestamps)
@@ -151,7 +151,7 @@ class Segel extends Component
     private function getResources()
     {
         $startDate = Carbon::createFromTimestamp($this->timestamps['start']);
-        $endDate   = Carbon::createFromTimestamp($this->timestamps['end']);
+        $endDate = Carbon::createFromTimestamp($this->timestamps['end']);
 
         return count($this->resources) > 0
             ? Resource::whereIn('id', $this->resources)
