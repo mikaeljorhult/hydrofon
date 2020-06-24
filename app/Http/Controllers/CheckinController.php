@@ -29,9 +29,7 @@ class CheckinController extends Controller
     public function store(CheckinStoreRequest $request)
     {
         $booking = Booking::findOrFail($request->get('booking_id'));
-        $booking->checkin()->create([
-            'user_id' => $request->user()->id,
-        ]);
+        $booking->checkin()->create();
 
         // Shorten booking if it has not ended yet.
         if ($booking->end_time->isFuture() && $booking->start_time->isPast()) {

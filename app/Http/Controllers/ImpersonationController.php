@@ -31,6 +31,7 @@ class ImpersonationController extends Controller
         // Administrators can't be impersonated.
         if (! $user->isAdmin()) {
             session()->put('impersonate', $user->id);
+            session()->put('impersonated_by', auth()->id());
         }
 
         return redirect()->back();

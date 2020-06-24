@@ -71,7 +71,6 @@ class BookingController extends Controller
 
         Booking::create(array_merge($request->all(), [
             'user_id'       => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
-            'created_by_id' => $currentUser->id,
         ]));
 
         flash('Booking was created');

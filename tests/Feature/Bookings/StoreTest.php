@@ -38,7 +38,8 @@ class StoreTest extends TestCase
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
-            'user_id' => 2,
+            'user_id'       => 2,
+            'created_by_id' => 2,
         ]);
     }
 
