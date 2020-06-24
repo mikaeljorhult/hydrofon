@@ -13,8 +13,19 @@ class Checkin extends Model
      */
     protected $fillable = [
         'booking_id',
-        'user_id',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($checkin) {
+            $checkin->user_id = auth()->id();
+        });
+    }
 
     /**
      * Booking that was checked in.

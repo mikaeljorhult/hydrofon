@@ -29,9 +29,7 @@ class CheckoutController extends Controller
     public function store(CheckoutStoreRequest $request)
     {
         $booking = Booking::findOrFail($request->get('booking_id'));
-        $booking->checkout()->create([
-            'user_id' => $request->user()->id,
-        ]);
+        $booking->checkout()->create();
 
         flash('Booking was checked out.');
 

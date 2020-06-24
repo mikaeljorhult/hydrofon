@@ -31,9 +31,11 @@ class BookingTest extends TestCase
      */
     public function testBookingHasACreator()
     {
+        $this->actingAs($user = factory(User::class)->create());
         $booking = factory(Booking::class)->create();
 
         $this->assertInstanceOf(User::class, $booking->created_by);
+        $this->assertEquals($user->id, $booking->created_by->id);
     }
 
     /**
@@ -51,7 +53,7 @@ class BookingTest extends TestCase
     }
 
     /**
-     * Bookings that end outside date range should be exluded in between scope.
+     * Bookings that end outside date range should be excluded in between scope.
      *
      * @return void
      */

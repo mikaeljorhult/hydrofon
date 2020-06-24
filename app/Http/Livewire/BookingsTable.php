@@ -68,9 +68,7 @@ class BookingsTable extends BaseTable
 
         $items->each(function ($item, $key) {
             if (! $item->resource->is_facility && ! $item->checkin) {
-                $item->checkin()->create([
-                    'user_id' => auth()->id(),
-                ]);
+                $item->checkin()->create();
 
                 // Shorten booking if it has not ended yet.
                 if ($item->end_time->isFuture() && $item->start_time->isPast()) {
@@ -92,9 +90,7 @@ class BookingsTable extends BaseTable
 
         $items->each(function ($item, $key) {
             if (! $item->resource->is_facility && ! $item->checkout) {
-                $item->checkout()->create([
-                    'user_id' => auth()->id(),
-                ]);
+                $item->checkout()->create();
             }
         });
 

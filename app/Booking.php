@@ -13,7 +13,6 @@ class Booking extends Model
      * @var array
      */
     protected $fillable = [
-        'created_by_id',
         'user_id',
         'resource_id',
         'start_time',
@@ -29,6 +28,20 @@ class Booking extends Model
         'start_time' => 'datetime:Y-m-d H:i',
         'end_time'   => 'datetime:Y-m-d H:i',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($booking) {
+            $booking->created_by_id = session()->has('impersonate')
+                ? session()->get('impersonated_by')
+                : auth()->id();
+        });
+    }
 
     /**
      * User that created the booking.
