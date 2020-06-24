@@ -12,7 +12,7 @@
             value="{{ $category->id }}"
             {{ in_array($category->id, $expanded) ? 'checked="checked"' : '' }}
             class="hidden"
-            x-model="expanded"
+            x-model.number="expanded"
         />
 
         @svg('folder', 'w-5')

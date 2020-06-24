@@ -1,8 +1,8 @@
 <div
     class="resourcelist"
     x-data="{
-        expanded: {{ str_replace("\"", "'", json_encode(array_map('strval', $expanded))) }},
-        selected: {{ str_replace("\"", "'", json_encode(array_map('strval', $selected))) }},
+        expanded: @json($expanded),
+        selected: @json($selected),
         date: '{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}',
         datepicker: null,
         multipleSelect: function ($event) {

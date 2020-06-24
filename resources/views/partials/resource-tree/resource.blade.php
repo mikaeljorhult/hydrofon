@@ -6,7 +6,7 @@
                 name="resources[]"
                 value="{{ $resource->id }}"
                 {{ in_array($resource->id, $selected) ? 'checked="checked"' : '' }}
-                x-model="selected"
+                x-model.number="selected"
             />
             {{ $resource->name }}
         </label>
