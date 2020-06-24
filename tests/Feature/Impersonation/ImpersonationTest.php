@@ -17,7 +17,7 @@ class ImpersonationTest extends TestCase
      */
     public function testAdministratorCanSeeImpersonationForm()
     {
-        $admin    = factory(User::class)->states('admin')->create();
+        $admin = factory(User::class)->states('admin')->create();
         $response = $this->actingAs($admin)->get('/');
 
         $response->assertStatus(200);
@@ -32,7 +32,7 @@ class ImpersonationTest extends TestCase
     public function testAdministratorCanImpersonateUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $response = $this->actingAs($admin)->post('/impersonation', [
             'user_id' => $user->id,
@@ -51,7 +51,7 @@ class ImpersonationTest extends TestCase
     public function testAdministratorCanStopImpersonatingUser()
     {
         $admin = factory(User::class)->states('admin')->create();
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->actingAs($admin)->post('/impersonation', [
             'user_id' => $user->id,
@@ -106,7 +106,7 @@ class ImpersonationTest extends TestCase
      */
     public function testUserCanNotSeeImpersonationForm()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/');
 
         $response->assertStatus(200);
