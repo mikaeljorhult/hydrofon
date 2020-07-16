@@ -1,7 +1,5 @@
-let mix = require('laravel-mix');
-
-require('laravel-mix-purgecss');
-require('laravel-mix-tailwind');
+const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -20,10 +18,11 @@ mix
     .copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
-    .tailwind('./tailwind.config.js')
-    .purgeCss({
-        globs: [
-            path.join(__dirname, 'node_modules/flatpickr/dist/flatpickr.js'),
-        ],
-    })
-    .version();
+    .options({
+        processCssUrls: false,
+        postCss: [tailwindcss('./tailwind.config.js')],
+    });
+
+if (mix.inProduction()) {
+    mix.version();
+}

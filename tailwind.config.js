@@ -1,5 +1,9 @@
 module.exports = {
-    purge: false,
+    purge: [
+        './resources/**/*.js',
+        './resources/**/*.php',
+        './node_modules/flatpickr/dist/flatpickr.js'
+    ],
     theme: {
         extend: {
             colors: {
