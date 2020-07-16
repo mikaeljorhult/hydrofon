@@ -1,6 +1,6 @@
 <li
     class="resourcelist-category{{ in_array($category->id, $expanded) ? ' expanded' : '' }}"
-    x-bind:class="{ expanded: expanded.indexOf('{{ $category->id }}') > -1 }"
+    x-bind:class="{ expanded: expanded.indexOf({{ $category->id }}) > -1 }"
 >
     <label
         class="cursor-pointer"

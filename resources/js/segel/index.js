@@ -23,16 +23,13 @@ HYDROFON.Segel = {
         return this._element;
     },
     set resources(resources) {
-        this._debounceResources(resources);
+        HYDROFON.Segel.component.call('setResources', resources);
     },
     set expanded(categories) {
         this._debounceExpanded(categories);
     },
     _debounceExpanded: debounce(function (expanded) {
         HYDROFON.Segel.component.call('setExpanded', expanded);
-    }, 1000),
-    _debounceResources: debounce(function (resources) {
-        HYDROFON.Segel.component.call('setResources', resources);
     }, 1000),
     calculateGrid: function () {
         this.grid = Grid.create(this.element.clientWidth, 41, this.component.data.steps);
