@@ -54,7 +54,7 @@ class ImpersonationTest extends DuskTestCase
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
 
-        $this->browse(function (Browser $browser) use ($user1, $user2) {
+        $this->browse(function (Browser $browser) use ($user1) {
             $browser->loginAs($user1)
                     ->visit('/calendar')
                     ->assertSourceMissing('topbar-impersonation');

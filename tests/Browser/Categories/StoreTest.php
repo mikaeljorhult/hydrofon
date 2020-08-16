@@ -42,7 +42,7 @@ class StoreTest extends DuskTestCase
         $user = factory(User::class)->states('admin')->create();
         $category = factory(Category::class)->make();
 
-        $this->browse(function (Browser $browser) use ($user, $category) {
+        $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                     ->visit('/categories/create')
                     ->press('Create')
