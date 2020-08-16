@@ -42,7 +42,7 @@ class StoreTest extends DuskTestCase
         $admin = factory(User::class)->states('admin')->create();
         $resource = factory(Resource::class)->make();
 
-        $this->browse(function (Browser $browser) use ($admin, $resource) {
+        $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)
                     ->visit('/resources/create')
                     ->press('Create')

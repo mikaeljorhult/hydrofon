@@ -44,7 +44,7 @@ class StoreTest extends DuskTestCase
         $user = factory(User::class)->create();
         $booking = factory(Booking::class)->make();
 
-        $this->browse(function (Browser $browser) use ($user, $booking) {
+        $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                     ->visit('/bookings/create')
                     ->press('Create')
