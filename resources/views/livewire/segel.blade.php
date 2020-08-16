@@ -11,7 +11,7 @@
                 href="{{ route('calendar') }}"
                 wire:click.prevent="previousTimeScope"
             >
-                @svg('cheveron-left', 'w-5')
+                <x-heroicon-s-chevron-left class="w-5" />
                 <span class="screen-reader">Previous</span>
             </a>
             <a
@@ -21,7 +21,7 @@
                 wire:click.prevent="nextTimeScope"
             >
                 <span class="screen-reader">Next</span>
-                @svg('cheveron-right', 'w-5')
+                <x-heroicon-s-chevron-right class="w-5" />
             </a>
         </div>
 
@@ -128,7 +128,7 @@
             >
                 <div class="flex items-center justify-center absolute inset-0 bg-gray-400 bg-opacity-25">
                     <div class="flex items-center justify-center py-2 px-4 bg-brand text-white text-xl rounded opacity-75">
-                        @svg('refresh', 'inline-block w-5 pr-1 fill-current')
+                        <x-heroicon-s-refresh class="inline-block w-5 pr-1 fill-current" />
                         LOADING...
                     </div>
                 </div>

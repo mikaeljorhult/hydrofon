@@ -15,7 +15,7 @@
             x-model.number="expanded"
         />
 
-        @svg('folder', 'w-5')
+        <x-heroicon-s-folder class="w-5" />
         {{ $category->name }}
     </label>
 

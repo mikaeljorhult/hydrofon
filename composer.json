@@ -9,19 +9,20 @@
     "type": "project",
     "require": {
         "php": "^7.2.5",
+        "blade-ui-kit/blade-heroicons": "^0.2.1",
+        "blade-ui-kit/blade-icons": "^0.4.4",
         "eluceo/ical": "^0.16.0",
         "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^1.0",
+        "guzzlehttp/guzzle": "^6.3",
         "kalnoy/nestedset": "^5.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "^7.10",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
         "livewire/livewire": "^1.0.0",
-        "nothingworks/blade-svg": "^0.3.0",
-        "spatie/laravel-query-builder": "^2.8",
-        "laravel/ui": "^2.0",
-        "fruitcake/laravel-cors": "^1.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "spatie/laravel-query-builder": "^2.8"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2.3",

@@ -96,7 +96,7 @@
                             @if(count($item->resource->buckets) > 0)
                                 <button
                                     wire:click.prevent="$emit('switch', {{ $item->id }})"
-                                >@svg('refresh', 'w-4 text-gray-600 fill-current')</button>
+                                ><x-heroicon-s-refresh class="w-4 text-gray-600 fill-current" /></button>
                             @endif
                         </td>
                         <td data-title="User">

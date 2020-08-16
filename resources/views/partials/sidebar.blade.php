@@ -7,21 +7,10 @@
         </h1>
     </header>
 
-    @guest
-        <ul class="list-none w-full">
-            <li>
-                <a href="{{ route('login') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                    @svg('stand-by', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current')
-                    Log in
-                </a>
-            </li>
-        </ul>
-    @endguest
-
     @auth
         <section class="w-full py-4 px-1 bg-brand-600">
             <a href="{{ route('profile') }}" class="block text-white no-underline hover:text-white">
-                @svg('user', 'icon w-6 h-auto mt-0 mx-auto mb-1 opacity-75 fill-current')
+                <x-heroicon-s-user class="icon w-6 h-auto mt-0 mx-auto mb-1 opacity-75 fill-current" />
 
                 <div class="pt-1 text-xs">
                     {{ auth()->user()->name }}
@@ -33,14 +22,16 @@
             <ul class="list-none w-full flex flex-wrap items-center content-between px-4 md:block md:px-0 md:mb-4">
                 <li class="w-1/2 sm:w-1/3 md:w-auto">
                     <a href="{{ route('calendar') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                        @svg('calendar', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Book
+                        <x-heroicon-s-calendar class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                        Book
                     </a>
                 </li>
 
                 @admin
                     <li class="w-1/2 sm:w-1/3 md:w-auto">
                         <a href="{{ route('desk') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('computer-desktop', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Desk
+                            <x-heroicon-s-desktop-computer class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Desk
                         </a>
                     </li>
                 @endadmin
@@ -48,32 +39,38 @@
                 @admin
                     <li class="w-1/2 sm:w-1/3 md:w-auto md:mt-3">
                         <a href="{{ route('bookings.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('date-add', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Bookings
+                            <x-heroicon-s-calendar class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Bookings
                         </a>
                     </li>
                     <li class="w-1/2 sm:w-1/3 md:w-auto">
                         <a href="{{ route('buckets.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('box', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Buckets
+                            <x-heroicon-s-archive class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Buckets
                         </a>
                     </li>
                     <li class="w-1/2 sm:w-1/3 md:w-auto">
                         <a href="{{ route('categories.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('tag', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Categories
+                            <x-heroicon-s-tag class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Categories
                         </a>
                     </li>
                     <li class="w-1/2 sm:w-1/3 md:w-auto">
                         <a href="{{ route('groups.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('lock-closed', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Groups
+                            <x-heroicon-s-identification class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Groups
                         </a>
                     </li>
                     <li class="w-1/2 sm:w-1/3 md:w-auto">
                         <a href="{{ route('resources.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('mobile-devices', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Resources
+                            <x-heroicon-s-device-mobile class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Resources
                         </a>
                     </li>
                     <li class="w-1/2 sm:w-1/3 md:w-auto">
                         <a href="{{ route('users.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('user-group', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current') Users
+                            <x-heroicon-s-users class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
+                            Users
                         </a>
                     </li>
                 @endadmin
@@ -83,7 +80,7 @@
                         <a href="{{ route('impersonation') }}"
                            onclick="event.preventDefault(); document.getElementById('impersonation-form').submit();"
                            class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('view-hide', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current')
+                            <x-heroicon-s-eye-off class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
                             Stop impersonation
                         </a>
 
@@ -95,7 +92,7 @@
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                            class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            @svg('stand-by', 'block w-6 h-auto mt-0 mx-auto mb-1 fill-current')
+                            <x-heroicon-s-logout class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
                             Log out
                         </a>
 
