@@ -15,7 +15,8 @@
             x-model.number="expanded"
         />
 
-        <x-heroicon-s-folder class="w-5" />
+        <x-heroicon-s-folder class="resource-list-folder-icon resource-list-folder-closed w-5" />
+        <x-heroicon-s-folder-open class="resource-list-folder-icon resource-list-folder-open w-5" />
         {{ $category->name }}
     </label>
 

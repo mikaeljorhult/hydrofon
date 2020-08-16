@@ -12,13 +12,27 @@
     li {
         margin: .25rem 0;
     }
+}
 
-    svg {
+.resource-list-folder-icon {
+    display: inline-block;
+    width: 1.25rem;
+    height: auto;
+    vertical-align: text-bottom;
+    fill: #d45843;
+}
+
+.resource-list-folder-open {
+    display: none;
+}
+
+.expanded > label {
+    .resource-list-folder-closed {
+        display: none;
+    }
+
+    .resource-list-folder-open {
         display: inline-block;
-        width: 1.25rem;
-        height: auto;
-        vertical-align: text-bottom;
-        fill: #d45843;
     }
 }
 
