@@ -9,6 +9,7 @@ sudo: false
 
 install:
   - cp .env.example .env                                         # Create a new .env file.
+  - rm composer.lock                                             # Remove Composer lock file.
   - composer install --no-interaction --prefer-dist --no-suggest # Install dependencies.
   - php artisan key:generate                                     # Generate application key.
 
