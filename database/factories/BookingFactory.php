@@ -22,12 +22,12 @@ class BookingFactory extends Factory
     public function definition()
     {
         return [
-        'user_id'       => $user_id = User::factory()->create()->id,
-        'resource_id'   => Resource::factory()->create()->id,
-        'created_by_id' => $user_id,
-        'start_time'    => now()->addHours(1),
-        'end_time'      => now()->addHours(3),
-    ];
+            'user_id'       => $user_id = User::factory()->create()->id,
+            'resource_id'   => Resource::factory()->create()->id,
+            'created_by_id' => $user_id,
+            'start_time'    => now()->addHours(1),
+            'end_time'      => now()->addHours(3),
+        ];
     }
 
     public function current()

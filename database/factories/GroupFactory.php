@@ -21,7 +21,7 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-        'name' => $this->faker->colorName,
-    ];
+            'name' => $this->faker->colorName,
+        ];
     }
 }

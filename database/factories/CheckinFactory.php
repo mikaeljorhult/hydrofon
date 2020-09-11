@@ -22,8 +22,8 @@ class CheckinFactory extends Factory
     public function definition()
     {
         return [
-        'booking_id' => Booking::factory()->create()->id,
-        'user_id'    => User::factory()->create()->id,
-    ];
+            'booking_id' => Booking::factory()->create()->id,
+            'user_id'    => User::factory()->create()->id,
+        ];
     }
 }

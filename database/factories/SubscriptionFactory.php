@@ -21,16 +21,16 @@ class SubscriptionFactory extends Factory
     public function definition()
     {
         $subscribables = [
-        App\Resource::class,
-        App\User::class,
-    ];
+            App\Resource::class,
+            App\User::class,
+        ];
 
         $subscribableType = $this->faker->randomElement($subscribables);
         $subscribable = factory($subscribableType)->create();
 
         return [
-        'subscribable_id'   => $subscribable->id,
-        'subscribable_type' => $subscribableType,
-    ];
+            'subscribable_id'   => $subscribable->id,
+            'subscribable_type' => $subscribableType,
+        ];
     }
 }
