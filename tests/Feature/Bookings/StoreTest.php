@@ -11,6 +11,8 @@ class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
+    private $storedBooking;
+
     /**
      * Posts request to persist a booking.
      *
@@ -21,10 +23,10 @@ class StoreTest extends TestCase
      */
     public function storeBooking($overrides = [], $user = null)
     {
-        $booking = Booking::factory()->make($overrides);
+        $this->storedBooking = Booking::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->create())
-                    ->post('bookings', $booking->toArray());
+                    ->post('bookings', $this->storedBooking->toArray());
     }
 
     /**
@@ -38,8 +40,8 @@ class StoreTest extends TestCase
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
-            'user_id'       => 2,
-            'created_by_id' => 2,
+            'user_id'       => $this->storedBooking->user_id + 1,
+            'created_by_id' => $this->storedBooking->created_by_id + 1,
         ]);
     }
 

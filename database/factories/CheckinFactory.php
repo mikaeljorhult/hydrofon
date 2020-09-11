@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Booking;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,8 +23,8 @@ class CheckinFactory extends Factory
     public function definition()
     {
         return [
-        'booking_id' => Booking::factory()->create()->id,
-        'user_id'    => User::factory()->create()->id,
-    ];
+            'booking_id' => Booking::factory()->create()->id,
+            'user_id'    => User::factory()->create()->id,
+        ];
     }
 }

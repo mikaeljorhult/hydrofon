@@ -22,16 +22,16 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-        'name' => $this->faker->country,
-    ];
+            'name' => $this->faker->country,
+        ];
     }
 
     public function child()
     {
-        return $this->state(function () {
-            ['parent_id' => function () {
-    return Category::factory()->create()->id;
-}]
-        });
+        return $this->state([
+            'parent_id' => function () {
+                return Category::factory()->create()->id;
+            },
+        ]);
     }
 }

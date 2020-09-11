@@ -3,6 +3,7 @@
 namespace Tests\Unit\Model;
 
 use App\Booking;
+use App\Checkin;
 use App\Checkout;
 use App\Resource;
 use App\User;
