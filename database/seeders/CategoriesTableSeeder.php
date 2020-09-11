@@ -1,9 +1,11 @@
 <?php
 
-use App\Resource;
+namespace Database\Seeders;
+
+use App\Category;
 use Illuminate\Database\Seeder;
 
-class ResourcesTableSeeder extends Seeder
+class CategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +15,7 @@ class ResourcesTableSeeder extends Seeder
     public function run()
     {
         if (app()->environment('local')) {
-            Resource::factory()->times(20)->create();
+            Category::factory()->times(10)->create();
         }
     }
 }
