@@ -25,10 +25,10 @@ class SubscriptionFactory extends Factory
         App\User::class,
     ];
 
-    $subscribableType = $this->faker->randomElement($subscribables);
-    $subscribable = factory($subscribableType)->create();
+        $subscribableType = $this->faker->randomElement($subscribables);
+        $subscribable = factory($subscribableType)->create();
 
-    return [
+        return [
         'subscribable_id'   => $subscribable->id,
         'subscribable_type' => $subscribableType,
     ];
