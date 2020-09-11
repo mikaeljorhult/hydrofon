@@ -18,7 +18,7 @@ class CleanTest extends TestCase
      */
     public function testBookingsOlderThanSixMonthsAreDeleted()
     {
-        factory(Booking::class, 2)->create([
+        Booking::factory()->times(2)->create([
             'start_time' => now()->subMonths(7),
             'end_time'   => now()->subMonths(6),
         ]);
@@ -35,7 +35,7 @@ class CleanTest extends TestCase
      */
     public function testNewlyEndedBookingsAreNotDeleted()
     {
-        factory(Booking::class)->create([
+        Booking::factory()->create([
             'start_time' => now()->subMonths(2),
             'end_time'   => now()->subMonths(1),
         ]);
@@ -52,7 +52,7 @@ class CleanTest extends TestCase
      */
     public function testCurrentBookingsAreNotDeleted()
     {
-        factory(Booking::class)->create([
+        Booking::factory()->create([
             'start_time' => now()->subMonth(),
             'end_time'   => now()->addMonth(),
         ]);
@@ -69,7 +69,7 @@ class CleanTest extends TestCase
      */
     public function testFutureBookingsAreNotDeleted()
     {
-        factory(Booking::class)->create([
+        Booking::factory()->create([
             'start_time' => now()->addMonths(1),
             'end_time'   => now()->addMonths(2),
         ]);
@@ -86,7 +86,7 @@ class CleanTest extends TestCase
      */
     public function testNoneActiveUsersAreDeleted()
     {
-        factory(User::class)->create([
+        User::factory()->create([
             'last_logged_in_at' => now()->subYear(),
         ]);
 
@@ -102,7 +102,7 @@ class CleanTest extends TestCase
      */
     public function testOldAndInactiveUsersAreDeleted()
     {
-        factory(User::class)->create([
+        User::factory()->create([
             'created_at' => now()->subYear(),
         ]);
 
@@ -118,7 +118,7 @@ class CleanTest extends TestCase
      */
     public function testNewlyCreatedUsersThatHaveNotLoggedInAreNotDeleted()
     {
-        factory(User::class)->create();
+        User::factory()->create();
 
         $this->artisan('hydrofon:clean');
 
@@ -132,11 +132,11 @@ class CleanTest extends TestCase
      */
     public function testActiveUsersAreNotDeleted()
     {
-        factory(User::class)->create([
+        User::factory()->create([
             'last_logged_in_at' => now()->subMonth(),
         ]);
 
-        factory(User::class)->create([
+        User::factory()->create([
             'created_at'        => now()->subYears(2),
             'last_logged_in_at' => now()->subMonth(),
         ]);

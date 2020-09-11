@@ -18,8 +18,8 @@ class ImpersonationTest extends DuskTestCase
      */
     public function testAdminCanImpersonateUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)
@@ -51,8 +51,8 @@ class ImpersonationTest extends DuskTestCase
      */
     public function testUserCanNotSeeImpersonationForm()
     {
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user1) {
             $browser->loginAs($user1)

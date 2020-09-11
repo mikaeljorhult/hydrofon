@@ -19,7 +19,7 @@ class IndexTest extends DuskTestCase
      */
     public function testUserCanNavigateToIndexPage()
     {
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
@@ -36,8 +36,8 @@ class IndexTest extends DuskTestCase
      */
     public function testCategoryIsListedOnIndexPage()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)

@@ -18,8 +18,8 @@ class UpdateTest extends TestCase
      */
     public function testIdentifiersCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id.'/identifiers/'.$identifier->id, [
@@ -39,8 +39,8 @@ class UpdateTest extends TestCase
      */
     public function testIdentifierMustHaveAValue()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id.'/identifiers/'.$identifier->id, [
@@ -61,8 +61,8 @@ class UpdateTest extends TestCase
      */
     public function testValueMustBeUnique()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
         $admin->identifiers()->create(['value' => 'another-value']);
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
@@ -85,8 +85,8 @@ class UpdateTest extends TestCase
      */
     public function testValueCanNotBeAUserEmailAddress()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id.'/identifiers/'.$identifier->id, [
@@ -108,10 +108,10 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateIdentifiers()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs(factory(User::class)->create())->put('resources/'.$resource->id.'/identifiers/'.$identifier->id, [
+        $response = $this->actingAs(User::factory()->create())->put('resources/'.$resource->id.'/identifiers/'.$identifier->id, [
             'value' => 'another-value',
         ]);
 

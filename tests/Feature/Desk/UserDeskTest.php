@@ -17,7 +17,7 @@ class UserDeskTest extends TestCase
      */
     public function testUsersCantVisitDesk()
     {
-        $response = $this->actingAs(factory(User::class)->create())->get('/desk');
+        $response = $this->actingAs(User::factory()->create())->get('/desk');
 
         $response->assertStatus(403);
     }
@@ -29,7 +29,7 @@ class UserDeskTest extends TestCase
      */
     public function testAdministratorsCanVisitDesk()
     {
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk');
+        $response = $this->actingAs(User::factory()->admin()->create())->get('/desk');
 
         $response->assertStatus(200);
     }
@@ -41,7 +41,7 @@ class UserDeskTest extends TestCase
      */
     public function testSearchRedirectsToUserPage()
     {
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())
+        $response = $this->actingAs(User::factory()->admin()->create())
                          ->post('/desk', [
                              'search' => 'search-term',
                          ]);
@@ -57,9 +57,9 @@ class UserDeskTest extends TestCase
      */
     public function testUsersCanBeFoundByEmail()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/'.$user->email);
+        $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/'.$user->email);
 
         $response->assertStatus(200);
         $response->assertSee($user->name);
@@ -72,10 +72,10 @@ class UserDeskTest extends TestCase
      */
     public function testUsersCanBeFoundByIdentifier()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->identifiers()->create(['value' => 'user-identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/user-identifier');
+        $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/user-identifier');
 
         $response->assertStatus(200);
         $response->assertSee($user->name);

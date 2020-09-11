@@ -18,8 +18,8 @@ class BookingsTest extends TestCase
      */
     public function testBookingsAreAvailable()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create([
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create([
             'user_id' => $user->id,
         ]);
 

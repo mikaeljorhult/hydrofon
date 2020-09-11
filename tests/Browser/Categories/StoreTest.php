@@ -19,8 +19,8 @@ class StoreTest extends DuskTestCase
      */
     public function testCategoriesCanBeStored()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->make();
+        $user = User::factory()->admin()->create();
+        $category = Category::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)
@@ -39,8 +39,8 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidCategoryIsRedirectedBackToCreateForm()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->make();
+        $user = User::factory()->admin()->create();
+        $category = Category::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)

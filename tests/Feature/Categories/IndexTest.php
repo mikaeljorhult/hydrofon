@@ -18,9 +18,9 @@ class IndexTest extends TestCase
      */
     public function testCategoriesAreListed()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('categories')
              ->assertSuccessful()
              ->assertSee($category->name);
@@ -33,10 +33,10 @@ class IndexTest extends TestCase
      */
     public function testCategoriesAreFilteredByName()
     {
-        $visibleCategory = factory(Category::class)->create();
-        $notVisibleCategory = factory(Category::class)->create();
+        $visibleCategory = Category::factory()->create();
+        $notVisibleCategory = Category::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('categories?filter[categories.name]='.$visibleCategory->name)
              ->assertSuccessful()
              ->assertSee(route('categories.edit', $visibleCategory))
@@ -50,13 +50,13 @@ class IndexTest extends TestCase
      */
     public function testCategoriesAreFilteredByParent()
     {
-        $visibleCategory = factory(Category::class)->create();
-        $notVisibleCategory = factory(Category::class)->create();
+        $visibleCategory = Category::factory()->create();
+        $notVisibleCategory = Category::factory()->create();
 
-        $visibleCategory->parent()->associate(factory(Category::class)->create());
+        $visibleCategory->parent()->associate(Category::factory()->create());
         $visibleCategory->save();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('categories?filter[categories.parent_id]='.$visibleCategory->parent->id)
              ->assertSuccessful()
              ->assertSee(route('categories.edit', $visibleCategory))

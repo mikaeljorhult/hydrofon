@@ -20,7 +20,7 @@ class ResourceListTest extends DuskTestCase
      */
     public function testResourceListIsPresent()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
@@ -36,8 +36,8 @@ class ResourceListTest extends DuskTestCase
      */
     public function testResourcesAreShownInCalendar()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $resource) {
             $browser->loginAs($user)
@@ -57,8 +57,8 @@ class ResourceListTest extends DuskTestCase
      */
     public function testBookingsAreShownInCalendar()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create([
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create([
             'start_time' => now()->startOfDay()->hour(1),
             'end_time'   => now()->startOfDay()->hour(3),
         ]);

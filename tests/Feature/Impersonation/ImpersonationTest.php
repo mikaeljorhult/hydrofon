@@ -17,7 +17,7 @@ class ImpersonationTest extends TestCase
      */
     public function testAdministratorCanSeeImpersonationForm()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
         $response = $this->actingAs($admin)->get('/');
 
         $response->assertStatus(200);
@@ -31,8 +31,8 @@ class ImpersonationTest extends TestCase
      */
     public function testAdministratorCanImpersonateUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->post('/impersonation', [
             'user_id' => $user->id,
@@ -50,8 +50,8 @@ class ImpersonationTest extends TestCase
      */
     public function testAdministratorCanStopImpersonatingUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->actingAs($admin)->post('/impersonation', [
             'user_id' => $user->id,
@@ -70,7 +70,7 @@ class ImpersonationTest extends TestCase
      */
     public function testUserIDIsRequired()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $response = $this->actingAs($admin)->post('/impersonation', [
             'user_id' => '',
@@ -88,7 +88,7 @@ class ImpersonationTest extends TestCase
      */
     public function testUserMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $response = $this->actingAs($admin)->post('/impersonation', [
             'user_id' => 100,
@@ -106,7 +106,7 @@ class ImpersonationTest extends TestCase
      */
     public function testUserCanNotSeeImpersonationForm()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/');
 
         $response->assertStatus(200);
@@ -120,8 +120,8 @@ class ImpersonationTest extends TestCase
      */
     public function testUserCanNotImpersonateUser()
     {
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
 
         $response = $this->actingAs($user1)->post('/impersonation', [
             'user_id' => $user2->id,

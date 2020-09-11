@@ -19,8 +19,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testCategoriesCanBeUpdated()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)
@@ -39,8 +39,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testCategoriesMustHaveAName()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)

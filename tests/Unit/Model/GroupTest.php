@@ -19,9 +19,9 @@ class GroupTest extends TestCase
      */
     public function testGroupCanHaveResources()
     {
-        $this->actingAs(factory(User::class)->states('admin')->create());
+        $this->actingAs(User::factory()->admin()->create());
 
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $group->resources);
     }
@@ -33,7 +33,7 @@ class GroupTest extends TestCase
      */
     public function testGroupCanHaveUsers()
     {
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $group->users);
     }

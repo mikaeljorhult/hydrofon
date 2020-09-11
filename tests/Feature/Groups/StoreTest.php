@@ -21,9 +21,9 @@ class StoreTest extends TestCase
      */
     public function storeGroup($overrides = [], $user = null)
     {
-        $group = factory(Group::class)->make($overrides);
+        $group = Group::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->post('groups', $group->toArray());
     }
 
@@ -65,7 +65,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreGroups()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->storeGroup([], $user)
              ->assertStatus(403);

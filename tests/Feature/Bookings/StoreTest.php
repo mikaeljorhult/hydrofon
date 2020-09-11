@@ -21,9 +21,9 @@ class StoreTest extends TestCase
      */
     public function storeBooking($overrides = [], $user = null)
     {
-        $booking = factory(Booking::class)->make($overrides);
+        $booking = Booking::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->create())
+        return $this->actingAs($user ?: User::factory()->create())
                     ->post('bookings', $booking->toArray());
     }
 
@@ -50,8 +50,8 @@ class StoreTest extends TestCase
      */
     public function testAdministratorCanCreateBookingForOtherUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->storeBooking(['user_id' => $user->id], $admin)
              ->assertRedirect('/');
@@ -69,8 +69,8 @@ class StoreTest extends TestCase
      */
     public function testUserCannotCreateBookingsForOtherUser()
     {
-        $firstUser = factory(User::class)->create();
-        $secondUser = factory(User::class)->create();
+        $firstUser = User::factory()->create();
+        $secondUser = User::factory()->create();
 
         $this->storeBooking(['user_id' => $secondUser->id], $firstUser)
              ->assertRedirect('/');
@@ -145,8 +145,8 @@ class StoreTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->make();
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id' => $booking->resource_id,
@@ -181,8 +181,8 @@ class StoreTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->make();
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id' => $booking->resource_id,
@@ -220,7 +220,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanNotOverlapPreviousBookings()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->storeBooking([
             'resource_id' => $booking->resource_id,

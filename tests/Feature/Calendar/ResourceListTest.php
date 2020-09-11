@@ -19,7 +19,7 @@ class ResourceListTest extends TestCase
      */
     public function testResourceListIsAvailable()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
@@ -33,8 +33,8 @@ class ResourceListTest extends TestCase
      */
     public function testCategoriesWithoutGroupsAreListed()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
 
         $response = $this->actingAs($user)->get('/calendar');
 
@@ -49,8 +49,8 @@ class ResourceListTest extends TestCase
      */
     public function testCategoriesWithGroupsAreNotListed()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
         $category->groups()->create(['name' => 'Group Name']);
 
         $response = $this->actingAs($user)->get('/calendar');
@@ -66,8 +66,8 @@ class ResourceListTest extends TestCase
      */
     public function testCategoriesWithGroupsAreListedToUsersWithSameGroup()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
         $group = $user->groups()->create(['name' => 'Group Name']);
         $category->groups()->attach($group);
 
@@ -84,8 +84,8 @@ class ResourceListTest extends TestCase
      */
     public function testResourcesWithoutGroupsAreListed()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($user)->get('/calendar');
 
@@ -100,8 +100,8 @@ class ResourceListTest extends TestCase
      */
     public function testResourcesWithGroupsAreNotListed()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
         $resource->groups()->create(['name' => 'Group Name']);
 
         $response = $this->actingAs($user)->get('/calendar');
@@ -117,8 +117,8 @@ class ResourceListTest extends TestCase
      */
     public function testResourcesWithGroupsAreListedToUsersWithSameGroup()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
         $group = $user->groups()->create(['name' => 'Group Name']);
         $resource->groups()->attach($group);
 

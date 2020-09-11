@@ -21,9 +21,9 @@ class StoreTest extends TestCase
      */
     public function storeCategory($overrides = [], $user = null)
     {
-        $category = factory(Category::class)->make($overrides);
+        $category = Category::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->post('categories', $category->toArray());
     }
 
@@ -34,7 +34,7 @@ class StoreTest extends TestCase
      */
     public function testCategoriesCanBeStored()
     {
-        $parent = factory(Category::class)->create();
+        $parent = Category::factory()->create();
 
         $this->storeCategory([
             'name'      => 'New Category',
@@ -55,7 +55,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreCategories()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->storeCategory([], $user)
              ->assertStatus(403);
@@ -84,9 +84,9 @@ class StoreTest extends TestCase
      */
     public function testParentMustExist()
     {
-        $category = factory(Category::class)->make();
+        $category = Category::factory()->make();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->post('categories', array_merge($category->toArray(), ['parent_id' => 100]))
              ->assertRedirect()
              ->assertSessionHasErrors('parent_id');

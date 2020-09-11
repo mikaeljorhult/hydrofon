@@ -18,10 +18,10 @@ class CategoryPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanViewACategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->assertTrue($admin->can('view', $category));
         $this->assertFalse($user->can('view', $category));
@@ -34,8 +34,8 @@ class CategoryPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateCategories()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Category::class));
         $this->assertFalse($user->can('create', Category::class));
@@ -48,10 +48,10 @@ class CategoryPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanUpdateACategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->assertTrue($admin->can('update', $category));
         $this->assertFalse($user->can('update', $category));
@@ -64,10 +64,10 @@ class CategoryPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteACategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->assertTrue($admin->can('delete', $category));
         $this->assertFalse($user->can('delete', $category));

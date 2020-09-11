@@ -19,8 +19,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testResourcesCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $resource) {
             $browser->loginAs($admin)
@@ -39,8 +39,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testResourcesMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $resource) {
             $browser->loginAs($admin)

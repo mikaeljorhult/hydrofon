@@ -20,9 +20,9 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreListed()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('resources')
              ->assertSuccessful()
              ->assertSee($resource->name);
@@ -35,10 +35,10 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByName()
     {
-        $visibleResource = factory(Resource::class)->create();
-        $notVisibleResource = factory(Resource::class)->create();
+        $visibleResource = Resource::factory()->create();
+        $notVisibleResource = Resource::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('resources?filter[name]='.$visibleResource->name)
              ->assertSuccessful()
              ->assertSee(route('resources.edit', $visibleResource))
@@ -52,12 +52,12 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByCategory()
     {
-        $visibleResource = factory(Resource::class)->create();
-        $notVisibleResource = factory(Resource::class)->create();
+        $visibleResource = Resource::factory()->create();
+        $notVisibleResource = Resource::factory()->create();
 
-        $visibleResource->categories()->attach(factory(Category::class)->create());
+        $visibleResource->categories()->attach(Category::factory()->create());
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('resources?filter[categories.id]='.$visibleResource->categories->first()->id)
              ->assertSuccessful()
              ->assertSee(route('resources.edit', $visibleResource))
@@ -71,12 +71,12 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByGroup()
     {
-        $visibleResource = factory(Resource::class)->create();
-        $notVisibleResource = factory(Resource::class)->create();
+        $visibleResource = Resource::factory()->create();
+        $notVisibleResource = Resource::factory()->create();
 
-        $visibleResource->groups()->attach(factory(Group::class)->create());
+        $visibleResource->groups()->attach(Group::factory()->create());
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('resources?filter[groups.id]='.$visibleResource->groups->first()->id)
              ->assertSuccessful()
              ->assertSee(route('resources.edit', $visibleResource))
@@ -90,10 +90,10 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreFilteredByFacility()
     {
-        $visibleResource = factory(Resource::class)->states('facility')->create();
-        $notVisibleResource = factory(Resource::class)->create();
+        $visibleResource = Resource::factory()->facility()->create();
+        $notVisibleResource = Resource::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('resources?filter[is_facility]=1')
              ->assertSuccessful()
              ->assertSee(route('resources.edit', $visibleResource))

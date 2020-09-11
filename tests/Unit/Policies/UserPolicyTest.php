@@ -17,10 +17,10 @@ class UserPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanViewAUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $userToView = factory(User::class)->create();
+        $userToView = User::factory()->create();
 
         $this->assertTrue($admin->can('view', $userToView));
         $this->assertFalse($user->can('view', $userToView));
@@ -33,8 +33,8 @@ class UserPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateUsers()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', User::class));
         $this->assertFalse($user->can('create', User::class));
@@ -47,10 +47,10 @@ class UserPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanUpdateAUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $userToUpdate = factory(User::class)->create();
+        $userToUpdate = User::factory()->create();
 
         $this->assertTrue($admin->can('update', $userToUpdate));
         $this->assertFalse($user->can('update', $userToUpdate));
@@ -63,10 +63,10 @@ class UserPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteAUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $userToDelete = factory(User::class)->create();
+        $userToDelete = User::factory()->create();
 
         $this->assertTrue($admin->can('delete', $userToDelete));
         $this->assertFalse($user->can('delete', $userToDelete));
@@ -79,7 +79,7 @@ class UserPolicyTest extends TestCase
      */
     public function testAnAdministratorCanNotDeleteOwnAccount()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $this->assertFalse($admin->can('delete', $admin));
     }

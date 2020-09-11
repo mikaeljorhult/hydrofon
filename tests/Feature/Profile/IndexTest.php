@@ -17,7 +17,7 @@ class IndexTest extends TestCase
      */
     public function testProfileIsAvailable()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
              ->get('profile')

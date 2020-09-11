@@ -1,10 +1,29 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Checkin::class, function (Faker $faker) {
-    return [
-        'booking_id' => factory(App\Booking::class)->create()->id,
-        'user_id'    => factory(App\User::class)->create()->id,
+use App\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class CheckinFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = \App\Checkin::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+        'booking_id' => Booking::factory()->create()->id,
+        'user_id'    => User::factory()->create()->id,
     ];
-});
+    }
+}

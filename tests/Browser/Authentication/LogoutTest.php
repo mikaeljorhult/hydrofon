@@ -18,7 +18,7 @@ class LogoutTest extends DuskTestCase
      */
     public function testUserCanLogOut()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email'    => 'test@hydrofon.se',
             'password' => bcrypt('password'),
         ]);

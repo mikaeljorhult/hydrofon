@@ -18,9 +18,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenCreatingUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $user = factory(User::class)->make();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $user = User::factory()->make();
 
         $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -43,8 +43,8 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
             'email'                 => $user->email,
@@ -67,9 +67,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $user = User::factory()->create();
 
         $this->actingAs($admin)->put('users/'.$user->id, [
             'email'  => 'test@hydrofon.se',
@@ -90,9 +90,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $user = User::factory()->create();
 
         $user->groups()->attach($group);
 
@@ -120,8 +120,8 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email'  => 'test@hydrofon.se',

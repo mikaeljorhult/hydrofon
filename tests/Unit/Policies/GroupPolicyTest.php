@@ -18,10 +18,10 @@ class GroupPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanViewAGroup()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
 
         $this->assertTrue($admin->can('view', $group));
         $this->assertFalse($user->can('view', $group));
@@ -34,8 +34,8 @@ class GroupPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateGroups()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Group::class));
         $this->assertFalse($user->can('create', Group::class));
@@ -48,10 +48,10 @@ class GroupPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanUpdateAGroup()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
 
         $this->assertTrue($admin->can('update', $group));
         $this->assertFalse($user->can('update', $group));
@@ -64,10 +64,10 @@ class GroupPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteAGroup()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
 
         $this->assertTrue($admin->can('delete', $group));
         $this->assertFalse($user->can('delete', $group));

@@ -19,9 +19,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenCreatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $resource = factory(Resource::class)->make();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $resource = Resource::factory()->make();
 
         $this->actingAs($admin)->post('resources', [
             'name'   => $resource->name,
@@ -41,8 +41,8 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->make();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->make();
 
         $response = $this->actingAs($admin)->post('resources', [
             'name'   => $resource->name,
@@ -62,9 +62,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $resource = Resource::factory()->create();
 
         $this->actingAs($admin)->put('resources/'.$resource->id, [
             'name'   => 'New Resource Name',
@@ -84,9 +84,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $resource = Resource::factory()->create();
 
         $resource->groups()->attach($group);
 
@@ -113,8 +113,8 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
             'name'   => 'New Resource Name',

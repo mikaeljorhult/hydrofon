@@ -19,9 +19,9 @@ class CategoryTest extends TestCase
      */
     public function testCategoryCanHaveAParent()
     {
-        $this->actingAs(factory(User::class)->states('admin')->create());
+        $this->actingAs(User::factory()->admin()->create());
 
-        $category = factory(Category::class)->states('child')->create();
+        $category = Category::factory()->child()->create();
 
         $this->assertInstanceOf(Category::class, $category->parent);
     }
@@ -33,9 +33,9 @@ class CategoryTest extends TestCase
      */
     public function testCategoryCanHaveChildCategories()
     {
-        $this->actingAs(factory(User::class)->states('admin')->create());
+        $this->actingAs(User::factory()->admin()->create());
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $category->categories);
     }
@@ -47,9 +47,9 @@ class CategoryTest extends TestCase
      */
     public function testCategoryCanHaveChildResources()
     {
-        $this->actingAs(factory(User::class)->states('admin')->create());
+        $this->actingAs(User::factory()->admin()->create());
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $category->resources);
     }

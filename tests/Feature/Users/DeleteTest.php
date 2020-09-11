@@ -18,8 +18,8 @@ class DeleteTest extends TestCase
      */
     public function testUsersCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->delete('users/'.$user->id);
 
@@ -36,8 +36,8 @@ class DeleteTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $this->actingAs($admin)->delete('users/'.$booking->user->id);
 
@@ -56,8 +56,8 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteUsers()
     {
-        $notAdmin = factory(User::class)->create();
-        $user = factory(User::class)->create();
+        $notAdmin = User::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($notAdmin)->delete('users/'.$user->id);
 
@@ -74,7 +74,7 @@ class DeleteTest extends TestCase
      */
     public function testUsersCanNotDeleteThemselves()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $response = $this->actingAs($admin)->delete('users/'.$admin->id);
 

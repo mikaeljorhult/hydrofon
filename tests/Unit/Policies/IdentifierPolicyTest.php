@@ -18,10 +18,10 @@ class IdentifierPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanViewAnIdentifier()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $identifier = factory(User::class)->create()->identifiers()->create(['value' => 'identifier']);
+        $identifier = User::factory()->create()->identifiers()->create(['value' => 'identifier']);
 
         $this->assertTrue($admin->can('view', $identifier));
         $this->assertFalse($user->can('view', $identifier));
@@ -34,8 +34,8 @@ class IdentifierPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateIdentifiers()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Identifier::class));
         $this->assertFalse($user->can('create', Identifier::class));
@@ -48,10 +48,10 @@ class IdentifierPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanUpdateAnIdentifier()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $identifier = factory(User::class)->create()->identifiers()->create(['value' => 'identifier']);
+        $identifier = User::factory()->create()->identifiers()->create(['value' => 'identifier']);
 
         $this->assertTrue($admin->can('update', $identifier));
         $this->assertFalse($user->can('update', $identifier));
@@ -64,10 +64,10 @@ class IdentifierPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteAnIdentifier()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $identifier = factory(User::class)->create()->identifiers()->create(['value' => 'identifier']);
+        $identifier = User::factory()->create()->identifiers()->create(['value' => 'identifier']);
 
         $this->assertTrue($admin->can('delete', $identifier));
         $this->assertFalse($user->can('delete', $identifier));

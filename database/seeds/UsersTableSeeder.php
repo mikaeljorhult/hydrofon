@@ -12,14 +12,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->states(['admin'])->create([
+        User::factory()->['admin']()->create([
             'name'     => 'Default User',
             'email'    => 'default@hydrofon.se',
             'password' => bcrypt('default'),
         ]);
 
         if (app()->environment('local')) {
-            factory(User::class, 10)->create();
+            User::factory()->times(10)->create();
         }
     }
 }

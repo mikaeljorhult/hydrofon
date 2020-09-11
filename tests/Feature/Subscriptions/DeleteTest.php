@@ -22,7 +22,7 @@ class DeleteTest extends TestCase
      */
     public function deleteSubscription($subscription, $user = null)
     {
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->delete('subscriptions/'.$subscription->id);
     }
 
@@ -33,8 +33,8 @@ class DeleteTest extends TestCase
      */
     public function testUserSubscriptionsCanBeDeleted()
     {
-        $user = factory(User::class)->create();
-        $subscription = factory(Subscription::class)->create([
+        $user = User::factory()->create();
+        $subscription = Subscription::factory()->create([
             'subscribable_type' => \App\User::class,
             'subscribable_id'   => $user->id,
         ]);
@@ -56,8 +56,8 @@ class DeleteTest extends TestCase
      */
     public function testAdministratorCanDeleteAnyUserSubscription()
     {
-        $user = factory(User::class)->create();
-        $subscription = factory(Subscription::class)->create([
+        $user = User::factory()->create();
+        $subscription = Subscription::factory()->create([
             'subscribable_type' => \App\User::class,
             'subscribable_id'   => $user->id,
         ]);
@@ -79,8 +79,8 @@ class DeleteTest extends TestCase
      */
     public function testAdministratorCanDeleteAResourceSubscription()
     {
-        $resource = factory(Resource::class)->create();
-        $subscription = factory(Subscription::class)->create([
+        $resource = Resource::factory()->create();
+        $subscription = Subscription::factory()->create([
             'subscribable_type' => \App\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
@@ -102,14 +102,14 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteAResourceSubscription()
     {
-        $resource = factory(Resource::class)->create();
-        $subscription = factory(Subscription::class)->create([
+        $resource = Resource::factory()->create();
+        $subscription = Subscription::factory()->create([
             'subscribable_type' => \App\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
 
         $this->from(route('resources.show', [$resource->id]))
-             ->deleteSubscription($subscription, factory(User::class)->create())
+             ->deleteSubscription($subscription, User::factory()->create())
              ->assertStatus(403);
 
         $this->assertDatabaseHas('subscriptions', [

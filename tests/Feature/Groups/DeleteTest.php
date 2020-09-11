@@ -18,8 +18,8 @@ class DeleteTest extends TestCase
      */
     public function testGroupsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
 
         $response = $this->actingAs($admin)->delete('groups/'.$group->id);
 
@@ -36,8 +36,8 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteGroups()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
 
         $response = $this->actingAs($user)->delete('groups/'.$group->id);
 

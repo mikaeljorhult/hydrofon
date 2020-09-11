@@ -19,7 +19,7 @@ class ResourceTest extends TestCase
      */
     public function testResourceCanHaveBookings()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $resource->bookings);
     }
@@ -31,9 +31,9 @@ class ResourceTest extends TestCase
      */
     public function testResourceCanBelongToCategories()
     {
-        $this->actingAs(factory(User::class)->states('admin')->create());
+        $this->actingAs(User::factory()->admin()->create());
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $resource->categories);
     }
@@ -45,7 +45,7 @@ class ResourceTest extends TestCase
      */
     public function testResourceCanBelongToAGroup()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $resource->groups);
     }

@@ -21,9 +21,9 @@ class StoreTest extends TestCase
      */
     public function storeResource($overrides = [], $user = null)
     {
-        $resource = factory(Resource::class)->make($overrides);
+        $resource = Resource::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->post('resources', $resource->toArray());
     }
 
@@ -63,7 +63,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreResources()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->storeResource([], $user)
              ->assertStatus(403);

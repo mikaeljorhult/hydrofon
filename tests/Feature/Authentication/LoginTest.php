@@ -30,7 +30,7 @@ class LoginTest extends TestCase
      */
     public function testUserCanLogIn()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->post('/login', [
             'email'    => $user->email,

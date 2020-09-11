@@ -20,7 +20,7 @@ class AvailableTest extends TestCase
      */
     public function testSameResourceAndTime()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
         $availableRule = new Available($booking->start_time, $booking->end_time);
 
         $this->assertFalse($availableRule->passes('resource_id', $booking->resource_id));
@@ -33,10 +33,10 @@ class AvailableTest extends TestCase
      */
     public function testSameTimeDifferentResources()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
         $availableRule = new Available($booking->start_time, $booking->end_time);
 
-        $this->assertTrue($availableRule->passes('resource_id', factory(Resource::class)->create()->id));
+        $this->assertTrue($availableRule->passes('resource_id', Resource::factory()->create()->id));
     }
 
     /**
@@ -46,7 +46,7 @@ class AvailableTest extends TestCase
      */
     public function testOneBookingCanBeIgnored()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
         $this->assertTrue($availableRule->passes('resource_id', $booking->resource_id));
@@ -59,12 +59,12 @@ class AvailableTest extends TestCase
      */
     public function testBookingCanStartWhenAnotherEnds()
     {
-        $previous = factory(Booking::class)->create([
+        $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 12:00:00'),
             'end_time'   => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'resource_id'  => $previous->resource_id,
             'start_time'   => Carbon::parse('2017-01-01 13:00:00'),
             'end_time'     => Carbon::parse('2017-01-01 14:00:00'),
@@ -82,12 +82,12 @@ class AvailableTest extends TestCase
      */
     public function testBookingCanEndWhenAnotherStart()
     {
-        $previous = factory(Booking::class)->create([
+        $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 13:00:00'),
             'end_time'   => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'resource_id'  => $previous->resource_id,
             'start_time'   => Carbon::parse('2017-01-01 12:00:00'),
             'end_time'     => Carbon::parse('2017-01-01 13:00:00'),
@@ -105,12 +105,12 @@ class AvailableTest extends TestCase
      */
     public function testBookingCannotOverlapAWholeOtherBooking()
     {
-        $previous = factory(Booking::class)->create([
+        $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 13:00:00'),
             'end_time'   => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'resource_id'  => $previous->resource_id,
             'start_time'   => Carbon::parse('2017-01-01 12:00:00'),
             'end_time'     => Carbon::parse('2017-01-01 15:00:00'),
@@ -128,12 +128,12 @@ class AvailableTest extends TestCase
      */
     public function testBookingCannotOverlapStartOfAnotherBooking()
     {
-        $previous = factory(Booking::class)->create([
+        $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 13:00:00'),
             'end_time'   => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'resource_id'  => $previous->resource_id,
             'start_time'   => Carbon::parse('2017-01-01 12:00:00'),
             'end_time'     => Carbon::parse('2017-01-01 13:15:00'),
@@ -151,12 +151,12 @@ class AvailableTest extends TestCase
      */
     public function testBookingCannotOverlapEndOfAnotherBooking()
     {
-        $previous = factory(Booking::class)->create([
+        $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 12:00:00'),
             'end_time'   => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'resource_id'  => $previous->resource_id,
             'start_time'   => Carbon::parse('2017-01-01 12:45:00'),
             'end_time'     => Carbon::parse('2017-01-01 14:00:00'),
@@ -174,12 +174,12 @@ class AvailableTest extends TestCase
      */
     public function testBookingCannotOverlapMiddleOfAnotherBooking()
     {
-        $previous = factory(Booking::class)->create([
+        $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 12:00:00'),
             'end_time'   => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'resource_id'  => $previous->resource_id,
             'start_time'   => Carbon::parse('2017-01-01 12:15:00'),
             'end_time'     => Carbon::parse('2017-01-01 12:45:00'),

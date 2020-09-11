@@ -18,10 +18,10 @@ class IndexTest extends TestCase
      */
     public function testResourcesAreListed()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('resources/'.$resource->id.'/identifiers')
              ->assertSuccessful()
              ->assertSee($identifier->value);

@@ -18,9 +18,9 @@ class UpdateTest extends TestCase
      */
     public function testCategoriesCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $parents = factory(Category::class, 2)->create();
-        $category = factory(Category::class)->create([
+        $admin = User::factory()->admin()->create();
+        $parents = Category::factory()->times(2)->create();
+        $category = Category::factory()->create([
             'parent_id' => $parents[0]->id,
         ]);
 
@@ -43,8 +43,8 @@ class UpdateTest extends TestCase
      */
     public function testCategoriesMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $admin = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
             'name' => '',
@@ -64,9 +64,9 @@ class UpdateTest extends TestCase
      */
     public function testParentMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create([
-            'parent_id' => factory(Category::class)->create()->id,
+        $admin = User::factory()->admin()->create();
+        $category = Category::factory()->create([
+            'parent_id' => Category::factory()->create()->id,
         ]);
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
@@ -89,9 +89,9 @@ class UpdateTest extends TestCase
      */
     public function testCategoryMustNotBeItsOwnParent()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create([
-            'parent_id' => factory(Category::class)->create()->id,
+        $admin = User::factory()->admin()->create();
+        $category = Category::factory()->create([
+            'parent_id' => Category::factory()->create()->id,
         ]);
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
@@ -114,8 +114,8 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateCategories()
     {
-        $admin = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $admin = User::factory()->create();
+        $category = Category::factory()->create();
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
             'name' => 'New Category Name',

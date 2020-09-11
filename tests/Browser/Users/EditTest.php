@@ -18,8 +18,8 @@ class EditTest extends DuskTestCase
      */
     public function testUserCanNavigateToEditPage()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)

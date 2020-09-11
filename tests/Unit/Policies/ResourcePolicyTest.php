@@ -19,10 +19,10 @@ class ResourcePolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanViewAResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->assertTrue($admin->can('view', $resource));
         $this->assertFalse($user->can('view', $resource));
@@ -35,8 +35,8 @@ class ResourcePolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateResources()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Resource::class));
         $this->assertFalse($user->can('create', Resource::class));
@@ -49,10 +49,10 @@ class ResourcePolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanUpdateAResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->assertTrue($admin->can('update', $resource));
         $this->assertFalse($user->can('update', $resource));
@@ -65,10 +65,10 @@ class ResourcePolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteAResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->assertTrue($admin->can('delete', $resource));
         $this->assertFalse($user->can('delete', $resource));
@@ -81,11 +81,11 @@ class ResourcePolicyTest extends TestCase
      */
     public function testAResourceCanBeListedIfUserIsAdministrator()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $resourceWithGroup = factory(Resource::class)->create();
-        $resourceWithoutGroup = factory(Resource::class)->create();
+        $user = User::factory()->admin()->create();
+        $resourceWithGroup = Resource::factory()->create();
+        $resourceWithoutGroup = Resource::factory()->create();
 
-        $resourceWithGroup->groups()->attach(factory(Group::class)->create());
+        $resourceWithGroup->groups()->attach(Group::factory()->create());
 
         $this->assertTrue($user->can('list', $resourceWithGroup));
         $this->assertTrue($user->can('list', $resourceWithoutGroup));
@@ -98,8 +98,8 @@ class ResourcePolicyTest extends TestCase
      */
     public function testAResourceCanBeListedIfItHasNoGroup()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
 
         $this->assertTrue($user->can('list', $resource));
     }
@@ -111,13 +111,13 @@ class ResourcePolicyTest extends TestCase
      */
     public function testAResourceCanBeListedIfItIsInSameGroupAsUser()
     {
-        $userWithGroup = factory(User::class)->create();
-        $userWithoutGroup = factory(User::class)->create();
-        $userWithOtherGroup = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $userWithGroup = User::factory()->create();
+        $userWithoutGroup = User::factory()->create();
+        $userWithOtherGroup = User::factory()->create();
+        $resource = Resource::factory()->create();
 
-        $userWithGroup->groups()->attach($group = factory(Group::class)->create());
-        $userWithOtherGroup->groups()->attach(factory(Group::class)->create());
+        $userWithGroup->groups()->attach($group = Group::factory()->create());
+        $userWithOtherGroup->groups()->attach(Group::factory()->create());
         $resource->groups()->attach($group);
 
         $this->assertTrue($userWithGroup->can('list', $resource));

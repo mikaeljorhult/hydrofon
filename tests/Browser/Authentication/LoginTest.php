@@ -18,7 +18,7 @@ class LoginTest extends DuskTestCase
      */
     public function testUserCanLogIn()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email'    => 'test@hydrofon.se',
             'password' => bcrypt('password'),
         ]);

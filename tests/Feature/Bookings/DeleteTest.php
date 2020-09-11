@@ -20,8 +20,8 @@ class DeleteTest extends TestCase
      */
     public function testBookingsCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
 
@@ -38,7 +38,7 @@ class DeleteTest extends TestCase
      */
     public function testUserCanDeleteBookingItOwns()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
@@ -55,8 +55,8 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteBookingByAnotherUser()
     {
-        $booking = factory(Booking::class)->states('future')->create();
-        $anotherUser = factory(User::class)->create();
+        $booking = Booking::factory()->future()->create();
+        $anotherUser = User::factory()->create();
 
         $response = $this->actingAs($anotherUser)->delete('bookings/'.$booking->id);
 
@@ -73,7 +73,7 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteBookingThatHasStarted()
     {
-        $booking = factory(Booking::class)->states('past')->create();
+        $booking = Booking::factory()->past()->create();
 
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
@@ -90,8 +90,8 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteBookingThatHasBeenCheckedOut()
     {
-        $booking = factory(Booking::class)->states('past')->create();
-        factory(Checkout::class)->create([
+        $booking = Booking::factory()->past()->create();
+        Checkout::factory()->create([
             'booking_id' => $booking->id,
         ]);
 
@@ -110,11 +110,11 @@ class DeleteTest extends TestCase
      */
     public function testRelatedCheckinAndCheckoutAreDeletedWithBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
-        $booking->checkin()->save(factory(Checkin::class)->create());
-        $booking->checkout()->save(factory(Checkout::class)->create());
+        $booking->checkin()->save(Checkin::factory()->create());
+        $booking->checkout()->save(Checkout::factory()->create());
 
         $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
 

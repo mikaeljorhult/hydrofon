@@ -21,9 +21,9 @@ class StoreTest extends TestCase
      */
     public function storeBucket($overrides = [], $user = null)
     {
-        $bucket = factory(Bucket::class)->make($overrides);
+        $bucket = Bucket::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->post('buckets', $bucket->toArray());
     }
 
@@ -63,7 +63,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreBuckets()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->storeBucket([], $user)
              ->assertStatus(403);

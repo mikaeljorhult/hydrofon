@@ -18,8 +18,8 @@ class DeleteTest extends TestCase
      */
     public function testIdentifiersCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->delete('resources/'.$resource->id.'/identifiers/'.$identifier->id);
@@ -37,10 +37,10 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteIdentifiers()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
-        $response = $this->actingAs(factory(User::class)->create())->delete('resources/'.$resource->id.'/identifiers/'.$identifier->id);
+        $response = $this->actingAs(User::factory()->create())->delete('resources/'.$resource->id.'/identifiers/'.$identifier->id);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('identifiers', [

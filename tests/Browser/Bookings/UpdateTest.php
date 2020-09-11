@@ -19,8 +19,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $booking = factory(Booking::class)->create();
-        $newResource = factory(Resource::class)->create();
+        $booking = Booking::factory()->create();
+        $newResource = Resource::factory()->create();
 
         $this->browse(function (Browser $browser) use ($booking, $newResource) {
             $browser->loginAs($booking->user)
@@ -39,7 +39,7 @@ class UpdateTest extends DuskTestCase
      */
     public function testBookingsMustHaveAResource()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->browse(function (Browser $browser) use ($booking) {
             $browser->loginAs($booking->user)

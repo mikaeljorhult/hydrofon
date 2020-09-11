@@ -19,9 +19,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenCreatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $category = factory(Category::class)->make();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $category = Category::factory()->make();
 
         $this->actingAs($admin)->post('categories', [
             'name'   => $category->name,
@@ -41,8 +41,8 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->make();
+        $admin = User::factory()->admin()->create();
+        $category = Category::factory()->make();
 
         $response = $this->actingAs($admin)->post('categories', [
             'name'   => $category->name,
@@ -62,9 +62,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $category = factory(Category::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $category = Category::factory()->create();
 
         $this->actingAs($admin)->put('categories/'.$category->id, [
             'name'   => 'New Category Name',
@@ -84,9 +84,9 @@ class GroupTest extends TestCase
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
-        $category = factory(Category::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
+        $category = Category::factory()->create();
 
         $category->groups()->attach($group);
 
@@ -113,8 +113,8 @@ class GroupTest extends TestCase
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingCategory()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $admin = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
             'name'   => 'New Category Name',

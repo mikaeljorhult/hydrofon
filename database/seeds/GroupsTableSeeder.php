@@ -13,7 +13,7 @@ class GroupsTableSeeder extends Seeder
     public function run()
     {
         if (app()->environment('local')) {
-            factory(Group::class, 10)->create();
+            Group::factory()->times(10)->create();
         }
     }
 }

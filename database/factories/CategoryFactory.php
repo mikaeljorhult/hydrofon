@@ -1,15 +1,37 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Category::class, function (Faker $faker) {
-    return [
-        'name' => $faker->country,
+use App\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class CategoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = \App\Category::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+        'name' => $this->faker->country,
     ];
-});
+    }
 
-$factory->state(App\Category::class, 'child', [
-    'parent_id' => function () {
-        return factory(App\Category::class)->create()->id;
-    },
-]);
+    public function child()
+    {
+        return $this->state(function () {
+            ['parent_id' => function () {
+    return Category::factory()->create()->id;
+}]
+        });
+    }
+}

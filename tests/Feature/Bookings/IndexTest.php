@@ -19,9 +19,9 @@ class IndexTest extends TestCase
     public function testBookingsAreListed()
     {
         $this->withoutExceptionHandling();
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('bookings')
              ->assertSuccessful()
              ->assertSee($booking->resource->name);
@@ -34,10 +34,10 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByResource()
     {
-        $visibleBooking = factory(Booking::class)->create();
-        $notVisibleBooking = factory(Booking::class)->create();
+        $visibleBooking = Booking::factory()->create();
+        $notVisibleBooking = Booking::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('bookings?filter[resource_id]='.$visibleBooking->resource->id)
              ->assertSuccessful()
              ->assertSee(route('bookings.edit', $visibleBooking))
@@ -51,10 +51,10 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByUser()
     {
-        $visibleBooking = factory(Booking::class)->create();
-        $notVisibleBooking = factory(Booking::class)->create();
+        $visibleBooking = Booking::factory()->create();
+        $notVisibleBooking = Booking::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('bookings?filter[user_id]='.$visibleBooking->user->id)
              ->assertSuccessful()
              ->assertSee(route('bookings.edit', $visibleBooking))
@@ -68,10 +68,10 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByStartTime()
     {
-        $visibleBooking = factory(Booking::class)->states('future')->create();
-        $notVisibleBooking = factory(Booking::class)->states('past')->create();
+        $visibleBooking = Booking::factory()->future()->create();
+        $notVisibleBooking = Booking::factory()->past()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('bookings?filter[start_time]='.$visibleBooking->start_time->format('Y-m-d'))
              ->assertSuccessful()
              ->assertSee(route('bookings.edit', $visibleBooking))
@@ -85,10 +85,10 @@ class IndexTest extends TestCase
      */
     public function testBookingsAreFilteredByEndTime()
     {
-        $visibleBooking = factory(Booking::class)->states('future')->create();
-        $notVisibleBooking = factory(Booking::class)->states('past')->create();
+        $visibleBooking = Booking::factory()->future()->create();
+        $notVisibleBooking = Booking::factory()->past()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('bookings?filter[end_time]='.$visibleBooking->start_time->format('Y-m-d'))
              ->assertSuccessful()
              ->assertSee(route('bookings.edit', $visibleBooking))
