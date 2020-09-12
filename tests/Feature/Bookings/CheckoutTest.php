@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Bookings;
 
-use App\Booking;
-use App\Checkout;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkout;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,8 +19,8 @@ class CheckoutTest extends TestCase
      */
     public function testBookingCanBeCheckedOut()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $this->actingAs($admin)->post('checkouts', [
             'booking_id' => $booking->id,
@@ -40,8 +40,8 @@ class CheckoutTest extends TestCase
      */
     public function testCheckoutCanBeUndone()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $checkout = factory(Checkout::class)->create();
+        $admin = User::factory()->admin()->create();
+        $checkout = Checkout::factory()->create();
 
         $this->actingAs($admin)->delete('checkouts/'.$checkout->id);
 
@@ -58,7 +58,7 @@ class CheckoutTest extends TestCase
      */
     public function testBookingMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $response = $this->actingAs($admin)->post('checkouts', [
             'booking_id' => 100,
@@ -79,8 +79,8 @@ class CheckoutTest extends TestCase
      */
     public function testNonAdminUsersCanNotCheckOutBookings()
     {
-        $admin = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->post('checkouts', [
             'booking_id' => $booking->id,
@@ -101,8 +101,8 @@ class CheckoutTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteCheckouts()
     {
-        $user = factory(User::class)->create();
-        $checkout = factory(Checkout::class)->create();
+        $user = User::factory()->create();
+        $checkout = Checkout::factory()->create();
 
         $response = $this->actingAs($user)->delete('checkouts/'.$checkout->id);
 

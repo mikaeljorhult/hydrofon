@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IdentifierDestroyRequest;
 use App\Http\Requests\IdentifierStoreRequest;
 use App\Http\Requests\IdentifierUpdateRequest;
-use App\Identifier;
-use App\User;
+use App\Models\Identifier;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class UserIdentifierController extends Controller
@@ -24,7 +24,7 @@ class UserIdentifierController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class UserIdentifierController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,7 +53,7 @@ class UserIdentifierController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\IdentifierStoreRequest $request
-     * @param \App\User                                 $user
+     * @param \App\Models\User                                 $user
      *
      * @return void
      */
@@ -74,8 +74,8 @@ class UserIdentifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\User       $user
-     * @param \App\Identifier $identifier
+     * @param \App\Models\User       $user
+     * @param \App\Models\Identifier $identifier
      *
      * @return \Illuminate\Http\Response
      */
@@ -92,8 +92,8 @@ class UserIdentifierController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\IdentifierUpdateRequest $request
-     * @param \App\User                                  $user
-     * @param \App\Identifier                            $identifier
+     * @param \App\Models\User                                  $user
+     * @param \App\Models\Identifier                            $identifier
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,8 +114,8 @@ class UserIdentifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\User                                   $user
-     * @param \App\Identifier                             $identifier
+     * @param \App\Models\User                                   $user
+     * @param \App\Models\Identifier                             $identifier
      * @param \App\Http\Requests\IdentifierDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

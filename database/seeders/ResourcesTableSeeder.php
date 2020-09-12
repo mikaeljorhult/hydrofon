@@ -1,6 +1,8 @@
 <?php
 
-use App\Resource;
+namespace Database\Seeders;
+
+use App\Models\Resource;
 use Illuminate\Database\Seeder;
 
 class ResourcesTableSeeder extends Seeder
@@ -13,7 +15,7 @@ class ResourcesTableSeeder extends Seeder
     public function run()
     {
         if (app()->environment('local')) {
-            factory(Resource::class, 20)->create();
+            Resource::factory()->times(20)->create();
         }
     }
 }

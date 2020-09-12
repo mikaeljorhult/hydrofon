@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Categories;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,8 +18,8 @@ class DeleteTest extends TestCase
      */
     public function testCategoriesCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $admin = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $response = $this->actingAs($admin)->delete('categories/'.$category->id);
 

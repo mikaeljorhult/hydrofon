@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Policies;
 
-use App\Booking;
-use App\Checkin;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkin;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,8 +19,8 @@ class CheckinPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateCheckins()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Checkin::class));
         $this->assertFalse($user->can('create', Checkin::class));
@@ -33,10 +33,10 @@ class CheckinPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteACheckin()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $checkin = factory(Booking::class)->create()->checkin()->create();
+        $checkin = Booking::factory()->create()->checkin()->create();
 
         $this->assertTrue($admin->can('delete', $checkin));
         $this->assertFalse($user->can('delete', $checkin));

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Policies;
 
-use App\Booking;
-use App\Checkout;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkout;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,8 +19,8 @@ class CheckoutPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanCreateCheckouts()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Checkout::class));
         $this->assertFalse($user->can('create', Checkout::class));
@@ -33,10 +33,10 @@ class CheckoutPolicyTest extends TestCase
      */
     public function testOnlyAdminUsersCanDeleteACheckout()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $checkout = factory(Booking::class)->create()->checkin()->create();
+        $checkout = Booking::factory()->create()->checkin()->create();
 
         $this->assertTrue($admin->can('delete', $checkout));
         $this->assertFalse($user->can('delete', $checkout));

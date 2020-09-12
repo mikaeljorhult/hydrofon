@@ -1,11 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +25,7 @@ class Group extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(\App\Resource::class);
+        return $this->belongsToMany(\App\Models\Resource::class);
     }
 
     /**
@@ -32,7 +35,7 @@ class Group extends Model
      */
     public function resources()
     {
-        return $this->belongsToMany(\App\Resource::class);
+        return $this->belongsToMany(\App\Models\Resource::class);
     }
 
     /**
@@ -42,6 +45,6 @@ class Group extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\App\User::class);
+        return $this->belongsToMany(\App\Models\User::class);
     }
 }

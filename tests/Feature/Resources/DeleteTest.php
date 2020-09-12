@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Resources;
 
-use App\Booking;
-use App\Resource;
-use App\User;
+use App\Models\Booking;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,8 +19,8 @@ class DeleteTest extends TestCase
      */
     public function testResourcesCanBeDeleted()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->delete('resources/'.$resource->id);
 
@@ -37,8 +37,8 @@ class DeleteTest extends TestCase
      */
     public function testRelatedBookingsAreDeletedWithResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $this->actingAs($admin)->delete('resources/'.$booking->resource->id);
 
@@ -57,8 +57,8 @@ class DeleteTest extends TestCase
      */
     public function testNonAdminUsersCanNotDeleteResources()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($user)->delete('resources/'.$resource->id);
 

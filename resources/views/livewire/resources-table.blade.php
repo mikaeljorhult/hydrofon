@@ -70,7 +70,7 @@
                                         multiple
                                         wire:model="editValues.groups"
                                     >
-                                        @foreach(\App\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Models\Group::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>
@@ -83,7 +83,7 @@
                                         multiple
                                         wire:model="editValues.categories"
                                     >
-                                        @foreach(\App\Category::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Models\Category::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>
@@ -96,7 +96,7 @@
                                         multiple
                                         wire:model="editValues.buckets"
                                     >
-                                        @foreach(\App\Bucket::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                        @foreach(\App\Models\Bucket::orderBy('name')->get(['id', 'name']) as $optionItem)
                                             <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                         @endforeach
                                     </select>

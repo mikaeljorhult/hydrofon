@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Calendar;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,7 +18,7 @@ class CalendarTest extends TestCase
      */
     public function testUserCanVisitCalendar()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/calendar');
 
         $response->assertStatus(200);
@@ -32,8 +32,8 @@ class CalendarTest extends TestCase
      */
     public function testResourcesAreAddedToSession()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
             'resources' => [$resource->id],
@@ -50,7 +50,7 @@ class CalendarTest extends TestCase
      */
     public function testMissingResourcesAreNotAddedToSession()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
             'resources' => 100,
@@ -67,7 +67,7 @@ class CalendarTest extends TestCase
      */
     public function testDateIsUsed()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
             'date' => '2017-01-01',
@@ -83,8 +83,8 @@ class CalendarTest extends TestCase
      */
     public function testResourcesAreShown()
     {
-        $user = factory(User::class)->create();
-        $resources = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resources = Resource::factory()->create();
 
         $this->actingAs($user)->post('/calendar', [
             'resources' => [$resources->id],

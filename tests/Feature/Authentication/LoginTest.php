@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Authentication;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -30,7 +30,7 @@ class LoginTest extends TestCase
      */
     public function testUserCanLogIn()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->post('/login', [
             'email'    => $user->email,

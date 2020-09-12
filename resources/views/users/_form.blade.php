@@ -18,10 +18,10 @@
     {!! Form::password('password_confirmation', ['placeholder' => 'Confirm password', 'class' => 'field' . ($errors->has('password_confirmation') ? ' is-invalid' : '')]) !!}
 </div>
 
-@if(\App\Group::exists())
+@if(\App\Models\Group::exists())
     <div class="mb-6">
         {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
-        {!! Form::select('groups[]', \App\Group::orderBy('name')->pluck('name', 'id'), isset($user) ? $user->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('groups') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('groups[]', \App\Models\Group::orderBy('name')->pluck('name', 'id'), isset($user) ? $user->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('groups') ? ' is-invalid' : '')]) !!}
     </div>
 @endif
 

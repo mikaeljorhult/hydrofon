@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubscriptionDestroyRequest;
 use App\Http\Requests\SubscriptionStoreRequest;
 use App\Scopes\GroupPolicyScope;
-use App\Subscription;
+use App\Models\Subscription;
 use Illuminate\Support\Str;
 
 class SubscriptionController extends Controller
@@ -40,7 +40,7 @@ class SubscriptionController extends Controller
     public function store(SubscriptionStoreRequest $request)
     {
         Subscription::firstOrCreate([
-            'subscribable_type' => 'App\\'.Str::ucfirst($request->get('subscribable_type')),
+            'subscribable_type' => 'App\\Models\\'.Str::ucfirst($request->get('subscribable_type')),
             'subscribable_id'   => $request->get('subscribable_id'),
         ]);
 
@@ -52,7 +52,7 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Subscription                             $subscription
+     * @param \App\Models\Subscription                             $subscription
      * @param \App\Http\Requests\SubscriptionDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

@@ -1,9 +1,11 @@
 <?php
 
-use App\Category;
+namespace Database\Seeders;
+
+use App\Models\Group;
 use Illuminate\Database\Seeder;
 
-class CategoriesTableSeeder extends Seeder
+class GroupsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         if (app()->environment('local')) {
-            factory(Category::class, 10)->create();
+            Group::factory()->times(10)->create();
         }
     }
 }

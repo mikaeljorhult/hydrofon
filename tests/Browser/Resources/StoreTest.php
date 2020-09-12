@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Resources;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,8 +19,8 @@ class StoreTest extends DuskTestCase
      */
     public function testResourcesCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->make();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->make();
 
         $this->browse(function (Browser $browser) use ($admin, $resource) {
             $browser->loginAs($admin)
@@ -39,8 +39,8 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidResourceIsRedirectedBackToCreateForm()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->make();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->make();
 
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)

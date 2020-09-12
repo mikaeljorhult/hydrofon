@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use App\Resource;
-use App\Subscription;
-use App\User;
+use App\Models\Resource;
+use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,15 +16,15 @@ class StoreTest extends TestCase
      * Posts request to persist a subscription.
      *
      * @param array               $overrides
-     * @param \App\User|null $user
+     * @param \App\Models\User|null $user
      *
      * @return \Illuminate\Testing\TestResponse
      */
     public function storeSubscription($overrides = [], $user = null)
     {
-        $subscription = factory(Subscription::class)->make($overrides);
+        $subscription = Subscription::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->post('subscriptions', $subscription->toArray());
     }
 
@@ -35,7 +35,7 @@ class StoreTest extends TestCase
      */
     public function testUserSubscriptionsCanBeStored()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->from(route('users.show', [$user->id]))
              ->storeSubscription([
@@ -45,7 +45,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => $user->id,
         ]);
     }
@@ -57,9 +57,9 @@ class StoreTest extends TestCase
      */
     public function testOnlyOneSubscriptionIsCreatedForEachObject()
     {
-        $subscription = factory(Subscription::class)->create($attributes = [
-            'subscribable_type' => \App\User::class,
-            'subscribable_id'   => factory(User::class)->create()->id,
+        $subscription = Subscription::factory()->create($attributes = [
+            'subscribable_type' => \App\Models\User::class,
+            'subscribable_id'   => User::factory()->create()->id,
         ]);
 
         $this->storeSubscription([
@@ -78,7 +78,7 @@ class StoreTest extends TestCase
      */
     public function testUserCanNotSubscribeToOtherUsersBookings()
     {
-        $users = factory(User::class, 2)->create();
+        $users = User::factory()->times(2)->create();
 
         $this->storeSubscription([
             'subscribable_type' => 'user',
@@ -95,7 +95,7 @@ class StoreTest extends TestCase
      */
     public function testResourceSubscriptionsCanBeStored()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->from(route('resources.show', [$resource->id]))
              ->storeSubscription([
@@ -105,7 +105,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \App\Resource::class,
+            'subscribable_type' => \App\Models\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
     }
@@ -117,13 +117,13 @@ class StoreTest extends TestCase
      */
     public function testUserCanNotSubscribeResourceBookings()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $this->from(route('resources.show', [$resource->id]))
              ->storeSubscription([
                  'subscribable_type' => 'resource',
                  'subscribable_id'   => $resource->id,
-             ], factory(User::class)->create())
+             ], User::factory()->create())
              ->assertStatus(403);
 
         $this->assertCount(0, Subscription::all());

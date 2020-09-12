@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Users;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -18,8 +18,8 @@ class StoreTest extends DuskTestCase
      */
     public function testUsersCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->make();
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)
@@ -41,8 +41,8 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidUserIsRedirectedBackToCreateForm()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->make();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->make();
 
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Profile;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,8 +18,8 @@ class BookingsTest extends TestCase
      */
     public function testBookingsAreAvailable()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create([
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create([
             'user_id' => $user->id,
         ]);
 

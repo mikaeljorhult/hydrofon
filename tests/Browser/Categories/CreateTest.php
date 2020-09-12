@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Categories;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -18,7 +18,7 @@ class CreateTest extends DuskTestCase
      */
     public function testUserCanNavigateToCreatePage()
     {
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\DataRequests;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,7 +17,7 @@ class StoreTest extends TestCase
      */
     public function testDataExportCanBeRequested()
     {
-        $this->actingAs(factory(User::class)->create())->post('datarequests')
+        $this->actingAs(User::factory()->create())->post('datarequests')
              ->assertStatus(200)
              ->assertHeader('Content-Type', 'application/json; charset=UTF-8');
     }

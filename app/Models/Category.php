@@ -1,13 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Scopes\GroupPolicyScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends Model
 {
+    use HasFactory;
     use NodeTrait;
 
     /**
@@ -60,7 +62,7 @@ class Category extends Model
      */
     public function groups()
     {
-        return $this->belongsToMany(\App\Group::class);
+        return $this->belongsToMany(\App\Models\Group::class);
     }
 
     /**
@@ -70,7 +72,7 @@ class Category extends Model
      */
     public function resources()
     {
-        return $this->belongsToMany(\App\Resource::class)
+        return $this->belongsToMany(\App\Models\Resource::class)
                     ->orderBy('name');
     }
 }

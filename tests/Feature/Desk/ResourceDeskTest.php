@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Desk;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,10 +18,10 @@ class ResourceDeskTest extends TestCase
      */
     public function testResourcesCanBeFoundByIdentifier()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
         $resource->identifiers()->create(['value' => 'resource-identifier']);
 
-        $response = $this->actingAs(factory(User::class)->states('admin')->create())->get('/desk/resource-identifier');
+        $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/resource-identifier');
 
         $response->assertStatus(200);
         $response->assertSee($resource->name);

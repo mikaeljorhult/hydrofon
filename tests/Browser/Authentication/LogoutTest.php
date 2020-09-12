@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Authentication;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -18,7 +18,7 @@ class LogoutTest extends DuskTestCase
      */
     public function testUserCanLogOut()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email'    => 'test@hydrofon.se',
             'password' => bcrypt('password'),
         ]);

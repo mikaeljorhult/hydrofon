@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Bookings;
 
-use App\Booking;
-use App\Checkout;
-use App\Resource;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkout;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,9 +20,9 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
-        $newResource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
+        $newResource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $newResource->id,
@@ -43,9 +43,9 @@ class UpdateTest extends TestCase
      */
     public function testAdministratorCanChangeUserOfBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'user_id'     => $user->id,
@@ -68,9 +68,9 @@ class UpdateTest extends TestCase
      */
     public function testUserCannotChangeUserOfABooking()
     {
-        $firstUser = factory(User::class)->create();
-        $secondUser = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $firstUser = User::factory()->create();
+        $secondUser = User::factory()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($firstUser)->put('bookings/'.$booking->id, [
             'user_id'     => $secondUser->id,
@@ -93,7 +93,7 @@ class UpdateTest extends TestCase
      */
     public function testUserCanChangeBookingItOwns()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -116,8 +116,8 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingItDontOwn()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -140,7 +140,7 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingThatHasStarted()
     {
-        $booking = factory(Booking::class)->states('past')->create();
+        $booking = Booking::factory()->past()->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -163,9 +163,9 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingThatHasBeenCheckedOut()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
-        factory(Checkout::class)->create([
+        Checkout::factory()->create([
             'booking_id' => $booking->id,
         ]);
 
@@ -190,8 +190,8 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAResource()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => '',
@@ -213,8 +213,8 @@ class UpdateTest extends TestCase
      */
     public function testResourceMustExist()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => 100,
@@ -236,9 +236,9 @@ class UpdateTest extends TestCase
      */
     public function testBookingsCanNotOverlapOtherBookings()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $previous = factory(Booking::class)->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $previous = Booking::factory()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $previous->resource_id,
@@ -262,8 +262,8 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAStartTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -285,8 +285,8 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -308,8 +308,8 @@ class UpdateTest extends TestCase
      */
     public function testBookingsMustHaveAEndTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -331,8 +331,8 @@ class UpdateTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -354,8 +354,8 @@ class UpdateTest extends TestCase
      */
     public function testStartTimeMustBeBeforeEndTime()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $booking = factory(Booking::class)->create();
+        $admin = User::factory()->admin()->create();
+        $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,

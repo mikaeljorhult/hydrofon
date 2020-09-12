@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Bookings;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,8 +19,8 @@ class StoreTest extends DuskTestCase
      */
     public function testBookingsCanBeStored()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user, $booking) {
             $browser->loginAs($user)
@@ -41,8 +41,8 @@ class StoreTest extends DuskTestCase
      */
     public function testInvalidBookingIsRedirectedBackToCreateForm()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)

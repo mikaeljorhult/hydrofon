@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DeskRequest;
-use App\Identifier;
-use App\User;
+use App\Models\Identifier;
+use App\Models\User;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -81,7 +81,7 @@ class DeskController extends Controller
     /**
      * Get bookings of identifiable.
      *
-     * @param \App\Resource|\App\User $identifiable
+     * @param \App\Resource|\App\Models\User $identifiable
      *
      * @return mixed
      */

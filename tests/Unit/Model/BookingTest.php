@@ -2,9 +2,11 @@
 
 namespace Tests\Unit\Model;
 
-use App\Booking;
-use App\Resource;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkin;
+use App\Models\Checkout;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +21,7 @@ class BookingTest extends TestCase
      */
     public function testBookingHasAnOwner()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->assertInstanceOf(User::class, $booking->user);
     }
@@ -31,8 +33,8 @@ class BookingTest extends TestCase
      */
     public function testBookingHasACreator()
     {
-        $this->actingAs($user = factory(User::class)->create());
-        $booking = factory(Booking::class)->create();
+        $this->actingAs($user = User::factory()->create());
+        $booking = Booking::factory()->create();
 
         $this->assertInstanceOf(User::class, $booking->created_by);
         $this->assertEquals($user->id, $booking->created_by->id);
@@ -45,9 +47,9 @@ class BookingTest extends TestCase
      */
     public function testBookingHasAResource()
     {
-        $this->actingAs(factory(User::class)->states('admin')->create());
+        $this->actingAs(User::factory()->admin()->create());
 
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->assertInstanceOf(Resource::class, $booking->resource);
     }
@@ -60,10 +62,10 @@ class BookingTest extends TestCase
     public function testBetweenScopeExcludeBookings()
     {
         // Create a past booking.
-        factory(Booking::class)->states('past')->create();
+        Booking::factory()->past()->create();
 
         // Create a booking between 11.00 and 12.00 on current date.
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'start_time' => today()->hour(11),
             'end_time'   => today()->hour(12),
         ]);
@@ -84,7 +86,7 @@ class BookingTest extends TestCase
     public function testBetweenScopeExcludeBookingsThatEndOnStartTime()
     {
         // Create a booking between 12.00 yesterday and 00.00 on current date.
-        factory(Booking::class)->create([
+        Booking::factory()->create([
             'start_time' => today()->subDay()->hour(12),
             'end_time'   => today()->hour(0),
         ]);
@@ -104,10 +106,10 @@ class BookingTest extends TestCase
     public function testBetweenScopeIncludeBookingsThatStartOnStartTime()
     {
         // Create a past booking.
-        factory(Booking::class)->states('past')->create();
+        Booking::factory()->past()->create();
 
         // Create a booking between 00.00 and 04.00 on current date.
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'start_time' => today()->hour(0),
             'end_time'   => today()->hour(4),
         ]);
@@ -128,10 +130,10 @@ class BookingTest extends TestCase
     public function testBetweenScopeIncludeBookingsThatEndOnEndTime()
     {
         // Create a past booking.
-        factory(Booking::class)->states('past')->create();
+        Booking::factory()->past()->create();
 
         // Create a booking between 00.00 and 04.00 on current date.
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'start_time' => today()->hour(0),
             'end_time'   => today()->addDay()->hour(0),
         ]);
@@ -152,7 +154,7 @@ class BookingTest extends TestCase
     public function testBetweenScopeIncludeBookingsThatStartAndEndOutsideScope()
     {
         // Create a booking between 00.00 and 04.00 on current date.
-        $booking = factory(Booking::class)->create([
+        $booking = Booking::factory()->create([
             'start_time' => now()->subYear(),
             'end_time'   => now()->addYear(),
         ]);
@@ -173,11 +175,11 @@ class BookingTest extends TestCase
     public function testPastScopeIncludePastBookings()
     {
         // Create a current and a future booking.
-        factory(Booking::class)->states('current')->create();
-        factory(Booking::class)->states('future')->create();
+        Booking::factory()->current()->create();
+        Booking::factory()->future()->create();
 
         // Create a past booking.
-        $booking = factory(Booking::class)->states('past')->create();
+        $booking = Booking::factory()->past()->create();
 
         // Get all past bookings.
         $bookings = Booking::past()->get();
@@ -195,11 +197,11 @@ class BookingTest extends TestCase
     public function testFutureScopeIncludeFutureBookings()
     {
         // Create a current and a past booking.
-        factory(Booking::class)->states('current')->create();
-        factory(Booking::class)->states('past')->create();
+        Booking::factory()->current()->create();
+        Booking::factory()->past()->create();
 
         // Create a future booking.
-        $booking = factory(Booking::class)->states('future')->create();
+        $booking = Booking::factory()->future()->create();
 
         // Get all future bookings.
         $bookings = Booking::future()->get();
@@ -217,11 +219,11 @@ class BookingTest extends TestCase
     public function testCurrentScopeIncludeCurrentBookings()
     {
         // Create a past and a future booking.
-        factory(Booking::class)->states('past')->create();
-        factory(Booking::class)->states('future')->create();
+        Booking::factory()->past()->create();
+        Booking::factory()->future()->create();
 
         // Create a current booking.
-        $booking = factory(Booking::class)->states('current')->create();
+        $booking = Booking::factory()->current()->create();
 
         // Get all current bookings.
         $bookings = Booking::current()->get();
@@ -239,15 +241,15 @@ class BookingTest extends TestCase
     public function testOverdueScopeIncludeOverdueBookings()
     {
         // Create a past and a future booking.
-        factory(Booking::class)->states('past')->create();
-        factory(Booking::class)->states('future')->create();
-        $checkedInBooking = factory(Booking::class)->states('past')->create();
-        $checkedInBooking->checkout()->save(factory(\App\Checkout::class)->create());
-        $checkedInBooking->checkin()->save(factory(\App\Checkin::class)->create());
+        Booking::factory()->past()->create();
+        Booking::factory()->future()->create();
+        $checkedInBooking = Booking::factory()->past()->create();
+        $checkedInBooking->checkout()->save(Checkout::factory()->create());
+        $checkedInBooking->checkin()->save(Checkin::factory()->create());
 
         // Create a current booking.
-        $booking = factory(Booking::class)->states('past')->create();
-        $booking->checkout()->save(factory(\App\Checkout::class)->create());
+        $booking = Booking::factory()->past()->create();
+        $booking->checkout()->save(Checkout::factory()->create());
 
         // Get all current bookings.
         $bookings = Booking::overdue()->get();

@@ -1,9 +1,27 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Group::class, function (Faker $faker) {
-    return [
-        'name' => $faker->colorName,
-    ];
-});
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class GroupFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = \App\Models\Group::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->colorName,
+        ];
+    }
+}

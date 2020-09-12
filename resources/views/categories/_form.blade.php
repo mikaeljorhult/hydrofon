@@ -3,17 +3,17 @@
     {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'field' . ($errors->has('name') ? ' is-invalid' : '')]) !!}
 </div>
 
-@if(\App\Category::exists())
+@if(\App\Models\Category::exists())
     <div class="mb-6">
         {!! Form::label('parent_id', 'Parent', ['class' => 'label']) !!}
-        {!! Form::select('parent_id', \App\Category::where('id', '!=', isset($category) ? $category->id : 0)->orderBy('name')->pluck('name', 'id'), isset($category) ? $category->parent_id : null, ['placeholder' => 'Select a parent...', 'class' => 'field' . ($errors->has('parent_id') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('parent_id', \App\Models\Category::where('id', '!=', isset($category) ? $category->id : 0)->orderBy('name')->pluck('name', 'id'), isset($category) ? $category->parent_id : null, ['placeholder' => 'Select a parent...', 'class' => 'field' . ($errors->has('parent_id') ? ' is-invalid' : '')]) !!}
     </div>
 @endif
 
-@if(\App\Group::exists())
+@if(\App\Models\Group::exists())
     <div class="mb-6">
         {!! Form::label('groups[]', 'Groups', ['class' => 'label']) !!}
-        {!! Form::select('groups[]', \App\Group::orderBy('name')->pluck('name', 'id'), isset($category) ? $category->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('groups') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('groups[]', \App\Models\Group::orderBy('name')->pluck('name', 'id'), isset($category) ? $category->groups->pluck('id') : [], ['multiple' => true, 'class' => 'field' . ($errors->has('groups') ? ' is-invalid' : '')]) !!}
     </div>
 @endif
 

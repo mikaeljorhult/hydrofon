@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 

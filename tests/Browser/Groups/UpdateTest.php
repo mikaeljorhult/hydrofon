@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Groups;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,8 +19,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testGroupsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $group) {
             $browser->loginAs($admin)
@@ -39,8 +39,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testGroupsMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $group = factory(Group::class)->create();
+        $admin = User::factory()->admin()->create();
+        $group = Group::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $group) {
             $browser->loginAs($admin)

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Profile;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,7 +17,7 @@ class IndexTest extends TestCase
      */
     public function testProfileIsAvailable()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
              ->get('profile')

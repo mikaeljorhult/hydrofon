@@ -2,8 +2,8 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Category;
-use App\Resource;
+use App\Models\Category;
+use App\Models\Resource;
 use Illuminate\View\View;
 
 class ResourceListComposer

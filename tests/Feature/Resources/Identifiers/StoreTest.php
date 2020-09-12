@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Resources\Identifiers;
 
-use App\Identifier;
-use App\Resource;
-use App\User;
+use App\Models\Identifier;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,8 +19,8 @@ class StoreTest extends TestCase
      */
     public function testIdentifiersCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->post('/resources/'.$resource->id.'/identifiers', [
             'value' => 'test-value',
@@ -30,7 +30,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('identifiers', [
             'value'             => 'test-value',
             'identifiable_id'   => $resource->id,
-            'identifiable_type' => \App\Resource::class,
+            'identifiable_type' => \App\Models\Resource::class,
         ]);
     }
 
@@ -41,8 +41,8 @@ class StoreTest extends TestCase
      */
     public function testIdentifierMustHaveAValue()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->post('/resources/'.$resource->id.'/identifiers', [
             'value' => '',
@@ -60,8 +60,8 @@ class StoreTest extends TestCase
      */
     public function testValueMustBeUnique()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
         $admin->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->post('/resources/'.$resource->id.'/identifiers', [
@@ -80,8 +80,8 @@ class StoreTest extends TestCase
      */
     public function testValueCanNotBeAUserEmailAddress()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->post('/resources/'.$resource->id.'/identifiers', [
             'value' => $resource->email,
@@ -99,9 +99,9 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreIdentifiers()
     {
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
-        $response = $this->actingAs(factory(User::class)->create())->post('/resources/'.$resource->id.'/identifiers', [
+        $response = $this->actingAs(User::factory()->create())->post('/resources/'.$resource->id.'/identifiers', [
             'value' => 'test-value',
         ]);
 

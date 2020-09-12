@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Buckets;
 
-use App\Bucket;
-use App\User;
+use App\Models\Bucket;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,8 +18,8 @@ class UpdateTest extends TestCase
      */
     public function testBucketsCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $bucket = factory(Bucket::class)->create();
+        $admin = User::factory()->admin()->create();
+        $bucket = Bucket::factory()->create();
 
         $response = $this->actingAs($admin)->put('buckets/'.$bucket->id, [
             'name' => 'New Bucket Name',
@@ -38,8 +38,8 @@ class UpdateTest extends TestCase
      */
     public function testBucketsMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $bucket = factory(Bucket::class)->create();
+        $admin = User::factory()->admin()->create();
+        $bucket = Bucket::factory()->create();
 
         $response = $this->actingAs($admin)->put('buckets/'.$bucket->id, [
             'name' => '',
@@ -59,8 +59,8 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateBuckets()
     {
-        $user = factory(User::class)->create();
-        $bucket = factory(Bucket::class)->create();
+        $user = User::factory()->create();
+        $bucket = Bucket::factory()->create();
 
         $response = $this->actingAs($user)->put('buckets/'.$bucket->id, [
             'name' => 'New Bucket Name',

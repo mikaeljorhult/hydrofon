@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Model;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,7 +19,7 @@ class UserTest extends TestCase
      */
     public function testUserCanHaveBookings()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $user->bookings);
     }
@@ -31,7 +31,7 @@ class UserTest extends TestCase
      */
     public function testUserCanBelongToAGroup()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->assertInstanceOf(Collection::class, $user->groups);
     }
@@ -43,7 +43,7 @@ class UserTest extends TestCase
      */
     public function testUserCanBeAdmin()
     {
-        $user = factory(User::class)->create(['is_admin' => false]);
+        $user = User::factory()->create(['is_admin' => false]);
 
         $this->assertFalse($user->isAdmin());
         $user->is_admin = true;
@@ -57,8 +57,8 @@ class UserTest extends TestCase
      */
     public function testOwnMethodChecksIfModelBelongsToUser()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create();
 
         $this->assertFalse($user->owns($booking));
         $booking->user_id = $user->id;
@@ -72,7 +72,7 @@ class UserTest extends TestCase
      */
     public function testDataRequestExportIsRendered()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $rendered = $user->exportToJson();
 
@@ -87,8 +87,8 @@ class UserTest extends TestCase
      */
     public function testBookingsAreIncludedInExport()
     {
-        $user = factory(User::class)->create();
-        $user->bookings()->save($booking = factory(Booking::class)->create());
+        $user = User::factory()->create();
+        $user->bookings()->save($booking = Booking::factory()->create());
 
         $rendered = $user->exportToJson();
 
@@ -103,7 +103,7 @@ class UserTest extends TestCase
      */
     public function testIdentifiersAreIncludedInExport()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->identifiers()->create($identifier = [
             'identifiable_type' => User::class,
             'identifiable_id'   => $user->id,

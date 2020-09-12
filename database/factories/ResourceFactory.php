@@ -1,15 +1,34 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Resource::class, function (Faker $faker) {
-    return [
-        'name'        => $faker->city,
-        'description' => $faker->sentence,
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class ResourceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = \App\Models\Resource::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+        'name'        => $this->faker->city,
+        'description' => $this->faker->sentence,
         'is_facility' => false,
     ];
-});
+    }
 
-$factory->state(App\Resource::class, 'facility', [
-    'is_facility' => true,
-]);
+    public function facility()
+    {
+        return $this->state(['is_facility' => true]);
+    }
+}

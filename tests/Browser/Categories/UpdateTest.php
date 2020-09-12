@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Categories;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,8 +19,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testCategoriesCanBeUpdated()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)
@@ -39,8 +39,8 @@ class UpdateTest extends DuskTestCase
      */
     public function testCategoriesMustHaveAName()
     {
-        $user = factory(User::class)->states('admin')->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->admin()->create();
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser->loginAs($user)

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Bookings;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -11,20 +11,22 @@ class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
+    private $storedBooking;
+
     /**
      * Posts request to persist a booking.
      *
      * @param array               $overrides
-     * @param \App\User|null $user
+     * @param \App\Models\User|null $user
      *
      * @return \Illuminate\Testing\TestResponse
      */
     public function storeBooking($overrides = [], $user = null)
     {
-        $booking = factory(Booking::class)->make($overrides);
+        $this->storedBooking = Booking::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->create())
-                    ->post('bookings', $booking->toArray());
+        return $this->actingAs($user ?: User::factory()->create())
+                    ->post('bookings', $this->storedBooking->toArray());
     }
 
     /**
@@ -38,8 +40,8 @@ class StoreTest extends TestCase
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
-            'user_id'       => 2,
-            'created_by_id' => 2,
+            'user_id'       => $this->storedBooking->user_id + 1,
+            'created_by_id' => $this->storedBooking->created_by_id + 1,
         ]);
     }
 
@@ -50,8 +52,8 @@ class StoreTest extends TestCase
      */
     public function testAdministratorCanCreateBookingForOtherUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->storeBooking(['user_id' => $user->id], $admin)
              ->assertRedirect('/');
@@ -69,8 +71,8 @@ class StoreTest extends TestCase
      */
     public function testUserCannotCreateBookingsForOtherUser()
     {
-        $firstUser = factory(User::class)->create();
-        $secondUser = factory(User::class)->create();
+        $firstUser = User::factory()->create();
+        $secondUser = User::factory()->create();
 
         $this->storeBooking(['user_id' => $secondUser->id], $firstUser)
              ->assertRedirect('/');
@@ -145,8 +147,8 @@ class StoreTest extends TestCase
      */
     public function testStartTimeMustBeValidTimestamp()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->make();
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id' => $booking->resource_id,
@@ -181,8 +183,8 @@ class StoreTest extends TestCase
      */
     public function testEndTimeMustBeValidTimestamp()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->make();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->make();
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id' => $booking->resource_id,
@@ -220,7 +222,7 @@ class StoreTest extends TestCase
      */
     public function testBookingsCanNotOverlapPreviousBookings()
     {
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->storeBooking([
             'resource_id' => $booking->resource_id,

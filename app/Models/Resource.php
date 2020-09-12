@@ -1,12 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Scopes\GroupPolicyScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,7 +49,7 @@ class Resource extends Model
      */
     public function bookings()
     {
-        return $this->hasMany(\App\Booking::class);
+        return $this->hasMany(\App\Models\Booking::class);
     }
 
     /**
@@ -56,7 +59,7 @@ class Resource extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(\App\Category::class)
+        return $this->belongsToMany(\App\Models\Category::class)
                     ->orderBy('name');
     }
 
@@ -67,7 +70,7 @@ class Resource extends Model
      */
     public function buckets()
     {
-        return $this->belongsToMany(\App\Bucket::class);
+        return $this->belongsToMany(\App\Models\Bucket::class);
     }
 
     /**
@@ -77,7 +80,7 @@ class Resource extends Model
      */
     public function identifiers()
     {
-        return $this->morphMany(\App\Identifier::class, 'identifiable');
+        return $this->morphMany(\App\Models\Identifier::class, 'identifiable');
     }
 
     /**
@@ -87,6 +90,6 @@ class Resource extends Model
      */
     public function groups()
     {
-        return $this->belongsToMany(\App\Group::class);
+        return $this->belongsToMany(\App\Models\Group::class);
     }
 }

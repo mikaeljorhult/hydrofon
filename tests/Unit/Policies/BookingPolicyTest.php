@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Policies;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,10 +18,10 @@ class BookingPolicyTest extends TestCase
      */
     public function testAdminsCanViewABooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->assertTrue($admin->can('view', $booking));
         $this->assertFalse($user->can('view', $booking));
@@ -34,8 +34,8 @@ class BookingPolicyTest extends TestCase
      */
     public function testOwnerCanViewBooking()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create([
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create([
             'user_id' => $user->id,
         ]);
 
@@ -49,8 +49,8 @@ class BookingPolicyTest extends TestCase
      */
     public function testAllUsersCanCreateBookings()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->assertTrue($admin->can('create', Booking::class));
         $this->assertTrue($user->can('create', Booking::class));
@@ -63,10 +63,10 @@ class BookingPolicyTest extends TestCase
      */
     public function testAdminsCanUpdateAnyBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->assertTrue($admin->can('update', $booking));
         $this->assertFalse($user->can('update', $booking));
@@ -79,11 +79,11 @@ class BookingPolicyTest extends TestCase
      */
     public function testOwnerCanUpdateBooking()
     {
-        $user = factory(User::class)->create();
-        $pastBooking = factory(Booking::class)->states('past')->create(['user_id' => $user->id]);
-        $futureBooking = factory(Booking::class)->states('future')->create(['user_id' => $user->id]);
-        $currentBooking = factory(Booking::class)->states('current')->create(['user_id' => $user->id]);
-        $checkedOut = factory(Booking::class)->states('future')->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
+        $futureBooking = Booking::factory()->future()->create(['user_id' => $user->id]);
+        $currentBooking = Booking::factory()->current()->create(['user_id' => $user->id]);
+        $checkedOut = Booking::factory()->future()->create(['user_id' => $user->id]);
 
         $checkedOut->checkout()->create();
 
@@ -100,10 +100,10 @@ class BookingPolicyTest extends TestCase
      */
     public function testAdminsCanDeleteAnyBooking()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
-        $booking = factory(Booking::class)->create();
+        $booking = Booking::factory()->create();
 
         $this->assertTrue($admin->can('delete', $booking));
         $this->assertFalse($user->can('delete', $booking));
@@ -116,11 +116,11 @@ class BookingPolicyTest extends TestCase
      */
     public function testOwnerCanDeleteBooking()
     {
-        $user = factory(User::class)->create();
-        $pastBooking = factory(Booking::class)->states('past')->create(['user_id' => $user->id]);
-        $futureBooking = factory(Booking::class)->states('future')->create(['user_id' => $user->id]);
-        $currentBooking = factory(Booking::class)->states('current')->create(['user_id' => $user->id]);
-        $checkedOut = factory(Booking::class)->states('future')->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
+        $futureBooking = Booking::factory()->future()->create(['user_id' => $user->id]);
+        $currentBooking = Booking::factory()->current()->create(['user_id' => $user->id]);
+        $checkedOut = Booking::factory()->future()->create(['user_id' => $user->id]);
 
         $checkedOut->checkout()->create();
 

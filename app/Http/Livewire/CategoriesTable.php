@@ -9,7 +9,7 @@ class CategoriesTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\Category::class;
+    protected $model = \App\Models\Category::class;
     protected $relationships = ['parent', 'groups'];
     protected $editFields = ['id', 'name', 'parent_id'];
 

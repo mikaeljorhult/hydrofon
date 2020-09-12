@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Users;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,9 +18,9 @@ class IndexTest extends TestCase
      */
     public function testUsersAreListed()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('users')
              ->assertSuccessful()
              ->assertSee($user->name);
@@ -33,10 +33,10 @@ class IndexTest extends TestCase
      */
     public function testUsersAreFilteredByName()
     {
-        $visibleUser = factory(User::class)->create();
-        $notVisibleUser = factory(User::class)->create();
+        $visibleUser = User::factory()->create();
+        $notVisibleUser = User::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('users?filter[name]='.$visibleUser->name)
              ->assertSuccessful()
              ->assertSee(route('users.edit', $visibleUser))
@@ -50,10 +50,10 @@ class IndexTest extends TestCase
      */
     public function testUsersAreFilteredByEmail()
     {
-        $visibleUser = factory(User::class)->create();
-        $notVisibleUser = factory(User::class)->create();
+        $visibleUser = User::factory()->create();
+        $notVisibleUser = User::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('users?filter[email]='.$visibleUser->email)
              ->assertSuccessful()
              ->assertSee(route('users.edit', $visibleUser))
@@ -67,12 +67,12 @@ class IndexTest extends TestCase
      */
     public function testUsersAreFilteredByGroup()
     {
-        $visibleUser = factory(User::class)->states('admin')->create();
-        $notVisibleUser = factory(User::class)->create();
+        $visibleUser = User::factory()->admin()->create();
+        $notVisibleUser = User::factory()->create();
 
-        $visibleUser->groups()->attach(factory(Group::class)->create());
+        $visibleUser->groups()->attach(Group::factory()->create());
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('users?filter[is_admin]=1')
              ->assertSuccessful()
              ->assertSee(route('users.edit', $visibleUser))

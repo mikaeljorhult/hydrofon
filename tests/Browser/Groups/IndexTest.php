@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Groups;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,7 +19,7 @@ class IndexTest extends DuskTestCase
      */
     public function testUserCanNavigateToIndexPage()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)
@@ -36,8 +36,8 @@ class IndexTest extends DuskTestCase
      */
     public function testResourceIsListedOnIndexPage()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $group) {
             $browser->loginAs($user)

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Resources;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,8 +18,8 @@ class UpdateTest extends TestCase
      */
     public function testResourcesCanBeUpdated()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
             'name' => 'New Resource Name',
@@ -38,8 +38,8 @@ class UpdateTest extends TestCase
      */
     public function testResourcesMustHaveAName()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $resource = factory(Resource::class)->create();
+        $admin = User::factory()->admin()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
             'name' => '',
@@ -59,8 +59,8 @@ class UpdateTest extends TestCase
      */
     public function testNonAdminUsersCanNotUpdateResources()
     {
-        $user = factory(User::class)->create();
-        $resource = factory(Resource::class)->create();
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create();
 
         $response = $this->actingAs($user)->put('resources/'.$resource->id, [
             'name' => 'New Resource Name',

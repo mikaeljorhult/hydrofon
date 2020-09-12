@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Booking;
+use App\Models\Booking;
 use App\Http\Requests\Traits\PreserveReferer;
 use App\Rules\Available;
 use Carbon\Carbon;

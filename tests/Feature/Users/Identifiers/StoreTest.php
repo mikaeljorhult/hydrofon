@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Users\Identifiers;
 
-use App\Identifier;
-use App\User;
+use App\Models\Identifier;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,8 +18,8 @@ class StoreTest extends TestCase
      */
     public function testIdentifiersCanBeStored()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => 'test-value',
@@ -29,7 +29,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('identifiers', [
             'value'             => 'test-value',
             'identifiable_id'   => $user->id,
-            'identifiable_type' => \App\User::class,
+            'identifiable_type' => \App\Models\User::class,
         ]);
     }
 
@@ -40,8 +40,8 @@ class StoreTest extends TestCase
      */
     public function testIdentifierMustHaveAValue()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => '',
@@ -59,8 +59,8 @@ class StoreTest extends TestCase
      */
     public function testValueMustBeUnique()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
         $admin->identifiers()->create(['value' => 'test-value']);
 
         $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
@@ -79,8 +79,8 @@ class StoreTest extends TestCase
      */
     public function testValueCanNotBeAUserEmailAddress()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->post('/users/'.$user->id.'/identifiers', [
             'value' => $user->email,
@@ -98,7 +98,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreIdentifiers()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/users/'.$user->id.'/identifiers', [
             'value' => 'test-value',

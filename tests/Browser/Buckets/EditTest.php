@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Buckets;
 
-use App\Bucket;
-use App\User;
+use App\Models\Bucket;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,8 +19,8 @@ class EditTest extends DuskTestCase
      */
     public function testUserCanNavigateToEditPage()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $bucket = factory(Bucket::class)->create();
+        $admin = User::factory()->admin()->create();
+        $bucket = Bucket::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $bucket) {
             $browser->loginAs($admin)

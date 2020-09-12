@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use App\Subscription;
-use App\User;
+use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,9 +18,9 @@ class ShowTest extends TestCase
      */
     public function testUserSubscriptionIsShown()
     {
-        $user = factory(User::class)->create();
-        $subscription = factory(Subscription::class)->create([
-            'subscribable_type' => \App\User::class,
+        $user = User::factory()->create();
+        $subscription = Subscription::factory()->create([
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => $user->id,
         ]);
 

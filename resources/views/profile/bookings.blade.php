@@ -12,7 +12,7 @@
                 <section class="lg:flex items-end py-2 px-3 bg-gray-100">
                     <div class="mb-2 lg:mb-0 lg:mr-4">
                         {!! Form::label('filter[resource_id]', 'Resource', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                        {!! Form::select('filter[resource_id]', \App\Resource::orderBy('name')->pluck('name', 'id'), request('filter.resource_id'), ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
+                        {!! Form::select('filter[resource_id]', \App\Models\Resource::orderBy('name')->pluck('name', 'id'), request('filter.resource_id'), ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                     </div>
 
                     <div class="mb-2 lg:mb-0 lg:mx-4">

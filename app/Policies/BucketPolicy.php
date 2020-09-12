@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Bucket;
-use App\User;
+use App\Models\Bucket;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BucketPolicy
@@ -13,8 +13,8 @@ class BucketPolicy
     /**
      * Determine whether the user can view the bucket.
      *
-     * @param \App\User   $user
-     * @param \App\Bucket $bucket
+     * @param \App\Models\User   $user
+     * @param \App\Models\Bucket $bucket
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class BucketPolicy
     /**
      * Determine whether the user can create buckets.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class BucketPolicy
     /**
      * Determine whether the user can update the bucket.
      *
-     * @param \App\User   $user
-     * @param \App\Bucket $bucket
+     * @param \App\Models\User   $user
+     * @param \App\Models\Bucket $bucket
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class BucketPolicy
     /**
      * Determine whether the user can delete the bucket.
      *
-     * @param \App\User   $user
-     * @param \App\Bucket $bucket
+     * @param \App\Models\User   $user
+     * @param \App\Models\Bucket $bucket
      *
      * @return mixed
      */

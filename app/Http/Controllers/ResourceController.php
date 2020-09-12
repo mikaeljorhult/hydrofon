@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResourceDestroyRequest;
 use App\Http\Requests\ResourceStoreRequest;
 use App\Http\Requests\ResourceUpdateRequest;
-use App\Resource;
+use App\Models\Resource;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourceController extends Controller
@@ -78,7 +78,7 @@ class ResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Resource $resource
+     * @param \App\Models\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +90,7 @@ class ResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Resource $resource
+     * @param \App\Models\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -107,7 +107,7 @@ class ResourceController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\ResourceUpdateRequest $request
-     * @param \App\Resource                            $resource
+     * @param \App\Models\Resource                            $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -130,7 +130,7 @@ class ResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Resource                             $resource
+     * @param \App\Models\Resource                             $resource
      * @param \App\Http\Requests\ResourceDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

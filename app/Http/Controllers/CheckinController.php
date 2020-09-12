@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Booking;
-use App\Checkin;
+use App\Models\Booking;
+use App\Models\Checkin;
 use App\Http\Requests\CheckinDestroyRequest;
 use App\Http\Requests\CheckinStoreRequest;
 
@@ -46,7 +46,7 @@ class CheckinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Checkin                             $checkin
+     * @param \App\Models\Checkin                             $checkin
      * @param \App\Http\Requests\CheckinDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

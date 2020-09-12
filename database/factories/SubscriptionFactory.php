@@ -1,18 +1,36 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Subscription::class, function (Faker $faker) {
-    $subscribables = [
-        App\Resource::class,
-        App\User::class,
-    ];
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-    $subscribableType = $faker->randomElement($subscribables);
-    $subscribable = factory($subscribableType)->create();
+class SubscriptionFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = \App\Models\Subscription::class;
 
-    return [
-        'subscribable_id'   => $subscribable->id,
-        'subscribable_type' => $subscribableType,
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $subscribables = [
+            \App\Models\Resource::class,
+            \App\Models\User::class,
+        ];
+
+        $subscribableType = $this->faker->randomElement($subscribables);
+        $subscribable = app()->make($subscribableType)->factory()->create();
+
+        return [
+            'subscribable_id'   => $subscribable->id,
+            'subscribable_type' => $subscribableType,
+        ];
+    }
+}

@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Desk;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -18,7 +18,7 @@ class DeskTest extends DuskTestCase
      */
     public function testAdminCanVisitDesk()
     {
-        $admin = factory(User::class)->states('admin')->create();
+        $admin = User::factory()->admin()->create();
 
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->loginAs($admin)
@@ -35,8 +35,8 @@ class DeskTest extends DuskTestCase
      */
     public function testAdminCanSearchForUser()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($admin, $user) {
             $browser->loginAs($admin)
@@ -54,8 +54,8 @@ class DeskTest extends DuskTestCase
      */
     public function testUserCanBeFoundByIdentifier()
     {
-        $admin = factory(User::class)->states('admin')->create();
-        $user = factory(User::class)->create();
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
         $identifier = $user->identifiers()->create(['value' => 'test-identifier']);
 
         $this->browse(function (Browser $browser) use ($admin, $user, $identifier) {

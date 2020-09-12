@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Bookings;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,7 +19,7 @@ class IndexTest extends DuskTestCase
      */
     public function testUserCanNavigateToIndexPage()
     {
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
@@ -36,8 +36,8 @@ class IndexTest extends DuskTestCase
      */
     public function testBookingIsListedOnIndexPage()
     {
-        $user = factory(User::class)->create();
-        $booking = factory(Booking::class)->create();
+        $user = User::factory()->create();
+        $booking = Booking::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $booking) {
             $browser->loginAs($user)

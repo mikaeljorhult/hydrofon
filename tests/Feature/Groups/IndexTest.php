@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Groups;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,9 +18,9 @@ class IndexTest extends TestCase
      */
     public function testGroupsAreListed()
     {
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('groups')
              ->assertSuccessful()
              ->assertSee($group->name);
@@ -33,10 +33,10 @@ class IndexTest extends TestCase
      */
     public function testGroupsCanBeFilteredByName()
     {
-        $visibleGroup = factory(Group::class)->create();
-        $notVisibleGroup = factory(Group::class)->create();
+        $visibleGroup = Group::factory()->create();
+        $notVisibleGroup = Group::factory()->create();
 
-        $this->actingAs(factory(User::class)->states('admin')->create())
+        $this->actingAs(User::factory()->admin()->create())
              ->get('groups?'.http_build_query([
                  'filter[name]' => $visibleGroup->name,
              ]))

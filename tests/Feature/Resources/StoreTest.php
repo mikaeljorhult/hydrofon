@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Resources;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,15 +15,15 @@ class StoreTest extends TestCase
      * Posts request to persist a group.
      *
      * @param array               $overrides
-     * @param \App\User|null $user
+     * @param \App\Models\User|null $user
      *
      * @return \Illuminate\Testing\TestResponse
      */
     public function storeResource($overrides = [], $user = null)
     {
-        $resource = factory(Resource::class)->make($overrides);
+        $resource = Resource::factory()->make($overrides);
 
-        return $this->actingAs($user ?: factory(User::class)->states('admin')->create())
+        return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->post('resources', $resource->toArray());
     }
 
@@ -63,7 +63,7 @@ class StoreTest extends TestCase
      */
     public function testNonAdminUsersCanNotStoreResources()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->storeResource([], $user)
              ->assertStatus(403);
