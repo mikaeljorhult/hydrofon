@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Group;
 use App\Http\Requests\Traits\PreserveReferer;
+use App\Models\Group;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GroupStoreRequest extends FormRequest
