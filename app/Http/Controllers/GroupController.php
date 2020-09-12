@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use App\Http\Requests\GroupDestroyRequest;
 use App\Http\Requests\GroupStoreRequest;
 use App\Http\Requests\GroupUpdateRequest;
+use App\Models\Group;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller

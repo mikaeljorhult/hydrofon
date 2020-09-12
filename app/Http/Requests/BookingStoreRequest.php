@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Booking;
 use App\Http\Requests\Traits\PreserveReferer;
+use App\Models\Booking;
 use App\Rules\Available;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;

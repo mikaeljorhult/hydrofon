@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Bucket;
 use App\Http\Requests\Traits\PreserveReferer;
+use App\Models\Bucket;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BucketStoreRequest extends FormRequest

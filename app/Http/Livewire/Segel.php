@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Booking;
 use App\Helpers\Grid;
+use App\Models\Booking;
 use App\Models\Resource;
 use App\Rules\Available;
 use Carbon\Carbon;
