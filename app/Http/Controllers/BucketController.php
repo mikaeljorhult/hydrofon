@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bucket;
 use App\Http\Requests\BucketDestroyRequest;
 use App\Http\Requests\BucketStoreRequest;
 use App\Http\Requests\BucketUpdateRequest;
+use App\Models\Bucket;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BucketController extends Controller

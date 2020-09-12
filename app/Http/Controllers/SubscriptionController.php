@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscriptionDestroyRequest;
 use App\Http\Requests\SubscriptionStoreRequest;
-use App\Scopes\GroupPolicyScope;
 use App\Models\Subscription;
+use App\Scopes\GroupPolicyScope;
 use Illuminate\Support\Str;
 
 class SubscriptionController extends Controller

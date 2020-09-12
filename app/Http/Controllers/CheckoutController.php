@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
-use App\Models\Checkout;
 use App\Http\Requests\CheckoutDestroyRequest;
 use App\Http\Requests\CheckoutStoreRequest;
+use App\Models\Booking;
+use App\Models\Checkout;
 
 class CheckoutController extends Controller
 {

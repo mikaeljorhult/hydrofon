@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Http\Requests\BookingDestroyRequest;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
+use App\Models\Booking;
 use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 

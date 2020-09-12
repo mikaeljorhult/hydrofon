@@ -21,10 +21,10 @@ class ResourceFactory extends Factory
     public function definition()
     {
         return [
-        'name'        => $this->faker->city,
-        'description' => $this->faker->sentence,
-        'is_facility' => false,
-    ];
+            'name'        => $this->faker->city,
+            'description' => $this->faker->sentence,
+            'is_facility' => false,
+        ];
     }
 
     public function facility()
