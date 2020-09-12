@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Booking;
+use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Rule;
 

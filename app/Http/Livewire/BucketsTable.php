@@ -8,7 +8,7 @@ class BucketsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\Bucket::class;
+    protected $model = \App\Models\Bucket::class;
 
     public function onSave()
     {

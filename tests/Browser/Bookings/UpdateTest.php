@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\Bookings;
 
-use App\Booking;
-use App\Resource;
+use App\Models\Booking;
+use App\Models\Resource;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;

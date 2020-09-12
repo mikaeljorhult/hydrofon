@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Group;
+use App\Models\Group;
 use Illuminate\Database\Seeder;
 
 class GroupsTableSeeder extends Seeder

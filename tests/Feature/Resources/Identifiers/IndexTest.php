@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Resources\Identifiers;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

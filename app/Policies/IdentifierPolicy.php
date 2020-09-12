@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Identifier;
-use App\User;
+use App\Models\Identifier;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class IdentifierPolicy
@@ -13,8 +13,8 @@ class IdentifierPolicy
     /**
      * Determine whether the user can view the identifier.
      *
-     * @param \App\User       $user
-     * @param \App\Identifier $identifier
+     * @param \App\Models\User       $user
+     * @param \App\Models\Identifier $identifier
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class IdentifierPolicy
     /**
      * Determine whether the user can create identifiers.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class IdentifierPolicy
     /**
      * Determine whether the user can update the identifier.
      *
-     * @param \App\User       $user
-     * @param \App\Identifier $identifier
+     * @param \App\Models\User       $user
+     * @param \App\Models\Identifier $identifier
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class IdentifierPolicy
     /**
      * Determine whether the user can delete the identifier.
      *
-     * @param \App\User       $user
-     * @param \App\Identifier $identifier
+     * @param \App\Models\User       $user
+     * @param \App\Models\Identifier $identifier
      *
      * @return mixed
      */

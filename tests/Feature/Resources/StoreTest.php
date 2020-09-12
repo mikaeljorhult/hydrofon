@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Resources;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,7 +15,7 @@ class StoreTest extends TestCase
      * Posts request to persist a group.
      *
      * @param array               $overrides
-     * @param \App\User|null $user
+     * @param \App\Models\User|null $user
      *
      * @return \Illuminate\Testing\TestResponse
      */

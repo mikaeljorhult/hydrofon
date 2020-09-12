@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Resources;
 
-use App\Category;
-use App\Group;
-use App\Resource;
-use App\User;
+use App\Models\Category;
+use App\Models\Group;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

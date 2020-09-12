@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Policies;
 
-use App\Booking;
-use App\Checkout;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkout;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

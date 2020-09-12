@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Bucket;
+use App\Models\Bucket;
 use App\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
 

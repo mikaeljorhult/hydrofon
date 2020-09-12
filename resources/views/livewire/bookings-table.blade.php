@@ -13,7 +13,7 @@
                                 class="field"
                                 wire:model="editValues.resource_id"
                             >
-                                @foreach(\App\Resource::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                @foreach(\App\Models\Resource::orderBy('name')->get(['id', 'name']) as $optionItem)
                                     <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                 @endforeach
                             </select>
@@ -28,7 +28,7 @@
                                 class="field"
                                 wire:model="editValues.user_id"
                             >
-                                @foreach(\App\User::orderBy('name')->get(['id', 'name']) as $optionItem)
+                                @foreach(\App\Models\User::orderBy('name')->get(['id', 'name']) as $optionItem)
                                     <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                 @endforeach
                             </select>

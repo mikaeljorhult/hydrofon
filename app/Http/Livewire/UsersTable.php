@@ -9,7 +9,7 @@ class UsersTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\User::class;
+    protected $model = \App\Models\User::class;
     protected $relationships = ['groups'];
     protected $editFields = ['id', 'email', 'name', 'is_admin'];
 

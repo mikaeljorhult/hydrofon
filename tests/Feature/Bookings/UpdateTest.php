@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Bookings;
 
-use App\Booking;
-use App\Checkout;
-use App\Resource;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkout;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

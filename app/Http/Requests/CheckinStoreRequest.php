@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Checkin;
+use App\Models\Checkin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CheckoutFactory extends Factory
@@ -13,7 +13,7 @@ class CheckoutFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Checkout::class;
+    protected $model = \App\Models\Checkout::class;
 
     /**
      * Define the model's default state.

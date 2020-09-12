@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Category;
+use App\Models\Category;
 use App\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

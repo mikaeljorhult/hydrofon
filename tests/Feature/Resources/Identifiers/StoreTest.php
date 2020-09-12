@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Resources\Identifiers;
 
-use App\Identifier;
-use App\Resource;
-use App\User;
+use App\Models\Identifier;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -30,7 +30,7 @@ class StoreTest extends TestCase
         $this->assertDatabaseHas('identifiers', [
             'value'             => 'test-value',
             'identifiable_id'   => $resource->id,
-            'identifiable_type' => \App\Resource::class,
+            'identifiable_type' => \App\Models\Resource::class,
         ]);
     }
 

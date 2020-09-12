@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;

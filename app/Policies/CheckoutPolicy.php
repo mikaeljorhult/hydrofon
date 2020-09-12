@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Checkout;
-use App\User;
+use App\Models\Checkout;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CheckoutPolicy
@@ -13,7 +13,7 @@ class CheckoutPolicy
     /**
      * Determine whether the user can create checkouts.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -25,8 +25,8 @@ class CheckoutPolicy
     /**
      * Determine whether the user can delete the checkout.
      *
-     * @param \App\User     $user
-     * @param \App\Checkout $checkout
+     * @param \App\Models\User     $user
+     * @param \App\Models\Checkout $checkout
      *
      * @return mixed
      */

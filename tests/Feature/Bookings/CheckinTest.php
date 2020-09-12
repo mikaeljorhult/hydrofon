@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Bookings;
 
-use App\Booking;
-use App\Checkin;
-use App\User;
+use App\Models\Booking;
+use App\Models\Checkin;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

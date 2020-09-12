@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Models\Category;
 use App\Http\Requests\CategoryDestroyRequest;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Category $category
+     * @param \App\Models\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -89,7 +89,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Category $category
+     * @param \App\Models\Category $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -106,7 +106,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\CategoryUpdateRequest $request
-     * @param \App\Category                            $category
+     * @param \App\Models\Category                            $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,7 +125,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Category                             $category
+     * @param \App\Models\Category                             $category
      * @param \App\Http\Requests\CategoryDestroyRequest $request
      *
      * @return void

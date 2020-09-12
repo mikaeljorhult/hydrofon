@@ -22,7 +22,7 @@
 
                 <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[categories.parent_id]', 'Parent', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                    {!! Form::select('filter[categories.parent_id]', \App\Category::orderBy('name')->pluck('name', 'id'), request('filter')['categories.parent_id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
+                    {!! Form::select('filter[categories.parent_id]', \App\Models\Category::orderBy('name')->pluck('name', 'id'), request('filter')['categories.parent_id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
                 <div class="flex-grow text-right">

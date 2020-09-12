@@ -21,7 +21,7 @@
                     Select user to impersonate
                 </label>
 
-                {!! Form::select('user_id', \App\User::pluck('name', 'id'), session()->get('impersonate', null), ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Impersonate user...']) !!}
+                {!! Form::select('user_id', \App\Models\User::pluck('name', 'id'), session()->get('impersonate', null), ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Impersonate user...']) !!}
                 {!! Form::submit('Impersonate', ['class' => 'btn btn-primary screen-reader']) !!}
             {!! Form::close() !!}
         </section>

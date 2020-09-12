@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookingFactory extends Factory
@@ -13,7 +13,7 @@ class BookingFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Booking::class;
+    protected $model = \App\Models\Booking::class;
 
     /**
      * Define the model's default state.

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Bucket;
+use App\Models\Bucket;
 use App\Http\Requests\BucketDestroyRequest;
 use App\Http\Requests\BucketStoreRequest;
 use App\Http\Requests\BucketUpdateRequest;
@@ -74,7 +74,7 @@ class BucketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Bucket $bucket
+     * @param \App\Models\Bucket $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -86,7 +86,7 @@ class BucketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Bucket $bucket
+     * @param \App\Models\Bucket $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -103,7 +103,7 @@ class BucketController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\BucketUpdateRequest $request
-     * @param \App\Bucket                            $bucket
+     * @param \App\Models\Bucket                            $bucket
      *
      * @return \Illuminate\Http\Response
      */
@@ -122,7 +122,7 @@ class BucketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Bucket                             $bucket
+     * @param \App\Models\Bucket                             $bucket
      * @param \App\Http\Requests\BucketDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

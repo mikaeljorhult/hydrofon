@@ -11,7 +11,7 @@ class ResourceFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Resource::class;
+    protected $model = \App\Models\Resource::class;
 
     /**
      * Define the model's default state.

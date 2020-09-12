@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use App\Resource;
-use App\Subscription;
-use App\User;
+use App\Models\Resource;
+use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class StoreTest extends TestCase
      * Posts request to persist a subscription.
      *
      * @param array               $overrides
-     * @param \App\User|null $user
+     * @param \App\Models\User|null $user
      *
      * @return \Illuminate\Testing\TestResponse
      */
@@ -45,7 +45,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => $user->id,
         ]);
     }
@@ -58,7 +58,7 @@ class StoreTest extends TestCase
     public function testOnlyOneSubscriptionIsCreatedForEachObject()
     {
         $subscription = Subscription::factory()->create($attributes = [
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => User::factory()->create()->id,
         ]);
 
@@ -105,7 +105,7 @@ class StoreTest extends TestCase
              ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \App\Resource::class,
+            'subscribable_type' => \App\Models\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -80,7 +80,7 @@ class User extends Authenticatable
      */
     public function identifiers()
     {
-        return $this->morphMany(\App\Identifier::class, 'identifiable');
+        return $this->morphMany(\App\Models\Identifier::class, 'identifiable');
     }
 
     /**
@@ -90,7 +90,7 @@ class User extends Authenticatable
      */
     public function bookings()
     {
-        return $this->hasMany(\App\Booking::class);
+        return $this->hasMany(\App\Models\Booking::class);
     }
 
     /**
@@ -100,7 +100,7 @@ class User extends Authenticatable
      */
     public function groups()
     {
-        return $this->belongsToMany(\App\Group::class);
+        return $this->belongsToMany(\App\Models\Group::class);
     }
 
     /**
@@ -110,7 +110,7 @@ class User extends Authenticatable
      */
     public function subscription()
     {
-        return $this->morphOne(\App\Subscription::class, 'subscribable');
+        return $this->morphOne(\App\Models\Subscription::class, 'subscribable');
     }
 
     /**

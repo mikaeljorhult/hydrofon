@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Booking;
+use App\Models\Booking;
 use App\Http\Requests\BookingDestroyRequest;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
@@ -88,7 +88,7 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Booking $booking
+     * @param \App\Models\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -100,7 +100,7 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Booking $booking
+     * @param \App\Models\Booking $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -117,7 +117,7 @@ class BookingController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\BookingUpdateRequest $request
-     * @param \App\Booking                            $booking
+     * @param \App\Models\Booking                            $booking
      *
      * @return \Illuminate\Http\Response
      */
@@ -144,7 +144,7 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Booking                             $booking
+     * @param \App\Models\Booking                             $booking
      * @param \App\Http\Requests\BookingDestroyRequest $request
      *
      * @return \Illuminate\Http\Response
