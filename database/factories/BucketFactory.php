@@ -11,7 +11,7 @@ class BucketFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Bucket::class;
+    protected $model = \App\Models\Bucket::class;
 
     /**
      * Define the model's default state.

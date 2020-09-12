@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Checkin;
-use App\User;
+use App\Models\Checkin;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CheckinPolicy
@@ -13,7 +13,7 @@ class CheckinPolicy
     /**
      * Determine whether the user can create checkins.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -25,8 +25,8 @@ class CheckinPolicy
     /**
      * Determine whether the user can delete the checkin.
      *
-     * @param \App\User    $user
-     * @param \App\Checkin $checkin
+     * @param \App\Models\User    $user
+     * @param \App\Models\Checkin $checkin
      *
      * @return mixed
      */

@@ -8,7 +8,7 @@ class GroupsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\Group::class;
+    protected $model = \App\Models\Group::class;
 
     public function onSave()
     {

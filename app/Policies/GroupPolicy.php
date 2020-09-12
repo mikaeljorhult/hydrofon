@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GroupPolicy
@@ -13,8 +13,8 @@ class GroupPolicy
     /**
      * Determine whether the user can view the group.
      *
-     * @param \App\User  $user
-     * @param \App\Group $group
+     * @param \App\Models\User  $user
+     * @param \App\Models\Group $group
      *
      * @return mixed
      */
@@ -26,7 +26,7 @@ class GroupPolicy
     /**
      * Determine whether the user can create groups.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -38,8 +38,8 @@ class GroupPolicy
     /**
      * Determine whether the user can update the group.
      *
-     * @param \App\User  $user
-     * @param \App\Group $group
+     * @param \App\Models\User  $user
+     * @param \App\Models\Group $group
      *
      * @return mixed
      */
@@ -51,8 +51,8 @@ class GroupPolicy
     /**
      * Determine whether the user can delete the group.
      *
-     * @param \App\User  $user
-     * @param \App\Group $group
+     * @param \App\Models\User  $user
+     * @param \App\Models\Group $group
      *
      * @return mixed
      */

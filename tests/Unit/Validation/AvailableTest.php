@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Validation;
 
-use App\Booking;
-use App\Resource;
+use App\Models\Booking;
+use App\Models\Resource;
 use App\Rules\Available;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

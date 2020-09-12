@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Resource;
-use App\User;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResourcePolicy
@@ -13,8 +13,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can see the resource in listings.
      *
-     * @param \App\User     $user
-     * @param \App\Resource $resource
+     * @param \App\Models\User     $user
+     * @param \App\Models\Resource $resource
      *
      * @return mixed
      */
@@ -28,8 +28,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can view the resource.
      *
-     * @param \App\User     $user
-     * @param \App\Resource $resource
+     * @param \App\Models\User     $user
+     * @param \App\Models\Resource $resource
      *
      * @return mixed
      */
@@ -41,7 +41,7 @@ class ResourcePolicy
     /**
      * Determine whether the user can create resources.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -53,8 +53,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can update the resource.
      *
-     * @param \App\User     $user
-     * @param \App\Resource $resource
+     * @param \App\Models\User     $user
+     * @param \App\Models\Resource $resource
      *
      * @return mixed
      */
@@ -66,8 +66,8 @@ class ResourcePolicy
     /**
      * Determine whether the user can delete the resource.
      *
-     * @param \App\User     $user
-     * @param \App\Resource $resource
+     * @param \App\Models\User     $user
+     * @param \App\Models\Resource $resource
      *
      * @return mixed
      */

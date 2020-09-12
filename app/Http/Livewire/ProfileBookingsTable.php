@@ -10,7 +10,7 @@ class ProfileBookingsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\Booking::class;
+    protected $model = \App\Models\Booking::class;
     protected $relationships = ['resource'];
     protected $editFields = ['id', 'resource_id', 'start_time', 'end_time'];
 

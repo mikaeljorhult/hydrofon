@@ -11,7 +11,7 @@ class SubscriptionFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Subscription::class;
+    protected $model = \App\Models\Subscription::class;
 
     /**
      * Define the model's default state.
@@ -21,8 +21,8 @@ class SubscriptionFactory extends Factory
     public function definition()
     {
         $subscribables = [
-            \App\Resource::class,
-            \App\User::class,
+            \App\Models\Resource::class,
+            \App\Models\User::class,
         ];
 
         $subscribableType = $this->faker->randomElement($subscribables);

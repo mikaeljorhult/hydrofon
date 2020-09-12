@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IdentifierDestroyRequest;
 use App\Http\Requests\IdentifierStoreRequest;
 use App\Http\Requests\IdentifierUpdateRequest;
-use App\Identifier;
-use App\Resource;
+use App\Models\Identifier;
+use App\Models\Resource;
 use Illuminate\Support\Str;
 
 class ResourceIdentifierController extends Controller
@@ -24,7 +24,7 @@ class ResourceIdentifierController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Resource $resource
+     * @param \App\Models\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class ResourceIdentifierController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param \App\Resource $resource
+     * @param \App\Models\Resource $resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,7 +53,7 @@ class ResourceIdentifierController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\IdentifierStoreRequest $request
-     * @param \App\Resource                             $resource
+     * @param \App\Models\Resource                             $resource
      *
      * @return void
      */
@@ -74,8 +74,8 @@ class ResourceIdentifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Resource   $resource
-     * @param \App\Identifier $identifier
+     * @param \App\Models\Resource   $resource
+     * @param \App\Models\Identifier $identifier
      *
      * @return \Illuminate\Http\Response
      */
@@ -92,8 +92,8 @@ class ResourceIdentifierController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\IdentifierUpdateRequest $request
-     * @param \App\Resource                              $resource
-     * @param \App\Identifier                            $identifier
+     * @param \App\Models\Resource                              $resource
+     * @param \App\Models\Identifier                            $identifier
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,8 +114,8 @@ class ResourceIdentifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Resource                               $resource
-     * @param \App\Identifier                             $identifier
+     * @param \App\Models\Resource                               $resource
+     * @param \App\Models\Identifier                             $identifier
      * @param \App\Http\Requests\IdentifierDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

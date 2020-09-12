@@ -22,12 +22,12 @@
 
                 <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[categories.id]', 'Category', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                    {!! Form::select('filter[categories.id]', \App\Category::orderBy('name')->pluck('name', 'id'), request('filter')['categories.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
+                    {!! Form::select('filter[categories.id]', \App\Models\Category::orderBy('name')->pluck('name', 'id'), request('filter')['categories.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
                 <div class="mb-2 lg:mb-0 lg:mx-4">
                     {!! Form::label('filter[groups.id]', 'Group', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                    {!! Form::select('filter[groups.id]', \App\Group::orderBy('name')->pluck('name', 'id'), request('filter')['groups.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
+                    {!! Form::select('filter[groups.id]', \App\Models\Group::orderBy('name')->pluck('name', 'id'), request('filter')['groups.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
                 </div>
 
                 <div class="mt-4 mb-2 lg:my-0 lg:mx-4 flex items-center self-center">

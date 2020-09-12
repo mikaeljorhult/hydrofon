@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Model;
 
-use App\Booking;
-use App\Resource;
-use App\Subscription;
-use App\User;
+use App\Models\Booking;
+use App\Models\Resource;
+use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -34,7 +34,7 @@ class SubscriptionTest extends TestCase
     {
         $user = User::factory()->create();
         $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => $user->id,
         ]);
 
@@ -54,7 +54,7 @@ class SubscriptionTest extends TestCase
     {
         $resource = Resource::factory()->create();
         $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Resource::class,
+            'subscribable_type' => \App\Models\Resource::class,
             'subscribable_id'   => $resource->id,
         ]);
 
@@ -73,7 +73,7 @@ class SubscriptionTest extends TestCase
     public function testBookingsAreIncludedAsEvents()
     {
         $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => User::factory()->create()->id,
         ]);
         $subscription->subscribable->bookings()->save($booking = Booking::factory()->create());
@@ -93,7 +93,7 @@ class SubscriptionTest extends TestCase
     public function testBookingsAreBundled()
     {
         $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => User::factory()->create()->id,
         ]);
         $subscription->subscribable->bookings()->saveMany(Booking::factory()->times(2)->create([
@@ -121,7 +121,7 @@ class SubscriptionTest extends TestCase
         ];
 
         $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\User::class,
+            'subscribable_type' => \App\Models\User::class,
             'subscribable_id'   => User::factory()->create()->id,
         ]);
         $subscription->subscribable->bookings()->save(Booking::factory()->create($timestamps));
@@ -144,7 +144,7 @@ class SubscriptionTest extends TestCase
     public function testFacilityResourceSubscriptionHaveUserName()
     {
         $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Resource::class,
+            'subscribable_type' => \App\Models\Resource::class,
             'subscribable_id'   => Resource::factory()->facility()->create()->id,
         ]);
         $subscription->subscribable->bookings()->save($booking = Booking::factory()->create());

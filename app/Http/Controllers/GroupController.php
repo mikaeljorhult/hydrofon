@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use App\Http\Requests\GroupDestroyRequest;
 use App\Http\Requests\GroupStoreRequest;
 use App\Http\Requests\GroupUpdateRequest;
@@ -73,7 +73,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Group $group
+     * @param \App\Models\Group $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -85,7 +85,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Group $group
+     * @param \App\Models\Group $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -102,7 +102,7 @@ class GroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\GroupUpdateRequest $request
-     * @param \App\Group                            $group
+     * @param \App\Models\Group                            $group
      *
      * @return \Illuminate\Http\Response
      */
@@ -120,7 +120,7 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Group                             $group
+     * @param \App\Models\Group                             $group
      * @param \App\Http\Requests\GroupDestroyRequest $reqest
      *
      * @return \Illuminate\Http\Response

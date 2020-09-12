@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Checkout;
+use App\Models\Checkout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

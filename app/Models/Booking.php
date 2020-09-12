@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,7 +53,7 @@ class Booking extends Model
      */
     public function created_by()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     /**
@@ -63,7 +63,7 @@ class Booking extends Model
      */
     public function resource()
     {
-        return $this->belongsTo(\App\Resource::class);
+        return $this->belongsTo(\App\Models\Resource::class);
     }
 
     /**
@@ -73,7 +73,7 @@ class Booking extends Model
      */
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     /**
@@ -83,7 +83,7 @@ class Booking extends Model
      */
     public function checkin()
     {
-        return $this->hasOne(\App\Checkin::class);
+        return $this->hasOne(\App\Models\Checkin::class);
     }
 
     /**
@@ -93,7 +93,7 @@ class Booking extends Model
      */
     public function checkout()
     {
-        return $this->hasOne(\App\Checkout::class);
+        return $this->hasOne(\App\Models\Checkout::class);
     }
 
     /**

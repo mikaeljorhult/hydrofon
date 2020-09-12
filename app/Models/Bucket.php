@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +25,6 @@ class Bucket extends Model
      */
     public function resources()
     {
-        return $this->belongsToMany(\App\Resource::class);
+        return $this->belongsToMany(\App\Models\Resource::class);
     }
 }

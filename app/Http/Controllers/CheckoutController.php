@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Booking;
-use App\Checkout;
+use App\Models\Booking;
+use App\Models\Checkout;
 use App\Http\Requests\CheckoutDestroyRequest;
 use App\Http\Requests\CheckoutStoreRequest;
 
@@ -39,7 +39,7 @@ class CheckoutController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Checkout                             $checkout
+     * @param \App\Models\Checkout                             $checkout
      * @param \App\Http\Requests\CheckoutDestroyRequest $request
      *
      * @return \Illuminate\Http\Response

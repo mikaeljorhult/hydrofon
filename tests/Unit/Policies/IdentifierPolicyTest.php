@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Policies;
 
-use App\Identifier;
-use App\User;
+use App\Models\Identifier;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

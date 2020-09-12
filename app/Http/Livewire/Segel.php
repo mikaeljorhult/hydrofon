@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Booking;
+use App\Models\Booking;
 use App\Helpers\Grid;
-use App\Resource;
+use App\Models\Resource;
 use App\Rules\Available;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;

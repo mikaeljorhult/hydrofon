@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Booking;
-use App\User;
+use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BookingPolicy
@@ -11,7 +11,7 @@ class BookingPolicy
     use HandlesAuthorization;
 
     /**
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @param string         $ability
      *
      * @return bool
@@ -27,8 +27,8 @@ class BookingPolicy
     /**
      * Determine whether the user can view the booking.
      *
-     * @param \App\User    $user
-     * @param \App\Booking $booking
+     * @param \App\Models\User    $user
+     * @param \App\Models\Booking $booking
      *
      * @return mixed
      */
@@ -40,7 +40,7 @@ class BookingPolicy
     /**
      * Determine whether the user can create bookings.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      *
      * @return mixed
      */
@@ -52,8 +52,8 @@ class BookingPolicy
     /**
      * Determine whether the user can update the booking.
      *
-     * @param \App\User    $user
-     * @param \App\Booking $booking
+     * @param \App\Models\User    $user
+     * @param \App\Models\Booking $booking
      *
      * @return mixed
      */
@@ -65,8 +65,8 @@ class BookingPolicy
     /**
      * Determine whether the user can delete the booking.
      *
-     * @param \App\User    $user
-     * @param \App\Booking $booking
+     * @param \App\Models\User    $user
+     * @param \App\Models\Booking $booking
      *
      * @return mixed
      */

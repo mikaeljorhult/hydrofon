@@ -9,7 +9,7 @@ class ResourcesTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\Resource::class;
+    protected $model = \App\Models\Resource::class;
     protected $relationships = ['buckets', 'categories', 'groups'];
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
 

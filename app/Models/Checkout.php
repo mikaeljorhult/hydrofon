@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Checkin extends Model
+class Checkout extends Model
 {
     use HasFactory;
 
@@ -25,18 +25,18 @@ class Checkin extends Model
      */
     protected static function booted()
     {
-        static::creating(function ($checkin) {
-            $checkin->user_id = auth()->id();
+        static::creating(function ($checkout) {
+            $checkout->user_id = auth()->id();
         });
     }
 
     /**
-     * Booking that was checked in.
+     * Booking that was checked out.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function booking()
     {
-        return $this->belongsTo(\App\Booking::class);
+        return $this->belongsTo(\App\Models\Booking::class);
     }
 }
