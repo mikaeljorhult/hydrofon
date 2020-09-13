@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    @livewireStyles
+    <livewire:styles />
 </head>
 
 <body class="font-base font-light">
@@ -41,7 +41,7 @@
     <script src="{{ asset('js/manifest.js') }}"></script>
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    @livewireScripts
+    <livewire:scripts />
     @stack('scripts')
 </body>
 

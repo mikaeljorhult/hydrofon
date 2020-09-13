@@ -151,7 +151,7 @@
         });
 
         document.addEventListener('livewire:load', function(event) {
-            window.livewire.hook('afterDomUpdate', () => {
+            window.livewire.hook('message.processed', () => {
                 HYDROFON.Segel.handleResize();
                 HYDROFON.Segel.element.querySelectorAll('.segel-resource').forEach(HYDROFON.Segel.interactions.resource);
                 HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)

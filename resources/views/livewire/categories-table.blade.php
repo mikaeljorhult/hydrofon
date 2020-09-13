@@ -26,6 +26,8 @@
                                 class="field"
                                 wire:model="editValues.parent_id"
                             >
+                                <option>-</option>
+
                                 @foreach(\App\Models\Category::where('id', '!=', $item->id)->orderBy('name')->get(['id', 'name']) as $optionItem)
                                     <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
                                 @endforeach
