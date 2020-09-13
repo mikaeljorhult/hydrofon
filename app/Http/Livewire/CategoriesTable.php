@@ -13,10 +13,10 @@ class CategoriesTable extends BaseTable
     protected $relationships = ['parent', 'groups'];
     protected $editFields = ['id', 'name', 'parent_id'];
 
-    public $tableDefaultSort = 'categories.name';
+    public $tableDefaultSort = 'name';
     public $tableHeaders = [
-        'categories.name' => 'Name',
-        'parent.name' => 'Parent',
+        'name' => 'Name',
+        'parent_name' => 'Parent',
     ];
 
     public function onSave()

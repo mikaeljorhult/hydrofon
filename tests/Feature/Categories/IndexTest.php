@@ -37,7 +37,7 @@ class IndexTest extends TestCase
         $notVisibleCategory = Category::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('categories?filter[categories.name]='.$visibleCategory->name)
+             ->get('categories?filter[name]='.$visibleCategory->name)
              ->assertSuccessful()
              ->assertSee(route('categories.edit', $visibleCategory))
              ->assertDontSee(route('categories.edit', $notVisibleCategory));
@@ -57,7 +57,7 @@ class IndexTest extends TestCase
         $visibleCategory->save();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('categories?filter[categories.parent_id]='.$visibleCategory->parent->id)
+             ->get('categories?filter[parent_id]='.$visibleCategory->parent->id)
              ->assertSuccessful()
              ->assertSee(route('categories.edit', $visibleCategory))
              ->assertDontSee(route('categories.edit', $notVisibleCategory));

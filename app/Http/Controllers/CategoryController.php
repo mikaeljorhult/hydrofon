@@ -29,11 +29,15 @@ class CategoryController extends Controller
     {
         $categories = QueryBuilder::for(Category::class)
                                   ->with(['parent'])
-                                  ->leftJoin('categories as parent', 'parent.id', '=', 'categories.parent_id')
-                                  ->allowedFilters('categories.name', 'categories.parent_id')
-                                  ->allowedSorts(['categories.name', 'parent.name'])
-                                  ->defaultSort('categories.name')
-                                  ->select('categories.*')
+                                  ->addSelect([
+                                      'parent_name' => Category::from('categories AS parent')
+                                                               ->whereColumn('id', 'categories.parent_id')
+                                                               ->select('name')
+                                                               ->take(1),
+                                  ])
+                                  ->allowedFilters('name', 'parent_id')
+                                  ->allowedSorts(['name', 'parent_name'])
+                                  ->defaultSort('name')
                                   ->paginate(15);
 
         session()->flash('index-referer-url', request()->fullUrl());
@@ -58,7 +62,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\CategoryStoreRequest $request
+     * @param  \App\Http\Requests\CategoryStoreRequest  $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -77,7 +81,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Category $category
+     * @param  \App\Models\Category  $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -89,7 +93,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Category $category
+     * @param  \App\Models\Category  $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -105,8 +109,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\CategoryUpdateRequest $request
-     * @param \App\Models\Category                            $category
+     * @param  \App\Http\Requests\CategoryUpdateRequest  $request
+     * @param  \App\Models\Category  $category
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,8 +129,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Category                             $category
-     * @param \App\Http\Requests\CategoryDestroyRequest $request
+     * @param  \App\Models\Category  $category
+     * @param  \App\Http\Requests\CategoryDestroyRequest  $request
      *
      * @return void
      */
