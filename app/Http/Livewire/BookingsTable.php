@@ -16,10 +16,10 @@ class BookingsTable extends BaseTable
 
     public $tableDefaultSort = 'start_time';
     public $tableHeaders = [
-        'resources.name' => 'Resource',
-        'users.name'     => 'User',
-        'start_time'     => 'Start',
-        'end_time'       => 'End',
+        'resource_name' => 'Resource',
+        'user_name'     => 'User',
+        'start_time'    => 'Start',
+        'end_time'      => 'End',
     ];
 
     protected $listeners = [

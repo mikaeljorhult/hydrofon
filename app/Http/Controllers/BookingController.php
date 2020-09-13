@@ -6,6 +6,8 @@ use App\Http\Requests\BookingDestroyRequest;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
 use App\Models\Booking;
+use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -32,11 +34,19 @@ class BookingController extends Controller
         $bookings = QueryBuilder::for(Booking::class)
                                 ->select('bookings.*')
                                 ->with(['checkin', 'checkout', 'resource.buckets', 'user'])
-                                ->join('resources', 'resources.id', '=', 'bookings.resource_id')
-                                ->join('users', 'users.id', '=', 'bookings.user_id')
+                                ->addSelect([
+                                    'user_name' => User::whereColumn('user_id', 'users.id')
+                                                       ->select('name')
+                                                       ->take(1),
+                                ])
+                                ->addSelect([
+                                    'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
+                                                               ->select('name')
+                                                               ->take(1),
+                                ])
                                 ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
                                 ->defaultSort('start_time')
-                                ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
+                                ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
                                 ->paginate(15);
 
         session()->flash('index-referer-url', request()->fullUrl());
