@@ -2,7 +2,7 @@
 
 Equipment booking system.
 
-[![Build Status](https://travis-ci.org/mikaeljorhult/hydrofon.svg)](https://travis-ci.org/mikaeljorhult/hydrofon)
+[![Actions Status](https://github.com/mikaeljorhult/hydrofon/workflows/CI/badge.svg)](https://github.com/mikaeljorhult/hydrofon/actions)
 [![License](https://img.shields.io/badge/license-MIT-428f7e.svg)](http://mikaeljorhult.mit-license.org)
 
 ## Installation
