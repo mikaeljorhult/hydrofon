@@ -12,7 +12,7 @@ HYDROFON.Segel = {
     interactions: Interactions,
     set component(component) {
         this._component = component;
-        this._element = component.el.el;
+        this._element = component.el;
         this.calculateGrid();
         this.initialized = true;
     },
