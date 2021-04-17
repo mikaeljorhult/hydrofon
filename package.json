@@ -8,15 +8,15 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "alpinejs": "^2.4.0",
+        "alpinejs": "^2.8.2",
         "cross-env": "^7.0.0",
         "flatpickr": "^4.6.3",
         "interactjs": "^1.9.3",
         "laravel-mix": "^6.0.16",
-        "postcss": "^8.1",
+        "postcss": "^8.2.10",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.32.8",
         "sass-loader": "^11.0.1",
-        "tailwindcss": "^1.7.5"
+        "tailwindcss": "^2.1.0"
     }
 }

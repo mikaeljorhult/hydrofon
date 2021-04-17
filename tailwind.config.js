@@ -1,9 +1,10 @@
 module.exports = {
     purge: [
+        './resources/**/*.blade.php',
         './resources/**/*.js',
-        './resources/**/*.php',
         './node_modules/flatpickr/dist/flatpickr.js'
     ],
+    darkMode: false,
     theme: {
         extend: {
             colors: {
@@ -17,7 +18,7 @@ module.exports = {
                     700: '#993B2B',
                     800: '#732D20',
                     900: '#4D1E15',
-                    default: '#FF6347'
+                    DEFAULT: '#FF6347'
                 },
                 complementary: {
                     100: '#F1F2F5',
@@ -29,7 +30,7 @@ module.exports = {
                     700: '#464C5A',
                     800: '#353944',
                     900: '#23262D',
-                    default: '#757E96'
+                    DEFAULT: '#757E96'
                 },
             },
             fontFamily: {
@@ -37,7 +38,9 @@ module.exports = {
             }
         }
     },
-    variants: {},
+    variants: {
+        extend: {},
+    },
     plugins: [],
     corePlugins: {
         container: false
