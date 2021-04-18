@@ -82,7 +82,7 @@
                 x-ref="datepicker"
                 x-bind:value="date"
             />
-            {!! Form::submit('Show calendar', ['class' => 'btn btn-primary screen-reader']) !!}
+            {!! Form::submit('Show calendar', ['class' => 'btn btn-primary sr-only']) !!}
         </section>
 
         @include('partials.resource-tree.base')

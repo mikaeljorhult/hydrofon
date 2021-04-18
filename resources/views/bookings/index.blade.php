@@ -9,7 +9,7 @@
 
             {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
                 {!! Form::search('filter[start_time]', request('filter.start_time'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
             {!! Form::close() !!}
         @endcomponent
 

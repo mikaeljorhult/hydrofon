@@ -12,7 +12,7 @@
                 wire:click.prevent="previousTimeScope"
             >
                 <x-heroicon-s-chevron-left class="w-5" />
-                <span class="screen-reader">Previous</span>
+                <span class="sr-only">Previous</span>
             </a>
             <a
                 class="order-3"
@@ -20,7 +20,7 @@
                 href="{{ route('calendar') }}"
                 wire:click.prevent="nextTimeScope"
             >
-                <span class="screen-reader">Next</span>
+                <span class="sr-only">Next</span>
                 <x-heroicon-s-chevron-right class="w-5" />
             </a>
         </div>

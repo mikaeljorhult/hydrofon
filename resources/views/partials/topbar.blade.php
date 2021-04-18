@@ -4,12 +4,12 @@
             {!! Form::open(['route' => 'desk', 'class' => 'flex items-center']) !!}
                 <x-heroicon-s-search class="w-4 flex-shrink-0" />
 
-                <label for="search" class="screen-reader">
+                <label for="search" class="sr-only">
                     Search for resource or user
                 </label>
 
                 {!! Form::text('search', $search ?? null, ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Search resource or user...']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
             {!! Form::close() !!}
         </section>
 
@@ -17,12 +17,12 @@
             {!! Form::open(['route' => 'impersonation', 'class' => 'flex items-center']) !!}
                 <x-heroicon-s-eye class="w-4 flex-shrink-0" />
 
-                <label for="user_id" class="screen-reader">
+                <label for="user_id" class="sr-only">
                     Select user to impersonate
                 </label>
 
                 {!! Form::select('user_id', \App\Models\User::pluck('name', 'id'), session()->get('impersonate', null), ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Impersonate user...']) !!}
-                {!! Form::submit('Impersonate', ['class' => 'btn btn-primary screen-reader']) !!}
+                {!! Form::submit('Impersonate', ['class' => 'btn btn-primary sr-only']) !!}
             {!! Form::close() !!}
         </section>
     </nav>

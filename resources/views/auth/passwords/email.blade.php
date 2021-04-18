@@ -15,7 +15,7 @@
                 {{ csrf_field() }}
 
                 <div class="mb-6{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="screen-reader">E-mail</label>
+                    <label for="email" class="sr-only">E-mail</label>
                     <input id="email" type="email" name="email" placeholder="E-mail" class="field" value="{{ old('email') }}" required>
 
                     @if ($errors->has('email'))

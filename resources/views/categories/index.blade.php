@@ -9,7 +9,7 @@
 
             {!! Form::open(['route' => 'categories.index', 'method' => 'GET']) !!}
                 {!! Form::search('filter[categories.name]', request('filter')['categories.name'] ?? null, ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary screen-reader']) !!}
+                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
             {!! Form::close() !!}
         @endcomponent
 

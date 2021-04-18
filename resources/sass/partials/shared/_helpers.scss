@@ -1,27 +1,3 @@
 a[disabled] {
     pointer-events: none;
 }
-
-.screen-reader {
-  height: 1px;
-  width: 1px;
-  position: absolute !important;
-  overflow: hidden;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  word-wrap: normal !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-}
-
-.image-replacement {
-  overflow: hidden;
-  text-indent: 150%;
-  white-space: nowrap;
-}
-
-.narrow-content {
-  max-width: 30rem;
-  margin: 0 auto;
-}
