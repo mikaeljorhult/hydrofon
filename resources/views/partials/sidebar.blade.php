@@ -20,59 +20,17 @@
 
         <nav class="w-full md:flex flex-col flex-1 items-center content-between overflow-y-scroll my-6">
             <ul class="list-none w-full flex flex-wrap items-center content-between px-4 md:block md:px-0 md:mb-4">
-                <li class="w-1/2 sm:w-1/3 md:w-auto">
-                    <a href="{{ route('calendar') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                        <x-heroicon-s-calendar class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                        Book
-                    </a>
-                </li>
+                <x-sidebar-link route="calendar" icon="calendar" text="Book" />
 
                 @admin
-                    <li class="w-1/2 sm:w-1/3 md:w-auto">
-                        <a href="{{ route('desk') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-desktop-computer class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Desk
-                        </a>
-                    </li>
-                @endadmin
+                    <x-sidebar-link route="desk" icon="desktop-computer" text="Desk" />
 
-                @admin
-                    <li class="w-1/2 sm:w-1/3 md:w-auto md:mt-3">
-                        <a href="{{ route('bookings.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-calendar class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Bookings
-                        </a>
-                    </li>
-                    <li class="w-1/2 sm:w-1/3 md:w-auto">
-                        <a href="{{ route('buckets.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-archive class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Buckets
-                        </a>
-                    </li>
-                    <li class="w-1/2 sm:w-1/3 md:w-auto">
-                        <a href="{{ route('categories.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-tag class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Categories
-                        </a>
-                    </li>
-                    <li class="w-1/2 sm:w-1/3 md:w-auto">
-                        <a href="{{ route('groups.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-identification class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Groups
-                        </a>
-                    </li>
-                    <li class="w-1/2 sm:w-1/3 md:w-auto">
-                        <a href="{{ route('resources.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-device-mobile class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Resources
-                        </a>
-                    </li>
-                    <li class="w-1/2 sm:w-1/3 md:w-auto">
-                        <a href="{{ route('users.index') }}" class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-users class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Users
-                        </a>
-                    </li>
+                    <x-sidebar-link route="bookings.index" icon="calendar" text="Bookings" class="md:mt-3" />
+                    <x-sidebar-link route="buckets.index" icon="archive" text="Buckets" />
+                    <x-sidebar-link route="categories.index" icon="tag" text="Categories" />
+                    <x-sidebar-link route="groups.index" icon="identification" text="Groups" />
+                    <x-sidebar-link route="resources.index" icon="device-mobile" text="Resources" />
+                    <x-sidebar-link route="users.index" icon="users" text="Users" />
                 @endadmin
 
                 <li class="w-full mt-3 sm:mt-0 sm:w-1/3 md:w-auto md:mt-3">
