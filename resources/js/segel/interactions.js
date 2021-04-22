@@ -68,11 +68,11 @@ Interactions.resource = function (resource) {
 
     interact(resource).on('doubletap', function (event) {
         // Ignore propagating clicks from other elements.
-        if (event.target.className !== 'segel-resource' && event.target.className !== 'segel-bookings') {
+        if (! event.target.classList.contains('segel-resource') && !event.target.classList.contains('segel-bookings')) {
             return;
         }
 
-        let resourceNode = event.target.className === 'segel-resource'
+        let resourceNode = event.target.classList.contains('segel-resource')
             ? event.target
             : event.target.parentNode;
 
