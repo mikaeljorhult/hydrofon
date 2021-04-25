@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "development": "mix",
+        "development": "TAILWIND_MODE=build mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
