@@ -1,168 +1,30 @@
-.segel {
-    margin: 1rem 0;
-
-    &,
-    & * {
-        box-sizing: border-box;
-    }
-
-    ul {
-        margin: 0;
-        padding-left: 0;
-        list-style: none;
-    }
-}
-
-.segel-container {
-    min-height: 16rem;
-    position: relative;
-    border: 2px solid #f0f0f0;
-    border-width: 2px 0;
-}
-
-.segel-indicator {
-    width: 2px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 999;
-    background-color: #1a9bfc;
-    pointer-events: none;
-    transition: left 0.1s;
-}
-
-.segel-ruler {
-    ul {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.8rem;
-    }
-
-    li {
-        flex: 1;
-        position: relative;
-        padding: 0.5rem 0 0.6rem 0.5rem;
-        background-color: #f3f3f3;
-    }
-
-    li:nth-child(even) {
-        background-color: #f8f8f8;
-
-        span {
-            display: none;
-        }
-    }
-
-    // TODO: Base this on container width.
-    @media (min-width: 701px) {
-        li:nth-child(even) span {
-            display: inline;
-        }
-    }
-}
-
-.segel-grid {
-    display: flex;
-    position: absolute;
-    top: 2rem;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-
-    li {
-        flex: 1;
-        background-color: rgba(0, 0, 0, 0.025);
-    }
-
-    li:nth-child(even) {
-        background-color: rgba(0, 0, 0, 0.01);
-    }
-}
-
-.segel-resources {
-    overflow: hidden;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.segel-no-resources {
-    padding: 5.2rem 0 1rem;
-    color: #999;
-    text-align: center;
-}
-
 .segel-resource {
-    position: relative;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #e6e6e6;
-
-    .droppable {
-        background-color: rgba(0, 0, 0, 0.05);
+    &.droppable {
+        @apply bg-brand bg-opacity-5;
     }
 
-    .dragging {
-        border: 2px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    .is-dragging {
+        @apply border-2 border-brand-600 border-opacity-10 shadow-sm ;
     }
-}
-
-.segel-bookings,
-.segel-booking {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-}
-
-.segel-bookings {
-    left: 0;
-    right: 0;
-    user-select: none;
-}
-
-.segel-booking {
-    display: block;
-    height: 100%;
-    z-index: 100;
-    overflow: hidden;
-    background-color: rgba(255, 0, 0, 0.25);
-    border-radius: 0.25rem;
-    touch-action: none;
 }
 
 .segel-resize-handle {
-    display: none;
-    align-items: center;
-    width: 0.5rem;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.15);
-    color: #fff;
-    text-align: center;
-
     .segel-booking.editable:hover &,
     .segel-booking.is-resizing & {
-        display: flex;
+        @apply flex;
     }
 
     .segel-booking.is-dragging & {
-        display: none;
+        @apply hidden;
     }
 }
 
 .segel-resize-handle__left {
-    left: 0;
+    @apply left-0;
 }
 
 .segel-resize-handle__right {
-    right: 0;
+    @apply right-0;
 }
 
 // Animations.
