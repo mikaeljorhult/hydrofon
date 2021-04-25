@@ -18,8 +18,6 @@
 // Hydrofon styles.
 @import './partials/shared/base';
 @import './partials/shared/tables';
-@import './partials/shared/helpers';
-@import './partials/shared/alpine';
 @import './partials/app/resourcelist';
 @import './partials/app/pagination';
 @import './partials/app/flash-message';
@@ -27,3 +25,6 @@
 
 // Tailwind CSS.
 @tailwind utilities;
+
+// Alpine JS.
+[x-cloak] { display: none; }
