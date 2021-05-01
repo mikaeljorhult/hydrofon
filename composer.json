@@ -26,6 +26,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
+        "barryvdh/laravel-ide-helper": "^2.10",
         "brianium/paratest": "^6.2",
         "facade/ignition": "^2.3.6",
         "fakerphp/faker": "^1.9.1",
@@ -61,6 +62,11 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
         ]
     },
     "config": {
