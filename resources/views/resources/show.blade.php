@@ -2,7 +2,6 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => $resource->name])
-        @endcomponent
+        <x-heading :title="$resource->name" />
     </section>
 @endsection

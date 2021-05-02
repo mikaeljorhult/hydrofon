@@ -4,8 +4,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => $user->name, 'url' => route('profile')])
-        @endcomponent
+        <x-heading :title="$user->name" :url="route('profile')" />
 
         <div>
             <h2>Bookings</h2>

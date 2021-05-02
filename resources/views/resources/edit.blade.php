@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Edit resource'])
-        @endcomponent
+        <x-heading :title="'Edit resource'" />
 
         <section>
             {!! Form::model($resource, ['route' => ['resources.update', $resource->id], 'method' => 'PUT' ]) !!}

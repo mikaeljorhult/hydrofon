@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create user'])
-        @endcomponent
+        <x-heading :title="'Create user'" />
 
         <section>
             {!! Form::open(['route' => 'users.store']) !!}

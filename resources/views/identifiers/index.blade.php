@@ -4,13 +4,13 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Identifiers for ' . $identifiable->name])
+        <x-heading :title="'Identifiers for ' . $identifiable->name">
             <x-forms.button
                 type="link"
                 class="rounded-full mr-2"
-                :href="route($identifiable->getTable().'.identifiers.create', [$identifiable]"
+                :href="route($identifiable->getTable().'.identifiers.create', [$identifiable])"
             >New identifier</x-forms.button>
-        @endcomponent
+        </x-heading>
 
         <table class="table">
             <thead>

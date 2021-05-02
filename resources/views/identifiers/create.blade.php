@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create identifier'])
-        @endcomponent
+        <x-heading :title="'Create identifier'" />
 
         <section>
             {!! Form::open(['route' => [$identifiable->getTable().'.identifiers.store', $identifiable]]) !!}

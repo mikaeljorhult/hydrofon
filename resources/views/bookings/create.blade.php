@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create booking'])
-        @endcomponent
+        <x-heading :title="'Create booking'" />
 
         <section>
             {!! Form::open(['route' => 'bookings.store']) !!}

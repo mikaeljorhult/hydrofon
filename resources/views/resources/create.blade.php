@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create resource'])
-        @endcomponent
+        <x-heading :title="'Create resource'" />
 
         <section>
             {!! Form::open(['route' => 'resources.store']) !!}

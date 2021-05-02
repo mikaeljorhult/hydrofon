@@ -4,8 +4,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Profile: Bookings', 'url' => route('profile.bookings')])
-        @endcomponent
+        <x-heading :title="'Profile: Bookings'" :url="route('profile.bookings')" />
 
         <div>
             {!! Form::open(['route' => 'profile.bookings', 'method' => 'GET']) !!}

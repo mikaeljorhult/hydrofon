@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Edit bucket'])
-        @endcomponent
+        <x-heading :title="'Edit bucket'" />
 
         <section>
             {!! Form::model($bucket, ['route' => ['buckets.update', $bucket->id], 'method' => 'PUT' ]) !!}

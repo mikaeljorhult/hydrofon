@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Groups', 'url' => route('groups.index')])
+        <x-heading :title="'Groups'" :url="route('groups.index')">
             <x-forms.button
                 type="link"
                 class="rounded-full mr-2"
@@ -17,7 +17,7 @@
                     Search
                 </x-forms.button>
             {!! Form::close() !!}
-        @endcomponent
+        </x-heading>
 
         @livewire('groups-table', ['items' => $groups->getCollection()])
 

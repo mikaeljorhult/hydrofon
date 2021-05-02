@@ -5,8 +5,7 @@
 @section('content')
     <section class="container">
         @if($identifiable)
-            @component('components.heading', ['title' => $identifiable->name])
-            @endcomponent
+            <x-heading :title="$identifiable->name" />
 
             <h2>Bookings</h2>
             @livewire('bookings-table', ['items' => $bookings->getCollection()])

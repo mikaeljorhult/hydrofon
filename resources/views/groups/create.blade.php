@@ -2,8 +2,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Create group'])
-        @endcomponent
+        <x-heading :title="'Create group'" />
 
         <section>
             {!! Form::open(['route' => 'groups.store']) !!}

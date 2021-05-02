@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        @component('components.heading', ['title' => 'Bookings', 'url' => route('bookings.index')])
+        <x-heading :title="'Bookings'" :url="route('bookings.index')">
             <x-forms.button
                 type="link"
                 class="rounded-full mr-2"
@@ -17,7 +17,7 @@
                     Search
                 </x-forms.button>
             {!! Form::close() !!}
-        @endcomponent
+        </x-heading>
 
         {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
             <section class="lg:flex items-end py-2 px-3 bg-gray-100">
