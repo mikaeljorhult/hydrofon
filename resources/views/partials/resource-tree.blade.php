@@ -82,7 +82,9 @@
                 x-ref="datepicker"
                 x-bind:value="date"
             />
-            {!! Form::submit('Show calendar', ['class' => 'btn btn-primary sr-only']) !!}
+            <x-forms.button class="sr-only">
+                Show calendar
+            </x-forms.button>
         </section>
 
         @include('partials.resource-tree.base')

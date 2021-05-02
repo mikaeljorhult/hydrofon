@@ -72,7 +72,9 @@
                     </p>
 
                     {!! Form::open(['route' => ['subscriptions.destroy', $user->subscription->id], 'method' => 'DELETE']) !!}
-                        {!! Form::submit('End subscription', ['class' => 'btn btn-primary']) !!}
+                        <x-forms.button>
+                            End subscription
+                        </x-forms.button>
                     {!! Form::close() !!}
                 @else
                     <p class="mb-4">
@@ -83,7 +85,9 @@
                     {!! Form::open(['route' => 'subscriptions.store']) !!}
                         {!! Form::hidden('subscribable_type', 'user') !!}
                         {!! Form::hidden('subscribable_id', $user->id) !!}
-                        {!! Form::submit('Create subscription', ['class' => 'btn btn-primary']) !!}
+                        <x-forms.button>
+                            Create subscription
+                        </x-forms.button>
                     {!! Form::close() !!}
                 @endif
             </div>
@@ -99,7 +103,9 @@
                 </p>
 
                 {!! Form::open(['route' => 'datarequests.store']) !!}
-                    {!! Form::submit('Request Data', ['class' => 'btn btn-primary']) !!}
+                    <x-forms.button>
+                        Request Data
+                    </x-forms.button>
                 {!! Form::close() !!}
             </div>
         </div>

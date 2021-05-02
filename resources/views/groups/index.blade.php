@@ -5,11 +5,17 @@
 @section('content')
     <section class="container">
         @component('components.heading', ['title' => 'Groups', 'url' => route('groups.index')])
-            <a href="{{ route('groups.create') }}" class="btn btn-primary btn-pill mr-2">New group</a>
+            <x-forms.button
+                type="link"
+                class="rounded-full mr-2"
+                :href="route('groups.create')"
+            >New booking</x-forms.button>
 
             {!! Form::open(['route' => 'groups.index', 'method' => 'GET']) !!}
                 {!! Form::search('filter[name]', request('filter.name'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
+                <x-forms.button class="sr-only">
+                    Search
+                </x-forms.button>
             {!! Form::close() !!}
         @endcomponent
 

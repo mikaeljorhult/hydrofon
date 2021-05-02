@@ -40,7 +40,10 @@ module.exports = {
         }
     },
     variants: {
-        extend: {},
+        extend: {
+            opacity: ['disabled'],
+            cursor: ['disabled'],
+        },
     },
     plugins: [],
     corePlugins: {

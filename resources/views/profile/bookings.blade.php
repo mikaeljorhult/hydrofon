@@ -27,10 +27,14 @@
 
                     <div class="flex-grow text-right">
                         @if(request()->has('filter') && !empty(array_filter(request('filter'))))
-                            <a href="{{ route('profile.bookings', request()->except(['filter', 'page'])) }}" class="btn btn-link">Clear</a>
+                            <x-forms.link
+                                :href="route('bookings.index', request()->except(['filter', 'page']))"
+                            >Clear</x-forms.link>
                         @endif
 
-                        {!! Form::submit('Filter', ['class' => 'btn btn-primary']) !!}
+                        <x-forms.button>
+                            Filter
+                        </x-forms.button>
                     </div>
                 </section>
             {!! Form::close() !!}

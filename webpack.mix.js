@@ -16,7 +16,6 @@ mix
     .extract()
     .copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/admin.scss', 'public/css')
     .options({
         processCssUrls: false,
         postCss: [

@@ -26,7 +26,9 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Send reset link" class="btn btn-primary">
+                    <x-forms.button>
+                        Send reset link
+                    </x-forms.button>
                 </div>
             </form>
         </div>

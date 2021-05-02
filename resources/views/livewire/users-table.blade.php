@@ -45,17 +45,17 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
-                        <td data-title="&nbsp;" class="table-actions">
-                            <a
-                                class="btn btn-primary"
+                        <td data-title="&nbsp;" class="text-right">
+                            <x-forms.button
+                                type="link"
                                 wire:click.prevent="$emit('save')"
                                 wire:loading.attr="disabled"
-                            >Save</a>
+                            >Save</x-forms.button>
 
-                            <a
-                                class="btn"
+                            <x-forms.button-secondary
+                                type="link"
                                 wire:click.prevent="$set('isEditing', false)"
-                            >Cancel</a>
+                            >Cancel</x-forms.button-secondary>
                         </td>
                     </tr>
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
@@ -143,11 +143,10 @@
                 <th colspan="{{ count($this->tableHeaders) + 2 }}">
                     <div class="flex justify-end">
                         <form>
-                            <button
-                                {{ count($this->selectedRows) === 0 ? 'disabled="disabled"' : '' }}
-                                class="btn"
+                            <x-forms.button-link
+                                :disabled="count($this->selectedRows) === 0"
                                 wire:click.prevent="$emit('delete', false, true)"
-                            >Delete</button>
+                            >Delete</x-forms.button-link>
                         </form>
                     </div>
                 </th>

@@ -5,7 +5,11 @@
 @section('content')
     <section class="container">
         @component('components.heading', ['title' => 'Identifiers for ' . $identifiable->name])
-            <a href="{{ route($identifiable->getTable().'.identifiers.create', [$identifiable]) }}" class="btn btn-primary btn-pill mr-2">New identifier</a>
+            <x-forms.button
+                type="link"
+                class="rounded-full mr-2"
+                :href="route($identifiable->getTable().'.identifiers.create', [$identifiable]"
+            >New identifier</x-forms.button>
         @endcomponent
 
         <table class="table">

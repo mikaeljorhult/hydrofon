@@ -47,7 +47,9 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Register" class="btn btn-primary">
+                    <x-forms.button>
+                        Register
+                    </x-forms.button>
                 </div>
             </form>
         </div>

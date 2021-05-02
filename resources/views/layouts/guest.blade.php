@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-js">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full no-js">
 
 <head>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="font-base font-light">
+<body class="h-full bg-white text-gray-700 font-base font-light">
     <div id="app" class="app h-full flex">
         <main class="main-content flex-grow overflow-scroll">
             @yield('content')

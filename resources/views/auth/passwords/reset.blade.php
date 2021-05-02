@@ -44,7 +44,9 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Reset password" class="btn btn-primary">
+                    <x-forms.button>
+                        Reset password
+                    </x-forms.button>
                 </div>
             </form>
         </div>

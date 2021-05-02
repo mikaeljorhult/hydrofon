@@ -5,11 +5,17 @@
 @section('content')
     <section class="container">
         @component('components.heading', ['title' => 'Bookings', 'url' => route('bookings.index')])
-            <a href="{{ route('bookings.create') }}" class="btn btn-primary btn-pill mr-2">New booking</a>
+            <x-forms.button
+                type="link"
+                class="rounded-full mr-2"
+                :href="route('bookings.create')"
+            >New booking</x-forms.button>
 
             {!! Form::open(['route' => 'bookings.index', 'method' => 'GET']) !!}
                 {!! Form::search('filter[start_time]', request('filter.start_time'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
+                <x-forms.button class="sr-only">
+                    Search
+                </x-forms.button>
             {!! Form::close() !!}
         @endcomponent
 
@@ -37,10 +43,14 @@
 
                 <div class="flex-grow text-right">
                     @if(request()->has('filter') && !empty(array_filter(request('filter'))))
-                        <a href="{{ route('bookings.index', request()->except(['filter', 'page'])) }}" class="btn btn-link">Clear</a>
+                        <x-forms.link
+                            :href="route('bookings.index', request()->except(['filter', 'page']))"
+                        >Clear</x-forms.link>
                     @endif
 
-                    {!! Form::submit('Filter', ['class' => 'btn btn-primary']) !!}
+                    <x-forms.button>
+                        Filter
+                    </x-forms.button>
                 </div>
             </section>
         {!! Form::close() !!}

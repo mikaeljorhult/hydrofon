@@ -8,8 +8,14 @@
                     {{ config('app.name', 'Hydrofon') }}
                 </h1>
 
-                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
-                <a href="{{ route('register') }}" class="btn">Register</a>
+                <x-forms.button
+                    type="link"
+                    :href="route('login')"
+                >Login</x-forms.button>
+                <x-forms.button-secondary
+                    type="link"
+                    :href="route('register')"
+                >Register</x-forms.button-secondary>
             </div>
         </header>
 

@@ -37,11 +37,14 @@
                 </div>
 
                 <div class="flex items-center justify-between">
-                    <input type="submit" value="Log in" class="btn btn-block btn-primary">
+                    <x-forms.button>
+                        Log in
+                    </x-forms.button>
 
-                    <a href="{{ route('password.request') }}" class="forgot-password">
-                        Forgot password?
-                    </a>
+                    <x-forms.button-secondary
+                        type="link"
+                        :href="route('password.request')"
+                    >Forgot password?</x-forms.button-secondary>
                 </div>
             </form>
         </div>

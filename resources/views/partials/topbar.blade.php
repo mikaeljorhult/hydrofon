@@ -9,7 +9,9 @@
                 </label>
 
                 {!! Form::text('search', $search ?? null, ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Search resource or user...']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
+                <x-forms.button class="sr-only">
+                    Search
+                </x-forms.button>
             {!! Form::close() !!}
         </section>
 
@@ -22,7 +24,9 @@
                 </label>
 
                 {!! Form::select('user_id', \App\Models\User::pluck('name', 'id'), session()->get('impersonate', null), ['class' => 'field mb-0 bg-transparent border-transparent text-sm focus:border-transparent', 'placeholder' => 'Impersonate user...']) !!}
-                {!! Form::submit('Impersonate', ['class' => 'btn btn-primary sr-only']) !!}
+                <x-forms.button class="sr-only">
+                    Impersonate
+                </x-forms.button>
             {!! Form::close() !!}
         </section>
     </nav>

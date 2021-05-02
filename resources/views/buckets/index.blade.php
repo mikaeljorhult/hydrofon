@@ -5,11 +5,17 @@
 @section('content')
     <section class="container">
         @component('components.heading', ['title' => 'Buckets', 'url' => route('buckets.index')])
-            <a href="{{ route('buckets.create') }}" class="btn btn-primary btn-pill mr-2">New bucket</a>
+            <x-forms.button
+                type="link"
+                class="rounded-full mr-2"
+                :href="route('buckets.create')"
+            >New bucket</x-forms.button>
 
             {!! Form::open(['route' => 'buckets.index', 'method' => 'GET']) !!}
                 {!! Form::search('filter[name]', request('filter.name'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                {!! Form::submit('Search', ['class' => 'btn btn-primary sr-only']) !!}
+                <x-forms.button class="sr-only">
+                    Search
+                </x-forms.button>
             {!! Form::close() !!}
         @endcomponent
 
