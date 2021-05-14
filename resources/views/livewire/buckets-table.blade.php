@@ -53,14 +53,17 @@
                             </div>
 
                             <div>
-                                {!! Form::model($item, ['route' => ['buckets.destroy', $item->id], 'method' => 'DELETE' ]) !!}
+                                <form action="{{ route('buckets.destroy', [$item->id]) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+
                                     <button
                                         type="submit"
                                         title="Delete"
                                         wire:click.prevent="$emit('delete', {{ $item->id }})"
                                         wire:loading.attr="disabled"
                                     >Delete</button>
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </td>
                     </tr>

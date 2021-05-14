@@ -27,11 +27,14 @@
                             <a href="{{ route($identifiable->getTable().'.identifiers.edit', [$identifiable, $identifier]) }}">{{ $identifier->value }}</a>
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
-                            {!! Form::model($identifier, ['route' => [$identifiable->getTable().'.identifiers.destroy', $identifiable, $identifier], 'method' => 'DELETE' ]) !!}
+                            <form action="{{ route($identifiable->getTable().'.identifiers.destroy', [$identifiable, $identifier]) }}" method="post">
+                                @method('delete')
+                                @csrf
+
                                 <button type="submit" title="Delete">
                                     Delete
                                 </button>
-                            {!! Form::close() !!}
+                            </form>
                         </td>
                     </tr>
                 @empty

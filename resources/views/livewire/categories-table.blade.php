@@ -85,14 +85,17 @@
                             </div>
 
                             <div>
-                                {!! Form::model($item, ['route' => ['categories.destroy', $item->id], 'method' => 'DELETE' ]) !!}
-                                <button
-                                    type="submit"
-                                    title="Delete"
-                                    wire:click.prevent="$emit('delete', {{ $item->id }})"
-                                    wire:loading.attr="disabled"
-                                >Delete</button>
-                                {!! Form::close() !!}
+                                <form action="{{ route('categories.destroy', [$item->id]) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+
+                                    <button
+                                        type="submit"
+                                        title="Delete"
+                                        wire:click.prevent="$emit('delete', {{ $item->id }})"
+                                        wire:loading.attr="disabled"
+                                    >Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

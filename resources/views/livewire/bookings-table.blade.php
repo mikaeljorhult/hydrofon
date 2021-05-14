@@ -98,29 +98,33 @@
                         <td data-title="&nbsp;" class="table-actions">
                             @unless($item->resource->is_facility || $item->checkout || $item->checkin)
                                 <div>
-                                    {!! Form::open(['route' => ['checkouts.store']]) !!}
-                                        {!! Form::hidden('booking_id', $item->id) !!}
+                                    <form action="{{ route('checkouts.store') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $item->id }}" />
+
                                         <button
                                             type="submit"
                                             title="Check out"
                                             wire:click.prevent="$emit('checkout', {{ $item->id }})"
                                             wire:loading.attr="disabled"
                                         >Check out</button>
-                                    {!! Form::close() !!}
+                                    </form>
                                 </div>
                             @endif
 
                             @unless($item->resource->is_facility || $item->checkin)
                                 <div>
-                                    {!! Form::open(['route' => ['checkins.store']]) !!}
-                                        {!! Form::hidden('booking_id', $item->id) !!}
+                                    <form action="{{ route('checkins.store') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $item->id }}" />
+
                                         <button
                                             type="submit"
                                             title="Check in"
                                             wire:click.prevent="$emit('checkin', {{ $item->id }})"
                                             wire:loading.attr="disabled"
                                         >Check in</button>
-                                    {!! Form::close() !!}
+                                    </form>
                                 </div>
                             @endif
 
@@ -133,24 +137,30 @@
                             </div>
 
                             <div>
-                                {!! Form::open(['route' => 'calendar']) !!}
-                                    {{ Form::hidden('date', $item->start_time->format('Y-m-d')) }}
-                                    {{ Form::hidden('resources[]', $item->resource->id) }}
+                                <form action="{{ route('calendar') }}" method="post">
+                                    @csrf
+
+                                    <input type="hidden" name="date" value="{{ $item->start_time->format('Y-m-d') }}" />
+                                    <input type="hidden" name="resources[]" value="{{ $item->resource->id }}" />
+
                                     <button type="submit" title="View in calendar">
                                         View
                                     </button>
-                                {!! Form::close() !!}
+                                </form>
                             </div>
 
                             <div>
-                                {!! Form::model($item, ['route' => ['bookings.destroy', $item->id], 'method' => 'DELETE' ]) !!}
+                                <form action="{{ route('bookings.destroy', [$item->id]) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+
                                     <button
                                         type="submit"
                                         title="Delete"
                                         wire:click.prevent="$emit('delete', {{ $item->id }})"
                                         wire:loading.attr="disabled"
                                     >Delete</button>
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </td>
                     </tr>
