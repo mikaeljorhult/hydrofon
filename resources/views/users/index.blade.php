@@ -11,49 +11,44 @@
                 :href="route('users.create')"
             >New user</x-forms.button>
 
-            {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-                {!! Form::search('filter[email]', request('filter.email'), ['placeholder' => 'Filter', 'class' => 'field']) !!}
-                <x-forms.button class="sr-only">
-                    Search
-                </x-forms.button>
-            {!! Form::close() !!}
+            <x-slot name="filters">
+                <form action="{{ route('users.index') }}" method="get">
+                    <section class="lg:flex items-end py-2 px-3 bg-gray-50">
+                        <div class="mb-2 lg:mb-0 lg:mr-4">
+                            <x-forms.label for="filter[email]" class="sr-only">E-mail</x-forms.label>
+                            <x-forms.input name="filter[email]" value="{{ request('filter.email') }}" placeholder="E-mail" />
+                        </div>
+
+                        <div class="mb-2 lg:mb-0 lg:mr-4">
+                            <x-forms.label for="filter[name]" class="sr-only">Name</x-forms.label>
+                            <x-forms.input name="filter[name]" value="{{ request('filter.name') }}" placeholder="Name" />
+                        </div>
+
+                        <div class="mb-2 lg:mb-0 lg:mr-4">
+                            <x-forms.label for="filter[groups.id]" class="sr-only">Group</x-forms.label>
+                            <x-forms.select name="filter[groups.id]" :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['groups.id'] ?? null" placeholder="All groups" />
+                        </div>
+
+                        <div class="mt-4 mb-2 lg:my-0 lg:mr-4 flex items-center self-center">
+                            <x-forms.checkbox name="filter[is_admin]" id="filter[is_admin]" :checked="request('filter.is_admin')" />
+                            <x-forms.label for="filter[is_admin]" class="ml-1 text-sm">Administrator</x-forms.label>
+                        </div>
+
+                        <div class="flex-grow text-right">
+                            @if(request()->has('filter') && !empty(array_filter(request('filter'))))
+                                <x-forms.link
+                                    :href="route('users.index', request()->except(['filter', 'page']))"
+                                >Clear</x-forms.link>
+                            @endif
+
+                            <x-forms.button>
+                                Filter
+                            </x-forms.button>
+                        </div>
+                    </section>
+                </form>
+            </x-slot>
         </x-heading>
-
-        {!! Form::open(['route' => 'users.index', 'method' => 'GET']) !!}
-            <section class="lg:flex items-end py-2 px-3 bg-gray-100">
-                <div class="mb-2 lg:mb-0 lg:mr-4">
-                    {!! Form::label('filter[email]', 'E-mail', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                    {!! Form::text('filter[email]', request('filter.email'), ['placeholder' => 'E-mail', 'class' => 'field inline-block lg:w-auto']) !!}
-                </div>
-
-                <div class="mb-2 lg:mb-0 lg:mr-4">
-                    {!! Form::label('filter[name]', 'Name', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                    {!! Form::text('filter[name]', request('filter.name'), ['placeholder' => 'Name', 'class' => 'field inline-block lg:w-auto']) !!}
-                </div>
-
-                <div class="mb-2 lg:mb-0 lg:mx-4">
-                    {!! Form::label('filter[groups.id]', 'Group', ['class' => 'lg:mr-1 text-xs uppercase']) !!}
-                    {!! Form::select('filter[groups.id]', \App\Models\Group::orderBy('name')->pluck('name', 'id'), request('filter')['groups.id'] ?? null, ['placeholder' => 'All', 'class' => 'field inline-block lg:w-auto']) !!}
-                </div>
-
-                <div class="mt-4 mb-2 lg:my-0 lg:mx-4 flex items-center self-center">
-                    {!! Form::checkbox('filter[is_admin]', 1, request('filter.is_admin'), ['class' => 'mr-1']) !!}
-                    {!! Form::label('filter[is_admin]', 'Administrator', ['class' => 'text-xs uppercase']) !!}
-                </div>
-
-                <div class="flex-grow text-right">
-                    @if(request()->has('filter') && !empty(array_filter(request('filter'))))
-                        <x-forms.link
-                            :href="route('users.index', request()->except(['filter', 'page']))"
-                        >Clear</x-forms.link>
-                    @endif
-
-                    <x-forms.button>
-                        Filter
-                    </x-forms.button>
-                </div>
-            </section>
-        {!! Form::close() !!}
 
         @livewire('users-table', ['items' => $users->getCollection()])
 
