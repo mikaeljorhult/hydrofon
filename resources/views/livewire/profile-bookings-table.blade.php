@@ -3,20 +3,16 @@
         @include('livewire.partials.table-header')
 
         <tbody>
-            @forelse($items as $item)
+            @forelse($this->items as $item)
                 @if($this->isEditing === $item->id)
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }} is-editing">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Resource">
-                            <select
+                            <x-forms.select
                                 name="resource_id"
-                                class="field"
+                                :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
                                 wire:model="editValues.resource_id"
-                            >
-                                @foreach(\App\Models\Resource::orderBy('name')->get(['id', 'name']) as $optionItem)
-                                    <option value="{{ $optionItem->id }}">{{ $optionItem->name }}</option>
-                                @endforeach
-                            </select>
+                            />
 
                             @error('editValues.resource_id')
                                 <span class="error">{{ $message }}</span>
@@ -24,11 +20,9 @@
                         </td>
                         <td data-title="Start">
                             <div wire:ignore>
-                                <input
-                                    type="text"
+                                <x-forms.input
                                     name="start_time"
                                     value="{{ $item->start_time }}"
-                                    class="field"
                                     wire:model.debounce.500ms="editValues.start_time"
                                 />
                             </div>
@@ -39,11 +33,9 @@
                         </td>
                         <td data-title="End">
                             <div wire:ignore>
-                                <input
-                                    type="text"
+                                <x-forms.input
                                     name="end_time"
                                     value="{{ $item->end_time }}"
-                                    class="field"
                                     wire:model.debounce.500ms="editValues.end_time"
                                 />
                             </div>
@@ -68,10 +60,9 @@
                 @else
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
                         <td data-title="&nbsp;">
-                            <input
-                                type="checkbox"
+                            <x-forms.checkbox
                                 value="{{ $item->id }}"
-                                {{ in_array($item->id, $this->selectedRows) ? 'checked="checked"' : '' }}
+                                :checked="in_array($item->id, $this->selectedRows)"
                                 wire:click="$emit('select', {{ $item->id }}, $event.target.checked)"
                             />
                         </td>
@@ -147,8 +138,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             @this.on('editing', function () {
-                let startTime = @this.root.el.querySelector('input[name="start_time"]');
-                let endTime = @this.root.el.querySelector('input[name="end_time"]');
+                let startTime = @this.__instance.el.querySelector('input[name="start_time"]');
+                let endTime = @this.__instance.el.querySelector('input[name="end_time"]');
 
                 flatpickr(startTime, {
                     allowInput: true,

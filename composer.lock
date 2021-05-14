@@ -5421,16 +5421,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "V3.5.6",
+            "version": "v3.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "fb5383132f3775cfcf859e4c77b74427d0158d9b"
+                "reference": "88fd9cfa144b06b2549e9d487fdaec68265e791e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/fb5383132f3775cfcf859e4c77b74427d0158d9b",
-                "reference": "fb5383132f3775cfcf859e4c77b74427d0158d9b",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/88fd9cfa144b06b2549e9d487fdaec68265e791e",
+                "reference": "88fd9cfa144b06b2549e9d487fdaec68265e791e",
                 "shasum": ""
             },
             "require": {
@@ -5490,7 +5490,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/V3.5.6"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.5.7"
             },
             "funding": [
                 {
@@ -5498,7 +5498,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-13T07:04:33+00:00"
+            "time": "2021-05-13T20:18:35+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",

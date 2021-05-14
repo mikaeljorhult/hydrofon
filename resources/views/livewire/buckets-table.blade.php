@@ -3,16 +3,14 @@
         @include('livewire.partials.table-header')
 
         <tbody>
-            @forelse($items as $item)
+            @forelse($this->items as $item)
                 @if($this->isEditing === $item->id)
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }} is-editing">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Name">
-                            <input
-                                type="text"
+                            <x-forms.input
                                 name="name"
                                 value="{{ $item->name }}"
-                                class="field"
                                 wire:model.debounce.500ms="editValues.name"
                             />
 
@@ -36,10 +34,9 @@
                 @else
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
                         <td data-title="&nbsp;">
-                            <input
-                                type="checkbox"
+                            <x-forms.checkbox
                                 value="{{ $item->id }}"
-                                {{ in_array($item->id, $this->selectedRows) ? 'checked="checked"' : '' }}
+                                :checked="in_array($item->id, $this->selectedRows)"
                                 wire:click="$emit('select', {{ $item->id }}, $event.target.checked)"
                             />
                         </td>

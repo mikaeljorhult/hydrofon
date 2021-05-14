@@ -60,7 +60,7 @@ class BookingsTable extends BaseTable
         $this->isEditing = false;
     }
 
-    public function onCheckin($id, $multiple)
+    public function onCheckin($id, $multiple = false)
     {
         $itemsToCheckin = $multiple ? $this->selectedRows : [$id];
 
@@ -82,7 +82,7 @@ class BookingsTable extends BaseTable
         $this->refreshItems($itemsToCheckin);
     }
 
-    public function onCheckout($id, $multiple)
+    public function onCheckout($id, $multiple = false)
     {
         $itemsToCheckout = $multiple ? $this->selectedRows : [$id];
 
