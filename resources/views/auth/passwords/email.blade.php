@@ -15,8 +15,8 @@
                 {{ csrf_field() }}
 
                 <div class="mb-6{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="sr-only">E-mail</label>
-                    <input id="email" type="email" name="email" placeholder="E-mail" class="field" value="{{ old('email') }}" required>
+                    <x-forms.label for="email" class="sr-only">E-mail</x-forms.label>
+                    <x-forms.input type="email" name="email" id="email" placeholder="E-mail" value="{{ old('email') }}" required autofocus />
 
                     @if ($errors->has('email'))
                         <div class="help-block">

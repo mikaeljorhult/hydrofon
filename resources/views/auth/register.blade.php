@@ -9,8 +9,8 @@
                 {{ csrf_field() }}
 
                 <div class="mb-4{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="label sr-only">Name</label>
-                    <input id="name" type="text" name="name" placeholder="Name" class="field" value="{{ old('name') }}" required autofocus>
+                    <x-forms.label for="name" class="sr-only">Name</x-forms.label>
+                    <x-forms.input name="name" id="name" placeholder="Name" value="{{ old('name') }}" required autofocus />
 
                     @if ($errors->has('name'))
                         <div class="help-block">
@@ -20,8 +20,8 @@
                 </div>
 
                 <div class="mb-4{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="label sr-only">E-mail</label>
-                    <input id="email" type="email" name="email" placeholder="E-mail" class="field" value="{{ old('email') }}" required>
+                    <x-forms.label for="email" class="sr-only">E-mail</x-forms.label>
+                    <x-forms.input name="email" id="email" placeholder="E-mail" value="{{ old('email') }}" required />
 
                     @if ($errors->has('email'))
                         <div class="help-block">
@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="mb-4{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="label sr-only">Password</label>
-                    <input id="password" type="password" name="password" placeholder="Password" class="field" required>
+                    <x-forms.label for="password" class="sr-only">Password</x-forms.label>
+                    <x-forms.input type="password" name="password" id="password" placeholder="Password" required />
 
                     @if ($errors->has('password'))
                         <div class="help-block">
@@ -42,8 +42,8 @@
                 </div>
 
                 <div class="mb-6">
-                    <label for="password-confirm" class="label sr-only">Confirm password</label>
-                    <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm password" class="field" required>
+                    <x-forms.label for="password_confirmation" class="sr-only">Confirm password</x-forms.label>
+                    <x-forms.input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required />
                 </div>
 
                 <div>

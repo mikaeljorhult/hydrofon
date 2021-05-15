@@ -2,5 +2,5 @@
 
 <label
     for="{{ $for }}"
-    {{ $attributes }}
+    {{ $attributes->merge(['class' => 'text-sm']) }}
 >{{ $slot }}</label>

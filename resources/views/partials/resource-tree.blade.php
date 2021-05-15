@@ -72,21 +72,20 @@
         });
     "
 >
-    {!! Form::open(['route' => 'calendar', 'class' => 'w-full', 'x-ref' => 'form']) !!}
-        <section class="resourcelist-date">
-            <input
-                type="text"
+    <form action="{{ route('calendar') }}" method="post" class="w-full" x-ref="form">
+        <section class="h-16 flex items-center absolute top-0 inset-x-0 px-4 bg-complementary-600">
+            <x-forms.input
                 name="date"
-                class="field"
                 value="{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}"
                 x-ref="datepicker"
                 x-bind:value="date"
             />
+
             <x-forms.button class="sr-only">
                 Show calendar
             </x-forms.button>
         </section>
 
         @include('partials.resource-tree.base')
-    {!! Form::close() !!}
+    </form>
 </div>

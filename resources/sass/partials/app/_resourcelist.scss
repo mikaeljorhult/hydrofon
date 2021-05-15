@@ -5,7 +5,6 @@
     overflow: hidden;
     padding-top: 4.1rem;
     background-color: #313541;
-    color: rgba(255, 255, 255, .6);
     white-space: nowrap;
     user-select: none;
 
@@ -57,25 +56,11 @@
     }
 }
 
-.resourcelist-date {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem 2rem 1rem 1rem;
-    background-color: rgba(255, 255, 255, .75);
-
-    input {
-        margin-bottom: 0;
-        padding: .525rem;
-        font-size: .8rem;
-    }
-}
-
 .resourcelist-base {
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    color: rgba(255, 255, 255, .6);
 
     > :last-child {
         margin-bottom: 2rem;

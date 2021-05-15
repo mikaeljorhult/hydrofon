@@ -9,8 +9,8 @@
                 {{ csrf_field() }}
 
                 <div class="mb-4{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="sr-only">E-mail</label>
-                    <input id="email" type="email" name="email" placeholder="E-mail" class="field" value="{{ old('email') }}" required autofocus>
+                    <x-forms.label for="email" class="sr-only">E-mail</x-forms.label>
+                    <x-forms.input type="email" name="email" id="email" placeholder="E-mail" value="{{ old('email') }}" required autofocus />
 
                     @if ($errors->has('email'))
                         <div class="help-block">
@@ -20,8 +20,8 @@
                 </div>
 
                 <div class="mb-4{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="sr-only">Password</label>
-                    <input id="password" type="password" name="password"  placeholder="Password" class="field" required>
+                    <x-forms.label for="password" class="sr-only">Password</x-forms.label>
+                    <x-forms.input type="password" name="password" id="password" placeholder="Password" required />
 
                     @if ($errors->has('password'))
                         <div class="help-block">
@@ -30,10 +30,12 @@
                     @endif
                 </div>
 
-                <div class="mb-6">
-                    <label class="label">
-                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember me
-                    </label>
+                <div class="mb-6 flex items-center">
+                    <x-forms.checkbox name="remember" id="remember" :checked="old('remember')" />
+
+                    <x-forms.label for="remember" class="ml-1">
+                        Remember me
+                    </x-forms.label>
                 </div>
 
                 <div class="flex items-center justify-between">
