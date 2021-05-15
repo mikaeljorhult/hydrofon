@@ -67,27 +67,33 @@
                     </p>
 
                     <p class="mb-4">
-                        {!! Form::text('feed', route('feed', [$user->subscription->uuid]), ['class' => 'field', 'readonly' => true]) !!}
+                        <x-forms.input name="feed" value="{{ route('feed', [$user->subscription->uuid]) }}" readonly />
                     </p>
 
-                    {!! Form::open(['route' => ['subscriptions.destroy', $user->subscription->id], 'method' => 'DELETE']) !!}
+                    <form action="{{ route('subscriptions.destroy', [$user->subscription->id]) }}" method="post">
+                        @method('delete')
+                        @csrf
+
                         <x-forms.button>
                             End subscription
                         </x-forms.button>
-                    {!! Form::close() !!}
+                    </form>
                 @else
                     <p class="mb-4">
                         You can setup an iCal feed to be able to subscribe and see your upcoming bookings from within your
                         calendar application of choice.
                     </p>
 
-                    {!! Form::open(['route' => 'subscriptions.store']) !!}
-                        {!! Form::hidden('subscribable_type', 'user') !!}
-                        {!! Form::hidden('subscribable_id', $user->id) !!}
+                    <form action="{{ route('subscriptions.store') }}" method="post">
+                        @csrf
+
+                        <input type="hidden" name="subscribable_type" value="user">
+                        <input type="hidden" name="subscribable_id" value="{{ $user->id }}">
+
                         <x-forms.button>
                             Create subscription
                         </x-forms.button>
-                    {!! Form::close() !!}
+                    </form>
                 @endif
             </div>
         </div>

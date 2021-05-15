@@ -27,18 +27,15 @@
 
         <div>
             <div class="flex items-baseline">
-                <label class="inline-block mr-1">
-                    Show:
-                </label>
+                <x-forms.label for="type">Show:</x-forms.label>
 
-                <select
-                    class="field"
+                <x-forms.select
+                    name="type"
+                    id="type"
+                    :options="['day' => 'Day', 'week' => 'Week', 'month' => 'Month']"
                     wire:model="type"
-                >
-                    <option value="day">Day</option>
-                    <option value="week">Week</option>
-                    <option value="month">Month</option>
-                </select>
+                    class="ml-1"
+                />
             </div>
         </div>
     </div>

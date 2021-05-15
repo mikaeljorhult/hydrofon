@@ -1,13 +1,13 @@
 @can('list', $resource)
     <li class="resourcelist-resource">
         <label>
-            <input
-                type="checkbox"
+            <x-forms.checkbox
                 name="resources[]"
                 value="{{ $resource->id }}"
-                {{ in_array($resource->id, $selected) ? 'checked="checked"' : '' }}
+                :checked="in_array($resource->id, $selected)"
                 x-model.number.debounce.1000ms="selected"
             />
+
             {{ $resource->name }}
         </label>
     </li>

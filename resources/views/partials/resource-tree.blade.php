@@ -73,6 +73,8 @@
     "
 >
     <form action="{{ route('calendar') }}" method="post" class="w-full" x-ref="form">
+        @csrf
+
         <section class="h-16 flex items-center absolute top-0 inset-x-0 px-4 bg-complementary-600">
             <x-forms.input
                 name="date"
