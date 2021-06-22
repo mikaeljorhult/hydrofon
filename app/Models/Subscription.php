@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-use Eluceo\iCal\Component\Calendar;
-use Eluceo\iCal\Component\Event;
+use Eluceo\iCal\Domain\Entity\Calendar;
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\DateTime;
+use Eluceo\iCal\Domain\ValueObject\TimeSpan;
+use Eluceo\iCal\Presentation\Component\Property;
+use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -54,23 +59,31 @@ class Subscription extends Model
      */
     public function toCalendar()
     {
-        $vCalendar = new Calendar('App\\EN');
-        $vCalendar->setName($this->subscribable->name.' | Hydrofon');
-
         $this->subscribable->load([
             'bookings',
             'bookings.resource',
             'bookings.user',
         ]);
 
-        collect()
+        $events = collect()
             ->merge($this->createFacilityEvents())
             ->merge($this->createResourceEvents())
-            ->each(function ($item, $key) use ($vCalendar) {
-                $vCalendar->addComponent($item);
-            });
+            ->toArray();
 
-        return $vCalendar->render();
+        $calendar = new Calendar($events);
+        $componentFactory = new CalendarFactory();
+        $component = $componentFactory
+            ->createCalendar($calendar)
+            ->withProperty(new Property(
+              'NAME',
+              new TextValue($this->subscribable->name.' | Hydrofon')
+            ))
+            ->withProperty(new Property(
+                'X-WR-CALNAME',
+                new TextValue($this->subscribable->name.' | Hydrofon')
+            ));
+
+        return (string) $component;
     }
 
     /**
@@ -88,15 +101,15 @@ class Subscription extends Model
                 return $item->start_time->format('YmdHis');
             })
             ->map(function ($item, $key) {
-                $vEvent = new Event();
-
-                $vEvent
-                    ->setDtStart($item->first()->start_time)
-                    ->setDtEnd($item->first()->start_time->addHour())
+                return (new Event())
                     ->setSummary('Pick up '.Str::plural('booking', $item->count()))
-                    ->setDescription('To pick up:'.PHP_EOL.'- '.$item->implode('resource.name', PHP_EOL.'- '));
-
-                return $vEvent;
+                    ->setDescription('To pick up:'.PHP_EOL.'- '.$item->implode('resource.name', PHP_EOL.'- '))
+                    ->setOccurrence(
+                        new TimeSpan(
+                            new DateTime($item->first()->start_time, false),
+                            new DateTime($item->first()->start_time->addHour(), false)
+                        )
+                    );
             });
     }
 
@@ -112,19 +125,19 @@ class Subscription extends Model
                 return $item->resource->is_facility;
             })
             ->map(function ($item, $key) {
-                $vEvent = new Event();
-
                 $summary = $this->subscribable instanceof User
                     ? $item->resource->name
                     : $item->user->name;
 
-                $vEvent
-                    ->setDtStart($item->start_time)
-                    ->setDtEnd($item->end_time)
+                return (new Event())
                     ->setSummary($summary)
-                    ->setDescription('');
-
-                return $vEvent;
+                    ->setDescription('')
+                    ->setOccurrence(
+                        new TimeSpan(
+                            new DateTime($item->start_time, false),
+                            new DateTime($item->end_time, false)
+                        )
+                    );
             });
     }
 }
