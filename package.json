@@ -9,14 +9,15 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.3.2",
-        "alpinejs": "^2.8.2",
+        "alpinejs": "^3.1.0",
         "flatpickr": "^4.6.3",
         "interactjs": "^1.10.11",
         "laravel-mix": "^6.0.16",
+        "lodash.debounce": "^4.0.8",
         "postcss": "^8.2.10",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.32.8",
-        "sass-loader": "^11.0.1",
-        "tailwindcss": "^2.1.0"
+        "sass-loader": "^12.1.0",
+        "tailwindcss": "^2.2.2"
     }
 }

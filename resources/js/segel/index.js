@@ -1,5 +1,5 @@
 import interact from 'interactjs';
-import {debounce} from 'alpinejs/src/utils';
+import debounce from 'lodash.debounce';
 import Grid from './grid';
 import Interactions from './interactions';
 
