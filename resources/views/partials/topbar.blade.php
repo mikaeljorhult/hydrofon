@@ -11,9 +11,9 @@
                 </x-forms.label>
 
                 <x-forms.input
-                    type="search"
-                    name="search"
                     id="search"
+                    name="search"
+                    type="search"
                     placeholder="Search resource or user..."
                     value="{{ $search ?? null }}"
                     class="!border-transparent !shadow-none"
@@ -31,13 +31,13 @@
 
                 <x-heroicon-s-eye class="w-4 flex-shrink-0" />
 
-                <x-forms.label for="user_id" class="sr-only">
+                <x-forms.label for="topbar-user_id" class="sr-only">
                     Select user to impersonate
                 </x-forms.label>
 
                 <x-forms.select
+                    id="topbar-user_id"
                     name="user_id"
-                    id="user_id"
                     :options="\App\Models\User::pluck('name', 'id')"
                     :selected="session()->get('impersonate', null)"
                     placeholder="Impersonate user..."

@@ -5,6 +5,8 @@
         if (! $attributes->has('multiple')) {
             $attributes->merge(['class' => 'pr-10']);
         }
+
+        $selected = \Illuminate\Support\Arr::wrap($selected);
     @endphp
 
     {{ $attributes->merge(['class' => 'block w-full pl-3 py-2 text-base font-light border-gray-300 rounded-md focus:outline-none focus:border-gray-300 focus:ring-brand-500 sm:text-sm disabled:opacity-50']) }}
@@ -20,7 +22,7 @@
     @foreach($options as $key => $label)
         <option
             value="{{ $key }}"
-            {{ $key == $selected ? 'selected' : '' }}
+            {{ in_array($key, $selected) ? 'selected' : '' }}
         >{{ $label }}</option>
     @endforeach
 </select>

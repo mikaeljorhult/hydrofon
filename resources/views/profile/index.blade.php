@@ -107,11 +107,12 @@
                     generated and downloaded.
                 </p>
 
-                {!! Form::open(['route' => 'datarequests.store']) !!}
+                <form action="{{ route('datarequests.store') }}" method="post">
+                    @csrf
                     <x-forms.button>
                         Request Data
                     </x-forms.button>
-                {!! Form::close() !!}
+                </form>
             </div>
         </div>
     </section>
