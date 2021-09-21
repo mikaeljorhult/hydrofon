@@ -20,8 +20,7 @@ class ImpersonationController extends Controller
     /**
      * Create impersonation of user.
      *
-     * @param \App\Http\Requests\ImpersonationRequest $request
-     *
+     * @param  \App\Http\Requests\ImpersonationRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ImpersonationRequest $request)

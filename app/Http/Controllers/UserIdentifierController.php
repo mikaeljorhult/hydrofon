@@ -24,8 +24,7 @@ class UserIdentifierController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function index(User $user)
@@ -38,8 +37,7 @@ class UserIdentifierController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function create(User $user)
@@ -52,9 +50,8 @@ class UserIdentifierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\IdentifierStoreRequest $request
-     * @param \App\Models\User                                 $user
-     *
+     * @param  \App\Http\Requests\IdentifierStoreRequest  $request
+     * @param  \App\Models\User  $user
      * @return void
      */
     public function store(IdentifierStoreRequest $request, User $user)
@@ -74,9 +71,8 @@ class UserIdentifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\User       $user
-     * @param \App\Models\Identifier $identifier
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Identifier  $identifier
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user, Identifier $identifier)
@@ -91,10 +87,9 @@ class UserIdentifierController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\IdentifierUpdateRequest $request
-     * @param \App\Models\User                                  $user
-     * @param \App\Models\Identifier                            $identifier
-     *
+     * @param  \App\Http\Requests\IdentifierUpdateRequest  $request
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Identifier  $identifier
      * @return \Illuminate\Http\Response
      */
     public function update(IdentifierUpdateRequest $request, User $user, Identifier $identifier)
@@ -114,10 +109,9 @@ class UserIdentifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\User                                   $user
-     * @param \App\Models\Identifier                             $identifier
-     * @param \App\Http\Requests\IdentifierDestroyRequest $request
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Identifier  $identifier
+     * @param  \App\Http\Requests\IdentifierDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user, Identifier $identifier, IdentifierDestroyRequest $request)

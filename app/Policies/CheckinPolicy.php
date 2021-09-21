@@ -13,8 +13,7 @@ class CheckinPolicy
     /**
      * Determine whether the user can create checkins.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -25,9 +24,8 @@ class CheckinPolicy
     /**
      * Determine whether the user can delete the checkin.
      *
-     * @param \App\Models\User    $user
-     * @param \App\Models\Checkin $checkin
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Checkin  $checkin
      * @return mixed
      */
     public function delete(User $user, Checkin $checkin)

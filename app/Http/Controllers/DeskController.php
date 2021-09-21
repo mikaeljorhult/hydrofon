@@ -23,8 +23,7 @@ class DeskController extends Controller
     /**
      * Show the circulation desk view.
      *
-     * @param null|string $search
-     *
+     * @param  null|string  $search
      * @return \Illuminate\Http\Response
      */
     public function index($search = null)
@@ -46,8 +45,7 @@ class DeskController extends Controller
     /**
      * Redirect to desk view with search term.
      *
-     * @param \App\Http\Requests\DeskRequest $request
-     *
+     * @param  \App\Http\Requests\DeskRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(DeskRequest $request)
@@ -60,7 +58,6 @@ class DeskController extends Controller
      * Checks against user e-mail address and otherwise against identifiers.
      *
      * @param $search
-     *
      * @return mixed
      */
     private function resolveIdentifiable($search)
@@ -81,8 +78,7 @@ class DeskController extends Controller
     /**
      * Get bookings of identifiable.
      *
-     * @param \App\Resource|\App\Models\User $identifiable
-     *
+     * @param  \App\Resource|\App\Models\User  $identifiable
      * @return mixed
      */
     private function getBookings($identifiable)

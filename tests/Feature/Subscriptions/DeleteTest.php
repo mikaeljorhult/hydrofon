@@ -15,9 +15,8 @@ class DeleteTest extends TestCase
     /**
      * Posts request to delete a subscription.
      *
-     * @param \App\Models\Subscription $subscription
-     * @param \App\Models\User|null    $user
-     *
+     * @param  \App\Models\Subscription  $subscription
+     * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
     public function deleteSubscription($subscription, $user = null)

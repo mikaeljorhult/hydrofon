@@ -13,8 +13,7 @@ class SubscriptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $uuid
-     *
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
     public function show($uuid)
@@ -33,8 +32,7 @@ class SubscriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\SubscriptionStoreRequest $request
-     *
+     * @param  \App\Http\Requests\SubscriptionStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(SubscriptionStoreRequest $request)
@@ -52,9 +50,8 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Subscription                             $subscription
-     * @param \App\Http\Requests\SubscriptionDestroyRequest $request
-     *
+     * @param  \App\Models\Subscription  $subscription
+     * @param  \App\Http\Requests\SubscriptionDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function destroy(Subscription $subscription, SubscriptionDestroyRequest $request)
