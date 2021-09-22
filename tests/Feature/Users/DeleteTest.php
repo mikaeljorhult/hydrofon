@@ -24,9 +24,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($admin)->delete('users/'.$user->id);
 
         $response->assertRedirect('/users');
-        $this->assertDatabaseMissing('users', [
-            'email' => $user->email,
-        ]);
+        $this->assertModelMissing($user);
     }
 
     /**
@@ -41,12 +39,8 @@ class DeleteTest extends TestCase
 
         $this->actingAs($admin)->delete('users/'.$booking->user->id);
 
-        $this->assertDatabaseMissing('users', [
-            'id' => $booking->user->id,
-        ]);
-        $this->assertDatabaseMissing('bookings', [
-            'id' => $booking->id,
-        ]);
+        $this->assertModelMissing($booking->user);
+        $this->assertModelMissing($booking);
     }
 
     /**
@@ -62,9 +56,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($notAdmin)->delete('users/'.$user->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('users', [
-            'email' => $user->email,
-        ]);
+        $this->assertModelExists($user);
     }
 
     /**
@@ -79,8 +71,6 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($admin)->delete('users/'.$admin->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('users', [
-            'email' => $admin->email,
-        ]);
+        $this->assertModelExists($admin);
     }
 }

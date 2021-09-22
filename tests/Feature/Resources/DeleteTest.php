@@ -25,9 +25,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($admin)->delete('resources/'.$resource->id);
 
         $response->assertRedirect('/resources');
-        $this->assertDatabaseMissing('resources', [
-            'name' => $resource->name,
-        ]);
+        $this->assertModelMissing($resource);
     }
 
     /**
@@ -42,12 +40,8 @@ class DeleteTest extends TestCase
 
         $this->actingAs($admin)->delete('resources/'.$booking->resource->id);
 
-        $this->assertDatabaseMissing('resources', [
-            'id' => $booking->resource->id,
-        ]);
-        $this->assertDatabaseMissing('bookings', [
-            'id' => $booking->id,
-        ]);
+        $this->assertModelMissing($booking);
+        $this->assertModelMissing($booking->resource);
     }
 
     /**
@@ -63,9 +57,6 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($user)->delete('resources/'.$resource->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('resources', [
-            'id'   => $resource->id,
-            'name' => $resource->name,
-        ]);
+        $this->assertModelExists($resource);
     }
 }

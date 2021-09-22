@@ -24,9 +24,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($admin)->delete('groups/'.$group->id);
 
         $response->assertRedirect('/groups');
-        $this->assertDatabaseMissing('groups', [
-            'name' => $group->name,
-        ]);
+        $this->assertModelMissing($group);
     }
 
     /**
@@ -42,9 +40,6 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($user)->delete('groups/'.$group->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('groups', [
-            'id'   => $group->id,
-            'name' => $group->name,
-        ]);
+        $this->assertModelExists($group);
     }
 }

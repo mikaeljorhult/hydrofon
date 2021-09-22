@@ -24,8 +24,6 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($admin)->delete('categories/'.$category->id);
 
         $response->assertRedirect('/categories');
-        $this->assertDatabaseMissing('categories', [
-            'name' => $category->name,
-        ]);
+        $this->assertModelMissing($category);
     }
 }

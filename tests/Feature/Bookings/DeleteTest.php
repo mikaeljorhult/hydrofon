@@ -61,9 +61,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($anotherUser)->delete('bookings/'.$booking->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('bookings', [
-            'id' => $booking->id,
-        ]);
+        $this->assertModelExists($booking);
     }
 
     /**
@@ -78,9 +76,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('bookings', [
-            'id' => $booking->id,
-        ]);
+        $this->assertModelExists($booking);
     }
 
     /**
@@ -98,9 +94,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('bookings', [
-            'id' => $booking->id,
-        ]);
+        $this->assertModelExists($booking);
     }
 
     /**

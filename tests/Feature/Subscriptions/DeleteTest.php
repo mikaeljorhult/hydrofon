@@ -43,10 +43,7 @@ class DeleteTest extends TestCase
              ->deleteSubscription($subscription, $user)
              ->assertRedirect(route('users.show', [$user->id]));
 
-        $this->assertDatabaseMissing('subscriptions', [
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
-        ]);
+        $this->assertModelMissing($subscription);
     }
 
     /**
@@ -66,10 +63,8 @@ class DeleteTest extends TestCase
              ->deleteSubscription($subscription)
              ->assertRedirect(route('users.show', [$user->id]));
 
-        $this->assertDatabaseMissing('subscriptions', [
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
-        ]);
+        $this->assertModelMissing($subscription);
+
     }
 
     /**
@@ -89,10 +84,7 @@ class DeleteTest extends TestCase
              ->deleteSubscription($subscription)
              ->assertRedirect(route('resources.show', [$resource->id]));
 
-        $this->assertDatabaseMissing('subscriptions', [
-            'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $resource->id,
-        ]);
+        $this->assertModelMissing($subscription);
     }
 
     /**
@@ -112,9 +104,6 @@ class DeleteTest extends TestCase
              ->deleteSubscription($subscription, User::factory()->create())
              ->assertStatus(403);
 
-        $this->assertDatabaseHas('subscriptions', [
-            'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $resource->id,
-        ]);
+        $this->assertModelExists($subscription);
     }
 }

@@ -25,9 +25,7 @@ class DeleteTest extends TestCase
         $response = $this->actingAs($admin)->delete('resources/'.$resource->id.'/identifiers/'.$identifier->id);
 
         $response->assertRedirect();
-        $this->assertDatabaseMissing('identifiers', [
-            'value' => 'test-value',
-        ]);
+        $this->assertModelMissing($identifier);
     }
 
     /**
@@ -43,8 +41,6 @@ class DeleteTest extends TestCase
         $response = $this->actingAs(User::factory()->create())->delete('resources/'.$resource->id.'/identifiers/'.$identifier->id);
 
         $response->assertStatus(403);
-        $this->assertDatabaseHas('identifiers', [
-            'value' => 'test-value',
-        ]);
+        $this->assertModelExists($identifier);
     }
 }
