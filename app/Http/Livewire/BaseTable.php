@@ -97,7 +97,7 @@ class BaseTable extends Component
         $this->isEditing = false;
     }
 
-    public function onDelete($id, $multiple)
+    public function onDelete($id, $multiple = false)
     {
         $itemsToDelete = $multiple ? $this->selectedRows : [$id];
 
