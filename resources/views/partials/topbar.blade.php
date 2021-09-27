@@ -53,7 +53,11 @@
                             aria-haspopup="true"
                             x-on:click.prevent="isOpen = !isOpen"
                         >
-                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            <img
+                                class="h-8 w-8 rounded-full"
+                                src="{{ Avatar::create(auth()->user()->name)->toBase64() }}"
+                                alt="Avatar"
+                            />
 
                             <span class="hidden ml-3 text-gray-700 text-sm font-light lg:block">
                                 <span class="sr-only">Open user menu for </span>{{ auth()->user()->name }}
