@@ -31,13 +31,7 @@
             </div>
 
             <div class="ml-4 flex items-center md:ml-6">
-                <button
-                    type="button"
-                    class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-                >
-                    <span class="sr-only">View notifications</span>
-                    <x-heroicon-o-bell class="w-6 h-6" />
-                </button>
+                <livewire:notifications-indicator />
 
                 <div
                     class="ml-3 relative"
