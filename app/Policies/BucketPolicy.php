@@ -13,9 +13,8 @@ class BucketPolicy
     /**
      * Determine whether the user can view the bucket.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Bucket $bucket
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Bucket  $bucket
      * @return mixed
      */
     public function view(User $user, Bucket $bucket)
@@ -26,8 +25,7 @@ class BucketPolicy
     /**
      * Determine whether the user can create buckets.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -38,9 +36,8 @@ class BucketPolicy
     /**
      * Determine whether the user can update the bucket.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Bucket $bucket
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Bucket  $bucket
      * @return mixed
      */
     public function update(User $user, Bucket $bucket)
@@ -51,9 +48,8 @@ class BucketPolicy
     /**
      * Determine whether the user can delete the bucket.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Bucket $bucket
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Bucket  $bucket
      * @return mixed
      */
     public function delete(User $user, Bucket $bucket)

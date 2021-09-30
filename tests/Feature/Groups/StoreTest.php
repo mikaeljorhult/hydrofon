@@ -14,9 +14,8 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a group.
      *
-     * @param array               $overrides
-     * @param \App\Models\User|null $user
-     *
+     * @param  array  $overrides
+     * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
     public function storeGroup($overrides = [], $user = null)

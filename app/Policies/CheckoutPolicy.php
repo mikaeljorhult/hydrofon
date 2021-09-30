@@ -13,8 +13,7 @@ class CheckoutPolicy
     /**
      * Determine whether the user can create checkouts.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -25,9 +24,8 @@ class CheckoutPolicy
     /**
      * Determine whether the user can delete the checkout.
      *
-     * @param \App\Models\User     $user
-     * @param \App\Models\Checkout $checkout
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Checkout  $checkout
      * @return mixed
      */
     public function delete(User $user, Checkout $checkout)
