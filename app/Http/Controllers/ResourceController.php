@@ -55,8 +55,7 @@ class ResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\ResourceStoreRequest $request
-     *
+     * @param  \App\Http\Requests\ResourceStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ResourceStoreRequest $request)
@@ -78,8 +77,7 @@ class ResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Resource $resource
-     *
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
     public function show(Resource $resource)
@@ -90,8 +88,7 @@ class ResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Resource $resource
-     *
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
     public function edit(Resource $resource)
@@ -106,9 +103,8 @@ class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\ResourceUpdateRequest $request
-     * @param \App\Models\Resource                            $resource
-     *
+     * @param  \App\Http\Requests\ResourceUpdateRequest  $request
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
     public function update(ResourceUpdateRequest $request, Resource $resource)
@@ -130,9 +126,8 @@ class ResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Resource                             $resource
-     * @param \App\Http\Requests\ResourceDestroyRequest $request
-     *
+     * @param  \App\Models\Resource  $resource
+     * @param  \App\Http\Requests\ResourceDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function destroy(Resource $resource, ResourceDestroyRequest $request)

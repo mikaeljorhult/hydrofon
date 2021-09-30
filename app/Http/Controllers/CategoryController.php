@@ -63,7 +63,6 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\CategoryStoreRequest  $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryStoreRequest $request)
@@ -82,7 +81,6 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Category  $category
-     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -94,7 +92,6 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Category  $category
-     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -111,7 +108,6 @@ class CategoryController extends Controller
      *
      * @param  \App\Http\Requests\CategoryUpdateRequest  $request
      * @param  \App\Models\Category  $category
-     *
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryUpdateRequest $request, Category $category)
@@ -131,7 +127,6 @@ class CategoryController extends Controller
      *
      * @param  \App\Models\Category  $category
      * @param  \App\Http\Requests\CategoryDestroyRequest  $request
-     *
      * @return void
      */
     public function destroy(Category $category, CategoryDestroyRequest $request)

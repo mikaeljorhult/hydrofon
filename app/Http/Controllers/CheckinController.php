@@ -22,8 +22,7 @@ class CheckinController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\CheckinStoreRequest $request
-     *
+     * @param  \App\Http\Requests\CheckinStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CheckinStoreRequest $request)
@@ -46,9 +45,8 @@ class CheckinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Checkin                             $checkin
-     * @param \App\Http\Requests\CheckinDestroyRequest $request
-     *
+     * @param  \App\Models\Checkin  $checkin
+     * @param  \App\Http\Requests\CheckinDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function destroy(Checkin $checkin, CheckinDestroyRequest $request)
