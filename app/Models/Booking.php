@@ -99,10 +99,9 @@ class Booking extends Model
     /**
      * Scope a query to only include bookings between dates.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param mixed                                 $start
-     * @param mixed                                 $end
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $start
+     * @param  mixed  $end
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeBetween($query, $start, $end)
@@ -138,8 +137,7 @@ class Booking extends Model
     /**
      * Scope a query to only include bookings in the past.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCurrent($query)
@@ -151,8 +149,7 @@ class Booking extends Model
     /**
      * Scope a query to only include bookings in the past.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePast($query)
@@ -163,8 +160,7 @@ class Booking extends Model
     /**
      * Scope a query to only include bookings in the future.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFuture($query)
@@ -175,8 +171,7 @@ class Booking extends Model
     /**
      * Scope a query to only include bookings that are to be returned.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOverdue($query)

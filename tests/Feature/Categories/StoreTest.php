@@ -14,9 +14,8 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a category.
      *
-     * @param array               $overrides
-     * @param \App\Models\User|null $user
-     *
+     * @param  array  $overrides
+     * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
     public function storeCategory($overrides = [], $user = null)
