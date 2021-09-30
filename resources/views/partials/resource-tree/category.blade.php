@@ -20,7 +20,7 @@
         {{ $category->name }}
     </label>
 
-    @if($category->children->count() > 0 || $category->resources->count() > 0)
+    @if($category->children->isNotEmpty() || $category->resources->isNotEmpty())
         <ul class="list-none resourcelist-children">
             @each('partials.resource-tree.category', $category->children, 'category')
             @each('partials.resource-tree.resource', $category->resources, 'resource')

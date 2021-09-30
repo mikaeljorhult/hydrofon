@@ -19,6 +19,8 @@ Route::redirect('home', '/')->name('home');
 Route::get('profile', 'ProfileController')->name('profile');
 Route::get('profile/bookings', 'ProfileBookingsController')->name('profile.bookings');
 
+Route::get('notifications', 'NotificationsController')->name('notifications');
+
 Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');
 Route::post('calendar', 'CalendarController@store');
 

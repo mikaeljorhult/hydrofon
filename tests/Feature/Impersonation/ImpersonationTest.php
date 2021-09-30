@@ -21,7 +21,7 @@ class ImpersonationTest extends TestCase
         $response = $this->actingAs($admin)->get('/');
 
         $response->assertStatus(200);
-        $response->assertSee('topbar-impersonation');
+        $response->assertSee('impersonation');
     }
 
     /**
@@ -110,7 +110,7 @@ class ImpersonationTest extends TestCase
         $response = $this->actingAs($user)->get('/');
 
         $response->assertStatus(200);
-        $response->assertDontSee('topbar-impersonation');
+        $response->assertDontSee('topbar-user_id');
     }
 
     /**

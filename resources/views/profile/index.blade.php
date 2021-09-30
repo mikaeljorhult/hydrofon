@@ -3,59 +3,61 @@
 @section('title', 'Profile')
 
 @section('content')
-    <section class="container">
+    <section class="container space-y-8">
         <x-heading :title="$user->name" :url="route('profile')" />
 
-        <div>
-            <h2>Bookings</h2>
+        @if($latest->isNotEmpty() && $upcoming->isNotEmpty() && $overdue->isNotEmpty())
+            <div>
+                <h2>Bookings</h2>
 
-            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                @if($latest->count() > 0)
-                    <div class="p-4 pt-3 bg-gray-100">
-                        <h3 class="mt-0 mb-2">Latest</h3>
-                        @foreach($latest as $booking)
-                            <ul class="mb-3">
-                                <li>{{ $booking->start_time->format('Y-m-d H:i') }}: {{ $booking->resource->name }}</li>
-                            </ul>
-                        @endforeach
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    @if($latest->isNotEmpty())
+                        <div class="p-4 pt-3 bg-gray-100">
+                            <h3 class="mt-0 mb-2">Latest</h3>
+                            @foreach($latest as $booking)
+                                <ul class="mb-3">
+                                    <li>{{ $booking->start_time->format('Y-m-d H:i') }}: {{ $booking->resource->name }}</li>
+                                </ul>
+                            @endforeach
 
-                        <div class="text-right">
-                            <a href="{{ route('profile.bookings') }}">See all bookings</a>
+                            <div class="text-right">
+                                <a href="{{ route('profile.bookings') }}">See all bookings</a>
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                @if($upcoming->count() > 0)
-                    <div class="p-4 pt-3 bg-gray-100">
-                        <h3 class="mt-0 mb-2">Upcoming</h3>
-                        @foreach($upcoming as $day)
-                            <h3 class="mt-0 mb-1 text-sm font-normal">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
+                    @if($upcoming->isNotEmpty())
+                        <div class="p-4 pt-3 bg-gray-100">
+                            <h3 class="mt-0 mb-2">Upcoming</h3>
+                            @foreach($upcoming as $day)
+                                <h3 class="mt-0 mb-1 text-sm font-normal">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
+                                <ul class="mb-3">
+                                    @foreach($day as $booking)
+                                        <li>{{ $booking->resource->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if($overdue->isNotEmpty())
+                        <div class="p-4 pt-3 bg-gray-100">
+                            <h3 class="mt-0 mb-2">Overdue</h3>
                             <ul class="mb-3">
-                                @foreach($day as $booking)
-                                    <li>{{ $booking->resource->name }}</li>
+                                @foreach($overdue as $booking)
+                                    <li>
+                                        {{ $booking->resource->name }}
+                                        <span class="text-sm">
+                                            ({{ $booking->end_time->diffForHumans() }})
+                                        </span>
+                                    </li>
                                 @endforeach
                             </ul>
-                        @endforeach
-                    </div>
-                @endif
-
-                @if($overdue->count() > 0)
-                    <div class="p-4 pt-3 bg-gray-100">
-                        <h3 class="mt-0 mb-2">Overdue</h3>
-                        <ul class="mb-3">
-                            @foreach($overdue as $booking)
-                                <li>
-                                    {{ $booking->resource->name }}
-                                    <span class="text-sm">
-                                        ({{ $booking->end_time->diffForHumans() }})
-                                    </span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        @endif
 
         <div>
             <h2>Calendar Subscription</h2>

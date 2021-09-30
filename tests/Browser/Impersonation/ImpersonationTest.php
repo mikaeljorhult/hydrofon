@@ -25,7 +25,7 @@ class ImpersonationTest extends DuskTestCase
             $browser->loginAs($admin)
                     ->visit('/calendar')
                     // See impersonation form.
-                    ->assertSourceHas('topbar-impersonation')
+                    ->assertSourceHas('topbar-user_id')
                     ->select('user_id', $user->id)
                     ->keys('[name="user_id"]', '{enter}')
 
@@ -57,7 +57,7 @@ class ImpersonationTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user1) {
             $browser->loginAs($user1)
                     ->visit('/calendar')
-                    ->assertSourceMissing('topbar-impersonation');
+                    ->assertSourceMissing('topbar-user_id');
         });
     }
 }

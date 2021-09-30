@@ -22,7 +22,7 @@ class ResourcePolicy
     {
         return $user->isAdmin() ||
                $resource->groups->count() === 0 ||
-               $user->groups->intersect($resource->groups)->count() > 0;
+               $user->groups->intersect($resource->groups)->isNotEmpty();
     }
 
     /**

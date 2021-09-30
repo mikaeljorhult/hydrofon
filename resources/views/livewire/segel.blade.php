@@ -96,7 +96,7 @@
                     >
                         {{ $resource->name }}
 
-                        @if($resource->bookings->count() > 0)
+                        @if($resource->bookings->isNotEmpty())
                             <ul class="segel-bookings absolute inset-0 select-none">
                                 @foreach($resource->bookings as $booking)
                                     <li
