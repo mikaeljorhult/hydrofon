@@ -15,7 +15,7 @@
 
         window.HYDROFON = {
             baseURL: @json(url('/')),
-            user:  @json(optional(auth()->user())->id),
+            user:  @json(auth()->id()),
             isAdmin: @json(auth()->user() ? auth()->user()->isAdmin() : false)
         };
     </script>

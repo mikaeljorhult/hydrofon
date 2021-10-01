@@ -32,33 +32,6 @@
                     <x-sidebar-link route="resources.index" icon="device-mobile" text="Resources" />
                     <x-sidebar-link route="users.index" icon="users" text="Users" />
                 @endadmin
-
-                <li class="w-full mt-3 sm:mt-0 sm:w-1/3 md:w-auto md:mt-3">
-                    @if(auth()->user()->isImpersonated())
-                        <a href="{{ route('impersonation') }}"
-                           onclick="event.preventDefault(); document.getElementById('impersonation-form').submit();"
-                           class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-eye-off class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Stop impersonation
-                        </a>
-
-                        <form id="impersonation-form" action="{{ route('impersonation') }}" method="POST" style="display: none;">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                        </form>
-                    @else
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                           class="block py-2 px-0 text-complementary text-xs leading-tight no-underline hover:text-complementary-400 hover:bg-complementary-800">
-                            <x-heroicon-s-logout class="block w-6 h-auto mt-0 mx-auto mb-1 fill-current" />
-                            Log out
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    @endif
-                </li>
             </ul>
         </nav>
     @endauth
