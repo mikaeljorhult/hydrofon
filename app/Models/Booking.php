@@ -97,6 +97,16 @@ class Booking extends Model
     }
 
     /**
+     * Booking can be approved.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function approval()
+    {
+        return $this->hasOne(\App\Models\Approval::class);
+    }
+
+    /**
      * Scope a query to only include bookings between dates.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
