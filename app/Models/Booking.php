@@ -215,4 +215,13 @@ class Booking extends Model
     {
         return $this->start_time->diffInSeconds($this->end_time);
     }
+
+    public function isValidStatus(string $name, $reason = null)
+    {
+        return in_array($name, [
+            'approved',
+            'pending',
+            'rejected',
+        ]);
+    }
 }
