@@ -14,6 +14,43 @@ class ApprovalTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Bookings needing approval are listed.
+     *
+     * @return void
+     */
+    public function testBookingsNeedingApprovalAreListed()
+    {
+        $approver = User::factory()->create();
+
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+        $user = User::factory()->create();
+        $user->groups()->attach($group);
+
+        $booking = Booking::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        $this->actingAs($approver)->get('approvals')
+            ->assertOk()
+            ->assertSeeText($booking->user->name);
+    }
+
+    /**
+     * Bookings not needing approval are omitted from listing.
+     *
+     * @return void
+     */
+    public function testBookingsNotNeedingApprovalAreOmitted()
+    {
+        $approver = User::factory()->create();
+        $booking = Booking::factory()->create();
+
+        $this->actingAs($approver)->get('approvals')
+             ->assertOk()
+             ->assertDontSeeText($booking->user->name);
+    }
+
+    /**
      * Booking can be approved.
      *
      * @return void
@@ -65,6 +102,7 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalCanBeRevokedByAdmin()
     {
+        $this->withoutExceptionHandling();
         $admin = User::factory()->admin()->create();
         $approval = Approval::factory()->create();
 

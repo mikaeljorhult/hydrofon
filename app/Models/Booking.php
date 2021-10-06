@@ -5,10 +5,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ModelStatus\HasStatuses;
 
 class Booking extends Model
 {
-    use HasFactory;
+    use HasFactory, HasStatuses;
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +44,16 @@ class Booking extends Model
             $booking->created_by_id = session()->has('impersonate')
                 ? session()->get('impersonated_by')
                 : auth()->id();
+        });
+
+        static::created(function ($booking) {
+            $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
+
+            if ($mustBeApproved) {
+                $booking->setStatus('pending');
+            } else {
+                $booking->setStatus('approved', 'Automatically approved');
+            }
         });
     }
 
