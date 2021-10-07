@@ -11,7 +11,7 @@ class BookingsTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \App\Models\Booking::class;
-    protected $relationships = ['checkin', 'checkout', 'resource.buckets', 'user'];
+    protected $relationships = ['checkin', 'checkout', 'resource.buckets', 'statuses', 'user'];
     protected $editFields = ['id', 'resource_id', 'user_id', 'start_time', 'end_time'];
 
     public $tableDefaultSort = 'start_time';
@@ -20,6 +20,7 @@ class BookingsTable extends BaseTable
         'user_name'     => 'User',
         'start_time'    => 'Start',
         'end_time'      => 'End',
+        'status'        => 'Status'
     ];
 
     protected $listeners = [
