@@ -19,6 +19,16 @@ class Group extends Model
     ];
 
     /**
+     * Users that can approve bookings for users in group.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function approvers()
+    {
+        return $this->belongsToMany(\App\Models\User::class, 'approver_group');
+    }
+
+    /**
      * Categories in the group.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

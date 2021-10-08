@@ -18,11 +18,7 @@ class ShowTest extends TestCase
      */
     public function testUserSubscriptionIsShown()
     {
-        $user = User::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
-        ]);
+        $subscription = Subscription::factory()->user()->create();
 
         $this->get('feeds/'.$subscription->uuid)
              ->assertStatus(200)

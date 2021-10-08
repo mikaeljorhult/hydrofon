@@ -11,7 +11,7 @@ class ProfileBookingsTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \App\Models\Booking::class;
-    protected $relationships = ['resource'];
+    protected $relationships = ['resource', 'statuses'];
     protected $editFields = ['id', 'resource_id', 'start_time', 'end_time'];
 
     public $tableDefaultSort = 'start_time';
@@ -19,6 +19,7 @@ class ProfileBookingsTable extends BaseTable
         'resources.name' => 'Resource',
         'start_time'     => 'Start',
         'end_time'       => 'End',
+        'status'         => 'Status',
     ];
 
     protected $listeners = [

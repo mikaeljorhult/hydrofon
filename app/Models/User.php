@@ -74,6 +74,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Groups the user can approve bookings for.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function approvingGroups()
+    {
+        return $this->belongsToMany(\App\Models\Group::class, 'approver_group');
+    }
+
+    /**
      * Get all identifiers.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany

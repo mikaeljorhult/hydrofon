@@ -5,10 +5,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ModelStatus\HasStatuses;
 
 class Booking extends Model
 {
-    use HasFactory;
+    use HasFactory, HasStatuses;
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +44,27 @@ class Booking extends Model
             $booking->created_by_id = session()->has('impersonate')
                 ? session()->get('impersonated_by')
                 : auth()->id();
+        });
+
+        static::created(function ($booking) {
+            $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
+
+            if ($mustBeApproved) {
+                $booking->setStatus('pending');
+            } else {
+                $booking->setStatus('approved', 'Automatically approved');
+            }
+        });
+
+        static::updating(function ($booking) {
+            if (in_array($booking->status, ['approved', 'rejected']) && !auth()->user()->isAdmin()) {
+                $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
+
+                if ($mustBeApproved) {
+                    $booking->approval()->delete();
+                    $booking->setStatus('pending', 'Booking was changed after being ' . $booking->status);
+                }
+            }
         });
     }
 
@@ -94,6 +116,16 @@ class Booking extends Model
     public function checkout()
     {
         return $this->hasOne(\App\Models\Checkout::class);
+    }
+
+    /**
+     * Booking can be approved.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function approval()
+    {
+        return $this->hasOne(\App\Models\Approval::class);
     }
 
     /**
@@ -193,5 +225,14 @@ class Booking extends Model
     public function getDurationAttribute()
     {
         return $this->start_time->diffInSeconds($this->end_time);
+    }
+
+    public function isValidStatus(string $name, $reason = null)
+    {
+        return in_array($name, [
+            'approved',
+            'pending',
+            'rejected',
+        ]);
     }
 }

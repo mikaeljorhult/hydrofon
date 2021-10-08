@@ -32,17 +32,13 @@ class SubscriptionTest extends TestCase
      */
     public function testUserSubscriptionIsRendered()
     {
-        $user = User::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
-        ]);
+        $subscription = Subscription::factory()->user()->create();
 
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
         $this->assertStringContainsString('VCALENDAR', $rendered);
-        $this->assertStringContainsString($user->name, $rendered);
+        $this->assertStringContainsString($subscription->subscribable->name, $rendered);
     }
 
     /**
@@ -52,17 +48,13 @@ class SubscriptionTest extends TestCase
      */
     public function testResourceSubscriptionIsRendered()
     {
-        $resource = Resource::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $resource->id,
-        ]);
+        $subscription = Subscription::factory()->resource()->create();
 
         $rendered = $subscription->toCalendar();
 
         $this->assertIsString($rendered);
         $this->assertStringContainsString('VCALENDAR', $rendered);
-        $this->assertStringContainsString($resource->name, $rendered);
+        $this->assertStringContainsString($subscription->subscribable->name, $rendered);
     }
 
     /**
@@ -72,11 +64,8 @@ class SubscriptionTest extends TestCase
      */
     public function testBookingsAreIncludedAsEvents()
     {
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => User::factory()->create()->id,
-        ]);
-        $subscription->subscribable->bookings()->save($booking = Booking::factory()->create());
+        $subscription = Subscription::factory()->user()->create();
+        $booking = Booking::factory()->for($subscription->subscribable)->create();
 
         $rendered = $subscription->toCalendar();
 
@@ -92,14 +81,11 @@ class SubscriptionTest extends TestCase
      */
     public function testBookingsAreBundled()
     {
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => User::factory()->create()->id,
-        ]);
-        $subscription->subscribable->bookings()->saveMany(Booking::factory()->times(2)->create([
+        $subscription = Subscription::factory()->user()->create();
+        Booking::factory()->times(2)->for($subscription->subscribable)->create([
             'start_time' => now(),
             'end_time'   => now()->addHour(),
-        ]));
+        ]);
 
         $rendered = $subscription->toCalendar();
 
@@ -120,14 +106,10 @@ class SubscriptionTest extends TestCase
             'end_time'   => today()->addHour(),
         ];
 
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => User::factory()->create()->id,
-        ]);
-        $subscription->subscribable->bookings()->save(Booking::factory()->create($timestamps));
-        $subscription->subscribable->bookings()->save(Booking::factory()->create(array_merge($timestamps, [
-            'resource_id' => Resource::factory()->facility()->create()->id,
-        ])));
+        $subscription = Subscription::factory()->user()->create();
+
+        Booking::factory()->for($subscription->subscribable)->create($timestamps);
+        Booking::factory()->for($subscription->subscribable)->for(Resource::factory()->facility())->create($timestamps);
 
         $rendered = $subscription->toCalendar();
 
@@ -143,11 +125,14 @@ class SubscriptionTest extends TestCase
      */
     public function testFacilityResourceSubscriptionHaveUserName()
     {
+        $booking = Booking::factory()->create([
+            'resource_id' => Resource::factory()->facility(),
+        ]);
+
         $subscription = Subscription::factory()->create([
             'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => Resource::factory()->facility()->create()->id,
+            'subscribable_id'   => $booking->resource->id,
         ]);
-        $subscription->subscribable->bookings()->save($booking = Booking::factory()->create());
 
         $rendered = $subscription->toCalendar();
 
