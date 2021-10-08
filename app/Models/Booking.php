@@ -55,6 +55,17 @@ class Booking extends Model
                 $booking->setStatus('approved', 'Automatically approved');
             }
         });
+
+        static::updating(function ($booking) {
+            if (in_array($booking->status, ['approved', 'rejected']) && !auth()->user()->isAdmin()) {
+                $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
+
+                if ($mustBeApproved) {
+                    $booking->approval()->delete();
+                    $booking->setStatus('pending', 'Booking was changed after being ' . $booking->status);
+                }
+            }
+        });
     }
 
     /**

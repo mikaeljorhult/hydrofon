@@ -143,4 +143,79 @@ class ApprovalTest extends TestCase
         $response->assertForbidden();
         $this->assertModelExists($approval);
     }
+
+    /**
+     * If user is in an approving group and changes the booking after getting approval the approval is revoked.
+     *
+     * @return void
+     */
+    public function testApprovalIsRevokedIfUserChangesBooking()
+    {
+        $approval = Approval::factory()->create();
+        $booking = $approval->booking;
+
+        $group = Group::factory()->hasApprovers(1)->create();
+        $booking->user->groups()->attach($group);
+
+        $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->addMinute(),
+            'end_time'    => $booking->end_time,
+        ]);
+
+        $booking->refresh();
+
+        $response->assertRedirect();
+        $this->assertModelMissing($approval);
+        $this->assertEquals('pending', $booking->status);
+    }
+
+    /**
+     * If user don't need approval the booking is still automatically approved after changes.
+     *
+     * @return void
+     */
+    public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking()
+    {
+        $approval = Approval::factory()->create();
+        $booking = $approval->booking;
+
+        $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->addMinute(),
+            'end_time'    => $booking->end_time,
+        ]);
+
+        $booking->refresh();
+
+        $response->assertRedirect();
+        $this->assertModelExists($approval);
+        $this->assertEquals('approved', $booking->status);
+    }
+
+    /**
+     * Administrators can change a booking without approval being revoked.
+     *
+     * @return void
+     */
+    public function testApprovalIsNotRevokedIfAdminChangesBooking()
+    {
+        $approval = Approval::factory()->create();
+        $booking = $approval->booking;
+
+        $group = Group::factory()->hasApprovers(1)->create();
+        $booking->user->groups()->attach($group);
+
+        $response = $this->actingAs(User::factory()->admin()->create())->put('bookings/'.$booking->id, [
+            'resource_id' => $booking->resource_id,
+            'start_time'  => $booking->start_time->addMinute(),
+            'end_time'    => $booking->end_time,
+        ]);
+
+        $booking->refresh();
+
+        $response->assertRedirect();
+        $this->assertModelExists($approval);
+        $this->assertEquals('approved', $booking->status);
+    }
 }
