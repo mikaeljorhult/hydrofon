@@ -87,10 +87,9 @@ class UserTest extends TestCase
      */
     public function testBookingsAreIncludedInExport()
     {
-        $user = User::factory()->create();
-        $user->bookings()->save($booking = Booking::factory()->create());
+        $booking = Booking::factory()->create();
 
-        $rendered = $user->exportToJson();
+        $rendered = $booking->user->exportToJson();
 
         $this->assertJson($rendered);
         $this->assertStringContainsString($booking->resource->name, $rendered);

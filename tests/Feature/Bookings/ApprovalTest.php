@@ -23,8 +23,7 @@ class ApprovalTest extends TestCase
         $approver = User::factory()->create();
 
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
-        $user = User::factory()->create();
-        $user->groups()->attach($group);
+        $user = User::factory()->hasAttached($group)->create();
 
         $booking = Booking::factory()->create([
             'user_id' => $user->id,
@@ -102,7 +101,6 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalCanBeRevokedByAdmin()
     {
-        $this->withoutExceptionHandling();
         $admin = User::factory()->admin()->create();
         $approval = Approval::factory()->create();
 
@@ -131,7 +129,7 @@ class ApprovalTest extends TestCase
     }
 
     /**
-     * Approval can be revoked by approving user.
+     * Users can not revoke an approval.
      *
      * @return void
      */

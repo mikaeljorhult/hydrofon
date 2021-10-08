@@ -26,11 +26,40 @@ class SubscriptionFactory extends Factory
         ];
 
         $subscribableType = $this->faker->randomElement($subscribables);
-        $subscribable = app()->make($subscribableType)->factory()->create();
 
         return [
-            'subscribable_id'   => $subscribable->id,
+            'subscribable_id'   => app()->make($subscribableType)->factory(),
             'subscribable_type' => $subscribableType,
         ];
+    }
+
+    /**
+     * Subscription of a resource.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function resource()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'subscribable_id'   => \App\Models\Resource::factory(),
+                'subscribable_type' => \App\Models\Resource::class,
+            ];
+        });
+    }
+
+    /**
+     * Subscription of a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function user()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'subscribable_id'   => \App\Models\User::factory(),
+                'subscribable_type' => \App\Models\User::class,
+            ];
+        });
     }
 }

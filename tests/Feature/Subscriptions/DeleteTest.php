@@ -32,15 +32,11 @@ class DeleteTest extends TestCase
      */
     public function testUserSubscriptionsCanBeDeleted()
     {
-        $user = User::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
-        ]);
+        $subscription = Subscription::factory()->user()->create();
 
-        $this->from(route('users.show', [$user->id]))
-             ->deleteSubscription($subscription, $user)
-             ->assertRedirect(route('users.show', [$user->id]));
+        $this->from(route('users.show', [$subscription->subscribable->id]))
+             ->deleteSubscription($subscription, $subscription->subscribable)
+             ->assertRedirect(route('users.show', [$subscription->subscribable->id]));
 
         $this->assertModelMissing($subscription);
     }
@@ -52,15 +48,11 @@ class DeleteTest extends TestCase
      */
     public function testAdministratorCanDeleteAnyUserSubscription()
     {
-        $user = User::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
-        ]);
+        $subscription = Subscription::factory()->user()->create();
 
-        $this->from(route('users.show', [$user->id]))
+        $this->from(route('users.show', [$subscription->subscribable->id]))
              ->deleteSubscription($subscription)
-             ->assertRedirect(route('users.show', [$user->id]));
+             ->assertRedirect(route('users.show', [$subscription->subscribable->id]));
 
         $this->assertModelMissing($subscription);
     }
@@ -72,15 +64,11 @@ class DeleteTest extends TestCase
      */
     public function testAdministratorCanDeleteAResourceSubscription()
     {
-        $resource = Resource::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $resource->id,
-        ]);
+        $subscription = Subscription::factory()->resource()->create();
 
-        $this->from(route('resources.show', [$resource->id]))
+        $this->from(route('resources.show', [$subscription->subscribable->id]))
              ->deleteSubscription($subscription)
-             ->assertRedirect(route('resources.show', [$resource->id]));
+             ->assertRedirect(route('resources.show', [$subscription->subscribable->id]));
 
         $this->assertModelMissing($subscription);
     }
@@ -92,13 +80,9 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteAResourceSubscription()
     {
-        $resource = Resource::factory()->create();
-        $subscription = Subscription::factory()->create([
-            'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $resource->id,
-        ]);
+        $subscription = Subscription::factory()->resource()->create();
 
-        $this->from(route('resources.show', [$resource->id]))
+        $this->from(route('resources.show', [$subscription->subscribable->id]))
              ->deleteSubscription($subscription, User::factory()->create())
              ->assertStatus(403);
 
