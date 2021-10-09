@@ -56,7 +56,7 @@ class UserIdentifierController extends Controller
      */
     public function store(IdentifierStoreRequest $request, User $user)
     {
-        $user->identifiers()->create($request->all());
+        $user->identifiers()->create($request->validated());
 
         flash('Identifier was added');
 
@@ -94,7 +94,7 @@ class UserIdentifierController extends Controller
      */
     public function update(IdentifierUpdateRequest $request, User $user, Identifier $identifier)
     {
-        $identifier->update($request->all());
+        $identifier->update($request->validated());
 
         flash('Identifier was updated');
 

@@ -56,7 +56,7 @@ class ResourceIdentifierController extends Controller
      */
     public function store(IdentifierStoreRequest $request, Resource $resource)
     {
-        $resource->identifiers()->create($request->all());
+        $resource->identifiers()->create($request->validated());
 
         flash('Identifier was added');
 
@@ -94,7 +94,7 @@ class ResourceIdentifierController extends Controller
      */
     public function update(IdentifierUpdateRequest $request, Resource $resource, Identifier $identifier)
     {
-        $identifier->update($request->all());
+        $identifier->update($request->validated());
 
         flash('Identifier was updated');
 

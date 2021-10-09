@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $input = $request->all();
+        $input = $request->validated();
         $input['is_admin'] = $request->has('is_admin');
 
         if ($request->has('password')) {
@@ -113,7 +113,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $input = $request->all();
+        $input = $request->validated();
 
         if (! $user->is(auth()->user())) {
             $input['is_admin'] = $request->has('is_admin');

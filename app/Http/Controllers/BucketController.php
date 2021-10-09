@@ -60,7 +60,7 @@ class BucketController extends Controller
      */
     public function store(BucketStoreRequest $request)
     {
-        $bucket = Bucket::create($request->all());
+        $bucket = Bucket::create($request->validated());
         $bucket->resources()->sync($request->get('resources'));
 
         flash('Bucket "'.$bucket->name.'" was created');
@@ -105,7 +105,7 @@ class BucketController extends Controller
      */
     public function update(BucketUpdateRequest $request, Bucket $bucket)
     {
-        $bucket->update($request->all());
+        $bucket->update($request->validated());
         $bucket->resources()->sync($request->get('resources'));
 
         flash('Bucket "'.$bucket->name.'" was updated');

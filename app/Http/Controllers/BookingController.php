@@ -78,7 +78,7 @@ class BookingController extends Controller
     {
         $currentUser = auth()->user();
 
-        Booking::create(array_merge($request->all(), [
+        Booking::create(array_merge($request->validated(), [
             'user_id'       => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
         ]));
 
@@ -131,7 +131,7 @@ class BookingController extends Controller
     {
         $currentUser = auth()->user();
 
-        $booking->update(array_merge($request->all(), [
+        $booking->update(array_merge($request->validated(), [
             'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $booking->user_id,
         ]));
 
