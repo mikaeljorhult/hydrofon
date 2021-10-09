@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\PreserveReferer;
 use App\Models\Group;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GroupStoreRequest extends FormRequest
 {
@@ -28,7 +29,8 @@ class GroupStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'name'        => ['required'],
+            'approvers.*' => [Rule::exists('users', 'id')],
         ];
     }
 }

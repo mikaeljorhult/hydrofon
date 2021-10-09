@@ -61,6 +61,7 @@ class GroupController extends Controller
     public function store(GroupStoreRequest $request)
     {
         $group = Group::create($request->all());
+        $group->approvers()->sync($request->get('approvers'));
 
         flash('Group "'.$group->name.'" was created');
 
@@ -105,6 +106,7 @@ class GroupController extends Controller
     public function update(GroupUpdateRequest $request, Group $group)
     {
         $group->update($request->all());
+        $group->approvers()->sync($request->get('approvers'));
 
         flash('Group "'.$group->name.'" was updated');
 
