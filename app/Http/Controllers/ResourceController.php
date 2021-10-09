@@ -60,7 +60,7 @@ class ResourceController extends Controller
      */
     public function store(ResourceStoreRequest $request)
     {
-        $input = $request->all();
+        $input = $request->validated();
         $input['is_facility'] = $request->has('is_facility');
 
         $resource = Resource::create($input);
@@ -109,7 +109,7 @@ class ResourceController extends Controller
      */
     public function update(ResourceUpdateRequest $request, Resource $resource)
     {
-        $input = $request->all();
+        $input = $request->validated();
         $input['is_facility'] = $request->has('is_facility');
 
         $resource->update($input);

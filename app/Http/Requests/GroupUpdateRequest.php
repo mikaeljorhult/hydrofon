@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GroupUpdateRequest extends FormRequest
 {
@@ -27,7 +28,8 @@ class GroupUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'name'        => ['required'],
+            'approvers.*' => [Rule::exists('users', 'id')],
         ];
     }
 }
