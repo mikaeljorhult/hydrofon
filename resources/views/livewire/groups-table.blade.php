@@ -31,6 +31,22 @@
                             >Cancel</x-forms.button-secondary>
                         </td>
                     </tr>
+                    <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
+                        <td>&nbsp;</td>
+                        <td colspan="{{ count($this->tableHeaders) + 1 }}">
+                            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-4">
+                                <div>
+                                    <label class="block mb-2 text-xs uppercase">Approvers</label>
+                                    <x-forms.select
+                                        name="approvers[]"
+                                        :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
+                                        multiple
+                                        wire:model="editValues.approvers"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 @else
                     <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
                         <td data-title="&nbsp;">

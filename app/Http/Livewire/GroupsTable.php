@@ -3,12 +3,14 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 
 class GroupsTable extends BaseTable
 {
     use AuthorizesRequests;
 
     protected $model = \App\Models\Group::class;
+    protected $relationships = ['approvers'];
 
     public function onSave()
     {
@@ -17,9 +19,11 @@ class GroupsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name' => ['required'],
+            'editValues.name'        => ['required'],
+            'editValues.approvers.*' => [Rule::exists('users', 'id')],
         ])['editValues'];
 
+        $this->syncRelationship($item, $validatedData, 'approvers');
         $item->update($validatedData);
 
         $this->refreshItems([$item->id]);
