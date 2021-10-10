@@ -56,7 +56,7 @@ class ApproverTest extends TestCase
      */
     public function testApproversAreStoredWhenUpdatingGroup()
     {
-        $group    = Group::factory()->create();
+        $group = Group::factory()->create();
         $approver = User::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())->put('groups/'.$group->id, [
