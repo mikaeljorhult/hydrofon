@@ -24,23 +24,54 @@
                     <td data-title="End">
                         {{ $item->end_time->format('Y-m-d H:i') }}
                     </td>
+                    <td data-title="Status">
+                        @php
+                            $status = $item->status();
+
+                            switch($status->name) {
+                                case 'approved':
+                                    $statusClasses = 'bg-green-100 text-green-800';
+                                    break;
+                                case 'pending':
+                                    $statusClasses = 'bg-yellow-100 text-yellow-800';
+                                    break;
+                                case 'rejected':
+                                    $statusClasses = 'bg-red-100 text-red-800';
+                                    break;
+                            }
+                        @endphp
+
+                        <span
+                            class="inline-flex items-center px-2 py-0.5 rounded text-sm font-medium {{ $statusClasses }}"
+                            title="{{ $status->reason }}"
+                        >
+                                {{ $status->name }}
+                            </span>
+                    </td>
 
                     <td data-title="&nbsp;" class="table-actions">
-                        @unless($item->approval)
-                            <div>
-                                <form action="{{ route('approvals.store') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="booking_id" value="{{ $item->id }}" />
+                        <div>
+                            <form action="{{ route('approvals.store') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="booking_id" value="{{ $item->id }}" />
 
-                                    <button
-                                        type="submit"
-                                        title="Approve"
-                                        wire:click.prevent="$emit('approve', {{ $item->id }})"
-                                        wire:loading.attr="disabled"
-                                    >Approve</button>
-                                </form>
-                            </div>
-                        @endif
+                                <button
+                                    type="submit"
+                                    title="Approve"
+                                    wire:click.prevent="$emit('approve', {{ $item->id }})"
+                                    wire:loading.attr="disabled"
+                                >Approve</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <button
+                                type="submit"
+                                title="Reject"
+                                wire:click.prevent="$emit('reject', {{ $item->id }})"
+                                wire:loading.attr="disabled"
+                            >Reject</button>
+                        </div>
 
                         <div>
                             <form action="{{ route('calendar') }}" method="post">
@@ -72,6 +103,13 @@
                                 :disabled="count($this->selectedRows) === 0"
                                 wire:click.prevent="$emit('approve', false, true)"
                             >Approve</x-forms.button-link>
+                        </form>
+
+                        <form>
+                            <x-forms.button-link
+                                :disabled="count($this->selectedRows) === 0"
+                                wire:click.prevent="$emit('reject', false, true)"
+                            >Reject</x-forms.button-link>
                         </form>
                     </div>
                 </th>
