@@ -20,7 +20,7 @@ class BookingsTable extends BaseTable
         'user_name'     => 'User',
         'start_time'    => 'Start',
         'end_time'      => 'End',
-        'status'        => 'Status'
+        'status'        => 'Status',
     ];
 
     protected $listeners = [

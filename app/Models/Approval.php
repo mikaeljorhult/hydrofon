@@ -35,7 +35,7 @@ class Approval extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    function booking()
+    public function booking()
     {
         return $this->belongsTo(\App\Models\Booking::class);
     }
@@ -45,7 +45,7 @@ class Approval extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    function user()
+    public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
     }

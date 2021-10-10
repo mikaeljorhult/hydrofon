@@ -119,7 +119,7 @@ class ApprovalTest extends TestCase
     {
         $user = User::factory()->admin()->create();
         $approval = Approval::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user)->delete('approvals/'.$approval->id);

@@ -57,12 +57,12 @@ class Booking extends Model
         });
 
         static::updating(function ($booking) {
-            if (in_array($booking->status, ['approved', 'rejected']) && !auth()->user()->isAdmin()) {
+            if (in_array($booking->status, ['approved', 'rejected']) && ! auth()->user()->isAdmin()) {
                 $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
 
                 if ($mustBeApproved) {
                     $booking->approval()->delete();
-                    $booking->setStatus('pending', 'Booking was changed after being ' . $booking->status);
+                    $booking->setStatus('pending', 'Booking was changed after being '.$booking->status);
                 }
             }
         });
