@@ -218,6 +218,20 @@
                         <form>
                             <x-forms.button-link
                                 :disabled="count($this->selectedRows) === 0"
+                                wire:click.prevent="$emit('approve', false, true)"
+                            >Approve</x-forms.button-link>
+                        </form>
+
+                        <form>
+                            <x-forms.button-link
+                                :disabled="count($this->selectedRows) === 0"
+                                wire:click.prevent="$emit('reject', false, true)"
+                            >Reject</x-forms.button-link>
+                        </form>
+
+                        <form>
+                            <x-forms.button-link
+                                :disabled="count($this->selectedRows) === 0"
                                 wire:click.prevent="$emit('delete', false, true)"
                             >Delete</x-forms.button-link>
                         </form>

@@ -32,6 +32,8 @@ class BookingsTable extends BaseTable
         'checkin'   => 'onCheckin',
         'checkout'  => 'onCheckout',
         'switch'    => 'onSwitch',
+        'approve'   => 'onApprove',
+        'reject'    => 'onReject',
     ];
 
     public function onSave()
@@ -96,6 +98,41 @@ class BookingsTable extends BaseTable
         });
 
         $this->refreshItems($itemsToCheckout);
+    }
+
+    public function onApprove($id, $multiple = false)
+    {
+        $itemsToApprove = $multiple ? $this->selectedRows : [$id];
+
+        $items = $this->modelInstance->with(['approval'])->findOrFail($itemsToApprove);
+
+        $items->each(function ($item, $key) {
+            if ($item->status !== 'approved') {
+                $item->approval()->create();
+                $item->setStatus('approved', 'Approved by '.auth()->user()->name);
+            }
+        });
+
+        $this->refreshItems($itemsToApprove);
+    }
+
+    public function onReject($id, $multiple = false)
+    {
+        $itemsToApprove = $multiple ? $this->selectedRows : [$id];
+
+        $items = $this->modelInstance->with(['approval'])->findOrFail($itemsToApprove);
+
+        $items->each(function ($item, $key) {
+            if ($item->status !== 'rejected') {
+                if ($item->approval) {
+                    $item->approval()->delete();
+                }
+
+                $item->setStatus('rejected', 'Rejected by '.auth()->user()->name);
+            }
+        });
+
+        $this->refreshItems($itemsToApprove);
     }
 
     public function onSwitch($id)

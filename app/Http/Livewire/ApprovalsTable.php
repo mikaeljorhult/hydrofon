@@ -20,12 +20,14 @@ class ApprovalsTable extends BaseTable
         'user_name'     => 'User',
         'start_time'    => 'Start',
         'end_time'      => 'End',
+        'status'        => 'Status',
     ];
 
     protected $listeners = [
         'select'    => 'onSelect',
         'selectAll' => 'onSelectAll',
         'approve'   => 'onApprove',
+        'reject'    => 'onReject',
     ];
 
     public function onApprove($id, $multiple = false)
@@ -35,12 +37,32 @@ class ApprovalsTable extends BaseTable
         $items = $this->modelInstance->findOrFail($itemsToApprove);
 
         $items->each(function ($item, $key) {
-            if (! $item->isApproved) {
+            if ($item->status !== 'approved') {
                 $item->approval()->create();
+                $item->setStatus('approved', 'Approved by '.auth()->user()->name);
             }
         });
 
         $this->refreshItems($itemsToApprove);
+    }
+
+    public function onReject($id, $multiple = false)
+    {
+        $itemsToReject = $multiple ? $this->selectedRows : [$id];
+
+        $items = $this->modelInstance->with(['approval'])->findOrFail($itemsToReject);
+
+        $items->each(function ($item, $key) {
+            if ($item->status !== 'rejected') {
+                if ($item->approval) {
+                    $item->approval()->delete();
+                }
+
+                $item->setStatus('rejected', 'Rejected by '.auth()->user()->name);
+            }
+        });
+
+        $this->refreshItems($itemsToReject);
     }
 
     public function render()
