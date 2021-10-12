@@ -10,24 +10,39 @@
             @if($notifications->isNotEmpty())
                 <ul role="list" class="divide-y divide-gray-300">
                     @foreach($notifications as $notification)
-                        <li class="py-4 {{ $loop->first ? 'pt-0' : '' }}">
+                        <li>
+                            @if(isset($notification->data['url']))
+                                <a
+                                    href="{!! $notification->data['url'] !!}"
+                                    class="block py-4 px-2 pr-3 {{ $notification->unread() ? 'border-l-2 border-brand-500' : '' }}"
+                                >
+                            @else
+                                <div class="py-4 px-2 pr-3 {{ $notification->unread() ? 'border-l-2 border-brand-500' : '' }}">
+                            @endif
+
                             <div class="flex space-x-3">
                                 <div class="text-gray-600">
                                     <x-dynamic-component
-                                        :component="'heroicon-s-' . $notification->data['icon']"
+                                        :component="'heroicon-' . ($notification->unread() ? 's' : 'o') . '-' . $notification->data['icon']"
                                         class="h-6 w-6 rounded-full"
                                     />
                                 </div>
 
                                 <div class="flex-1 space-y-1">
-                                    <div class="flex items-center justify-between">
-                                        <h3 class="text-sm font-medium">{{ $notification->data['title'] }}</h3>
-                                        <p class="text-sm text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
+                                    <div class="flex items-baseline justify-between">
+                                        <h3 class="text-sm {{ $notification->unread() ? 'font-medium' : '' }}">{{ $notification->data['title'] }}</h3>
+                                        <p class="text-xs text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
                                     </div>
 
                                     <p class="text-sm text-gray-500">{{ $notification->data['body'] }}</p>
                                 </div>
                             </div>
+
+                            @if(isset($notification->data['url']))
+                                </a>
+                            @else
+                                </div>
+                            @endif
                         </li>
                     @endforeach
                 </ul>

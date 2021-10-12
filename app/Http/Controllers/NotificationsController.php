@@ -24,7 +24,12 @@ class NotificationsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $notifications = auth()->user()->unreadNotifications;
+        $notifications = auth()->user()->notifications()
+            ->orderBy('read_at', 'desc')
+            ->latest()
+            ->limit(8)
+            ->get();
+
         auth()->user()->unreadNotifications()->update(['read_at' => now()]);
 
         return view('notifications.index')
