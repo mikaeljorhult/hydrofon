@@ -6,7 +6,7 @@
     <section class="container space-y-8">
         <x-heading :title="$user->name" :url="route('profile')" />
 
-        @if($latest->isNotEmpty() && $upcoming->isNotEmpty() && $overdue->isNotEmpty())
+        @if($latest->isNotEmpty() || $upcoming->isNotEmpty() || $overdue->isNotEmpty())
             <div>
                 <h2>Bookings</h2>
 
