@@ -10,52 +10,116 @@
             <div>
                 <h2>Bookings</h2>
 
-                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <dl class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     @if($latest->isNotEmpty())
-                        <div class="p-4 pt-3 bg-gray-100">
-                            <h3 class="mt-0 mb-2">Latest</h3>
-                            @foreach($latest as $booking)
-                                <ul class="mb-3">
-                                    <li>{{ $booking->start_time->format('Y-m-d H:i') }}: {{ $booking->resource->name }}</li>
-                                </ul>
-                            @endforeach
+                        <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                            <dt>
+                                <div class="absolute bg-brand rounded-md p-3">
+                                    <x-heroicon-o-calendar class="h-6 w-6 text-white" />
+                                </div>
 
-                            <div class="text-right">
-                                <a href="{{ route('profile.bookings') }}">See all bookings</a>
-                            </div>
+                                <p class="ml-16 text-sm font-medium text-gray-500 truncate">Latest Bookings</p>
+                            </dt>
+
+                            <dd class="ml-16 pb-6 sm:pb-7">
+                                <p>
+                                    <ul class="mt-2">
+                                        @foreach($latest as $booking)
+                                            <li class="mb-1">
+                                                <span class="text-sm whitespace-nowrap">{{ $booking->start_time->format('Y-m-d H:i') }}:</span>
+                                                {{ $booking->resource->name }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </p>
+
+                                <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a
+                                            href="{{ route('profile.bookings') }}"
+                                            class="font-medium text-brand-600 hover:text-brand-500"
+                                        >
+                                            View all<span class="sr-only"> Latest bookings</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
                         </div>
                     @endif
 
                     @if($upcoming->isNotEmpty())
-                        <div class="p-4 pt-3 bg-gray-100">
-                            <h3 class="mt-0 mb-2">Upcoming</h3>
-                            @foreach($upcoming as $day)
-                                <h3 class="mt-0 mb-1 text-sm font-normal">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
-                                <ul class="mb-3">
-                                    @foreach($day as $booking)
-                                        <li>{{ $booking->resource->name }}</li>
+                        <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                            <dt>
+                                <div class="absolute bg-brand rounded-md p-3">
+                                    <x-heroicon-o-plus-circle class="h-6 w-6 text-white" />
+                                </div>
+
+                                <p class="ml-16 text-sm font-medium text-gray-500 truncate">Upcoming Bookings</p>
+                            </dt>
+
+                            <dd class="ml-16 pb-6 sm:pb-7">
+                                <p>
+                                    @foreach($upcoming as $day)
+                                        <h3 class="pt-2 text-sm">{{ $day->first()->start_time->format('Y-m-d') }}</h3>
+
+                                        <ul>
+                                            <li>
+                                                {{ $booking->resource->name }}
+                                            </li>
+                                        </ul>
                                     @endforeach
-                                </ul>
-                            @endforeach
+                                </p>
+
+                                <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a
+                                            href="{{ route('profile.bookings') }}"
+                                            class="font-medium text-brand-600 hover:text-brand-500"
+                                        >
+                                            View all<span class="sr-only"> Upcoming bookings</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
                         </div>
                     @endif
 
                     @if($overdue->isNotEmpty())
-                        <div class="p-4 pt-3 bg-gray-100">
-                            <h3 class="mt-0 mb-2">Overdue</h3>
-                            <ul class="mb-3">
-                                @foreach($overdue as $booking)
-                                    <li>
-                                        {{ $booking->resource->name }}
-                                        <span class="text-sm">
-                                            ({{ $booking->end_time->diffForHumans() }})
-                                        </span>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                            <dt>
+                                <div class="absolute bg-brand rounded-md p-3">
+                                    <x-heroicon-o-exclamation class="h-6 w-6 text-white" />
+                                </div>
+
+                                <p class="ml-16 text-sm font-medium text-gray-500 truncate">Overdue Bookings</p>
+                            </dt>
+
+                            <dd class="ml-16 pb-6 sm:pb-7">
+                                <p>
+                                    @foreach($overdue as $booking)
+                                        <ul class="pt-2">
+                                            <li>
+                                                {{ $booking->resource->name }}
+                                                <span class="text-sm whitespace-nowrap">({{ $booking->end_time->diffForHumans() }})</span>
+                                            </li>
+                                        </ul>
+                                    @endforeach
+                                </p>
+
+                                <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a
+                                            href="{{ route('profile.bookings') }}"
+                                            class="font-medium text-brand-600 hover:text-brand-500"
+                                        >
+                                            View all<span class="sr-only"> Overdue bookings</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
                         </div>
                     @endif
-                </div>
+                </dl>
             </div>
         @endif
 
