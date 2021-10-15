@@ -43,6 +43,16 @@ class Resource extends Model
     }
 
     /**
+     * Whether user is administrator or not.
+     *
+     * @return bool
+     */
+    public function isFacility()
+    {
+        return $this->is_facility;
+    }
+
+    /**
      * Bookings of resource.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

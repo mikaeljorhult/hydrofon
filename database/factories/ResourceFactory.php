@@ -27,6 +27,11 @@ class ResourceFactory extends Factory
         ];
     }
 
+    public function equipment()
+    {
+        return $this->state(['is_facility' => false]);
+    }
+
     public function facility()
     {
         return $this->state(['is_facility' => true]);

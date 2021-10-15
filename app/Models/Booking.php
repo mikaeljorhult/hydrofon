@@ -47,7 +47,17 @@ class Booking extends Model
         });
 
         static::created(function ($booking) {
-            $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
+            $requireApproval = config('hydrofon.require_approval');
+
+            if (
+                $requireApproval === 'none'
+                || ($requireApproval === 'equipment' && $booking->resource->isFacility())
+                || ($requireApproval === 'facilities' && !$booking->resource->isFacility())
+            ) {
+                $mustBeApproved = false;
+            } else {
+                $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
+            }
 
             if ($mustBeApproved) {
                 $booking->setStatus('pending');
@@ -57,6 +67,16 @@ class Booking extends Model
         });
 
         static::updating(function ($booking) {
+            $requireApproval = config('hydrofon.require_approval');
+
+            if (
+                $requireApproval === 'none'
+                || ($requireApproval === 'equipment' && $booking->resource->isFacility())
+                || ($requireApproval === 'facilities' && !$booking->resource->isFacility())
+            ) {
+                return;
+            }
+
             if (in_array($booking->status, ['approved', 'rejected']) && ! auth()->user()->isAdmin()) {
                 $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
 

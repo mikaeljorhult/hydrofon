@@ -5,8 +5,10 @@ namespace Tests\Feature\Bookings;
 use App\Models\Approval;
 use App\Models\Booking;
 use App\Models\Group;
+use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class ApprovalTest extends TestCase
@@ -20,18 +22,96 @@ class ApprovalTest extends TestCase
      */
     public function testBookingsNeedingApprovalAreListed()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $approver = User::factory()->create();
 
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
-        $user = User::factory()->hasAttached($group)->create();
 
-        $booking = Booking::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $booking = Booking::factory()
+                          ->for(User::factory()->hasAttached($group))
+                          ->create();
 
         $this->actingAs($approver)->get('approvals')
             ->assertOk()
             ->assertSeeText($booking->user->name);
+    }
+
+    /**
+     * Config may remove need for approval.
+     *
+     * @return void
+     */
+    public function testConfigCanRemoveNeedForApproval()
+    {
+        Config::set('hydrofon.require_approval', 'none');
+
+        $approver = User::factory()->create();
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+
+        $booking = Booking::factory()
+                          ->for(User::factory()->hasAttached($group))
+                          ->create();
+
+        $this->actingAs($approver)->get('approvals')
+             ->assertOk()
+             ->assertDontSeeText($booking->user->name);
+    }
+
+    /**
+     * Config may remove need for approval for equipment.
+     *
+     * @return void
+     */
+    public function testConfigCanRemoveNeedForApprovalForEquipment()
+    {
+        Config::set('hydrofon.require_approval', 'facilities');
+
+        $approver = User::factory()->create();
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+
+        $equipmentBooking = Booking::factory()
+                          ->for(User::factory()->hasAttached($group))
+                          ->for(Resource::factory()->equipment())
+                          ->create();
+
+        $facilityBooking = Booking::factory()
+                                  ->for(User::factory()->hasAttached($group))
+                                  ->for(Resource::factory()->facility())
+                                  ->create();
+
+        $this->actingAs($approver)->get('approvals')
+             ->assertOk()
+             ->assertDontSeeText($equipmentBooking->user->name)
+             ->assertSeeText($facilityBooking->user->name);
+    }
+
+    /**
+     * Config may remove need for approval for facilities.
+     *
+     * @return void
+     */
+    public function testConfigCanRemoveNeedForApprovalForFacilities()
+    {
+        Config::set('hydrofon.require_approval', 'equipment');
+
+        $approver = User::factory()->create();
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+
+        $equipmentBooking = Booking::factory()
+                                   ->for(User::factory()->hasAttached($group))
+                                   ->for(Resource::factory()->equipment())
+                                   ->create();
+
+        $facilityBooking = Booking::factory()
+                                  ->for(User::factory()->hasAttached($group))
+                                  ->for(Resource::factory()->facility())
+                                  ->create();
+
+        $this->actingAs($approver)->get('approvals')
+             ->assertOk()
+             ->assertSeeText($equipmentBooking->user->name)
+             ->assertDontSeeText($facilityBooking->user->name);
     }
 
     /**
@@ -41,6 +121,8 @@ class ApprovalTest extends TestCase
      */
     public function testBookingsNotNeedingApprovalAreOmitted()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $approver = User::factory()->create();
         $booking = Booking::factory()->create();
 
@@ -56,6 +138,8 @@ class ApprovalTest extends TestCase
      */
     public function testBookingCanBeApproved()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $user = User::factory()->create();
         $booking = Booking::factory()->create();
 
@@ -80,6 +164,8 @@ class ApprovalTest extends TestCase
      */
     public function testBookingCanNotBeApprovedIfUserIsInAnApprovingGroup()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $user = User::factory()->create();
         $booking = Booking::factory()->create();
 
@@ -101,6 +187,8 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalCanBeRevokedByAdmin()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $admin = User::factory()->admin()->create();
         $approval = Approval::factory()->create();
 
@@ -117,10 +205,10 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalCanBeRevokedByApprover()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $user = User::factory()->admin()->create();
-        $approval = Approval::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $approval = Approval::factory()->for($user)->create();
 
         $response = $this->actingAs($user)->delete('approvals/'.$approval->id);
 
@@ -135,6 +223,8 @@ class ApprovalTest extends TestCase
      */
     public function testUsersCanNotRevokeApproval()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $user = User::factory()->create();
         $approval = Approval::factory()->create();
 
@@ -151,6 +241,8 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalIsRevokedIfUserChangesBooking()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $approval = Approval::factory()->create();
         $booking = $approval->booking;
 
@@ -177,6 +269,8 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $approval = Approval::factory()->create();
         $booking = $approval->booking;
 
@@ -200,6 +294,8 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalIsNotRevokedIfAdminChangesBooking()
     {
+        Config::set('hydrofon.require_approval', 'all');
+
         $approval = Approval::factory()->create();
         $booking = $approval->booking;
 
