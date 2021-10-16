@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Bookings;
+namespace Tests\Feature\Approvals;
 
 use App\Models\Approval;
 use App\Models\Booking;
@@ -14,6 +14,37 @@ use Tests\TestCase;
 class ApprovalTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * User not assigned as an approver can not .
+     *
+     * @return void
+     */
+    public function testNonApproverUserCannotSeeList()
+    {
+        Config::set('hydrofon.require_approval', 'all');
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->get('approvals')
+             ->assertForbidden();
+    }
+
+    /**
+     * List is not available to approvers if approval requirement has been turned off.
+     *
+     * @return void
+     */
+    public function testApproverCannotSeeListIfTurnedOff()
+    {
+        Config::set('hydrofon.require_approval', 'none');
+
+        $approver = User::factory()->create();
+        Group::factory()->hasAttached($approver, [], 'approvers')->create();
+
+        $this->actingAs($approver)->get('approvals')
+             ->assertForbidden();
+    }
 
     /**
      * Bookings needing approval are listed.
@@ -35,27 +66,6 @@ class ApprovalTest extends TestCase
         $this->actingAs($approver)->get('approvals')
             ->assertOk()
             ->assertSeeText($booking->user->name);
-    }
-
-    /**
-     * Config may remove need for approval.
-     *
-     * @return void
-     */
-    public function testConfigCanRemoveNeedForApproval()
-    {
-        Config::set('hydrofon.require_approval', 'none');
-
-        $approver = User::factory()->create();
-        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
-
-        $booking = Booking::factory()
-                          ->for(User::factory()->hasAttached($group))
-                          ->create();
-
-        $this->actingAs($approver)->get('approvals')
-             ->assertOk()
-             ->assertDontSeeText($booking->user->name);
     }
 
     /**
@@ -124,6 +134,8 @@ class ApprovalTest extends TestCase
         Config::set('hydrofon.require_approval', 'all');
 
         $approver = User::factory()->create();
+        Group::factory()->hasAttached($approver, [], 'approvers')->create();
+
         $booking = Booking::factory()->create();
 
         $this->actingAs($approver)->get('approvals')

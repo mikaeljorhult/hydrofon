@@ -12,9 +12,34 @@ class ApprovalPolicy
     use HandlesAuthorization;
 
     /**
+     * @param  \App\Models\User  $user
+     * @param  string  $ability
+     * @return bool
+     */
+    public function before(User $user, $ability)
+    {
+        // Bail if approval isn't required.
+        if (config('hydrofon.require_approval') === 'none') {
+            return false;
+        }
+    }
+
+    /**
+     * Determine whether the user can see list of approvals.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function list(User $user)
+    {
+        return $user->isAdmin() || $user->approvingGroups()->exists();
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user, Booking $booking)

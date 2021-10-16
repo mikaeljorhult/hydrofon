@@ -29,6 +29,8 @@ class ApprovalController extends Controller
      */
     public function index()
     {
+        $this->authorize('list', Approval::class);
+
         $bookings = QueryBuilder::for(Booking::class)
                                 ->select('bookings.*')
                                 ->with(['resource', 'user'])
