@@ -25,28 +25,7 @@
                         {{ $item->end_time->format('Y-m-d H:i') }}
                     </td>
                     <td data-title="Status">
-                        @php
-                            $status = $item->status();
-
-                            switch($status->name) {
-                                case 'approved':
-                                    $statusClasses = 'bg-green-100 text-green-800';
-                                    break;
-                                case 'pending':
-                                    $statusClasses = 'bg-yellow-100 text-yellow-800';
-                                    break;
-                                case 'rejected':
-                                    $statusClasses = 'bg-red-100 text-red-800';
-                                    break;
-                            }
-                        @endphp
-
-                        <span
-                            class="inline-flex items-center px-2 py-0.5 rounded text-sm font-medium {{ $statusClasses }}"
-                            title="{{ $status->reason }}"
-                        >
-                                {{ $status->name }}
-                            </span>
+                        @include('livewire.partials.item-status', ['item' => $item])
                     </td>
 
                     <td data-title="&nbsp;" class="table-actions">
@@ -89,14 +68,14 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="{{ count($this->tableHeaders) + 2 }}">No bookings are awaiting your approval.</td>
+                    <td colspan="{{ count($this->headers) + 2 }}">No bookings are awaiting your approval.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="{{ count($this->tableHeaders) + 2 }}">
+                <th colspan="{{ count($this->headers) + 2 }}">
                     <div class="flex justify-end">
                         <form>
                             <x-forms.button-link

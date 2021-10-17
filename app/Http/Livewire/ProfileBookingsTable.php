@@ -19,7 +19,6 @@ class ProfileBookingsTable extends BaseTable
         'resources.name' => 'Resource',
         'start_time'     => 'Start',
         'end_time'       => 'End',
-        'status'         => 'Status',
     ];
 
     protected $listeners = [
@@ -29,6 +28,13 @@ class ProfileBookingsTable extends BaseTable
         'save'      => 'onSave',
         'delete'    => 'onDelete',
     ];
+
+    public function getHeadersProperty()
+    {
+        return config('hydrofon.require_approval') !== 'none'
+            ? array_merge($this->tableHeaders, ['status' => 'Status'])
+            : $this->tableHeaders;
+    }
 
     public function onSave()
     {

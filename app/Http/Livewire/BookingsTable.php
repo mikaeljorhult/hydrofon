@@ -20,7 +20,6 @@ class BookingsTable extends BaseTable
         'user_name'     => 'User',
         'start_time'    => 'Start',
         'end_time'      => 'End',
-        'status'        => 'Status',
     ];
 
     protected $listeners = [
@@ -35,6 +34,13 @@ class BookingsTable extends BaseTable
         'approve'   => 'onApprove',
         'reject'    => 'onReject',
     ];
+
+    public function getHeadersProperty()
+    {
+        return config('hydrofon.require_approval') !== 'none'
+            ? array_merge($this->tableHeaders, ['status' => 'Status'])
+            : $this->tableHeaders;
+    }
 
     public function onSave()
     {

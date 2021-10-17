@@ -70,14 +70,14 @@
                 @endif
             @empty
                 <tr>
-                    <td colspan="{{ count($this->tableHeaders) + 2 }}">No buckets was found.</td>
+                    <td colspan="{{ count($this->headers) + 2 }}">No buckets was found.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="{{ count($this->tableHeaders) + 2 }}">
+                <th colspan="{{ count($this->headers) + 2 }}">
                     <div class="flex justify-end">
                         <form>
                             <x-forms.button-link

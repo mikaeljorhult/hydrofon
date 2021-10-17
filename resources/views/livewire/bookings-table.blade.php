@@ -55,7 +55,9 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
-                        <td data-title="&nbsp;">&nbsp;</td>
+                        @if(config('hydrofon.require_approval') !== 'none')
+                            <td data-title="&nbsp;">&nbsp;</td>
+                        @endif
                         <td data-title="&nbsp;" class="text-right">
                             <x-forms.button
                                 type="link"
@@ -95,30 +97,11 @@
                         <td data-title="End">
                             {{ $item->end_time->format('Y-m-d H:i') }}
                         </td>
-                        <td data-title="Status">
-                            @php
-                                $status = $item->status();
-
-                                switch($status->name) {
-                                    case 'approved':
-                                        $statusClasses = 'bg-green-100 text-green-800';
-                                        break;
-                                    case 'pending':
-                                        $statusClasses = 'bg-yellow-100 text-yellow-800';
-                                        break;
-                                    case 'rejected':
-                                        $statusClasses = 'bg-red-100 text-red-800';
-                                        break;
-                                }
-                            @endphp
-
-                            <span
-                                class="inline-flex items-center px-2 py-0.5 rounded text-sm font-medium {{ $statusClasses }}"
-                                title="{{ $status->reason }}"
-                            >
-                                {{ $status->name }}
-                            </span>
-                        </td>
+                        @if(config('hydrofon.require_approval') !== 'none')
+                            <td data-title="Status">
+                                @include('livewire.partials.item-status', ['item' => $item])
+                            </td>
+                        @endif
 
                         <td data-title="&nbsp;" class="table-actions">
                             @unless($item->resource->is_facility || $item->checkout || $item->checkin)
@@ -192,14 +175,14 @@
                 @endif
             @empty
                 <tr>
-                    <td colspan="{{ count($this->tableHeaders) + 2 }}">No bookings was found.</td>
+                    <td colspan="{{ count($this->headers) + 2 }}">No bookings was found.</td>
                 </tr>
             @endforelse
         </tbody>
 
         <tfoot>
             <tr>
-                <th colspan="{{ count($this->tableHeaders) + 2 }}">
+                <th colspan="{{ count($this->headers) + 2 }}">
                     <div class="flex justify-end">
                         <form>
                             <x-forms.button-link
@@ -215,19 +198,21 @@
                             >Check in</x-forms.button-link>
                         </form>
 
-                        <form>
-                            <x-forms.button-link
-                                :disabled="count($this->selectedRows) === 0"
-                                wire:click.prevent="$emit('approve', false, true)"
-                            >Approve</x-forms.button-link>
-                        </form>
+                        @if(config('hydrofon.require_approval') !== 'none')
+                            <form>
+                                <x-forms.button-link
+                                    :disabled="count($this->selectedRows) === 0"
+                                    wire:click.prevent="$emit('approve', false, true)"
+                                >Approve</x-forms.button-link>
+                            </form>
 
-                        <form>
-                            <x-forms.button-link
-                                :disabled="count($this->selectedRows) === 0"
-                                wire:click.prevent="$emit('reject', false, true)"
-                            >Reject</x-forms.button-link>
-                        </form>
+                            <form>
+                                <x-forms.button-link
+                                    :disabled="count($this->selectedRows) === 0"
+                                    wire:click.prevent="$emit('reject', false, true)"
+                                >Reject</x-forms.button-link>
+                            </form>
+                        @endif
 
                         <form>
                             <x-forms.button-link

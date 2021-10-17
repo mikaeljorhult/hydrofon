@@ -28,19 +28,21 @@
                                 />
                             </div>
 
-                            <div class="sm:col-span-4">
-                                <x-forms.label for="approvers">
-                                    Approvers
-                                </x-forms.label>
+                            @if(config('hydrofon.require_approval') !== 'none')
+                                <div class="sm:col-span-4">
+                                    <x-forms.label for="approvers">
+                                        Approvers
+                                    </x-forms.label>
 
-                                <x-forms.select
-                                    id="approvers"
-                                    name="approvers[]"
-                                    :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
-                                    :selected="old('approvers') ?? null"
-                                    multiple
-                                />
-                            </div>
+                                    <x-forms.select
+                                        id="approvers"
+                                        name="approvers[]"
+                                        :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
+                                        :selected="old('approvers') ?? null"
+                                        multiple
+                                    />
+                                </div>
+                            @endif
                         </div>
                     </div>
 

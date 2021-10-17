@@ -6,7 +6,7 @@
         />
     </th>
 
-    @foreach($this->tableHeaders as $header => $title)
+    @foreach($this->headers as $header => $title)
         <th {!! substr($header, 0, 3) === 'is_' ? 'class="text-center"' : '' !!}>
             <a href="{{ $this->tableBaseUrl.'?'.http_build_query(['sort' => (request('sort') === $header || ($this->tableDefaultSort === $header && !request()->has('sort')) ? '-' : '') . $header] + request()->only(['filter', 'sort'])) }}">{{ $title }}</a>
         </th>

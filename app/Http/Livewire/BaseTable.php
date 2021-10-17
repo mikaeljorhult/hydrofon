@@ -49,6 +49,11 @@ class BaseTable extends Component
         }
     }
 
+    public function getHeadersProperty()
+    {
+        return $this->tableHeaders;
+    }
+
     public function onSelect($id, $checked)
     {
         if ($checked) {
