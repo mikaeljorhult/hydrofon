@@ -1,5 +1,12 @@
 <nav class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 md:border-none">
-    <button type="button" class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 md:hidden">
+    <button
+        type="button"
+        class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 md:hidden"
+        x-data="{ resourceListPresent: !!document.getElementById('resourcelist') }"
+        x-on:click.prevent="$dispatch('show-resourcelist')"
+        x-show="resourceListPresent"
+        x-cloak
+    >
         <span class="sr-only">Open sidebar</span>
         <x-heroicon-o-menu-alt-1 class="w-6 h-6" />
     </button>
