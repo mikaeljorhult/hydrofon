@@ -52,7 +52,7 @@ class Booking extends Model
             if (
                 $requireApproval === 'none'
                 || ($requireApproval === 'equipment' && $booking->resource->isFacility())
-                || ($requireApproval === 'facilities' && !$booking->resource->isFacility())
+                || ($requireApproval === 'facilities' && ! $booking->resource->isFacility())
             ) {
                 $mustBeApproved = false;
             } else {
@@ -72,7 +72,7 @@ class Booking extends Model
             if (
                 $requireApproval === 'none'
                 || ($requireApproval === 'equipment' && $booking->resource->isFacility())
-                || ($requireApproval === 'facilities' && !$booking->resource->isFacility())
+                || ($requireApproval === 'facilities' && ! $booking->resource->isFacility())
             ) {
                 return;
             }
