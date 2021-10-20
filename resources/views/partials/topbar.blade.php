@@ -11,6 +11,20 @@
         <x-heroicon-o-menu-alt-1 class="w-6 h-6" />
     </button>
 
+    <div class="flex items-center px-2 bg-brand text-white font-bold text-sm leading-none uppercase md:hidden">
+        <a href="{{ route('home') }}">Hydrofon</a>
+    </div>
+
+    <button
+        type="button"
+        class="absolute top-full right-6 mt-px p-2 bg-white md:hidden"
+        x-data="{ visible: false }"
+        x-on:click.prevent="visible = !visible; $dispatch('toggle-sidebar', visible)"
+    >
+        <x-heroicon-s-chevron-double-up x-bind:class="{ 'w-4 h-4': true, 'hidden': !visible }" />
+        <x-heroicon-s-chevron-double-down x-bind:class="{ 'w-4 h-4': true, 'hidden': visible }" />
+    </button>
+
     <div class="flex-1 px-4 flex justify-between sm:px-6">
         <div class="flex-1 flex">
             @admin

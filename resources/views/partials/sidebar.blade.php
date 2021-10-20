@@ -1,4 +1,11 @@
-<aside class="sidebar md:w-32 flex flex-col flex-shrink-0 items-center justify-between overflow-hidden bg-complementary-900 text-complementary text-center">
+<aside
+    class="sidebar md:w-32 md:!flex flex-col flex-shrink-0 items-center justify-between overflow-hidden bg-complementary-900 text-complementary text-center"
+
+    x-data="{ visible: false }"
+    x-on:toggle-sidebar.window="visible = $event.detail;"
+    x-show="visible"
+    x-cloak
+>
     <header class="w-full py-12 px-0 bg-brand">
         <h1 class="m-0 font-bold text-base leading-none uppercase">
             <a href="{{ url('/') }}" class="block text-white hover:text-white">

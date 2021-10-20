@@ -73,8 +73,8 @@
             },
         });
     "
-    x-on:show-resourcelist.window="visible = true"
 
+    x-on:show-resourcelist.window="visible = true"
     x-show="visible"
     x-transition:enter="transition ease-in-out duration-300 transform"
     x-transition:enter-start="-translate-x-full"
