@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
+use App\Notifications\BookingAwaitingApproval;
 use App\Notifications\BookingOverdue;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
@@ -42,6 +43,7 @@ class NotifyUsers extends Command
     public function handle()
     {
         $this->overdueBookings();
+        $this->awaitingApproval();
 
         return 0;
     }
@@ -75,6 +77,23 @@ class NotifyUsers extends Command
 
         if ($users->isNotEmpty()) {
             Notification::send($users, new BookingOverdue());
+        }
+    }
+
+    /**
+     * Notify approvers of new bookings waiting for approval.
+     */
+    private function awaitingApproval()
+    {
+        $approvers = User::whereHas('approvingGroups.users.bookings', function (Builder $query) {
+            $query
+                ->currentStatus('pending')
+                ->where('updated_at', '>', $this->dateOfLastNotification(BookingAwaitingApproval::class));
+        })->get();
+
+
+        if ($approvers->isNotEmpty()) {
+            Notification::send($approvers, new BookingAwaitingApproval());
         }
     }
 }
