@@ -65,7 +65,7 @@ class NotifyTest extends TestCase
     {
         $user = User::factory()->create();
         $user->notify(new BookingOverdue());
-        $user->notifications()->update(['created_at' => now()->subHour()]);
+        $user->notifications()->update(['created_at' => now()->subHour(), 'read_at' => now()]);
 
         Booking::factory()
                ->hasCheckout()
@@ -135,7 +135,7 @@ class NotifyTest extends TestCase
 
         $approver = User::factory()->create();
         $approver->notify(new BookingAwaitingApproval());
-        $approver->notifications()->update(['created_at' => now()->subHour()]);
+        $approver->notifications()->update(['created_at' => now()->subHour(), 'read_at' => now()]);
 
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 

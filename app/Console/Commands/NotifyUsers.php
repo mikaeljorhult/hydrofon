@@ -56,11 +56,18 @@ class NotifyUsers extends Command
      */
     private function dateOfLastNotification(string $className)
     {
-        return \DB::table('notifications')
-                  ->select('created_at')
-                  ->where('type', '=', $className)
-                  ->latest()
-                  ->first()->created_at ?? '1970-01-01 00:00:00';
+        $notification = \DB::table('notifications')
+            ->select(['created_at', 'read_at'])
+            ->where('type', '=', $className)
+            ->latest()
+            ->first();
+
+        // Don't notify users again if they have an unread notification of same type.
+        if ($notification && $notification->read_at === null) {
+            return now()->addHour();
+        }
+
+        return $notification->created_at ?? '1970-01-01 00:00:00';
     }
 
     /**
