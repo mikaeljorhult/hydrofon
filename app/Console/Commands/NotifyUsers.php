@@ -3,10 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
+use App\Notifications\BookingApproved;
 use App\Notifications\BookingAwaitingApproval;
 use App\Notifications\BookingOverdue;
+use App\Notifications\BookingRejected;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Notification;
 
 class NotifyUsers extends Command
@@ -16,7 +19,7 @@ class NotifyUsers extends Command
      *
      * @var string
      */
-    protected $signature = 'hydrofon:notifications';
+    protected $signature = 'hydrofon:notifications {--type=all : Type of notification to process}';
 
     /**
      * The console command description.
@@ -42,8 +45,22 @@ class NotifyUsers extends Command
      */
     public function handle()
     {
-        $this->overdueBookings();
-        $this->awaitingApproval();
+        $requireApproval = config('hydrofon.require_approval') !== 'none';
+
+        if ($this->option('type') === 'all') {
+            $this->overdueBookings();
+            $this->awaitingApproval();
+            $this->approvedBookings();
+            $this->rejectedBookings();
+        } elseif ($this->option('type') === 'overdue') {
+            $this->overdueBookings();
+        } elseif ($this->option('type') === 'approval' && $requireApproval) {
+            $this->awaitingApproval();
+        } elseif ($this->option('type') === 'approved' && $requireApproval) {
+            $this->approvedBookings();
+        } elseif ($this->option('type') === 'rejected' && $requireApproval) {
+            $this->rejectedBookings();
+        }
 
         return 0;
     }
@@ -68,6 +85,43 @@ class NotifyUsers extends Command
         }
 
         return $notification->created_at ?? '1970-01-01 00:00:00';
+    }
+
+    /**
+     * Notify users with approved bookings.
+     */
+    private function approvedBookings()
+    {
+        $users = User::whereHas('bookings', function (Builder $query) {
+             $query
+                 ->currentStatus('approved')
+                 ->whereHas('approval')
+                 ->whereHas('statuses', function (Builder $query) {
+                     $query->where('created_at', '>', $this->dateOfLastNotification(BookingApproved::class));
+                 });
+        })->get();
+
+        if ($users->isNotEmpty()) {
+            Notification::send($users, new BookingApproved());
+        }
+    }
+
+    /**
+     * Notify users with rejected bookings.
+     */
+    private function rejectedBookings()
+    {
+        $users = User::whereHas('bookings', function (Builder $query) {
+            $query
+                ->currentStatus('rejected')
+                ->whereHas('statuses', function (Builder $query) {
+                    $query->where('created_at', '>', $this->dateOfLastNotification(BookingRejected::class));
+                });
+        })->get();
+
+        if ($users->isNotEmpty()) {
+            Notification::send($users, new BookingRejected());
+        }
     }
 
     /**
