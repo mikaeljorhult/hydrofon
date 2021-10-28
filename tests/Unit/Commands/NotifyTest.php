@@ -19,6 +19,56 @@ class NotifyTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Notify command will process all types of notifications.
+     *
+     * @return void
+     */
+    public function testCommandWillProcessAllNotificationTypes()
+    {
+        // Overdue booking.
+        $overdueBooking = Booking::factory()
+                                 ->past()
+                                 ->hasCheckout()
+                                 ->create();
+
+        // Booking needing approval.
+        Config::set('hydrofon.require_approval', 'all');
+        $approver = User::factory()->create();
+        $group    = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+
+        Booking::factory()
+               ->for(User::factory()->hasAttached($group))
+               ->create();
+
+        // Approved booking.
+        $approval = Approval::factory()->create();
+
+        // Rejected booking.
+        $rejectedBooking = Booking::factory()->create();
+        $rejectedBooking->setStatus('rejected');
+
+        // Run command.
+        $this->artisan('hydrofon:notifications');
+
+        $this->assertDatabaseHas('notifications', [
+            'notifiable_id' => $overdueBooking->user->id,
+            'type'          => BookingOverdue::class,
+        ]);
+        $this->assertDatabaseHas('notifications', [
+            'notifiable_id' => $approver->id,
+            'type'          => BookingAwaitingApproval::class,
+        ]);
+        $this->assertDatabaseHas('notifications', [
+            'notifiable_id' => $approval->booking->user->id,
+            'type'          => BookingApproved::class,
+        ]);
+        $this->assertDatabaseHas('notifications', [
+            'notifiable_id' => $rejectedBooking->user->id,
+            'type'          => BookingRejected::class,
+        ]);
+    }
+
+    /**
      * User with overdue a booking gets notified.
      *
      * @return void
