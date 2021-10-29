@@ -43,7 +43,7 @@ class BookingRejected extends Notification
             'icon' => 'x-circle',
             'title' => 'Bookings have been rejected!',
             'body' => 'One or more bookings have been rejected. You may review your rejected bookings in your profile.',
-            'url' => route('profile.bookings'),
+            'url' => route('profile.bookings', ['filter[status]=rejected']),
         ];
     }
 }

@@ -43,6 +43,7 @@ class BookingOverdue extends Notification
             'icon' => 'exclamation',
             'title' => 'Bookings overdue!',
             'body' => 'One or more bookings are overdue. Please return the equipment as soon as possible.',
+            'url' => route('profile.bookings', ['filter[overdue]=1']),
         ];
     }
 }

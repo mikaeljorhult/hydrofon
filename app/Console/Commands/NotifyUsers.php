@@ -9,7 +9,6 @@ use App\Notifications\BookingOverdue;
 use App\Notifications\BookingRejected;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Notification;
 
 class NotifyUsers extends Command
@@ -68,16 +67,17 @@ class NotifyUsers extends Command
     /**
      * Retrieve date of last notification of type.
      *
-     * @param  string  $className FQN of notification type
+     * @param  string  $className  FQN of notification type
+     *
      * @return string
      */
     private function dateOfLastNotification(string $className)
     {
         $notification = \DB::table('notifications')
-            ->select(['created_at', 'read_at'])
-            ->where('type', '=', $className)
-            ->latest()
-            ->first();
+                           ->select(['created_at', 'read_at'])
+                           ->where('type', '=', $className)
+                           ->latest()
+                           ->first();
 
         // Don't notify users again if they have an unread notification of same type.
         if ($notification && $notification->read_at === null) {
@@ -93,12 +93,9 @@ class NotifyUsers extends Command
     private function approvedBookings()
     {
         $users = User::whereHas('bookings', function (Builder $query) {
-             $query
-                 ->currentStatus('approved')
-                 ->whereHas('approval')
-                 ->whereHas('statuses', function (Builder $query) {
-                     $query->where('created_at', '>', $this->dateOfLastNotification(BookingApproved::class));
-                 });
+            $query->approved()->whereHas('statuses', function (Builder $query) {
+                $query->where('created_at', '>', $this->dateOfLastNotification(BookingApproved::class));
+            });
         })->get();
 
         if ($users->isNotEmpty()) {
@@ -112,11 +109,9 @@ class NotifyUsers extends Command
     private function rejectedBookings()
     {
         $users = User::whereHas('bookings', function (Builder $query) {
-            $query
-                ->currentStatus('rejected')
-                ->whereHas('statuses', function (Builder $query) {
-                    $query->where('created_at', '>', $this->dateOfLastNotification(BookingRejected::class));
-                });
+            $query->rejected()->whereHas('statuses', function (Builder $query) {
+                $query->where('created_at', '>', $this->dateOfLastNotification(BookingRejected::class));
+            });
         })->get();
 
         if ($users->isNotEmpty()) {
@@ -130,9 +125,8 @@ class NotifyUsers extends Command
     private function overdueBookings()
     {
         $users = User::whereHas('bookings', function (Builder $query) {
-            $query
-                ->overdue()
-                ->where('end_time', '>', $this->dateOfLastNotification(BookingOverdue::class));
+            $query->overdue()
+                  ->where('end_time', '>', $this->dateOfLastNotification(BookingOverdue::class));
         })->get();
 
 
@@ -147,9 +141,8 @@ class NotifyUsers extends Command
     private function awaitingApproval()
     {
         $approvers = User::whereHas('approvingGroups.users.bookings', function (Builder $query) {
-            $query
-                ->currentStatus('pending')
-                ->where('updated_at', '>', $this->dateOfLastNotification(BookingAwaitingApproval::class));
+            $query->currentStatus('pending')
+                  ->where('updated_at', '>', $this->dateOfLastNotification(BookingAwaitingApproval::class));
         })->get();
 
 

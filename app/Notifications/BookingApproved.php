@@ -43,7 +43,7 @@ class BookingApproved extends Notification
             'icon' => 'check-circle',
             'title' => 'Bookings have been approved!',
             'body' => 'One or more bookings have been approved. You may review your approved bookings in your profile.',
-            'url' => route('profile.bookings'),
+            'url' => route('profile.bookings', ['filter[status]=approved']),
         ];
     }
 }
