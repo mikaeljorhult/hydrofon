@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingController extends Controller
@@ -44,7 +45,13 @@ class BookingController extends Controller
                                                                ->select('name')
                                                                ->take(1),
                                 ])
-                                ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
+                                ->allowedFilters([
+                                    'resource_id',
+                                    'user_id',
+                                    'start_time',
+                                    'end_time',
+                                    AllowedFilter::scope('status', 'currentStatus'),
+                                ])
                                 ->defaultSort('start_time')
                                 ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
                                 ->paginate(15);

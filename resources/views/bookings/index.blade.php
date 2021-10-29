@@ -34,6 +34,13 @@
                             <x-forms.input name="filter[end_time]" value="{{ request('filter.end_time') }}" placeholder="End Time" />
                         </div>
 
+                        @if(config('hydrofon.require_approval') !== 'none')
+                            <div class="items-center mb-2 lg:mb-0 lg:mr-4">
+                                <x-forms.label for="filter[status]" class="sr-only">Status</x-forms.label>
+                                <x-forms.select name="filter[status]" :options="['approved' => 'Approved', 'rejected' => 'Rejected', 'pending' => 'Pending']" :selected="request('filter')['status'] ?? null" placeholder="All statuses" />
+                            </div>
+                        @endif
+
                         <div class="flex-grow text-right">
                             @if(request()->has('filter') && !empty(array_filter(request('filter'))))
                                 <x-forms.link

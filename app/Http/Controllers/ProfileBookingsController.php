@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProfileBookingsController extends Controller
@@ -30,7 +31,14 @@ class ProfileBookingsController extends Controller
                                 ->select('bookings.*')
                                 ->with(['checkin', 'checkout', 'user'])
                                 ->join('resources', 'resources.id', '=', 'bookings.resource_id')
-                                ->allowedFilters(['resource_id', 'start_time', 'end_time'])
+                                ->allowedFilters([
+                                    'resource_id',
+                                    'start_time',
+                                    'end_time',
+                                    AllowedFilter::scope('upcoming', 'future'),
+                                    AllowedFilter::scope('overdue'),
+                                    AllowedFilter::scope('status', 'currentStatus'),
+                                ])
                                 ->defaultSort('start_time')
                                 ->allowedSorts(['resources.name', 'start_time', 'end_time'])
                                 ->paginate(15);

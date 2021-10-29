@@ -73,7 +73,7 @@
                                 <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                                     <div class="text-sm">
                                         <a
-                                            href="{{ route('profile.bookings') }}"
+                                            href="{{ route('profile.bookings', ['filter[upcoming]=1']) }}"
                                             class="font-medium text-brand-600 hover:text-brand-500"
                                         >
                                             View all<span class="sr-only"> Upcoming bookings</span>
@@ -109,7 +109,7 @@
                                 <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                                     <div class="text-sm">
                                         <a
-                                            href="{{ route('profile.bookings') }}"
+                                            href="{{ route('profile.bookings', ['filter[overdue]=1']) }}"
                                             class="font-medium text-brand-600 hover:text-brand-500"
                                         >
                                             View all<span class="sr-only"> Overdue bookings</span>

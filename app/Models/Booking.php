@@ -238,6 +238,30 @@ class Booking extends Model
     }
 
     /**
+     * Scope a query to only include approved bookings.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeApproved($query)
+    {
+        return $query
+            ->currentStatus('approved')
+            ->whereHas('approval');
+    }
+
+    /**
+     * Scope a query to only include rejected bookings.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRejected($query)
+    {
+        return $query->currentStatus('rejected');
+    }
+
+    /**
      * Calculate duration in seconds.
      *
      * @return int
