@@ -68,7 +68,6 @@ class NotifyUsers extends Command
      * Retrieve date of last notification of type.
      *
      * @param  string  $className  FQN of notification type
-     *
      * @return string
      */
     private function dateOfLastNotification(string $className)
@@ -129,7 +128,6 @@ class NotifyUsers extends Command
                   ->where('end_time', '>', $this->dateOfLastNotification(BookingOverdue::class));
         })->get();
 
-
         if ($users->isNotEmpty()) {
             Notification::send($users, new BookingOverdue());
         }
@@ -144,7 +142,6 @@ class NotifyUsers extends Command
             $query->currentStatus('pending')
                   ->where('updated_at', '>', $this->dateOfLastNotification(BookingAwaitingApproval::class));
         })->get();
-
 
         if ($approvers->isNotEmpty()) {
             Notification::send($approvers, new BookingAwaitingApproval());

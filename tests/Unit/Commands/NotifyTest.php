@@ -34,7 +34,7 @@ class NotifyTest extends TestCase
         // Booking needing approval.
         Config::set('hydrofon.require_approval', 'all');
         $approver = User::factory()->create();
-        $group    = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         Booking::factory()
                ->for(User::factory()->hasAttached($group))
@@ -143,7 +143,7 @@ class NotifyTest extends TestCase
         Config::set('hydrofon.require_approval', 'all');
 
         $approver = User::factory()->create();
-        $group    = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         Booking::factory()
                ->for(User::factory()->hasAttached($group))
@@ -165,7 +165,7 @@ class NotifyTest extends TestCase
         Config::set('hydrofon.require_approval', 'all');
 
         $approver = User::factory()->create();
-        $group    = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         Booking::factory()
                ->for(User::factory()->hasAttached($group))
