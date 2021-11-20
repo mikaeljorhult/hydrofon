@@ -1,5 +1,5 @@
 <li
-    class="resourcelist-category{{ in_array($category->id, $expanded) ? ' expanded' : '' }}"
+    class="resourcelist-category my-1{{ in_array($category->id, $expanded) ? ' expanded' : '' }}"
     x-bind:class="{ expanded: expanded.indexOf({{ $category->id }}) > -1 }"
 >
     <label
@@ -15,8 +15,14 @@
             x-model.number="expanded"
         />
 
-        <x-heroicon-s-folder class="resource-list-folder-icon resource-list-folder-closed w-5" />
-        <x-heroicon-s-folder-open class="resource-list-folder-icon resource-list-folder-open w-5" />
+        <x-heroicon-s-folder
+            class="resource-list-folder-icon resource-list-folder-closed inline-block w-5 h-auto align-text-bottom {{ in_array($category->id, $expanded) ? 'hidden' : '' }}"
+            x-bind:class="{ hidden: expanded.indexOf({{ $category->id }}) > -1 }"
+        />
+        <x-heroicon-s-folder-open
+            class="resource-list-folder-icon resource-list-folder-open inline-block w-5 h-auto align-text-bottom {{ in_array($category->id, $expanded) ? '' : 'hidden' }}"
+            x-bind:class="{ hidden: expanded.indexOf({{ $category->id }}) == -1 }"
+        />
         {{ $category->name }}
     </label>
 

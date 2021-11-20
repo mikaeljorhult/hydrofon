@@ -1,49 +1,10 @@
 .resourcelist {
-    display: flex;
     flex: 0 1 14rem;
-    overflow: hidden;
-    padding-top: 4.1rem;
     background-color: #313541;
-    white-space: nowrap;
-    user-select: none;
-
-    li {
-        margin: .25rem 0;
-    }
 }
 
 .resource-list-folder-icon {
-    display: inline-block;
-    width: 1.25rem;
-    height: auto;
-    vertical-align: text-bottom;
     fill: #d45843;
-}
-
-.resource-list-folder-open {
-    display: none;
-}
-
-.expanded > label {
-    .resource-list-folder-closed {
-        display: none;
-    }
-
-    .resource-list-folder-open {
-        display: inline-block;
-    }
-}
-
-.resourcelist-toggle {
-    display: flex;
-    width: 2rem;
-    height: 3.9rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-    align-items: center;
-    justify-content: flex-end;
-    text-decoration: none;
 }
 
 .resourcelist-children {
@@ -55,32 +16,9 @@
     }
 }
 
-.resourcelist-base {
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    color: rgba(255, 255, 255, .6);
-
-    > :last-child {
-        margin-bottom: 2rem;
-    }
-}
-
 .resourcelist-category {
-    div {
-        display: inline-block;
-    }
-
     &.has-children > span {
         display: block;
         cursor: pointer;
-    }
-}
-
-.resourcelist-resource {
-    font-size: .9rem;
-
-    input {
-        margin-right: .1rem;
     }
 }

@@ -1,6 +1,6 @@
 <div
     id="resourcelist"
-    class="resourcelist w-2/3 fixed inset-y-0 z-50 md:w-auto md:relative md:!flex"
+    class="resourcelist w-2/3 fixed inset-y-0 z-50 pt-16 overflow-hidden whitespace-nowrap select-none md:w-auto md:relative md:!flex"
     x-data="{
         visible: false,
         expanded: @json($expanded),
