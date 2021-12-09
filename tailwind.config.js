@@ -1,11 +1,9 @@
 module.exports = {
     mode: 'jit',
-    purge: [
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
+    content: [
+        './resources/**/*.{php,js}',
         './node_modules/flatpickr/dist/flatpickr.js'
     ],
-    darkMode: false,
     theme: {
         extend: {
             colors: {
@@ -38,12 +36,6 @@ module.exports = {
                 'base': ['Roboto', 'sans-serif']
             }
         }
-    },
-    variants: {
-        extend: {
-            opacity: ['disabled'],
-            cursor: ['disabled'],
-        },
     },
     plugins: [
         require('@tailwindcss/forms'),

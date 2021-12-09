@@ -1,4 +1,4 @@
-<nav class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 md:border-none">
+<nav class="relative z-10 shrink-0 flex h-16 bg-white border-b border-gray-200 md:border-none">
     <button
         type="button"
         class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 md:hidden"
@@ -79,7 +79,7 @@
                             <span class="sr-only">Open user menu for </span>{{ auth()->user()->name }}
                         </span>
 
-                        <x-heroicon-s-chevron-down class="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block" />
+                        <x-heroicon-s-chevron-down class="hidden shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block" />
                     </button>
                 </div>
 
@@ -92,11 +92,11 @@
 
                     x-show="isOpen"
                     x-transition:enter="transition ease-out duration-100"
-                    x-transition:enter-start="transform opacity-0 scale-95"
-                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
                     x-transition:leave="transition ease-in duration-75"
-                    x-transition:leave-start="transform opacity-100 scale-100"
-                    x-transition:leave-end="transform opacity-0 scale-95"
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-95"
                     x-cloak
                 >
                     @admin
