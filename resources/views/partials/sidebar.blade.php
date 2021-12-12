@@ -1,5 +1,5 @@
 <aside
-    class="sidebar md:w-32 md:!flex flex-col shrink-0 items-center justify-between overflow-hidden bg-complementary-900 text-complementary text-center"
+    class="sidebar md:w-32 md:!flex flex-col shrink-0 items-center justify-between overflow-hidden bg-slate-800 text-white text-center"
 
     x-data="{ visible: false }"
     x-on:toggle-sidebar.window="visible = $event.detail;"

@@ -1,6 +1,6 @@
 <div
     id="resourcelist"
-    class="resourcelist w-2/3 fixed inset-y-0 z-50 pt-16 overflow-hidden whitespace-nowrap select-none md:w-auto md:relative md:!flex"
+    class="resourcelist w-2/3 fixed inset-y-0 z-50 pt-16 overflow-hidden whitespace-nowrap select-none bg-slate-700 md:w-auto md:relative md:!flex"
     x-data="{
         visible: false,
         expanded: @json($expanded),
@@ -87,8 +87,13 @@
     <form action="{{ route('calendar') }}" method="post" class="w-full" x-ref="form">
         @csrf
 
-        <section class="h-16 flex items-center absolute top-0 inset-x-0 px-4 bg-complementary-600">
+        <section class="h-16 flex items-center absolute top-0 inset-x-0 px-4 bg-slate-600">
+            <x-forms.label for="resourcelist-date" class="sr-only">
+                Date
+            </x-forms.label>
+
             <x-forms.input
+                id="resourcelist-date"
                 name="date"
                 value="{{ isset($date) ? $date->format('Y-m-d') : now()->format('Y-m-d') }}"
                 x-ref="datepicker"

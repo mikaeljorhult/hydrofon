@@ -19,18 +19,6 @@ module.exports = {
                     900: '#4D1E15',
                     DEFAULT: '#FF6347'
                 },
-                complementary: {
-                    100: '#F1F2F5',
-                    200: '#DDDFE5',
-                    300: '#C8CBD5',
-                    400: '#9EA5B6',
-                    500: '#757E96',
-                    600: '#697187',
-                    700: '#464C5A',
-                    800: '#353944',
-                    900: '#23262D',
-                    DEFAULT: '#757E96'
-                },
             },
             fontFamily: {
                 'base': ['Roboto', 'sans-serif']
