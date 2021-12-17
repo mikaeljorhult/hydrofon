@@ -6,7 +6,7 @@
     x-show="visible"
     x-cloak
 >
-    <header class="w-full py-12 px-0 bg-brand">
+    <header class="w-full py-12 px-0 bg-red-600">
         <h1 class="m-0 font-bold text-base leading-none uppercase">
             <a href="{{ url('/') }}" class="block text-white hover:text-white">
                 {{ config('app.name', 'Hydrofon') }}
@@ -15,7 +15,7 @@
     </header>
 
     @auth
-        <section class="w-full py-4 px-1 bg-brand-600">
+        <section class="w-full py-4 px-1 bg-red-700">
             <a href="{{ route('profile') }}" class="block text-white no-underline hover:text-white">
                 <x-heroicon-s-user class="icon w-6 h-auto mt-0 mx-auto mb-1 opacity-75 fill-current" />
 

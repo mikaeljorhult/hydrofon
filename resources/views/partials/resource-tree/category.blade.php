@@ -16,11 +16,11 @@
         />
 
         <x-heroicon-s-folder
-            class="resource-list-folder-icon resource-list-folder-closed inline-block w-5 h-auto align-text-bottom fill-brand-600 {{ in_array($category->id, $expanded) ? 'hidden' : '' }}"
+            class="resource-list-folder-icon resource-list-folder-closed inline-block w-5 h-auto align-text-bottom fill-red-600 {{ in_array($category->id, $expanded) ? 'hidden' : '' }}"
             x-bind:class="{ hidden: expanded.indexOf({{ $category->id }}) > -1 }"
         />
         <x-heroicon-s-folder-open
-            class="resource-list-folder-icon resource-list-folder-open inline-block w-5 h-auto align-text-bottom fill-brand-600 {{ in_array($category->id, $expanded) ? '' : 'hidden' }}"
+            class="resource-list-folder-icon resource-list-folder-open inline-block w-5 h-auto align-text-bottom fill-red-600 {{ in_array($category->id, $expanded) ? '' : 'hidden' }}"
             x-bind:class="{ hidden: expanded.indexOf({{ $category->id }}) == -1 }"
         />
         {{ $category->name }}

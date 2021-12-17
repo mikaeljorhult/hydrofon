@@ -14,10 +14,10 @@
                             @if(isset($notification->data['url']))
                                 <a
                                     href="{!! $notification->data['url'] !!}"
-                                    class="block py-4 px-2 pr-3 {{ $notification->unread() ? 'border-l-2 border-brand-500' : '' }}"
+                                    class="block py-4 px-2 pr-3 {{ $notification->unread() ? 'border-l-2 border-red-500' : '' }}"
                                 >
                             @else
-                                <div class="py-4 px-2 pr-3 {{ $notification->unread() ? 'border-l-2 border-brand-500' : '' }}">
+                                <div class="py-4 px-2 pr-3 {{ $notification->unread() ? 'border-l-2 border-red-500' : '' }}">
                             @endif
 
                             <div class="flex space-x-3">

@@ -5,7 +5,7 @@
         <tbody>
             @forelse($this->items as $item)
                 @if($this->isEditing === $item->id)
-                    <tr class="{{ $loop->odd ? 'odd' : 'even' }} is-editing">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} is-editing">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="E-mail">
                             <x-forms.input
@@ -54,7 +54,7 @@
                             >Cancel</x-forms.button-secondary>
                         </td>
                     </tr>
-                    <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }}">
                         <td>&nbsp;</td>
                         <td colspan="{{ count($this->headers) + 1 }}">
                             <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-4">
@@ -71,7 +71,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
                                 value="{{ $item->id }}"

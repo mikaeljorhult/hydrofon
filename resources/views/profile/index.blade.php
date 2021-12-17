@@ -14,7 +14,7 @@
                     @if($latest->isNotEmpty())
                         <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                             <dt>
-                                <div class="absolute bg-brand rounded-md p-3">
+                                <div class="absolute bg-red-600 rounded-md p-3">
                                     <x-heroicon-o-calendar class="h-6 w-6 text-white" />
                                 </div>
 
@@ -37,7 +37,7 @@
                                     <div class="text-sm">
                                         <a
                                             href="{{ route('profile.bookings') }}"
-                                            class="font-medium text-brand-600 hover:text-brand-500"
+                                            class="font-medium text-red-600 hover:text-red-500"
                                         >
                                             View all<span class="sr-only"> Latest bookings</span>
                                         </a>
@@ -50,7 +50,7 @@
                     @if($upcoming->isNotEmpty())
                         <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                             <dt>
-                                <div class="absolute bg-brand rounded-md p-3">
+                                <div class="absolute bg-red-600 rounded-md p-3">
                                     <x-heroicon-o-plus-circle class="h-6 w-6 text-white" />
                                 </div>
 
@@ -74,7 +74,7 @@
                                     <div class="text-sm">
                                         <a
                                             href="{{ route('profile.bookings', ['filter[upcoming]=1']) }}"
-                                            class="font-medium text-brand-600 hover:text-brand-500"
+                                            class="font-medium text-red-600 hover:text-red-500"
                                         >
                                             View all<span class="sr-only"> Upcoming bookings</span>
                                         </a>
@@ -87,7 +87,7 @@
                     @if($overdue->isNotEmpty())
                         <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                             <dt>
-                                <div class="absolute bg-brand rounded-md p-3">
+                                <div class="absolute bg-red-600 rounded-md p-3">
                                     <x-heroicon-o-exclamation class="h-6 w-6 text-white" />
                                 </div>
 
@@ -110,7 +110,7 @@
                                     <div class="text-sm">
                                         <a
                                             href="{{ route('profile.bookings', ['filter[overdue]=1']) }}"
-                                            class="font-medium text-brand-600 hover:text-brand-500"
+                                            class="font-medium text-red-600 hover:text-red-500"
                                         >
                                             View all<span class="sr-only"> Overdue bookings</span>
                                         </a>

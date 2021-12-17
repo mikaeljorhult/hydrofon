@@ -1,10 +1,10 @@
 .segel-resource {
     &.droppable {
-        @apply bg-brand bg-opacity-5;
+        @apply bg-red-600 bg-opacity-5;
     }
 
     .is-dragging {
-        @apply border-2 border-brand-600 border-opacity-10 shadow-sm ;
+        @apply border-2 border-red-700 border-opacity-10 shadow-sm ;
     }
 }
 

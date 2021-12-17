@@ -11,7 +11,7 @@
         <x-heroicon-o-menu-alt-1 class="w-6 h-6" />
     </button>
 
-    <div class="flex items-center px-2 bg-brand text-white font-bold text-sm leading-none uppercase md:hidden">
+    <div class="flex items-center px-2 bg-red-600 text-white font-bold text-sm leading-none uppercase md:hidden">
         <a href="{{ route('home') }}">Hydrofon</a>
     </div>
 
@@ -63,7 +63,7 @@
                 <div>
                     <button
                         type="button"
-                        class="max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-300 lg:p-2 lg:rounded-md lg:hover:bg-gray-50"
+                        class="max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300 lg:p-2 lg:rounded-md lg:hover:bg-gray-50"
                         id="user-menu-button"
                         aria-expanded="false"
                         aria-haspopup="true"

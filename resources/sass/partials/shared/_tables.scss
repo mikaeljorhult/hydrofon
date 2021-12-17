@@ -5,10 +5,6 @@ table {
     background-color: #fff;
 }
 
-tr.even {
-    background-color: #f4f7fc;
-}
-
 tbody tr:hover {
     .table-actions > div {
         visibility: visible;
@@ -22,7 +18,7 @@ tbody tr:hover {
 
 th,
 td {
-    padding: .875rem;
+    @apply p-4;
 }
 
 th {
@@ -36,13 +32,11 @@ th {
     }
 
     thead & {
-        border-bottom: 1px solid #eef2f5;
-        font-size: .8rem;
+        @apply border-b border-slate-200 text-sm;
     }
 
     tfoot & {
-        border-top: 1px solid #eef2f5;
-        font-size: .9rem;
+        @apply border-t border-slate-200 text-sm;
     }
 }
 
@@ -61,10 +55,11 @@ th {
     a,
     button {
         &:not(.btn) {
+            @apply text-red-700;
+
             vertical-align: middle;
             padding: 0;
             background-color: transparent;
-            color: #e65940;
             border: none;
             cursor: pointer;
             font-weight: inherit;

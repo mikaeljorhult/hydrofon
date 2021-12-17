@@ -5,7 +5,7 @@
         <tbody>
             @forelse($this->items as $item)
                 @if($this->isEditing === $item->id)
-                    <tr class="{{ $loop->odd ? 'odd' : 'even' }} is-editing">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} is-editing">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Resource">
                             <x-forms.select
@@ -61,7 +61,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
                                 value="{{ $item->id }}"

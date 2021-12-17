@@ -4,7 +4,7 @@
 
         <tbody>
             @forelse($this->items as $item)
-                <tr class="{{ $loop->odd ? 'odd' : 'even' }} hover:bg-brand-100">
+                <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                     <td data-title="&nbsp;">
                         <x-forms.checkbox
                             value="{{ $item->id }}"

@@ -100,7 +100,7 @@
                             <ul class="segel-bookings absolute inset-0 select-none">
                                 @foreach($resource->bookings as $booking)
                                     <li
-                                        class="segel-booking block h-full absolute inset-y-0 z-40 overflow-hidden bg-brand-600 opacity-75 rounded @can('update', $booking) editable @endcan"
+                                        class="segel-booking block h-full absolute inset-y-0 z-40 overflow-hidden bg-red-600 opacity-75 rounded @can('update', $booking) editable @endcan"
                                         title="{{ $booking->user->name }}"
                                         style="
                                             width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
@@ -111,8 +111,8 @@
                                         data-start="{{ $booking->start_time->format('U') }}"
                                         data-end="{{ $booking->end_time->format('U') }}"
                                     >
-                                        <span class="segel-resize-handle segel-resize-handle__left hidden items-center w-2 h-full absolute inset-y-0 bg-brand-900 opacity-50 text-white text-center">&#8942;</span>
-                                        <span class="segel-resize-handle segel-resize-handle__right hidden items-center w-2 h-full absolute inset-y-0 bg-brand-900 opacity-50 text-white text-center">&#8942;</span>
+                                        <span class="segel-resize-handle segel-resize-handle__left hidden items-center w-2 h-full absolute inset-y-0 bg-red-900 opacity-50 text-white text-center">&#8942;</span>
+                                        <span class="segel-resize-handle segel-resize-handle__right hidden items-center w-2 h-full absolute inset-y-0 bg-red-900 opacity-50 text-white text-center">&#8942;</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -130,7 +130,7 @@
                 wire:target="setResources,setTimestamps,previousTimeScope,nextTimeScope"
             >
                 <div class="flex items-center justify-center absolute inset-0 bg-gray-400 bg-opacity-25">
-                    <div class="flex items-center justify-center py-2 px-4 bg-brand text-white text-xl rounded opacity-75">
+                    <div class="flex items-center justify-center py-2 px-4 bg-red-600 text-white text-xl rounded opacity-75">
                         <x-heroicon-s-refresh class="inline-block w-5 pr-1 fill-current" />
                         LOADING...
                     </div>

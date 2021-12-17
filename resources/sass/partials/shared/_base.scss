@@ -14,7 +14,7 @@ h4 {font-size: 1.44em;}
 h5 {font-size: 1.2em;}
 
 .main-content {
-  background-color: #eff4fa;
+    @apply bg-slate-100;
 }
 
 .container {
