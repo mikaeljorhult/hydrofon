@@ -1,4 +1,6 @@
-import Alpine from 'alpinejs'
+import Alpine from 'alpinejs';
+import ResourceTree from './components/resourceTree';
+Alpine.data('resourceTree', ResourceTree);
 window.Alpine = Alpine;
 Alpine.start();
 

@@ -6,7 +6,7 @@
                 name="resources[]"
                 value="{{ $resource->id }}"
                 :checked="in_array($resource->id, $selected)"
-                x-model.number.debounce.1000ms="selected"
+                x-model.number="selected"
             />
 
             {{ $resource->name }}
