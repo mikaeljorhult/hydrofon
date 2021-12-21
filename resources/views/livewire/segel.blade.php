@@ -43,20 +43,12 @@
     <div
         id="segel"
         class="segel my-4"
-        x-data="{
+        x-data="segel({
             start: {{ $timestamps['start'] }},
             duration: {{ $timestamps['duration'] }},
             current: 0,
-        }"
-        x-on:resize.window.debounce.500="HYDROFON.Segel.handleResize()"
-        x-init="
-            setInterval(() => {
-                current = Math.round(
-                    (new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000))
-                    / 1000
-                );
-            }, 1000);
-        "
+        })"
+        x-bind="base"
     >
         <div class="segel-container relative border-t-2 border-b-2 border-gray-200 min-h-[16rem]">
             <ul class="segel-grid flex absolute inset-0 top-8 pointer-events-none">

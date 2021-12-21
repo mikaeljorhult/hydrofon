@@ -14,7 +14,6 @@
         "flatpickr": "^4.6.3",
         "interactjs": "^1.10.11",
         "laravel-mix": "^6.0.39",
-        "lodash.debounce": "^4.0.8",
         "postcss": "^8.4.4",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.44.0",

@@ -1,5 +1,4 @@
 import interact from 'interactjs';
-import debounce from 'lodash.debounce';
 import Grid from './grid';
 import Interactions from './interactions';
 
@@ -26,11 +25,8 @@ HYDROFON.Segel = {
         HYDROFON.Segel.component.call('setResources', resources);
     },
     set expanded(categories) {
-        this._debounceExpanded(categories);
+        HYDROFON.Segel.component.call('setExpanded', categories);
     },
-    _debounceExpanded: debounce(function (expanded) {
-        HYDROFON.Segel.component.call('setExpanded', expanded);
-    }, 1000),
     calculateGrid: function () {
         this.grid = Grid.create(this.element.clientWidth, 41, this.component.data.steps);
         this.size = {

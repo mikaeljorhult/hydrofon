@@ -1,6 +1,8 @@
 import Alpine from 'alpinejs';
 import ResourceTree from './components/resourceTree';
+import SegelComponent from './components/segel';
 Alpine.data('resourceTree', ResourceTree);
+Alpine.data('segel', SegelComponent);
 window.Alpine = Alpine;
 Alpine.start();
 
