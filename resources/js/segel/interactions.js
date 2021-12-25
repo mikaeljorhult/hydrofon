@@ -6,7 +6,11 @@ import interact from 'interactjs';
  *
  * @type {Object}
  */
-const Interactions = {};
+const Interactions = {
+    grid: null,
+    size: null,
+    timestamps: null,
+};
 
 let position = { x: 0, y: 0 };
 let bookingClone = null;
@@ -42,8 +46,8 @@ Interactions.resource = function (resource) {
                         (bookingNode.getBoundingClientRect().left - resourceNode.getBoundingClientRect().left)
                         / resourceNode.clientWidth
                     )
-                    * HYDROFON.Segel.component.data.timestamps.duration
-                    + HYDROFON.Segel.component.data.timestamps.start
+                    * Interactions.timestamps.duration
+                    + Interactions.timestamps.start
                 );
 
                 let endTime = booking.end_time - (booking.start_time - startTime);
@@ -78,15 +82,15 @@ Interactions.resource = function (resource) {
 
         let position = Math.round(
             (event.offsetX / resourceNode.clientWidth)
-            * HYDROFON.Segel.component.data.timestamps.duration
+            * Interactions.timestamps.duration
         );
 
         let size = Math.round(
-            HYDROFON.Segel.component.data.timestamps.duration
-            / HYDROFON.Segel.component.data.steps
+            Interactions.timestamps.duration
+            / Interactions.steps
         );
 
-        let startTime = position + HYDROFON.Segel.component.data.timestamps.start;
+        let startTime = position + Interactions.timestamps.start;
         let endTime = startTime + size * 2;
 
         HYDROFON.Segel.component.call('createBooking', {
@@ -128,7 +132,7 @@ Interactions.booking = function (booking) {
 
                 if (bookingClone) {
                     if (event.altKey) {
-                        HYDROFON.Segel.interactions.booking(bookingClone);
+                        Interactions.booking(bookingClone);
                     } else {
                         bookingClone.parentNode.removeChild(bookingClone);
                     }
@@ -142,7 +146,7 @@ Interactions.booking = function (booking) {
                 restriction: '.segel-resources'
             }),
             interact.modifiers.snap({
-                targets: HYDROFON.Segel.grid,
+                targets: Interactions.grid,
                 offset: 'startCoords'
             })
         ],
@@ -193,8 +197,8 @@ Interactions.booking = function (booking) {
                         (bookingNode.getBoundingClientRect().left - resourceNode.getBoundingClientRect().left)
                         / resourceNode.clientWidth
                     )
-                    * HYDROFON.Segel.component.data.timestamps.duration
-                    + HYDROFON.Segel.component.data.timestamps.start
+                    * Interactions.timestamps.duration
+                    + Interactions.timestamps.start
                 );
 
                 let endTime = Math.round(
@@ -202,7 +206,7 @@ Interactions.booking = function (booking) {
                         bookingNode.getBoundingClientRect().width
                         / resourceNode.clientWidth
                     )
-                    * HYDROFON.Segel.component.data.timestamps.duration
+                    * Interactions.timestamps.duration
                     + startTime
                 );
 
@@ -223,10 +227,10 @@ Interactions.booking = function (booking) {
                 restriction: '.segel-resources'
             }),
             interact.modifiers.restrictSize(
-                HYDROFON.Segel.size
+                Interactions.size
             ),
             interact.modifiers.snap({
-                targets: HYDROFON.Segel.grid,
+                targets: Interactions.grid,
                 offset: 'startCoords'
             }),
         ],

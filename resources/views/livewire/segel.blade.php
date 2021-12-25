@@ -44,9 +44,9 @@
         id="segel"
         class="segel my-4"
         x-data="segel({
-            start: {{ $timestamps['start'] }},
-            duration: {{ $timestamps['duration'] }},
-            current: 0,
+            start: {{ $this->timestamps['start'] }},
+            duration: {{ $this->timestamps['duration'] }},
+            steps: {{ $this->steps }}
         })"
         x-bind="base"
     >
@@ -95,8 +95,8 @@
                                         class="segel-booking block h-full absolute inset-y-0 z-40 overflow-hidden bg-red-600 opacity-75 rounded @can('update', $booking) editable @endcan"
                                         title="{{ $booking->user->name }}"
                                         style="
-                                            width: {{ $booking->duration / $timestamps['duration'] * 100 }}%;
-                                            left: {{ ($booking->start_time->format('U') - $timestamps['start']) / $timestamps['duration'] * 100 }}%;
+                                            width: {{ $booking->duration / $this->timestamps['duration'] * 100 }}%;
+                                            left: {{ ($booking->start_time->format('U') - $this->timestamps['start']) / $this->timestamps['duration'] * 100 }}%;
                                             "
                                         data-id="{{ $booking->id }}"
                                         data-user="{{ $booking->user_id }}"
@@ -136,21 +136,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             HYDROFON.Segel.component = @this.__instance;
-            HYDROFON.Segel.element.querySelectorAll('.segel-resource').forEach(HYDROFON.Segel.interactions.resource);
-            HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)
 
             history.pushState({
                 date: null,
-                timestamps: @json($timestamps)
+                timestamps: @json($this->timestamps)
             }, 'initial');
-        });
-
-        document.addEventListener('livewire:load', function(event) {
-            window.livewire.hook('message.processed', () => {
-                HYDROFON.Segel.handleResize();
-                HYDROFON.Segel.element.querySelectorAll('.segel-resource').forEach(HYDROFON.Segel.interactions.resource);
-                HYDROFON.Segel.element.querySelectorAll('.segel-booking').forEach(HYDROFON.Segel.interactions.booking)
-            });
         });
 
         window.onpopstate = function (event) {
