@@ -1,3 +1,5 @@
+import Store from '../store';
+
 export default (initialState) => ({
     visible: initialState.visible ?? true,
     expanded: initialState.expanded ?? [],
@@ -32,11 +34,11 @@ export default (initialState) => ({
 
     init() {
         this.$watch('expanded', value => {
-            if (HYDROFON.Segel.initialized) {
+            if (Store.initialized) {
                 clearTimeout(this.debounceExpanded);
 
                 this.debounceExpanded = setTimeout(() => {
-                    HYDROFON.Segel.expanded = value;
+                    this.$dispatch('segel-setexpanded', value);
                 }, 1000);
             }
         });
@@ -45,8 +47,8 @@ export default (initialState) => ({
             clearTimeout(this.debounceSelected);
 
             this.debounceSelected = setTimeout(() => {
-                if (HYDROFON.Segel.initialized) {
-                    HYDROFON.Segel.resources = value;
+                if (Store.initialized) {
+                    this.$dispatch('segel-setresources', value);
                 } else {
                     this.$refs.form.submit();
                 }
@@ -63,19 +65,15 @@ export default (initialState) => ({
             altFormat: 'Y-m-d',
             dateFormat: 'Y-m-d',
             time_24hr: true,
-            onChange: function(selectedDates, dateStr, instance) {
+            onChange: (selectedDates, dateStr, instance) => {
                 let newDate = new Date(
                     selectedDates[0].getTime() - (selectedDates[0].getTimezoneOffset() * 60 * 1000)
                 ).getTime() / 1000;
 
-                if (HYDROFON.Segel.initialized) {
-                    let timestamps = {
+                if (Store.initialized) {
+                    this.$dispatch('segel-settimestamps', {
                         start: newDate,
-                        end: newDate + HYDROFON.Segel.component.data.timestamps.duration,
-                        duration: HYDROFON.Segel.component.data.timestamps.duration,
-                    };
-
-                    HYDROFON.Segel.component.call('setTimestamps', timestamps);
+                    });
                 } else {
                     this.$refs.form.submit();
                 }

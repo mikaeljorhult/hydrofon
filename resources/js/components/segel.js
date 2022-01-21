@@ -1,6 +1,7 @@
 import interact from 'interactjs';
 import Grid from '../segel/grid';
 import Interactions from '../segel/interactions';
+import Store from '../store';
 
 export default (initialState) => ({
     start: initialState.start,
@@ -22,11 +23,28 @@ export default (initialState) => ({
         this.setupInteractions();
 
         this.$watch('start, duration, steps', this.setupTimestamps);
+
+        window.Livewire.hook('message.processed', (message, component) => {
+            if (component.name === 'segel') {
+                this.setupInteractions();
+            }
+        });
+
+        Store.initialized = true;
     },
 
     base: {
         ['x-on:resize.window.debounce.500']() {
             this.handleResize();
+        },
+        ['x-on:segel-setexpanded.window'](event) {
+            this.$wire.setExpanded(event.detail);
+        },
+        ['x-on:segel-setresources.window'](event) {
+            this.$wire.setResources(event.detail);
+        },
+        ['x-on:segel-settimestamps.window'](event) {
+            this.$wire.setTimestamps(event.detail);
         }
     },
 

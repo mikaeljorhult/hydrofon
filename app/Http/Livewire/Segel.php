@@ -50,6 +50,20 @@ class Segel extends Component
         session()->put('resources', $id);
     }
 
+    public function setTimestamps($timestamps)
+    {
+        $newTimestamps = (array) $timestamps;
+
+        if (!isset($newTimestamps['end'])) {
+            $newTimestamps['end'] = isset($newTimestamps['duration'])
+                ? $newTimestamps['start'] + $newTimestamps['duration']
+                : $newTimestamps['start'] + $this->timestamps['duration'];
+        }
+
+        $this->timestamps = $newTimestamps;
+        $this->changeTimestamps(0);
+    }
+
     public function setGrid($date, $type = null)
     {
         $grid = new Grid($date, $type);
@@ -59,12 +73,6 @@ class Segel extends Component
         $this->steps = $grid->steps;
         $this->timestamps = $grid->timestamps;
         $this->dateString = $grid->dateString;
-    }
-
-    public function setTimestamps($timestamps)
-    {
-        $this->timestamps = (array) $timestamps;
-        $this->changeTimestamps(0);
     }
 
     public function previousTimeScope()

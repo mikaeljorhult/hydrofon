@@ -1,8 +1,8 @@
 import Alpine from 'alpinejs';
 import ResourceTree from './components/resourceTree';
-import SegelComponent from './components/segel';
+import Segel from './components/segel';
 Alpine.data('resourceTree', ResourceTree);
-Alpine.data('segel', SegelComponent);
+Alpine.data('segel', Segel);
 window.Alpine = Alpine;
 Alpine.start();
 
@@ -11,5 +11,3 @@ window.interact = interact;
 
 import flatpickr from 'flatpickr';
 window.flatpickr = flatpickr;
-
-import Segel from './segel';

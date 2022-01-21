@@ -85,6 +85,9 @@
                     <li
                         class="segel-resource relative py-2 px-0 border-b border-gray-200"
                         data-id="{{ $resource->id }}"
+                        x-on:createbooking="$wire.createBooking($event.detail)"
+                        x-on:updatebooking="$wire.updateBooking($event.detail)"
+                        x-on:deletebooking="$wire.deleteBooking($event.detail)"
                     >
                         {{ $resource->name }}
 
@@ -135,8 +138,6 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            HYDROFON.Segel.component = @this.__instance;
-
             history.pushState({
                 date: null,
                 timestamps: @json($this->timestamps)
@@ -144,11 +145,11 @@
         });
 
         window.onpopstate = function (event) {
-            HYDROFON.Segel.component.call('setTimestamps', event.state.timestamps);
+            window.Livewire.emitTo('segel', 'setTimestamps', event.state.timestamps);
         };
 
         window.livewire.on('dateChanged', (state) => {
             history.pushState({date: state.date, timestamps: state.timestamps}, state.date, state.url);
-        })
+        });
     </script>
 @endpush

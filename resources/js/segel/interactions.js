@@ -59,10 +59,11 @@ Interactions.resource = function (resource) {
                 progressBar.classList.add('progress');
                 bookingNode.appendChild(progressBar);
 
-                HYDROFON.Segel.component.call(
-                    event.dragEvent.altKey ? 'createBooking' : 'updateBooking',
-                    booking
-                );
+                resourceNode.dispatchEvent(new CustomEvent(
+                    event.dragEvent.altKey ? 'createbooking' : 'updatebooking', {
+                        detail: booking
+                    }
+                ));
 
                 bookingNode.classList.remove('droppable');
                 position = { x: 0, y: 0 };
@@ -93,11 +94,15 @@ Interactions.resource = function (resource) {
         let startTime = position + Interactions.timestamps.start;
         let endTime = startTime + size * 2;
 
-        HYDROFON.Segel.component.call('createBooking', {
-            resource_id: parseInt(resourceNode.dataset.id),
-            start_time: startTime,
-            end_time: endTime,
-        });
+        resourceNode.dispatchEvent(new CustomEvent(
+            'createbooking', {
+                detail: {
+                    resource_id: parseInt(resourceNode.dataset.id),
+                    start_time: startTime,
+                    end_time: endTime,
+                }
+            }
+        ));
     });
 };
 
@@ -217,7 +222,11 @@ Interactions.booking = function (booking) {
                 progressBar.classList.add('progress');
                 bookingNode.appendChild(progressBar);
 
-                HYDROFON.Segel.component.call('updateBooking', booking);
+                resourceNode.parentNode.dispatchEvent(new CustomEvent(
+                    'updatebooking', {
+                        detail: booking
+                    }
+                ));
 
                 event.target.classList.remove('is-resizing');
             }
@@ -237,9 +246,15 @@ Interactions.booking = function (booking) {
     });
 
     interact(booking).on('doubletap', function (event) {
-        HYDROFON.Segel.component.call('deleteBooking', {
-            id: parseInt(event.target.dataset.id),
-        });
+        let resourceNode = event.target.closest('.segel-resource');
+
+        resourceNode.dispatchEvent(new CustomEvent(
+            'deletebooking', {
+                detail: {
+                    id: parseInt(event.target.dataset.id),
+                }
+            }
+        ));
     });
 };
 
