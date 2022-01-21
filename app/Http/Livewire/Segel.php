@@ -54,7 +54,7 @@ class Segel extends Component
     {
         $newTimestamps = (array) $timestamps;
 
-        if (!isset($newTimestamps['end'])) {
+        if (! isset($newTimestamps['end'])) {
             $newTimestamps['end'] = isset($newTimestamps['duration'])
                 ? $newTimestamps['start'] + $newTimestamps['duration']
                 : $newTimestamps['start'] + $this->timestamps['duration'];
