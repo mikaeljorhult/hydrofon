@@ -1,4 +1,4 @@
-<nav class="relative z-10 shrink-0 flex h-16 bg-white border-b border-gray-200 md:border-none">
+<nav class="relative z-50 shrink-0 flex h-16 bg-white border-b border-gray-200 md:border-none">
     <button
         type="button"
         class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 md:hidden"

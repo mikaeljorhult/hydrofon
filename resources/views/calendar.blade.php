@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <section class="container">
+    <section class="container z-10">
         @livewire('segel', ['resources' => $resources, 'date' => $date])
     </section>
 @endsection
