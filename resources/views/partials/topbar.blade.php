@@ -53,6 +53,7 @@
         </div>
 
         <div class="ml-4 flex items-center md:ml-6">
+            <livewire:quick-book />
             <livewire:notifications-indicator />
 
             <div
