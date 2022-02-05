@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         return auth()->check()
-            ? view('home')
+            ? redirect('calendar')
             : view('welcome');
     }
 }
