@@ -9,8 +9,13 @@ export default (initialState) => ({
     steps: initialState.steps,
 
     current: 0,
+    selected: [],
+
+    rulerElement: null,
 
     init() {
+        this.rulerElement = this.$el.querySelector('.segel-ruler');
+
         setInterval(() => {
             this.current = Math.round(
                 (new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000))
@@ -27,8 +32,13 @@ export default (initialState) => ({
         window.Livewire.hook('message.processed', (message, component) => {
             if (component.name === 'segel') {
                 this.setupInteractions();
+                this.diffSelected();
             }
         });
+
+        Array.prototype.forEach.call(this.$el.querySelectorAll('[name="selected[]"]'), checkbox => {
+            checkbox.checked = false;
+        })
 
         Store.initialized = true;
     },
@@ -48,6 +58,28 @@ export default (initialState) => ({
         }
     },
 
+    selector: {
+        ['x-on:click']() {
+            if (this.$el.checked) {
+                this.selected.push(this.$el.value);
+            } else {
+                this.selected.splice(this.selected.indexOf(this.$el.value), 1);
+            }
+        },
+        ['x-bind:checked']() {
+            return this.selected.indexOf(this.$el.value) > -1;
+        },
+    },
+
+    diffSelected() {
+        let checkboxes = this.$el.querySelectorAll('[name="selected[]"]');
+        let available = Array.from(checkboxes).map(checkbox => {
+            return checkbox.value;
+        });
+
+        this.selected = this.selected.filter(value => available.includes(value));
+    },
+
     setupTimestamps() {
         Interactions.steps = this.steps;
         Interactions.timestamps = {
@@ -62,15 +94,22 @@ export default (initialState) => ({
     },
 
     calculateGrid() {
-        Interactions.grid = Grid.create(this.$el.clientWidth, 41, this.steps);
+        let gridOffset = window
+            .getComputedStyle(this.rulerElement, null)
+            .getPropertyValue('padding-left')
+            .replace('px', '');
+
+        let gridWidth = this.$el.clientWidth - parseInt(gridOffset);
+
+        Interactions.grid = Grid.create(gridWidth, 44, this.steps);
         Interactions.size = {
             min: {
-                width: this.$el.clientWidth / this.steps,
+                width: gridWidth / this.steps,
                 height: 1
             },
             max: {
-                width: this.$el.clientWidth,
-                height: 41
+                width: gridWidth,
+                height: 44
             }
         };
     },

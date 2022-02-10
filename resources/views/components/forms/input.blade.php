@@ -1,4 +1,4 @@
-@props(['checked' => false, 'disabled' => false])
+@props(['disabled' => false])
 
 <input
     {{ $attributes->merge([

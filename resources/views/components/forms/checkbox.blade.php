@@ -1,4 +1,4 @@
-@props(['options' => [], 'selected' => null, 'disabled' => false])
+@props(['disabled' => false])
 
 <input
     type="checkbox"

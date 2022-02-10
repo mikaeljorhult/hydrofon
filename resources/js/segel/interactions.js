@@ -97,7 +97,7 @@ Interactions.resource = function (resource) {
         resourceNode.dispatchEvent(new CustomEvent(
             'createbooking', {
                 detail: {
-                    resource_id: parseInt(resourceNode.dataset.id),
+                    resource_id: [parseInt(resourceNode.dataset.id)],
                     start_time: startTime,
                     end_time: endTime,
                 }
@@ -152,7 +152,10 @@ Interactions.booking = function (booking) {
             }),
             interact.modifiers.snap({
                 targets: Interactions.grid,
-                offset: 'startCoords'
+                offset: 'parent',
+                relativePoints: [
+                    { x: 0, y: 0 }
+                ]
             })
         ],
     });

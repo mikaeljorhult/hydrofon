@@ -104,18 +104,35 @@ class Segel extends Component
             'end_time'    => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
 
-        $validatedValues = $this->validate([
+        $validated = $this->validate([
             'values.user_id'     => ['sometimes', 'nullable', Rule::exists('users', 'id')],
-            'values.resource_id' => [
-                'required',
+            'values.resource_id' => ['required', 'array'],
+            'values.resource_id.*' => [
                 Rule::exists('resources', 'id'),
-                new Available($this->values['start_time'], $this->values['end_time'], 0, 'resource_id'),
+                new Available($this->values['start_time'], $this->values['end_time'], 0, 'resource_id')
             ],
             'values.start_time'  => ['required', 'date', 'required_with:values.resource_id', 'before:values.end_time'],
             'values.end_time'    => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
         ])['values'];
 
-        Booking::create($validatedValues);
+        $bookings = collect($validated['resource_id'])
+            ->map(function ($value) use ($validated) {
+                $booking = [
+                    'resource_id' => $value,
+                    'start_time' => $validated['start_time'],
+                    'end_time' => $validated['end_time'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                if (isset($validated['user_id'])) {
+                    $booking['user_id'] = $validated['user_id'];
+                }
+
+                return $booking;
+            });
+
+        Booking::insert($bookings->toArray());
 
         $this->values = [];
     }
