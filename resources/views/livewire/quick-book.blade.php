@@ -15,6 +15,7 @@
             aria-expanded="false"
             aria-haspopup="true"
             x-on:click.prevent="isOpen = !isOpen"
+            wire:click.prefetch="loadResources"
         >
             <span class="sr-only">Open Quick Book</span>
             <x-heroicon-o-lightning-bolt class="w-6 h-6" />
@@ -74,7 +75,7 @@
                     <x-forms.select
                         id="quickbook-resources"
                         name="resource_id"
-                        :options="$this->availableResources->pluck('name', 'id')"
+                        :options="$this->availableResources->count() > 0 ? $this->availableResources->pluck('name', 'id') : []"
                         :selected="null"
                         placeholder="Available resources"
                         x-model="resource_id"

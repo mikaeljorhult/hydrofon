@@ -24,13 +24,18 @@ class QuickBook extends Component
             'end_time'           => now()->minutes(0)->addHours(2)->format('Y-m-d H:i'),
             'resource_id'        => null,
             'user_id'            => auth()->id(),
-            'availableResources' => $this->getAvailableResources(),
+            'availableResources' => collect(),
         ]);
     }
 
     public function render()
     {
         return view('livewire.quick-book');
+    }
+
+    public function loadResources()
+    {
+        $this->availableResources = $this->getAvailableResources();
     }
 
     public function book()
