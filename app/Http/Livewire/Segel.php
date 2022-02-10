@@ -109,7 +109,7 @@ class Segel extends Component
             'values.resource_id' => ['required', 'array'],
             'values.resource_id.*' => [
                 Rule::exists('resources', 'id'),
-                new Available($this->values['start_time'], $this->values['end_time'], 0, 'resource_id')
+                new Available($this->values['start_time'], $this->values['end_time'], 0, 'resource_id'),
             ],
             'values.start_time'  => ['required', 'date', 'required_with:values.resource_id', 'before:values.end_time'],
             'values.end_time'    => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
