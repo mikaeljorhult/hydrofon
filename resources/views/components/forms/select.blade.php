@@ -16,7 +16,7 @@
     x-on:change="$el.classList.toggle('text-gray-500', $el.value == '')"
 >
     @if($attributes->get('placeholder'))
-        <option value="">{{ $attributes->get('placeholder') }}</option>
+        <option value="" {{ empty($selected) ? 'selected' : '' }}>{{ $attributes->get('placeholder') }}</option>
     @endif
 
     @foreach($options as $key => $label)
