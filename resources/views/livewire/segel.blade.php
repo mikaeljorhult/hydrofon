@@ -153,6 +153,12 @@
             <div
                 class="flex items-center justify-end gap-x-4 p-4 bg-gray-50"
                 x-show="selected.length > 0"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
                 x-cloak
             >
                 <div class="flex-1">
