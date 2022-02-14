@@ -13,7 +13,7 @@ class RemoveNestedSetColumns extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('categories', '_lft'))  {
+        if (Schema::hasColumn('categories', '_lft')) {
             Schema::table('categories', function (Blueprint $table) {
                 $table->dropColumn(['_lft', '_rgt']);
             });
