@@ -34,6 +34,7 @@ class ResourceListComposer
     {
         return Category::with(['resources'])
                        ->orderBy('name')
+                       ->tree()
                        ->get();
     }
 

@@ -5,12 +5,11 @@ namespace App\Models;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kalnoy\Nestedset\NodeTrait;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model
 {
-    use HasFactory;
-    use NodeTrait;
+    use HasFactory, HasRecursiveRelationships;
 
     /**
      * The attributes that are mass assignable.

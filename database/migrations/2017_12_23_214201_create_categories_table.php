@@ -16,10 +16,8 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 60);
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
-
-            // Add columns for nested set.
-            $table->nestedSet();
 
             // Set parent to NULL if parent category is deleted.
             $table->foreign('parent_id')->references('id')->on('categories')
