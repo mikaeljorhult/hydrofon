@@ -10,6 +10,7 @@ class GroupsTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \App\Models\Group::class;
+
     protected $relationships = ['approvers'];
 
     public function onSave()

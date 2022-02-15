@@ -7,17 +7,25 @@ use Livewire\Component;
 class BaseTable extends Component
 {
     protected $model;
+
     protected $modelInstance;
+
     protected $relationships = [];
 
     public $items;
+
     public $selectedRows;
+
     public $isEditing;
+
     public $editValues;
+
     protected $editFields = ['id', 'name'];
 
     public $tableBaseUrl;
+
     public $tableDefaultSort = 'name';
+
     public $tableHeaders = [
         'name' => 'Name',
     ];

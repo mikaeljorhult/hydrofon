@@ -10,10 +10,13 @@ class CategoriesTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \App\Models\Category::class;
+
     protected $relationships = ['parent', 'groups'];
+
     protected $editFields = ['id', 'name', 'parent_id'];
 
     public $tableDefaultSort = 'name';
+
     public $tableHeaders = [
         'name' => 'Name',
         'parent_name' => 'Parent',

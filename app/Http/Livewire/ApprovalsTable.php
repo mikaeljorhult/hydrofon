@@ -11,10 +11,13 @@ class ApprovalsTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \App\Models\Booking::class;
+
     protected $relationships = ['resource', 'user'];
+
     protected $editFields = [];
 
     public $tableDefaultSort = 'start_time';
+
     public $tableHeaders = [
         'resource_name' => 'Resource',
         'user_name'     => 'User',

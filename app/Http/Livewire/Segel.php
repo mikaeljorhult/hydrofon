@@ -17,10 +17,15 @@ class Segel extends Component
     use AuthorizesRequests;
 
     public $resources;
+
     public $timestamps;
+
     public $dateString;
+
     public $type;
+
     public $steps;
+
     public $headings;
 
     public $values;

@@ -7,13 +7,19 @@ use Carbon\Carbon;
 class Grid
 {
     const TYPE_DAY = 'day';
+
     const TYPE_WEEK = 'week';
+
     const TYPE_MONTH = 'month';
 
     public $type;
+
     public $headings;
+
     public $steps;
+
     public $timestamps;
+
     public $dateString;
 
     public function __construct(Carbon $date, string $type)

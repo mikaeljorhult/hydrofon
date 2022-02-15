@@ -12,9 +12,13 @@ use Livewire\Component;
 class QuickBook extends Component
 {
     public $start_time;
+
     public $end_time;
+
     public $resource_id;
+
     public $user_id;
+
     public $availableResources;
 
     public function mount()

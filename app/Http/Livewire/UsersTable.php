@@ -10,10 +10,13 @@ class UsersTable extends BaseTable
     use AuthorizesRequests;
 
     protected $model = \App\Models\User::class;
+
     protected $relationships = ['groups'];
+
     protected $editFields = ['id', 'email', 'name', 'is_admin'];
 
     public $tableDefaultSort = 'email';
+
     public $tableHeaders = [
         'email'    => 'email',
         'name'     => 'Name',
