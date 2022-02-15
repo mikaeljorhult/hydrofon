@@ -1,5 +1,21 @@
 <?php
 
+use App\Http\Controllers\UserIdentifierController;
+use App\Http\Controllers\ResourceIdentifierController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileBookingsController;
+use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\DataRequestController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CheckinController;
+use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\DeskController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImpersonationController;
+use App\Http\Controllers\SubscriptionController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,24 +27,24 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', [HomeController::class, 'index']);
 
 Auth::routes();
 Route::redirect('home', '/')->name('home');
 
-Route::get('profile', 'ProfileController')->name('profile');
-Route::get('profile/bookings', 'ProfileBookingsController')->name('profile.bookings');
+Route::get('profile', ProfileController::class)->name('profile');
+Route::get('profile/bookings', ProfileBookingsController::class)->name('profile.bookings');
 
-Route::get('notifications', 'NotificationsController')->name('notifications');
+Route::get('notifications', NotificationsController::class)->name('notifications');
 
-Route::get('calendar/{date?}', 'CalendarController@index')->name('calendar');
-Route::post('calendar', 'CalendarController@store');
+Route::get('calendar/{date?}', [CalendarController::class, 'index'])->name('calendar');
+Route::post('calendar', [CalendarController::class, 'store']);
 
-Route::get('desk/{search?}', 'DeskController@index')->name('desk');
-Route::post('desk', 'DeskController@store');
+Route::get('desk/{search?}', [DeskController::class, 'index'])->name('desk');
+Route::post('desk', [DeskController::class, 'store']);
 
-Route::post('impersonation', 'ImpersonationController@store')->name('impersonation');
-Route::delete('impersonation', 'ImpersonationController@destroy');
+Route::post('impersonation', [ImpersonationController::class, 'store'])->name('impersonation');
+Route::delete('impersonation', [ImpersonationController::class, 'destroy']);
 
 Route::resources([
     'bookings'   => 'BookingController',
@@ -39,15 +55,15 @@ Route::resources([
     'users'      => 'UserController',
 ]);
 
-Route::resource('checkins', 'CheckinController')->only(['store', 'destroy']);
-Route::resource('checkouts', 'CheckoutController')->only(['store', 'destroy']);
+Route::resource('checkins', CheckinController::class)->only(['store', 'destroy']);
+Route::resource('checkouts', CheckoutController::class)->only(['store', 'destroy']);
 
-Route::resource('approvals', 'ApprovalController')->only(['index', 'store', 'destroy']);
+Route::resource('approvals', ApprovalController::class)->only(['index', 'store', 'destroy']);
 
-Route::resource('resources.identifiers', 'ResourceIdentifierController')->except(['show']);
-Route::resource('users.identifiers', 'UserIdentifierController')->except(['show']);
+Route::resource('resources.identifiers', ResourceIdentifierController::class)->except(['show']);
+Route::resource('users.identifiers', UserIdentifierController::class)->except(['show']);
 
-Route::resource('subscriptions', 'SubscriptionController')->only(['store', 'destroy']);
-Route::get('feeds/{feed}', 'SubscriptionController@show')->name('feed');
+Route::resource('subscriptions', SubscriptionController::class)->only(['store', 'destroy']);
+Route::get('feeds/{feed}', [SubscriptionController::class, 'show'])->name('feed');
 
-Route::resource('datarequests', 'DataRequestController')->only(['store']);
+Route::resource('datarequests', DataRequestController::class)->only(['store']);
