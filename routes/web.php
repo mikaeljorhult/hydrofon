@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\UserIdentifierController;
-use App\Http\Controllers\ResourceIdentifierController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfileBookingsController;
-use App\Http\Controllers\NotificationsController;
-use App\Http\Controllers\DataRequestController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CheckinController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DataRequestController;
 use App\Http\Controllers\DeskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonationController;
+use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\ProfileBookingsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResourceIdentifierController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserIdentifierController;
 use Illuminate\Support\Facades\Route;
 
 /*
