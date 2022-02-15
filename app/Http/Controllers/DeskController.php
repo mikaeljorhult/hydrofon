@@ -91,16 +91,18 @@ class DeskController extends Controller
                                $query->where('is_facility', '=', 0);
                            })
                            ->where(function ($query) {
-                               $filter = request()->query->get('filter');
+                               $filter = request()->query->all('filter');
 
                                // Set default time span to +/- 4 days if not in request.
                                if (! isset($filter['between'])) {
                                    $query->between(now()->subDays(4), now()->addDays(4));
+                               } else {
+                                   $between = explode(',', $filter['between']);
+                                   $query->between($between[0], $between[1]);
                                }
                            })
                            ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                            ->join('users', 'users.id', '=', 'bookings.user_id')
-                           ->allowedFilters(AllowedFilter::scope('between'))
                            ->defaultSort('start_time')
                            ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
                            ->paginate(15);

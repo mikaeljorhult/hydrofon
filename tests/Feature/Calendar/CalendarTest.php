@@ -53,7 +53,7 @@ class CalendarTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/calendar', [
-            'resources' => 100,
+            'resources' => [100],
         ]);
 
         $response->assertRedirect('/');
