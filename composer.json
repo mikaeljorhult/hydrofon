@@ -9,30 +9,29 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
-        "blade-ui-kit/blade-heroicons": "^1.2.0",
+        "blade-ui-kit/blade-heroicons": "^1.3",
         "eluceo/ical": "^2.2.0",
-        "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "fruitcake/laravel-cors": "^2.0.5",
+        "guzzlehttp/guzzle": "^7.2",
         "laracasts/flash": "^3.2",
-        "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.0",
+        "laravel/framework": "^9.0",
+        "laravel/tinker": "^2.7",
+        "laravel/ui": "^3.4",
         "laravolt/avatar": "^4.1",
         "livewire/livewire": "^2.5",
-        "spatie/laravel-model-status": "^1.10",
-        "spatie/laravel-query-builder": "^4.0",
-        "staudenmeir/laravel-adjacency-list": "^1.0"
+        "spatie/laravel-model-status": "^1.11",
+        "spatie/laravel-query-builder": "^5.0",
+        "staudenmeir/laravel-adjacency-list": "^1.10"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.5",
-        "barryvdh/laravel-ide-helper": "^2.10",
-        "brianium/paratest": "^6.2",
-        "facade/ignition": "^2.3.6",
+        "barryvdh/laravel-debugbar": "^3.6",
+        "barryvdh/laravel-ide-helper": "^2.12",
+        "brianium/paratest": "^6.4",
         "fakerphp/faker": "^1.9.1",
-        "mockery/mockery": "^1.3.1",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3"
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -63,7 +62,8 @@
             "@php artisan package:discover"
         ],
         "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ]
     },
     "config": {
