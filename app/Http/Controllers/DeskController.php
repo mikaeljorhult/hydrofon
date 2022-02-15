@@ -69,7 +69,7 @@ class DeskController extends Controller
                                       ->where('value', $search)
                                       ->first();
 
-            $identifiable = optional($identifier)->identifiable;
+            $identifiable = $identifier?->identifiable;
         }
 
         return $identifiable;
