@@ -73,7 +73,7 @@ Interactions.resource = function (resource) {
 
     interact(resource).on('doubletap', function (event) {
         // Ignore propagating clicks from other elements.
-        if (! event.target.classList.contains('segel-resource') && !event.target.classList.contains('segel-bookings')) {
+        if (!event.target.classList.contains('segel-resource') && !event.target.classList.contains('segel-bookings')) {
             return;
         }
 
@@ -249,6 +249,11 @@ Interactions.booking = function (booking) {
     });
 
     interact(booking).on('doubletap', function (event) {
+        // Ignore clicks on resize handles.
+        if (!event.target.classList.contains('segel-booking')) {
+            return;
+        }
+
         let resourceNode = event.target.closest('.segel-resource');
 
         resourceNode.dispatchEvent(new CustomEvent(
