@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading :title="'Bookings'" :url="route('bookings.index')">
+        <x-heading title="Bookings" :url="route('bookings.index')">
             <x-forms.button
                 type="link"
                 class="rounded-full mr-2"

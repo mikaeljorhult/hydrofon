@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading :title="'Create identifier'" />
+        <x-heading title="Create identifier" />
 
         <section>
             <form

@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading :title="'Profile: Bookings'" :url="route('profile.bookings')">
+        <x-heading title="Profile: Bookings" :url="route('profile.bookings')">
             <x-slot name="filters">
                 <form action="{{ route('profile.bookings') }}" method="get">
                     <section class="lg:flex items-end py-2 px-3 bg-gray-50">

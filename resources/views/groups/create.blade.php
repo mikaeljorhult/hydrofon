@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading :title="'Create group'" />
+        <x-heading title="Create group" />
 
         <section>
             <form
