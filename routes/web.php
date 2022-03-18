@@ -66,7 +66,7 @@ Route::resource('checkouts', CheckoutController::class)->only(['store', 'destroy
 
 Route::resource('approvals', ApprovalController::class)->only(['index', 'store', 'destroy']);
 
-Route::resource('resources.identifiers', ResourceIdentifierController::class)->except(['show']);
+Route::resource('resources.identifiers', ResourceIdentifierController::class);
 Route::resource('users.identifiers', UserIdentifierController::class)->except(['show']);
 
 Route::resource('subscriptions', SubscriptionController::class)->only(['store', 'destroy']);

@@ -10,6 +10,19 @@
                 class="rounded-full mr-2"
                 :href="route($identifiable->getTable().'.identifiers.create', [$identifiable])"
             >New identifier</x-forms.button>
+
+            <form
+                action="{{ route($identifiable->getTable().'.identifiers.store', $identifiable) }}"
+                method="post"
+            >
+                @csrf
+                <input type="hidden" name="value" value="{{ \Illuminate\Support\Str::uuid() }}" />
+
+                <x-forms.button
+                    class="rounded-full mr-2"
+                    :href="route($identifiable->getTable().'.identifiers.create', [$identifiable])"
+                >Generate unique ID</x-forms.button>
+            </form>
         </x-heading>
 
         <table class="table">
