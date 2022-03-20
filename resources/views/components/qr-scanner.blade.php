@@ -36,10 +36,21 @@
     >
         <div class="py-2 px-4">
             <div
-                class="group w-full h-36 relative bg-gray-100"
+                class="group flex justify-center items-center w-full h-36 relative bg-gray-100"
                 x-show="isScanning"
             >
                 <video x-ref="video"></video>
+
+                <div
+                    class="w-1/3 h-2/3 transition-all"
+                    x-ref="highlight"
+                >
+                    <div class="w-1/4 absolute top-0 left-0 border-2 border-red-500 border-b-transparent border-r-transparent">&nbsp;</div>
+                    <div class="w-1/4 absolute top-0 right-0 border-2 border-red-500 border-b-transparent border-l-transparent">&nbsp;</div>
+                    <div class="w-1/4 absolute bottom-0 left-0 border-2 border-red-500 border-t-transparent border-r-transparent">&nbsp;</div>
+                    <div class="w-1/4 absolute bottom-0 right-0 border-2 border-red-500 border-t-transparent border-l-transparent">&nbsp;</div>
+                </div>
+
                 <button
                     class="w-full absolute inset-0 bg-gray-100/75 text-sm font-light hidden group-hover:block"
                     x-on:click="stop"

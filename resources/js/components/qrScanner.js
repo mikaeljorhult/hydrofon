@@ -14,8 +14,9 @@ export default (initialState) => ({
                 this.$refs.video,
                 this.onDecode.bind(this),
                 {
-                    highlightScanRegion: true,
                     returnDetailedScanResult: true,
+                    highlightScanRegion: true,
+                    overlay: this.$refs.highlight,
                 }
             );
         }
