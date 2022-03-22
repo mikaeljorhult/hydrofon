@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Identifier;
 use App\Rules\Available;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -26,16 +27,17 @@ class BookingsTable extends BaseTable
     ];
 
     protected $listeners = [
-        'select'    => 'onSelect',
-        'selectAll' => 'onSelectAll',
-        'edit'      => 'onEdit',
-        'save'      => 'onSave',
-        'delete'    => 'onDelete',
-        'checkin'   => 'onCheckin',
-        'checkout'  => 'onCheckout',
-        'switch'    => 'onSwitch',
-        'approve'   => 'onApprove',
-        'reject'    => 'onReject',
+        'select'           => 'onSelect',
+        'selectAll'        => 'onSelectAll',
+        'selectIdentifier' => 'onSelectIdentifier',
+        'edit'             => 'onEdit',
+        'save'             => 'onSave',
+        'delete'           => 'onDelete',
+        'checkin'          => 'onCheckin',
+        'checkout'         => 'onCheckout',
+        'switch'           => 'onSwitch',
+        'approve'          => 'onApprove',
+        'reject'           => 'onReject',
     ];
 
     public function getHeadersProperty()
@@ -163,6 +165,17 @@ class BookingsTable extends BaseTable
         $item->save();
 
         $this->refreshItems([$id]);
+    }
+
+    public function onSelectIdentifier($identifier)
+    {
+        $resourceId = Identifier::where('value', $identifier)->soleValue('identifiable_id');
+
+        $bookings = $this->items->where('resource_id', $resourceId)->pluck('id');
+
+        if ($bookings->count() > 0) {
+            $this->onSelect($bookings->first(), true);
+        }
     }
 
     public function render()

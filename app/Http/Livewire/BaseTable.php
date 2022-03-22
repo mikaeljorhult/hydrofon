@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class BaseTable extends Component
@@ -64,11 +65,16 @@ class BaseTable extends Component
 
     public function onSelect($id, $checked)
     {
+        $wrappedId = Arr::wrap($id);
+
         if ($checked) {
-            array_push($this->selectedRows, $id);
+            foreach($wrappedId as $wrapped) {
+                array_push($this->selectedRows, $wrapped);
+            }
+
             $this->selectedRows = array_values(array_unique($this->selectedRows));
         } else {
-            $this->selectedRows = array_diff($this->selectedRows, [$id]);
+            $this->selectedRows = array_diff($this->selectedRows, $wrappedId);
         }
     }
 
