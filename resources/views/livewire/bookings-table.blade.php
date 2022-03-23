@@ -1,4 +1,7 @@
-<div>
+<div
+    x-data="itemsTable()"
+    x-on:qrcoderead.window="$wire.emit('selectIdentifier', $event.detail)"
+>
     <table class="table">
         @include('livewire.partials.table-header')
 
@@ -227,8 +230,6 @@
     </table>
 </div>
 
-@include('livewire.partials.table-scripts')
-
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -253,10 +254,6 @@
                     time_24hr: true,
                 });
             });
-        });
-
-        window.addEventListener('qrcoderead', function (event) {
-            @this.emit('selectIdentifier', event.detail);
         });
     </script>
 @endpush

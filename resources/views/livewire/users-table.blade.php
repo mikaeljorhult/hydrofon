@@ -1,4 +1,4 @@
-<div>
+<div x-data="itemsTable()">
     <table class="table">
         @include('livewire.partials.table-header')
 
@@ -147,5 +147,3 @@
         </tfoot>
     </table>
 </div>
-
-@include('livewire.partials.table-scripts')
