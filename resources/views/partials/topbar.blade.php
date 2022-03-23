@@ -53,6 +53,10 @@
         </div>
 
         <div class="ml-4 flex items-center md:ml-6">
+            @if(request()->routeIs('desk'))
+                <x-qr-scanner />
+            @endif
+
             <livewire:quick-book />
             <livewire:notifications-indicator />
 

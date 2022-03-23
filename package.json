@@ -15,6 +15,7 @@
         "interactjs": "^1.10.11",
         "laravel-mix": "^6.0.39",
         "postcss": "^8.4.4",
+        "qr-scanner": "^1.4.1",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.44.0",
         "sass-loader": "^12.4.0",

@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading :title="'Buckets'" :url="route('buckets.index')">
+        <x-heading title="Buckets" :url="route('buckets.index')">
             <x-forms.button
                 type="link"
                 class="rounded-full mr-2"

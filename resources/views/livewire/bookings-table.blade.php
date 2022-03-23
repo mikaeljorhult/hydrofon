@@ -254,5 +254,9 @@
                 });
             });
         });
+
+        window.addEventListener('qrcoderead', function (event) {
+            @this.emit('selectIdentifier', event.detail);
+        });
     </script>
 @endpush

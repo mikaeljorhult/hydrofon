@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading :title="'Create booking'" />
+        <x-heading title="Create booking" />
 
         <section>
             <form
