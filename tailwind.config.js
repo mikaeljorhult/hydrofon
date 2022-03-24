@@ -4,13 +4,7 @@ module.exports = {
         './resources/**/*.{php,js}',
         './node_modules/flatpickr/dist/flatpickr.js'
     ],
-    theme: {
-        extend: {
-            fontFamily: {
-                'base': ['Roboto', 'sans-serif']
-            }
-        }
-    },
+    theme: {},
     plugins: [
         require('@tailwindcss/forms'),
     ],

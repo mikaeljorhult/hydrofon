@@ -6,24 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="theme-color" content="#dc2626">
+    <meta name="theme-color" content="#b91c1c">
 
     <title>@yield('title', config('app.name', 'Hydrofon'))</title>
 
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
-
-        window.HYDROFON = {
-            baseURL: @json(url('/')),
-            user:  @json(auth()->id()),
-            isAdmin: @json(auth()->user() ? auth()->user()->isAdmin() : false)
-        };
     </script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     <livewire:styles />
 </head>
 
