@@ -13,6 +13,7 @@ class Administrator
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     *
      * @throws \Illuminate\Auth\AuthenticationException
      */
     public function handle($request, Closure $next)
