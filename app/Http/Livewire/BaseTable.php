@@ -68,7 +68,7 @@ class BaseTable extends Component
         $wrappedId = Arr::wrap($id);
 
         if ($checked) {
-            foreach($wrappedId as $wrapped) {
+            foreach ($wrappedId as $wrapped) {
                 array_push($this->selectedRows, $wrapped);
             }
 
