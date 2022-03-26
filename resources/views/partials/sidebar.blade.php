@@ -25,7 +25,7 @@
             </a>
         </section>
 
-        <nav class="w-full md:flex flex-col flex-1 items-center content-between overflow-y-scroll my-6">
+        <nav class="w-full md:flex flex-col flex-1 items-center content-between overflow-y-auto my-6">
             <ul class="list-none w-full flex flex-wrap items-center content-between px-4 md:block md:px-0 md:mb-4">
                 <x-sidebar-link route="calendar" icon="calendar" text="Book" />
 

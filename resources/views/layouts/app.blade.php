@@ -24,7 +24,7 @@
         @include('partials.sidebar')
         @yield('sidebar')
 
-        <main class="main-content h-full flex-grow overflow-scroll">
+        <main class="main-content h-full flex-grow overflow-y-scroll overflow-x-hidden">
             @include('partials/topbar')
             @include('flash::message')
             @yield('content')
