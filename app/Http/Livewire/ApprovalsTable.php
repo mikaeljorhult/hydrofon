@@ -27,10 +27,8 @@ class ApprovalsTable extends BaseTable
     ];
 
     protected $listeners = [
-        'select'    => 'onSelect',
-        'selectAll' => 'onSelectAll',
-        'approve'   => 'onApprove',
-        'reject'    => 'onReject',
+        'approve' => 'onApprove',
+        'reject'  => 'onReject',
     ];
 
     public function onApprove($id, $multiple = false)

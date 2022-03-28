@@ -1,4 +1,4 @@
-<div x-data="itemsTable()">
+<div x-data="itemsTable({ selectedRows: @entangle('selectedRows').defer })">
     <table class="table">
         @include('livewire.partials.table-header')
 
@@ -135,7 +135,7 @@
                     <div class="flex justify-end">
                         <form>
                             <x-forms.button-link
-                                :disabled="count($this->selectedRows) === 0"
+                                x-bind:disabled="selectedRows.length === 0"
                                 wire:click.prevent="$emit('delete', false, true)"
                             >Delete</x-forms.button-link>
                         </form>

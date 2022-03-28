@@ -27,7 +27,7 @@ export default (initialState) => ({
         this.calculateGrid();
         this.setupInteractions();
 
-        this.$watch('start, duration, steps', this.setupTimestamps);
+        this.$watch('start, duration, steps', this.setupTimestamps.bind(this));
 
         window.Livewire.hook('message.processed', (message, component) => {
             if (component.name === 'segel') {

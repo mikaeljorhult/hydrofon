@@ -1,8 +1,10 @@
 <thead>
     <th class="table-column-check">
         <x-forms.checkbox
-            :checked="$this->items->isNotEmpty() && count($this->selectedRows) === $this->items->count()"
-            wire:click="$emit('selectAll', $event.target.checked)"
+            name="select-all"
+            value="1"
+            x-bind="selectall"
+            x-ref="selectall"
         />
     </th>
 

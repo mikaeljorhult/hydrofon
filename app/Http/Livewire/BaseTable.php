@@ -32,11 +32,9 @@ class BaseTable extends Component
     ];
 
     protected $listeners = [
-        'select'    => 'onSelect',
-        'selectAll' => 'onSelectAll',
-        'edit'      => 'onEdit',
-        'save'      => 'onSave',
-        'delete'    => 'onDelete',
+        'edit'   => 'onEdit',
+        'save'   => 'onSave',
+        'delete' => 'onDelete',
     ];
 
     public function __construct($id)
@@ -61,26 +59,6 @@ class BaseTable extends Component
     public function getHeadersProperty()
     {
         return $this->tableHeaders;
-    }
-
-    public function onSelect($id, $checked)
-    {
-        $wrappedId = Arr::wrap($id);
-
-        if ($checked) {
-            foreach ($wrappedId as $wrapped) {
-                array_push($this->selectedRows, $wrapped);
-            }
-
-            $this->selectedRows = array_values(array_unique($this->selectedRows));
-        } else {
-            $this->selectedRows = array_diff($this->selectedRows, $wrappedId);
-        }
-    }
-
-    public function onSelectAll($checked)
-    {
-        $this->selectedRows = $checked ? $this->items->pluck('id')->toArray() : [];
     }
 
     public function onEdit($id)
@@ -145,6 +123,8 @@ class BaseTable extends Component
         $this->items = empty($ids)
             ? collect()
             : $this->items->except($ids);
+
+        $this->selectedRows = array_diff($this->selectedRows, $ids);
     }
 
     private function setEditValues($item)

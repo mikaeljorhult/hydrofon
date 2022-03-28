@@ -27,17 +27,15 @@ class BookingsTable extends BaseTable
     ];
 
     protected $listeners = [
-        'select'           => 'onSelect',
-        'selectAll'        => 'onSelectAll',
         'selectIdentifier' => 'onSelectIdentifier',
-        'edit'             => 'onEdit',
-        'save'             => 'onSave',
-        'delete'           => 'onDelete',
-        'checkin'          => 'onCheckin',
-        'checkout'         => 'onCheckout',
-        'switch'           => 'onSwitch',
-        'approve'          => 'onApprove',
-        'reject'           => 'onReject',
+        'edit'            => 'onEdit',
+        'save'            => 'onSave',
+        'delete'          => 'onDelete',
+        'checkin'         => 'onCheckin',
+        'checkout'        => 'onCheckout',
+        'switch'          => 'onSwitch',
+        'approve'         => 'onApprove',
+        'reject'          => 'onReject',
     ];
 
     public function getHeadersProperty()

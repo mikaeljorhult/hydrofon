@@ -1,4 +1,4 @@
-<div x-data="itemsTable()">
+<div x-data="itemsTable({ selectedRows: @entangle('selectedRows').defer })">
     <table class="table">
         @include('livewire.partials.table-header')
 
@@ -7,9 +7,9 @@
                 <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                     <td data-title="&nbsp;">
                         <x-forms.checkbox
+                            name="selected[]"
                             value="{{ $item->id }}"
-                            :checked="in_array($item->id, $this->selectedRows)"
-                            wire:click="$emit('select', {{ $item->id }}, $event.target.checked)"
+                            x-model="selectedRows"
                         />
                     </td>
                     <td data-title="Resource">
@@ -79,14 +79,14 @@
                     <div class="flex justify-end">
                         <form>
                             <x-forms.button-link
-                                :disabled="count($this->selectedRows) === 0"
+                                x-bind:disabled="selectedRows.length === 0"
                                 wire:click.prevent="$emit('approve', false, true)"
                             >Approve</x-forms.button-link>
                         </form>
 
                         <form>
                             <x-forms.button-link
-                                :disabled="count($this->selectedRows) === 0"
+                                x-bind:disabled="selectedRows.length === 0"
                                 wire:click.prevent="$emit('reject', false, true)"
                             >Reject</x-forms.button-link>
                         </form>

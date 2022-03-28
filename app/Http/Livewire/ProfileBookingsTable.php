@@ -25,11 +25,9 @@ class ProfileBookingsTable extends BaseTable
     ];
 
     protected $listeners = [
-        'select'    => 'onSelect',
-        'selectAll' => 'onSelectAll',
-        'edit'      => 'onEdit',
-        'save'      => 'onSave',
-        'delete'    => 'onDelete',
+        'edit'   => 'onEdit',
+        'save'   => 'onSave',
+        'delete' => 'onDelete',
     ];
 
     public function getHeadersProperty()
