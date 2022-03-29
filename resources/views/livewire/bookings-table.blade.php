@@ -77,6 +77,7 @@
                     <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
+                                class="text-red-500"
                                 name="selected[]"
                                 value="{{ $item->id }}"
                                 x-model="selectedRows"

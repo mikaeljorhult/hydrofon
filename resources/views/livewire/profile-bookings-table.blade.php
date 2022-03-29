@@ -64,9 +64,10 @@
                     <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
+                                class="text-red-500"
+                                name="selected[]"
                                 value="{{ $item->id }}"
-                                :checked="in_array($item->id, $this->selectedRows)"
-                                wire:click="$emit('select', {{ $item->id }}, $event.target.checked)"
+                                x-model="selectedRows"
                             />
                         </td>
                         <td data-title="Resource">
