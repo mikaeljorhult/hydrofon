@@ -10,6 +10,7 @@ export default (initialState) => ({
 
         this.$watch('selectedRows', (newValue) => {
             let checkboxes = this.$root.querySelectorAll('[name="selected[]"]');
+            this.$refs.selectall.checked = newValue.length === checkboxes.length && checkboxes.length > 0;
             this.$refs.selectall.indeterminate = newValue.length > 0 && newValue.length !== checkboxes.length;
         })
     },
