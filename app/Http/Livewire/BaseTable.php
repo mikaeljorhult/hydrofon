@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class BaseTable extends Component

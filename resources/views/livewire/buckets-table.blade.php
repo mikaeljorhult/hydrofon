@@ -31,6 +31,22 @@
                             >Cancel</x-forms.button-secondary>
                         </td>
                     </tr>
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }}">
+                        <td>&nbsp;</td>
+                        <td colspan="{{ count($this->headers) + 1 }}">
+                            <div class="grid gap-4 grid-cols-1 lg:grid-cols-3 pb-4">
+                                <div>
+                                    <label class="block mb-2 text-xs uppercase">Resources</label>
+                                    <x-forms.select
+                                        name="resources[]"
+                                        :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
+                                        multiple
+                                        wire:model="editValues.resources"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 @else
                     <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
                         <td data-title="&nbsp;">

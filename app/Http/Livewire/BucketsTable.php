@@ -3,12 +3,15 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 
 class BucketsTable extends BaseTable
 {
     use AuthorizesRequests;
 
     protected $model = \App\Models\Bucket::class;
+
+    protected $relationships = ['resources'];
 
     public function onSave()
     {
@@ -17,8 +20,12 @@ class BucketsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name' => ['required'],
+            'editValues.name'        => ['required'],
+            'editValues.resources'   => ['nullable', 'array'],
+            'editValues.resources.*' => [Rule::exists('resources', 'id')],
         ])['editValues'];
+
+        $this->syncRelationship($item, $validatedData, 'resources');
 
         $item->update($validatedData);
 
