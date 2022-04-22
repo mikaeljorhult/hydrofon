@@ -28,14 +28,14 @@ class BookingsTable extends BaseTable
 
     protected $listeners = [
         'selectIdentifier' => 'onSelectIdentifier',
-        'edit'            => 'onEdit',
-        'save'            => 'onSave',
-        'delete'          => 'onDelete',
-        'checkin'         => 'onCheckin',
-        'checkout'        => 'onCheckout',
-        'switch'          => 'onSwitch',
-        'approve'         => 'onApprove',
-        'reject'          => 'onReject',
+        'edit'             => 'onEdit',
+        'save'             => 'onSave',
+        'delete'           => 'onDelete',
+        'checkin'          => 'onCheckin',
+        'checkout'         => 'onCheckout',
+        'switch'           => 'onSwitch',
+        'approve'          => 'onApprove',
+        'reject'           => 'onReject',
     ];
 
     public function getHeadersProperty()
@@ -52,7 +52,14 @@ class BookingsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.user_id'     => ['sometimes', 'nullable', Rule::exists('users', 'id')],
+            'editValues.user_id'     => [
+                'sometimes',
+                'nullable',
+                Rule::exists('users', 'id'),
+                Rule::when(!auth()->user()->isAdmin(), [
+                    Rule::in([auth()->id()]),
+                ]),
+            ],
             'editValues.resource_id' => [
                 'required',
                 Rule::exists('resources', 'id'),
@@ -79,7 +86,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with(['resource', 'checkin'])->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->checkin) {
+            if (!$item->resource->is_facility && !$item->checkin) {
                 $item->checkin()->create();
 
                 // Shorten booking if it has not ended yet.
@@ -101,7 +108,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with(['resource', 'checkout'])->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->checkout) {
+            if (!$item->resource->is_facility && !$item->checkout) {
                 $item->checkout()->create();
             }
         });

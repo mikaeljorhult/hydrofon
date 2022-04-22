@@ -18,7 +18,7 @@ class CategoriesTable extends BaseTable
     public $tableDefaultSort = 'name';
 
     public $tableHeaders = [
-        'name' => 'Name',
+        'name'        => 'Name',
         'parent_name' => 'Parent',
     ];
 

@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Rules\Available;
+use App\Models\Approval;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Validation\Rule;
 
 class ApprovalsTable extends BaseTable
 {
@@ -35,7 +34,12 @@ class ApprovalsTable extends BaseTable
     {
         $itemsToApprove = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->findOrFail($itemsToApprove);
+        $items = $this->modelInstance
+            ->with(['approval'])
+            ->findOrFail($itemsToApprove)
+            ->each(function ($item, $key) {
+                $this->authorize('create', [Approval::class, $item]);
+            });
 
         $items->each(function ($item, $key) {
             if ($item->status !== 'approved') {
@@ -51,7 +55,12 @@ class ApprovalsTable extends BaseTable
     {
         $itemsToReject = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with(['approval'])->findOrFail($itemsToReject);
+        $items = $this->modelInstance
+            ->with(['approval'])
+            ->findOrFail($itemsToReject)
+            ->each(function ($item, $key) {
+                $this->authorize('create', [Approval::class, $item]);
+            });
 
         $items->each(function ($item, $key) {
             if ($item->status !== 'rejected') {

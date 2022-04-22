@@ -44,6 +44,14 @@ class ProfileBookingsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
+            'editValues.user_id'     => [
+                'sometimes',
+                'nullable',
+                Rule::exists('users', 'id'),
+                Rule::when(!auth()->user()->isAdmin(), [
+                    Rule::in([auth()->id()]),
+                ]),
+            ],
             'editValues.resource_id' => [
                 'required',
                 Rule::exists('resources', 'id'),

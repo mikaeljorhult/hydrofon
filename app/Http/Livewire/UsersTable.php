@@ -32,7 +32,6 @@ class UsersTable extends BaseTable
         $validatedData = $this->validate([
             'editValues.name'     => ['required'],
             'editValues.email'    => ['required', 'email', Rule::unique('users', 'email')->ignore($item->id)],
-            'editValues.password' => ['nullable', 'confirmed'],
             'editValues.is_admin' => ['nullable'],
             'editValues.groups'   => ['nullable', 'array'],
             'editValues.groups.*' => [Rule::exists('groups', 'id')],

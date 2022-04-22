@@ -21,6 +21,7 @@ class GroupsTable extends BaseTable
 
         $validatedData = $this->validate([
             'editValues.name'        => ['required'],
+            'editValues.approvers'   => ['nullable', 'array'],
             'editValues.approvers.*' => [Rule::exists('users', 'id')],
         ])['editValues'];
 
