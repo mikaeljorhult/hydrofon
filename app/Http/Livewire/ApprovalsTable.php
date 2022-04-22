@@ -39,14 +39,8 @@ class ApprovalsTable extends BaseTable
             ->findOrFail($itemsToApprove)
             ->each(function ($item, $key) {
                 $this->authorize('create', [Approval::class, $item]);
-            });
-
-        $items->each(function ($item, $key) {
-            if ($item->status !== 'approved') {
-                $item->approval()->create();
-                $item->setStatus('approved', 'Approved by '.auth()->user()->name);
-            }
-        });
+            })
+            ->each->approve();
 
         $this->refreshItems($itemsToApprove);
     }
@@ -60,17 +54,8 @@ class ApprovalsTable extends BaseTable
             ->findOrFail($itemsToReject)
             ->each(function ($item, $key) {
                 $this->authorize('create', [Approval::class, $item]);
-            });
-
-        $items->each(function ($item, $key) {
-            if ($item->status !== 'rejected') {
-                if ($item->approval) {
-                    $item->approval()->delete();
-                }
-
-                $item->setStatus('rejected', 'Rejected by '.auth()->user()->name);
-            }
-        });
+            })
+            ->each->reject();
 
         $this->refreshItems($itemsToReject);
     }

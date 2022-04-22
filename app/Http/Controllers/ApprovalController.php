@@ -64,14 +64,8 @@ class ApprovalController extends Controller
     public function store(Request $request)
     {
         $booking = Booking::findOrFail($request->input('booking_id'));
-        $this->authorize('create', [Approval::class, $booking]);
 
-        $validated = $request->validate([
-            'booking_id' => Rule::exists('bookings', 'id'),
-        ]);
-
-        $booking->approval()->create();
-        $booking->setStatus('approved');
+        $booking->approve();
 
         return redirect()->back();
     }

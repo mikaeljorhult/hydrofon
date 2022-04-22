@@ -152,20 +152,24 @@ class ApprovalTest extends TestCase
     {
         Config::set('hydrofon.require_approval', 'all');
 
-        $user = User::factory()->create();
-        $booking = Booking::factory()->create();
+        $approver = User::factory()->create();
+        $user     = User::factory()->create();
 
-        $group = Group::factory()->hasAttached($user, [], 'approvers')->create();
-        $booking->user->groups()->attach($group);
+        $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
+        $user->groups()->attach($group);
 
-        $response = $this->actingAs($user)->post('approvals', [
+        $booking = Booking::factory()
+                          ->for($user)
+                          ->create();
+
+        $response = $this->actingAs($approver)->post('approvals', [
             'booking_id' => $booking->id,
         ]);
 
         $response->assertRedirect();
         $this->assertDatabaseHas('approvals', [
             'booking_id' => $booking->id,
-            'user_id' => $user->id,
+            'user_id' => $approver->id,
         ]);
     }
 

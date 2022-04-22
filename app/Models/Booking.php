@@ -279,4 +279,44 @@ class Booking extends Model
             'rejected',
         ]);
     }
+
+
+    /**
+     * Approve booking.
+     *
+     * @return void
+     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
+     */
+    public function approve()
+    {
+        if (auth()->user()->cannot('create', [Approval::class, $this])) {
+            abort(403);
+        }
+
+        if ($this->status !== 'approved') {
+            $this->approval()->create();
+            $this->setStatus('approved', 'Approved by '.auth()->user()->name);
+        }
+    }
+
+    /**
+     * Reject booking.
+     *
+     * @return void
+     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
+     */
+    public function reject()
+    {
+        if (auth()->user()->cannot('create', [Approval::class, $this])) {
+            abort(403);
+        }
+
+        if ($this->status !== 'rejected') {
+            if ($this->approval) {
+                $this->approval()->delete();
+            }
+
+            $this->setStatus('rejected', 'Rejected by '.auth()->user()->name);
+        }
+    }
 }
