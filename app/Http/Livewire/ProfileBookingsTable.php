@@ -48,7 +48,7 @@ class ProfileBookingsTable extends BaseTable
                 'sometimes',
                 'nullable',
                 Rule::exists('users', 'id'),
-                Rule::when(!auth()->user()->isAdmin(), [
+                Rule::when(! auth()->user()->isAdmin(), [
                     Rule::in([auth()->id()]),
                 ]),
             ],

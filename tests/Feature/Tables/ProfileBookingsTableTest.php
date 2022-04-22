@@ -53,7 +53,7 @@ class ProfileBookingsTableTest extends TestCase
      */
     public function testAdministratorCanEditABooking()
     {
-        $items    = Booking::factory()->count(1)->create();
+        $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
@@ -75,7 +75,7 @@ class ProfileBookingsTableTest extends TestCase
      */
     public function testUserCanNotEditAnotherUsersBooking()
     {
-        $items    = Booking::factory()->count(1)->create();
+        $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->create())
@@ -97,7 +97,7 @@ class ProfileBookingsTableTest extends TestCase
      */
     public function testUserCanEditTheirOwnBooking()
     {
-        $items    = Booking::factory()->future()->count(1)->create();
+        $items = Booking::factory()->future()->count(1)->create();
         $resource = Resource::factory()->create();
 
         Livewire::actingAs($items[0]->user)
@@ -120,7 +120,7 @@ class ProfileBookingsTableTest extends TestCase
     public function testUserCanNotChangeUserOfTheirOwnBooking()
     {
         $items = Booking::factory()->future()->count(1)->create();
-        $user  = User::factory()->create();
+        $user = User::factory()->create();
 
         Livewire::actingAs($items[0]->user)
                 ->test(ProfileBookingsTable::class, ['items' => $items])
