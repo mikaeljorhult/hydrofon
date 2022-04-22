@@ -171,6 +171,10 @@ class ApprovalTest extends TestCase
             'booking_id' => $booking->id,
             'user_id' => $approver->id,
         ]);
+
+        $status = $booking->latestStatus();
+        $this->assertEquals('approved', $status->name);
+        $this->assertEquals($approver->id, $status->created_by->id);
     }
 
     /**
