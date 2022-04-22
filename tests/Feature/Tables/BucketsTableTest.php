@@ -95,7 +95,7 @@ class BucketsTableTest extends TestCase
      */
     public function testRelatedResourcesAreSaved()
     {
-        $items    = Bucket::factory()->count(1)->create();
+        $items = Bucket::factory()->count(1)->create();
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())

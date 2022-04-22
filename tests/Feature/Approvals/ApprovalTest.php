@@ -153,7 +153,7 @@ class ApprovalTest extends TestCase
         Config::set('hydrofon.require_approval', 'all');
 
         $approver = User::factory()->create();
-        $user     = User::factory()->create();
+        $user = User::factory()->create();
 
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
         $user->groups()->attach($group);

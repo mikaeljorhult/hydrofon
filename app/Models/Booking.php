@@ -280,11 +280,11 @@ class Booking extends Model
         ]);
     }
 
-
     /**
      * Approve booking.
      *
      * @return void
+     *
      * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function approve()
@@ -303,6 +303,7 @@ class Booking extends Model
      * Reject booking.
      *
      * @return void
+     *
      * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function reject()

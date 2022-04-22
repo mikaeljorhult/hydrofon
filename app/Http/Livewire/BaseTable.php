@@ -41,14 +41,14 @@ class BaseTable extends Component
         parent::__construct($id);
 
         $this->modelInstance = app($this->model);
-        $this->tableBaseUrl  = url()->current();
+        $this->tableBaseUrl = url()->current();
     }
 
     public function mount($items, $baseUrl = null)
     {
-        $this->items        = $items;
+        $this->items = $items;
         $this->selectedRows = [];
-        $this->isEditing    = false;
+        $this->isEditing = false;
 
         if ($baseUrl) {
             $this->tableBaseUrl = $baseUrl;
@@ -132,7 +132,7 @@ class BaseTable extends Component
 
         if (count($this->relationships) > 0) {
             foreach ($this->relationships as $relationship) {
-                if (!in_array($relationship.'_id', $this->editFields) && $item->$relationship) {
+                if (! in_array($relationship.'_id', $this->editFields) && $item->$relationship) {
                     $this->editValues[$relationship] = $item->$relationship->pluck('id')->toArray();
                 }
             }

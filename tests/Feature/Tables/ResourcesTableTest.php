@@ -97,7 +97,7 @@ class ResourcesTableTest extends TestCase
      */
     public function testRelatedBucketsAreSaved()
     {
-        $items  = Resource::factory()->count(1)->create();
+        $items = Resource::factory()->count(1)->create();
         $bucket = Bucket::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
@@ -117,7 +117,7 @@ class ResourcesTableTest extends TestCase
      */
     public function testRelatedCategoriesAreSaved()
     {
-        $items    = Resource::factory()->count(1)->create();
+        $items = Resource::factory()->count(1)->create();
         $category = Category::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())

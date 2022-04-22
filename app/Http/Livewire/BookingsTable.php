@@ -56,7 +56,7 @@ class BookingsTable extends BaseTable
                 'sometimes',
                 'nullable',
                 Rule::exists('users', 'id'),
-                Rule::when(!auth()->user()->isAdmin(), [
+                Rule::when(! auth()->user()->isAdmin(), [
                     Rule::in([auth()->id()]),
                 ]),
             ],
@@ -86,7 +86,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with(['resource', 'checkin'])->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (!$item->resource->is_facility && !$item->checkin) {
+            if (! $item->resource->is_facility && ! $item->checkin) {
                 $item->checkin()->create();
 
                 // Shorten booking if it has not ended yet.
@@ -108,7 +108,7 @@ class BookingsTable extends BaseTable
         $items = $this->modelInstance->with(['resource', 'checkout'])->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (!$item->resource->is_facility && !$item->checkout) {
+            if (! $item->resource->is_facility && ! $item->checkout) {
                 $item->checkout()->create();
             }
         });

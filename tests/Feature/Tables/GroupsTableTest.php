@@ -94,7 +94,7 @@ class GroupsTableTest extends TestCase
      */
     public function testRelatedApproversAreSaved()
     {
-        $items    = Group::factory()->count(1)->create();
+        $items = Group::factory()->count(1)->create();
         $approver = User::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
