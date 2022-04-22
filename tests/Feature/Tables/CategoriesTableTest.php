@@ -95,7 +95,7 @@ class CategoriesTableTest extends TestCase
      */
     public function testParentRelationshipIsSaved()
     {
-        $items  = Category::factory()->count(1)->create();
+        $items = Category::factory()->count(1)->create();
         $parent = Category::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
