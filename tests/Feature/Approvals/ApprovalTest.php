@@ -8,7 +8,6 @@ use App\Models\Group;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class ApprovalTest extends TestCase
@@ -22,7 +21,7 @@ class ApprovalTest extends TestCase
      */
     public function testNonApproverUserCannotSeeList()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $user = User::factory()->create();
 
@@ -37,7 +36,7 @@ class ApprovalTest extends TestCase
      */
     public function testApproverCannotSeeListIfTurnedOff()
     {
-        Config::set('hydrofon.require_approval', 'none');
+        $this->approvalIsNotRequired();
 
         $approver = User::factory()->create();
         Group::factory()->hasAttached($approver, [], 'approvers')->create();
@@ -53,7 +52,7 @@ class ApprovalTest extends TestCase
      */
     public function testBookingsNeedingApprovalAreListed()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 
@@ -64,8 +63,8 @@ class ApprovalTest extends TestCase
                           ->create();
 
         $this->actingAs($approver)->get('approvals')
-            ->assertOk()
-            ->assertSeeText($booking->user->name);
+             ->assertOk()
+             ->assertSeeText($booking->user->name);
     }
 
     /**
@@ -75,15 +74,15 @@ class ApprovalTest extends TestCase
      */
     public function testConfigCanRemoveNeedForApprovalForEquipment()
     {
-        Config::set('hydrofon.require_approval', 'facilities');
+        $this->approvalIsRequiredForFacilities();
 
         $approver = User::factory()->create();
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $equipmentBooking = Booking::factory()
-                          ->for(User::factory()->hasAttached($group))
-                          ->for(Resource::factory()->equipment())
-                          ->create();
+                                   ->for(User::factory()->hasAttached($group))
+                                   ->for(Resource::factory()->equipment())
+                                   ->create();
 
         $facilityBooking = Booking::factory()
                                   ->for(User::factory()->hasAttached($group))
@@ -103,7 +102,7 @@ class ApprovalTest extends TestCase
      */
     public function testConfigCanRemoveNeedForApprovalForFacilities()
     {
-        Config::set('hydrofon.require_approval', 'equipment');
+        $this->approvalIsRequiredForEquipment();
 
         $approver = User::factory()->create();
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
@@ -131,7 +130,7 @@ class ApprovalTest extends TestCase
      */
     public function testBookingsNotNeedingApprovalAreOmitted()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
         Group::factory()->hasAttached($approver, [], 'approvers')->create();
@@ -150,7 +149,7 @@ class ApprovalTest extends TestCase
      */
     public function testBookingCanBeApproved()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
         $user = User::factory()->create();
@@ -169,7 +168,7 @@ class ApprovalTest extends TestCase
         $response->assertRedirect();
         $this->assertDatabaseHas('approvals', [
             'booking_id' => $booking->id,
-            'user_id' => $approver->id,
+            'user_id'    => $approver->id,
         ]);
 
         $status = $booking->latestStatus();
@@ -184,7 +183,7 @@ class ApprovalTest extends TestCase
      */
     public function testBookingCanNotBeApprovedIfUserIsInAnApprovingGroup()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $user = User::factory()->create();
         $booking = Booking::factory()->create();
@@ -207,7 +206,7 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalCanBeRevokedByAdmin()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $admin = User::factory()->admin()->create();
         $approval = Approval::factory()->create();
@@ -225,7 +224,7 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalCanBeRevokedByApprover()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $user = User::factory()->admin()->create();
         $approval = Approval::factory()->for($user)->create();
@@ -243,7 +242,7 @@ class ApprovalTest extends TestCase
      */
     public function testUsersCanNotRevokeApproval()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $user = User::factory()->create();
         $approval = Approval::factory()->create();
@@ -261,7 +260,7 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalIsRevokedIfUserChangesBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approval = Approval::factory()->create();
         $booking = $approval->booking;
@@ -289,7 +288,7 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approval = Approval::factory()->create();
         $booking = $approval->booking;
@@ -314,7 +313,7 @@ class ApprovalTest extends TestCase
      */
     public function testApprovalIsNotRevokedIfAdminChangesBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approval = Approval::factory()->create();
         $booking = $approval->booking;

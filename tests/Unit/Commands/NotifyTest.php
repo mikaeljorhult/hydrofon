@@ -11,7 +11,6 @@ use App\Notifications\BookingAwaitingApproval;
 use App\Notifications\BookingOverdue;
 use App\Notifications\BookingRejected;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class NotifyTest extends TestCase
@@ -32,7 +31,7 @@ class NotifyTest extends TestCase
                                  ->create();
 
         // Booking needing approval.
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
         $approver = User::factory()->create();
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
@@ -140,7 +139,7 @@ class NotifyTest extends TestCase
      */
     public function testApproverWithWaitingApprovalsGetNotified()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
@@ -162,7 +161,7 @@ class NotifyTest extends TestCase
      */
     public function testApproverDontGetNotifiedTwiceAboutSamePendingBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
@@ -184,7 +183,7 @@ class NotifyTest extends TestCase
      */
     public function testApproverGetsNotifiedAboutNewBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
         $approver->notify(new BookingAwaitingApproval());
@@ -208,7 +207,7 @@ class NotifyTest extends TestCase
      */
     public function testUserWithApprovedBookingGetNotified()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approval = Approval::factory()->create();
 
@@ -225,7 +224,7 @@ class NotifyTest extends TestCase
      */
     public function testUserWithAutoApprovedBookingDontGetNotified()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $user = User::factory()
                     ->has(Booking::factory())
@@ -243,7 +242,7 @@ class NotifyTest extends TestCase
      */
     public function testUserDontGetNotifiedTwiceAboutSameApprovedBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approval = Approval::factory()->create();
 
@@ -260,7 +259,7 @@ class NotifyTest extends TestCase
      */
     public function testUserWithRejectedBookingGetNotified()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $booking = Booking::factory()->create();
         $booking->setStatus('rejected');
@@ -278,7 +277,7 @@ class NotifyTest extends TestCase
      */
     public function testUserDontGetNotifiedTwiceAboutSameRejectedBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $booking = Booking::factory()->create();
         $booking->setStatus('rejected');

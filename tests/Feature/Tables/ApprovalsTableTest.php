@@ -8,7 +8,6 @@ use App\Models\Booking;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -40,7 +39,7 @@ class ApprovalsTableTest extends TestCase
      */
     public function testAdministratorCanApproveBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 
@@ -68,7 +67,7 @@ class ApprovalsTableTest extends TestCase
      */
     public function testGroupApproverCanApproveBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 
@@ -96,7 +95,7 @@ class ApprovalsTableTest extends TestCase
      */
     public function testUserCanNotApproveBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 
@@ -124,7 +123,7 @@ class ApprovalsTableTest extends TestCase
      */
     public function testAdministratorCanRejectBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 
@@ -154,7 +153,7 @@ class ApprovalsTableTest extends TestCase
      */
     public function testGroupApproverCanRejectBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 
@@ -184,7 +183,7 @@ class ApprovalsTableTest extends TestCase
      */
     public function testUserCanNotRejectBooking()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $approver = User::factory()->create();
 

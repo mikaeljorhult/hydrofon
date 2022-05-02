@@ -5,7 +5,6 @@ namespace Tests\Unit\Model;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\Subscription;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

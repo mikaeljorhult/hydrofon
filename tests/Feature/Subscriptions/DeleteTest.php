@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use App\Models\Resource;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

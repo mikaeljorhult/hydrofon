@@ -10,7 +10,6 @@ use App\Models\Group;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -256,7 +255,7 @@ class BookingsTableTest extends TestCase
      */
     public function testBookingCanBeApproved()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $group = Group::factory()
                       ->hasAttached(User::factory()->create(), [], 'approvers')
@@ -283,7 +282,7 @@ class BookingsTableTest extends TestCase
      */
     public function testBookingCanBeRejected()
     {
-        Config::set('hydrofon.require_approval', 'all');
+        $this->approvalIsRequired();
 
         $group = Group::factory()
                       ->hasAttached(User::factory()->create(), [], 'approvers')
