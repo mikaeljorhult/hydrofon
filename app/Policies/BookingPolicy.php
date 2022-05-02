@@ -69,4 +69,15 @@ class BookingPolicy
     {
         return $user->owns($booking) && $booking->start_time->isFuture() && $booking->checkout === null;
     }
+
+    /**
+     * Determine whether the user can approve any bookings.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function approveAny(User $user)
+    {
+        return $user->approvingGroups()->exists();
+    }
 }

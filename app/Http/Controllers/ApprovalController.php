@@ -7,7 +7,6 @@ use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ApprovalController extends Controller
@@ -29,7 +28,12 @@ class ApprovalController extends Controller
      */
     public function index()
     {
-        $this->authorize('list', Approval::class);
+        // Bail if approvals are not set up.
+        if (config('hydrofon.require_approval') === 'none') {
+            abort(403);
+        }
+
+        $this->authorize('approveAny', Booking::class);
 
         $bookings = QueryBuilder::for(Booking::class)
                                 ->select('bookings.*')
