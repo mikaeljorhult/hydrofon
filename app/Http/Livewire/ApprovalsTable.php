@@ -34,11 +34,11 @@ class ApprovalsTable extends BaseTable
     {
         $itemsToApprove = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance
+        $this->modelInstance
             ->with(['approval'])
             ->findOrFail($itemsToApprove)
             ->each(function ($item, $key) {
-                $this->authorize('create', [Approval::class, $item]);
+                $this->authorize('approve', $item);
             })
             ->each->approve();
 
@@ -49,11 +49,11 @@ class ApprovalsTable extends BaseTable
     {
         $itemsToReject = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance
+        $this->modelInstance
             ->with(['approval'])
             ->findOrFail($itemsToReject)
             ->each(function ($item, $key) {
-                $this->authorize('create', [Approval::class, $item]);
+                $this->authorize('approve', $item);
             })
             ->each->reject();
 

@@ -289,7 +289,7 @@ class Booking extends Model
      */
     public function approve()
     {
-        if (auth()->user()->cannot('create', [Approval::class, $this])) {
+        if (auth()->user()->cannot('approve', $this)) {
             abort(403);
         }
 
@@ -308,7 +308,7 @@ class Booking extends Model
      */
     public function reject()
     {
-        if (auth()->user()->cannot('create', [Approval::class, $this])) {
+        if (auth()->user()->cannot('approve', $this)) {
             abort(403);
         }
 
@@ -318,6 +318,28 @@ class Booking extends Model
             }
 
             $this->setStatus('rejected', 'Rejected by '.auth()->user()->name);
+        }
+    }
+
+    /**
+     * Revoke booking approval.
+     *
+     * @return void
+     *
+     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
+     */
+    public function revoke()
+    {
+        if (auth()->user()->cannot('approve', $this)) {
+            abort(403);
+        }
+
+        if ($this->status === 'approved') {
+            if ($this->approval) {
+                $this->approval()->delete();
+            }
+
+            $this->setStatus('pending', 'Approval revoked');
         }
     }
 }

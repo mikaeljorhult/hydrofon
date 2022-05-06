@@ -69,6 +69,8 @@ class ApprovalController extends Controller
     {
         $booking = Booking::findOrFail($request->input('booking_id'));
 
+        $this->authorize('approve', $booking);
+
         $booking->approve();
 
         return redirect()->back();
@@ -82,14 +84,9 @@ class ApprovalController extends Controller
      */
     public function destroy(Approval $approval)
     {
-        $this->authorize('delete', $approval);
+        $this->authorize('approve', $approval->booking);
 
-        // Revoked approval if booking has not yet started.
-        if ($approval->booking->start_time->isFuture()) {
-            $approval->booking->setStatus('pending', 'Approval revoked');
-        }
-
-        $approval->delete();
+        $approval->booking->revoke();
 
         return redirect()->back();
     }

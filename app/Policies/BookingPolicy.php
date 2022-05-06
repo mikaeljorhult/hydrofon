@@ -80,4 +80,18 @@ class BookingPolicy
     {
         return $user->approvingGroups()->exists();
     }
+
+    /**
+     * Determine whether the user can approve the booking.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Booking  $booking
+     * @return mixed
+     */
+    public function approve(User $user, Booking $booking)
+    {
+        $booking->loadMissing(['user']);
+
+        return $booking->user->groups()->whereIn('id', $user->approvingGroups()->pluck('id'))->exists();
+    }
 }
