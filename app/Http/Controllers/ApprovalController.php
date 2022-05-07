@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Approval;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
@@ -79,14 +78,14 @@ class ApprovalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Approval  $approval
+     * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Approval $approval)
+    public function destroy(Booking $booking)
     {
-        $this->authorize('approve', $approval->booking);
+        $this->authorize('approve', $booking);
 
-        $approval->booking->revoke();
+        $booking->revoke();
 
         return redirect()->back();
     }

@@ -120,35 +120,28 @@ class BookingsTable extends BaseTable
     {
         $itemsToApprove = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with(['approval'])->findOrFail($itemsToApprove);
-
-        $items->each(function ($item, $key) {
-            if ($item->status !== 'approved') {
-                $item->approval()->create();
-                $item->setStatus('approved', 'Approved by '.auth()->user()->name);
-            }
-        });
+        $this->modelInstance
+            ->findOrFail($itemsToApprove)
+            ->each(function ($item, $key) {
+                $this->authorize('approve', $item);
+            })
+            ->each->approve();
 
         $this->refreshItems($itemsToApprove);
     }
 
     public function onReject($id, $multiple = false)
     {
-        $itemsToApprove = $multiple ? $this->selectedRows : [$id];
+        $itemsToReject = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with(['approval'])->findOrFail($itemsToApprove);
+        $this->modelInstance
+            ->findOrFail($itemsToReject)
+            ->each(function ($item, $key) {
+                $this->authorize('approve', $item);
+            })
+            ->each->reject();
 
-        $items->each(function ($item, $key) {
-            if ($item->status !== 'rejected') {
-                if ($item->approval) {
-                    $item->approval()->delete();
-                }
-
-                $item->setStatus('rejected', 'Rejected by '.auth()->user()->name);
-            }
-        });
-
-        $this->refreshItems($itemsToApprove);
+        $this->refreshItems($itemsToReject);
     }
 
     public function onSwitch($id)

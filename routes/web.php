@@ -64,7 +64,11 @@ Route::resources([
 Route::resource('checkins', CheckinController::class)->only(['store', 'destroy']);
 Route::resource('checkouts', CheckoutController::class)->only(['store', 'destroy']);
 
-Route::resource('approvals', ApprovalController::class)->only(['index', 'store', 'destroy']);
+Route::controller(ApprovalController::class)->group(function () {
+    Route::get('approvals', 'index')->name('approvals.index');
+    Route::post('approvals', 'store')->name('approvals.store');
+    Route::delete('approvals/{booking}', 'destroy')->name('approvals.destroy');
+});
 
 Route::resource('resources.identifiers', ResourceIdentifierController::class);
 Route::resource('users.identifiers', UserIdentifierController::class)->except(['show']);

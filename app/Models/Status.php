@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Status extends \Spatie\ModelStatus\Status
 {
+    use HasFactory;
+
     /**
      * The "booted" method of the model.
      *

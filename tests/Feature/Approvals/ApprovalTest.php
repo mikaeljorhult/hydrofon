@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Approvals;
 
-use App\Models\Approval;
 use App\Models\Booking;
 use App\Models\Group;
 use App\Models\Resource;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class ApprovalTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * User not assigned as an approver can not .
+     * User not assigned as an approver can not access approvals index.
      *
      * @return void
      */
@@ -166,37 +166,9 @@ class ApprovalTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('approvals', [
-            'booking_id' => $booking->id,
-            'user_id'    => $approver->id,
-        ]);
-
         $status = $booking->latestStatus();
         $this->assertEquals('approved', $status->name);
         $this->assertEquals($approver->id, $status->created_by->id);
-    }
-
-    /**
-     * Booking can not be approved if user is in an approving group.
-     *
-     * @return void
-     */
-    public function testBookingCanNotBeApprovedIfUserIsInAnApprovingGroup()
-    {
-        $this->approvalIsRequired();
-
-        $user = User::factory()->create();
-        $booking = Booking::factory()->create();
-
-        $group = Group::factory()->hasApprovers(1)->create();
-        $booking->user->groups()->attach($group);
-
-        $response = $this->actingAs($user)->post('approvals', [
-            'booking_id' => $booking->id,
-        ]);
-
-        $response->assertForbidden();
-        $this->assertDatabaseCount('approvals', 0);
     }
 
     /**
@@ -209,30 +181,14 @@ class ApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $admin = User::factory()->admin()->create();
-        $approval = Approval::factory()->create();
+        $booking = Booking::factory()
+                          ->has(Status::factory()->approved())
+                          ->create();
 
-        $response = $this->actingAs($admin)->delete('approvals/'.$approval->id);
-
-        $response->assertRedirect();
-        $this->assertModelMissing($approval);
-    }
-
-    /**
-     * Approval can be revoked by approving user.
-     *
-     * @return void
-     */
-    public function testApprovalCanBeRevokedByApprover()
-    {
-        $this->approvalIsRequired();
-
-        $user = User::factory()->admin()->create();
-        $approval = Approval::factory()->for($user)->create();
-
-        $response = $this->actingAs($user)->delete('approvals/'.$approval->id);
+        $response = $this->actingAs($admin)->delete('approvals/'.$booking->id);
 
         $response->assertRedirect();
-        $this->assertModelMissing($approval);
+        $this->assertNotEquals('approved', $booking->status);
     }
 
     /**
@@ -245,12 +201,14 @@ class ApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $user = User::factory()->create();
-        $approval = Approval::factory()->create();
+        $booking = Booking::factory()
+                          ->has(Status::factory()->approved())
+                          ->create();
 
-        $response = $this->actingAs($user)->delete('approvals/'.$approval->id);
+        $response = $this->actingAs($user)->delete('approvals/'.$booking->id);
 
         $response->assertForbidden();
-        $this->assertModelExists($approval);
+        $this->assertEquals('approved', $booking->status);
     }
 
     /**
@@ -262,8 +220,9 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $approval = Approval::factory()->create();
-        $booking = $approval->booking;
+        $booking = Booking::factory()
+                          ->has(Status::factory()->approved())
+                          ->create();
 
         $group = Group::factory()->hasApprovers(1)->create();
         $booking->user->groups()->attach($group);
@@ -277,7 +236,6 @@ class ApprovalTest extends TestCase
         $booking->refresh();
 
         $response->assertRedirect();
-        $this->assertModelMissing($approval);
         $this->assertEquals('pending', $booking->status);
     }
 
@@ -290,8 +248,9 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $approval = Approval::factory()->create();
-        $booking = $approval->booking;
+        $booking = Booking::factory()
+                          ->has(Status::factory()->approved())
+                          ->create();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -302,7 +261,6 @@ class ApprovalTest extends TestCase
         $booking->refresh();
 
         $response->assertRedirect();
-        $this->assertModelExists($approval);
         $this->assertEquals('approved', $booking->status);
     }
 
@@ -315,8 +273,9 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $approval = Approval::factory()->create();
-        $booking = $approval->booking;
+        $booking = Booking::factory()
+                          ->has(Status::factory()->approved())
+                          ->create();
 
         $group = Group::factory()->hasApprovers(1)->create();
         $booking->user->groups()->attach($group);
@@ -330,7 +289,6 @@ class ApprovalTest extends TestCase
         $booking->refresh();
 
         $response->assertRedirect();
-        $this->assertModelExists($approval);
         $this->assertEquals('approved', $booking->status);
     }
 }
