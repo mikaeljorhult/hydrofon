@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Identifier;
 use App\Rules\Available;
+use App\States\CheckedIn;
+use App\States\CheckedOut;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 
@@ -13,7 +15,7 @@ class BookingsTable extends BaseTable
 
     protected $model = \App\Models\Booking::class;
 
-    protected $relationships = ['checkin', 'checkout', 'resource.buckets', 'statuses', 'user'];
+    protected $relationships = ['resource.buckets', 'user'];
 
     protected $editFields = ['id', 'resource_id', 'user_id', 'start_time', 'end_time'];
 
@@ -24,26 +26,20 @@ class BookingsTable extends BaseTable
         'user_name'     => 'User',
         'start_time'    => 'Start',
         'end_time'      => 'End',
+        'state'         => 'Status',
     ];
 
     protected $listeners = [
         'selectIdentifier' => 'onSelectIdentifier',
-        'edit'             => 'onEdit',
-        'save'             => 'onSave',
-        'delete'           => 'onDelete',
-        'checkin'          => 'onCheckin',
-        'checkout'         => 'onCheckout',
-        'switch'           => 'onSwitch',
-        'approve'          => 'onApprove',
-        'reject'           => 'onReject',
+        'edit'            => 'onEdit',
+        'save'            => 'onSave',
+        'delete'          => 'onDelete',
+        'checkin'         => 'onCheckin',
+        'checkout'        => 'onCheckout',
+        'switch'          => 'onSwitch',
+        'approve'         => 'onApprove',
+        'reject'          => 'onReject',
     ];
-
-    public function getHeadersProperty()
-    {
-        return config('hydrofon.require_approval') !== 'none'
-            ? array_merge($this->tableHeaders, ['status' => 'Status'])
-            : $this->tableHeaders;
-    }
 
     public function onSave()
     {
@@ -83,18 +79,11 @@ class BookingsTable extends BaseTable
     {
         $itemsToCheckin = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with(['resource', 'checkin'])->findOrFail($itemsToCheckin);
+        $items = $this->modelInstance->with(['resource'])->findOrFail($itemsToCheckin);
 
         $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->checkin) {
-                $item->checkin()->create();
-
-                // Shorten booking if it has not ended yet.
-                if ($item->end_time->isFuture() && $item->start_time->isPast()) {
-                    $item->update([
-                        'end_time' => now(),
-                    ]);
-                }
+            if (! $item->resource->is_facility && ! $item->isCheckedIn) {
+                $item->state->transitionTo(CheckedIn::class);
             }
         });
 
@@ -105,11 +94,11 @@ class BookingsTable extends BaseTable
     {
         $itemsToCheckout = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->modelInstance->with(['resource', 'checkout'])->findOrFail($itemsToCheckout);
+        $items = $this->modelInstance->with(['resource'])->findOrFail($itemsToCheckout);
 
         $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->checkout) {
-                $item->checkout()->create();
+            if (! $item->resource->is_facility && ! $item->isCheckedOut) {
+                $item->state->transitionTo(CheckedOut::class);
             }
         });
 

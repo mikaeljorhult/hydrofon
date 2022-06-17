@@ -29,7 +29,7 @@ class ProfileBookingsController extends Controller
         $user = auth()->user();
         $bookings = QueryBuilder::for(auth()->user()->bookings()->getQuery())
                                 ->select('bookings.*')
-                                ->with(['checkin', 'checkout', 'user'])
+                                ->with(['user'])
                                 ->join('resources', 'resources.id', '=', 'bookings.resource_id')
                                 ->allowedFilters([
                                     'resource_id',
@@ -37,7 +37,6 @@ class ProfileBookingsController extends Controller
                                     'end_time',
                                     AllowedFilter::scope('upcoming', 'future'),
                                     AllowedFilter::scope('overdue'),
-                                    AllowedFilter::scope('status', 'currentStatus'),
                                 ])
                                 ->defaultSort('start_time')
                                 ->allowedSorts(['resources.name', 'start_time', 'end_time'])

@@ -54,7 +54,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertOk();
 
-        $this->assertEquals('approved', $items[0]->status);
+        $this->assertTrue($items[0]->fresh()->isApproved);
     }
 
     /**
@@ -80,7 +80,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertOk();
 
-        $this->assertEquals('approved', $items[0]->status);
+        $this->assertTrue($items[0]->fresh()->isApproved);
     }
 
     /**
@@ -106,7 +106,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertForbidden();
 
-        $this->assertNotEquals('approved', $items[0]->status);
+        $this->assertFalse($items[0]->fresh()->isApproved);
     }
 
     /**
@@ -132,7 +132,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('reject', $items[0]->id)
                 ->assertOk();
 
-        $this->assertEquals('rejected', $items[0]->refresh()->status);
+        $this->assertTrue($items[0]->fresh()->isRejected);
     }
 
     /**
@@ -158,7 +158,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('reject', $items[0]->id)
                 ->assertOk();
 
-        $this->assertEquals('rejected', $items[0]->refresh()->status);
+        $this->assertTrue($items[0]->fresh()->isRejected);
     }
 
     /**
@@ -184,6 +184,6 @@ class ApprovalsTableTest extends TestCase
                 ->emit('reject', $items[0]->id)
                 ->assertForbidden();
 
-        $this->assertNotEquals('approved', $items[0]->status);
+        $this->assertFalse($items[0]->fresh()->isRejected);
     }
 }

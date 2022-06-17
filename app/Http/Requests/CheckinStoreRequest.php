@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Checkin;
+use App\Models\Booking;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +15,7 @@ class CheckinStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('create', Checkin::class);
+        return $this->user()->can('checkinAny', Booking::class);
     }
 
     /**

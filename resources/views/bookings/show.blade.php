@@ -27,8 +27,8 @@
 
                 <div class="flow-root">
                     <ul role="list" class="-mb-8">
-                        @foreach($events as $event)
-                            @includeFirst(['bookings.timeline.'.$event->type.'-'.$event->name, 'bookings.timeline.'.$event->name, 'bookings.timeline.status'], ['item' => $event, 'last' => $loop->last])
+                        @foreach($activities as $activity)
+                            @includeFirst(['bookings.timeline.'.$activity->description, 'bookings.timeline.activity'], ['item' => $activity, 'last' => $loop->last])
                         @endforeach
                     </ul>
                 </div>

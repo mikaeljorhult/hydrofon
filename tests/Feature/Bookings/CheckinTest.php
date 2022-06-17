@@ -20,35 +20,15 @@ class CheckinTest extends TestCase
     public function testBookingCanBeCheckedIn()
     {
         $admin = User::factory()->admin()->create();
-        $booking = Booking::factory()->create();
+        $booking = Booking::withoutEvents(function() {
+            return Booking::factory()->checkedout()->create();
+        });
 
         $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
         ]);
 
-        $this->assertNotNull($booking->checkin);
-        $this->assertDatabaseHas('checkins', [
-            'booking_id' => $booking->id,
-            'user_id'    => $admin->id,
-        ]);
-    }
-
-    /**
-     * A checkin can be deleted.
-     *
-     * @return void
-     */
-    public function testCheckinCanBeUndone()
-    {
-        $admin = User::factory()->admin()->create();
-        $checkin = Checkin::factory()->create();
-
-        $this->actingAs($admin)->delete('checkins/'.$checkin->id);
-
-        $this->assertDatabaseMissing('checkins', [
-            'booking_id' => $checkin->booking_id,
-            'user_id'    => $checkin->user_id,
-        ]);
+        $this->assertTrue($booking->fresh()->isCheckedIn);
     }
 
     /**
@@ -59,17 +39,18 @@ class CheckinTest extends TestCase
     public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
     {
         $admin = User::factory()->admin()->create();
-        $booking = Booking::factory()->create([
-            'start_time' => now()->subHour(),
-            'end_time'   => now()->addHour(5),
-        ]);
+        $booking = Booking::withoutEvents(function() {
+            return Booking::factory()->checkedout()->create([
+                'start_time' => now()->subHour(),
+                'end_time'   => now()->addHour(5),
+            ]);
+        });
 
         $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
         ]);
 
-        $booking->refresh();
-        $this->assertTrue($booking->end_time->lte(now()));
+        $this->assertTrue($booking->fresh()->end_time->lte(now()));
     }
 
     /**
@@ -87,10 +68,6 @@ class CheckinTest extends TestCase
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('booking_id');
-        $this->assertDatabaseMissing('checkins', [
-            'booking_id' => 100,
-            'user_id'    => $admin->id,
-        ]);
     }
 
     /**
@@ -101,36 +78,15 @@ class CheckinTest extends TestCase
     public function testNonAdminUsersCanNotCheckInBookings()
     {
         $admin = User::factory()->create();
-        $booking = Booking::factory()->create();
+        $booking = Booking::withoutEvents(function() {
+            return Booking::factory()->checkedout()->create();
+        });
 
         $response = $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
         ]);
 
         $response->assertStatus(403);
-        $this->assertNull($booking->checkin);
-        $this->assertDatabaseMissing('checkins', [
-            'booking_id' => $booking->id,
-            'user_id'    => $admin->id,
-        ]);
-    }
-
-    /**
-     * Non-admin users can not delete checkins.
-     *
-     * @return void
-     */
-    public function testNonAdminUsersCanNotDeleteCheckins()
-    {
-        $admin = User::factory()->create();
-        $checkin = Checkin::factory()->create();
-
-        $response = $this->actingAs($admin)->delete('checkins/'.$checkin->id);
-
-        $response->assertStatus(403);
-        $this->assertDatabaseHas('checkins', [
-            'booking_id' => $checkin->booking_id,
-            'user_id'    => $checkin->user_id,
-        ]);
+        $this->assertFalse($booking->fresh()->isCheckedIn);
     }
 }

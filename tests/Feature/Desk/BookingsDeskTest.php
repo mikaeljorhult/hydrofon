@@ -74,11 +74,11 @@ class BookingsDeskTest extends TestCase
      */
     public function testCheckedInBookingsAreOmitted()
     {
-        $user = User::factory()->create();
-        $booking = Booking::factory()->create(['user_id' => $user->id]);
-        $booking->checkin()->create(['user_id' => $user->id]);
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->checkedin()->create();
+        });
 
-        $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/'.$user->email);
+        $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/'.$booking->user->email);
 
         $response->assertStatus(200);
         $response->assertDontSee($booking->resource->name);

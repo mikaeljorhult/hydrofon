@@ -12,7 +12,7 @@ class ProfileBookingsTable extends BaseTable
 
     protected $model = \App\Models\Booking::class;
 
-    protected $relationships = ['resource', 'statuses'];
+    protected $relationships = ['resource'];
 
     protected $editFields = ['id', 'resource_id', 'start_time', 'end_time'];
 

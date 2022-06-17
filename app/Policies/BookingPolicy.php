@@ -55,7 +55,7 @@ class BookingPolicy
      */
     public function update(User $user, Booking $booking)
     {
-        return $user->owns($booking) && $booking->start_time->isFuture() && $booking->checkout === null;
+        return $user->owns($booking) && $booking->start_time->isFuture() && !$booking->isCheckedOut;
     }
 
     /**
@@ -67,7 +67,29 @@ class BookingPolicy
      */
     public function delete(User $user, Booking $booking)
     {
-        return $user->owns($booking) && $booking->start_time->isFuture() && $booking->checkout === null;
+        return $user->owns($booking) && $booking->start_time->isFuture() && !$booking->isCheckedOut;
+    }
+
+    /**
+     * Determine whether the user can check in any bookings.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function checkinAny(User $user)
+    {
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can check out any bookings.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function checkoutAny(User $user)
+    {
+        return $user->isAdmin();
     }
 
     /**

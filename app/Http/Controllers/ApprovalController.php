@@ -37,7 +37,7 @@ class ApprovalController extends Controller
         $bookings = QueryBuilder::for(Booking::class)
                                 ->select('bookings.*')
                                 ->with(['resource', 'user'])
-                                ->currentStatus('pending')
+                                ->pending()
                                 ->addSelect([
                                     'user_name' => User::whereColumn('user_id', 'users.id')
                                                        ->select('name')

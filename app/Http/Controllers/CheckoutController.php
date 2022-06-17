@@ -6,6 +6,7 @@ use App\Http\Requests\CheckoutDestroyRequest;
 use App\Http\Requests\CheckoutStoreRequest;
 use App\Models\Booking;
 use App\Models\Checkout;
+use App\States\CheckedOut;
 
 class CheckoutController extends Controller
 {
@@ -28,25 +29,9 @@ class CheckoutController extends Controller
     public function store(CheckoutStoreRequest $request)
     {
         $booking = Booking::findOrFail($request->get('booking_id'));
-        $booking->checkout()->create();
+        $booking->state->transitionTo(CheckedOut::class);
 
         flash('Booking was checked out.');
-
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     * @param  \App\Http\Requests\CheckoutDestroyRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Checkout $checkout, CheckoutDestroyRequest $request)
-    {
-        $checkout->delete();
-
-        flash('Checkout was deleted.');
 
         return redirect()->back();
     }

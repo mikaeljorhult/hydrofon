@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Checkout;
+use App\Models\Booking;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +15,7 @@ class CheckoutStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('create', Checkout::class);
+        return $this->user()->can('checkoutAny', Booking::class);
     }
 
     /**

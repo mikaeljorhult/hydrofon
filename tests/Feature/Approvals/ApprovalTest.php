@@ -5,7 +5,6 @@ namespace Tests\Feature\Approvals;
 use App\Models\Booking;
 use App\Models\Group;
 use App\Models\Resource;
-use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -135,7 +134,9 @@ class ApprovalTest extends TestCase
         $approver = User::factory()->create();
         Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
-        $booking = Booking::factory()->create();
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->autoapproved()->create();
+        });
 
         $this->actingAs($approver)->get('approvals')
              ->assertOk()
@@ -166,9 +167,7 @@ class ApprovalTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $status = $booking->latestStatus();
-        $this->assertEquals('approved', $status->name);
-        $this->assertEquals($approver->id, $status->created_by->id);
+        $this->assertTrue($booking->fresh()->isApproved);
     }
 
     /**
@@ -181,14 +180,14 @@ class ApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $admin = User::factory()->admin()->create();
-        $booking = Booking::factory()
-                          ->has(Status::factory()->approved())
-                          ->create();
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->approved()->create();
+        });
 
         $response = $this->actingAs($admin)->delete('approvals/'.$booking->id);
 
         $response->assertRedirect();
-        $this->assertNotEquals('approved', $booking->status);
+        $this->assertFalse($booking->fresh()->isApproved);
     }
 
     /**
@@ -201,14 +200,14 @@ class ApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $user = User::factory()->create();
-        $booking = Booking::factory()
-                          ->has(Status::factory()->approved())
-                          ->create();
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->approved()->create();
+        });
 
         $response = $this->actingAs($user)->delete('approvals/'.$booking->id);
 
         $response->assertForbidden();
-        $this->assertEquals('approved', $booking->status);
+        $this->assertTrue($booking->fresh()->isApproved);
     }
 
     /**
@@ -220,9 +219,9 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::factory()
-                          ->has(Status::factory()->approved())
-                          ->create();
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->approved()->create();
+        });
 
         $group = Group::factory()->hasApprovers(1)->create();
         $booking->user->groups()->attach($group);
@@ -233,10 +232,8 @@ class ApprovalTest extends TestCase
             'end_time'    => $booking->end_time,
         ]);
 
-        $booking->refresh();
-
         $response->assertRedirect();
-        $this->assertEquals('pending', $booking->status);
+        $this->assertTrue($booking->fresh()->isPending);
     }
 
     /**
@@ -248,9 +245,9 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::factory()
-                          ->has(Status::factory()->approved())
-                          ->create();
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->approved()->create();
+        });
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -258,10 +255,8 @@ class ApprovalTest extends TestCase
             'end_time'    => $booking->end_time,
         ]);
 
-        $booking->refresh();
-
         $response->assertRedirect();
-        $this->assertEquals('approved', $booking->status);
+        $this->assertTrue($booking->fresh()->isApproved);
     }
 
     /**
@@ -273,9 +268,9 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::factory()
-                          ->has(Status::factory()->approved())
-                          ->create();
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->approved()->create();
+        });
 
         $group = Group::factory()->hasApprovers(1)->create();
         $booking->user->groups()->attach($group);
@@ -286,9 +281,7 @@ class ApprovalTest extends TestCase
             'end_time'    => $booking->end_time,
         ]);
 
-        $booking->refresh();
-
         $response->assertRedirect();
-        $this->assertEquals('approved', $booking->status);
+        $this->assertTrue($booking->fresh()->isApproved);
     }
 }

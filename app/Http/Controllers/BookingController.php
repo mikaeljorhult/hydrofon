@@ -9,7 +9,6 @@ use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Support\Str;
-use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingController extends Controller
@@ -34,7 +33,7 @@ class BookingController extends Controller
     {
         $bookings = QueryBuilder::for(Booking::class)
                                 ->select('bookings.*')
-                                ->with(['checkin', 'checkout', 'resource.buckets', 'user'])
+                                ->with(['resource.buckets', 'user'])
                                 ->addSelect([
                                     'user_name' => User::whereColumn('user_id', 'users.id')
                                                        ->select('name')
@@ -50,7 +49,6 @@ class BookingController extends Controller
                                     'user_id',
                                     'start_time',
                                     'end_time',
-                                    AllowedFilter::scope('status', 'currentStatus'),
                                 ])
                                 ->defaultSort('start_time')
                                 ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
@@ -112,51 +110,28 @@ class BookingController extends Controller
         $booking->load([
             'resource',
             'user',
-            'activities.causer:id,name',
-            'statuses.created_by:id,name',
-            'checkin.created_by:id,name',
-            'checkout.created_by:id,name',
+            'activities' => function ($query) {
+                $query->with('causer:id,name')
+                    ->when(config('hydrofon.require_approval') === 'none', function ($query) {
+                        // Ignore logs for approval states if approval isn't use.
+                        $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
+                    });
+            },
         ]);
 
-        $events = collect()
-            ->concat($booking->activities)
-            ->concat($booking->statuses)
-            ->when($booking->checkout, function ($collection, $value) {
-                return $collection->push($value);
-            })
-            ->when($booking->checkin, function ($collection, $value) {
-                return $collection->push($value);
-            })
-            ->sortBy('created_at')
-            ->map(function ($item) {
-                $object = (object) [
-                    'type' => strtolower(class_basename($item)),
-                    'created_at' => $item->created_at,
-                ];
+        // Remove save where initial values are set.
+        $activities = $booking->activities->filter(function ($activity) {
+            if ($activity->event !== 'updated') {
+                return true;
+            }
 
-                switch ($object->type) {
-                    case 'activity':
-                        $object->name = $item->event;
-                        $object->created_by = $item->causer;
-                        $object->created_by_id = $item->causer_id;
-                        break;
-                    case 'status':
-                        $object->name = $item->name;
-                        $object->created_by = $item->created_by;
-                        $object->created_by_id = $item->created_by_id;
-                        break;
-                    case 'checkin':
-                    case 'checkout':
-                        $object->name = $object->type;
-                        $object->created_by = $item->created_by;
-                        $object->created_by_id = $item->created_by_id;
-                        break;
-                }
+            return collect($activity->changes()['old'])
+                ->values()
+                ->whereNotNull()
+                ->isNotEmpty();
+        });
 
-                return $object;
-            });
-
-        return view('bookings.show')->with(compact(['booking', 'events']));
+        return view('bookings.show')->with(compact(['booking', 'activities']));
     }
 
     /**

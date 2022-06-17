@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Spatie\ModelStates\Events\StateChanged;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Login::class      => [
             \App\Listeners\UpdateLastLoggedInAt::class,
+        ],
+        StateChanged::class => [
+            \App\Listeners\LogBookingStateChange::class,
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,
@@ -30,7 +34,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         //
     }
 }

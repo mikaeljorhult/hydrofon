@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
+use App\States\Approved;
+use App\States\AutoApproved;
+use App\States\BookingState;
+use App\States\CheckedIn;
+use App\States\CheckedOut;
+use App\States\Completed;
+use App\States\Pending;
+use App\States\Rejected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\ModelStatus\HasStatuses;
+use Spatie\ModelStates\HasStates;
 
 class Booking extends Model
 {
-    use HasFactory, HasStatuses, LogsActivity;
+    use HasFactory, HasStates, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +41,7 @@ class Booking extends Model
     protected $casts = [
         'start_time' => 'datetime:Y-m-d H:i',
         'end_time'   => 'datetime:Y-m-d H:i',
+        'state'      => BookingState::class,
     ];
 
     /**
@@ -61,29 +70,44 @@ class Booking extends Model
                 $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
             }
 
+            // Booking needs to be approved before it can be checked out or used.
             if ($mustBeApproved) {
-                $booking->setStatus('pending');
-            } else {
-                $booking->setStatus('approved', 'Automatically approved');
+                $booking->state->transitionTo(Pending::class);
+                return;
             }
+
+            // No approval is needed and it will not be checked out so bookings is complete.
+            if ($booking->resource->isFacility()) {
+                $booking->state->transitionTo(Completed::class);
+                return;
+            }
+
+            // Booking needs no approval and is cleared to be checked out.
+            $booking->state->transitionTo(AutoApproved::class);
         });
 
-        static::updating(function ($booking) {
+        static::updating(function (Booking $booking) {
+            // Bail if state is being transitioned.
+            if ($booking->isDirty('state')) {
+                return;
+            };
+
             $requireApproval = config('hydrofon.require_approval');
 
             if (
-                $requireApproval === 'none'
+                (auth()->user() && auth()->user()->isAdmin())
+                || $requireApproval === 'none'
                 || ($requireApproval === 'equipment' && $booking->resource->isFacility())
                 || ($requireApproval === 'facilities' && ! $booking->resource->isFacility())
             ) {
                 return;
             }
 
-            if (in_array($booking->status, ['approved', 'rejected']) && ! auth()->user()->isAdmin()) {
+            if ($booking->isApproved || $booking->isRejected) {
                 $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
 
                 if ($mustBeApproved) {
-                    $booking->setStatus('pending', 'Booking was changed after being '.$booking->status);
+                    $booking->state->transitionTo(Pending::class);
                 }
             }
         });
@@ -120,23 +144,54 @@ class Booking extends Model
     }
 
     /**
-     * Booking can be checked in.
+     * Get approved state.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return bool
      */
-    public function checkin()
+    protected function getIsApprovedAttribute()
     {
-        return $this->hasOne(\App\Models\Checkin::class);
+        return $this->state->equals(Approved::class)
+            || $this->state->equals(AutoApproved::class);
     }
 
     /**
-     * Booking can be checked out.
+     * Get rejected state.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return bool
      */
-    public function checkout()
+    protected function getIsRejectedAttribute()
     {
-        return $this->hasOne(\App\Models\Checkout::class);
+        return $this->state->equals(Rejected::class);
+    }
+
+    /**
+     * Get pending state.
+     *
+     * @return bool
+     */
+    protected function getIsPendingAttribute()
+    {
+        return $this->state->equals(Pending::class);
+    }
+
+    /**
+     * Get checked in state.
+     *
+     * @return bool
+     */
+    protected function getIsCheckedInAttribute()
+    {
+        return $this->state->equals(CheckedIn::class);
+    }
+
+    /**
+     * Get checked out state.
+     *
+     * @return bool
+     */
+    protected function getIsCheckedOutAttribute()
+    {
+        return $this->state->equals(CheckedOut::class);
     }
 
     /**
@@ -224,8 +279,7 @@ class Booking extends Model
                 $query->where('is_facility', '=', 0);
             })
             ->past()
-            ->has('checkout')
-            ->doesntHave('checkin');
+            ->whereState('state', CheckedOut::class);
     }
 
     /**
@@ -236,7 +290,7 @@ class Booking extends Model
      */
     public function scopeApproved($query)
     {
-        return $query->currentStatus('approved');
+        return $query->whereState('state', [Approved::class, AutoApproved::class]);
     }
 
     /**
@@ -247,7 +301,18 @@ class Booking extends Model
      */
     public function scopeRejected($query)
     {
-        return $query->currentStatus('rejected');
+        return $query->whereState('state', Rejected::class);
+    }
+
+    /**
+     * Scope a query to only include rejected bookings.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePending($query)
+    {
+        return $query->whereState('state', Pending::class);
     }
 
     /**
@@ -260,26 +325,22 @@ class Booking extends Model
         return $this->start_time->diffInSeconds($this->end_time);
     }
 
-    public function isValidStatus(string $name, $reason = null)
-    {
-        return in_array($name, [
-            'approved',
-            'pending',
-            'rejected',
-        ]);
-    }
-
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()
+                         ->logOnly([
+                             'user_id',
+                             'resource_id',
+                             'start_time',
+                             'end_time',
+                         ])
+                         ->logOnlyDirty();
     }
 
     /**
      * Approve booking.
      *
      * @return void
-     *
-     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function approve()
     {
@@ -287,17 +348,13 @@ class Booking extends Model
             abort(403);
         }
 
-        if ($this->status !== 'approved') {
-            $this->setStatus('approved', 'Approved by '.auth()->user()->name);
-        }
+        $this->state->transitionTo(Approved::class);
     }
 
     /**
      * Reject booking.
      *
      * @return void
-     *
-     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function reject()
     {
@@ -305,17 +362,13 @@ class Booking extends Model
             abort(403);
         }
 
-        if ($this->status !== 'rejected') {
-            $this->setStatus('rejected', 'Rejected by '.auth()->user()->name);
-        }
+        $this->state->transitionTo(Rejected::class);
     }
 
     /**
      * Revoke booking approval.
      *
      * @return void
-     *
-     * @throws \Spatie\ModelStatus\Exceptions\InvalidStatus
      */
     public function revoke()
     {
@@ -323,8 +376,6 @@ class Booking extends Model
             abort(403);
         }
 
-        if ($this->status === 'approved') {
-            $this->setStatus('pending', 'Approval revoked');
-        }
+        $this->state->transitionTo(Pending::class);
     }
 }

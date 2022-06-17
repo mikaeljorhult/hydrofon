@@ -83,9 +83,9 @@ class BookingPolicyTest extends TestCase
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
         $futureBooking = Booking::factory()->future()->create(['user_id' => $user->id]);
         $currentBooking = Booking::factory()->current()->create(['user_id' => $user->id]);
-        $checkedOut = Booking::factory()->future()->create(['user_id' => $user->id]);
-
-        $checkedOut->checkout()->create();
+        $checkedOut = Booking::withoutEvents(function () use ($user) {
+            return Booking::factory()->current()->checkedout()->create(['user_id' => $user->id]);
+        });
 
         $this->assertFalse($user->can('update', $pastBooking));
         $this->assertFalse($user->can('update', $currentBooking));
@@ -120,13 +120,41 @@ class BookingPolicyTest extends TestCase
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
         $futureBooking = Booking::factory()->future()->create(['user_id' => $user->id]);
         $currentBooking = Booking::factory()->current()->create(['user_id' => $user->id]);
-        $checkedOut = Booking::factory()->future()->create(['user_id' => $user->id]);
-
-        $checkedOut->checkout()->create();
+        $checkedOut = Booking::withoutEvents(function () use ($user) {
+            return Booking::factory()->current()->checkedout()->create(['user_id' => $user->id]);
+        });
 
         $this->assertFalse($user->can('update', $pastBooking));
         $this->assertFalse($user->can('update', $currentBooking));
         $this->assertTrue($user->can('update', $futureBooking));
         $this->assertFalse($user->can('update', $checkedOut));
+    }
+
+    /**
+     * Only administrators can create checkins.
+     *
+     * @return void
+     */
+    public function testOnlyAdminUsersCanCreateCheckins()
+    {
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
+
+        $this->assertTrue($admin->can('checkinAny', Booking::class));
+        $this->assertFalse($user->can('checkinAny', Booking::class));
+    }
+
+    /**
+     * Only administrators can create checkouts.
+     *
+     * @return void
+     */
+    public function testOnlyAdminUsersCanCreateCheckouts()
+    {
+        $admin = User::factory()->admin()->create();
+        $user = User::factory()->create();
+
+        $this->assertTrue($admin->can('checkoutAny', Booking::class));
+        $this->assertFalse($user->can('checkoutAny', Booking::class));
     }
 }

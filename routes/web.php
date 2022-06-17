@@ -61,8 +61,8 @@ Route::resources([
     'users'      => UserController::class,
 ]);
 
-Route::resource('checkins', CheckinController::class)->only(['store', 'destroy']);
-Route::resource('checkouts', CheckoutController::class)->only(['store', 'destroy']);
+Route::resource('checkins', CheckinController::class)->only(['store']);
+Route::resource('checkouts', CheckoutController::class)->only(['store']);
 
 Route::controller(ApprovalController::class)->group(function () {
     Route::get('approvals', 'index')->name('approvals.index');

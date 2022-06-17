@@ -5,7 +5,6 @@ namespace Tests\Feature\Tables;
 use App\Http\Livewire\BookingsTable;
 use App\Models\Booking;
 use App\Models\Checkin;
-use App\Models\Checkout;
 use App\Models\Group;
 use App\Models\Resource;
 use App\Models\User;
@@ -217,16 +216,16 @@ class BookingsTableTest extends TestCase
      */
     public function testAdministratorCanCheckoutBooking()
     {
-        $items = Booking::factory()->current()->count(1)->create();
+        $items = Booking::withoutEvents(function () {
+            return Booking::factory()->current()->checkedout()->count(1)->create();
+        });
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
                 ->emit('checkout', $items[0]->id)
                 ->assertOk();
 
-        $this->assertDatabaseHas(Checkout::class, [
-            'booking_id' => $items[0]->id,
-        ]);
+        $this->assertTrue($items[0]->fresh()->isCheckedOut);
     }
 
     /**
@@ -236,16 +235,16 @@ class BookingsTableTest extends TestCase
      */
     public function testAdministratorCanCheckinBooking()
     {
-        $items = Booking::factory()->current()->count(1)->create();
+        $items = Booking::withoutEvents(function () {
+            return Booking::factory()->current()->checkedout()->count(1)->create();
+        });
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
                 ->emit('checkin', $items[0]->id)
                 ->assertOk();
 
-        $this->assertDatabaseHas(Checkin::class, [
-            'booking_id' => $items[0]->id,
-        ]);
+        $this->assertTrue($items[0]->fresh()->isCheckedIn);
     }
 
     /**
@@ -272,7 +271,7 @@ class BookingsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertOk();
 
-        $this->assertEquals('approved', $items[0]->fresh()->status);
+        $this->assertTrue($items[0]->fresh()->isApproved);
     }
 
     /**
@@ -299,7 +298,7 @@ class BookingsTableTest extends TestCase
                 ->emit('reject', $items[0]->id)
                 ->assertOk();
 
-        $this->assertEquals('rejected', $items[0]->fresh()->status);
+        $this->assertTrue($items[0]->fresh()->isRejected);
     }
 
     /**

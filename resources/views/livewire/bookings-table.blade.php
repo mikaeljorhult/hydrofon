@@ -101,14 +101,12 @@
                         <td data-title="End">
                             {{ $item->end_time->format('Y-m-d H:i') }}
                         </td>
-                        @if(config('hydrofon.require_approval') !== 'none')
-                            <td data-title="Status">
-                                @include('livewire.partials.item-status', ['item' => $item])
-                            </td>
-                        @endif
+                        <td data-title="Status">
+                            @include('livewire.partials.item-status', ['item' => $item])
+                        </td>
 
                         <td data-title="&nbsp;" class="table-actions">
-                            @unless($item->resource->is_facility || $item->checkout || $item->checkin)
+                            @if(!$item->resource->is_facility && $item->isApproved)
                                 <div>
                                     <form action="{{ route('checkouts.store') }}" method="post">
                                         @csrf
@@ -124,7 +122,7 @@
                                 </div>
                             @endif
 
-                            @unless($item->resource->is_facility || $item->checkin)
+                            @if(!$item->resource->is_facility && $item->isCheckedOut)
                                 <div>
                                     <form action="{{ route('checkins.store') }}" method="post">
                                         @csrf

@@ -86,38 +86,13 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteBookingThatHasBeenCheckedOut()
     {
-        $booking = Booking::factory()->past()->create();
-        Checkout::factory()->create([
-            'booking_id' => $booking->id,
-        ]);
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->past()->checkedout()->create();
+        });
 
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
         $response->assertStatus(403);
         $this->assertModelExists($booking);
-    }
-
-    /**
-     * Related checkin and checkout is deleted with booking.
-     *
-     * @return void
-     */
-    public function testRelatedCheckinAndCheckoutAreDeletedWithBooking()
-    {
-        $admin = User::factory()->admin()->create();
-        $booking = Booking::factory()->create();
-
-        $booking->checkin()->save(Checkin::factory()->create());
-        $booking->checkout()->save(Checkout::factory()->create());
-
-        $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
-
-        $response->assertRedirect('/');
-        $this->assertDatabaseMissing('checkins', [
-            'booking_id' => $booking->id,
-        ]);
-        $this->assertDatabaseMissing('checkouts', [
-            'booking_id' => $booking->id,
-        ]);
     }
 }
