@@ -86,7 +86,7 @@ class BookingController extends Controller
         $currentUser = auth()->user();
 
         Booking::create(array_merge($request->validated(), [
-            'user_id'       => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
+            'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
         ]));
 
         flash('Booking was created');
@@ -109,7 +109,54 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        return view('bookings.show')->with('booking', $booking);
+        $booking->load([
+            'resource',
+            'user',
+            'activities.causer:id,name',
+            'statuses.created_by:id,name',
+            'checkin.created_by:id,name',
+            'checkout.created_by:id,name',
+        ]);
+
+        $events = collect()
+            ->concat($booking->activities)
+            ->concat($booking->statuses)
+            ->when($booking->checkout, function ($collection, $value) {
+                return $collection->push($value);
+            })
+            ->when($booking->checkin, function ($collection, $value) {
+                return $collection->push($value);
+            })
+            ->sortBy('created_at')
+            ->map(function ($item) {
+                $object = (object) [
+                    'type' => strtolower(class_basename($item)),
+                    'created_at' => $item->created_at,
+                ];
+
+                switch ($object->type) {
+                    case 'activity':
+                        $object->name = $item->event;
+                        $object->created_by = $item->causer;
+                        $object->created_by_id = $item->causer_id;
+                        break;
+                    case 'status':
+                        $object->name = $item->name;
+                        $object->created_by = $item->created_by;
+                        $object->created_by_id = $item->created_by_id;
+                        break;
+                    case 'checkin':
+                    case 'checkout':
+                        $object->name = $object->type;
+                        $object->created_by = $item->created_by;
+                        $object->created_by_id = $item->created_by_id;
+                        break;
+                }
+
+                return $object;
+            });
+
+        return view('bookings.show')->with(compact(['booking', 'events']));
     }
 
     /**

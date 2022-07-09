@@ -5,11 +5,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\ModelStatus\HasStatuses;
 
 class Booking extends Model
 {
-    use HasFactory, HasStatuses;
+    use HasFactory, HasStatuses, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -265,6 +267,11 @@ class Booking extends Model
             'pending',
             'rejected',
         ]);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
     }
 
     /**

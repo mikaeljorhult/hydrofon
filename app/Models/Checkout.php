@@ -39,4 +39,14 @@ class Checkout extends Model
     {
         return $this->belongsTo(\App\Models\Booking::class);
     }
+
+    /**
+     * User that checked out the booking.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function created_by()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
 }
