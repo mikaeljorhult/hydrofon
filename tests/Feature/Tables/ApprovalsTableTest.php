@@ -3,7 +3,6 @@
 namespace Tests\Feature\Tables;
 
 use App\Http\Livewire\ApprovalsTable;
-use App\Models\Approval;
 use App\Models\Booking;
 use App\Models\Group;
 use App\Models\User;
@@ -55,9 +54,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertOk();
 
-        $this->assertDatabaseHas(Approval::class, [
-            'booking_id' => $items[0]->id,
-        ]);
+        $this->assertEquals('approved', $items[0]->status);
     }
 
     /**
@@ -83,9 +80,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertOk();
 
-        $this->assertDatabaseHas(Approval::class, [
-            'booking_id' => $items[0]->id,
-        ]);
+        $this->assertEquals('approved', $items[0]->status);
     }
 
     /**
@@ -111,9 +106,7 @@ class ApprovalsTableTest extends TestCase
                 ->emit('approve', $items[0]->id)
                 ->assertForbidden();
 
-        $this->assertDatabaseMissing(Approval::class, [
-            'booking_id' => $items[0]->id,
-        ]);
+        $this->assertNotEquals('approved', $items[0]->status);
     }
 
     /**
@@ -138,10 +131,6 @@ class ApprovalsTableTest extends TestCase
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->emit('reject', $items[0]->id)
                 ->assertOk();
-
-        $this->assertDatabaseMissing(Approval::class, [
-            'booking_id' => $items[0]->id,
-        ]);
 
         $this->assertEquals('rejected', $items[0]->refresh()->status);
     }
@@ -169,10 +158,6 @@ class ApprovalsTableTest extends TestCase
                 ->emit('reject', $items[0]->id)
                 ->assertOk();
 
-        $this->assertDatabaseMissing(Approval::class, [
-            'booking_id' => $items[0]->id,
-        ]);
-
         $this->assertEquals('rejected', $items[0]->refresh()->status);
     }
 
@@ -199,8 +184,6 @@ class ApprovalsTableTest extends TestCase
                 ->emit('reject', $items[0]->id)
                 ->assertForbidden();
 
-        $this->assertDatabaseMissing(Approval::class, [
-            'booking_id' => $items[0]->id,
-        ]);
+        $this->assertNotEquals('approved', $items[0]->status);
     }
 }

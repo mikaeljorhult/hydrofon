@@ -10,6 +10,7 @@ use App\Notifications\BookingRejected;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 
 class NotifyUsers extends Command
 {
@@ -92,9 +93,17 @@ class NotifyUsers extends Command
     private function approvedBookings()
     {
         $users = User::whereHas('bookings', function (Builder $query) {
-            $query->approved()->whereHas('statuses', function (Builder $query) {
-                $query->where('created_at', '>', $this->dateOfLastNotification(BookingApproved::class));
-            });
+            $query
+                ->approved()
+                ->whereHas('statuses', function (Builder $query) {
+                    $query
+                        ->where(function (Builder $query) {
+                            $query
+                                ->whereNotNull('statuses.created_by_id')
+                                ->orWhereColumn('statuses.created_by_id', '!=', 'bookings.user_id');
+                        })
+                        ->where('created_at', '>', $this->dateOfLastNotification(BookingApproved::class));
+                });
         })->get();
 
         if ($users->isNotEmpty()) {

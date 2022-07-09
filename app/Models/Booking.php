@@ -81,7 +81,6 @@ class Booking extends Model
                 $mustBeApproved = $booking->user->groups()->whereHas('approvers')->exists();
 
                 if ($mustBeApproved) {
-                    $booking->approval()->delete();
                     $booking->setStatus('pending', 'Booking was changed after being '.$booking->status);
                 }
             }
@@ -136,16 +135,6 @@ class Booking extends Model
     public function checkout()
     {
         return $this->hasOne(\App\Models\Checkout::class);
-    }
-
-    /**
-     * Booking can be approved.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function approval()
-    {
-        return $this->hasOne(\App\Models\Approval::class);
     }
 
     /**
@@ -245,9 +234,7 @@ class Booking extends Model
      */
     public function scopeApproved($query)
     {
-        return $query
-            ->currentStatus('approved')
-            ->whereHas('approval');
+        return $query->currentStatus('approved');
     }
 
     /**
@@ -294,7 +281,6 @@ class Booking extends Model
         }
 
         if ($this->status !== 'approved') {
-            $this->approval()->create();
             $this->setStatus('approved', 'Approved by '.auth()->user()->name);
         }
     }
@@ -313,10 +299,6 @@ class Booking extends Model
         }
 
         if ($this->status !== 'rejected') {
-            if ($this->approval) {
-                $this->approval()->delete();
-            }
-
             $this->setStatus('rejected', 'Rejected by '.auth()->user()->name);
         }
     }
@@ -335,10 +317,6 @@ class Booking extends Model
         }
 
         if ($this->status === 'approved') {
-            if ($this->approval) {
-                $this->approval()->delete();
-            }
-
             $this->setStatus('pending', 'Approval revoked');
         }
     }

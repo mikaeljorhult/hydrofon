@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Commands;
 
-use App\Models\Approval;
 use App\Models\Booking;
 use App\Models\Group;
+use App\Models\Status;
 use App\Models\User;
 use App\Notifications\BookingApproved;
 use App\Notifications\BookingAwaitingApproval;
@@ -40,30 +40,29 @@ class NotifyTest extends TestCase
                ->create();
 
         // Approved booking.
-        $approval = Approval::factory()->create();
+        $approvedBooking = Booking::factory()->has(Status::factory()->approved())->create();
 
         // Rejected booking.
-        $rejectedBooking = Booking::factory()->create();
-        $rejectedBooking->setStatus('rejected');
+        $rejectedBooking = Booking::factory()->has(Status::factory()->rejected())->create();
 
         // Run command.
         $this->artisan('hydrofon:notifications');
 
         $this->assertDatabaseHas('notifications', [
             'notifiable_id' => $overdueBooking->user->id,
-            'type'          => BookingOverdue::class,
+            'type'         => BookingOverdue::class,
         ]);
         $this->assertDatabaseHas('notifications', [
             'notifiable_id' => $approver->id,
-            'type'          => BookingAwaitingApproval::class,
+            'type'         => BookingAwaitingApproval::class,
         ]);
         $this->assertDatabaseHas('notifications', [
-            'notifiable_id' => $approval->booking->user->id,
-            'type'          => BookingApproved::class,
+            'notifiable_id' => $approvedBooking->user->id,
+            'type'         => BookingApproved::class,
         ]);
         $this->assertDatabaseHas('notifications', [
             'notifiable_id' => $rejectedBooking->user->id,
-            'type'          => BookingRejected::class,
+            'type'         => BookingRejected::class,
         ]);
     }
 
@@ -209,12 +208,12 @@ class NotifyTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $approval = Approval::factory()->create();
+        $booking = Booking::factory()->has(Status::factory()->approved())->create();
 
         $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
 
-        $this->assertCount(1, $approval->booking->user->notifications);
-        $this->assertEquals(BookingApproved::class, $approval->booking->user->notifications->first()->type);
+        $this->assertCount(1, $booking->user->notifications);
+        $this->assertEquals(BookingApproved::class, $booking->user->notifications->first()->type);
     }
 
     /**
@@ -244,12 +243,12 @@ class NotifyTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $approval = Approval::factory()->create();
+        $booking = Booking::factory()->has(Status::factory()->approved())->create();
 
         $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
         $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
 
-        $this->assertCount(1, $approval->booking->user->notifications);
+        $this->assertCount(1, $booking->user->notifications);
     }
 
     /**
@@ -261,8 +260,7 @@ class NotifyTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::factory()->create();
-        $booking->setStatus('rejected');
+        $booking = Booking::factory()->has(Status::factory()->rejected())->create();
 
         $this->artisan('hydrofon:notifications', ['--type' => 'rejected']);
 
@@ -279,8 +277,7 @@ class NotifyTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::factory()->create();
-        $booking->setStatus('rejected');
+        $booking = Booking::factory()->has(Status::factory()->rejected())->create();
 
         $this->artisan('hydrofon:notifications', ['--type' => 'rejected']);
         $this->artisan('hydrofon:notifications', ['--type' => 'rejected']);
