@@ -22,7 +22,7 @@ class CheckoutTest extends TestCase
         $this->withoutExceptionHandling();
 
         $admin = User::factory()->admin()->create();
-        $booking = Booking::withoutEvents(function() {
+        $booking = Booking::withoutEvents(function () {
             return Booking::factory()->autoapproved()->create();
         });
 
@@ -58,7 +58,7 @@ class CheckoutTest extends TestCase
     public function testNonAdminUsersCanNotCheckOutBookings()
     {
         $admin = User::factory()->create();
-        $booking = Booking::withoutEvents(function() {
+        $booking = Booking::withoutEvents(function () {
             return Booking::factory()->autoapproved()->create();
         });
 

@@ -79,7 +79,6 @@ class DeskController extends Controller
      * Get bookings of identifiable.
      *
      * @param  \App\Resource|\App\Models\User  $identifiable
-     *
      * @return mixed
      */
     private function getBookings($identifiable)
@@ -95,7 +94,7 @@ class DeskController extends Controller
                                $filter = request()->query->all('filter');
 
                                // Set default time span to +/- 4 days if not in request.
-                               if (!isset($filter['between'])) {
+                               if (! isset($filter['between'])) {
                                    $query->between(now()->subDays(4), now()->addDays(4));
                                } else {
                                    $between = explode(',', $filter['between']);
