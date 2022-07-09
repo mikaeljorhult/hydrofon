@@ -1,7 +1,6 @@
 {
     "private": true,
     "scripts": {
-        "development": "TAILWIND_MODE=build mix",
         "dev": "vite",
         "build": "vite build"
     },

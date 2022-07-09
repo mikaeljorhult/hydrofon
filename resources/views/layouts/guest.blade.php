@@ -14,8 +14,7 @@
         document.documentElement.classList.add('js');
     </script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite('resources/sass/app.scss')
 </head>
 
 <body class="h-full bg-white text-gray-700 font-base font-light">

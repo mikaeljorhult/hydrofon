@@ -15,7 +15,7 @@
         document.documentElement.classList.add('js');
     </script>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite('resources/sass/app.scss')
     <livewire:styles />
 </head>
 
@@ -31,9 +31,7 @@
         </main>
     </div>
 
-    <script src="{{ asset('js/manifest.js') }}"></script>
-    <script src="{{ asset('js/vendor.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @vite('resources/js/app.js')
     <livewire:scripts />
     @stack('scripts')
 </body>
