@@ -14,7 +14,7 @@
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laracasts/flash": "^3.2",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^9.19",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "laravolt/avatar": "^4.1",
