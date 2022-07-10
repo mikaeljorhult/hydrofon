@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('state')->after('end_time');
+            $table->string('state')
+                  ->default('created')
+                  ->after('end_time');
         });
     }
 
