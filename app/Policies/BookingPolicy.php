@@ -55,7 +55,7 @@ class BookingPolicy
      */
     public function update(User $user, Booking $booking)
     {
-        return $user->owns($booking) && $booking->start_time->isFuture() && !$booking->isCheckedOut;
+        return $user->owns($booking) && $booking->start_time->isFuture() && ! $booking->isCheckedOut;
     }
 
     /**
@@ -67,7 +67,7 @@ class BookingPolicy
      */
     public function delete(User $user, Booking $booking)
     {
-        return $user->owns($booking) && $booking->start_time->isFuture() && !$booking->isCheckedOut;
+        return $user->owns($booking) && $booking->start_time->isFuture() && ! $booking->isCheckedOut;
     }
 
     /**
