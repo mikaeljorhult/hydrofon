@@ -73,12 +73,14 @@ class Booking extends Model
             // Booking needs to be approved before it can be checked out or used.
             if ($mustBeApproved) {
                 $booking->state->transitionTo(Pending::class);
+
                 return;
             }
 
             // No approval is needed and it will not be checked out so bookings is complete.
             if ($booking->resource->isFacility()) {
                 $booking->state->transitionTo(Completed::class);
+
                 return;
             }
 
@@ -90,7 +92,7 @@ class Booking extends Model
             // Bail if state is being transitioned.
             if ($booking->isDirty('state')) {
                 return;
-            };
+            }
 
             $requireApproval = config('hydrofon.require_approval');
 
