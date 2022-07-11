@@ -186,4 +186,48 @@ class ApprovalsTableTest extends TestCase
 
         $this->assertFalse($items[0]->fresh()->isRejected);
     }
+
+    /**
+     * Booking must have a valid state to be approved.
+     *
+     * @return void
+     */
+    public function testBookingMustHaveValidStateToBeApproved()
+    {
+        $this->approvalIsRequired();
+
+        $items = Booking::withoutEvents(function () {
+            return Booking::factory()->current()->checkedout()->count(1)->create();
+        });
+
+        Livewire::actingAs(User::factory()->admin()->create())
+                ->test(ApprovalsTable::class, ['items' => $items])
+                ->set('selectedRows', [$items[0]->id])
+                ->emit('approve', null, true)
+                ->assertOk();
+
+        $this->assertFalse($items[0]->fresh()->isApproved);
+    }
+
+    /**
+     * Booking must have a valid state to be rejected.
+     *
+     * @return void
+     */
+    public function testBookingMustHaveValidStateToBeRejected()
+    {
+        $this->approvalIsRequired();
+
+        $items = Booking::withoutEvents(function () {
+            return Booking::factory()->current()->checkedout()->count(1)->create();
+        });
+
+        Livewire::actingAs(User::factory()->admin()->create())
+                ->test(ApprovalsTable::class, ['items' => $items])
+                ->set('selectedRows', [$items[0]->id])
+                ->emit('reject', null, true)
+                ->assertOk();
+
+        $this->assertFalse($items[0]->fresh()->isRejected);
+    }
 }

@@ -4,8 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\Identifier;
 use App\Rules\Available;
+use App\States\Approved;
 use App\States\CheckedIn;
 use App\States\CheckedOut;
+use App\States\Rejected;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 
@@ -81,11 +84,13 @@ class BookingsTable extends BaseTable
 
         $items = $this->modelInstance->with(['resource'])->findOrFail($itemsToCheckin);
 
-        $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->isCheckedIn) {
-                $item->state->transitionTo(CheckedIn::class);
-            }
-        });
+        if ($this->canTransitionTo($items, CheckedIn::class)) {
+            $items->each(function ($item) {
+                if (!$item->resource->is_facility && !$item->isCheckedIn) {
+                    $item->state->transitionTo(CheckedIn::class);
+                }
+            });
+        }
 
         $this->refreshItems($itemsToCheckin);
     }
@@ -96,11 +101,13 @@ class BookingsTable extends BaseTable
 
         $items = $this->modelInstance->with(['resource'])->findOrFail($itemsToCheckout);
 
-        $items->each(function ($item, $key) {
-            if (! $item->resource->is_facility && ! $item->isCheckedOut) {
-                $item->state->transitionTo(CheckedOut::class);
-            }
-        });
+        if ($this->canTransitionTo($items, CheckedOut::class)) {
+            $items->each(function ($item) {
+                if (!$item->resource->is_facility && !$item->isCheckedOut) {
+                    $item->state->transitionTo(CheckedOut::class);
+                }
+            });
+        }
 
         $this->refreshItems($itemsToCheckout);
     }
@@ -109,12 +116,15 @@ class BookingsTable extends BaseTable
     {
         $itemsToApprove = $multiple ? $this->selectedRows : [$id];
 
-        $this->modelInstance
-            ->findOrFail($itemsToApprove)
-            ->each(function ($item, $key) {
-                $this->authorize('approve', $item);
-            })
-            ->each->approve();
+        $items = $this->modelInstance->findOrFail($itemsToApprove);
+
+        if ($this->canTransitionTo($items, Approved::class)) {
+            $items
+                ->each(function ($item) {
+                    $this->authorize('approve', $item);
+                })
+                ->each->approve();
+        }
 
         $this->refreshItems($itemsToApprove);
     }
@@ -123,12 +133,15 @@ class BookingsTable extends BaseTable
     {
         $itemsToReject = $multiple ? $this->selectedRows : [$id];
 
-        $this->modelInstance
-            ->findOrFail($itemsToReject)
-            ->each(function ($item, $key) {
-                $this->authorize('approve', $item);
-            })
-            ->each->reject();
+        $items = $this->modelInstance->findOrFail($itemsToReject);
+
+        if ($this->canTransitionTo($items, Rejected::class)) {
+            $items
+                ->each(function ($item) {
+                    $this->authorize('approve', $item);
+                })
+                ->each->reject();
+        }
 
         $this->refreshItems($itemsToReject);
     }
@@ -163,6 +176,12 @@ class BookingsTable extends BaseTable
         if ($bookings->count() > 0) {
             $this->onSelect($bookings->first(), true);
         }
+    }
+
+    private function canTransitionTo(Collection $items, $state) {
+        return $items->reduce(function ($carry, $item) use ($state) {
+            return $carry && $item->state->canTransitionTo($state);
+        }, true);
     }
 
     public function render()

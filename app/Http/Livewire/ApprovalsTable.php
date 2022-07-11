@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\States\Approved;
+use App\States\Rejected;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ApprovalsTable extends BaseTable
@@ -33,12 +36,15 @@ class ApprovalsTable extends BaseTable
     {
         $itemsToApprove = $multiple ? $this->selectedRows : [$id];
 
-        $this->modelInstance
-            ->findOrFail($itemsToApprove)
-            ->each(function ($item, $key) {
-                $this->authorize('approve', $item);
-            })
-            ->each->approve();
+        $items = $this->modelInstance->findOrFail($itemsToApprove);
+
+        if ($this->canTransitionTo($items, Approved::class)) {
+            $items
+                ->each(function ($item) {
+                    $this->authorize('approve', $item);
+                })
+                ->each->approve();
+        }
 
         $this->refreshItems($itemsToApprove);
     }
@@ -47,14 +53,23 @@ class ApprovalsTable extends BaseTable
     {
         $itemsToReject = $multiple ? $this->selectedRows : [$id];
 
-        $this->modelInstance
-            ->findOrFail($itemsToReject)
-            ->each(function ($item, $key) {
-                $this->authorize('approve', $item);
-            })
-            ->each->reject();
+        $items = $this->modelInstance->findOrFail($itemsToReject);
+
+        if ($this->canTransitionTo($items, Rejected::class)) {
+            $items
+                ->each(function ($item) {
+                    $this->authorize('approve', $item);
+                })
+                ->each->reject();
+        }
 
         $this->refreshItems($itemsToReject);
+    }
+
+    private function canTransitionTo(Collection $items, $state) {
+        return $items->reduce(function ($carry, $item) use ($state) {
+            return $carry && $item->state->canTransitionTo($state);
+        }, true);
     }
 
     public function render()
