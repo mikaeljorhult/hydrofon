@@ -28,7 +28,11 @@ class BookingApproved extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        $hasNotifications = $notifiable->unreadNotifications()
+                                       ->where('type', get_class($this))
+                                       ->exists();
+
+        return $hasNotifications ? [] : ['database'];
     }
 
     /**

@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         StateChanged::class => [
             \App\Listeners\LogBookingStateChange::class,
+            \App\Listeners\NotifyUserOfBookingStateChange::class,
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

@@ -44,12 +44,6 @@ class NotifyTest extends TestCase
                ->for(User::factory()->hasAttached($group))
                ->create();
 
-        // Approved booking.
-        $approvedBooking = Booking::factory()->has(Status::factory()->approved())->create();
-
-        // Rejected booking.
-        $rejectedBooking = Booking::factory()->has(Status::factory()->rejected())->create();
-
         // Run command.
         $this->artisan('hydrofon:notifications');
 
@@ -60,14 +54,6 @@ class NotifyTest extends TestCase
         $this->assertDatabaseHas('notifications', [
             'notifiable_id' => $approver->id,
             'type'         => BookingAwaitingApproval::class,
-        ]);
-        $this->assertDatabaseHas('notifications', [
-            'notifiable_id' => $approvedBooking->user->id,
-            'type'         => BookingApproved::class,
-        ]);
-        $this->assertDatabaseHas('notifications', [
-            'notifiable_id' => $rejectedBooking->user->id,
-            'type'         => BookingRejected::class,
         ]);
     }
 
@@ -202,91 +188,5 @@ class NotifyTest extends TestCase
         $this->artisan('hydrofon:notifications', ['--type' => 'approval']);
 
         $this->assertCount(2, $approver->notifications);
-    }
-
-    /**
-     * User with an approved booking gets notified.
-     *
-     * @return void
-     */
-    public function testUserWithApprovedBookingGetNotified()
-    {
-        $this->approvalIsRequired();
-
-        $booking = Booking::factory()->has(Status::factory()->approved())->create();
-
-        $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
-
-        $this->assertCount(1, $booking->user->notifications);
-        $this->assertEquals(BookingApproved::class, $booking->user->notifications->first()->type);
-    }
-
-    /**
-     * User with a (auto-)approved booking don't get notified.
-     *
-     * @return void
-     */
-    public function testUserWithAutoApprovedBookingDontGetNotified()
-    {
-        $this->approvalIsRequired();
-
-        $user = User::factory()
-                    ->has(Booking::factory())
-                    ->create();
-
-        $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
-
-        $this->assertCount(0, $user->notifications);
-    }
-
-    /**
-     * User only get notified once about the same approved booking.
-     *
-     * @return void
-     */
-    public function testUserDontGetNotifiedTwiceAboutSameApprovedBooking()
-    {
-        $this->approvalIsRequired();
-
-        $booking = Booking::factory()->has(Status::factory()->approved())->create();
-
-        $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
-        $this->artisan('hydrofon:notifications', ['--type' => 'approved']);
-
-        $this->assertCount(1, $booking->user->notifications);
-    }
-
-    /**
-     * User with a rejected booking gets notified.
-     *
-     * @return void
-     */
-    public function testUserWithRejectedBookingGetNotified()
-    {
-        $this->approvalIsRequired();
-
-        $booking = Booking::factory()->has(Status::factory()->rejected())->create();
-
-        $this->artisan('hydrofon:notifications', ['--type' => 'rejected']);
-
-        $this->assertCount(1, $booking->user->notifications);
-        $this->assertEquals(BookingRejected::class, $booking->user->notifications->first()->type);
-    }
-
-    /**
-     * User only get notified once about the same approved booking.
-     *
-     * @return void
-     */
-    public function testUserDontGetNotifiedTwiceAboutSameRejectedBooking()
-    {
-        $this->approvalIsRequired();
-
-        $booking = Booking::factory()->has(Status::factory()->rejected())->create();
-
-        $this->artisan('hydrofon:notifications', ['--type' => 'rejected']);
-        $this->artisan('hydrofon:notifications', ['--type' => 'rejected']);
-
-        $this->assertCount(1, $booking->user->notifications);
     }
 }
