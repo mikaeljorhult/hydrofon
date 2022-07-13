@@ -8,7 +8,6 @@ use App\States\Approved;
 use App\States\AutoApproved;
 use App\States\CheckedIn;
 use App\States\CheckedOut;
-use App\States\Created;
 use App\States\Pending;
 use App\States\Rejected;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -83,5 +82,14 @@ class BookingFactory extends Factory
     public function checkedin()
     {
         return $this->state(['state' => CheckedIn::class]);
+    }
+
+    public function overdue()
+    {
+        return $this->state([
+            'start_time' => now()->subHour(),
+            'end_time'   => now()->subMinute(),
+            'state'      => CheckedOut::class,
+        ]);
     }
 }
