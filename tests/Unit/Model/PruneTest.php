@@ -1,13 +1,14 @@
 <?php
 
-namespace Tests\Unit\Commands;
+namespace Tests\Unit\Model;
 
 use App\Models\Booking;
 use App\Models\User;
+use App\States\CheckedOut;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CleanTest extends TestCase
+class PruneTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -23,9 +24,29 @@ class CleanTest extends TestCase
             'end_time'   => now()->subMonths(6),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(0, Booking::all());
+    }
+
+    /**
+     * Bookings less than 6 months old are not deleted.
+     *
+     * @return void
+     */
+    public function testCheckedOutBookingsAreNotDeleted()
+    {
+        $booking = Booking::withoutEvents(function () {
+            return Booking::factory()->create([
+                'start_time' => now()->subMonths(7),
+                'end_time'   => now()->subMonths(6),
+                'state'      => CheckedOut::class,
+            ]);
+        });
+
+        $this->artisan('model:prune');
+
+        $this->assertModelExists($booking);
     }
 
     /**
@@ -40,7 +61,7 @@ class CleanTest extends TestCase
             'end_time'   => now()->subMonths(1),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(1, Booking::all());
     }
@@ -57,7 +78,7 @@ class CleanTest extends TestCase
             'end_time'   => now()->addMonth(),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(1, Booking::all());
     }
@@ -74,7 +95,7 @@ class CleanTest extends TestCase
             'end_time'   => now()->addMonths(2),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(1, Booking::all());
     }
@@ -90,7 +111,7 @@ class CleanTest extends TestCase
             'last_logged_in_at' => now()->subYear(),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(0, User::all());
     }
@@ -106,7 +127,7 @@ class CleanTest extends TestCase
             'created_at' => now()->subYear(),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(0, User::all());
     }
@@ -120,7 +141,7 @@ class CleanTest extends TestCase
     {
         User::factory()->create();
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(1, User::all());
     }
@@ -141,7 +162,7 @@ class CleanTest extends TestCase
             'last_logged_in_at' => now()->subMonth(),
         ]);
 
-        $this->artisan('hydrofon:clean');
+        $this->artisan('model:prune');
 
         $this->assertCount(2, User::all());
     }

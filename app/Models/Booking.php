@@ -13,13 +13,14 @@ use App\States\Rejected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\ModelStates\HasStates;
 
 class Booking extends Model
 {
-    use HasFactory, HasStates, LogsActivity;
+    use HasFactory, HasStates, LogsActivity, Prunable;
 
     /**
      * The attributes that are mass assignable.
@@ -113,6 +114,18 @@ class Booking extends Model
                 }
             }
         });
+    }
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable()
+    {
+        // Booking is not checked out and ended at least half a year ago.
+        return static::whereNotState('state', CheckedOut::class)
+                     ->where('end_time', '<=', now()->subMonths(6));
     }
 
     /**

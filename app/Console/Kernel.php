@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('hydrofon:clean')->daily();
+        $schedule->command('model:prune')->daily();
         $schedule->command(OverdueBookingNotification::class)->everyFifteenMinutes();
     }
 

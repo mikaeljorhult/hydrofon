@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Prunable;
 
     /**
      * The attributes that are mass assignable.
@@ -41,6 +42,24 @@ class User extends Authenticatable
         'is_admin'          => 'boolean',
         'last_logged_in_at' => 'datetime',
     ];
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable()
+    {
+        return static::where(function ($query) {
+            // User has never logged in and was created more than a year ago.
+            $query->whereNull('last_logged_in_at')
+                  ->whereDate('created_at', '<=', now()->subMonths(12));
+        })->orWhere(function ($query) {
+            // User has logged in but not been active for more than a year.
+            $query->whereNotNull('last_logged_in_at')
+                  ->whereDate('last_logged_in_at', '<=', now()->subMonths(12));
+        });
+    }
 
     /**
      * Whether user is administrator or not.
