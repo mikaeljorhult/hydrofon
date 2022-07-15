@@ -189,6 +189,29 @@ class PruneTest extends TestCase
     }
 
     /**
+     * Pruned users relationships are also deleted.
+     *
+     * @return void
+     */
+    public function testRelationshipsAreDeletedWithTheirUser()
+    {
+        $user = User::factory()->create([
+            'created_at' => now()->subYear(),
+        ]);
+
+        $booking = Booking::factory()->for($user)->create();
+        $identifier = $user->identifiers()->create(['value' => 'test-value']);
+        $subscription = $user->subscription()->create();
+
+        $this->artisan('model:prune');
+
+        $this->assertModelMissing($user);
+        $this->assertModelMissing($booking);
+        $this->assertModelMissing($identifier);
+        $this->assertModelMissing($subscription);
+    }
+
+    /**
      * The time before users get pruned from the database can be
      * set in configuration.
      *

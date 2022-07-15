@@ -67,6 +67,13 @@ class User extends Authenticatable
                      });
     }
 
+    protected function pruning()
+    {
+        $this->bookings()->delete();
+        $this->identifiers()->delete();
+        $this->subscription()->delete();
+    }
+
     /**
      * Whether user is administrator or not.
      *
