@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\User;
 use App\States\CheckedOut;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class PruneTest extends TestCase
@@ -185,5 +186,43 @@ class PruneTest extends TestCase
         $this->artisan('model:prune');
 
         $this->assertModelExists($user);
+    }
+
+    /**
+     * The time before users get pruned from the database can be
+     * set in configuration.
+     *
+     * @return void
+     */
+    public function testTimeBeforePruningUsersCanBeConfigured()
+    {
+        Config::set('hydrofon.prune_models_after_days.users', 1);
+
+        $user = User::factory()->create([
+            'created_at' => now()->subDay(),
+        ]);
+
+        $this->artisan('model:prune');
+
+        $this->assertModelMissing($user);
+    }
+
+    /**
+     * The time before bookings get pruned from the database can be
+     * set in configuration.
+     *
+     * @return void
+     */
+    public function testTimeBeforePruningBookingsCanBeConfigured()
+    {
+        Config::set('hydrofon.prune_models_after_days.bookings', 1);
+
+        $user = Booking::factory()->create([
+            'end_time' => now()->subDay(),
+        ]);
+
+        $this->artisan('model:prune');
+
+        $this->assertModelMissing($user);
     }
 }

@@ -125,7 +125,7 @@ class Booking extends Model
     {
         // Booking is not checked out and ended at least half a year ago.
         return static::whereNotState('state', CheckedOut::class)
-                     ->where('end_time', '<=', now()->subMonths(6));
+                     ->where('end_time', '<=', now()->subDays(config('hydrofon.prune_models_after_days.bookings', 180)));
     }
 
     /**

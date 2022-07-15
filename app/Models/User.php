@@ -58,12 +58,12 @@ class User extends Authenticatable
                      ->where(function ($query) {
                          // User has never logged in and was created more than a year ago.
                          $query->whereNull('last_logged_in_at')
-                               ->whereDate('created_at', '<=', now()->subMonths(12));
+                               ->whereDate('created_at', '<=', now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
                      })
                      ->orWhere(function ($query) {
                          // User has logged in but not been active for more than a year.
                          $query->whereNotNull('last_logged_in_at')
-                               ->whereDate('last_logged_in_at', '<=', now()->subMonths(12));
+                               ->whereDate('last_logged_in_at', '<=', now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
                      });
     }
 
