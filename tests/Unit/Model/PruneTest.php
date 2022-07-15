@@ -166,4 +166,24 @@ class PruneTest extends TestCase
 
         $this->assertCount(2, User::all());
     }
+
+    /**
+     * Users that have checked out bookings are not deleted.
+     *
+     * @return void
+     */
+    public function testUsersWithCheckedOutBookingsAreNotDeleted()
+    {
+        $user = User::factory()->create([
+            'created_at' => now()->subYear(),
+        ]);
+
+        Booking::withoutEvents(function () use ($user) {
+            return Booking::factory()->for($user)->checkedout()->create();
+        });
+
+        $this->artisan('model:prune');
+
+        $this->assertModelExists($user);
+    }
 }

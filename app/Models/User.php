@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\States\CheckedOut;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,15 +52,19 @@ class User extends Authenticatable
      */
     public function prunable()
     {
-        return static::where(function ($query) {
-            // User has never logged in and was created more than a year ago.
-            $query->whereNull('last_logged_in_at')
-                  ->whereDate('created_at', '<=', now()->subMonths(12));
-        })->orWhere(function ($query) {
-            // User has logged in but not been active for more than a year.
-            $query->whereNotNull('last_logged_in_at')
-                  ->whereDate('last_logged_in_at', '<=', now()->subMonths(12));
-        });
+        return static::whereDoesntHave('bookings', function (Builder $query) {
+            return $query->whereState('state', CheckedOut::class);
+        })
+                     ->where(function ($query) {
+                         // User has never logged in and was created more than a year ago.
+                         $query->whereNull('last_logged_in_at')
+                               ->whereDate('created_at', '<=', now()->subMonths(12));
+                     })
+                     ->orWhere(function ($query) {
+                         // User has logged in but not been active for more than a year.
+                         $query->whereNotNull('last_logged_in_at')
+                               ->whereDate('last_logged_in_at', '<=', now()->subMonths(12));
+                     });
     }
 
     /**
