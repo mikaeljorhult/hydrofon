@@ -216,9 +216,7 @@ class BookingsTableTest extends TestCase
      */
     public function testAdministratorCanCheckoutBooking()
     {
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->checkedout()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
@@ -235,9 +233,7 @@ class BookingsTableTest extends TestCase
      */
     public function testAdministratorCanCheckinBooking()
     {
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->checkedout()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
@@ -308,9 +304,7 @@ class BookingsTableTest extends TestCase
      */
     public function testBookingMustHaveValidStateToBeCheckedIn()
     {
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
@@ -328,9 +322,7 @@ class BookingsTableTest extends TestCase
      */
     public function testBookingMustHaveValidStateToBeCheckedOut()
     {
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
@@ -350,9 +342,7 @@ class BookingsTableTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->checkedout()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
@@ -372,9 +362,7 @@ class BookingsTableTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->checkedout()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])

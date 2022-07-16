@@ -19,9 +19,7 @@ class OverdueBookingNotificationTest extends TestCase
      */
     public function testUserWithOverdueBookingGetNotified()
     {
-        $overdueBooking = Booking::withoutEvents(function () {
-            return Booking::factory()->overdue()->create();
-        });
+        $overdueBooking = Booking::factory()->overdue()->createQuietly();
 
         $this->artisan('hydrofon:overdue');
 
@@ -39,9 +37,7 @@ class OverdueBookingNotificationTest extends TestCase
         $user = User::factory()->create();
         $user->notify(new BookingOverdue());
 
-        Booking::withoutEvents(function () use ($user) {
-            return Booking::factory()->overdue()->for($user)->create();
-        });
+        Booking::factory()->overdue()->for($user)->createQuietly();
 
         $this->artisan('hydrofon:overdue');
 
@@ -59,9 +55,7 @@ class OverdueBookingNotificationTest extends TestCase
         $user->notify(new BookingOverdue());
         $user->notifications()->update(['created_at' => now()->subHour(), 'read_at' => now()]);
 
-        Booking::withoutEvents(function () use ($user) {
-            return Booking::factory()->overdue()->for($user)->create();
-        });
+        Booking::factory()->overdue()->for($user)->createQuietly();
 
         $this->artisan('hydrofon:overdue');
 

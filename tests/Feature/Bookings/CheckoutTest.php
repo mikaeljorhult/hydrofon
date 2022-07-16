@@ -22,9 +22,7 @@ class CheckoutTest extends TestCase
         $this->withoutExceptionHandling();
 
         $admin = User::factory()->admin()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->autoapproved()->create();
-        });
+        $booking = Booking::factory()->autoapproved()->createQuietly();
 
         $this->actingAs($admin)->post('checkouts', [
             'booking_id' => $booking->id,
@@ -58,9 +56,7 @@ class CheckoutTest extends TestCase
     public function testNonAdminUsersCanNotCheckOutBookings()
     {
         $admin = User::factory()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->autoapproved()->create();
-        });
+        $booking = Booking::factory()->autoapproved()->createQuietly();
 
         $response = $this->actingAs($admin)->post('checkouts', [
             'booking_id' => $booking->id,

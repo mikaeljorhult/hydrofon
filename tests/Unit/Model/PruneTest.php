@@ -37,13 +37,11 @@ class PruneTest extends TestCase
      */
     public function testCheckedOutBookingsAreNotDeleted()
     {
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->create([
-                'start_time' => now()->subMonths(7),
-                'end_time'   => now()->subMonths(6),
-                'state'      => CheckedOut::class,
-            ]);
-        });
+        $booking = Booking::factory()->createQuietly([
+            'start_time' => now()->subMonths(7),
+            'end_time'   => now()->subMonths(6),
+            'state'      => CheckedOut::class,
+        ]);
 
         $this->artisan('model:prune');
 
@@ -179,9 +177,7 @@ class PruneTest extends TestCase
             'created_at' => now()->subYear(),
         ]);
 
-        Booking::withoutEvents(function () use ($user) {
-            return Booking::factory()->for($user)->checkedout()->create();
-        });
+        Booking::factory()->for($user)->checkedout()->createQuietly();
 
         $this->artisan('model:prune');
 

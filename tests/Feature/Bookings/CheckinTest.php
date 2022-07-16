@@ -20,9 +20,7 @@ class CheckinTest extends TestCase
     public function testBookingCanBeCheckedIn()
     {
         $admin = User::factory()->admin()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->checkedout()->create();
-        });
+        $booking = Booking::factory()->checkedout()->createQuietly();
 
         $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
@@ -39,12 +37,10 @@ class CheckinTest extends TestCase
     public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
     {
         $admin = User::factory()->admin()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->checkedout()->create([
-                'start_time' => now()->subHour(),
-                'end_time'   => now()->addHour(5),
-            ]);
-        });
+        $booking = Booking::factory()->checkedout()->createQuietly([
+            'start_time' => now()->subHour(),
+            'end_time'   => now()->addHour(5),
+        ]);
 
         $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,
@@ -78,9 +74,7 @@ class CheckinTest extends TestCase
     public function testNonAdminUsersCanNotCheckInBookings()
     {
         $admin = User::factory()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->checkedout()->create();
-        });
+        $booking = Booking::factory()->checkedout()->createQuietly();
 
         $response = $this->actingAs($admin)->post('checkins', [
             'booking_id' => $booking->id,

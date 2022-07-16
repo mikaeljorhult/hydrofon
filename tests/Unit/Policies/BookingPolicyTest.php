@@ -83,9 +83,7 @@ class BookingPolicyTest extends TestCase
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
         $futureBooking = Booking::factory()->future()->create(['user_id' => $user->id]);
         $currentBooking = Booking::factory()->current()->create(['user_id' => $user->id]);
-        $checkedOut = Booking::withoutEvents(function () use ($user) {
-            return Booking::factory()->current()->checkedout()->create(['user_id' => $user->id]);
-        });
+        $checkedOut = Booking::factory()->current()->checkedout()->createQuietly(['user_id' => $user->id]);
 
         $this->assertFalse($user->can('update', $pastBooking));
         $this->assertFalse($user->can('update', $currentBooking));
@@ -120,9 +118,7 @@ class BookingPolicyTest extends TestCase
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
         $futureBooking = Booking::factory()->future()->create(['user_id' => $user->id]);
         $currentBooking = Booking::factory()->current()->create(['user_id' => $user->id]);
-        $checkedOut = Booking::withoutEvents(function () use ($user) {
-            return Booking::factory()->current()->checkedout()->create(['user_id' => $user->id]);
-        });
+        $checkedOut = Booking::factory()->current()->checkedout()->createQuietly(['user_id' => $user->id]);
 
         $this->assertFalse($user->can('update', $pastBooking));
         $this->assertFalse($user->can('update', $currentBooking));

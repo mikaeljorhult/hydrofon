@@ -243,14 +243,10 @@ class BookingTest extends TestCase
         // Create a past and a future booking.
         Booking::factory()->past()->create();
         Booking::factory()->future()->create();
-        $checkedInBooking = Booking::withoutEvents(function () {
-            return Booking::factory()->past()->checkedin()->create();
-        });
+        $checkedInBooking = Booking::factory()->past()->checkedin()->createQuietly();
 
         // Create a current booking.
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->past()->checkedout()->create();
-        });
+        $booking = Booking::factory()->past()->checkedout()->createQuietly();
 
         // Get all current bookings.
         $bookings = Booking::overdue()->get();

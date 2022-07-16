@@ -74,9 +74,7 @@ class BookingsDeskTest extends TestCase
      */
     public function testCheckedInBookingsAreOmitted()
     {
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->checkedin()->create();
-        });
+        $booking = Booking::factory()->checkedin()->createQuietly();
 
         $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/'.$booking->user->email);
 

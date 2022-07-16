@@ -196,9 +196,7 @@ class ApprovalsTableTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->checkedout()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
@@ -218,9 +216,7 @@ class ApprovalsTableTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $items = Booking::withoutEvents(function () {
-            return Booking::factory()->current()->checkedout()->count(1)->create();
-        });
+        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])

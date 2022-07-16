@@ -163,9 +163,7 @@ class UpdateTest extends TestCase
      */
     public function testUserCanNotChangeBookingThatHasBeenCheckedOut()
     {
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->checkedout()->create();
-        });
+        $booking = Booking::factory()->checkedout()->createQuietly();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,

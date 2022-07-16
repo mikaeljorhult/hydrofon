@@ -86,9 +86,7 @@ class DeleteTest extends TestCase
      */
     public function testUserCanNotDeleteBookingThatHasBeenCheckedOut()
     {
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->past()->checkedout()->create();
-        });
+        $booking = Booking::factory()->past()->checkedout()->createQuietly();
 
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 

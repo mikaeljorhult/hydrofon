@@ -134,9 +134,7 @@ class ApprovalTest extends TestCase
         $approver = User::factory()->create();
         Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->autoapproved()->create();
-        });
+        $booking = Booking::factory()->autoapproved()->createQuietly();
 
         $this->actingAs($approver)->get('approvals')
              ->assertOk()
@@ -180,9 +178,7 @@ class ApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $admin = User::factory()->admin()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->approved()->create();
-        });
+        $booking = Booking::factory()->approved()->createQuietly();
 
         $response = $this->actingAs($admin)->delete('approvals/'.$booking->id);
 
@@ -200,9 +196,7 @@ class ApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $user = User::factory()->create();
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->approved()->create();
-        });
+        $booking = Booking::factory()->approved()->createQuietly();
 
         $response = $this->actingAs($user)->delete('approvals/'.$booking->id);
 
@@ -219,9 +213,7 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->approved()->create();
-        });
+        $booking = Booking::factory()->approved()->createQuietly();
 
         $group = Group::factory()->hasApprovers(1)->create();
         $booking->user->groups()->attach($group);
@@ -245,9 +237,7 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->approved()->create();
-        });
+        $booking = Booking::factory()->approved()->createQuietly();
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
@@ -268,9 +258,7 @@ class ApprovalTest extends TestCase
     {
         $this->approvalIsRequired();
 
-        $booking = Booking::withoutEvents(function () {
-            return Booking::factory()->approved()->create();
-        });
+        $booking = Booking::factory()->approved()->createQuietly();
 
         $group = Group::factory()->hasApprovers(1)->create();
         $booking->user->groups()->attach($group);
