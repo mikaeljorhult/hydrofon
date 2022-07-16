@@ -66,7 +66,8 @@ class ApprovalsTable extends BaseTable
         $this->refreshItems($itemsToReject);
     }
 
-    private function canTransitionTo(Collection $items, $state) {
+    private function canTransitionTo(Collection $items, $state)
+    {
         return $items->reduce(function ($carry, $item) use ($state) {
             return $carry && $item->state->canTransitionTo($state);
         }, true);
