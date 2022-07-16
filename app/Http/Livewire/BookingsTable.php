@@ -86,7 +86,7 @@ class BookingsTable extends BaseTable
 
         if ($this->canTransitionTo($items, CheckedIn::class)) {
             $items->each(function ($item) {
-                if (!$item->resource->is_facility && !$item->isCheckedIn) {
+                if (! $item->resource->is_facility && ! $item->isCheckedIn) {
                     $item->state->transitionTo(CheckedIn::class);
                 }
             });
@@ -103,7 +103,7 @@ class BookingsTable extends BaseTable
 
         if ($this->canTransitionTo($items, CheckedOut::class)) {
             $items->each(function ($item) {
-                if (!$item->resource->is_facility && !$item->isCheckedOut) {
+                if (! $item->resource->is_facility && ! $item->isCheckedOut) {
                     $item->state->transitionTo(CheckedOut::class);
                 }
             });
@@ -178,7 +178,8 @@ class BookingsTable extends BaseTable
         }
     }
 
-    private function canTransitionTo(Collection $items, $state) {
+    private function canTransitionTo(Collection $items, $state)
+    {
         return $items->reduce(function ($carry, $item) use ($state) {
             return $carry && $item->state->canTransitionTo($state);
         }, true);
