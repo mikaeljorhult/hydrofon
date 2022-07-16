@@ -10,4 +10,9 @@ class CheckedOut extends BookingState
     {
         return 'Checked out';
     }
+
+    public function css(): string
+    {
+        return 'bg-indigo-100 text-indigo-800';
+    }
 }
