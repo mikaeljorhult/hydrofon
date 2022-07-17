@@ -94,6 +94,17 @@
                         </td>
                         <td data-title="&nbsp;" class="table-actions">
                             <div>
+                                <form action="{{ route('impersonation') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $item->id }}" />
+
+                                    <button type="submit" title="Impersonate">
+                                        Impersonate
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div>
                                 <a
                                     href="{{ route('users.edit', $item) }}"
                                     title="Edit"

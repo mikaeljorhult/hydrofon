@@ -104,32 +104,6 @@
                     x-transition:leave-end="opacity-0 scale-95"
                     x-cloak
                 >
-                    @admin
-                        <div class="px-4 py-2 text-sm text-gray-700 border-b">
-                            <form action="{{ route('impersonation') }}" method="post" class="flex items-center">
-                                @csrf
-
-                                <x-forms.label for="topbar-user_id" class="sr-only">
-                                    Select user to impersonate
-                                </x-forms.label>
-
-                                <x-forms.select
-                                    id="topbar-user_id"
-                                    name="user_id"
-                                    :options="\App\Models\User::pluck('name', 'id')"
-                                    :selected="session()->get('impersonate', null)"
-                                    placeholder="Impersonate user..."
-                                    class="!shadow-none"
-                                    x-on:change="if ($el.value != '') { $el.closest('form').submit() }"
-                                />
-
-                                <x-forms.button class="sr-only">
-                                    Impersonate
-                                </x-forms.button>
-                            </form>
-                        </div>
-                    @endadmin
-
                     <!-- Active: "bg-gray-100", Not Active: "" -->
                     <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 

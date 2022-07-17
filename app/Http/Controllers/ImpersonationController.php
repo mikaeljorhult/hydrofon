@@ -33,7 +33,7 @@ class ImpersonationController extends Controller
             session()->put('impersonated_by', auth()->id());
         }
 
-        return redirect()->back();
+        return redirect()->route('calendar');
     }
 
     /**
