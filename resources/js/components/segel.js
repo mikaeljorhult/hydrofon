@@ -54,7 +54,7 @@ export default (initialState) => ({
             this.$wire.setResources(event.detail);
         },
         ['x-on:segel-settimestamps.window'](event) {
-            this.$wire.setTimestamps(event.detail);
+            this.$wire.setTimestamps(event.detail.start, event.detail.end, event.detail.duration);
         }
     },
 

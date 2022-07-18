@@ -44,9 +44,9 @@
         id="segel"
         class="segel my-4"
         x-data="segel({
-            start: {{ $this->timestamps['start'] }},
-            duration: {{ $this->timestamps['duration'] }},
-            steps: {{ $this->steps }}
+            start: @entangle('start'),
+            duration: @entangle('duration'),
+            steps: @entangle('steps')
         })"
         x-bind="base"
     >
@@ -107,8 +107,8 @@
                                         class="segel-booking block h-full absolute inset-y-0 z-40 overflow-hidden bg-red-600 opacity-75 rounded @can('update', $booking) editable @endcan"
                                         title="{{ $booking->user->name }}"
                                         style="
-                                            width: {{ $booking->duration / $this->timestamps['duration'] * 100 }}%;
-                                            left: {{ ($booking->start_time->format('U') - $this->timestamps['start']) / $this->timestamps['duration'] * 100 }}%;
+                                            width: {{ $booking->duration / $this->duration * 100 }}%;
+                                            left: {{ ($booking->start_time->format('U') - $this->start) / $this->duration * 100 }}%;
                                             "
                                         data-id="{{ $booking->id }}"
                                         data-user="{{ $booking->user_id }}"
@@ -211,16 +211,23 @@
         document.addEventListener('DOMContentLoaded', function () {
             history.pushState({
                 date: null,
-                timestamps: @json($this->timestamps)
+                start: {{ $this->start }},
+                end: {{ $this->end }},
+                duration: {{ $this->duration }}
             }, 'initial');
         });
 
         window.onpopstate = function (event) {
-            window.Livewire.emitTo('segel', 'setTimestamps', event.state.timestamps);
+            @this.setTimestamps(event.state.start, event.state.end, event.state.duration);
         };
 
         window.livewire.on('dateChanged', (state) => {
-            history.pushState({date: state.date, timestamps: state.timestamps}, state.date, state.url);
+            history.pushState({
+                date: state.date,
+                start: state.start,
+                end: state.end,
+                duration: state.duration
+            }, state.date, state.url);
         });
     </script>
 @endpush

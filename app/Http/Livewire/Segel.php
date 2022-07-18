@@ -18,7 +18,9 @@ class Segel extends Component
 
     public $resources;
 
-    public $timestamps;
+    public $start;
+    public $end;
+    public $duration;
 
     public $dateString;
 
@@ -55,17 +57,11 @@ class Segel extends Component
         session()->put('resources', $id);
     }
 
-    public function setTimestamps($timestamps)
+    public function setTimestamps($start, $end = null, $duration = null)
     {
-        $newTimestamps = (array) $timestamps;
-
-        if (! isset($newTimestamps['end'])) {
-            $newTimestamps['end'] = isset($newTimestamps['duration'])
-                ? $newTimestamps['start'] + $newTimestamps['duration']
-                : $newTimestamps['start'] + $this->timestamps['duration'];
-        }
-
-        $this->timestamps = $newTimestamps;
+        $this->start = $start;
+        $this->duration = $duration ?? $this->duration;
+        $this->end = $end ?? $this->start + $this->duration;
         $this->changeTimestamps(0);
     }
 
@@ -76,24 +72,26 @@ class Segel extends Component
         $this->type = $grid->type;
         $this->headings = $grid->headings;
         $this->steps = $grid->steps;
-        $this->timestamps = $grid->timestamps;
+        $this->start = $grid->timestamps['start'];
+        $this->end = $grid->timestamps['end'];
+        $this->duration = $grid->timestamps['duration'];
         $this->dateString = $grid->dateString;
     }
 
     public function previousTimeScope()
     {
-        $this->changeTimestamps($this->timestamps['duration'] * -1);
+        $this->changeTimestamps($this->duration * -1);
     }
 
     public function nextTimeScope()
     {
-        $this->changeTimestamps($this->timestamps['duration']);
+        $this->changeTimestamps($this->duration);
     }
 
     public function updatedType()
     {
         $this->setGrid(
-            Carbon::createFromTimestamp($this->timestamps['start']),
+            Carbon::createFromTimestamp($this->start),
             $this->type
         );
     }
@@ -180,8 +178,8 @@ class Segel extends Component
 
     private function getResources()
     {
-        $startDate = Carbon::createFromTimestamp($this->timestamps['start']);
-        $endDate = Carbon::createFromTimestamp($this->timestamps['end']);
+        $startDate = Carbon::createFromTimestamp($this->start);
+        $endDate = Carbon::createFromTimestamp($this->end);
 
         return count($this->resources) > 0
             ? Resource::whereIn('id', $this->resources)
@@ -199,19 +197,21 @@ class Segel extends Component
 
     private function roundTimestamp($timestamp)
     {
-        $precision = ($this->timestamps['duration']) / $this->steps;
+        $precision = ($this->duration) / $this->steps;
 
         return round($timestamp / $precision) * $precision;
     }
 
     private function changeTimestamps($difference)
     {
-        $start = Carbon::createFromTimestamp($this->timestamps['start'] + $difference);
+        $start = Carbon::createFromTimestamp($this->start + $difference);
         $this->setGrid($start, $this->type);
 
         $this->emit('dateChanged', [
             'date'       => $this->dateString,
-            'timestamps' => $this->timestamps,
+            'start'      => $this->start,
+            'end'        => $this->end,
+            'duration'   => $this->duration,
             'url'        => route('calendar', [$start->format('Y-m-d')]),
         ]);
     }

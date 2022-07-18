@@ -18,7 +18,7 @@ class ImpersonationTest extends TestCase
     public function testAdministratorCanSeeImpersonationForm()
     {
         $admin = User::factory()->admin()->create();
-        $response = $this->actingAs($admin)->get('calendar');
+        $response = $this->actingAs($admin)->get('users');
 
         $response->assertStatus(200);
         $response->assertSee('impersonation');
@@ -38,7 +38,7 @@ class ImpersonationTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('calendar');
         $response->assertSessionHas('impersonate', $user->id);
         $response->assertSessionHas('impersonated_by', $admin->id);
     }
