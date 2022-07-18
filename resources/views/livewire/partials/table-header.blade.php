@@ -1,5 +1,5 @@
 <thead>
-    <th class="table-column-check">
+    <th class="w-8">
         <x-forms.checkbox
             class="text-red-500"
             name="select-all"

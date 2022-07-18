@@ -5,17 +5,6 @@ table {
     background-color: #fff;
 }
 
-tbody tr:hover {
-    .table-actions > div {
-        visibility: visible;
-    }
-
-    .js & {
-        cursor: pointer;
-    }
-}
-
-
 th,
 td {
     @apply p-4;
@@ -37,52 +26,5 @@ th {
 
     tfoot & {
         @apply border-t border-slate-200 text-sm;
-    }
-}
-
-.table-column-check {
-    width: 2rem;
-}
-
-.table-actions {
-    display: flex;
-    justify-content: flex-end;
-
-    form {
-        display: inline;
-    }
-
-    a,
-    button {
-        &:not(.btn) {
-            @apply text-red-700;
-
-            vertical-align: middle;
-            padding: 0;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-weight: inherit;
-            text-decoration: none;
-        }
-
-        font-size: .875rem;
-    }
-
-    > div {
-        visibility: hidden;
-        font-size: 0;
-
-        &::before {
-            content: '|';
-            vertical-align: bottom;
-            padding: 0 .25rem;
-            color: #bfc9d3;
-            font-size: 1rem;
-        }
-
-        &:first-of-type::before {
-            visibility: hidden;
-        }
     }
 }

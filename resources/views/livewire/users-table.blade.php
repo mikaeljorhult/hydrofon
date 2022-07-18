@@ -71,7 +71,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} group hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
                                 class="text-red-500"
@@ -92,45 +92,47 @@
                                 :disabled="true"
                             />
                         </td>
-                        <td data-title="&nbsp;" class="table-actions">
+                        <td data-title="&nbsp;" class="flex justify-end">
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                form="impersonateform-{{ $item->id }}"
+                                type="submit"
+                                title="Impersonate"
+                            ><x-heroicon-s-eye class="w-4 h-4 fill-current" /></button>
+
+                            <a
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                href="{{ route('users.identifiers.index', $item) }}"
+                                title="Identifiers"
+                            ><x-heroicon-s-tag class="w-4 h-4 fill-current" /></a>
+
+                            <a
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                href="{{ route('users.edit', $item) }}"
+                                title="Edit"
+                                wire:click.prevent="$emit('edit', {{ $item->id }})"
+                            ><x-heroicon-s-pencil class="w-4 h-4 fill-current" /></a>
+
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                form="deleteform-{{ $item->id }}"
+                                type="submit"
+                                title="Delete"
+                                wire:click.prevent="$emit('delete', {{ $item->id }})"
+                                wire:loading.attr="disabled"
+                            ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+
                             <div>
-                                <form action="{{ route('impersonation') }}" method="post">
+                                <form action="{{ route('impersonation') }}" method="post" id="impersonateform-{{ $item->id }}">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{ $item->id }}" />
-
-                                    <button type="submit" title="Impersonate">
-                                        Impersonate
-                                    </button>
                                 </form>
                             </div>
 
-                            <div>
-                                <a
-                                    href="{{ route('users.edit', $item) }}"
-                                    title="Edit"
-                                    wire:click.prevent="$emit('edit', {{ $item->id }})"
-                                >Edit</a>
-                            </div>
-
-                            <div>
-                                <form action="{{ route('users.identifiers.index', [$item->id]) }}" method="get">
-                                    <button type="submit" title="Identifiers">
-                                        Identifiers
-                                    </button>
-                                </form>
-                            </div>
-
-                            <div>
-                                <form action="{{ route('groups.destroy', [$item->id]) }}" method="post">
+                            <div class="hidden">
+                                <form action="{{ route('users.destroy', [$item->id]) }}" method="post" id="deleteform-{{ $item->id }}">
                                     @method('delete')
                                     @csrf
-
-                                    <button
-                                        type="submit"
-                                        title="Delete"
-                                        wire:click.prevent="$emit('delete', {{ $item->id }})"
-                                        wire:loading.attr="disabled"
-                                    >Delete</button>
                                 </form>
                             </div>
                         </td>

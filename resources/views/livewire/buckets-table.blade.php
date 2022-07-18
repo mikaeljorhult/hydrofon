@@ -48,7 +48,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} group hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
                                 class="text-red-500"
@@ -60,26 +60,27 @@
                         <td data-title="Name">
                             <a href="{{ route('buckets.edit', $item) }}">{{ $item->name }}</a>
                         </td>
-                        <td data-title="&nbsp;" class="table-actions">
-                            <div>
-                                <a
-                                    href="{{ route('buckets.edit', $item) }}"
-                                    title="Edit"
-                                    wire:click.prevent="$emit('edit', {{ $item->id }})"
-                                >Edit</a>
-                            </div>
+                        <td data-title="&nbsp;" class="flex justify-end">
+                            <a
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                href="{{ route('buckets.edit', $item) }}"
+                                title="Edit"
+                                wire:click.prevent="$emit('edit', {{ $item->id }})"
+                            ><x-heroicon-s-pencil class="w-4 h-4 fill-current" /></a>
 
-                            <div>
-                                <form action="{{ route('buckets.destroy', [$item->id]) }}" method="post">
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                form="deleteform-{{ $item->id }}"
+                                type="submit"
+                                title="Delete"
+                                wire:click.prevent="$emit('delete', {{ $item->id }})"
+                                wire:loading.attr="disabled"
+                            ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+
+                            <div class="hidden">
+                                <form action="{{ route('buckets.destroy', [$item->id]) }}" method="post" id="deleteform-{{ $item->id }}">
                                     @method('delete')
                                     @csrf
-
-                                    <button
-                                        type="submit"
-                                        title="Delete"
-                                        wire:click.prevent="$emit('delete', {{ $item->id }})"
-                                        wire:loading.attr="disabled"
-                                    >Delete</button>
                                 </form>
                             </div>
                         </td>

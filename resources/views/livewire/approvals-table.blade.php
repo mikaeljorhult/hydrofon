@@ -4,7 +4,7 @@
 
         <tbody>
             @forelse($this->items as $item)
-                <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
+                <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} group hover:bg-red-50">
                     <td data-title="&nbsp;">
                         <x-forms.checkbox
                             class="text-red-500"
@@ -29,40 +29,41 @@
                         @include('livewire.partials.item-status', ['item' => $item])
                     </td>
 
-                    <td data-title="&nbsp;" class="table-actions">
-                        <div>
-                            <form action="{{ route('approvals.store') }}" method="post">
+                    <td data-title="&nbsp;" class="flex justify-end">
+                        <button
+                            class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
+                            form="approveform-{{ $item->id }}"
+                            type="submit"
+                            title="Approve"
+                            wire:click.prevent="$emit('approve', {{ $item->id }})"
+                            wire:loading.attr="disabled"
+                        ><x-heroicon-s-check class="w-4 h-4 fill-current" /></button>
+
+                        <button
+                            class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
+                            type="submit"
+                            title="Reject"
+                            wire:click.prevent="$emit('reject', {{ $item->id }})"
+                            wire:loading.attr="disabled"
+                        ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+
+                        <button
+                            class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                            form="viewincalendarform-{{ $item->id }}"
+                            type="submit"
+                            title="View in calendar"
+                        ><x-heroicon-s-calendar class="w-4 h-4 fill-current" /></button>
+
+                        <div class="hidden">
+                            <form action="{{ route('approvals.store') }}" method="post" id="approveform-{{ $item->id }}">
                                 @csrf
                                 <input type="hidden" name="booking_id" value="{{ $item->id }}" />
-
-                                <button
-                                    type="submit"
-                                    title="Approve"
-                                    wire:click.prevent="$emit('approve', {{ $item->id }})"
-                                    wire:loading.attr="disabled"
-                                >Approve</button>
                             </form>
-                        </div>
 
-                        <div>
-                            <button
-                                type="submit"
-                                title="Reject"
-                                wire:click.prevent="$emit('reject', {{ $item->id }})"
-                                wire:loading.attr="disabled"
-                            >Reject</button>
-                        </div>
-
-                        <div>
-                            <form action="{{ route('calendar') }}" method="post">
+                            <form action="{{ route('calendar') }}" method="post" id="viewincalendarform-{{ $item->id }}">
                                 @csrf
-
                                 <input type="hidden" name="date" value="{{ $item->start_time->format('Y-m-d') }}" />
                                 <input type="hidden" name="resources[]" value="{{ $item->resource->id }}" />
-
-                                <button type="submit" title="View in calendar">
-                                    View
-                                </button>
                             </form>
                         </div>
                     </td>

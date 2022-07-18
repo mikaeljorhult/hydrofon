@@ -58,10 +58,8 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </td>
-                        @if(config('hydrofon.require_approval') !== 'none')
-                            <td data-title="&nbsp;">&nbsp;</td>
-                        @endif
-                        <td data-title="&nbsp;" class="text-right">
+                        <td data-title="&nbsp;">&nbsp;</td>
+                        <td data-title="&nbsp;" class="whitespace-nowrap text-right">
                             <x-forms.button
                                 type="link"
                                 wire:click.prevent="$emit('save')"
@@ -74,7 +72,7 @@
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} hover:bg-red-50">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} group hover:bg-red-50">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
                                 class="text-red-500"
@@ -104,72 +102,78 @@
                         <td data-title="Status">
                             @include('livewire.partials.item-status', ['item' => $item])
                         </td>
-
-                        <td data-title="&nbsp;" class="table-actions">
+                        <td data-title="&nbsp;" class="flex justify-end">
                             @if(!$item->resource->is_facility && $item->isApproved)
-                                <div>
-                                    <form action="{{ route('checkouts.store') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="booking_id" value="{{ $item->id }}" />
-
-                                        <button
-                                            type="submit"
-                                            title="Check out"
-                                            wire:click.prevent="$emit('checkout', {{ $item->id }})"
-                                            wire:loading.attr="disabled"
-                                        >Check out</button>
-                                    </form>
-                                </div>
+                                <button
+                                    class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
+                                    form="checkoutform-{{ $item->id }}"
+                                    type="submit"
+                                    title="Check out"
+                                    wire:click.prevent="$emit('checkout', {{ $item->id }})"
+                                    wire:loading.attr="disabled"
+                                >
+                                    <x-heroicon-s-upload class="w-4 h-4 fill-current" />
+                                </button>
                             @endif
 
                             @if(!$item->resource->is_facility && $item->isCheckedOut)
-                                <div>
-                                    <form action="{{ route('checkins.store') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="booking_id" value="{{ $item->id }}" />
-
-                                        <button
-                                            type="submit"
-                                            title="Check in"
-                                            wire:click.prevent="$emit('checkin', {{ $item->id }})"
-                                            wire:loading.attr="disabled"
-                                        >Check in</button>
-                                    </form>
-                                </div>
+                                <button
+                                    class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                    form="checkinform-{{ $item->id }}"
+                                    type="submit"
+                                    title="Check in"
+                                    wire:click.prevent="$emit('checkin', {{ $item->id }})"
+                                    wire:loading.attr="disabled"
+                                ><x-heroicon-s-download class="w-4 h-4 fill-current" /></button>
                             @endif
 
-                            <div>
-                                <a
-                                    href="{{ route('bookings.edit', $item) }}"
-                                    title="Edit"
-                                    wire:click.prevent="$emit('edit', {{ $item->id }})"
-                                >Edit</a>
-                            </div>
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                form="viewincalendarform-{{ $item->id }}"
+                                type="submit"
+                                title="View in calendar"
+                            ><x-heroicon-s-calendar class="w-4 h-4 fill-current" /></button>
 
-                            <div>
-                                <form action="{{ route('calendar') }}" method="post">
+                            <a
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                href="{{ route('bookings.edit', $item) }}"
+                                title="Edit"
+                                wire:click.prevent="$emit('edit', {{ $item->id }})"
+                            ><x-heroicon-s-pencil class="w-4 h-4 fill-current" /></a>
+
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                form="deleteform-{{ $item->id }}"
+                                type="submit"
+                                title="Delete"
+                                wire:click.prevent="$emit('delete', {{ $item->id }})"
+                                wire:loading.attr="disabled"
+                            ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+
+                            <div class="hidden">
+                                @if(!$item->resource->is_facility && $item->isApproved)
+                                    <form action="{{ route('checkouts.store') }}" method="post" id="checkoutform-{{ $item->id }}">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $item->id }}" />
+                                    </form>
+                                @endif
+
+                                @if(!$item->resource->is_facility && $item->isCheckedOut)
+                                    <form action="{{ route('checkins.store') }}" method="post" id="checkinform-{{ $item->id }}">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $item->id }}" />
+                                    </form>
+                                @endif
+
+                                <form action="{{ route('calendar') }}" method="post" id="viewincalendarform-{{ $item->id }}">
                                     @csrf
-
                                     <input type="hidden" name="date" value="{{ $item->start_time->format('Y-m-d') }}" />
                                     <input type="hidden" name="resources[]" value="{{ $item->resource->id }}" />
-
-                                    <button type="submit" title="View in calendar">
-                                        View
-                                    </button>
                                 </form>
-                            </div>
 
-                            <div>
-                                <form action="{{ route('bookings.destroy', [$item->id]) }}" method="post">
+                                <form action="{{ route('bookings.destroy', [$item->id]) }}" method="post" id="deleteform-{{ $item->id }}">
                                     @method('delete')
                                     @csrf
-
-                                    <button
-                                        type="submit"
-                                        title="Delete"
-                                        wire:click.prevent="$emit('delete', {{ $item->id }})"
-                                        wire:loading.attr="disabled"
-                                    >Delete</button>
                                 </form>
                             </div>
                         </td>
