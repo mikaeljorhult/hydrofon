@@ -27,6 +27,7 @@ class DataRequestController extends Controller
     {
         return response()->streamDownload(function () use ($request) {
             echo $request->user()->exportToJson();
-        }, 'hydrofon-'.Str::slug($request->user()->name).'.json', ['Content-Type' => 'application/json; charset=UTF-8']);
+        }, 'hydrofon-'.Str::slug($request->user()->name).'.json',
+            ['Content-Type' => 'application/json; charset=UTF-8']);
     }
 }

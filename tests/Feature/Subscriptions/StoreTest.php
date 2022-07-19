@@ -39,13 +39,13 @@ class StoreTest extends TestCase
         $this->from(route('users.show', [$user->id]))
              ->storeSubscription([
                  'subscribable_type' => 'user',
-                 'subscribable_id'   => $user->id,
+                 'subscribable_id' => $user->id,
              ], $user)
              ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseHas('subscriptions', [
             'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => $user->id,
+            'subscribable_id' => $user->id,
         ]);
     }
 
@@ -58,12 +58,12 @@ class StoreTest extends TestCase
     {
         $subscription = Subscription::factory()->create($attributes = [
             'subscribable_type' => \App\Models\User::class,
-            'subscribable_id'   => User::factory()->create()->id,
+            'subscribable_id' => User::factory()->create()->id,
         ]);
 
         $this->storeSubscription([
             'subscribable_type' => 'user',
-            'subscribable_id'   => $subscription->subscribable_id,
+            'subscribable_id' => $subscription->subscribable_id,
         ]);
 
         $this->assertDatabaseHas('subscriptions', $attributes);
@@ -81,7 +81,7 @@ class StoreTest extends TestCase
 
         $this->storeSubscription([
             'subscribable_type' => 'user',
-            'subscribable_id'   => $users->first()->id,
+            'subscribable_id' => $users->first()->id,
         ], $users->last());
 
         $this->assertCount(0, Subscription::all());
@@ -99,13 +99,13 @@ class StoreTest extends TestCase
         $this->from(route('resources.show', [$resource->id]))
              ->storeSubscription([
                  'subscribable_type' => 'resource',
-                 'subscribable_id'   => $resource->id,
+                 'subscribable_id' => $resource->id,
              ])
              ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseHas('subscriptions', [
             'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $resource->id,
+            'subscribable_id' => $resource->id,
         ]);
     }
 
@@ -121,7 +121,7 @@ class StoreTest extends TestCase
         $this->from(route('resources.show', [$resource->id]))
              ->storeSubscription([
                  'subscribable_type' => 'resource',
-                 'subscribable_id'   => $resource->id,
+                 'subscribable_id' => $resource->id,
              ], User::factory()->create())
              ->assertStatus(403);
 

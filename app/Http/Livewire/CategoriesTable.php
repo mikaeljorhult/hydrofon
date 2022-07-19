@@ -18,7 +18,7 @@ class CategoriesTable extends BaseTable
     public $tableDefaultSort = 'name';
 
     public $tableHeaders = [
-        'name'        => 'Name',
+        'name' => 'Name',
         'parent_name' => 'Parent',
     ];
 
@@ -29,12 +29,12 @@ class CategoriesTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name'      => ['required', 'max:60'],
+            'editValues.name' => ['required', 'max:60'],
             'editValues.parent_id' => [
                 'nullable', Rule::notIn($item->id), Rule::exists('categories', 'id'),
             ],
-            'editValues.groups'    => ['nullable', 'array'],
-            'editValues.groups.*'  => [Rule::exists('groups', 'id')],
+            'editValues.groups' => ['nullable', 'array'],
+            'editValues.groups.*' => [Rule::exists('groups', 'id')],
         ])['editValues'];
 
         $this->syncRelationship($item, $validatedData, 'groups');

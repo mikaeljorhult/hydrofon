@@ -20,8 +20,8 @@ class BucketsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name'        => ['required'],
-            'editValues.resources'   => ['nullable', 'array'],
+            'editValues.name' => ['required'],
+            'editValues.resources' => ['nullable', 'array'],
             'editValues.resources.*' => [Rule::exists('resources', 'id')],
         ])['editValues'];
 

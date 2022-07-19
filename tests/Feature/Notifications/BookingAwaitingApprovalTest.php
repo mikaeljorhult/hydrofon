@@ -6,7 +6,6 @@ use App\Models\Booking;
 use App\Models\Group;
 use App\Models\User;
 use App\Notifications\BookingAwaitingApproval;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

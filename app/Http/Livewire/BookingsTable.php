@@ -26,22 +26,22 @@ class BookingsTable extends BaseTable
 
     public $tableHeaders = [
         'resource_name' => 'Resource',
-        'user_name'     => 'User',
-        'start_time'    => 'Start',
-        'end_time'      => 'End',
-        'state'         => 'Status',
+        'user_name' => 'User',
+        'start_time' => 'Start',
+        'end_time' => 'End',
+        'state' => 'Status',
     ];
 
     protected $listeners = [
         'selectIdentifier' => 'onSelectIdentifier',
-        'edit'            => 'onEdit',
-        'save'            => 'onSave',
-        'delete'          => 'onDelete',
-        'checkin'         => 'onCheckin',
-        'checkout'        => 'onCheckout',
-        'switch'          => 'onSwitch',
-        'approve'         => 'onApprove',
-        'reject'          => 'onReject',
+        'edit' => 'onEdit',
+        'save' => 'onSave',
+        'delete' => 'onDelete',
+        'checkin' => 'onCheckin',
+        'checkout' => 'onCheckout',
+        'switch' => 'onSwitch',
+        'approve' => 'onApprove',
+        'reject' => 'onReject',
     ];
 
     public function onSave()
@@ -51,7 +51,7 @@ class BookingsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.user_id'     => [
+            'editValues.user_id' => [
                 'sometimes',
                 'nullable',
                 Rule::exists('users', 'id'),
@@ -64,10 +64,10 @@ class BookingsTable extends BaseTable
                 Rule::exists('resources', 'id'),
                 new Available($this->editValues['start_time'], $this->editValues['end_time'], $item->id, 'resource_id'),
             ],
-            'editValues.start_time'  => [
+            'editValues.start_time' => [
                 'required', 'date', 'required_with:editValues.resource_id', 'before:editValues.end_time',
             ],
-            'editValues.end_time'    => [
+            'editValues.end_time' => [
                 'required', 'date', 'required_with:editValues.resource_id', 'after:editValues.start_time',
             ],
         ])['editValues'];

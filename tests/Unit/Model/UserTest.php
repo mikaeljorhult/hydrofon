@@ -105,8 +105,8 @@ class UserTest extends TestCase
         $user = User::factory()->create();
         $user->identifiers()->create($identifier = [
             'identifiable_type' => User::class,
-            'identifiable_id'   => $user->id,
-            'value'             => 'new-identifier',
+            'identifiable_id' => $user->id,
+            'value' => 'new-identifier',
         ]);
 
         $rendered = $user->exportToJson();

@@ -25,13 +25,13 @@ class UpdateTest extends TestCase
         ]);
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
-            'name'      => 'New Category Name',
+            'name' => 'New Category Name',
             'parent_id' => $parents[1]->id,
         ]);
 
         $response->assertRedirect('/categories');
         $this->assertDatabaseHas('categories', [
-            'name'      => 'New Category Name',
+            'name' => 'New Category Name',
             'parent_id' => $parents[1]->id,
         ]);
     }
@@ -70,14 +70,14 @@ class UpdateTest extends TestCase
         ]);
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
-            'name'      => $category->name,
+            'name' => $category->name,
             'parent_id' => 100,
         ]);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('parent_id');
         $this->assertDatabaseHas('categories', [
-            'name'      => $category->name,
+            'name' => $category->name,
             'parent_id' => $category->parent_id,
         ]);
     }
@@ -95,14 +95,14 @@ class UpdateTest extends TestCase
         ]);
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
-            'name'      => $category->name,
+            'name' => $category->name,
             'parent_id' => $category->id,
         ]);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('parent_id');
         $this->assertDatabaseHas('categories', [
-            'name'      => $category->name,
+            'name' => $category->name,
             'parent_id' => $category->parent_id,
         ]);
     }
@@ -123,7 +123,7 @@ class UpdateTest extends TestCase
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('categories', [
-            'id'   => $category->id,
+            'id' => $category->id,
             'name' => $category->name,
         ]);
     }

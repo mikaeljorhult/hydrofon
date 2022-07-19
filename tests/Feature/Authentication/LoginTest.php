@@ -33,7 +33,7 @@ class LoginTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->post('/login', [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => 'secret',
         ]);
 

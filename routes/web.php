@@ -53,12 +53,12 @@ Route::post('impersonation', [ImpersonationController::class, 'store'])->name('i
 Route::delete('impersonation', [ImpersonationController::class, 'destroy']);
 
 Route::resources([
-    'bookings'   => BookingController::class,
-    'buckets'    => BucketController::class,
+    'bookings' => BookingController::class,
+    'buckets' => BucketController::class,
     'categories' => CategoryController::class,
-    'groups'     => GroupController::class,
-    'resources'  => ResourceController::class,
-    'users'      => UserController::class,
+    'groups' => GroupController::class,
+    'resources' => ResourceController::class,
+    'users' => UserController::class,
 ]);
 
 Route::resource('checkins', CheckinController::class)->only(['store']);

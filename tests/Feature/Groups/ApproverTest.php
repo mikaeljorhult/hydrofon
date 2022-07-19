@@ -21,12 +21,12 @@ class ApproverTest extends TestCase
         $approver = User::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())->post('groups', [
-            'name'      => 'New Group',
+            'name' => 'New Group',
             'approvers' => [$approver->id],
         ]);
 
         $this->assertDatabaseHas('approver_group', [
-            'user_id'  => $approver->id,
+            'user_id' => $approver->id,
             'group_id' => 1,
         ]);
     }
@@ -39,7 +39,7 @@ class ApproverTest extends TestCase
     public function testNonExistingUserCannotBeAddedWhenStoringGroup()
     {
         $response = $this->actingAs(User::factory()->admin()->create())->post('groups', [
-            'name'      => 'New Group',
+            'name' => 'New Group',
             'approvers' => [100],
         ]);
 
@@ -60,13 +60,13 @@ class ApproverTest extends TestCase
         $approver = User::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())->put('groups/'.$group->id, [
-            'name'      => 'New Group',
+            'name' => 'New Group',
             'approvers' => [$approver->id],
         ]);
 
         $this->assertDatabaseHas('approver_group', [
             'group_id' => $group->id,
-            'user_id'  => $approver->id,
+            'user_id' => $approver->id,
         ]);
     }
 
@@ -84,7 +84,7 @@ class ApproverTest extends TestCase
         ]);
 
         $this->actingAs(User::factory()->admin()->create())->put('groups/'.$group->id, [
-            'name'      => 'New Group',
+            'name' => 'New Group',
             'approvers' => [],
         ]);
 
@@ -101,7 +101,7 @@ class ApproverTest extends TestCase
         $group = Group::factory()->create();
 
         $response = $this->actingAs(User::factory()->admin()->create())->put('groups/'.$group->id, [
-            'name'      => 'New Group',
+            'name' => 'New Group',
             'approvers' => [100],
         ]);
 

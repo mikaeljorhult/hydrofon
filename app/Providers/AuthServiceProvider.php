@@ -12,15 +12,15 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \App\Models\Booking::class    => \App\Policies\BookingPolicy::class,
-        \App\Models\Bucket::class     => \App\Policies\BucketPolicy::class,
-        \App\Models\Category::class   => \App\Policies\CategoryPolicy::class,
-        \App\Models\Checkin::class    => \App\Policies\CheckinPolicy::class,
-        \App\Models\Checkout::class   => \App\Policies\CheckoutPolicy::class,
-        \App\Models\Group::class      => \App\Policies\GroupPolicy::class,
+        \App\Models\Booking::class => \App\Policies\BookingPolicy::class,
+        \App\Models\Bucket::class => \App\Policies\BucketPolicy::class,
+        \App\Models\Category::class => \App\Policies\CategoryPolicy::class,
+        \App\Models\Checkin::class => \App\Policies\CheckinPolicy::class,
+        \App\Models\Checkout::class => \App\Policies\CheckoutPolicy::class,
+        \App\Models\Group::class => \App\Policies\GroupPolicy::class,
         \App\Models\Identifier::class => \App\Policies\IdentifierPolicy::class,
-        \App\Models\Resource::class   => \App\Policies\ResourcePolicy::class,
-        \App\Models\User::class       => \App\Policies\UserPolicy::class,
+        \App\Models\Resource::class => \App\Policies\ResourcePolicy::class,
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
     ];
 
     /**

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Bookings;
 
 use App\Models\Booking;
-use App\Models\Checkin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -39,7 +38,7 @@ class CheckinTest extends TestCase
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->checkedout()->createQuietly([
             'start_time' => now()->subHour(),
-            'end_time'   => now()->addHour(5),
+            'end_time' => now()->addHour(5),
         ]);
 
         $this->actingAs($admin)->post('checkins', [

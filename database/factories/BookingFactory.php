@@ -22,11 +22,11 @@ class BookingFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'       => $user_id = User::factory()->create()->id,
-            'resource_id'   => Resource::factory()->create()->id,
+            'user_id' => $user_id = User::factory()->create()->id,
+            'resource_id' => Resource::factory()->create()->id,
             'created_by_id' => $user_id,
-            'start_time'    => now()->addHours(1),
-            'end_time'      => now()->addHours(3),
+            'start_time' => now()->addHours(1),
+            'end_time' => now()->addHours(3),
         ];
     }
 
@@ -34,7 +34,7 @@ class BookingFactory extends Factory
     {
         return $this->state([
             'start_time' => now()->subHour(),
-            'end_time'   => now()->addHour(),
+            'end_time' => now()->addHour(),
         ]);
     }
 
@@ -42,7 +42,7 @@ class BookingFactory extends Factory
     {
         return $this->state([
             'start_time' => now()->subYear(),
-            'end_time'   => now()->subYear()->addHour(),
+            'end_time' => now()->subYear()->addHour(),
         ]);
     }
 
@@ -50,7 +50,7 @@ class BookingFactory extends Factory
     {
         return $this->state([
             'start_time' => now()->addYear(),
-            'end_time'   => now()->addYear()->addHour(),
+            'end_time' => now()->addYear()->addHour(),
         ]);
     }
 
@@ -88,8 +88,8 @@ class BookingFactory extends Factory
     {
         return $this->state([
             'start_time' => now()->subHour(),
-            'end_time'   => now()->subMinute(),
-            'state'      => CheckedOut::class,
+            'end_time' => now()->subMinute(),
+            'state' => CheckedOut::class,
         ]);
     }
 }

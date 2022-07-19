@@ -24,7 +24,7 @@ class CategoryTest extends TestCase
         $resource = Resource::factory()->make();
 
         $this->actingAs($admin)->post('resources', [
-            'name'       => $resource->name,
+            'name' => $resource->name,
             'categories' => [$category->id],
         ]);
 
@@ -45,7 +45,7 @@ class CategoryTest extends TestCase
         $resource = Resource::factory()->make();
 
         $response = $this->actingAs($admin)->post('resources', [
-            'name'       => $resource->name,
+            'name' => $resource->name,
             'categories' => [100],
         ]);
 
@@ -67,7 +67,7 @@ class CategoryTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->actingAs($admin)->put('resources/'.$resource->id, [
-            'name'       => 'New Resource Name',
+            'name' => 'New Resource Name',
             'categories' => [$category->id],
         ]);
 
@@ -96,7 +96,7 @@ class CategoryTest extends TestCase
         ]);
 
         $this->actingAs($admin)->put('resources/'.$resource->id, [
-            'name'       => 'New Resource Name',
+            'name' => 'New Resource Name',
             'categories' => [],
         ]);
 
@@ -117,7 +117,7 @@ class CategoryTest extends TestCase
         $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
-            'name'       => 'New Resource Name',
+            'name' => 'New Resource Name',
             'categories' => [100],
         ]);
 

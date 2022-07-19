@@ -20,13 +20,13 @@ class ProfileBookingsTable extends BaseTable
 
     public $tableHeaders = [
         'resources.name' => 'Resource',
-        'start_time'     => 'Start',
-        'end_time'       => 'End',
+        'start_time' => 'Start',
+        'end_time' => 'End',
     ];
 
     protected $listeners = [
-        'edit'   => 'onEdit',
-        'save'   => 'onSave',
+        'edit' => 'onEdit',
+        'save' => 'onSave',
         'delete' => 'onDelete',
     ];
 
@@ -44,7 +44,7 @@ class ProfileBookingsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.user_id'     => [
+            'editValues.user_id' => [
                 'sometimes',
                 'nullable',
                 Rule::exists('users', 'id'),
@@ -57,10 +57,10 @@ class ProfileBookingsTable extends BaseTable
                 Rule::exists('resources', 'id'),
                 new Available($this->editValues['start_time'], $this->editValues['end_time'], $item->id, 'resource_id'),
             ],
-            'editValues.start_time'  => [
+            'editValues.start_time' => [
                 'required', 'date', 'required_with:editValues.resource_id', 'before:editValues.end_time',
             ],
-            'editValues.end_time'    => [
+            'editValues.end_time' => [
                 'required', 'date', 'required_with:editValues.resource_id', 'after:editValues.start_time',
             ],
         ])['editValues'];

@@ -22,7 +22,7 @@ class PruneTest extends TestCase
     {
         Booking::factory()->times(2)->create([
             'start_time' => now()->subMonths(7),
-            'end_time'   => now()->subMonths(6),
+            'end_time' => now()->subMonths(6),
         ]);
 
         $this->artisan('model:prune');
@@ -39,8 +39,8 @@ class PruneTest extends TestCase
     {
         $booking = Booking::factory()->createQuietly([
             'start_time' => now()->subMonths(7),
-            'end_time'   => now()->subMonths(6),
-            'state'      => CheckedOut::class,
+            'end_time' => now()->subMonths(6),
+            'state' => CheckedOut::class,
         ]);
 
         $this->artisan('model:prune');
@@ -57,7 +57,7 @@ class PruneTest extends TestCase
     {
         Booking::factory()->create([
             'start_time' => now()->subMonths(2),
-            'end_time'   => now()->subMonths(1),
+            'end_time' => now()->subMonths(1),
         ]);
 
         $this->artisan('model:prune');
@@ -74,7 +74,7 @@ class PruneTest extends TestCase
     {
         Booking::factory()->create([
             'start_time' => now()->subMonth(),
-            'end_time'   => now()->addMonth(),
+            'end_time' => now()->addMonth(),
         ]);
 
         $this->artisan('model:prune');
@@ -91,7 +91,7 @@ class PruneTest extends TestCase
     {
         Booking::factory()->create([
             'start_time' => now()->addMonths(1),
-            'end_time'   => now()->addMonths(2),
+            'end_time' => now()->addMonths(2),
         ]);
 
         $this->artisan('model:prune');
@@ -157,7 +157,7 @@ class PruneTest extends TestCase
         ]);
 
         User::factory()->create([
-            'created_at'        => now()->subYears(2),
+            'created_at' => now()->subYears(2),
             'last_logged_in_at' => now()->subMonth(),
         ]);
 

@@ -68,7 +68,7 @@ class UpdateTest extends TestCase
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('groups', [
-            'id'   => $group->id,
+            'id' => $group->id,
             'name' => $group->name,
         ]);
     }

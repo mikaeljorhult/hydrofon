@@ -160,8 +160,8 @@ class ProfileBookingsTableTest extends TestCase
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $items[0]->resource_id,
-            'start_time'  => $items[0]->start_time,
-            'end_time'    => $items[0]->end_time,
+            'start_time' => $items[0]->start_time,
+            'end_time' => $items[0]->end_time,
         ]);
     }
 

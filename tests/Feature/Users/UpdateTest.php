@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email' => 'test@hydrofon.se',
-            'name'  => $user->name,
+            'name' => $user->name,
         ]);
 
         $response->assertRedirect('/users');
@@ -44,7 +44,7 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email' => 'test@hydrofon.se',
-            'name'  => '',
+            'name' => '',
         ]);
 
         $response->assertRedirect();
@@ -66,7 +66,7 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email' => '',
-            'name'  => $user->name,
+            'name' => $user->name,
         ]);
 
         $response->assertRedirect();
@@ -88,7 +88,7 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email' => $admin->email,
-            'name'  => $user->name,
+            'name' => $user->name,
         ]);
 
         $response->assertRedirect();
@@ -109,9 +109,9 @@ class UpdateTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
-            'email'                 => $admin->email,
-            'name'                  => $user->name,
-            'password'              => 'password',
+            'email' => $admin->email,
+            'name' => $user->name,
+            'password' => 'password',
             'password_confirmation' => 'not-password',
         ]);
 
@@ -133,9 +133,9 @@ class UpdateTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
-            'email'                 => $user->email,
-            'name'                  => $user->name,
-            'password'              => 'new-password',
+            'email' => $user->email,
+            'name' => $user->name,
+            'password' => 'new-password',
             'password_confirmation' => 'new-password',
         ]);
 
@@ -157,12 +157,12 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('users/'.$user->id, [
             'email' => 'test@hydrofon.se',
-            'name'  => $user->name,
+            'name' => $user->name,
         ]);
 
         $response->assertRedirect('/users');
         $this->assertDatabaseMissing('users', [
-            'id'    => $user->id,
+            'id' => $user->id,
             'email' => $user->email,
         ]);
     }

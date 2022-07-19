@@ -16,7 +16,7 @@ class ResourcesTable extends BaseTable
     protected $editFields = ['id', 'name', 'description', 'is_facility'];
 
     public $tableHeaders = [
-        'name'        => 'Name',
+        'name' => 'Name',
         'description' => 'Description',
         'is_facility' => 'Facility',
     ];
@@ -28,15 +28,15 @@ class ResourcesTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name'         => ['required', 'max:60'],
-            'editValues.description'  => ['nullable'],
-            'editValues.is_facility'  => ['nullable'],
-            'editValues.buckets'      => ['nullable', 'array'],
-            'editValues.buckets.*'    => [Rule::exists('buckets', 'id')],
-            'editValues.categories'   => ['nullable', 'array'],
+            'editValues.name' => ['required', 'max:60'],
+            'editValues.description' => ['nullable'],
+            'editValues.is_facility' => ['nullable'],
+            'editValues.buckets' => ['nullable', 'array'],
+            'editValues.buckets.*' => [Rule::exists('buckets', 'id')],
+            'editValues.categories' => ['nullable', 'array'],
             'editValues.categories.*' => [Rule::exists('categories', 'id')],
-            'editValues.groups'       => ['nullable', 'array'],
-            'editValues.groups.*'     => [Rule::exists('groups', 'id')],
+            'editValues.groups' => ['nullable', 'array'],
+            'editValues.groups.*' => [Rule::exists('groups', 'id')],
         ])['editValues'];
 
         $this->syncRelationship($item, $validatedData, 'buckets');

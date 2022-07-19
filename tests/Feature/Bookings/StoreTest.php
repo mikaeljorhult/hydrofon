@@ -39,7 +39,7 @@ class StoreTest extends TestCase
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
-            'user_id'       => $this->storedBooking->user_id + 1,
+            'user_id' => $this->storedBooking->user_id + 1,
             'created_by_id' => $this->storedBooking->created_by_id + 1,
         ]);
     }
@@ -58,7 +58,7 @@ class StoreTest extends TestCase
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
-            'user_id'       => $user->id,
+            'user_id' => $user->id,
             'created_by_id' => $admin->id,
         ]);
     }
@@ -77,7 +77,7 @@ class StoreTest extends TestCase
              ->assertRedirect('/');
 
         $this->assertDatabaseHas('bookings', [
-            'user_id'       => $firstUser->id,
+            'user_id' => $firstUser->id,
             'created_by_id' => $firstUser->id,
         ]);
     }
@@ -151,8 +151,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id' => $booking->resource_id,
-            'start_time'  => 'not-valid-time',
-            'end_time'    => $booking->end_time,
+            'start_time' => 'not-valid-time',
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -187,8 +187,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('bookings', [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => 'not-valid-time',
+            'start_time' => $booking->start_time,
+            'end_time' => 'not-valid-time',
         ]);
 
         $response->assertRedirect();
@@ -206,7 +206,7 @@ class StoreTest extends TestCase
     {
         $this->storeBooking([
             'start_time' => now()->addMonth(),
-            'end_time'   => now()->addMonth()->subHour(),
+            'end_time' => now()->addMonth()->subHour(),
         ])
              ->assertRedirect()
              ->assertSessionHasErrors('start_time');
@@ -225,8 +225,8 @@ class StoreTest extends TestCase
 
         $this->storeBooking([
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ])
              ->assertRedirect()
              ->assertSessionHasErrors('resource_id');

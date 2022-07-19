@@ -34,7 +34,7 @@ class SubscriptionStoreRequest extends FormRequest
                 'required',
                 Rule::in(['resource', 'user']),
             ],
-            'subscribable_id'   => ['required'],
+            'subscribable_id' => ['required'],
         ];
 
         if (in_array($this->input('subscribable_type'), ['resource', 'user'])) {

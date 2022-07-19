@@ -21,15 +21,15 @@ class ApprovalsTable extends BaseTable
 
     public $tableHeaders = [
         'resource_name' => 'Resource',
-        'user_name'     => 'User',
-        'start_time'    => 'Start',
-        'end_time'      => 'End',
-        'status'        => 'Status',
+        'user_name' => 'User',
+        'start_time' => 'Start',
+        'end_time' => 'End',
+        'status' => 'Status',
     ];
 
     protected $listeners = [
         'approve' => 'onApprove',
-        'reject'  => 'onReject',
+        'reject' => 'onReject',
     ];
 
     public function onApprove($id, $multiple = false)

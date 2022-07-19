@@ -3,8 +3,6 @@
 namespace Tests\Unit\Model;
 
 use App\Models\Booking;
-use App\Models\Checkin;
-use App\Models\Checkout;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -67,7 +65,7 @@ class BookingTest extends TestCase
         // Create a booking between 11.00 and 12.00 on current date.
         $booking = Booking::factory()->create([
             'start_time' => today()->hour(11),
-            'end_time'   => today()->hour(12),
+            'end_time' => today()->hour(12),
         ]);
 
         // Get all bookings of current date (00.00 - 24.00).
@@ -88,7 +86,7 @@ class BookingTest extends TestCase
         // Create a booking between 12.00 yesterday and 00.00 on current date.
         Booking::factory()->create([
             'start_time' => today()->subDay()->hour(12),
-            'end_time'   => today()->hour(0),
+            'end_time' => today()->hour(0),
         ]);
 
         // Get all bookings of current date.
@@ -111,7 +109,7 @@ class BookingTest extends TestCase
         // Create a booking between 00.00 and 04.00 on current date.
         $booking = Booking::factory()->create([
             'start_time' => today()->hour(0),
-            'end_time'   => today()->hour(4),
+            'end_time' => today()->hour(4),
         ]);
 
         // Get all bookings of current date.
@@ -135,7 +133,7 @@ class BookingTest extends TestCase
         // Create a booking between 00.00 and 04.00 on current date.
         $booking = Booking::factory()->create([
             'start_time' => today()->hour(0),
-            'end_time'   => today()->addDay()->hour(0),
+            'end_time' => today()->addDay()->hour(0),
         ]);
 
         // Get all bookings of current date.
@@ -156,7 +154,7 @@ class BookingTest extends TestCase
         // Create a booking between 00.00 and 04.00 on current date.
         $booking = Booking::factory()->create([
             'start_time' => now()->subYear(),
-            'end_time'   => now()->addYear(),
+            'end_time' => now()->addYear(),
         ]);
 
         // Get all bookings of current date.

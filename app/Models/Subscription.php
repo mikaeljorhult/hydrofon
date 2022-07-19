@@ -75,8 +75,8 @@ class Subscription extends Model
         $component = $componentFactory
             ->createCalendar($calendar)
             ->withProperty(new Property(
-              'NAME',
-              new TextValue($this->subscribable->name.' | Hydrofon')
+                'NAME',
+                new TextValue($this->subscribable->name.' | Hydrofon')
             ))
             ->withProperty(new Property(
                 'X-WR-CALNAME',

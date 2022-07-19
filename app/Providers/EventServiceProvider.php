@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Login::class      => [
+        Login::class => [
             \App\Listeners\UpdateLastLoggedInAt::class,
         ],
         StateChanged::class => [

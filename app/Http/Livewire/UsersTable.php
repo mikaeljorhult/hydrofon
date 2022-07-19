@@ -18,8 +18,8 @@ class UsersTable extends BaseTable
     public $tableDefaultSort = 'email';
 
     public $tableHeaders = [
-        'email'    => 'email',
-        'name'     => 'Name',
+        'email' => 'email',
+        'name' => 'Name',
         'is_admin' => 'Administrator',
     ];
 
@@ -30,10 +30,10 @@ class UsersTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name'     => ['required'],
-            'editValues.email'    => ['required', 'email', Rule::unique('users', 'email')->ignore($item->id)],
+            'editValues.name' => ['required'],
+            'editValues.email' => ['required', 'email', Rule::unique('users', 'email')->ignore($item->id)],
             'editValues.is_admin' => ['nullable'],
-            'editValues.groups'   => ['nullable', 'array'],
+            'editValues.groups' => ['nullable', 'array'],
             'editValues.groups.*' => [Rule::exists('groups', 'id')],
         ])['editValues'];
 

@@ -147,7 +147,7 @@ class UsersTableTest extends TestCase
                 ]);
 
         $this->assertDatabaseHas(User::class, [
-            'name'  => $items[0]->name,
+            'name' => $items[0]->name,
             'email' => $items[0]->email,
         ]);
     }

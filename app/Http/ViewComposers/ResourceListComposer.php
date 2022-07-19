@@ -21,7 +21,7 @@ class ResourceListComposer
 
         $view->with([
             'categories' => $categories,
-            'resources'  => $rootResources,
+            'resources' => $rootResources,
         ]);
     }
 

@@ -19,9 +19,9 @@ class ResourcePolicy
      */
     public function list(User $user, Resource $resource)
     {
-        return $user->isAdmin() ||
-               $resource->groups->count() === 0 ||
-               $user->groups->intersect($resource->groups)->isNotEmpty();
+        return $user->isAdmin()
+            || $resource->groups->count() === 0
+            || $user->groups->intersect($resource->groups)->isNotEmpty();
     }
 
     /**

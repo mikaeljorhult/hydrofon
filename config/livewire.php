@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'asset_url'  => null,
+    'asset_url' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +53,6 @@ return [
     |
     */
 
-    'middleware_group'  => 'web',
+    'middleware_group' => 'web',
 
 ];

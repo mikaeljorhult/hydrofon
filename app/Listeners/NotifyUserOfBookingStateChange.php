@@ -9,9 +9,7 @@ use App\Notifications\BookingRejected;
 use App\States\Approved;
 use App\States\Pending;
 use App\States\Rejected;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 use Spatie\ModelStates\Events\StateChanged;
 

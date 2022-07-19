@@ -24,13 +24,13 @@ class GroupTest extends TestCase
         $resource = Resource::factory()->make();
 
         $this->actingAs($admin)->post('resources', [
-            'name'   => $resource->name,
+            'name' => $resource->name,
             'groups' => [$group->id],
         ]);
 
         $this->assertDatabaseHas('group_resource', [
             'resource_id' => 1,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
     }
 
@@ -45,7 +45,7 @@ class GroupTest extends TestCase
         $resource = Resource::factory()->make();
 
         $response = $this->actingAs($admin)->post('resources', [
-            'name'   => $resource->name,
+            'name' => $resource->name,
             'groups' => [100],
         ]);
 
@@ -67,13 +67,13 @@ class GroupTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->actingAs($admin)->put('resources/'.$resource->id, [
-            'name'   => 'New Resource Name',
+            'name' => 'New Resource Name',
             'groups' => [$group->id],
         ]);
 
         $this->assertDatabaseHas('group_resource', [
             'resource_id' => $resource->id,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
     }
 
@@ -92,17 +92,17 @@ class GroupTest extends TestCase
 
         $this->assertDatabaseHas('group_resource', [
             'resource_id' => $resource->id,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
 
         $this->actingAs($admin)->put('resources/'.$resource->id, [
-            'name'   => 'New Resource Name',
+            'name' => 'New Resource Name',
             'groups' => [],
         ]);
 
         $this->assertDatabaseMissing('group_resource', [
             'resource_id' => $resource->id,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
     }
 
@@ -117,7 +117,7 @@ class GroupTest extends TestCase
         $resource = Resource::factory()->create();
 
         $response = $this->actingAs($admin)->put('resources/'.$resource->id, [
-            'name'   => 'New Resource Name',
+            'name' => 'New Resource Name',
             'groups' => [100],
         ]);
 

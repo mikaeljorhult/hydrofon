@@ -41,8 +41,8 @@ class Booking extends Model
      */
     protected $casts = [
         'start_time' => 'datetime:Y-m-d H:i',
-        'end_time'   => 'datetime:Y-m-d H:i',
-        'state'      => BookingState::class,
+        'end_time' => 'datetime:Y-m-d H:i',
+        'state' => BookingState::class,
     ];
 
     /**
@@ -125,7 +125,8 @@ class Booking extends Model
     {
         // Booking is not checked out and ended at least half a year ago.
         return static::whereNotState('state', CheckedOut::class)
-                     ->where('end_time', '<=', now()->subDays(config('hydrofon.prune_models_after_days.bookings', 180)));
+                     ->where('end_time', '<=',
+                         now()->subDays(config('hydrofon.prune_models_after_days.bookings', 180)));
     }
 
     /**

@@ -31,8 +31,8 @@ class BaseTable extends Component
     ];
 
     protected $listeners = [
-        'edit'   => 'onEdit',
-        'save'   => 'onSave',
+        'edit' => 'onEdit',
+        'save' => 'onSave',
         'delete' => 'onDelete',
     ];
 

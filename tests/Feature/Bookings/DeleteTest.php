@@ -3,8 +3,6 @@
 namespace Tests\Feature\Bookings;
 
 use App\Models\Booking;
-use App\Models\Checkin;
-use App\Models\Checkout;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

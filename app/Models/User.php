@@ -41,7 +41,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'is_admin'          => 'boolean',
+        'is_admin' => 'boolean',
         'last_logged_in_at' => 'datetime',
     ];
 
@@ -58,12 +58,14 @@ class User extends Authenticatable
                      ->where(function ($query) {
                          // User has never logged in and was created more than a year ago.
                          $query->whereNull('last_logged_in_at')
-                               ->whereDate('created_at', '<=', now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
+                               ->whereDate('created_at', '<=',
+                                   now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
                      })
                      ->orWhere(function ($query) {
                          // User has logged in but not been active for more than a year.
                          $query->whereNotNull('last_logged_in_at')
-                               ->whereDate('last_logged_in_at', '<=', now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
+                               ->whereDate('last_logged_in_at', '<=',
+                                   now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
                      });
     }
 
@@ -169,8 +171,8 @@ class User extends Authenticatable
         $user->bookings->transform(function ($item, $key) {
             return (object) [
                 'resource' => $item->resource->name,
-                'start'    => $item->start_time->format('U'),
-                'end'      => $item->end_time->format('U'),
+                'start' => $item->start_time->format('U'),
+                'end' => $item->end_time->format('U'),
             ];
         });
 

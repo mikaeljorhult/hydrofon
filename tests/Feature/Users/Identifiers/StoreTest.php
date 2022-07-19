@@ -27,8 +27,8 @@ class StoreTest extends TestCase
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('identifiers', [
-            'value'             => 'test-value',
-            'identifiable_id'   => $user->id,
+            'value' => 'test-value',
+            'identifiable_id' => $user->id,
             'identifiable_type' => \App\Models\User::class,
         ]);
     }

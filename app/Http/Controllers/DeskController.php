@@ -66,8 +66,8 @@ class DeskController extends Controller
 
         if (! $identifiable) {
             $identifier = Identifier::with('identifiable')
-                                      ->where('value', $search)
-                                      ->first();
+                                    ->where('value', $search)
+                                    ->first();
 
             $identifiable = $identifier?->identifiable;
         }

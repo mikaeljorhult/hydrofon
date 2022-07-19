@@ -43,7 +43,7 @@ class ProfileBookingsController extends Controller
                                 ->paginate(15);
 
         return view('profile.bookings')->with([
-            'user'     => $user,
+            'user' => $user,
             'bookings' => $bookings,
         ]);
     }

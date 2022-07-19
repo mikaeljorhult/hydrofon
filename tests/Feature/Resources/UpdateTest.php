@@ -68,7 +68,7 @@ class UpdateTest extends TestCase
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('resources', [
-            'id'   => $resource->id,
+            'id' => $resource->id,
             'name' => $resource->name,
         ]);
     }

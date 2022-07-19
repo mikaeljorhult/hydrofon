@@ -61,13 +61,13 @@ class AvailableTest extends TestCase
     {
         $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 12:00:00'),
-            'end_time'   => Carbon::parse('2017-01-01 13:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
         $booking = Booking::factory()->create([
             'resource_id' => $previous->resource_id,
-            'start_time'  => Carbon::parse('2017-01-01 13:00:00'),
-            'end_time'    => Carbon::parse('2017-01-01 14:00:00'),
+            'start_time' => Carbon::parse('2017-01-01 13:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
@@ -84,13 +84,13 @@ class AvailableTest extends TestCase
     {
         $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 13:00:00'),
-            'end_time'   => Carbon::parse('2017-01-01 14:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
         $booking = Booking::factory()->create([
             'resource_id' => $previous->resource_id,
-            'start_time'  => Carbon::parse('2017-01-01 12:00:00'),
-            'end_time'    => Carbon::parse('2017-01-01 13:00:00'),
+            'start_time' => Carbon::parse('2017-01-01 12:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
@@ -107,13 +107,13 @@ class AvailableTest extends TestCase
     {
         $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 13:00:00'),
-            'end_time'   => Carbon::parse('2017-01-01 14:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
         $booking = Booking::factory()->create([
             'resource_id' => $previous->resource_id,
-            'start_time'  => Carbon::parse('2017-01-01 12:00:00'),
-            'end_time'    => Carbon::parse('2017-01-01 15:00:00'),
+            'start_time' => Carbon::parse('2017-01-01 12:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 15:00:00'),
         ]);
 
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
@@ -130,13 +130,13 @@ class AvailableTest extends TestCase
     {
         $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 13:00:00'),
-            'end_time'   => Carbon::parse('2017-01-01 14:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
         $booking = Booking::factory()->create([
             'resource_id' => $previous->resource_id,
-            'start_time'  => Carbon::parse('2017-01-01 12:00:00'),
-            'end_time'    => Carbon::parse('2017-01-01 13:15:00'),
+            'start_time' => Carbon::parse('2017-01-01 12:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 13:15:00'),
         ]);
 
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
@@ -153,13 +153,13 @@ class AvailableTest extends TestCase
     {
         $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 12:00:00'),
-            'end_time'   => Carbon::parse('2017-01-01 13:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
         $booking = Booking::factory()->create([
             'resource_id' => $previous->resource_id,
-            'start_time'  => Carbon::parse('2017-01-01 12:45:00'),
-            'end_time'    => Carbon::parse('2017-01-01 14:00:00'),
+            'start_time' => Carbon::parse('2017-01-01 12:45:00'),
+            'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
@@ -176,13 +176,13 @@ class AvailableTest extends TestCase
     {
         $previous = Booking::factory()->create([
             'start_time' => Carbon::parse('2017-01-01 12:00:00'),
-            'end_time'   => Carbon::parse('2017-01-01 13:00:00'),
+            'end_time' => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
         $booking = Booking::factory()->create([
             'resource_id' => $previous->resource_id,
-            'start_time'  => Carbon::parse('2017-01-01 12:15:00'),
-            'end_time'    => Carbon::parse('2017-01-01 12:45:00'),
+            'start_time' => Carbon::parse('2017-01-01 12:15:00'),
+            'end_time' => Carbon::parse('2017-01-01 12:45:00'),
         ]);
 
         $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);

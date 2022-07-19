@@ -3,7 +3,6 @@
 namespace Tests\Feature\Bookings;
 
 use App\Models\Booking;
-use App\Models\Checkout;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,8 +25,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $newResource->id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect('/');
@@ -48,15 +47,15 @@ class UpdateTest extends TestCase
         $booking = Booking::factory()->create();
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
-            'user_id'     => $user->id,
+            'user_id' => $user->id,
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
-            'id'      => $booking->id,
+            'id' => $booking->id,
             'user_id' => $user->id,
         ]);
     }
@@ -73,15 +72,15 @@ class UpdateTest extends TestCase
         $booking = Booking::factory()->create();
 
         $response = $this->actingAs($firstUser)->put('bookings/'.$booking->id, [
-            'user_id'     => $secondUser->id,
+            'user_id' => $secondUser->id,
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
-            'id'      => $booking->id,
+            'id' => $booking->id,
             'user_id' => $booking->user_id,
         ]);
     }
@@ -97,15 +96,15 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->copy()->addHour(),
-            'end_time'    => $booking->end_time->copy()->addHour(),
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time' => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('bookings', [
-            'id'         => $booking->id,
+            'id' => $booking->id,
             'start_time' => $booking->start_time->copy()->addHour(),
-            'end_time'   => $booking->end_time->copy()->addHour(),
+            'end_time' => $booking->end_time->copy()->addHour(),
         ]);
     }
 
@@ -121,15 +120,15 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->copy()->addHour(),
-            'end_time'    => $booking->end_time->copy()->addHour(),
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time' => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
-            'id'         => $booking->id,
+            'id' => $booking->id,
             'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'end_time' => $booking->end_time,
         ]);
     }
 
@@ -144,15 +143,15 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->copy()->addHour(),
-            'end_time'    => $booking->end_time->copy()->addHour(),
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time' => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
-            'id'         => $booking->id,
+            'id' => $booking->id,
             'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'end_time' => $booking->end_time,
         ]);
     }
 
@@ -167,15 +166,15 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->copy()->addHour(),
-            'end_time'    => $booking->end_time->copy()->addHour(),
+            'start_time' => $booking->start_time->copy()->addHour(),
+            'end_time' => $booking->end_time->copy()->addHour(),
         ]);
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', [
-            'id'         => $booking->id,
+            'id' => $booking->id,
             'start_time' => $booking->start_time,
-            'end_time'   => $booking->end_time,
+            'end_time' => $booking->end_time,
         ]);
     }
 
@@ -191,8 +190,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => '',
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -214,8 +213,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => 100,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -238,16 +237,16 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $previous->resource_id,
-            'start_time'  => $previous->start_time,
-            'end_time'    => $previous->end_time,
+            'start_time' => $previous->start_time,
+            'end_time' => $previous->end_time,
         ]);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('resource_id');
         $this->assertDatabaseHas('bookings', [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
         ]);
     }
 
@@ -263,8 +262,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => '',
-            'end_time'    => $booking->end_time,
+            'start_time' => '',
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -286,8 +285,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => 'not-valid-time',
-            'end_time'    => $booking->end_time,
+            'start_time' => 'not-valid-time',
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -309,8 +308,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => '',
+            'start_time' => $booking->start_time,
+            'end_time' => '',
         ]);
 
         $response->assertRedirect();
@@ -332,8 +331,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => 'not-valid-time',
+            'start_time' => $booking->start_time,
+            'end_time' => 'not-valid-time',
         ]);
 
         $response->assertRedirect();
@@ -355,8 +354,8 @@ class UpdateTest extends TestCase
 
         $response = $this->actingAs($admin)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time,
-            'end_time'    => $booking->start_time->copy()->subHour(),
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->start_time->copy()->subHour(),
         ]);
 
         $response->assertRedirect();

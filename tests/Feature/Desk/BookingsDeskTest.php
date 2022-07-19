@@ -36,9 +36,9 @@ class BookingsDeskTest extends TestCase
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create([
-            'user_id'    => $user->id,
+            'user_id' => $user->id,
             'start_time' => now()->subDays(5)->subHour(),
-            'end_time'   => now()->subDays(5),
+            'end_time' => now()->subDays(5),
         ]);
 
         $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/'.$user->email);
@@ -56,9 +56,9 @@ class BookingsDeskTest extends TestCase
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create([
-            'user_id'    => $user->id,
+            'user_id' => $user->id,
             'start_time' => now()->addDays(5),
-            'end_time'   => now()->addDays(5)->addHour(),
+            'end_time' => now()->addDays(5)->addHour(),
         ]);
 
         $response = $this->actingAs(User::factory()->admin()->create())->get('/desk/'.$user->email);
@@ -91,9 +91,9 @@ class BookingsDeskTest extends TestCase
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create([
-            'user_id'    => $user->id,
+            'user_id' => $user->id,
             'start_time' => now()->subDays(5)->subHour(),
-            'end_time'   => now()->subDays(5),
+            'end_time' => now()->subDays(5),
         ]);
 
         $response = $this->actingAs(User::factory()->admin()->create())

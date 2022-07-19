@@ -38,10 +38,11 @@ class IdentifierUpdateRequest extends FormRequest
                 'required_with:identifiable_id',
                 Rule::in(['resource', 'user']),
             ],
-            'identifiable_id' => array_merge(['bail', 'required_without:value', 'required_with:identifiable_type'], (in_array($this->input('identifiable_type'), ['resource', 'user'])
-                ? [Rule::exists(Str::plural($this->input('identifiable_type')), 'id')]
-                : []
-            )),
+            'identifiable_id' => array_merge(['bail', 'required_without:value', 'required_with:identifiable_type'],
+                (in_array($this->input('identifiable_type'), ['resource', 'user'])
+                    ? [Rule::exists(Str::plural($this->input('identifiable_type')), 'id')]
+                    : []
+                )),
         ];
     }
 }

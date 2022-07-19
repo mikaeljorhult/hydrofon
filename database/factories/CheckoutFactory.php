@@ -17,7 +17,7 @@ class CheckoutFactory extends Factory
     {
         return [
             'booking_id' => Booking::factory()->create()->id,
-            'user_id'    => User::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }

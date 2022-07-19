@@ -83,7 +83,7 @@ class SubscriptionTest extends TestCase
         $subscription = Subscription::factory()->user()->create();
         Booking::factory()->times(2)->for($subscription->subscribable)->create([
             'start_time' => now(),
-            'end_time'   => now()->addHour(),
+            'end_time' => now()->addHour(),
         ]);
 
         $rendered = $subscription->toCalendar();
@@ -102,7 +102,7 @@ class SubscriptionTest extends TestCase
     {
         $timestamps = [
             'start_time' => today(),
-            'end_time'   => today()->addHour(),
+            'end_time' => today()->addHour(),
         ];
 
         $subscription = Subscription::factory()->user()->create();
@@ -130,7 +130,7 @@ class SubscriptionTest extends TestCase
 
         $subscription = Subscription::factory()->create([
             'subscribable_type' => \App\Models\Resource::class,
-            'subscribable_id'   => $booking->resource->id,
+            'subscribable_id' => $booking->resource->id,
         ]);
 
         $rendered = $subscription->toCalendar();

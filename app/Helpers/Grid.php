@@ -43,8 +43,8 @@ class Grid
     {
         $timestamps = [
             'current' => (int) now()->format('U'),
-            'start'   => (int) $date->format('U'),
-            'end'     => (int) $date->copy()->{'add'.ucfirst($this->type)}()->format('U'),
+            'start' => (int) $date->format('U'),
+            'end' => (int) $date->copy()->{'add'.ucfirst($this->type)}()->format('U'),
         ];
 
         $timestamps['duration'] = $timestamps['end'] - $timestamps['start'];
@@ -55,8 +55,8 @@ class Grid
     private function getSteps()
     {
         return [
-            self::TYPE_DAY   => 48,
-            self::TYPE_WEEK  => 56,
+            self::TYPE_DAY => 48,
+            self::TYPE_WEEK => 56,
             self::TYPE_MONTH => count($this->headings),
         ][$this->type];
     }

@@ -21,7 +21,7 @@ class SubscriptionFactory extends Factory
         $subscribableType = $this->faker->randomElement($subscribables);
 
         return [
-            'subscribable_id'   => app()->make($subscribableType)->factory(),
+            'subscribable_id' => app()->make($subscribableType)->factory(),
             'subscribable_type' => $subscribableType,
         ];
     }
@@ -35,7 +35,7 @@ class SubscriptionFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'subscribable_id'   => \App\Models\Resource::factory(),
+                'subscribable_id' => \App\Models\Resource::factory(),
                 'subscribable_type' => \App\Models\Resource::class,
             ];
         });
@@ -50,7 +50,7 @@ class SubscriptionFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'subscribable_id'   => \App\Models\User::factory(),
+                'subscribable_id' => \App\Models\User::factory(),
                 'subscribable_type' => \App\Models\User::class,
             ];
         });

@@ -21,9 +21,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => $user->email,
-            'name'                  => $user->name,
-            'password'              => 'password',
+            'email' => $user->email,
+            'name' => $user->name,
+            'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
@@ -44,9 +44,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => $user->email,
-            'name'                  => '',
-            'password'              => 'password',
+            'email' => $user->email,
+            'name' => '',
+            'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
@@ -69,9 +69,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => '',
-            'name'                  => $user->name,
-            'password'              => 'password',
+            'email' => '',
+            'name' => $user->name,
+            'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
@@ -94,9 +94,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => $admin->email,
-            'name'                  => $user->name,
-            'password'              => 'password',
+            'email' => $admin->email,
+            'name' => $user->name,
+            'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
@@ -119,9 +119,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => $user->email,
-            'name'                  => $user->name,
-            'password'              => '',
+            'email' => $user->email,
+            'name' => $user->name,
+            'password' => '',
             'password_confirmation' => 'password',
         ]);
 
@@ -144,9 +144,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => $user->email,
-            'name'                  => $user->name,
-            'password'              => 'password',
+            'email' => $user->email,
+            'name' => $user->name,
+            'password' => 'password',
             'password_confirmation' => 'not-password',
         ]);
 
@@ -169,9 +169,9 @@ class StoreTest extends TestCase
         $user = User::factory()->make();
 
         $response = $this->actingAs($admin)->post('users', [
-            'email'                 => $user->email,
-            'name'                  => $user->name,
-            'password'              => 'password',
+            'email' => $user->email,
+            'name' => $user->name,
+            'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 

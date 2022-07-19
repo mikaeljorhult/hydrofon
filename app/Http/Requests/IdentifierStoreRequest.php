@@ -38,10 +38,11 @@ class IdentifierStoreRequest extends FormRequest
                 'required',
                 Rule::in(['resource', 'user']),
             ],
-            'identifiable_id' => array_merge(['bail', 'sometimes'], (in_array($this->input('identifiable_type'), ['resource', 'user'])
-                ? ['required', Rule::exists(Str::plural($this->input('identifiable_type')), 'id')]
-                : []
-            )),
+            'identifiable_id' => array_merge(['bail', 'sometimes'],
+                (in_array($this->input('identifiable_type'), ['resource', 'user'])
+                    ? ['required', Rule::exists(Str::plural($this->input('identifiable_type')), 'id')]
+                    : []
+                )),
         ];
     }
 }

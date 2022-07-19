@@ -112,10 +112,10 @@ class BookingController extends Controller
             'user',
             'activities' => function ($query) {
                 $query->with('causer:id,name')
-                    ->when(config('hydrofon.require_approval') === 'none', function ($query) {
-                        // Ignore logs for approval states if approval isn't use.
-                        $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
-                    });
+                      ->when(config('hydrofon.require_approval') === 'none', function ($query) {
+                          // Ignore logs for approval states if approval isn't use.
+                          $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
+                      });
             },
         ]);
 

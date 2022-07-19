@@ -5,9 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Traits\PreserveReferer;
 use App\Models\Booking;
 use App\Rules\Available;
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class BookingStoreRequest extends FormRequest
@@ -32,14 +30,14 @@ class BookingStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'     => ['sometimes', 'nullable', Rule::exists('users', 'id')],
+            'user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'resource_id' => [
                 'required',
                 Rule::exists('resources', 'id'),
                 new Available($this->input('start_time'), $this->input('end_time')),
             ],
-            'start_time'  => ['required', 'date', 'required_with:resource_id', 'before:end_time'],
-            'end_time'    => ['required', 'date', 'required_with:resource_id', 'after:start_time'],
+            'start_time' => ['required', 'date', 'required_with:resource_id', 'before:end_time'],
+            'end_time' => ['required', 'date', 'required_with:resource_id', 'after:start_time'],
         ];
     }
 }

@@ -25,10 +25,10 @@ class CalendarRequest extends FormRequest
     public function rules()
     {
         return [
-            'date'        => ['nullable', 'date'],
-            'categories'   => ['nullable', 'array'],
+            'date' => ['nullable', 'date'],
+            'categories' => ['nullable', 'array'],
             'categories.*' => ['nullable', Rule::exists('categories', 'id')],
-            'resources'   => ['nullable', 'array'],
+            'resources' => ['nullable', 'array'],
             'resources.*' => ['nullable', Rule::exists('resources', 'id')],
         ];
     }

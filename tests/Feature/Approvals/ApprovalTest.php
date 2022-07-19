@@ -220,8 +220,8 @@ class ApprovalTest extends TestCase
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->addMinute(),
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time->addMinute(),
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -241,8 +241,8 @@ class ApprovalTest extends TestCase
 
         $response = $this->actingAs($booking->user)->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->addMinute(),
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time->addMinute(),
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();
@@ -265,8 +265,8 @@ class ApprovalTest extends TestCase
 
         $response = $this->actingAs(User::factory()->admin()->create())->put('bookings/'.$booking->id, [
             'resource_id' => $booking->resource_id,
-            'start_time'  => $booking->start_time->addMinute(),
-            'end_time'    => $booking->end_time,
+            'start_time' => $booking->start_time->addMinute(),
+            'end_time' => $booking->end_time,
         ]);
 
         $response->assertRedirect();

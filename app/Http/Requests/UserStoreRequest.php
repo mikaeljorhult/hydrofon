@@ -29,8 +29,8 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => ['required'],
-            'email'    => ['required', 'email', Rule::unique('users')],
+            'name' => ['required'],
+            'email' => ['required', 'email', Rule::unique('users')],
             'password' => ['required', 'confirmed'],
             'groups.*' => [Rule::exists('groups', 'id')],
         ];

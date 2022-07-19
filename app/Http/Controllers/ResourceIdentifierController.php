@@ -79,9 +79,9 @@ class ResourceIdentifierController extends Controller
     public function show(Resource $resource, Identifier $identifier)
     {
         $qrCode = QrCode::style('round')
-            ->eyeColor(0, 220, 38, 38, 0, 0, 0)
-            ->size(200)
-            ->generate('hydrofon:'.$identifier->value);
+                        ->eyeColor(0, 220, 38, 38, 0, 0, 0)
+                        ->size(200)
+                        ->generate('hydrofon:'.$identifier->value);
 
         return view('identifiers.show')->with([
             'resource' => $resource,

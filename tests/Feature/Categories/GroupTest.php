@@ -24,13 +24,13 @@ class GroupTest extends TestCase
         $category = Category::factory()->make();
 
         $this->actingAs($admin)->post('categories', [
-            'name'   => $category->name,
+            'name' => $category->name,
             'groups' => [$group->id],
         ]);
 
         $this->assertDatabaseHas('category_group', [
             'category_id' => 1,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
     }
 
@@ -45,7 +45,7 @@ class GroupTest extends TestCase
         $category = Category::factory()->make();
 
         $response = $this->actingAs($admin)->post('categories', [
-            'name'   => $category->name,
+            'name' => $category->name,
             'groups' => [100],
         ]);
 
@@ -67,13 +67,13 @@ class GroupTest extends TestCase
         $category = Category::factory()->create();
 
         $this->actingAs($admin)->put('categories/'.$category->id, [
-            'name'   => 'New Category Name',
+            'name' => 'New Category Name',
             'groups' => [$group->id],
         ]);
 
         $this->assertDatabaseHas('category_group', [
             'category_id' => $category->id,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
     }
 
@@ -92,17 +92,17 @@ class GroupTest extends TestCase
 
         $this->assertDatabaseHas('category_group', [
             'category_id' => $category->id,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
 
         $this->actingAs($admin)->put('categories/'.$category->id, [
-            'name'   => 'New Category Name',
+            'name' => 'New Category Name',
             'groups' => [],
         ]);
 
         $this->assertDatabaseMissing('category_group', [
             'category_id' => $category->id,
-            'group_id'    => $group->id,
+            'group_id' => $group->id,
         ]);
     }
 
@@ -117,7 +117,7 @@ class GroupTest extends TestCase
         $category = Category::factory()->create();
 
         $response = $this->actingAs($admin)->put('categories/'.$category->id, [
-            'name'   => 'New Category Name',
+            'name' => 'New Category Name',
             'groups' => [100],
         ]);
 

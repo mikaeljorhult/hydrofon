@@ -30,10 +30,10 @@ class ProfileController extends Controller
 
         return view('profile.index')
             ->with([
-                'user'     => $user,
-                'latest'   => $latest,
+                'user' => $user,
+                'latest' => $latest,
                 'upcoming' => $upcoming,
-                'overdue'  => $overdue,
+                'overdue' => $overdue,
             ]);
     }
 

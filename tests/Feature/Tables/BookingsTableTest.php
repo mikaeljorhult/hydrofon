@@ -4,7 +4,6 @@ namespace Tests\Feature\Tables;
 
 use App\Http\Livewire\BookingsTable;
 use App\Models\Booking;
-use App\Models\Checkin;
 use App\Models\Group;
 use App\Models\Resource;
 use App\Models\User;
@@ -162,8 +161,8 @@ class BookingsTableTest extends TestCase
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $items[0]->resource_id,
-            'start_time'  => $items[0]->start_time,
-            'end_time'    => $items[0]->end_time,
+            'start_time' => $items[0]->start_time,
+            'end_time' => $items[0]->end_time,
         ]);
     }
 

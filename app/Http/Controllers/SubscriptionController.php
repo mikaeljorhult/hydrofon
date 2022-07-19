@@ -39,7 +39,7 @@ class SubscriptionController extends Controller
     {
         Subscription::firstOrCreate([
             'subscribable_type' => 'App\\Models\\'.Str::ucfirst($request->get('subscribable_type')),
-            'subscribable_id'   => $request->get('subscribable_id'),
+            'subscribable_id' => $request->get('subscribable_id'),
         ]);
 
         flash('Subscription was created');

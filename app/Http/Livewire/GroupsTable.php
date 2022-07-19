@@ -20,8 +20,8 @@ class GroupsTable extends BaseTable
         $this->authorize('update', $item);
 
         $validatedData = $this->validate([
-            'editValues.name'        => ['required'],
-            'editValues.approvers'   => ['nullable', 'array'],
+            'editValues.name' => ['required'],
+            'editValues.approvers' => ['nullable', 'array'],
             'editValues.approvers.*' => [Rule::exists('users', 'id')],
         ])['editValues'];
 

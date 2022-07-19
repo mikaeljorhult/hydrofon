@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::factory()->admin()->create([
-            'name'     => 'Default User',
-            'email'    => 'default@hydrofon.se',
+            'name' => 'Default User',
+            'email' => 'default@hydrofon.se',
             'password' => bcrypt('default'),
         ]);
 

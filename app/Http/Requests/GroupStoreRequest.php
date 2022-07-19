@@ -29,7 +29,7 @@ class GroupStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => ['required'],
+            'name' => ['required'],
             'approvers.*' => [Rule::exists('users', 'id')],
         ];
     }

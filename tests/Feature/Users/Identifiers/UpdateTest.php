@@ -73,7 +73,7 @@ class UpdateTest extends TestCase
         $response->assertSessionHasErrors('value');
         $this->assertDatabaseHas('identifiers', [
             'value' => 'test-value',
-            'id'    => $identifier->id,
+            'id' => $identifier->id,
         ]);
     }
 
@@ -96,7 +96,7 @@ class UpdateTest extends TestCase
         $response->assertSessionHasErrors('value');
         $this->assertDatabaseHas('identifiers', [
             'value' => 'test-value',
-            'id'    => $identifier->id,
+            'id' => $identifier->id,
         ]);
     }
 

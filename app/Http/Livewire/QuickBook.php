@@ -24,10 +24,10 @@ class QuickBook extends Component
     public function mount()
     {
         $this->fill([
-            'start_time'         => now()->minutes(0)->format('Y-m-d H:i'),
-            'end_time'           => now()->minutes(0)->addHours(2)->format('Y-m-d H:i'),
-            'resource_id'        => null,
-            'user_id'            => auth()->id(),
+            'start_time' => now()->minutes(0)->format('Y-m-d H:i'),
+            'end_time' => now()->minutes(0)->addHours(2)->format('Y-m-d H:i'),
+            'resource_id' => null,
+            'user_id' => auth()->id(),
             'availableResources' => collect(),
         ]);
     }
@@ -45,14 +45,14 @@ class QuickBook extends Component
     public function book()
     {
         $validated = $this->validate([
-            'user_id'     => ['sometimes', 'nullable', Rule::exists('users', 'id')],
+            'user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'resource_id' => [
                 'required',
                 Rule::exists('resources', 'id'),
                 new Available($this->start_time, $this->end_time),
             ],
-            'start_time'  => ['required', 'date', 'required_with:resource_id', 'before:end_time'],
-            'end_time'    => ['required', 'date', 'required_with:resource_id', 'after:start_time'],
+            'start_time' => ['required', 'date', 'required_with:resource_id', 'before:end_time'],
+            'end_time' => ['required', 'date', 'required_with:resource_id', 'after:start_time'],
         ]);
 
         Booking::create($validated);

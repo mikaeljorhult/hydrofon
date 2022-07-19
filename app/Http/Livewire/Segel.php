@@ -19,7 +19,9 @@ class Segel extends Component
     public $resources;
 
     public $start;
+
     public $end;
+
     public $duration;
 
     public $dateString;
@@ -101,21 +103,21 @@ class Segel extends Component
         $this->authorize('create', Booking::class);
 
         $this->values = [
-            'user_id'     => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : auth()->id(),
+            'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : auth()->id(),
             'resource_id' => $values['resource_id'],
-            'start_time'  => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
-            'end_time'    => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
+            'start_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
+            'end_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
 
         $validated = $this->validate([
-            'values.user_id'     => ['sometimes', 'nullable', Rule::exists('users', 'id')],
+            'values.user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'values.resource_id' => ['required', 'array'],
             'values.resource_id.*' => [
                 Rule::exists('resources', 'id'),
                 new Available($this->values['start_time'], $this->values['end_time'], 0, 'resource_id'),
             ],
-            'values.start_time'  => ['required', 'date', 'required_with:values.resource_id', 'before:values.end_time'],
-            'values.end_time'    => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
+            'values.start_time' => ['required', 'date', 'required_with:values.resource_id', 'before:values.end_time'],
+            'values.end_time' => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
         ])['values'];
 
         $bookings = collect($validated['resource_id'])
@@ -146,21 +148,21 @@ class Segel extends Component
         $this->authorize('update', $booking);
 
         $this->values = [
-            'user_id'     => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : $booking->user_id,
+            'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : $booking->user_id,
             'resource_id' => isset($values['resource_id']) ? $values['resource_id'] : $booking->resource_id,
-            'start_time'  => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
-            'end_time'    => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
+            'start_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
+            'end_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
 
         $validatedValues = $this->validate([
-            'values.user_id'     => ['sometimes', 'nullable', Rule::exists('users', 'id')],
+            'values.user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'values.resource_id' => [
                 'required',
                 Rule::exists('resources', 'id'),
                 new Available($this->values['start_time'], $this->values['end_time'], $booking->id, 'resource_id'),
             ],
-            'values.start_time'  => ['required', 'date', 'required_with:values.resource_id', 'before:values.end_time'],
-            'values.end_time'    => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
+            'values.start_time' => ['required', 'date', 'required_with:values.resource_id', 'before:values.end_time'],
+            'values.end_time' => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
         ])['values'];
 
         $booking->update($validatedValues);
@@ -208,11 +210,11 @@ class Segel extends Component
         $this->setGrid($start, $this->type);
 
         $this->emit('dateChanged', [
-            'date'       => $this->dateString,
-            'start'      => $this->start,
-            'end'        => $this->end,
-            'duration'   => $this->duration,
-            'url'        => route('calendar', [$start->format('Y-m-d')]),
+            'date' => $this->dateString,
+            'start' => $this->start,
+            'end' => $this->end,
+            'duration' => $this->duration,
+            'url' => route('calendar', [$start->format('Y-m-d')]),
         ]);
     }
 }
