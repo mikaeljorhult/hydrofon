@@ -1,0 +1,48 @@
+export default () => ({
+    messages: [],
+
+    base: {
+        ['x-on:notify.window'] (event) {
+            let message = {
+                title: event.detail.title,
+                body: event.detail.body,
+                visible: false,
+            };
+
+            this.messages.push(message);
+
+            // Show message after it has been added to array.
+            setTimeout(() => {
+                this.show(message)
+            }, 10);
+
+            // Hide message automatically after 3 seconds.
+            setTimeout(() => {
+                this.hide(message)
+            }, 3000);
+        },
+    },
+
+    show (message) {
+        this.messages[this.getMessageIndex(message)].visible = true;
+    },
+
+    hide (message) {
+        const index = this.getMessageIndex(message);
+
+        if (index > -1) {
+            this.messages[index].visible = false;
+
+            // Remove message once hidden.
+            setTimeout(() => {
+                this.messages.splice(index, 1);
+            }, 500);
+        }
+    },
+
+    getMessageIndex (message) {
+        return this.messages.findIndex(object => {
+            return object.title === message.title;
+        })
+    },
+})

@@ -29,6 +29,8 @@
             @include('flash::message')
             @yield('content')
         </main>
+
+        <x-flaggspel />
     </div>
 
     @vite('resources/js/app.js')
