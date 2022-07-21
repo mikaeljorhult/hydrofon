@@ -26,7 +26,6 @@
 
         <main class="main-content h-full flex-grow overflow-y-scroll overflow-x-hidden">
             @include('partials/topbar')
-            @include('flash::message')
             @yield('content')
         </main>
 

@@ -50,3 +50,17 @@
         </template>
     </div>
 </div>
+
+@push('scripts')
+    @if(flash()->message)
+        <script>
+            document.addEventListener('alpine:initialized', () => {
+                window.dispatchEvent(new CustomEvent('notify', {
+                    detail: {
+                        'title': @json(flash()->message),
+                    }
+                }));
+            });
+        </script>
+    @endif
+@endpush

@@ -16,10 +16,10 @@ export default () => ({
                 this.show(message)
             }, 10);
 
-            // Hide message automatically after 3 seconds.
+            // Hide message automatically after 4 seconds.
             setTimeout(() => {
                 this.hide(message)
-            }, 3000);
+            }, 4000);
         },
     },
 
