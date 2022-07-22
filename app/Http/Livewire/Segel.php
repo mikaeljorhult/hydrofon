@@ -9,6 +9,7 @@ use App\Rules\Available;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -104,7 +105,7 @@ class Segel extends Component
 
         $this->values = [
             'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : auth()->id(),
-            'resource_id' => $values['resource_id'],
+            'resource_id' => Arr::wrap($values['resource_id']),
             'start_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
             'end_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
