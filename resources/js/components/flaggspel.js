@@ -1,9 +1,12 @@
 export default () => ({
     messages: [],
 
+    counter: 0,
+
     base: {
         ['x-on:notify.window'] (event) {
             let message = {
+                id: ++this.counter,
                 title: event.detail.title,
                 body: event.detail.body,
                 visible: false,
@@ -42,7 +45,7 @@ export default () => ({
 
     getMessageIndex (message) {
         return this.messages.findIndex(object => {
-            return object.title === message.title;
+            return object.id === message.id;
         })
     },
 })

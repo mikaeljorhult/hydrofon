@@ -4,7 +4,7 @@
     x-bind="base"
 >
     <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
-        <template x-for="(message, index) in messages" :key="index" hidden>
+        <template x-for="message in messages" :key="message.id" hidden>
             <div
                 class="max-w-sm w-full bg-white shadow-md rounded pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
                 x-transition:enter="transition transform ease-out duration-300"
