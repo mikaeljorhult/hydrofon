@@ -38,8 +38,8 @@ export default (initialState) => ({
                 'createbooking', {
                     detail: {
                         resource_id: this.selected,
-                        start_time: new Date(this.start_time).getTime() / 1000,
-                        end_time: new Date(this.end_time).getTime() / 1000,
+                        start_time: (new Date(this.start_time).getTime() - (new Date().getTimezoneOffset() * 60 * 1000)) / 1000,
+                        end_time: (new Date(this.end_time).getTime() - (new Date().getTimezoneOffset() * 60 * 1000)) / 1000,
                     }
                 }
             ));
