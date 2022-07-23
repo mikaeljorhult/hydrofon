@@ -9,6 +9,7 @@ export default () => ({
                 id: ++this.counter,
                 title: event.detail.title,
                 body: event.detail.body,
+                level: event.detail.level ?? 'success',
                 visible: false,
             };
 

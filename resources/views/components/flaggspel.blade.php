@@ -18,7 +18,15 @@
                 <div class="p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
-                            <x-heroicon-o-check-circle class="h-6 w-6 text-green-400" />
+                            <x-heroicon-o-check-circle
+                                class="h-6 w-6 text-green-600"
+                                x-show="message.level === 'success'"
+                            />
+
+                            <x-heroicon-o-x-circle
+                                class="h-6 w-6 text-red-600"
+                                x-show="message.level === 'error'"
+                            />
                         </div>
 
                         <div class="ml-3 w-0 flex-1 pt-0.5">
