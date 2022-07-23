@@ -35,10 +35,28 @@ class Segel extends Component
 
     public $values;
 
+    private $lastEditAction = null;
+
     public function mount($resources, $date)
     {
         $this->resources = $resources;
         $this->setGrid($date, 'day');
+    }
+
+    public function dehydrate()
+    {
+        // Dispatch error notification if it originates from create or update action.
+        if ($this->errorBag->isNotEmpty() && $this->lastEditAction) {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => $this->lastEditAction === 'createBooking'
+                    ? 'Booking could not be created'
+                    : 'Booking could not be updated',
+                'body' => $this->errorBag->first(),
+                'level' => 'error',
+            ]);
+
+            $this->lastEditAction = null;
+        }
     }
 
     public function render()
@@ -103,6 +121,8 @@ class Segel extends Component
     {
         $this->authorize('create', Booking::class);
 
+        $this->lastEditAction = 'createBooking';
+
         $this->values = [
             'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : auth()->id(),
             'resource_id' => Arr::wrap($values['resource_id']),
@@ -141,12 +161,26 @@ class Segel extends Component
         Booking::insert($bookings->toArray());
 
         $this->values = [];
+
+        if ($bookings->count() === 1) {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Booking was created',
+                'body' => 'The booking was created successfully.',
+            ]);
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Bookings was created',
+                'body' => $bookings->count().' bookings was created successfully.',
+            ]);
+        }
     }
 
     public function updateBooking($values)
     {
         $booking = Booking::findOrFail($values['id']);
         $this->authorize('update', $booking);
+
+        $this->lastEditAction = 'updateBooking';
 
         $this->values = [
             'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : $booking->user_id,
@@ -169,6 +203,11 @@ class Segel extends Component
         $booking->update($validatedValues);
 
         $this->values = [];
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Booking was updated',
+            'body' => 'The booking was updated successfully.',
+        ]);
     }
 
     public function deleteBooking($values)
@@ -177,6 +216,11 @@ class Segel extends Component
         $this->authorize('delete', $booking);
 
         $booking->delete();
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Booking was deleted',
+            'body' => 'The booking was deleted successfully.',
+        ]);
     }
 
     private function getResources()
