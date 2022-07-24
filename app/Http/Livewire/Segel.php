@@ -142,9 +142,9 @@ class Segel extends Component
         ])['values'];
 
         $bookings = collect($validated['resource_id'])
-            ->map(function ($value) use ($validated) {
+            ->each(function ($resource) use ($validated) {
                 $booking = [
-                    'resource_id' => $value,
+                    'resource_id' => $resource,
                     'start_time' => $validated['start_time'],
                     'end_time' => $validated['end_time'],
                     'created_at' => now(),
@@ -155,10 +155,8 @@ class Segel extends Component
                     $booking['user_id'] = $validated['user_id'];
                 }
 
-                return $booking;
+                Booking::create($booking);
             });
-
-        Booking::insert($bookings->toArray());
 
         $this->values = [];
 
