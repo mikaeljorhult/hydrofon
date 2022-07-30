@@ -21,6 +21,8 @@ class QuickBook extends Component
 
     public $availableResources;
 
+    private $notificationSent;
+
     public function mount()
     {
         $this->fill([
@@ -32,9 +34,18 @@ class QuickBook extends Component
         ]);
     }
 
-    public function render()
+    public function dehydrate()
     {
-        return view('livewire.quick-book');
+        // Dispatch error notification if validation failed.
+        if ($this->errorBag->isNotEmpty() && $this->notificationSent === false) {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Booking could not be created',
+                'body' => $this->errorBag->first(),
+                'level' => 'error',
+            ]);
+
+            $this->notificationSent = true;
+        }
     }
 
     public function loadResources()
@@ -44,6 +55,8 @@ class QuickBook extends Component
 
     public function book()
     {
+        $this->notificationSent = false;
+
         $validated = $this->validate([
             'user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'resource_id' => [
@@ -56,6 +69,12 @@ class QuickBook extends Component
         ]);
 
         Booking::create($validated);
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Booking was created',
+            'body' => 'The booking was created successfully.',
+            'level' => 'success',
+        ]);
     }
 
     private function getAvailableResources()

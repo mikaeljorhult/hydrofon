@@ -21,7 +21,7 @@ class QuickbookTest extends TestCase
      */
     public function testComponentIsRendered()
     {
-        $resource = Resource::factory()->create();
+        Resource::factory()->create();
 
         Livewire::test(QuickBook::class)
                 ->assertSee('Quick Book')
@@ -70,7 +70,10 @@ class QuickbookTest extends TestCase
                 ->test(QuickBook::class)
                 ->call('loadResources')
                 ->set('resource_id', $resource->id)
-                ->call('book');
+                ->call('book')
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -91,7 +94,10 @@ class QuickbookTest extends TestCase
                 ->set('end_time', '')
                 ->set('resource_id', '')
                 ->call('book')
-                ->assertHasErrors(['start_time', 'end_time', 'resource_id']);
+                ->assertHasErrors(['start_time', 'end_time', 'resource_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseCount(Booking::class, 0);
     }
@@ -112,7 +118,31 @@ class QuickbookTest extends TestCase
                 ->set('end_time', now()->subHour())
                 ->set('resource_id', $resource->id)
                 ->call('book')
-                ->assertHasErrors(['end_time']);
+                ->assertHasErrors(['end_time'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
+
+        $this->assertDatabaseCount(Booking::class, 0);
+    }
+
+    /**
+     * Resource must exist.
+     *
+     * @return void
+     */
+    public function testResourceMustExist()
+    {
+        Livewire::actingAs(User::factory()->create())
+                ->test(QuickBook::class)
+                ->set('start_time', now())
+                ->set('end_time', now()->addHour())
+                ->set('resource_id', 100)
+                ->call('book')
+                ->assertHasErrors(['resource_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseCount(Booking::class, 0);
     }
@@ -124,14 +154,51 @@ class QuickbookTest extends TestCase
      */
     public function testResourceMustBeAvailable()
     {
+        $booking = Booking::factory()->current()->createQuietly();
+
         Livewire::actingAs(User::factory()->create())
                 ->test(QuickBook::class)
                 ->set('start_time', now())
                 ->set('end_time', now()->addHour())
+                ->set('resource_id', $booking->resource_id)
+                ->call('book')
+                ->assertHasErrors(['resource_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
+
+        $this->assertDatabaseCount(Booking::class, 1);
+    }
+
+    /**
+     * Error notifications are reset on next request.
+     *
+     * @return void
+     */
+    public function testErrorNotificationsAreReset()
+    {
+        $resource = Resource::factory()->create();
+
+        Livewire::actingAs(User::factory()->create())
+                ->test(QuickBook::class)
+                ->set('start_time', now())
+                ->set('end_time', now()->addHour())
+
+                // Error on missing resource.
                 ->set('resource_id', 100)
                 ->call('book')
-                ->assertHasErrors(['resource_id']);
+                ->assertHasErrors(['resource_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                })
 
-        $this->assertDatabaseCount(Booking::class, 0);
+                // Successful on existing resource.
+                ->set('resource_id', $resource->id)
+                ->call('book')
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
+
+        $this->assertDatabaseCount(Booking::class, 1);
     }
 }
