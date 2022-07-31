@@ -52,7 +52,10 @@ class ApprovalsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->emit('approve', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isApproved);
     }
@@ -78,7 +81,10 @@ class ApprovalsTableTest extends TestCase
         Livewire::actingAs($approver)
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->emit('approve', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isApproved);
     }
@@ -130,7 +136,10 @@ class ApprovalsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->emit('reject', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isRejected);
     }
@@ -156,7 +165,10 @@ class ApprovalsTableTest extends TestCase
         Livewire::actingAs($approver)
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->emit('reject', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isRejected);
     }
@@ -202,7 +214,10 @@ class ApprovalsTableTest extends TestCase
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
                 ->emit('approve', null, true)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertFalse($items[0]->fresh()->isApproved);
     }
@@ -222,7 +237,10 @@ class ApprovalsTableTest extends TestCase
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
                 ->emit('reject', null, true)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertFalse($items[0]->fresh()->isRejected);
     }

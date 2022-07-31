@@ -30,22 +30,24 @@
                     </td>
 
                     <td data-title="&nbsp;" class="flex justify-end">
-                        <button
-                            class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
-                            form="approveform-{{ $item->id }}"
-                            type="submit"
-                            title="Approve"
-                            wire:click.prevent="$emit('approve', {{ $item->id }})"
-                            wire:loading.attr="disabled"
-                        ><x-heroicon-s-check class="w-4 h-4 fill-current" /></button>
+                        @if($item->isPending)
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
+                                form="approveform-{{ $item->id }}"
+                                type="submit"
+                                title="Approve"
+                                wire:click.prevent="$emit('approve', {{ $item->id }})"
+                                wire:loading.attr="disabled"
+                            ><x-heroicon-s-check class="w-4 h-4 fill-current" /></button>
 
-                        <button
-                            class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
-                            type="submit"
-                            title="Reject"
-                            wire:click.prevent="$emit('reject', {{ $item->id }})"
-                            wire:loading.attr="disabled"
-                        ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+                            <button
+                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
+                                type="submit"
+                                title="Reject"
+                                wire:click.prevent="$emit('reject', {{ $item->id }})"
+                                wire:loading.attr="disabled"
+                            ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+                        @endif
 
                         <button
                             class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"

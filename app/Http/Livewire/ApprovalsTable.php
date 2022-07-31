@@ -44,6 +44,34 @@ class ApprovalsTable extends BaseTable
                     $this->authorize('approve', $item);
                 })
                 ->each->approve();
+
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking approved',
+                    'body' => 'The booking was approved.',
+                    'level' => 'success',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings approved',
+                    'body' => $items->count().' bookings was approved.',
+                    'level' => 'success',
+                ]);
+            }
+        } else {
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking not approved',
+                    'body' => 'The booking could not be approved.',
+                    'level' => 'error',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings not approved',
+                    'body' => 'One or more of the selected bookings could not be approved',
+                    'level' => 'error',
+                ]);
+            }
         }
 
         $this->refreshItems($itemsToApprove);
@@ -61,6 +89,34 @@ class ApprovalsTable extends BaseTable
                     $this->authorize('approve', $item);
                 })
                 ->each->reject();
+
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking rejected',
+                    'body' => 'The booking was rejected.',
+                    'level' => 'success',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings rejected',
+                    'body' => $items->count().' bookings was rejected.',
+                    'level' => 'success',
+                ]);
+            }
+        } else {
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking not rejected',
+                    'body' => 'The booking could not be rejected.',
+                    'level' => 'error',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings not rejected',
+                    'body' => 'One or more of the selected bookings could not be rejected',
+                    'level' => 'error',
+                ]);
+            }
         }
 
         $this->refreshItems($itemsToReject);
