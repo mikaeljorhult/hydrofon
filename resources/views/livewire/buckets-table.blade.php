@@ -15,7 +15,7 @@
                             />
 
                             @error('editValues.name')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="&nbsp;" class="text-right">

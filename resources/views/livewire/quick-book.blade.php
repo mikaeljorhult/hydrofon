@@ -52,7 +52,7 @@
                         x-ref="start_time"
                     />
                     @error('start_time')
-                        <div class="error p-1 text-xs text-red-600">{{ $message }}</div>
+                        <x-forms.error :message="$message" />
                     @enderror
                 </div>
 
@@ -66,7 +66,7 @@
                         x-ref="end_time"
                     />
                     @error('end_time')
-                        <div class="error p-1 text-xs text-red-600">{{ $message }}</div>
+                        <x-forms.error :message="$message" />
                     @enderror
                 </div>
 
@@ -81,7 +81,7 @@
                         x-model="resource_id"
                     ></x-forms.select>
                     @error('resource_id')
-                        <div class="error p-1 text-xs text-red-600">{{ $message }}</div>
+                        <x-forms.error :message="$message" />
                     @enderror
                 </div>
 

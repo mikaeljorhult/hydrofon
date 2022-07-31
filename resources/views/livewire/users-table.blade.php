@@ -16,7 +16,7 @@
                             />
 
                             @error('editValues.email')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="Name">
@@ -27,7 +27,7 @@
                             />
 
                             @error('editValues.name')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="Administrator" class="text-center">
@@ -38,7 +38,7 @@
                             />
 
                             @error('editValues.is_admin')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="&nbsp;" class="text-right">

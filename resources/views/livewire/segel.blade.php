@@ -178,7 +178,7 @@
                         x-ref="start_time"
                     />
                     @error('start_time')
-                        <div class="error">{{ $message }}</div>
+                        <x-forms.error :message="$message" />
                     @enderror
                 </div>
 
@@ -192,7 +192,7 @@
                         x-ref="end_time"
                     />
                     @error('end_time')
-                        <div class="error">{{ $message }}</div>
+                        <x-forms.error :message="$message" />
                     @enderror
                 </div>
 

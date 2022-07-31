@@ -15,7 +15,7 @@
                             />
 
                             @error('editValues.resource_id')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="Start">
@@ -28,7 +28,7 @@
                             </div>
 
                             @error('editValues.start_time')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="End">
@@ -41,7 +41,7 @@
                             </div>
 
                             @error('editValues.end_time')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         @if(config('hydrofon.require_approval') !== 'none')

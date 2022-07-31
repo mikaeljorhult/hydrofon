@@ -15,7 +15,7 @@
                             />
 
                             @error('editValues.name')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="Description">
@@ -26,7 +26,7 @@
                             >{{ $item->description }}</x-forms.textarea>
 
                             @error('editValues.description')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="Facility" class="text-center">
@@ -37,7 +37,7 @@
                             />
 
                             @error('editValues.is_facility')
-                                <span class="error">{{ $message }}</span>
+                                <x-forms.error :message="$message" />
                             @enderror
                         </td>
                         <td data-title="&nbsp;" class="text-right">
