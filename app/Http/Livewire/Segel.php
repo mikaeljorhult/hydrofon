@@ -207,6 +207,7 @@ class Segel extends Component
         $this->dispatchBrowserEvent('notify', [
             'title' => 'Booking was updated',
             'body' => 'The booking was updated successfully.',
+            'level' => 'success',
         ]);
     }
 
