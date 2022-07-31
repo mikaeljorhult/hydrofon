@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 use Livewire\Component;
 
 class Segel extends Component
@@ -35,28 +36,10 @@ class Segel extends Component
 
     public $values;
 
-    private $lastEditAction = null;
-
     public function mount($resources, $date)
     {
         $this->resources = $resources;
         $this->setGrid($date, 'day');
-    }
-
-    public function dehydrate()
-    {
-        // Dispatch error notification if it originates from create or update action.
-        if ($this->errorBag->isNotEmpty() && $this->lastEditAction) {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => $this->lastEditAction === 'createBooking'
-                    ? 'Booking could not be created'
-                    : 'Booking could not be updated',
-                'body' => $this->errorBag->first(),
-                'level' => 'error',
-            ]);
-
-            $this->lastEditAction = null;
-        }
     }
 
     public function render()
@@ -121,8 +104,6 @@ class Segel extends Component
     {
         $this->authorize('create', Booking::class);
 
-        $this->lastEditAction = 'createBooking';
-
         $this->values = [
             'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : auth()->id(),
             'resource_id' => Arr::wrap($values['resource_id']),
@@ -130,7 +111,17 @@ class Segel extends Component
             'end_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
 
-        $validated = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Booking could not be created',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'values.user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'values.resource_id' => ['required', 'array'],
             'values.resource_id.*' => [
@@ -180,16 +171,24 @@ class Segel extends Component
         $booking = Booking::findOrFail($values['id']);
         $this->authorize('update', $booking);
 
-        $this->lastEditAction = 'updateBooking';
-
         $this->values = [
             'user_id' => auth()->user()->isAdmin() && isset($values['user_id']) ? $values['user_id'] : $booking->user_id,
-            'resource_id' => isset($values['resource_id']) ? $values['resource_id'] : $booking->resource_id,
+            'resource_id' => $values['resource_id'] ?? $booking->resource_id,
             'start_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['start_time'])),
             'end_time' => Carbon::createFromTimestamp($this->roundTimestamp($values['end_time'])),
         ];
 
-        $validatedValues = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Booking could not be updated',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'values.user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'values.resource_id' => [
                 'required',
@@ -200,7 +199,7 @@ class Segel extends Component
             'values.end_time' => ['required', 'date', 'required_with:values.resource_id', 'after:values.start_time'],
         ])['values'];
 
-        $booking->update($validatedValues);
+        $booking->update($validated);
 
         $this->values = [];
 

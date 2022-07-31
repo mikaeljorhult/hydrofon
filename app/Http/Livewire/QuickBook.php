@@ -7,6 +7,7 @@ use App\Models\Resource;
 use App\Rules\Available;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 use Livewire\Component;
 
 class QuickBook extends Component
@@ -21,8 +22,6 @@ class QuickBook extends Component
 
     public $availableResources;
 
-    private $notificationSent;
-
     public function mount()
     {
         $this->fill([
@@ -34,20 +33,6 @@ class QuickBook extends Component
         ]);
     }
 
-    public function dehydrate()
-    {
-        // Dispatch error notification if validation failed.
-        if ($this->errorBag->isNotEmpty() && $this->notificationSent === false) {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Booking could not be created',
-                'body' => $this->errorBag->first(),
-                'level' => 'error',
-            ]);
-
-            $this->notificationSent = true;
-        }
-    }
-
     public function loadResources()
     {
         $this->availableResources = $this->getAvailableResources();
@@ -55,9 +40,17 @@ class QuickBook extends Component
 
     public function book()
     {
-        $this->notificationSent = false;
-
-        $validated = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Booking could not be created',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],
             'resource_id' => [
                 'required',
