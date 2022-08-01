@@ -59,7 +59,10 @@ class UsersTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated User')
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(User::class, [
             'name' => 'Updated User',
@@ -102,7 +105,10 @@ class UsersTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.groups', [$group->id])
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->groups()->count());
     }
@@ -121,7 +127,10 @@ class UsersTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.groups', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.groups.*']);
+                ->assertHasErrors(['editValues.groups.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->groups()->count());
     }
@@ -144,7 +153,10 @@ class UsersTableTest extends TestCase
                 ->assertHasErrors([
                     'editValues.name',
                     'editValues.email',
-                ]);
+                ])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(User::class, [
             'name' => $items[0]->name,

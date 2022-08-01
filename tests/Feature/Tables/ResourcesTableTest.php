@@ -62,7 +62,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated Resource')
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Resource::class, [
             'name' => 'Updated Resource',
@@ -105,7 +108,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.buckets', [$bucket->id])
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->buckets()->count());
     }
@@ -125,7 +131,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.categories', [$category->id])
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->categories()->count());
     }
@@ -145,7 +154,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.groups', [$group->id])
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->groups()->count());
     }
@@ -164,7 +176,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', '')
                 ->emit('save')
-                ->assertHasErrors(['editValues.name']);
+                ->assertHasErrors(['editValues.name'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(Resource::class, [
             'name' => $items[0]->name,
@@ -185,7 +200,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.buckets', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.buckets.*']);
+                ->assertHasErrors(['editValues.buckets.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->groups()->count());
     }
@@ -204,7 +222,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.categories', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.categories.*']);
+                ->assertHasErrors(['editValues.categories.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->groups()->count());
     }
@@ -223,7 +244,10 @@ class ResourcesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.groups', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.groups.*']);
+                ->assertHasErrors(['editValues.groups.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->groups()->count());
     }

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class BucketsTable extends BaseTable
 {
@@ -19,18 +20,34 @@ class BucketsTable extends BaseTable
 
         $this->authorize('update', $item);
 
-        $validatedData = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Bucket could not be updated',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'editValues.name' => ['required'],
             'editValues.resources' => ['nullable', 'array'],
             'editValues.resources.*' => [Rule::exists('resources', 'id')],
         ])['editValues'];
 
-        $this->syncRelationship($item, $validatedData, 'resources');
+        $this->syncRelationship($item, $validated, 'resources');
 
-        $item->update($validatedData);
+        $item->update($validated);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Bucket was updated',
+            'body' => 'The bucket was updated successfully.',
+            'level' => 'success',
+        ]);
     }
 
     public function render()

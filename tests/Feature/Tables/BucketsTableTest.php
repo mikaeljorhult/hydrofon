@@ -60,7 +60,10 @@ class BucketsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated Bucket')
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Bucket::class, [
             'name' => 'Updated Bucket',
@@ -122,7 +125,10 @@ class BucketsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', '')
                 ->emit('save')
-                ->assertHasErrors(['editValues.name']);
+                ->assertHasErrors(['editValues.name'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(Bucket::class, [
             'name' => $items[0]->name,
@@ -143,7 +149,10 @@ class BucketsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.resources', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.resources.*']);
+                ->assertHasErrors(['editValues.resources.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->resources()->count());
     }

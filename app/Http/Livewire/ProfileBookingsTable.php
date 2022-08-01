@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Rules\Available;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class ProfileBookingsTable extends BaseTable
 {
@@ -43,7 +44,17 @@ class ProfileBookingsTable extends BaseTable
 
         $this->authorize('update', $item);
 
-        $validatedData = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Booking could not be updated',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'editValues.user_id' => [
                 'sometimes',
                 'nullable',
@@ -65,10 +76,16 @@ class ProfileBookingsTable extends BaseTable
             ],
         ])['editValues'];
 
-        $item->update($validatedData);
+        $item->update($validated);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Booking was updated',
+            'body' => 'The booking was updated successfully.',
+            'level' => 'success',
+        ]);
     }
 
     public function render()

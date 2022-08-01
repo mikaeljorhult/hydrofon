@@ -60,7 +60,10 @@ class CategoriesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated Category')
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Category::class, [
             'name' => 'Updated Category',
@@ -104,7 +107,10 @@ class CategoriesTableTest extends TestCase
                 ->set('editValues.parent_id', $parent->id)
                 ->emit('save')
                 ->assertHasNoErrors()
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->fresh()->parent()->count());
     }
@@ -123,7 +129,10 @@ class CategoriesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.parent_id', 100)
                 ->emit('save')
-                ->assertHasErrors(['editValues.parent_id']);
+                ->assertHasErrors(['editValues.parent_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->fresh()->parent()->count());
     }
@@ -142,7 +151,10 @@ class CategoriesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.parent_id', $items[0]->id)
                 ->emit('save')
-                ->assertHasErrors(['editValues.parent_id']);
+                ->assertHasErrors(['editValues.parent_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->fresh()->parent()->count());
     }
@@ -162,7 +174,10 @@ class CategoriesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.groups', [$group->id])
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->groups()->count());
     }
@@ -181,7 +196,10 @@ class CategoriesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.groups', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.groups.*']);
+                ->assertHasErrors(['editValues.groups.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->groups()->count());
     }
@@ -200,7 +218,10 @@ class CategoriesTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', '')
                 ->emit('save')
-                ->assertHasErrors(['editValues.name']);
+                ->assertHasErrors(['editValues.name'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(Category::class, [
             'name' => $items[0]->name,

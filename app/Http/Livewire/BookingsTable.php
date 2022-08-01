@@ -11,6 +11,7 @@ use App\States\Rejected;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class BookingsTable extends BaseTable
 {
@@ -50,7 +51,17 @@ class BookingsTable extends BaseTable
 
         $this->authorize('update', $item);
 
-        $validatedData = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Booking could not be updated',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'editValues.user_id' => [
                 'sometimes',
                 'nullable',
@@ -72,10 +83,16 @@ class BookingsTable extends BaseTable
             ],
         ])['editValues'];
 
-        $item->update($validatedData);
+        $item->update($validated);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Booking was updated',
+            'body' => 'The booking was updated successfully.',
+            'level' => 'success',
+        ]);
     }
 
     public function onCheckin($id, $multiple = false)

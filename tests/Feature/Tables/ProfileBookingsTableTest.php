@@ -61,7 +61,10 @@ class ProfileBookingsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.resource_id', $resource->id)
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -105,7 +108,10 @@ class ProfileBookingsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.resource_id', $resource->id)
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -127,7 +133,10 @@ class ProfileBookingsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.user_id', $user->id)
                 ->emit('save')
-                ->assertHasErrors(['editValues.user_id']);
+                ->assertHasErrors(['editValues.user_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseMissing(Booking::class, [
             'user_id' => $user->id,
@@ -154,7 +163,10 @@ class ProfileBookingsTableTest extends TestCase
                     'editValues.resource_id',
                     'editValues.start_time',
                     'editValues.end_time',
-                ]);
+                ])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $items[0] = $items[0]->fresh();
 
@@ -179,7 +191,10 @@ class ProfileBookingsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.resource_id', 100)
                 ->emit('save')
-                ->assertHasErrors(['editValues.resource_id']);
+                ->assertHasErrors(['editValues.resource_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $items[0]->resource_id,
@@ -200,7 +215,10 @@ class ProfileBookingsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.user_id', 100)
                 ->emit('save')
-                ->assertHasErrors(['editValues.user_id']);
+                ->assertHasErrors(['editValues.user_id'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(Booking::class, [
             'user_id' => $items[0]->user_id,

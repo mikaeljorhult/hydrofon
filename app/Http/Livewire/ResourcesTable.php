@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class ResourcesTable extends BaseTable
 {
@@ -27,7 +28,17 @@ class ResourcesTable extends BaseTable
 
         $this->authorize('update', $item);
 
-        $validatedData = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Resource could not be updated',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'editValues.name' => ['required', 'max:60'],
             'editValues.description' => ['nullable'],
             'editValues.is_facility' => ['nullable'],
@@ -39,13 +50,19 @@ class ResourcesTable extends BaseTable
             'editValues.groups.*' => [Rule::exists('groups', 'id')],
         ])['editValues'];
 
-        $this->syncRelationship($item, $validatedData, 'buckets');
-        $this->syncRelationship($item, $validatedData, 'categories');
-        $this->syncRelationship($item, $validatedData, 'groups');
-        $item->update($validatedData);
+        $this->syncRelationship($item, $validated, 'buckets');
+        $this->syncRelationship($item, $validated, 'categories');
+        $this->syncRelationship($item, $validated, 'groups');
+        $item->update($validated);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Resource was updated',
+            'body' => 'The resource was updated successfully.',
+            'level' => 'success',
+        ]);
     }
 
     public function render()

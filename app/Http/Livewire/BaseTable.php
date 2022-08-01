@@ -83,11 +83,11 @@ class BaseTable extends Component
 
         $this->authorize('update', $item);
 
-        $validatedData = $this->validate([
+        $validated = $this->validate([
             'editValues.name' => ['required'],
         ])['editValues'];
 
-        $item->update($validatedData);
+        $item->update($validated);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;

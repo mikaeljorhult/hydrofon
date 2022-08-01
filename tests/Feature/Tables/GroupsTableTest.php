@@ -59,7 +59,10 @@ class GroupsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated Group')
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertDatabaseHas(Group::class, [
             'name' => 'Updated Group',
@@ -102,7 +105,10 @@ class GroupsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.approvers', [$approver->id])
                 ->emit('save')
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertEquals(1, $items[0]->approvers()->count());
     }
@@ -121,7 +127,10 @@ class GroupsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.name', '')
                 ->emit('save')
-                ->assertHasErrors(['editValues.name']);
+                ->assertHasErrors(['editValues.name'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertDatabaseHas(Group::class, [
             'name' => $items[0]->name,
@@ -142,7 +151,10 @@ class GroupsTableTest extends TestCase
                 ->emit('edit', $items[0]->id)
                 ->set('editValues.approvers', [100])
                 ->emit('save')
-                ->assertHasErrors(['editValues.approvers.*']);
+                ->assertHasErrors(['editValues.approvers.*'])
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertEquals(0, $items[0]->approvers()->count());
     }
