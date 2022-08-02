@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Validation\Validator;
 use Livewire\Component;
 
 class BaseTable extends Component
@@ -83,7 +84,17 @@ class BaseTable extends Component
 
         $this->authorize('update', $item);
 
-        $validated = $this->validate([
+        $validated = $this->withValidator(function (Validator $validator) {
+            $validator->after(function (Validator $validator) {
+                if ($validator->errors()->any()) {
+                    $this->dispatchBrowserEvent('notify', [
+                        'title' => 'Item could not be updated',
+                        'body' => $validator->errors()->first(),
+                        'level' => 'error',
+                    ]);
+                }
+            });
+        })->validate([
             'editValues.name' => ['required'],
         ])['editValues'];
 
@@ -91,15 +102,20 @@ class BaseTable extends Component
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
+
+        $this->dispatchBrowserEvent('notify', [
+            'title' => 'Item was updated',
+            'body' => 'The item was updated successfully.',
+            'level' => 'success',
+        ]);
     }
 
     public function onDelete($id, $multiple = false)
     {
         $itemsToDelete = $multiple ? $this->selectedRows : [$id];
 
-        $items = $this->items->find($itemsToDelete);
-
-        $items
+        $items = $this->items
+            ->find($itemsToDelete)
             ->each(function ($item, $key) {
                 $this->authorize('delete', $item);
             })
@@ -108,6 +124,20 @@ class BaseTable extends Component
             });
 
         $this->removeItems($itemsToDelete);
+
+        if ($items->count() === 1) {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Item was deleted',
+                'body' => 'The item was deleted successfully.',
+                'level' => 'success',
+            ]);
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Items were deleted',
+                'body' => $items->count().' items were deleted successfully.',
+                'level' => 'success',
+            ]);
+        }
     }
 
     protected function refreshItems($ids = [])

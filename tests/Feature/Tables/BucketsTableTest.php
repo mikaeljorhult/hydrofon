@@ -169,7 +169,10 @@ class BucketsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BucketsTable::class, ['items' => $items])
                 ->emit('delete', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertModelMissing($items[0]);
     }
