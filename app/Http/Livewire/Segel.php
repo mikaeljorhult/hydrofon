@@ -160,7 +160,7 @@ class Segel extends Component
         } else {
             $this->dispatchBrowserEvent('notify', [
                 'title' => 'Bookings was created',
-                'body' => $bookings->count().' bookings was created successfully.',
+                'body' => $bookings->count().' bookings were created successfully.',
                 'level' => 'success',
             ]);
         }

@@ -233,12 +233,15 @@ class BookingsTableTest extends TestCase
      */
     public function testAdministratorCanCheckoutBooking()
     {
-        $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
+        $items = Booking::factory()->current()->approved()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
                 ->emit('checkout', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isCheckedOut);
     }
@@ -255,7 +258,10 @@ class BookingsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
                 ->emit('checkin', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isCheckedIn);
     }
@@ -282,7 +288,10 @@ class BookingsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
                 ->emit('approve', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isApproved);
     }
@@ -309,7 +318,10 @@ class BookingsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(BookingsTable::class, ['items' => $items])
                 ->emit('reject', $items[0]->id)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
 
         $this->assertTrue($items[0]->fresh()->isRejected);
     }
@@ -327,7 +339,10 @@ class BookingsTableTest extends TestCase
                 ->test(BookingsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
                 ->emit('checkin', null, true)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertFalse($items[0]->fresh()->isCheckedIn);
     }
@@ -345,7 +360,10 @@ class BookingsTableTest extends TestCase
                 ->test(BookingsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
                 ->emit('checkout', null, true)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertFalse($items[0]->fresh()->isCheckedOut);
     }
@@ -365,7 +383,10 @@ class BookingsTableTest extends TestCase
                 ->test(BookingsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
                 ->emit('approve', null, true)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertFalse($items[0]->fresh()->isApproved);
     }
@@ -385,7 +406,10 @@ class BookingsTableTest extends TestCase
                 ->test(BookingsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
                 ->emit('reject', null, true)
-                ->assertOk();
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
 
         $this->assertFalse($items[0]->fresh()->isRejected);
     }

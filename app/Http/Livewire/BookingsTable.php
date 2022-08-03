@@ -107,9 +107,29 @@ class BookingsTable extends BaseTable
                     $item->state->transitionTo(CheckedIn::class);
                 }
             });
-        }
 
-        $this->refreshItems($itemsToCheckin);
+            $this->refreshItems($itemsToCheckin);
+
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking was checked in',
+                    'body' => 'The booking was checked in successfully.',
+                    'level' => 'success',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings were checked in',
+                    'body' => $items->count().' bookings were checked in successfully.',
+                    'level' => 'success',
+                ]);
+            }
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Bookings not checked in',
+                'body' => 'One or more of the selected bookings could not be checked in.',
+                'level' => 'error',
+            ]);
+        }
     }
 
     public function onCheckout($id, $multiple = false)
@@ -124,9 +144,29 @@ class BookingsTable extends BaseTable
                     $item->state->transitionTo(CheckedOut::class);
                 }
             });
-        }
 
-        $this->refreshItems($itemsToCheckout);
+            $this->refreshItems($itemsToCheckout);
+
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking was checked out',
+                    'body' => 'The booking was checked out successfully.',
+                    'level' => 'success',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings were checked out',
+                    'body' => $items->count().' bookings were checked out successfully.',
+                    'level' => 'success',
+                ]);
+            }
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Bookings not checked out',
+                'body' => 'One or more of the selected bookings could not be checked out.',
+                'level' => 'error',
+            ]);
+        }
     }
 
     public function onApprove($id, $multiple = false)
@@ -141,9 +181,29 @@ class BookingsTable extends BaseTable
                     $this->authorize('approve', $item);
                 })
                 ->each->approve();
-        }
 
-        $this->refreshItems($itemsToApprove);
+            $this->refreshItems($itemsToApprove);
+
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking was approved',
+                    'body' => 'The booking was approved successfully.',
+                    'level' => 'success',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings were approved',
+                    'body' => $items->count().' bookings were approved successfully.',
+                    'level' => 'success',
+                ]);
+            }
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Bookings not approved',
+                'body' => 'One or more of the selected bookings could not be approved.',
+                'level' => 'error',
+            ]);
+        }
     }
 
     public function onReject($id, $multiple = false)
@@ -158,9 +218,29 @@ class BookingsTable extends BaseTable
                     $this->authorize('approve', $item);
                 })
                 ->each->reject();
-        }
 
-        $this->refreshItems($itemsToReject);
+            $this->refreshItems($itemsToReject);
+
+            if ($items->count() === 1) {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Booking was rejected',
+                    'body' => 'The booking was rejected successfully.',
+                    'level' => 'success',
+                ]);
+            } else {
+                $this->dispatchBrowserEvent('notify', [
+                    'title' => 'Bookings were rejected',
+                    'body' => $items->count().' bookings were rejected successfully.',
+                    'level' => 'success',
+                ]);
+            }
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Bookings not rejected',
+                'body' => 'One or more of the selected bookings could not be rejected.',
+                'level' => 'error',
+            ]);
+        }
     }
 
     public function onSwitch($id)

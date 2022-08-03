@@ -54,7 +54,7 @@ class ApprovalsTable extends BaseTable
             } else {
                 $this->dispatchBrowserEvent('notify', [
                     'title' => 'Bookings approved',
-                    'body' => $items->count().' bookings was approved.',
+                    'body' => $items->count().' bookings were approved.',
                     'level' => 'success',
                 ]);
             }
@@ -68,7 +68,7 @@ class ApprovalsTable extends BaseTable
             } else {
                 $this->dispatchBrowserEvent('notify', [
                     'title' => 'Bookings not approved',
-                    'body' => 'One or more of the selected bookings could not be approved',
+                    'body' => 'One or more of the selected bookings could not be approved.',
                     'level' => 'error',
                 ]);
             }
@@ -99,7 +99,7 @@ class ApprovalsTable extends BaseTable
             } else {
                 $this->dispatchBrowserEvent('notify', [
                     'title' => 'Bookings rejected',
-                    'body' => $items->count().' bookings was rejected.',
+                    'body' => $items->count().' bookings were rejected.',
                     'level' => 'success',
                 ]);
             }
@@ -113,7 +113,7 @@ class ApprovalsTable extends BaseTable
             } else {
                 $this->dispatchBrowserEvent('notify', [
                     'title' => 'Bookings not rejected',
-                    'body' => 'One or more of the selected bookings could not be rejected',
+                    'body' => 'One or more of the selected bookings could not be rejected.',
                     'level' => 'error',
                 ]);
             }
