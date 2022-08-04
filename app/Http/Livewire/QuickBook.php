@@ -22,6 +22,11 @@ class QuickBook extends Component
 
     public $availableResources;
 
+    protected $validationAttributes = [
+        'resource_id' => 'resource',
+        'user_id' => 'user',
+    ];
+
     public function mount()
     {
         $this->fill([

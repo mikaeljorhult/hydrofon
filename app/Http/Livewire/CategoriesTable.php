@@ -14,7 +14,11 @@ class CategoriesTable extends BaseTable
 
     protected $relationships = ['parent', 'groups'];
 
-    protected $editFields = ['id', 'name', 'parent_id'];
+    protected $editFields = [
+        'id' => 'ID',
+        'name' => 'name',
+        'parent_id' => 'parent',
+    ];
 
     public $tableDefaultSort = 'name';
 

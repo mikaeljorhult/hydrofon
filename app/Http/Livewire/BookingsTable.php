@@ -21,7 +21,13 @@ class BookingsTable extends BaseTable
 
     protected $relationships = ['resource.buckets', 'user'];
 
-    protected $editFields = ['id', 'resource_id', 'user_id', 'start_time', 'end_time'];
+    protected $editFields = [
+        'id' => 'ID',
+        'resource_id' => 'resource',
+        'user_id' => 'user',
+        'start_time' => 'start time',
+        'end_time' => 'end time',
+    ];
 
     public $tableDefaultSort = 'start_time';
 

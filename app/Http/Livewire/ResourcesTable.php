@@ -14,7 +14,12 @@ class ResourcesTable extends BaseTable
 
     protected $relationships = ['buckets', 'categories', 'groups'];
 
-    protected $editFields = ['id', 'name', 'description', 'is_facility'];
+    protected $editFields = [
+        'id' => 'ID',
+        'name' => 'name',
+        'description' => 'description',
+        'is_facility' => 'facility',
+    ];
 
     public $tableHeaders = [
         'name' => 'Name',

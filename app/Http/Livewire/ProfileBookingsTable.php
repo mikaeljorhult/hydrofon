@@ -15,7 +15,12 @@ class ProfileBookingsTable extends BaseTable
 
     protected $relationships = ['resource'];
 
-    protected $editFields = ['id', 'resource_id', 'start_time', 'end_time'];
+    protected $editFields = [
+        'id' => 'ID',
+        'resource_id' => 'resource',
+        'start_time' => 'start time',
+        'end_time' => 'end time',
+    ];
 
     public $tableDefaultSort = 'start_time';
 

@@ -14,7 +14,12 @@ class UsersTable extends BaseTable
 
     protected $relationships = ['groups'];
 
-    protected $editFields = ['id', 'email', 'name', 'is_admin'];
+    protected $editFields = [
+        'id' => 'ID',
+        'email' => 'e-mail',
+        'name' => 'name',
+        'is_admin' => 'administrator',
+    ];
 
     public $tableDefaultSort = 'email';
 

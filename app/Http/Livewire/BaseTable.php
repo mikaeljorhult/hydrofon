@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 
@@ -21,7 +22,10 @@ class BaseTable extends Component
 
     public $editValues;
 
-    protected $editFields = ['id', 'name'];
+    protected $editFields = [
+        'id' => 'ID',
+        'name' => 'name',
+    ];
 
     public $tableBaseUrl;
 
@@ -43,6 +47,7 @@ class BaseTable extends Component
 
         $this->modelInstance = app($this->model);
         $this->tableBaseUrl = url()->current();
+        $this->validationAttributes = Arr::prependKeysWith($this->editFields, 'editValues.');
     }
 
     public function mount($items, $baseUrl = null)
@@ -67,7 +72,7 @@ class BaseTable extends Component
             ? $this->modelInstance->with($this->relationships)
             : $this->modelInstance;
 
-        $item = $query->findOrFail($id, $this->editFields);
+        $item = $query->findOrFail($id, array_keys($this->editFields));
         $this->setEditValues($item);
 
         $this->isEditing = $id;
@@ -162,7 +167,7 @@ class BaseTable extends Component
 
         if (count($this->relationships) > 0) {
             foreach ($this->relationships as $relationship) {
-                if (! in_array($relationship.'_id', $this->editFields) && $item->$relationship) {
+                if (! in_array($relationship.'_id', array_keys($this->editFields)) && $item->$relationship) {
                     $this->editValues[$relationship] = $item->$relationship->pluck('id')->toArray();
                 }
             }
