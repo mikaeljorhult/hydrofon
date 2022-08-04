@@ -37,7 +37,7 @@
                                 <x-forms.input
                                     name="start_time"
                                     value="{{ $item->start_time }}"
-                                    wire:model.debounce.500ms="editValues.start_time"
+                                    wire:model.defer="editValues.start_time"
                                 />
                             </div>
 
@@ -50,7 +50,7 @@
                                 <x-forms.input
                                     name="end_time"
                                     value="{{ $item->end_time }}"
-                                    wire:model.debounce.500ms="editValues.end_time"
+                                    wire:model.defer="editValues.end_time"
                                 />
                             </div>
 
@@ -243,17 +243,15 @@
                 flatpickr(startTime, {
                     allowInput: true,
                     enableTime: true,
-                    altInput: true,
-                    altFormat: "Y-m-d H:i",
-                    dateFormat: 'Y-m-d H:i:S',
+                    altInput: false,
+                    dateFormat: 'Y-m-d H:i',
                     time_24hr: true,
                 });
                 flatpickr(endTime, {
                     allowInput: true,
                     enableTime: true,
-                    altInput: true,
-                    altFormat: "Y-m-d H:i",
-                    dateFormat: 'Y-m-d H:i:S',
+                    altInput: false,
+                    dateFormat: 'Y-m-d H:i',
                     time_24hr: true,
                 });
             });
