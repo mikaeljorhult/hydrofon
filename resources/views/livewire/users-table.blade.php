@@ -43,7 +43,6 @@
                         </td>
                         <td data-title="&nbsp;" class="text-right">
                             <x-forms.button
-                                type="link"
                                 wire:click.prevent="$emit('save')"
                                 wire:loading.attr="disabled"
                             >Save</x-forms.button>
