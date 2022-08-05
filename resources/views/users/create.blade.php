@@ -25,6 +25,7 @@
                                     name="name"
                                     value="{{ old('name') ?? null }}"
                                     placeholder="Name"
+                                    :hasErrors="$errors->has('name')"
                                 />
                             </div>
 
@@ -39,6 +40,7 @@
                                     type="email"
                                     value="{{ old('email') ?? null }}"
                                     placeholder="E-mail"
+                                    :hasErrors="$errors->has('email')"
                                 />
                             </div>
 
@@ -53,6 +55,7 @@
                                     type="password"
                                     value=""
                                     placeholder="Password"
+                                    :hasErrors="$errors->has('password')"
                                 />
                             </div>
 
@@ -67,6 +70,7 @@
                                     type="password"
                                     value=""
                                     placeholder="Confirm Password"
+                                    :hasErrors="$errors->has('password_confirmation')"
                                 />
                             </div>
 
@@ -80,6 +84,7 @@
                                     name="groups[]"
                                     :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('groups') ?? null"
+                                    :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
                             </div>

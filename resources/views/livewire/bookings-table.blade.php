@@ -14,6 +14,7 @@
                             <x-forms.select
                                 name="resource_id"
                                 :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
+                                :hasErrors="$errors->has('editValues.resource_id')"
                                 wire:model="editValues.resource_id"
                             />
 
@@ -25,6 +26,7 @@
                             <x-forms.select
                                 name="user_id"
                                 :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
+                                :hasErrors="$errors->has('editValues.user_id')"
                                 wire:model="editValues.user_id"
                             />
 
@@ -37,6 +39,7 @@
                                 <x-forms.input
                                     name="start_time"
                                     value="{{ $item->start_time }}"
+                                    :hasErrors="$errors->has('editValues.start_time')"
                                     wire:model.defer="editValues.start_time"
                                 />
                             </div>
@@ -50,6 +53,7 @@
                                 <x-forms.input
                                     name="end_time"
                                     value="{{ $item->end_time }}"
+                                    :hasErrors="$errors->has('editValues.end_time')"
                                     wire:model.defer="editValues.end_time"
                                 />
                             </div>

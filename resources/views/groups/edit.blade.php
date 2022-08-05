@@ -26,6 +26,7 @@
                                     name="name"
                                     value="{{ old('name') ?? $group->name }}"
                                     placeholder="Name"
+                                    :hasErrors="$errors->has('name')"
                                 />
                             </div>
 
@@ -40,6 +41,7 @@
                                         name="approvers[]"
                                         :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
                                         :selected="old('approvers') ?? $group->approvers->pluck('id')->toArray()"
+                                        :hasErrors="$errors->has('approvers')"
                                         multiple
                                     />
                                 </div>

@@ -26,6 +26,7 @@
                                     name="name"
                                     value="{{ old('name') ?? $resource->name }}"
                                     placeholder="Name"
+                                    :hasErrors="$errors->has('name')"
                                 />
                             </div>
 
@@ -51,6 +52,7 @@
                                     name="categories[]"
                                     :options="\App\Models\Category::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('categories') ?? $resource->categories->pluck('id')->toArray()"
+                                    :hasErrors="$errors->has('categories')"
                                     multiple
                                 />
                             </div>
@@ -65,6 +67,7 @@
                                     name="groups[]"
                                     :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('groups') ?? $resource->groups->pluck('id')->toArray()"
+                                    :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
                             </div>

@@ -25,6 +25,7 @@
                                     name="value"
                                     value="{{ old('value') ?? null }}"
                                     placeholder="Value"
+                                    :hasErrors="$errors->has('value')"
                                 />
                             </div>
                         </div>

@@ -174,6 +174,7 @@
                         id="segel-start_time"
                         name="start_time"
                         placeholder="Start Time"
+                        :hasErrors="$errors->has('editValues.start_time')"
                         x-model.lazy="start_time"
                         x-ref="start_time"
                     />
@@ -188,6 +189,7 @@
                         id="segel-end_time"
                         name="end_time"
                         placeholder="End Time"
+                        :hasErrors="$errors->has('editValues.end_time')"
                         x-model.lazy="end_time"
                         x-ref="end_time"
                     />

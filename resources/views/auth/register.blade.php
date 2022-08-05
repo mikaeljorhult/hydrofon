@@ -10,7 +10,15 @@
 
                 <div class="mb-4{{ $errors->has('name') ? ' has-error' : '' }}">
                     <x-forms.label for="name" class="sr-only">Name</x-forms.label>
-                    <x-forms.input name="name" id="name" placeholder="Name" value="{{ old('name') }}" required autofocus />
+                    <x-forms.input
+                        name="name"
+                        id="name"
+                        placeholder="Name"
+                        value="{{ old('name') }}"
+                        required
+                        autofocus
+                        :hasErrors="$errors->has('name')"
+                    />
 
                     @if ($errors->has('name'))
                         <div class="help-block">
@@ -21,7 +29,14 @@
 
                 <div class="mb-4{{ $errors->has('email') ? ' has-error' : '' }}">
                     <x-forms.label for="email" class="sr-only">E-mail</x-forms.label>
-                    <x-forms.input name="email" id="email" placeholder="E-mail" value="{{ old('email') }}" required />
+                    <x-forms.input
+                        name="email"
+                        id="email"
+                        placeholder="E-mail"
+                        value="{{ old('email') }}"
+                        required
+                        :hasErrors="$errors->has('email')"
+                    />
 
                     @if ($errors->has('email'))
                         <div class="help-block">
@@ -32,7 +47,14 @@
 
                 <div class="mb-4{{ $errors->has('password') ? ' has-error' : '' }}">
                     <x-forms.label for="password" class="sr-only">Password</x-forms.label>
-                    <x-forms.input type="password" name="password" id="password" placeholder="Password" required />
+                    <x-forms.input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        required
+                        :hasErrors="$errors->has('password')"
+                    />
 
                     @if ($errors->has('password'))
                         <div class="help-block">
@@ -43,7 +65,14 @@
 
                 <div class="mb-6">
                     <x-forms.label for="password_confirmation" class="sr-only">Confirm password</x-forms.label>
-                    <x-forms.input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required />
+                    <x-forms.input
+                        type="password"
+                        name="password_confirmation"
+                        id="password_confirmation"
+                        placeholder="Confirm password"
+                        required
+                        :hasErrors="$errors->has('password_confirmation')"
+                    />
                 </div>
 
                 <div>

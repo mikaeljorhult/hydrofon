@@ -25,6 +25,7 @@
                                     name="name"
                                     value="{{ old('name') ?? null }}"
                                     placeholder="Name"
+                                    :hasErrors="$errors->has('name')"
                                 />
                             </div>
 
@@ -50,6 +51,7 @@
                                     name="categories[]"
                                     :options="\App\Models\Category::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('categories') ?? null"
+                                    :hasErrors="$errors->has('categories')"
                                     multiple
                                 />
                             </div>
@@ -64,6 +66,7 @@
                                     name="groups[]"
                                     :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('groups') ?? null"
+                                    :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
                             </div>

@@ -26,6 +26,7 @@
                                     name="value"
                                     value="{{ old('value') ?? $identifier->value }}"
                                     placeholder="Value"
+                                    :hasErrors="$errors->has('value')"
                                 />
                             </div>
                         </div>

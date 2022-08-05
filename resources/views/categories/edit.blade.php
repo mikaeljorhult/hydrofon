@@ -26,6 +26,7 @@
                                     name="name"
                                     value="{{ old('name') ?? $category->name }}"
                                     placeholder="Name"
+                                    :hasErrors="$errors->has('name')"
                                 />
                             </div>
 
@@ -39,6 +40,7 @@
                                     name="parent_id"
                                     :options="\App\Models\Category::where('id', '!=', $category->id)->orderBy('name')->pluck('name', 'id')"
                                     :selected="old('parent_id') ?? $category->parent_id"
+                                    :hasErrors="$errors->has('parent_id')"
                                     placeholder="Select a parent..."
                                 />
                             </div>
@@ -53,6 +55,7 @@
                                     name="groups[]"
                                     :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('groups') ?? $category->groups->pluck('id')->toArray()"
+                                    :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
                             </div>

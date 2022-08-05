@@ -26,6 +26,7 @@
                                     name="name"
                                     value="{{ old('name') ?? $bucket->name }}"
                                     placeholder="Name"
+                                    :hasErrors="$errors->has('name')"
                                 />
                             </div>
 
@@ -39,6 +40,7 @@
                                     name="resources[]"
                                     :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('resources') ?? $bucket->resources->pluck('id')->toArray()"
+                                    :hasErrors="$errors->has('resources')"
                                     multiple
                                 />
                             </div>

@@ -1,4 +1,4 @@
-@props(['options' => [], 'selected' => null, 'disabled' => false])
+@props(['options' => [], 'selected' => null, 'disabled' => false, 'hasErrors' => false])
 
 <select
     @php
@@ -9,7 +9,7 @@
         $selected = \Illuminate\Support\Arr::wrap($selected);
     @endphp
 
-    {{ $attributes->merge(['class' => 'block w-full pl-3 py-2 text-base font-light border-gray-300 rounded-md focus:outline-none focus:border-gray-300 focus:ring-slate-400 sm:text-sm disabled:opacity-50']) }}
+    {{ $attributes->merge(['class' => 'block w-full pl-3 py-2 text-base font-light border-gray-300 rounded-md focus:outline-none focus:border-gray-300 focus:ring-slate-400 sm:text-sm disabled:opacity-50'.($hasErrors ? ' ring-2 ring-red-400' : '')]) }}
     {{ $disabled ? 'disabled="disabled"' : '' }}
     x-data
     x-init="$el.classList.toggle('text-gray-500', $el.value == '')"

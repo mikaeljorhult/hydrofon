@@ -16,7 +16,16 @@
 
                 <div class="mb-6{{ $errors->has('email') ? ' has-error' : '' }}">
                     <x-forms.label for="email" class="sr-only">E-mail</x-forms.label>
-                    <x-forms.input type="email" name="email" id="email" placeholder="E-mail" value="{{ old('email') }}" required autofocus />
+                    <x-forms.input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="E-mail"
+                        value="{{ old('email') }}"
+                        required
+                        autofocus
+                        :hasErrors="$errors->has('email')"
+                    />
 
                     @if ($errors->has('email'))
                         <div class="help-block">

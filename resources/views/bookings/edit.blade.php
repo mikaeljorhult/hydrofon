@@ -26,6 +26,7 @@
                                     name="resource_id"
                                     :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('resource_id') ?? $booking->resource_id"
+                                    :hasErrors="$errors->has('resource_id')"
                                 />
                             </div>
 
@@ -39,6 +40,7 @@
                                     name="user_id"
                                     :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('user_id') ?? $booking->user_id"
+                                    :hasErrors="$errors->has('user_id')"
                                 />
                             </div>
 
@@ -53,6 +55,7 @@
                                     type="datetime-local"
                                     value="{{ old('start_time') ?? $booking->start_time }}"
                                     placeholder="Start Time"
+                                    :hasErrors="$errors->has('start_time')"
                                 />
                             </div>
 
@@ -67,6 +70,7 @@
                                     type="datetime-local"
                                     value="{{ old('end_time') ?? $booking->end_time }}"
                                     placeholder="End Time"
+                                    :hasErrors="$errors->has('end_time')"
                                 />
                             </div>
                         </div>

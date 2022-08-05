@@ -25,6 +25,7 @@
                                     name="resource_id"
                                     :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('resource_id') ?? null"
+                                    :hasErrors="$errors->has('resource_id')"
                                 />
                             </div>
 
@@ -38,6 +39,7 @@
                                     name="user_id"
                                     :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
                                     :selected="old('user_id') ?? auth()->id()"
+                                    :hasErrors="$errors->has('user_id')"
                                 />
                             </div>
                         </div>
@@ -54,6 +56,7 @@
                                     type="datetime-local"
                                     value="{{ old('start_time') ?? null }}"
                                     placeholder="Start Time"
+                                    :hasErrors="$errors->has('start_time')"
                                 />
                             </div>
 
@@ -68,6 +71,7 @@
                                     type="datetime-local"
                                     value="{{ old('end_time') ?? null }}"
                                     placeholder="End Time"
+                                    :hasErrors="$errors->has('end_time')"
                                 />
                             </div>
                         </div>

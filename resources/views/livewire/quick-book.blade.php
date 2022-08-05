@@ -50,6 +50,7 @@
                         placeholder="Start Time"
                         x-model.lazy="start_time"
                         x-ref="start_time"
+                        :hasErrors="$errors->has('editValues.start_time')"
                     />
                     @error('start_time')
                         <x-forms.error :message="$message" />
@@ -64,6 +65,7 @@
                         placeholder="End Time"
                         x-model.lazy="end_time"
                         x-ref="end_time"
+                        :hasErrors="$errors->has('editValues.end_time')"
                     />
                     @error('end_time')
                         <x-forms.error :message="$message" />
@@ -77,6 +79,7 @@
                         name="resource_id"
                         :options="$this->availableResources->count() > 0 ? $this->availableResources->pluck('name', 'id') : []"
                         :selected="null"
+                        :hasErrors="$errors->has('editValues.resource_id')"
                         placeholder="Available resources"
                         x-model="resource_id"
                     ></x-forms.select>

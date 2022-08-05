@@ -11,6 +11,7 @@
                             <x-forms.input
                                 name="name"
                                 value="{{ $item->name }}"
+                                :hasErrors="$errors->has('editValues.name')"
                                 wire:model.debounce.500ms="editValues.name"
                             />
 
@@ -22,6 +23,7 @@
                             <x-forms.select
                                 name="parent_id"
                                 :options="\App\Models\Category::where('id', '!=', $item->id)->orderBy('name')->pluck('name', 'id')"
+                                :hasErrors="$errors->has('editValues.parent_id')"
                                 placeholder="-"
                                 wire:model="editValues.parent_id"
                             />
@@ -52,6 +54,7 @@
                                     <x-forms.select
                                         name="groups[]"
                                         :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
+                                        :hasErrors="$errors->has('editValues.groups')"
                                         multiple
                                         wire:model="editValues.groups"
                                     />
