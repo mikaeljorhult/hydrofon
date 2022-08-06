@@ -71,6 +71,7 @@ class QuickbookTest extends TestCase
                 ->call('loadResources')
                 ->set('resource_id', $resource->id)
                 ->call('book')
+                ->assertDispatchedBrowserEvent('booking-created')
                 ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
@@ -95,6 +96,7 @@ class QuickbookTest extends TestCase
                 ->set('resource_id', '')
                 ->call('book')
                 ->assertHasErrors(['start_time', 'end_time', 'resource_id'])
+                ->assertNotDispatchedBrowserEvent('booking-created')
                 ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });

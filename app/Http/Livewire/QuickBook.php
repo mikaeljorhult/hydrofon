@@ -66,7 +66,13 @@ class QuickBook extends Component
             'end_time' => ['required', 'date', 'required_with:resource_id', 'after:start_time'],
         ]);
 
-        Booking::create($validated);
+        $booking = Booking::create($validated);
+
+        $this->dispatchBrowserEvent('booking-created', [
+            'resource_id' => $booking->resource_id,
+            'start_time' => $booking->start_time->format('U'),
+            'end_time' => $booking->end_time->format('U'),
+        ]);
 
         $this->dispatchBrowserEvent('notify', [
             'title' => 'Booking was created',

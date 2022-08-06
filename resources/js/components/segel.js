@@ -47,6 +47,14 @@ export default (initialState) => ({
         ['x-on:resize.window.debounce.500']() {
             this.handleResize();
         },
+        ['x-on:booking-created.window'](event) {
+            let checkboxes = Array.from(this.$el.querySelectorAll('input[type="checkbox"]'))
+                .map(checkbox => checkbox.value);
+
+            if (checkboxes.indexOf(event.detail.resource_id) > -1) {
+                this.$wire.$refresh();
+            }
+        },
         ['x-on:segel-setexpanded.window'](event) {
             this.$wire.setExpanded(event.detail);
         },
@@ -73,9 +81,7 @@ export default (initialState) => ({
 
     diffSelected() {
         let checkboxes = this.$el.querySelectorAll('[name="selected[]"]');
-        let available = Array.from(checkboxes).map(checkbox => {
-            return checkbox.value;
-        });
+        let available = Array.from(checkboxes).map(checkbox => checkbox.value);
 
         this.selected = this.selected.filter(value => available.includes(value));
     },
