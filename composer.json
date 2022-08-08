@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "blade-ui-kit/blade-heroicons": "^1.3",
+        "coderello/laraflash": "^5.0",
         "eluceo/ical": "^2.2.0",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
@@ -20,7 +21,6 @@
         "livewire/livewire": "^2.5",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-activitylog": "^4.5",
-        "spatie/laravel-flash": "^1.9",
         "spatie/laravel-model-states": "^2.4",
         "spatie/laravel-model-status": "^1.11",
         "spatie/laravel-query-builder": "^5.0",

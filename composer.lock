@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c236229f525b6f5b0dc8bd92b6fb6ada",
+    "content-hash": "f71fef00bfecc398fae9e1b42a79af8f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -321,6 +321,62 @@
                 }
             ],
             "time": "2022-08-01T22:54:31+00:00"
+        },
+        {
+            "name": "coderello/laraflash",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coderello/laraflash.git",
+                "reference": "65ec5f58812118f7b8d30f5c7f1c7d1a9e372dd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coderello/laraflash/zipball/65ec5f58812118f7b8d30f5c7f1c7d1a9e372dd0",
+                "reference": "65ec5f58812118f7b8d30f5c7f1c7d1a9e372dd0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Coderello\\Laraflash\\Providers\\LaraflashServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Coderello\\Laraflash\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Advanced flash messages for Laravel.",
+            "keywords": [
+                "advanced",
+                "flash",
+                "laraflash",
+                "laravel",
+                "messages"
+            ],
+            "support": {
+                "issues": "https://github.com/coderello/laraflash/issues",
+                "source": "https://github.com/coderello/laraflash/tree/5.0.0"
+            },
+            "time": "2022-02-22T14:49:27+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -3717,67 +3773,6 @@
                 }
             ],
             "time": "2022-05-31T10:01:05+00:00"
-        },
-        {
-            "name": "spatie/laravel-flash",
-            "version": "1.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-flash.git",
-                "reference": "4bdb9b46b1b4604a2a67e2c6be915557905c31ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-flash/zipball/4bdb9b46b1b4604a2a67e2c6be915557905c31ff",
-                "reference": "4bdb9b46b1b4604a2a67e2c6be915557905c31ff",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/session": "^8.0|^9.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.23|^7.0",
-                "phpunit/phpunit": "^9.4"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Spatie\\Flash\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A lightweight package to flash messages",
-            "homepage": "https://github.com/spatie/laravel-flash",
-            "keywords": [
-                "laravel-flash",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-flash/issues",
-                "source": "https://github.com/spatie/laravel-flash/tree/1.9.0"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                }
-            ],
-            "time": "2022-01-12T08:17:47+00:00"
         },
         {
             "name": "spatie/laravel-model-states",
