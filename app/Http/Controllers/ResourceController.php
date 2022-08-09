@@ -67,7 +67,11 @@ class ResourceController extends Controller
         $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
-        flash('Resource "'.$resource->name.'" was created');
+        laraflash()
+            ->message()
+            ->title('Resource was created')
+            ->content('Resource "'.$resource->name.'" was created successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -116,7 +120,11 @@ class ResourceController extends Controller
         $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
-        flash('Resource "'.$resource->name.'" was updated');
+        laraflash()
+            ->message()
+            ->title('Resource was updated')
+            ->content('Resource was updated successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -134,7 +142,11 @@ class ResourceController extends Controller
     {
         $resource->delete();
 
-        flash('Resource was deleted');
+        laraflash()
+            ->message()
+            ->title('Resource was deleted')
+            ->content('Resource was deleted successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)

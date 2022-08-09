@@ -70,7 +70,11 @@ class CategoryController extends Controller
         $category = Category::create($request->validated());
         $category->groups()->sync($request->get('groups'));
 
-        flash('Category "'.$category->name.'" was created');
+        laraflash()
+            ->message()
+            ->title('Category was created')
+            ->content('Category "'.$category->name.'" was created successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -115,7 +119,11 @@ class CategoryController extends Controller
         $category->update($request->validated());
         $category->groups()->sync($request->get('groups'));
 
-        flash('Category "'.$category->name.'" was updated');
+        laraflash()
+            ->message()
+            ->title('Category was updated')
+            ->content('Category was updated successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -138,7 +146,11 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        flash('Category was deleted');
+        laraflash()
+            ->message()
+            ->title('Category was deleted')
+            ->content('Category was deleted successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)

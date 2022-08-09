@@ -29,7 +29,11 @@ class CheckoutController extends Controller
         $booking = Booking::findOrFail($request->get('booking_id'));
         $booking->state->transitionTo(CheckedOut::class);
 
-        flash('Booking was checked out.');
+        laraflash()
+            ->message()
+            ->title('Booking was checked out')
+            ->content('Booking was checked out successfully.')
+            ->success();
 
         return redirect()->back();
     }

@@ -71,7 +71,11 @@ class UserController extends Controller
         $user = User::create($input);
         $user->groups()->sync($request->get('groups'));
 
-        flash('User "'.$user->email.'" was created');
+        laraflash()
+            ->message()
+            ->title('User was created')
+            ->content('User "'.$user->email.'" was created successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -128,7 +132,11 @@ class UserController extends Controller
         $user->update($input);
         $user->groups()->sync($request->get('groups'));
 
-        flash('User "'.$user->email.'" was updated');
+        laraflash()
+            ->message()
+            ->title('User was updated')
+            ->content('User was updated successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -146,7 +154,11 @@ class UserController extends Controller
     {
         $user->delete();
 
-        flash('User was deleted');
+        laraflash()
+            ->message()
+            ->title('User was deleted')
+            ->content('User was deleted successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)

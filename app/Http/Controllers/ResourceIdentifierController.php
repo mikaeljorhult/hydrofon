@@ -59,7 +59,11 @@ class ResourceIdentifierController extends Controller
     {
         $resource->identifiers()->create($request->validated());
 
-        flash('Identifier was added');
+        laraflash()
+            ->message()
+            ->title('Identifier was added')
+            ->content('Identifier was added for "'.$resource->name.'" successfully.')
+            ->success();
 
         // Redirect to index if sent from create form, otherwise redirect back.
         if (Str::contains($request->headers->get('referer'), '/create')) {
@@ -118,7 +122,11 @@ class ResourceIdentifierController extends Controller
     {
         $identifier->update($request->validated());
 
-        flash('Identifier was updated');
+        laraflash()
+            ->message()
+            ->title('Identifier was updated')
+            ->content('Identifier was updated successfully.')
+            ->success();
 
         // Redirect to index if sent from edit form, otherwise redirect back.
         if (Str::contains($request->headers->get('referer'), '/edit')) {
@@ -140,7 +148,11 @@ class ResourceIdentifierController extends Controller
     {
         $identifier->delete();
 
-        flash('Identifier was removed');
+        laraflash()
+            ->message()
+            ->title('Identifier was removed')
+            ->content('Identifier was removed successfully.')
+            ->success();
 
         return redirect()->back();
     }

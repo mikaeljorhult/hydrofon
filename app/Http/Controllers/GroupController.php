@@ -63,7 +63,11 @@ class GroupController extends Controller
         $group = Group::create($request->validated());
         $group->approvers()->sync($request->get('approvers'));
 
-        flash('Group "'.$group->name.'" was created');
+        laraflash()
+            ->message()
+            ->title('Group was created')
+            ->content('Group "'.$group->name.'" was created successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -108,7 +112,11 @@ class GroupController extends Controller
         $group->update($request->validated());
         $group->approvers()->sync($request->get('approvers'));
 
-        flash('Group "'.$group->name.'" was updated');
+        laraflash()
+            ->message()
+            ->title('Group was updated')
+            ->content('Group was updated successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -126,7 +134,11 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        flash('Group was deleted');
+        laraflash()
+            ->message()
+            ->title('Group was deleted')
+            ->content('Group was deleted successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)

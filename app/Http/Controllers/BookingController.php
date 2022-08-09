@@ -87,7 +87,11 @@ class BookingController extends Controller
             'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
         ]));
 
-        flash('Booking was created');
+        laraflash()
+            ->message()
+            ->title('Booking was created')
+            ->content('Booking was created successfully.')
+            ->success();
 
         // Redirect to index if from admin page, otherwise back to referer.
         if (Str::contains($request->headers->get('referer'), '/bookings')) {
@@ -164,7 +168,11 @@ class BookingController extends Controller
             'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $booking->user_id,
         ]));
 
-        flash('Booking was updated');
+        laraflash()
+            ->message()
+            ->title('Booking was updated')
+            ->content('Booking was updated successfully.')
+            ->success();
 
         // Redirect to index if from admin page, otherwise back to referer.
         if (Str::contains($request->headers->get('referer'), '/bookings')) {
@@ -187,7 +195,11 @@ class BookingController extends Controller
     {
         $booking->delete();
 
-        flash('Booking was deleted');
+        laraflash()
+            ->message()
+            ->title('Booking was deleted')
+            ->content('Booking was deleted successfully.')
+            ->success();
 
         // Redirect to index if from admin page, otherwise back to referer.
         if (Str::contains($request->headers->get('referer'), '/bookings')) {

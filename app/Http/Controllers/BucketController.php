@@ -63,7 +63,11 @@ class BucketController extends Controller
         $bucket = Bucket::create($request->validated());
         $bucket->resources()->sync($request->get('resources'));
 
-        flash('Bucket "'.$bucket->name.'" was created');
+        laraflash()
+            ->message()
+            ->title('Bucket was created')
+            ->content('Bucket "'.$bucket->name.'" was created successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -108,7 +112,11 @@ class BucketController extends Controller
         $bucket->update($request->validated());
         $bucket->resources()->sync($request->get('resources'));
 
-        flash('Bucket "'.$bucket->name.'" was updated');
+        laraflash()
+            ->message()
+            ->title('Bucket was updated')
+            ->content('Bucket was updated successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)
@@ -126,7 +134,11 @@ class BucketController extends Controller
     {
         $bucket->delete();
 
-        flash('Bucket was deleted');
+        laraflash()
+            ->message()
+            ->title('Bucket was deleted')
+            ->content('Bucket was deleted successfully.')
+            ->success();
 
         return ($backUrl = session()->get('index-referer-url'))
             ? redirect()->to($backUrl)

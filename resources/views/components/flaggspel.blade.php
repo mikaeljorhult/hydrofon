@@ -60,15 +60,18 @@
 </div>
 
 @push('scripts')
-    @if(flash()->message)
-        <script>
-            document.addEventListener('alpine:initialized', () => {
+    <script>
+        document.addEventListener('alpine:initialized', () => {
+            let messages = @json(laraflash()->toArray());
+
+            messages.forEach(function (message) {
                 window.dispatchEvent(new CustomEvent('notify', {
                     detail: {
-                        'title': @json(flash()->message),
+                        'title': message.title,
+                        'body': message.content,
                     }
                 }));
-            });
-        </script>
-    @endif
+            })
+        });
+    </script>
 @endpush
