@@ -61,12 +61,12 @@
                 <ul class="flex justify-between text-sm">
                     @foreach($this->headings as $heading)
                         @if($loop->odd)
-                            <li class="flex-1 p-2 bg-gray-100">
+                            <li class="min-w-0 flex-1 p-2 bg-gray-100">
                                 <span>{{ $heading }}</span>
                             </li>
                         @else
-                            <li class="flex-1 p-2 bg-gray-50">
-                                <span class="hidden md:inline">{{ $heading }}</span>
+                            <li class="min-w-0 flex-1 p-2 bg-gray-50 opacity-0 lg:opacity-100">
+                                <span class="hidden lg:inline">{{ $heading }}</span>
                             </li>
                         @endif
                     @endforeach
