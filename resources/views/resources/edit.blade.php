@@ -28,6 +28,10 @@
                                     placeholder="Name"
                                     :hasErrors="$errors->has('name')"
                                 />
+
+                                @error('name')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -40,6 +44,10 @@
                                     name="description"
                                     placeholder="Description"
                                 >{{ old('description') ?? $resource->description }}</x-forms.textarea>
+
+                                @error('description')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -55,6 +63,10 @@
                                     :hasErrors="$errors->has('categories')"
                                     multiple
                                 />
+
+                                @error('categories')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -70,6 +82,10 @@
                                     :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
+
+                                @error('groups')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -82,6 +98,10 @@
                                 <x-forms.label for="is_facility" class="ml-1">
                                     Facility
                                 </x-forms.label>
+
+                                @error('is_facility')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
                         </div>
                     </div>

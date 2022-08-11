@@ -28,6 +28,10 @@
                                     :selected="old('resource_id') ?? $booking->resource_id"
                                     :hasErrors="$errors->has('resource_id')"
                                 />
+
+                                @error('resource_id')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -42,6 +46,10 @@
                                     :selected="old('user_id') ?? $booking->user_id"
                                     :hasErrors="$errors->has('user_id')"
                                 />
+
+                                @error('user_id')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-3">
@@ -57,6 +65,10 @@
                                     placeholder="Start Time"
                                     :hasErrors="$errors->has('start_time')"
                                 />
+
+                                @error('start_time')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-3">
@@ -72,6 +84,10 @@
                                     placeholder="End Time"
                                     :hasErrors="$errors->has('end_time')"
                                 />
+
+                                @error('end_time')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
                         </div>
                     </div>

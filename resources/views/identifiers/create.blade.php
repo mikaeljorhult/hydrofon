@@ -27,6 +27,10 @@
                                     placeholder="Value"
                                     :hasErrors="$errors->has('value')"
                                 />
+
+                                @error('value')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
                         </div>
                     </div>

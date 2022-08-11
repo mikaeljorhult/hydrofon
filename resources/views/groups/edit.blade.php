@@ -28,6 +28,10 @@
                                     placeholder="Name"
                                     :hasErrors="$errors->has('name')"
                                 />
+
+                                @error('name')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             @if(config('hydrofon.require_approval') !== 'none')
@@ -44,6 +48,10 @@
                                         :hasErrors="$errors->has('approvers')"
                                         multiple
                                     />
+
+                                    @error('approvers')
+                                        <x-forms.error :message="$message" />
+                                    @enderror
                                 </div>
                             @endif
                         </div>

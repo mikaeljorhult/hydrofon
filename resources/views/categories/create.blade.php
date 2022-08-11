@@ -27,6 +27,10 @@
                                     placeholder="Name"
                                     :hasErrors="$errors->has('name')"
                                 />
+
+                                @error('name')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -42,6 +46,10 @@
                                     placeholder="Select a parent..."
                                     :hasErrors="$errors->has('parent_id')"
                                 />
+
+                                @error('parent_id')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -57,6 +65,10 @@
                                     :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
+
+                                @error('groups')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
                         </div>
                     </div>

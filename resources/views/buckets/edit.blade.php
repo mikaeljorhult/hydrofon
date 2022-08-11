@@ -28,6 +28,10 @@
                                     placeholder="Name"
                                     :hasErrors="$errors->has('name')"
                                 />
+
+                                @error('name')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -43,6 +47,10 @@
                                     :hasErrors="$errors->has('resources')"
                                     multiple
                                 />
+
+                                @error('resources')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
                         </div>
                     </div>

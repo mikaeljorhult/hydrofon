@@ -27,6 +27,10 @@
                                     placeholder="Name"
                                     :hasErrors="$errors->has('name')"
                                 />
+
+                                @error('name')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -42,6 +46,10 @@
                                     placeholder="E-mail"
                                     :hasErrors="$errors->has('email')"
                                 />
+
+                                @error('email')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -57,6 +65,10 @@
                                     placeholder="Password"
                                     :hasErrors="$errors->has('password')"
                                 />
+
+                                @error('password')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -72,6 +84,10 @@
                                     placeholder="Confirm Password"
                                     :hasErrors="$errors->has('password_confirmation')"
                                 />
+
+                                @error('password_confirmation')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -87,6 +103,10 @@
                                     :hasErrors="$errors->has('groups')"
                                     multiple
                                 />
+
+                                @error('groups')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-4">
@@ -99,6 +119,10 @@
                                 <x-forms.label for="is_admin" class="ml-1">
                                     Administrator
                                 </x-forms.label>
+
+                                @error('is_admin')
+                                    <x-forms.error :message="$message" />
+                                @enderror
                             </div>
                         </div>
                     </div>
