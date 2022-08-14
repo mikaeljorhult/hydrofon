@@ -86,4 +86,48 @@ class InitCommandTest extends TestCase
 
         $this->assertDatabaseCount(User::class, 0);
     }
+
+    /**
+     * User information can be passed as options.
+     *
+     * @return void
+     */
+    public function testInformationCanBePassedAsOptions()
+    {
+        $this
+            ->artisan('hydrofon:init', [
+                '--name' => 'New User',
+                '--email' => 'default@hydrofon.se',
+                '--password' => 'password',
+            ])
+            ->expectsOutput('User was created successfully!')
+            ->assertSuccessful();
+
+        $this->assertDatabaseHas(User::class, [
+            'name' => 'New User',
+            'email' => 'default@hydrofon.se',
+        ]);
+    }
+
+    /**
+     * User information can be passed as options.
+     *
+     * @return void
+     */
+    public function testMissingOptionsAskForInformation()
+    {
+        $this
+            ->artisan('hydrofon:init', [
+                '--name' => 'New User',
+                '--password' => 'password',
+            ])
+            ->expectsQuestion('E-mail Address', 'default@hydrofon.se')
+            ->expectsOutput('User was created successfully!')
+            ->assertSuccessful();
+
+        $this->assertDatabaseHas(User::class, [
+            'name' => 'New User',
+            'email' => 'default@hydrofon.se',
+        ]);
+    }
 }

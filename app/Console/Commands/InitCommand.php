@@ -15,7 +15,10 @@ class InitCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hydrofon:init';
+    protected $signature = 'hydrofon:init
+                            {--name : Name of the user}
+                            {--email : Users e-mail address}
+                            {--password : Account password}';
 
     /**
      * The console command description.
@@ -31,9 +34,17 @@ class InitCommand extends Command
      */
     public function handle()
     {
-        $name = $this->ask('Name', 'Hydrofon Administrator');
-        $email = $this->ask('E-mail Address');
-        $password = $this->secret('Password');
+        $name = $this->option('name')
+            ? $this->option('name')
+            : $this->ask('Name', 'Hydrofon Administrator');
+
+        $email = $this->option('email')
+            ? $this->option('email')
+            : $this->ask('E-mail Address');
+
+        $password = $this->option('password')
+            ? $this->option('password')
+            : $this->secret('Password');
 
         try {
             $validator = Validator::make(compact(['name', 'email', 'password']), [
