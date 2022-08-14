@@ -6,12 +6,12 @@ use App\Models\Booking;
 use App\Models\Resource;
 use App\Rules\Available;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AvailableTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * Two bookings can't occupy the same resource and time.
