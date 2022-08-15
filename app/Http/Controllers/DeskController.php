@@ -93,9 +93,11 @@ class DeskController extends Controller
                            ->where(function ($query) {
                                $filter = request()->query->all('filter');
 
-                               // Set default time span to +/- 4 days if not in request.
                                if (! isset($filter['between'])) {
-                                   $query->between(now()->subDays(4), now()->addDays(4));
+                                   $query->between(
+                                       now()->subHours(config('hydrofon.desk_inclusion_hours.earlier', 0)),
+                                       now()->addHours(config('hydrofon.desk_inclusion_hours.later', 0))
+                                   );
                                } else {
                                    $between = explode(',', $filter['between']);
                                    $query->between($between[0], $between[1]);

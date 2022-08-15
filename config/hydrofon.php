@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value determines if a booking needs to be approved before it can be
-    | checked out. By default no approval is needed and all bookings are
+    | checked out. By default, no approval is needed and all bookings are
     | approved automatically. Can also be limited to resource type.
     |
     | Supported: "none", "all", "equipment", "facilities"
@@ -16,6 +16,22 @@ return [
     */
 
     'require_approval' => env('HYDROFON_REQUIRE_APPROVAL', 'none'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Desk Inclusion Tme
+    |--------------------------------------------------------------------------
+    |
+    | A number of hours to extend the "current" scope with within desk view.
+    | By default, bookings that have started and not yet ended are shown.
+    | Adding 1 will also include bookings that started one hour ago.
+    |
+    */
+
+    'desk_inclusion_hours' => [
+        'earlier' => 0,
+        'later' => 0,
+    ],
 
     /*
     |--------------------------------------------------------------------------
