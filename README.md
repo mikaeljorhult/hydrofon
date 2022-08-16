@@ -19,10 +19,11 @@ Database:
 - SQL Server 2017+
 
 ## Installation
-Clone the repository to your web server and install it using Composer:
-```
-composer install
-```
+1. Clone this repository with to your local machine or a web server.
+2. Run `composer install` to install the PHP dependencies.
+3. Set up a local database called `hydrofon` (see the `.env.example` for default connection and credentials).
+4. Run `composer setup` to setup the application.
+5. Optional: Run `php artisan hydrofon:init` to add an administrator account.
 
 ## Terminology
 | Word       | Definition |

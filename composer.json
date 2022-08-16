@@ -1,8 +1,10 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "mikaeljorhult/hydrofon",
+    "description": "Equipment booking system.",
     "keywords": [
-        "framework",
+        "hydrofon",
+        "equipment",
+        "booking",
         "laravel"
     ],
     "license": "MIT",
@@ -68,6 +70,11 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "setup": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php artisan key:generate",
+            "php artisan migrate"
         ]
     },
     "config": {
