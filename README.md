@@ -26,14 +26,22 @@ Database:
 5. Optional: Run `php artisan hydrofon:init` to add an administrator account.
 
 ## Terminology
-| Word       | Definition |
-| ---------- | ---------- |
-| Booking    | Reservation of one resource between two timestamps. |
-| Bucket     | Collection of resources that are interchangable. |
-| Category   | Grouping of resources that will be displayed together. |
+
+| Word       | Definition                                                          |
+|------------|---------------------------------------------------------------------|
+| Booking    | Reservation of one resource between two timestamps.                 |
+| Bucket     | Collection of resources that are interchangable.                    |
+| Category   | Grouping of resources that will be displayed together.              |
 | Group      | Link that determines which resources should be visible to the user. |
-| Identifier | String of characters that a user can be identified by. |
-| Resource   | An item that can be reserved. |
+| Identifier | String of characters that a user can be identified by.              |
+| Resource   | An item that can be reserved.                                       |
+
+## Development
+| Command                       | Description                                                         |
+|-------------------------------|---------------------------------------------------------------------|
+| `php artisan test --parallel` | Run test suite with parallel execution.                             |
+| `./vendor/bin/pint`           | Check and fix code style.                                           |
+| `npm run build`               | Build frontend assets.                                              |
 
 ## License
 Hydrofon is released under the [MIT license](http://mikaeljorhult.mit-license.org).
