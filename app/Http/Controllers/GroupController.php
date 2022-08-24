@@ -33,8 +33,6 @@ class GroupController extends Controller
                               ->allowedSorts('name')
                               ->paginate(15);
 
-        session()->flash('index-referer-url', request()->fullUrl());
-
         return view('groups.index')->with('groups', $groups);
     }
 
@@ -45,10 +43,6 @@ class GroupController extends Controller
      */
     public function create()
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('groups.create');
     }
 
@@ -69,9 +63,7 @@ class GroupController extends Controller
             ->content('Group "'.$group->name.'" was created successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/groups');
+        return redirect()->route('groups.index');
     }
 
     /**
@@ -93,10 +85,6 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('groups.edit')->with('group', $group);
     }
 
@@ -118,9 +106,7 @@ class GroupController extends Controller
             ->content('Group was updated successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/groups');
+        return redirect()->route('groups.index');
     }
 
     /**
@@ -140,8 +126,6 @@ class GroupController extends Controller
             ->content('Group was deleted successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/groups');
+        return redirect()->route('groups.index');
     }
 }

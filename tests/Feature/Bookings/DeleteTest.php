@@ -23,7 +23,7 @@ class DeleteTest extends TestCase
 
         $response = $this->actingAs($admin)->delete('bookings/'.$booking->id);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect();
         $this->assertDatabaseMissing('bookings', [
             'id' => $booking->id,
         ]);
@@ -40,7 +40,7 @@ class DeleteTest extends TestCase
 
         $response = $this->actingAs($booking->user)->delete('bookings/'.$booking->id);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect();
         $this->assertDatabaseMissing('bookings', [
             'id' => $booking->id,
         ]);

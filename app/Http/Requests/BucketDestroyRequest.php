@@ -2,13 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Traits\PreserveReferer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BucketDestroyRequest extends FormRequest
 {
-    use PreserveReferer;
-
     /**
      * Determine if the user is authorized to make this request.
      *

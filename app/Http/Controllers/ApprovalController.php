@@ -53,8 +53,6 @@ class ApprovalController extends Controller
                                 ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
                                 ->paginate(15);
 
-        session()->flash('index-referer-url', request()->fullUrl());
-
         return view('approvals.index')->with('bookings', $bookings);
     }
 

@@ -36,7 +36,7 @@ class StoreTest extends TestCase
     public function testBookingsCanBeStored()
     {
         $this->storeBooking()
-             ->assertRedirect('/');
+             ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => $this->storedBooking->user_id + 1,
@@ -55,7 +55,7 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->storeBooking(['user_id' => $user->id], $admin)
-             ->assertRedirect('/');
+             ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => $user->id,
@@ -74,7 +74,7 @@ class StoreTest extends TestCase
         $secondUser = User::factory()->create();
 
         $this->storeBooking(['user_id' => $secondUser->id], $firstUser)
-             ->assertRedirect('/');
+             ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => $firstUser->id,
@@ -90,7 +90,7 @@ class StoreTest extends TestCase
     public function testBookingsCanBeStoredWithoutUserID()
     {
         $this->storeBooking(['user_id' => null])
-             ->assertRedirect('/');
+             ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => 2,

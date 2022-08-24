@@ -66,10 +66,6 @@ class BookingController extends Controller
      */
     public function create()
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('bookings.create');
     }
 
@@ -93,14 +89,7 @@ class BookingController extends Controller
             ->content('Booking was created successfully.')
             ->success();
 
-        // Redirect to index if from admin page, otherwise back to referer.
-        if (Str::contains($request->headers->get('referer'), '/bookings')) {
-            return ($backUrl = session()->get('index-referer-url'))
-                ? redirect()->to($backUrl)
-                : redirect('/bookings');
-        } else {
-            return redirect()->back();
-        }
+        return redirect()->route('bookings.index');
     }
 
     /**
@@ -146,10 +135,6 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('bookings.edit')->with('booking', $booking);
     }
 
@@ -174,14 +159,7 @@ class BookingController extends Controller
             ->content('Booking was updated successfully.')
             ->success();
 
-        // Redirect to index if from admin page, otherwise back to referer.
-        if (Str::contains($request->headers->get('referer'), '/bookings')) {
-            return ($backUrl = session()->get('index-referer-url'))
-                ? redirect()->to($backUrl)
-                : redirect('/bookings');
-        } else {
-            return redirect()->back();
-        }
+        return redirect()->route('bookings.index');
     }
 
     /**
@@ -201,13 +179,6 @@ class BookingController extends Controller
             ->content('Booking was deleted successfully.')
             ->success();
 
-        // Redirect to index if from admin page, otherwise back to referer.
-        if (Str::contains($request->headers->get('referer'), '/bookings')) {
-            return ($backUrl = session()->get('index-referer-url'))
-                ? redirect()->to($backUrl)
-                : redirect('/bookings');
-        } else {
-            return redirect()->back();
-        }
+        return redirect()->route('bookings.index');
     }
 }

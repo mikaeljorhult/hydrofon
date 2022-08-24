@@ -33,8 +33,6 @@ class ResourceController extends Controller
                                  ->allowedSorts(['name', 'description', 'is_facility'])
                                  ->paginate(15);
 
-        session()->flash('index-referer-url', request()->fullUrl());
-
         return view('resources.index')->with('resources', $resources);
     }
 
@@ -45,10 +43,6 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('resources.create');
     }
 
@@ -73,9 +67,7 @@ class ResourceController extends Controller
             ->content('Resource "'.$resource->name.'" was created successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/resources');
+        return redirect()->route('resources.index');
     }
 
     /**
@@ -97,10 +89,6 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('resources.edit')->with('resource', $resource);
     }
 
@@ -126,9 +114,7 @@ class ResourceController extends Controller
             ->content('Resource was updated successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/resources');
+        return redirect()->route('resources.index');
     }
 
     /**
@@ -148,8 +134,6 @@ class ResourceController extends Controller
             ->content('Resource was deleted successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/resources');
+        return redirect()->route('resources.index');
     }
 }

@@ -34,8 +34,6 @@ class UserController extends Controller
                              ->allowedSorts(['email', 'name'])
                              ->paginate(15);
 
-        session()->flash('index-referer-url', request()->fullUrl());
-
         return view('users.index')->with('users', $users);
     }
 
@@ -46,10 +44,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('users.create');
     }
 
@@ -77,9 +71,7 @@ class UserController extends Controller
             ->content('User "'.$user->email.'" was created successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/users');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -101,10 +93,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('users.edit')->with('user', $user);
     }
 
@@ -138,9 +126,7 @@ class UserController extends Controller
             ->content('User was updated successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/users');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -160,8 +146,6 @@ class UserController extends Controller
             ->content('User was deleted successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/users');
+        return redirect()->route('users.index');
     }
 }

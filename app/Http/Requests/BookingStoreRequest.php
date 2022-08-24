@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Traits\PreserveReferer;
 use App\Models\Booking;
 use App\Rules\Available;
 use Illuminate\Foundation\Http\FormRequest;
@@ -10,8 +9,6 @@ use Illuminate\Validation\Rule;
 
 class BookingStoreRequest extends FormRequest
 {
-    use PreserveReferer;
-
     /**
      * Determine if the user is authorized to make this request.
      *

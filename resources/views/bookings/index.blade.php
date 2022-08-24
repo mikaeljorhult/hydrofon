@@ -16,12 +16,12 @@
                     <section class="lg:flex items-end py-2 px-3 bg-gray-50">
                         <div class="items-center mb-2 lg:mb-0 lg:mr-4">
                             <x-forms.label for="filter[resource_id]" class="sr-only">Resource</x-forms.label>
-                            <x-forms.select name="filter[resource_id]" :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['resource_id'] ?? null" placeholder="All resources" />
+                            <x-forms.select name="filter[resource_id]" :options="$filterResources" :selected="request('filter')['resource_id'] ?? null" placeholder="All resources" />
                         </div>
 
                         <div class="mb-2 lg:mb-0 lg:mr-4">
                             <x-forms.label for="filter[user_id]" class="sr-only">User</x-forms.label>
-                            <x-forms.select name="filter[user_id]" :options="\App\Models\User::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['user_id'] ?? null" placeholder="All users" />
+                            <x-forms.select name="filter[user_id]" :options="$filterUsers" :selected="request('filter')['user_id'] ?? null" placeholder="All users" />
                         </div>
 
                         <div class="mb-2 lg:mb-0 lg:mr-4">
@@ -34,17 +34,15 @@
                             <x-forms.input name="filter[end_time]" value="{{ request('filter.end_time') }}" placeholder="End Time" />
                         </div>
 
-                        @if(config('hydrofon.require_approval') !== 'none')
-                            <div class="items-center mb-2 lg:mb-0 lg:mr-4">
-                                <x-forms.label for="filter[state]" class="sr-only">Status</x-forms.label>
-                                <x-forms.select
-                                    name="filter[state]"
-                                    :options="['approved' => 'Approved', 'rejected' => 'Rejected', 'pending' => 'Pending']"
-                                    :selected="request('filter')['state'] ?? null"
-                                    placeholder="All states"
-                                />
-                            </div>
-                        @endif
+                        <div class="items-center mb-2 lg:mb-0 lg:mr-4">
+                            <x-forms.label for="filter[state]" class="sr-only">Status</x-forms.label>
+                            <x-forms.select
+                                name="filter[state]"
+                                :options="$filterState"
+                                :selected="request('filter')['state'] ?? null"
+                                placeholder="All states"
+                            />
+                        </div>
 
                         <div class="flex-grow text-right">
                             @if(request()->has('filter') && !empty(array_filter(request('filter'))))
@@ -62,8 +60,8 @@
             </x-slot>
         </x-heading>
 
-        @livewire('bookings-table', ['items' => $bookings->getCollection()])
+        @livewire('bookings-table', ['items' => $items->getCollection()])
 
-        {{ $bookings->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

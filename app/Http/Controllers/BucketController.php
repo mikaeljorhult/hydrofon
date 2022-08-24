@@ -33,8 +33,6 @@ class BucketController extends Controller
                                ->allowedSorts('name')
                                ->paginate(15);
 
-        session()->flash('index-referer-url', request()->fullUrl());
-
         return view('buckets.index')->with('buckets', $buckets);
     }
 
@@ -45,10 +43,6 @@ class BucketController extends Controller
      */
     public function create()
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('buckets.create');
     }
 
@@ -69,9 +63,7 @@ class BucketController extends Controller
             ->content('Bucket "'.$bucket->name.'" was created successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/buckets');
+        return redirect()->route('buckets.index');
     }
 
     /**
@@ -93,10 +85,6 @@ class BucketController extends Controller
      */
     public function edit(Bucket $bucket)
     {
-        if (session()->has('index-referer-url')) {
-            session()->keep('index-referer-url');
-        }
-
         return view('buckets.edit')->with('bucket', $bucket);
     }
 
@@ -118,9 +106,7 @@ class BucketController extends Controller
             ->content('Bucket was updated successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/buckets');
+        return redirect()->route('buckets.index');
     }
 
     /**
@@ -140,8 +126,6 @@ class BucketController extends Controller
             ->content('Bucket was deleted successfully.')
             ->success();
 
-        return ($backUrl = session()->get('index-referer-url'))
-            ? redirect()->to($backUrl)
-            : redirect('/buckets');
+        return redirect()->route('buckets.index');
     }
 }

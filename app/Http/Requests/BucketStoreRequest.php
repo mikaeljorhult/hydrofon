@@ -2,14 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Traits\PreserveReferer;
 use App\Models\Bucket;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BucketStoreRequest extends FormRequest
 {
-    use PreserveReferer;
-
     /**
      * Determine if the user is authorized to make this request.
      *
