@@ -42,7 +42,7 @@
                                 <x-forms.select
                                     id="resources"
                                     name="resources[]"
-                                    :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
+                                    :options="$resourceOptions"
                                     :selected="old('resources') ?? $bucket->resources->pluck('id')->toArray()"
                                     :hasErrors="$errors->has('resources')"
                                     multiple

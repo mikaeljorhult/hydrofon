@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resource;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -42,9 +43,12 @@ class ProfileBookingsController extends Controller
                                 ->allowedSorts(['resources.name', 'start_time', 'end_time'])
                                 ->paginate(15);
 
-        return view('profile.bookings')->with([
-            'user' => $user,
-            'bookings' => $bookings,
-        ]);
+        $filterResources = Resource::orderBy('name')->pluck('name', 'id');
+
+        return view('profile.bookings')->with(compact([
+            'user',
+            'bookings',
+            'filterResources',
+        ]));
     }
 }

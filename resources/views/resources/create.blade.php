@@ -57,7 +57,7 @@
                                 <x-forms.select
                                     id="categories"
                                     name="categories[]"
-                                    :options="\App\Models\Category::orderBy('name')->pluck('name', 'id')"
+                                    :options="$categoryOptions"
                                     :selected="old('categories') ?? null"
                                     :hasErrors="$errors->has('categories')"
                                     multiple
@@ -76,7 +76,7 @@
                                 <x-forms.select
                                     id="groups"
                                     name="groups[]"
-                                    :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
+                                    :options="$groupOptions"
                                     :selected="old('groups') ?? null"
                                     :hasErrors="$errors->has('groups')"
                                     multiple

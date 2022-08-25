@@ -6,6 +6,7 @@ use App\Http\Requests\CategoryDestroyRequest;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use App\Models\Group;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
@@ -27,20 +28,25 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = QueryBuilder::for(Category::class)
-                                  ->with(['parent'])
-                                  ->addSelect([
-                                      'parent_name' => Category::from('categories AS parent')
-                                                               ->whereColumn('id', 'categories.parent_id')
-                                                               ->select('name')
-                                                               ->take(1),
-                                  ])
-                                  ->allowedFilters('name', 'parent_id')
-                                  ->allowedSorts(['name', 'parent_name'])
-                                  ->defaultSort('name')
-                                  ->paginate(15);
+        $items = QueryBuilder::for(Category::class)
+                             ->with(['parent'])
+                             ->addSelect([
+                                 'parent_name' => Category::from('categories AS parent')
+                                                          ->whereColumn('id', 'categories.parent_id')
+                                                          ->select('name')
+                                                          ->take(1),
+                             ])
+                             ->allowedFilters('name', 'parent_id')
+                             ->allowedSorts(['name', 'parent_name'])
+                             ->defaultSort('name')
+                             ->paginate(15);
 
-        return view('categories.index')->with('categories', $categories);
+        $filterParent = Category::orderBy('name')->pluck('name', 'id');
+
+        return view('categories.index')->with(compact([
+            'items',
+            'filterParent',
+        ]));
     }
 
     /**
@@ -50,7 +56,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        $parentOptions = Category::orderBy('name')->pluck('name', 'id');
+        $groupOptions = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('categories.create')->with(compact([
+            'parentOptions',
+            'groupOptions',
+        ]));
     }
 
     /**
@@ -92,7 +104,14 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit')->with('category', $category);
+        $parentOptions = Category::where('id', '!=', $category->id)->orderBy('name')->pluck('name', 'id');
+        $groupOptions = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('categories.edit')->with(compact([
+            'category',
+            'parentOptions',
+            'groupOptions',
+        ]));
     }
 
     /**

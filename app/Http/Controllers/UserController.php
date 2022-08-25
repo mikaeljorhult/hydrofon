@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserDestroyRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Group;
 use App\Models\User;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -28,13 +29,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = QueryBuilder::for(User::class)
+        $items = QueryBuilder::for(User::class)
                              ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
                              ->defaultSort('email')
                              ->allowedSorts(['email', 'name'])
                              ->paginate(15);
 
-        return view('users.index')->with('users', $users);
+        $filterGroups = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('users.index')->with(compact([
+            'items',
+            'filterGroups',
+        ]));
     }
 
     /**
@@ -44,7 +50,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $groupOptions = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('users.create')->with(compact(['groupOptions']));
     }
 
     /**
@@ -93,7 +101,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit')->with('user', $user);
+        $groupOptions = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('users.edit')->with(compact([
+            'user',
+            'groupOptions',
+        ]));
     }
 
     /**

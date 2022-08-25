@@ -6,6 +6,7 @@ use App\Http\Requests\GroupDestroyRequest;
 use App\Http\Requests\GroupStoreRequest;
 use App\Http\Requests\GroupUpdateRequest;
 use App\Models\Group;
+use App\Models\User;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller
@@ -27,13 +28,13 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = QueryBuilder::for(Group::class)
-                              ->allowedFilters('name')
-                              ->defaultSort('name')
-                              ->allowedSorts('name')
-                              ->paginate(15);
+        $items = QueryBuilder::for(Group::class)
+                             ->allowedFilters('name')
+                             ->defaultSort('name')
+                             ->allowedSorts('name')
+                             ->paginate(15);
 
-        return view('groups.index')->with('groups', $groups);
+        return view('groups.index')->with(compact(['items']));
     }
 
     /**
@@ -43,7 +44,9 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('groups.create');
+        $userOptions = User::orderBy('name')->pluck('name', 'id');
+
+        return view('groups.create')->with(compact(['userOptions']));
     }
 
     /**
@@ -85,7 +88,12 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('groups.edit')->with('group', $group);
+        $userOptions = User::orderBy('name')->pluck('name', 'id');
+
+        return view('groups.edit')->with(compact([
+            'group',
+            'userOptions',
+        ]));
     }
 
     /**

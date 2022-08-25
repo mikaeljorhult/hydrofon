@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResourceDestroyRequest;
 use App\Http\Requests\ResourceStoreRequest;
 use App\Http\Requests\ResourceUpdateRequest;
+use App\Models\Category;
+use App\Models\Group;
 use App\Models\Resource;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -27,13 +29,20 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resources = QueryBuilder::for(Resource::class)
-                                 ->allowedFilters(['name', 'is_facility', 'categories.id', 'groups.id'])
-                                 ->defaultSort('name')
-                                 ->allowedSorts(['name', 'description', 'is_facility'])
-                                 ->paginate(15);
+        $items = QueryBuilder::for(Resource::class)
+                             ->allowedFilters(['name', 'is_facility', 'categories.id', 'groups.id'])
+                             ->defaultSort('name')
+                             ->allowedSorts(['name', 'description', 'is_facility'])
+                             ->paginate(15);
 
-        return view('resources.index')->with('resources', $resources);
+        $filterCategories = Category::orderBy('name')->pluck('name', 'id');
+        $filterGroups = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('resources.index')->with(compact([
+            'items',
+            'filterCategories',
+            'filterGroups',
+        ]));
     }
 
     /**
@@ -43,7 +52,13 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        return view('resources.create');
+        $categoryOptions = Category::orderBy('name')->pluck('name', 'id');
+        $groupOptions = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('resources.create')->with(compact([
+            'categoryOptions',
+            'groupOptions',
+        ]));
     }
 
     /**
@@ -89,7 +104,14 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
-        return view('resources.edit')->with('resource', $resource);
+        $categoryOptions = Category::orderBy('name')->pluck('name', 'id');
+        $groupOptions = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('resources.edit')->with(compact([
+            'resource',
+            'categoryOptions',
+            'groupOptions',
+        ]));
     }
 
     /**

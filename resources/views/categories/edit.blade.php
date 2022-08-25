@@ -42,7 +42,7 @@
                                 <x-forms.select
                                     id="parent_id"
                                     name="parent_id"
-                                    :options="\App\Models\Category::where('id', '!=', $category->id)->orderBy('name')->pluck('name', 'id')"
+                                    :options="$parentOptions"
                                     :selected="old('parent_id') ?? $category->parent_id"
                                     :hasErrors="$errors->has('parent_id')"
                                     placeholder="Select a parent..."
@@ -61,7 +61,7 @@
                                 <x-forms.select
                                     id="groups"
                                     name="groups[]"
-                                    :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
+                                    :options="$groupOptions"
                                     :selected="old('groups') ?? $category->groups->pluck('id')->toArray()"
                                     :hasErrors="$errors->has('groups')"
                                     multiple

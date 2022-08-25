@@ -8,7 +8,6 @@ use App\Http\Requests\BookingUpdateRequest;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingController extends Controller
@@ -31,32 +30,53 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = QueryBuilder::for(Booking::class)
-                                ->select('bookings.*')
-                                ->with(['resource.buckets', 'user'])
-                                ->addSelect([
-                                    'user_name' => User::whereColumn('user_id', 'users.id')
-                                                       ->select('name')
-                                                       ->take(1),
-                                ])
-                                ->addSelect([
-                                    'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
-                                                               ->select('name')
-                                                               ->take(1),
-                                ])
-                                ->allowedFilters([
-                                    'resource_id',
-                                    'user_id',
-                                    'start_time',
-                                    'end_time',
-                                ])
-                                ->defaultSort('start_time')
-                                ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
-                                ->paginate(15);
+        $items = QueryBuilder::for(Booking::class)
+                             ->select('bookings.*')
+                             ->with(['resource.buckets', 'user'])
+                             ->addSelect([
+                                 'user_name' => User::whereColumn('user_id', 'users.id')
+                                                    ->select('name')
+                                                    ->take(1),
+                             ])
+                             ->addSelect([
+                                 'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
+                                                            ->select('name')
+                                                            ->take(1),
+                             ])
+                             ->allowedFilters([
+                                 'resource_id',
+                                 'user_id',
+                                 'start_time',
+                                 'end_time',
+                                 'state',
+                             ])
+                             ->defaultSort('start_time')
+                             ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time', 'state'])
+                             ->paginate(15);
 
-        session()->flash('index-referer-url', request()->fullUrl());
+        $filterResources = Resource::orderBy('name')->pluck('name', 'id');
+        $filterUsers = User::orderBy('name')->pluck('name', 'id');
 
-        return view('bookings.index')->with('bookings', $bookings);
+        $filterState = config('hydrofon.require_approval') !== 'none'
+            ? [
+                'pending' => 'Pending',
+                'approved' => 'Approved',
+                'rejected' => 'Rejected',
+                'checkedout' => 'Checked out',
+                'checkedin' => 'Checked in',
+            ]
+            : [
+                'approved' => 'Approved',
+                'checkedout' => 'Checked out',
+                'checkedin' => 'Checked in',
+            ];
+
+        return view('bookings.index')->with(compact([
+            'items',
+            'filterResources',
+            'filterUsers',
+            'filterState',
+        ]));
     }
 
     /**
@@ -66,7 +86,13 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('bookings.create');
+        $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
+        $userOptions = User::orderBy('name')->pluck('name', 'id');
+
+        return view('bookings.create')->with(compact([
+            'resourceOptions',
+            'userOptions',
+        ]));
     }
 
     /**
@@ -124,7 +150,10 @@ class BookingController extends Controller
                 ->isNotEmpty();
         });
 
-        return view('bookings.show')->with(compact(['booking', 'activities']));
+        return view('bookings.show')->with(compact([
+            'booking',
+            'activities',
+        ]));
     }
 
     /**
@@ -135,7 +164,14 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
-        return view('bookings.edit')->with('booking', $booking);
+        $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
+        $userOptions = User::orderBy('name')->pluck('name', 'id');
+
+        return view('bookings.edit')->with(compact([
+            'booking',
+            'resourceOptions',
+            'userOptions',
+        ]));
     }
 
     /**

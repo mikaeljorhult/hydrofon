@@ -10,7 +10,7 @@
                     <section class="lg:flex items-end py-2 px-3 bg-gray-50">
                         <div class="items-center mb-2 lg:mb-0 lg:mr-4">
                             <x-forms.label for="filter[resource_id]" class="sr-only">Resource</x-forms.label>
-                            <x-forms.select name="filter[resource_id]" :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['resource_id'] ?? null" placeholder="All resources" />
+                            <x-forms.select name="filter[resource_id]" :options="$filterResources" :selected="request('filter')['resource_id'] ?? null" placeholder="All resources" />
                         </div>
 
                         <div class="mb-2 lg:mb-0 lg:mr-4">

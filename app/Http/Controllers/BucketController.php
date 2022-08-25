@@ -6,6 +6,7 @@ use App\Http\Requests\BucketDestroyRequest;
 use App\Http\Requests\BucketStoreRequest;
 use App\Http\Requests\BucketUpdateRequest;
 use App\Models\Bucket;
+use App\Models\Resource;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BucketController extends Controller
@@ -27,13 +28,13 @@ class BucketController extends Controller
      */
     public function index()
     {
-        $buckets = QueryBuilder::for(Bucket::class)
-                               ->allowedFilters('name')
-                               ->defaultSort('name')
-                               ->allowedSorts('name')
-                               ->paginate(15);
+        $items = QueryBuilder::for(Bucket::class)
+                             ->allowedFilters('name')
+                             ->defaultSort('name')
+                             ->allowedSorts('name')
+                             ->paginate(15);
 
-        return view('buckets.index')->with('buckets', $buckets);
+        return view('buckets.index')->with(compact(['items']));
     }
 
     /**
@@ -43,7 +44,9 @@ class BucketController extends Controller
      */
     public function create()
     {
-        return view('buckets.create');
+        $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
+
+        return view('buckets.create')->with(compact(['resourceOptions']));
     }
 
     /**
@@ -85,7 +88,12 @@ class BucketController extends Controller
      */
     public function edit(Bucket $bucket)
     {
-        return view('buckets.edit')->with('bucket', $bucket);
+        $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
+
+        return view('buckets.edit')->with(compact([
+            'bucket',
+            'resourceOptions',
+        ]));
     }
 
     /**

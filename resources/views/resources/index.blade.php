@@ -21,12 +21,12 @@
 
                         <div class="mb-2 lg:mb-0 lg:mr-4">
                             <x-forms.label for="filter[categories.id]" class="sr-only">Category</x-forms.label>
-                            <x-forms.select name="filter[categories.id]" :options="\App\Models\Category::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['categories.id'] ?? null" placeholder="All categories" />
+                            <x-forms.select name="filter[categories.id]" :options="$filterCategories" :selected="request('filter')['categories.id'] ?? null" placeholder="All categories" />
                         </div>
 
                         <div class="mb-2 lg:mb-0 lg:mr-4">
                             <x-forms.label for="filter[groups.id]" class="sr-only">Group</x-forms.label>
-                            <x-forms.select name="filter[groups.id]" :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['groups.id'] ?? null" placeholder="All groups" />
+                            <x-forms.select name="filter[groups.id]" :options="$filterGroups" :selected="request('filter')['groups.id'] ?? null" placeholder="All groups" />
                         </div>
 
                         <div class="mt-4 mb-2 lg:my-0 lg:mr-4 flex items-center self-center">
@@ -50,8 +50,8 @@
             </x-slot>
         </x-heading>
 
-        @livewire('resources-table', ['items' => $resources->getCollection()])
+        @livewire('resources-table', ['items' => $items->getCollection()])
 
-        {{ $resources->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

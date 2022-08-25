@@ -99,7 +99,7 @@
                                 <x-forms.select
                                     id="groups"
                                     name="groups[]"
-                                    :options="\App\Models\Group::orderBy('name')->pluck('name', 'id')"
+                                    :options="$groupOptions"
                                     :selected="old('groups') ?? $user->groups->pluck('id')->toArray()"
                                     :hasErrors="$errors->has('groups')"
                                     multiple

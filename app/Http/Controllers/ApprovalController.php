@@ -34,26 +34,31 @@ class ApprovalController extends Controller
 
         $this->authorize('approveAny', Booking::class);
 
-        $bookings = QueryBuilder::for(Booking::class)
-                                ->select('bookings.*')
-                                ->with(['resource', 'user'])
-                                ->pending()
-                                ->addSelect([
-                                    'user_name' => User::whereColumn('user_id', 'users.id')
-                                                       ->select('name')
-                                                       ->take(1),
-                                ])
-                                ->addSelect([
-                                    'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
-                                                               ->select('name')
-                                                               ->take(1),
-                                ])
-                                ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
-                                ->defaultSort('start_time')
-                                ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
-                                ->paginate(15);
+        $items = QueryBuilder::for(Booking::class)
+                             ->select('bookings.*')
+                             ->with(['resource', 'user'])
+                             ->pending()
+                             ->addSelect([
+                                 'user_name' => User::whereColumn('user_id', 'users.id')
+                                                    ->select('name')
+                                                    ->take(1),
+                             ])
+                             ->addSelect([
+                                 'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
+                                                            ->select('name')
+                                                            ->take(1),
+                             ])
+                             ->allowedFilters(['resource_id', 'user_id', 'start_time', 'end_time'])
+                             ->defaultSort('start_time')
+                             ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time'])
+                             ->paginate(15);
 
-        return view('approvals.index')->with('bookings', $bookings);
+        $filterResources = Resource::orderBy('name')->pluck('name', 'id');
+
+        return view('approvals.index')->with(compact([
+            'items',
+            'filterResources',
+        ]));
     }
 
     /**

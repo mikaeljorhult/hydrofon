@@ -24,7 +24,7 @@
                                 <x-forms.select
                                     id="resource_id"
                                     name="resource_id"
-                                    :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
+                                    :options="$resourcesOptions"
                                     :selected="old('resource_id') ?? $booking->resource_id"
                                     :hasErrors="$errors->has('resource_id')"
                                 />
@@ -42,7 +42,7 @@
                                 <x-forms.select
                                     id="user_id"
                                     name="user_id"
-                                    :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
+                                    :options="$userOptions"
                                     :selected="old('user_id') ?? $booking->user_id"
                                     :hasErrors="$errors->has('user_id')"
                                 />

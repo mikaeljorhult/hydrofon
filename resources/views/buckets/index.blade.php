@@ -35,8 +35,8 @@
             </x-slot>
         </x-heading>
 
-        @livewire('buckets-table', ['items' => $buckets->getCollection()])
+        @livewire('buckets-table', ['items' => $items->getCollection()])
 
-        {{ $buckets->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

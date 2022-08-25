@@ -35,8 +35,8 @@
             </x-slot>
         </x-heading>
 
-        @livewire('groups-table', ['items' => $groups->getCollection()])
+        @livewire('groups-table', ['items' => $items->getCollection()])
 
-        {{ $groups->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

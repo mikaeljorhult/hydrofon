@@ -21,7 +21,7 @@
 
                         <div class="mb-2 lg:mb-0 lg:mr-4">
                             <x-forms.label for="filter[parent_id]" class="sr-only">Parent</x-forms.label>
-                            <x-forms.select name="filter[parent_id]" :options="\App\Models\Category::orderBy('name')->pluck('name', 'id')" :selected="request('filter')['parent_id'] ?? null" placeholder="All parents" />
+                            <x-forms.select name="filter[parent_id]" :options="$filterParent" :selected="request('filter')['parent_id'] ?? null" placeholder="All parents" />
                         </div>
 
                         <div class="flex-grow text-right">
@@ -40,8 +40,8 @@
             </x-slot>
         </x-heading>
 
-        @livewire('categories-table', ['items' => $categories->getCollection()])
+        @livewire('categories-table', ['items' => $items->getCollection()])
 
-        {{ $categories->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
+        {{ $items->appends(['filter' => request()->get('filter'), 'sort' => request()->get('sort')])->links() }}
     </section>
 @endsection

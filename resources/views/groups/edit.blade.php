@@ -43,7 +43,7 @@
                                     <x-forms.select
                                         id="approvers"
                                         name="approvers[]"
-                                        :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
+                                        :options="$userOptions"
                                         :selected="old('approvers') ?? $group->approvers->pluck('id')->toArray()"
                                         :hasErrors="$errors->has('approvers')"
                                         multiple
