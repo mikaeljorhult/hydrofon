@@ -8,7 +8,7 @@
         x-cloak
     >
         <span class="sr-only">Open sidebar</span>
-        <x-heroicon-o-menu-alt-1 class="w-6 h-6" />
+        <x-heroicon-o-bars-3 class="w-6 h-6" />
     </button>
 
     <div class="flex items-center px-2 bg-red-600 text-white font-bold text-sm leading-none uppercase md:hidden">
@@ -37,7 +37,7 @@
 
                     <div class="relative w-full text-gray-400 focus-within:text-gray-600">
                         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none" aria-hidden="true">
-                            <x-heroicon-s-search class="w-5 h-5" />
+                            <x-heroicon-s-magnifying-glass class="w-5 h-5" />
                         </div>
 
                         <input

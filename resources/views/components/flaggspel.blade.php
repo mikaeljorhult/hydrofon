@@ -49,7 +49,7 @@
                                 x-on:click="hide(message)"
                             >
                                 <span class="sr-only">Close</span>
-                                <x-heroicon-s-x class="h-6 w-6 fill-current" />
+                                <x-heroicon-s-x-mark class="h-6 w-6 fill-current" />
                             </button>
                         </div>
                     </div>

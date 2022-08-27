@@ -30,13 +30,13 @@
                 <x-sidebar-link route="calendar" icon="calendar" text="Book" />
 
                 @admin
-                    <x-sidebar-link route="desk" icon="desktop-computer" text="Desk" />
+                    <x-sidebar-link route="desk" icon="computer-desktop" text="Desk" />
 
                     <x-sidebar-link route="bookings.index" icon="calendar" text="Bookings" class="md:mt-3" />
-                    <x-sidebar-link route="buckets.index" icon="archive" text="Buckets" />
+                    <x-sidebar-link route="buckets.index" icon="archive-box" text="Buckets" />
                     <x-sidebar-link route="categories.index" icon="tag" text="Categories" />
                     <x-sidebar-link route="groups.index" icon="identification" text="Groups" />
-                    <x-sidebar-link route="resources.index" icon="device-mobile" text="Resources" />
+                    <x-sidebar-link route="resources.index" icon="device-phone-mobile" text="Resources" />
                     <x-sidebar-link route="users.index" icon="users" text="Users" />
                 @endadmin
             </ul>

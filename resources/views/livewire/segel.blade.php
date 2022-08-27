@@ -135,7 +135,7 @@
             >
                 <div class="flex items-center justify-center absolute inset-0 bg-gray-400 bg-opacity-25">
                     <div class="flex items-center justify-center py-2 px-4 bg-red-600 text-white text-xl rounded opacity-75">
-                        <x-heroicon-s-refresh class="inline-block w-5 pr-1 fill-current" />
+                        <x-heroicon-s-arrow-path class="inline-block w-5 pr-1 fill-current" />
                         LOADING...
                     </div>
                 </div>

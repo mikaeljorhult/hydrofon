@@ -14,7 +14,7 @@
             x-on:click.prevent="isOpen = !isOpen"
         >
             <span class="sr-only">Open QR Scanner</span>
-            <x-heroicon-o-qrcode class="w-6 h-6" />
+            <x-heroicon-o-qr-code class="w-6 h-6" />
         </button>
     </div>
 

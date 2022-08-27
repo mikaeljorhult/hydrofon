@@ -38,7 +38,7 @@
                                 title="Approve"
                                 wire:click.prevent="$emit('approve', {{ $item->id }})"
                                 wire:loading.attr="disabled"
-                            ><x-heroicon-s-check class="w-4 h-4 fill-current" /></button>
+                            ><x-heroicon-m-check class="w-4 h-4 fill-current" /></button>
 
                             <button
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
@@ -46,7 +46,7 @@
                                 title="Reject"
                                 wire:click.prevent="$emit('reject', {{ $item->id }})"
                                 wire:loading.attr="disabled"
-                            ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+                            ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
                         @endif
 
                         <button
@@ -54,7 +54,7 @@
                             form="viewincalendarform-{{ $item->id }}"
                             type="submit"
                             title="View in calendar"
-                        ><x-heroicon-s-calendar class="w-4 h-4 fill-current" /></button>
+                        ><x-heroicon-m-calendar class="w-4 h-4 fill-current" /></button>
 
                         <div class="hidden">
                             <form action="{{ route('approvals.store') }}" method="post" id="approveform-{{ $item->id }}">

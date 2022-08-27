@@ -18,7 +18,7 @@
             wire:click.prefetch="loadResources"
         >
             <span class="sr-only">Open Quick Book</span>
-            <x-heroicon-o-lightning-bolt class="w-6 h-6" />
+            <x-heroicon-o-bolt class="w-6 h-6" />
         </button>
     </div>
 

@@ -19,7 +19,7 @@
                     type="button"
                     x-on:click.prevent="filters = !filters"
                 >
-                    <x-heroicon-o-filter class="block w-5 h-auto mx-auto text-gray-500" />
+                    <x-heroicon-o-funnel class="block w-5 h-auto mx-auto text-gray-500" />
                     <span class="sr-only">Filter</span>
                 </x-forms.button-secondary>
             @endisset

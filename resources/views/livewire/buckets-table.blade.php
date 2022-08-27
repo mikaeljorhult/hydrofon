@@ -67,7 +67,7 @@
                                 href="{{ route('buckets.edit', $item) }}"
                                 title="Edit"
                                 wire:click.prevent="$emit('edit', {{ $item->id }})"
-                            ><x-heroicon-s-pencil class="w-4 h-4 fill-current" /></a>
+                            ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
@@ -76,7 +76,7 @@
                                 title="Delete"
                                 wire:click.prevent="$emit('delete', {{ $item->id }})"
                                 wire:loading.attr="disabled"
-                            ><x-heroicon-s-x class="w-4 h-4 fill-current" /></button>
+                            ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
                             <div class="hidden">
                                 <form action="{{ route('buckets.destroy', [$item->id]) }}" method="post" id="deleteform-{{ $item->id }}">
