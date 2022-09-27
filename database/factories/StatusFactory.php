@@ -14,25 +14,30 @@ class StatusFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'pending',
-            'model_id' => \App\Models\Booking::factory(),
-            'model_type' => \App\Models\Booking::class,
+            'name' => 'broken',
+            'model_id' => \App\Models\Resource::factory(),
+            'model_type' => \App\Models\Resource::class,
             'created_by_id' => \App\Models\User::factory(),
         ];
     }
 
-    public function approved()
+    public function broken()
     {
-        return $this->state(['name' => 'approved']);
+        return $this->state(['name' => 'broken']);
     }
 
-    public function rejected()
+    public function dirty()
     {
-        return $this->state(['name' => 'rejected']);
+        return $this->state(['name' => 'dirty']);
     }
 
-    public function revoked()
+    public function inrepair()
     {
-        return $this->state(['name' => 'revoked']);
+        return $this->state(['name' => 'inrepair']);
+    }
+
+    public function missing()
+    {
+        return $this->state(['name' => 'missing']);
     }
 }

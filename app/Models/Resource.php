@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ModelStatus\HasStatuses;
 
 class Resource extends Model
 {
-    use HasFactory;
+    use HasFactory, HasStatuses;
 
     /**
      * The attributes that are mass assignable.
@@ -101,5 +102,22 @@ class Resource extends Model
     public function groups()
     {
         return $this->belongsToMany(\App\Models\Group::class);
+    }
+
+    /**
+     * Checks if status being set is valid.
+     *
+     * @param  string  $name
+     * @param  string|null  $reason
+     * @return bool
+     */
+    public function isValidStatus(string $name, ?string $reason = null): bool
+    {
+        return in_array($name, [
+            'broken',
+            'dirty',
+            'in-repair',
+            'missing',
+        ]);
     }
 }
