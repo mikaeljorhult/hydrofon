@@ -22,6 +22,14 @@ class ResourceStatusController extends Controller
 
         $resource->setStatus($validatedData['name'], $validatedData['reason'] ?? null);
 
+        activity()
+            ->performedOn($resource)
+            ->event('flagged')
+            ->withProperties([
+                'reason' => $validatedData['reason'] ?? null,
+            ])
+            ->log($validatedData['name']);
+
         return redirect()->back();
     }
 
@@ -36,6 +44,11 @@ class ResourceStatusController extends Controller
     public function destroy(Resource $resource, Status $status, StatusDestroyRequest $request)
     {
         $status->delete();
+
+        activity()
+            ->performedOn($resource)
+            ->event('deflagged')
+            ->log($status->name);
 
         return redirect()->back();
     }

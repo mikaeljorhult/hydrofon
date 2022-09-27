@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\Statuses;
 
+use App\Models\Resource;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
 
 class DeleteTest extends TestCase
@@ -41,5 +43,26 @@ class DeleteTest extends TestCase
              ->assertForbidden();
 
         $this->assertDatabaseCount(Status::class, 1);
+    }
+
+    /**
+     * Status deletion is logged as "deflagging".
+     *
+     * @return void
+     */
+    public function testStatusDeletionIsLogged()
+    {
+        $status = Status::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+             ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
+             ->assertRedirect();
+
+        $this->assertDatabaseHas(Activity::class, [
+            'event' => 'deflagged',
+            'description' => 'broken',
+            'subject_type' => Resource::class,
+            'subject_id' => $status->model_id,
+        ]);
     }
 }

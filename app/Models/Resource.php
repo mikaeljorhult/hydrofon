@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\ModelStatus\HasStatuses;
 
 class Resource extends Model
 {
-    use HasFactory, HasStatuses;
+    use HasFactory, HasStatuses, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -119,5 +121,21 @@ class Resource extends Model
             'in-repair',
             'missing',
         ]);
+    }
+
+    /**
+     * Determines what to activity to log.
+     *
+     * @return \Spatie\Activitylog\LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+                         ->logOnly([
+                             'name',
+                             'description',
+                             'is_facility',
+                         ])
+                         ->logOnlyDirty();
     }
 }

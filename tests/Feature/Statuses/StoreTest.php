@@ -6,6 +6,7 @@ use App\Models\Resource;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -69,5 +70,28 @@ class StoreTest extends TestCase
              ->assertSessionHasErrors('name');
 
         $this->assertDatabaseCount(Status::class, 0);
+    }
+
+    /**
+     * Any status changes are logged.
+     *
+     * @return void
+     */
+    public function testStatusChangesAreLogged()
+    {
+        $resource = Resource::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+             ->post('resources/'.$resource->id.'/statuses', [
+                 'name' => 'broken',
+             ])
+             ->assertRedirect();
+
+        $this->assertDatabaseHas(Activity::class, [
+            'event' => 'flagged',
+            'description' => 'broken',
+            'subject_type' => Resource::class,
+            'subject_id' => $resource->id,
+        ]);
     }
 }
