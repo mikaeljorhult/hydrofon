@@ -1,13 +1,13 @@
-<x-booking-status
+<x-timeline.item
     :item="$item"
     :last="$loop->last"
 >
     <x-slot:icon class="bg-gray-400">
-        <x-heroicon-s-user class="h-5 w-5 text-white" />
+        <x-heroicon-s-plus class="h-5 w-5 text-white" />
     </x-slot:icon>
 
     <p class="text-sm text-gray-500">
-        {{ $item->description }} by
+        Created by
 
         @if($item->causer)
             <a
@@ -18,4 +18,4 @@
             a <span class="font-medium text-gray-900">deleted user</span>
         @endif
     </p>
-</x-booking-status>
+</x-timeline.item>

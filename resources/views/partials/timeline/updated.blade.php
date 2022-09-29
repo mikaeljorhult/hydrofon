@@ -1,4 +1,4 @@
-<x-booking-status
+<x-timeline.item
     :item="$item"
     :last="$loop->last"
 >
@@ -32,4 +32,4 @@
         @endphp
         <span class="text-xs">Attributes changed: {{ $editedAttributes->join(', ') }}</span>
     </p>
-</x-booking-status>
+</x-timeline.item>
