@@ -59,8 +59,8 @@ class DeleteTest extends TestCase
              ->assertRedirect();
 
         $this->assertDatabaseHas(Activity::class, [
-            'event' => 'deflagged',
-            'description' => 'broken',
+            'event' => 'broken',
+            'description' => 'deflagged',
             'subject_type' => Resource::class,
             'subject_id' => $status->model_id,
         ]);

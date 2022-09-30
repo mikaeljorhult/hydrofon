@@ -24,11 +24,11 @@ class ResourceStatusController extends Controller
 
         activity()
             ->performedOn($resource)
-            ->event('flagged')
+            ->event($validatedData['name'])
             ->withProperties([
                 'reason' => $validatedData['reason'] ?? null,
             ])
-            ->log($validatedData['name']);
+            ->log('flagged');
 
         return redirect()->back();
     }
@@ -47,8 +47,8 @@ class ResourceStatusController extends Controller
 
         activity()
             ->performedOn($resource)
-            ->event('deflagged')
-            ->log($status->name);
+            ->event($status->name)
+            ->log('deflagged');
 
         return redirect()->back();
     }

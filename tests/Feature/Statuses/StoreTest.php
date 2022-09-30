@@ -88,8 +88,8 @@ class StoreTest extends TestCase
              ->assertRedirect();
 
         $this->assertDatabaseHas(Activity::class, [
-            'event' => 'flagged',
-            'description' => 'broken',
+            'event' => 'broken',
+            'description' => 'flagged',
             'subject_type' => Resource::class,
             'subject_id' => $resource->id,
         ]);

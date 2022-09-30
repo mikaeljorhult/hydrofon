@@ -93,6 +93,8 @@ class ResourceController extends Controller
      */
     public function show(Resource $resource)
     {
+        $resource->load('activities.causer:id,name');
+
         return view('resources.show')->with('resource', $resource);
     }
 
