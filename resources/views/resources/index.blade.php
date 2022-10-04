@@ -29,6 +29,11 @@
                             <x-forms.select name="filter[groups.id]" :options="$filterGroups" :selected="request('filter')['groups.id'] ?? null" placeholder="All groups" />
                         </div>
 
+                        <div class="mb-2 lg:mb-0 lg:mr-4">
+                            <x-forms.label for="filter[flags]" class="sr-only">Flags</x-forms.label>
+                            <x-forms.select name="filter[flags]" :options="$filterFlags" :selected="request('filter')['flags'] ?? null" placeholder="No flags" />
+                        </div>
+
                         <div class="mt-4 mb-2 lg:my-0 lg:mr-4 flex items-center self-center">
                             <x-forms.checkbox name="filter[is_facility]" id="filter[is_facility]" :checked="request('filter.is_facility')" />
                             <x-forms.label for="filter[is_facility]" class="ml-1 text-sm">Facility</x-forms.label>

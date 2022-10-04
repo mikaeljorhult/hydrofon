@@ -8,6 +8,7 @@ use App\Http\Requests\ResourceUpdateRequest;
 use App\Models\Category;
 use App\Models\Group;
 use App\Models\Resource;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ResourceController extends Controller
@@ -30,18 +31,31 @@ class ResourceController extends Controller
     public function index()
     {
         $items = QueryBuilder::for(Resource::class)
-                             ->allowedFilters(['name', 'is_facility', 'categories.id', 'groups.id'])
+                             ->allowedFilters([
+                                 'name',
+                                 'is_facility',
+                                 'categories.id',
+                                 'groups.id',
+                                 AllowedFilter::scope('flags', 'currentStatus'),
+                             ])
                              ->defaultSort('name')
                              ->allowedSorts(['name', 'description', 'is_facility'])
                              ->paginate(15);
 
         $filterCategories = Category::orderBy('name')->pluck('name', 'id');
         $filterGroups = Group::orderBy('name')->pluck('name', 'id');
+        $filterFlags = collect([
+            'broken' => 'Broken',
+            'dirty' => 'Dirty',
+            'in-repair' => 'In repair',
+            'missing' => 'Missing',
+        ]);
 
         return view('resources.index')->with(compact([
             'items',
             'filterCategories',
             'filterGroups',
+            'filterFlags',
         ]));
     }
 
