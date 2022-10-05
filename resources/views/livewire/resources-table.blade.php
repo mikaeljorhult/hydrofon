@@ -102,6 +102,7 @@
                         </td>
                         <td data-title="Name">
                             <a href="{{ route('resources.edit', $item) }}">{{ $item->name }}</a>
+                            @includeWhen(!empty($item->status), 'livewire.partials.item-flag', ['status' => $item->status])
                         </td>
                         <td data-title="Description">
                             {{ $item->description }}
