@@ -44,12 +44,7 @@ class ResourceController extends Controller
 
         $filterCategories = Category::orderBy('name')->pluck('name', 'id');
         $filterGroups = Group::orderBy('name')->pluck('name', 'id');
-        $filterFlags = collect([
-            'broken' => 'Broken',
-            'dirty' => 'Dirty',
-            'in-repair' => 'In repair',
-            'missing' => 'Missing',
-        ]);
+        $filterFlags = collect(Resource::$flags)->map(fn ($flag) => $flag['name'])->all();
 
         return view('resources.index')->with(compact([
             'items',
