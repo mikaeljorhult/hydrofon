@@ -6,6 +6,7 @@ use App\Http\Requests\ResourceDestroyRequest;
 use App\Http\Requests\ResourceStoreRequest;
 use App\Http\Requests\ResourceUpdateRequest;
 use App\Models\Category;
+use App\Models\Flag;
 use App\Models\Group;
 use App\Models\Resource;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -44,7 +45,7 @@ class ResourceController extends Controller
 
         $filterCategories = Category::orderBy('name')->pluck('name', 'id');
         $filterGroups = Group::orderBy('name')->pluck('name', 'id');
-        $filterFlags = collect(Resource::$flags)->map(fn ($flag) => $flag['name'])->all();
+        $filterFlags = Flag::pluck('name', 'abbr');
 
         return view('resources.index')->with(compact([
             'items',

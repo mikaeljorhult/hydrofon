@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Resource;
+use App\Models\Flag;
 use App\Models\Status;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -30,7 +30,7 @@ class StatusStoreRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                Rule::in(array_keys(Resource::$flags)),
+                Rule::in(Flag::pluck('abbr')),
             ],
             'reason' => ['sometimes', 'required', 'string'],
         ];

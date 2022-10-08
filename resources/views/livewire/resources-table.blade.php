@@ -102,10 +102,10 @@
                         </td>
                         <td data-title="Name">
                             <a href="{{ route('resources.edit', $item) }}">{{ $item->name }}</a>
-                            @if($item->flags)
+                            @if($item->flag)
                                 <x-heroicon-s-exclamation-circle
-                                    class="inline-block w-6 h-6 pb-1 {{ $item->flags['color'] }} fill-current"
-                                    title="{{ $item->flags['name'] }}"
+                                    class="inline-block w-6 h-6 pb-1 {{ $item->flag->color }} fill-current"
+                                    title="{{ $item->flag->name }}"
                                 />
                             @endif
                         </td>

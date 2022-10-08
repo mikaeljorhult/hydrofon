@@ -34,18 +34,6 @@ class Resource extends Model
     ];
 
     /**
-     * Valid flags for resources.
-     *
-     * @var array
-     */
-    public static array $flags = [
-        'broken' => ['name' => 'Broken', 'color' => 'text-red-600'],
-        'dirty' => ['name' => 'Dirty', 'color' => 'text-yellow-600'],
-        'in-repair' => ['name' => 'In repair', 'color' => 'text-orange-600'],
-        'missing' => ['name' => 'Missing', 'color' => 'text-gray-600'],
-    ];
-
-    /**
      * The "booting" method of the model.
      *
      * @return void
@@ -123,11 +111,9 @@ class Resource extends Model
      *
      * @return mixed|string[]|null
      */
-    public function getFlagsAttribute()
+    public function getFlagAttribute()
     {
-        return ! empty($this->status)
-            ? self::$flags[$this->status]
-            : null;
+        return Flag::whereAbbr($this->status)->first();
     }
 
     /**
@@ -139,7 +125,7 @@ class Resource extends Model
      */
     public function isValidStatus(string $name, ?string $reason = null): bool
     {
-        return in_array($name, array_keys(self::$flags));
+        return in_array($name, Flag::pluck('abbr')->all());
     }
 
     /**
