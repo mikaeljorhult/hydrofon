@@ -12,6 +12,22 @@ class UpdateTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Edit route is available.
+     *
+     * @return void
+     */
+    public function testEditRouteIsAvailable()
+    {
+        $bucket = Bucket::factory()->create();
+
+        $this
+            ->actingAs(User::factory()->admin()->create())
+            ->get(route('buckets.edit', $bucket))
+            ->assertSuccessful()
+            ->assertSee($bucket->name);
+    }
+
+    /**
      * Buckets can be updated.
      *
      * @return void

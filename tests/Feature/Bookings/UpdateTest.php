@@ -13,6 +13,22 @@ class UpdateTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Edit route is available.
+     *
+     * @return void
+     */
+    public function testEditRouteIsAvailable()
+    {
+        $booking = Booking::factory()->create();
+
+        $this
+            ->actingAs(User::factory()->admin()->create())
+            ->get(route('bookings.edit', $booking))
+            ->assertSuccessful()
+            ->assertSee($booking->name);
+    }
+
+    /**
      * Bookings can be updated.
      *
      * @return void

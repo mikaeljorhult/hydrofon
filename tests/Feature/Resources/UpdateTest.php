@@ -12,6 +12,22 @@ class UpdateTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Edit route is available.
+     *
+     * @return void
+     */
+    public function testEditRouteIsAvailable()
+    {
+        $resource = Resource::factory()->create();
+
+        $this
+            ->actingAs(User::factory()->admin()->create())
+            ->get(route('resources.edit', $resource))
+            ->assertSuccessful()
+            ->assertSee($resource->name);
+    }
+
+    /**
      * Resources can be updated.
      *
      * @return void

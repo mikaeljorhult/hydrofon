@@ -12,6 +12,22 @@ class UpdateTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Edit route is available.
+     *
+     * @return void
+     */
+    public function testEditRouteIsAvailable()
+    {
+        $category = Category::factory()->create();
+
+        $this
+            ->actingAs(User::factory()->admin()->create())
+            ->get(route('categories.edit', $category))
+            ->assertSuccessful()
+            ->assertSee($category->name);
+    }
+
+    /**
      * Categories can be updated.
      *
      * @return void

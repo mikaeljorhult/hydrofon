@@ -12,6 +12,22 @@ class UpdateTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Edit route is available.
+     *
+     * @return void
+     */
+    public function testEditRouteIsAvailable()
+    {
+        $group = Group::factory()->create();
+
+        $this
+            ->actingAs(User::factory()->admin()->create())
+            ->get(route('groups.edit', $group))
+            ->assertSuccessful()
+            ->assertSee($group->name);
+    }
+
+    /**
      * Groups can be updated.
      *
      * @return void
