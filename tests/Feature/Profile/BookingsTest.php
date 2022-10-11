@@ -3,7 +3,6 @@
 namespace Tests\Feature\Profile;
 
 use App\Models\Booking;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,12 +17,9 @@ class BookingsTest extends TestCase
      */
     public function testBookingsAreAvailable()
     {
-        $user = User::factory()->create();
-        $booking = Booking::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $booking = Booking::factory()->create();
 
-        $this->actingAs($user)
+        $this->actingAs($booking->user)
              ->get('profile/bookings')
              ->assertSuccessful()
              ->assertSee($booking->resource->name);

@@ -1,4 +1,4 @@
-<x-booking-status
+<x-timeline.item
     :item="$item"
     :last="$loop->last"
 >
@@ -9,4 +9,4 @@
     <p class="text-sm text-gray-500">
         Completed
     </p>
-</x-booking-status>
+</x-timeline.item>

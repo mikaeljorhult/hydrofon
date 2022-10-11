@@ -17,8 +17,8 @@ class ImpersonationTest extends TestCase
      */
     public function testAdministratorCanSeeImpersonationForm()
     {
-        $admin = User::factory()->admin()->create();
-        $response = $this->actingAs($admin)->get('users');
+        User::factory()->create();
+        $response = $this->actingAs(User::factory()->admin()->create())->get('users');
 
         $response->assertStatus(200);
         $response->assertSee('impersonation');

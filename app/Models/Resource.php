@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\ModelStatus\HasStatuses;
 
 class Resource extends Model
 {
-    use HasFactory;
+    use HasFactory, HasStatuses, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -101,5 +104,43 @@ class Resource extends Model
     public function groups()
     {
         return $this->belongsToMany(\App\Models\Group::class);
+    }
+
+    /**
+     * Get current flag object for resource.
+     *
+     * @return mixed|string[]|null
+     */
+    public function getFlagAttribute()
+    {
+        return Flag::whereAbbr($this->status)->first();
+    }
+
+    /**
+     * Checks if status being set is valid.
+     *
+     * @param  string  $name
+     * @param  string|null  $reason
+     * @return bool
+     */
+    public function isValidStatus(string $name, ?string $reason = null): bool
+    {
+        return in_array($name, Flag::pluck('abbr')->all());
+    }
+
+    /**
+     * Determines what to activity to log.
+     *
+     * @return \Spatie\Activitylog\LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+                         ->logOnly([
+                             'name',
+                             'description',
+                             'is_facility',
+                         ])
+                         ->logOnlyDirty();
     }
 }

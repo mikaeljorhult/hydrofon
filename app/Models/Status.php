@@ -15,13 +15,11 @@ class Status extends \Spatie\ModelStatus\Status
      */
     protected static function booted()
     {
-        static::created(function ($status) {
+        static::creating(function ($status) {
             if ($status->created_by_id === null) {
                 $status->created_by_id = session()->has('impersonate')
                     ? session()->get('impersonated_by')
                     : auth()->id();
-
-                $status->save();
             }
         });
     }

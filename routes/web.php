@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileBookingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ResourceIdentifierController;
+use App\Http\Controllers\ResourceStatusController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserIdentifierController;
@@ -69,6 +70,8 @@ Route::controller(ApprovalController::class)->group(function () {
     Route::post('approvals', 'store')->name('approvals.store');
     Route::delete('approvals/{booking}', 'destroy')->name('approvals.destroy');
 });
+
+Route::resource('resources.statuses', ResourceStatusController::class)->only(['store', 'destroy']);
 
 Route::resource('resources.identifiers', ResourceIdentifierController::class);
 Route::resource('users.identifiers', UserIdentifierController::class)->except(['show']);

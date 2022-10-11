@@ -5,6 +5,7 @@ namespace Tests\Feature\Resources;
 use App\Models\Category;
 use App\Models\Group;
 use App\Models\Resource;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -98,5 +99,22 @@ class IndexTest extends TestCase
              ->assertSuccessful()
              ->assertSee(route('resources.edit', $visibleResource))
              ->assertDontSee(route('resources.edit', $notVisibleResource));
+    }
+
+    /**
+     * Resources can be filtered by flags.
+     *
+     * @return void
+     */
+    public function testResourcesAreFilteredByFlags()
+    {
+        $status = Status::factory()->create();
+        $notVisibleResource = Resource::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+             ->get('resources?filter[flags]='.$status->name)
+             ->assertSuccessful()
+             ->assertSee($status->model->name)
+             ->assertDontSee($notVisibleResource->name);
     }
 }

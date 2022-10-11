@@ -102,6 +102,12 @@
                         </td>
                         <td data-title="Name">
                             <a href="{{ route('resources.edit', $item) }}">{{ $item->name }}</a>
+                            @if($item->flag)
+                                <x-heroicon-s-exclamation-circle
+                                    class="inline-block w-6 h-6 pb-1 {{ $item->flag->color }} fill-current"
+                                    title="{{ $item->flag->name }}"
+                                />
+                            @endif
                         </td>
                         <td data-title="Description">
                             {{ $item->description }}

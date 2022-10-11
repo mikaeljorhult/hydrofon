@@ -46,8 +46,8 @@ class LogBookingStateChange
         if ($eventType !== 'created') {
             activity()
                 ->performedOn($event->model)
-                ->event($eventType)
-                ->log($event->finalState->label());
+                ->event($event->finalState->label())
+                ->log($eventType);
         }
     }
 }

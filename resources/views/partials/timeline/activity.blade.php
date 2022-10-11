@@ -1,4 +1,4 @@
-<x-booking-status
+<x-timeline.item
     :item="$item"
     :last="$loop->last"
 >
@@ -18,4 +18,4 @@
             a <span class="font-medium text-gray-900">deleted user</span>
         @endif
     </p>
-</x-booking-status>
+</x-timeline.item>
