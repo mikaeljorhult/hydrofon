@@ -43,14 +43,13 @@
                                 <x-forms.error :message="$message" />
                             @enderror
                         </td>
-                        <td data-title="&nbsp;" class="text-right">
+                        <td data-title="&nbsp;" class="whitespace-nowrap text-right">
                             <x-forms.button
                                 wire:click.prevent="$emit('save')"
                                 wire:loading.attr="disabled"
                             >Save</x-forms.button>
 
                             <x-forms.button-secondary
-                                type="link"
                                 wire:click.prevent="$set('isEditing', false)"
                             >Cancel</x-forms.button-secondary>
                         </td>
@@ -95,12 +94,14 @@
                             />
                         </td>
                         <td data-title="&nbsp;" class="flex justify-end">
-                            <button
-                                class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
-                                form="impersonateform-{{ $item->id }}"
-                                type="submit"
-                                title="Impersonate"
-                            ><x-heroicon-m-eye class="w-4 h-4 fill-current" /></button>
+                            @unless($item->isAdmin())
+                                <button
+                                    class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
+                                    form="impersonateform-{{ $item->id }}"
+                                    type="submit"
+                                    title="Impersonate"
+                                ><x-heroicon-m-eye class="w-4 h-4 fill-current" /></button>
+                            @endunless
 
                             <a
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
@@ -124,14 +125,14 @@
                                 wire:loading.attr="disabled"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
-                            <div>
-                                <form action="{{ route('impersonation') }}" method="post" id="impersonateform-{{ $item->id }}">
-                                    @csrf
-                                    <input type="hidden" name="user_id" value="{{ $item->id }}" />
-                                </form>
-                            </div>
-
                             <div class="hidden">
+                                @unless($item->isAdmin())
+                                    <form action="{{ route('impersonation') }}" method="post" id="impersonateform-{{ $item->id }}">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ $item->id }}" />
+                                    </form>
+                                @endunless
+
                                 <form action="{{ route('users.destroy', [$item->id]) }}" method="post" id="deleteform-{{ $item->id }}">
                                     @method('delete')
                                     @csrf
