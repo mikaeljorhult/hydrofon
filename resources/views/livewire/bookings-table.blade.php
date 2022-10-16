@@ -63,15 +63,17 @@
                             @enderror
                         </td>
                         <td data-title="&nbsp;">&nbsp;</td>
-                        <td data-title="&nbsp;" class="whitespace-nowrap text-right">
-                            <x-forms.button
-                                wire:click.prevent="$emit('save')"
-                                wire:loading.attr="disabled"
-                            >Save</x-forms.button>
+                        <td class="whitespace-nowrap text-right">
+                            <div>
+                                <x-forms.button
+                                    wire:click.prevent="$emit('save')"
+                                    wire:loading.attr="disabled"
+                                >Save</x-forms.button>
 
-                            <x-forms.button-secondary
-                                wire:click.prevent="$set('isEditing', false)"
-                            >Cancel</x-forms.button-secondary>
+                                <x-forms.button-secondary
+                                    wire:click.prevent="$set('isEditing', false)"
+                                >Cancel</x-forms.button-secondary>
+                            </div>
                         </td>
                     </tr>
                 @else
