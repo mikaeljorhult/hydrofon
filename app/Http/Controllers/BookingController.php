@@ -134,7 +134,8 @@ class BookingController extends Controller
                       ->when(config('hydrofon.require_approval') === 'none', function ($query) {
                           // Ignore logs for approval states if approval isn't use.
                           $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
-                      });
+                      })
+                      ->oldest();
             },
         ]);
 
