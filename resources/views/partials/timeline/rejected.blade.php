@@ -2,8 +2,8 @@
     :item="$item"
     :last="$loop->last"
 >
-    <x-slot:icon class="bg-red-500">
-        <x-heroicon-s-x-mark class="h-5 w-5 text-white" />
+    <x-slot:icon class="bg-red-800">
+        <x-heroicon-s-x-mark class="h-5 w-5 text-red-100" />
     </x-slot:icon>
 
     <p class="text-sm text-gray-500">
