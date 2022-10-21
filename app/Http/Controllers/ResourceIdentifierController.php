@@ -8,7 +8,6 @@ use App\Http\Requests\IdentifierUpdateRequest;
 use App\Models\Identifier;
 use App\Models\Resource;
 use Illuminate\Support\Str;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ResourceIdentifierController extends Controller
 {
@@ -82,15 +81,9 @@ class ResourceIdentifierController extends Controller
      */
     public function show(Resource $resource, Identifier $identifier)
     {
-        $qrCode = QrCode::style('round')
-                        ->eyeColor(0, 220, 38, 38, 0, 0, 0)
-                        ->size(200)
-                        ->generate('hydrofon:'.$identifier->value);
-
         return view('identifiers.show')->with([
             'resource' => $resource,
             'identifier' => $identifier,
-            'code' => $qrCode,
         ]);
     }
 

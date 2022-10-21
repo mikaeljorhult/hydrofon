@@ -9,7 +9,7 @@
                 <div>
                     <div class="p-1 bg-gradient-to-br from-red-600 to-black">
                         <div class="p-4 bg-white">
-                            <div>{{ $code }}</div>
+                            <div>{{ $identifier->QrCode() }}</div>
                         </div>
                     </div>
 

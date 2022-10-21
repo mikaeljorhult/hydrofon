@@ -25,7 +25,7 @@ class ShowTest extends TestCase
              ->get('resources/'.$resource->id.'/identifiers/'.$identifier->id)
              ->assertSuccessful()
              ->assertSee($resource->name)
-             ->assertViewHas('code');
+             ->assertViewHas('identifier');
     }
 
     /**
