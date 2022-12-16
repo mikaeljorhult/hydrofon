@@ -3,7 +3,8 @@
     x-data="quickBook({
         start_time: @entangle('start_time'),
         end_time: @entangle('end_time'),
-        resource_id: @entangle('resource_id')
+        resource_id: @entangle('resource_id'),
+        search: @entangle('search')
     })"
     x-on:click.outside="outsideClick"
 >
@@ -41,6 +42,22 @@
         <div class="py-2 px-4">
             <form wire:submit.prevent="book">
                 <h3 class="mb-2 text-base">Quick Book</h3>
+
+                <div class="mb-2">
+                    <x-forms.label for="quickbook-search" class="sr-only">Search</x-forms.label>
+                    <x-forms.input
+                        id="quickbook-search"
+                        name="search"
+                        type="search"
+                        placeholder="Search"
+                        :hasErrors="$errors->has('editValues.search')"
+                        x-model.debounce.500ms="search"
+                        x-on:keydown.escape="search = ''"
+                    />
+                    @error('search')
+                        <x-forms.error :message="$message" />
+                    @enderror
+                </div>
 
                 <div class="mb-2">
                     <x-forms.label for="quickbook-start_time" class="sr-only">Start Time</x-forms.label>
