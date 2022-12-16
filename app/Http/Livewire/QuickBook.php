@@ -22,6 +22,8 @@ class QuickBook extends Component
 
     public $availableResources;
 
+    public $search;
+
     protected $validationAttributes = [
         'resource_id' => 'resource',
         'user_id' => 'user',
@@ -35,12 +37,27 @@ class QuickBook extends Component
             'resource_id' => null,
             'user_id' => auth()->id(),
             'availableResources' => collect(),
+            'search' => '',
         ]);
+    }
+
+    public function updated()
+    {
+        $this->loadResources();
+    }
+
+    public function getIsSearchProperty()
+    {
+        return strlen($this->search) > 3;
     }
 
     public function loadResources()
     {
         $this->availableResources = $this->getAvailableResources();
+
+        if ($this->isSearch && $this->availableResources->isNotEmpty()) {
+            $this->resource_id = $this->availableResources->first()->id;
+        }
     }
 
     public function book()
@@ -83,8 +100,13 @@ class QuickBook extends Component
 
     private function getAvailableResources()
     {
-        return Resource::whereDoesntHave('bookings', function (Builder $query) {
-            $query->between($this->start_time, $this->end_time);
-        })->orderBy('name')->get();
+        return Resource::query()
+                       ->when($this->isSearch, function (Builder $query) {
+                           $query->where('name', 'like', '%'.$this->search.'%');
+                       })
+                       ->whereDoesntHave('bookings', function (Builder $query) {
+                           $query->between($this->start_time, $this->end_time);
+                       })
+                       ->orderBy('name')->get();
     }
 }

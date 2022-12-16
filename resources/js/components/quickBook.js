@@ -5,6 +5,7 @@ export default (initialState) => ({
     start_time: initialState.start_time,
     end_time: initialState.end_time,
     resource_id: initialState.resource_id ?? 0,
+    search: initialState.search ?? '',
 
     startTimeDatepicker: null,
     endTimeDatepicker: null,
