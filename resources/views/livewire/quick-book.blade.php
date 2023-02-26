@@ -67,7 +67,7 @@
                         placeholder="Start Time"
                         x-model.lazy="start_time"
                         x-ref="start_time"
-                        :hasErrors="$errors->has('editValues.start_time')"
+                        :hasErrors="$errors->has('start_time')"
                     />
                     @error('start_time')
                         <x-forms.error :message="$message" />
@@ -82,7 +82,7 @@
                         placeholder="End Time"
                         x-model.lazy="end_time"
                         x-ref="end_time"
-                        :hasErrors="$errors->has('editValues.end_time')"
+                        :hasErrors="$errors->has('end_time')"
                     />
                     @error('end_time')
                         <x-forms.error :message="$message" />
@@ -91,15 +91,24 @@
 
                 <div class="mb-2">
                     <x-forms.label for="quickbook-resources" class="sr-only">Resources</x-forms.label>
-                    <x-forms.select
+                    <x-forms.combobox
                         id="quickbook-resources"
                         name="resource_id"
                         :options="$this->availableResources->count() > 0 ? $this->availableResources->pluck('name', 'id') : []"
-                        :selected="null"
-                        :hasErrors="$errors->has('editValues.resource_id')"
-                        placeholder="Available resources"
+                        :selected="$this->resource_id"
+                        :hasErrors="$errors->has('resource_id')"
                         x-model="resource_id"
-                    ></x-forms.select>
+                    >
+                        <x-slot:search
+                            id="quickbook-search"
+                            name="search"
+                            type="search"
+                            placeholder="Resource..."
+                            :hasErrors="$errors->has('search')"
+                            x-model.debounce.500ms="search"
+                            x-on:keydown.escape="search = ''"
+                        ></x-slot:search>
+                    </x-forms.combobox>
                     @error('resource_id')
                         <x-forms.error :message="$message" />
                     @enderror
