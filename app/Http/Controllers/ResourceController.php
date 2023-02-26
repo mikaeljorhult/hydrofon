@@ -106,7 +106,7 @@ class ResourceController extends Controller
         $resource->load([
             'activities.causer:id,name' => function ($query) {
                 $query->oldest();
-            }
+            },
         ]);
 
         return view('resources.show')->with('resource', $resource);
