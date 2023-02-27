@@ -23,7 +23,7 @@
                                 <x-forms.select
                                     id="resource_id"
                                     name="resource_id"
-                                    :options="$resourcesOptions"
+                                    :options="$resourceOptions"
                                     :selected="old('resource_id') ?? null"
                                     :hasErrors="$errors->has('resource_id')"
                                 />
