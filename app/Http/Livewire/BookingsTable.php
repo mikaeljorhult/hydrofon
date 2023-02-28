@@ -264,8 +264,23 @@ class BookingsTable extends BaseTable
 
         $availableResources = $buckets->pluck('resources')->flatten();
 
-        $item->resource()->associate($availableResources->first());
-        $item->save();
+        if ($availableResources->isNotEmpty()) {
+            $resource = $availableResources->first();
+            $item->resource()->associate($resource);
+            $item->save();
+
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'Booking was updated',
+                'body' => 'The resource was changed to '.$resource->name.'.',
+                'level' => 'success',
+            ]);
+        } else {
+            $this->dispatchBrowserEvent('notify', [
+                'title' => 'No available resources',
+                'body' => 'There are no available resources during that time.',
+                'level' => 'error',
+            ]);
+        }
 
         $this->refreshItems([$id]);
     }

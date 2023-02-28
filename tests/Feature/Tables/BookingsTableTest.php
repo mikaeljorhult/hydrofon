@@ -4,6 +4,7 @@ namespace Tests\Feature\Tables;
 
 use App\Http\Livewire\BookingsTable;
 use App\Models\Booking;
+use App\Models\Bucket;
 use App\Models\Group;
 use App\Models\Resource;
 use App\Models\User;
@@ -244,6 +245,86 @@ class BookingsTableTest extends TestCase
                 });
 
         $this->assertTrue($items[0]->fresh()->isCheckedOut);
+    }
+
+    /**
+     * Resource can be changed to other in same bucket.
+     *
+     * @return void
+     */
+    public function testAdministratorCanSwitchResource()
+    {
+        $bucket = Bucket::factory()->hasResources(2)->create();
+
+        $items = Booking::factory()
+                        ->current()
+                        ->approved()
+                        ->count(1)
+                        ->for($bucket->resources->first())
+                        ->createQuietly();
+
+        Livewire::actingAs(User::factory()->admin()->create())
+                ->test(BookingsTable::class, ['items' => $items])
+                ->emit('switch', $items[0]->id)
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'success';
+                });
+
+        $this->assertEquals($items[0]->fresh()->resource_id, $bucket->resources->last()->id);
+    }
+
+    /**
+     * Resource can not be switch if only one resource in bucket.
+     *
+     * @return void
+     */
+    public function testBucketMustHaveMultipleResources()
+    {
+        $bucket = Bucket::factory()->hasResources(1)->create();
+
+        $items = Booking::factory()
+                        ->current()
+                        ->approved()
+                        ->count(1)
+                        ->for($bucket->resources->first())
+                        ->createQuietly();
+
+        Livewire::actingAs(User::factory()->admin()->create())
+                ->test(BookingsTable::class, ['items' => $items])
+                ->emit('switch', $items[0]->id)
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
+
+        $this->assertEquals($items[0]->fresh()->resource_id, $bucket->resources->first()->id);
+    }
+
+    /**
+     * Resource can not be switch if only one resource in bucket.
+     *
+     * @return void
+     */
+    public function testResourceMustBeAvailableToSwitch()
+    {
+        $items = Booking::factory()
+                        ->current()
+                        ->approved()
+                        ->count(2)
+                        ->createQuietly();
+
+        Bucket::factory()->hasAttached($items->pluck('resource'))->create();
+
+        Livewire::actingAs(User::factory()->admin()->create())
+                ->test(BookingsTable::class, ['items' => $items])
+                ->emit('switch', $items[0]->id)
+                ->assertOk()
+                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                    return data_get($data, 'level') === 'error';
+                });
+
+        $this->assertNotEquals($items[0]->fresh()->resource_id, $items[1]->resource_id);
     }
 
     /**
