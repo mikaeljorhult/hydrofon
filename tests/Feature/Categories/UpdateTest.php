@@ -13,8 +13,6 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
     public function testEditRouteIsAvailable(): void
     {
@@ -29,8 +27,6 @@ class UpdateTest extends TestCase
 
     /**
      * Categories can be updated.
-     *
-     * @return void
      */
     public function testCategoriesCanBeUpdated(): void
     {
@@ -54,8 +50,6 @@ class UpdateTest extends TestCase
 
     /**
      * Categories must have a name.
-     *
-     * @return void
      */
     public function testCategoriesMustHaveAName(): void
     {
@@ -75,8 +69,6 @@ class UpdateTest extends TestCase
 
     /**
      * A parent category must exist in the database.
-     *
-     * @return void
      */
     public function testParentMustExist(): void
     {
@@ -100,8 +92,6 @@ class UpdateTest extends TestCase
 
     /**
      * Category can't be its own parent.
-     *
-     * @return void
      */
     public function testCategoryMustNotBeItsOwnParent(): void
     {
@@ -125,8 +115,6 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin user can not update categories.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotUpdateCategories(): void
     {

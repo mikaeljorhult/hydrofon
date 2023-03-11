@@ -13,8 +13,6 @@ class LoginTest extends TestCase
 
     /**
      * Login route is available.
-     *
-     * @return void
      */
     public function testLoginRouteIsAvailable(): void
     {
@@ -25,8 +23,6 @@ class LoginTest extends TestCase
 
     /**
      * User can log in.
-     *
-     * @return void
      */
     public function testUserCanLogIn(): void
     {

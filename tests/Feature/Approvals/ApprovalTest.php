@@ -15,8 +15,6 @@ class ApprovalTest extends TestCase
 
     /**
      * User not assigned as an approver can not access approvals index.
-     *
-     * @return void
      */
     public function testNonApproverUserCannotSeeList(): void
     {
@@ -30,8 +28,6 @@ class ApprovalTest extends TestCase
 
     /**
      * List is not available to approvers if approval requirement has been turned off.
-     *
-     * @return void
      */
     public function testApproverCannotSeeListIfTurnedOff(): void
     {
@@ -46,8 +42,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Bookings needing approval are listed.
-     *
-     * @return void
      */
     public function testBookingsNeedingApprovalAreListed(): void
     {
@@ -68,8 +62,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Config may remove need for approval for equipment.
-     *
-     * @return void
      */
     public function testConfigCanRemoveNeedForApprovalForEquipment(): void
     {
@@ -96,8 +88,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Config may remove need for approval for facilities.
-     *
-     * @return void
      */
     public function testConfigCanRemoveNeedForApprovalForFacilities(): void
     {
@@ -124,8 +114,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Bookings not needing approval are omitted from listing.
-     *
-     * @return void
      */
     public function testBookingsNotNeedingApprovalAreOmitted(): void
     {
@@ -143,8 +131,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Booking can be approved.
-     *
-     * @return void
      */
     public function testBookingCanBeApproved(): void
     {
@@ -170,8 +156,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Approval can be revoked by an administrator.
-     *
-     * @return void
      */
     public function testApprovalCanBeRevokedByAdmin(): void
     {
@@ -188,8 +172,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Users can not revoke an approval.
-     *
-     * @return void
      */
     public function testUsersCanNotRevokeApproval(): void
     {
@@ -206,8 +188,6 @@ class ApprovalTest extends TestCase
 
     /**
      * If user is in an approving group and changes the booking after getting approval the approval is revoked.
-     *
-     * @return void
      */
     public function testApprovalIsRevokedIfUserChangesBooking(): void
     {
@@ -230,8 +210,6 @@ class ApprovalTest extends TestCase
 
     /**
      * If user don't need approval the booking is still automatically approved after changes.
-     *
-     * @return void
      */
     public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking(): void
     {
@@ -251,8 +229,6 @@ class ApprovalTest extends TestCase
 
     /**
      * Administrators can change a booking without approval being revoked.
-     *
-     * @return void
      */
     public function testApprovalIsNotRevokedIfAdminChangesBooking(): void
     {

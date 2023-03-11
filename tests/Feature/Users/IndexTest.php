@@ -13,8 +13,6 @@ class IndexTest extends TestCase
 
     /**
      * Users are listed in index.
-     *
-     * @return void
      */
     public function testUsersAreListed(): void
     {
@@ -28,8 +26,6 @@ class IndexTest extends TestCase
 
     /**
      * Users can be filtered by the name.
-     *
-     * @return void
      */
     public function testUsersAreFilteredByName(): void
     {
@@ -45,8 +41,6 @@ class IndexTest extends TestCase
 
     /**
      * Users can be filtered by the e-mail address.
-     *
-     * @return void
      */
     public function testUsersAreFilteredByEmail(): void
     {
@@ -62,8 +56,6 @@ class IndexTest extends TestCase
 
     /**
      * Users can be filtered by the group.
-     *
-     * @return void
      */
     public function testUsersAreFilteredByGroup(): void
     {

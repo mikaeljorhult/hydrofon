@@ -14,8 +14,6 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Current bookings are displayed on desk page.
-     *
-     * @return void
      */
     public function testCurrentBookingsAreDisplayed(): void
     {
@@ -29,8 +27,6 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Older bookings are omitted.
-     *
-     * @return void
      */
     public function testOlderBookingsAreOmitted(): void
     {
@@ -47,8 +43,6 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Future bookings are omitted.
-     *
-     * @return void
      */
     public function testFutureBookingsAreOmitted(): void
     {
@@ -65,8 +59,6 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Bookings that have been checked in are omitted.
-     *
-     * @return void
      */
     public function testCheckedInBookingsAreOmitted(): void
     {
@@ -80,8 +72,6 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Time span of desk can be changed through filters.
-     *
-     * @return void
      */
     public function testBookingsTimeSpanCanBeFiltered(): void
     {
@@ -99,8 +89,6 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Time span of desk can be changed through configuration.
-     *
-     * @return void
      */
     public function testBookingsTimeSpanCanBeConfigured(): void
     {

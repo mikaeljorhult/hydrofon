@@ -10,11 +10,6 @@ class BookingPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * @param  \App\Models\User  $user
-     * @param  string  $ability
-     * @return bool
-     */
     public function before(User $user, string $ability): bool
     {
         // An administrator can do anything.
@@ -25,10 +20,6 @@ class BookingPolicy
 
     /**
      * Determine whether the user can view the booking.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Booking  $booking
-     * @return mixed
      */
     public function view(User $user, Booking $booking): bool
     {
@@ -37,9 +28,6 @@ class BookingPolicy
 
     /**
      * Determine whether the user can create bookings.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
      */
     public function create(User $user): bool
     {
@@ -48,10 +36,6 @@ class BookingPolicy
 
     /**
      * Determine whether the user can update the booking.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Booking  $booking
-     * @return mixed
      */
     public function update(User $user, Booking $booking): bool
     {
@@ -60,10 +44,6 @@ class BookingPolicy
 
     /**
      * Determine whether the user can delete the booking.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Booking  $booking
-     * @return mixed
      */
     public function delete(User $user, Booking $booking): bool
     {
@@ -73,7 +53,6 @@ class BookingPolicy
     /**
      * Determine whether the user can check in any bookings.
      *
-     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function checkinAny(User $user)
@@ -84,7 +63,6 @@ class BookingPolicy
     /**
      * Determine whether the user can check out any bookings.
      *
-     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function checkoutAny(User $user)
@@ -95,7 +73,6 @@ class BookingPolicy
     /**
      * Determine whether the user can approve any bookings.
      *
-     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function approveAny(User $user)
@@ -106,8 +83,6 @@ class BookingPolicy
     /**
      * Determine whether the user can approve the booking.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Booking  $booking
      * @return mixed
      */
     public function approve(User $user, Booking $booking)

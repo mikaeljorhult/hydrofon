@@ -14,8 +14,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when creating resource.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreStoredWhenCreatingResource(): void
     {
@@ -36,8 +34,6 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when creating resource.
-     *
-     * @return void
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringResource(): void
     {
@@ -57,8 +53,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when updating resource.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingResource(): void
     {
@@ -79,8 +73,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are removed when updating user.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingResource(): void
     {
@@ -108,8 +100,6 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when updating resource.
-     *
-     * @return void
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingResource(): void
     {

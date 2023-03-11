@@ -12,10 +12,6 @@ class CategoryPolicy
 
     /**
      * Determine whether the user can view the category.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
-     * @return mixed
      */
     public function view(User $user, Category $category): bool
     {
@@ -24,9 +20,6 @@ class CategoryPolicy
 
     /**
      * Determine whether the user can create categories.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
      */
     public function create(User $user): bool
     {
@@ -35,10 +28,6 @@ class CategoryPolicy
 
     /**
      * Determine whether the user can update the category.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
-     * @return mixed
      */
     public function update(User $user, Category $category): bool
     {
@@ -47,10 +36,6 @@ class CategoryPolicy
 
     /**
      * Determine whether the user can delete the category.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
-     * @return mixed
      */
     public function delete(User $user, Category $category): bool
     {

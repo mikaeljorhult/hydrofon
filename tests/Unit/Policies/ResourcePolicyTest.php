@@ -14,8 +14,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * Only administrators can view a resource.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanViewAResource(): void
     {
@@ -30,8 +28,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * Only administrators can create resources.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateResources(): void
     {
@@ -44,8 +40,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * Only administrators can update a resource.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanUpdateAResource(): void
     {
@@ -60,8 +54,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * Only administrators can delete a resource.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanDeleteAResource(): void
     {
@@ -76,8 +68,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * A resource is shown in listings to administrators.
-     *
-     * @return void
      */
     public function testAResourceCanBeListedIfUserIsAdministrator(): void
     {
@@ -93,8 +83,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * A resource is shown in listings if it has no group.
-     *
-     * @return void
      */
     public function testAResourceCanBeListedIfItHasNoGroup(): void
     {
@@ -106,8 +94,6 @@ class ResourcePolicyTest extends TestCase
 
     /**
      * A resource is shown in listings if it has no group.
-     *
-     * @return void
      */
     public function testAResourceCanBeListedIfItIsInSameGroupAsUser(): void
     {

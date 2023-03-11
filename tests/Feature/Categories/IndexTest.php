@@ -13,8 +13,6 @@ class IndexTest extends TestCase
 
     /**
      * Categories are listed in index.
-     *
-     * @return void
      */
     public function testCategoriesAreListed(): void
     {
@@ -28,8 +26,6 @@ class IndexTest extends TestCase
 
     /**
      * Categories can be filtered by the name.
-     *
-     * @return void
      */
     public function testCategoriesAreFilteredByName(): void
     {
@@ -45,8 +41,6 @@ class IndexTest extends TestCase
 
     /**
      * Categories can be filtered by parent category.
-     *
-     * @return void
      */
     public function testCategoriesAreFilteredByParent(): void
     {

@@ -38,8 +38,6 @@ class Resource extends Model
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
     protected static function boot(): void
     {
@@ -50,8 +48,6 @@ class Resource extends Model
 
     /**
      * Whether user is administrator or not.
-     *
-     * @return bool
      */
     public function isFacility(): bool
     {
@@ -60,8 +56,6 @@ class Resource extends Model
 
     /**
      * Bookings of resource.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function bookings(): HasMany
     {
@@ -70,8 +64,6 @@ class Resource extends Model
 
     /**
      * Categories the resource belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories(): BelongsToMany
     {
@@ -81,8 +73,6 @@ class Resource extends Model
 
     /**
      * Buckets the resource belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function buckets(): BelongsToMany
     {
@@ -91,8 +81,6 @@ class Resource extends Model
 
     /**
      * Get all identifiers.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function identifiers(): MorphMany
     {
@@ -101,8 +89,6 @@ class Resource extends Model
 
     /**
      * Groups the resource belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function groups(): BelongsToMany
     {
@@ -121,10 +107,6 @@ class Resource extends Model
 
     /**
      * Checks if status being set is valid.
-     *
-     * @param  string  $name
-     * @param  string|null  $reason
-     * @return bool
      */
     public function isValidStatus(string $name, ?string $reason = null): bool
     {
@@ -133,8 +115,6 @@ class Resource extends Model
 
     /**
      * Determines what to activity to log.
-     *
-     * @return \Spatie\Activitylog\LogOptions
      */
     public function getActivitylogOptions(): LogOptions
     {

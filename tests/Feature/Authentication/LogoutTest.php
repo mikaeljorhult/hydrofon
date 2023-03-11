@@ -12,8 +12,6 @@ class LogoutTest extends TestCase
 
     /**
      * User can log out.
-     *
-     * @return void
      */
     public function testUserCanLogOut(): void
     {

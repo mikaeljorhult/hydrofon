@@ -13,8 +13,6 @@ class ApproverTest extends TestCase
 
     /**
      * Approvers are stored when creating a group.
-     *
-     * @return void
      */
     public function testApproversAreStoredWhenCreatingGroup(): void
     {
@@ -33,8 +31,6 @@ class ApproverTest extends TestCase
 
     /**
      * Non-existing users cannot be added as an approver when creating a group.
-     *
-     * @return void
      */
     public function testNonExistingUserCannotBeAddedWhenStoringGroup(): void
     {
@@ -51,8 +47,6 @@ class ApproverTest extends TestCase
 
     /**
      * Approvers are stored when updating a group.
-     *
-     * @return void
      */
     public function testApproversAreStoredWhenUpdatingGroup(): void
     {
@@ -72,8 +66,6 @@ class ApproverTest extends TestCase
 
     /**
      * Approvers are removed when updating a group.
-     *
-     * @return void
      */
     public function testApproversAreRemovedWhenUpdatingGroup(): void
     {
@@ -93,8 +85,6 @@ class ApproverTest extends TestCase
 
     /**
      * Non-existing user cannot be added as an approver when updating a group.
-     *
-     * @return void
      */
     public function testNonExistingUserCannotBeAddedWhenUpdatingGroup(): void
     {

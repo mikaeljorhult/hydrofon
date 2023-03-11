@@ -18,8 +18,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -35,8 +33,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
     public function testEditFormIsDisplayed(): void
     {
@@ -50,8 +46,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Edited booking can be saved.
-     *
-     * @return void
      */
     public function testAdministratorCanEditABooking(): void
     {
@@ -75,8 +69,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can not update another users booking.
-     *
-     * @return void
      */
     public function testUserCanNotEditAnotherUsersBooking(): void
     {
@@ -97,8 +89,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can update their own booking.
-     *
-     * @return void
      */
     public function testUserCanEditTheirOwnBooking(): void
     {
@@ -122,8 +112,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can not change user of their own booking.
-     *
-     * @return void
      */
     public function testUserCanNotChangeUserOfTheirOwnBooking(): void
     {
@@ -147,8 +135,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * A booking have required attributes.
-     *
-     * @return void
      */
     public function testBookingHaveRequiredAttributes(): void
     {
@@ -181,8 +167,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingResourceIsNotAllowed(): void
     {
@@ -205,8 +189,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * User must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingUserIsNotAllowed(): void
     {
@@ -229,8 +211,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be checked out.
-     *
-     * @return void
      */
     public function testAdministratorCanCheckoutBooking(): void
     {
@@ -249,8 +229,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource can be changed to other in same bucket.
-     *
-     * @return void
      */
     public function testAdministratorCanSwitchResource(): void
     {
@@ -276,8 +254,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource can not be switch if only one resource in bucket.
-     *
-     * @return void
      */
     public function testBucketMustHaveMultipleResources(): void
     {
@@ -303,8 +279,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource can not be switch if only one resource in bucket.
-     *
-     * @return void
      */
     public function testResourceMustBeAvailableToSwitch(): void
     {
@@ -329,8 +303,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be checked in.
-     *
-     * @return void
      */
     public function testAdministratorCanCheckinBooking(): void
     {
@@ -349,8 +321,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be approved.
-     *
-     * @return void
      */
     public function testBookingCanBeApproved(): void
     {
@@ -379,8 +349,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be rejected.
-     *
-     * @return void
      */
     public function testBookingCanBeRejected(): void
     {
@@ -409,8 +377,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be checked in.
-     *
-     * @return void
      */
     public function testBookingMustHaveValidStateToBeCheckedIn(): void
     {
@@ -430,8 +396,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be checked out.
-     *
-     * @return void
      */
     public function testBookingMustHaveValidStateToBeCheckedOut(): void
     {
@@ -451,8 +415,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be approved.
-     *
-     * @return void
      */
     public function testBookingMustHaveValidStateToBeApproved(): void
     {
@@ -474,8 +436,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be rejected.
-     *
-     * @return void
      */
     public function testBookingMustHaveValidStateToBeRejected(): void
     {
@@ -497,8 +457,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be deleted.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteBooking(): void
     {
@@ -517,8 +475,6 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can not delete booking.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteBooking(): void
     {

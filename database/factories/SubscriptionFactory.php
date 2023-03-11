@@ -8,8 +8,6 @@ class SubscriptionFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -28,8 +26,6 @@ class SubscriptionFactory extends Factory
 
     /**
      * Subscription of a resource.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     public function resource(): Factory
     {
@@ -43,8 +39,6 @@ class SubscriptionFactory extends Factory
 
     /**
      * Subscription of a user.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     public function user(): Factory
     {

@@ -36,8 +36,6 @@ class OverdueBookingNotification extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(): int
     {
@@ -57,7 +55,6 @@ class OverdueBookingNotification extends Command
      * Retrieve date of last notification of type.
      *
      * @param  string  $className  FQN of notification type
-     * @return string
      */
     private function dateOfLastNotification(string $className): string
     {

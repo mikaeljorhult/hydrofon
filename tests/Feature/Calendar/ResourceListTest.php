@@ -14,8 +14,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Resource list is available in calendar view.
-     *
-     * @return void
      */
     public function testResourceListIsAvailable(): void
     {
@@ -28,8 +26,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Categories are listed in resource list.
-     *
-     * @return void
      */
     public function testCategoriesWithoutGroupsAreListed(): void
     {
@@ -44,8 +40,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Categories that have groups are not listed.
-     *
-     * @return void
      */
     public function testCategoriesWithGroupsAreNotListed(): void
     {
@@ -61,8 +55,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have groups are listed to user with same group.
-     *
-     * @return void
      */
     public function testCategoriesWithGroupsAreListedToUsersWithSameGroup(): void
     {
@@ -79,8 +71,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have no groups are listed.
-     *
-     * @return void
      */
     public function testResourcesWithoutGroupsAreListed(): void
     {
@@ -95,8 +85,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have groups are not listed.
-     *
-     * @return void
      */
     public function testResourcesWithGroupsAreNotListed(): void
     {
@@ -112,8 +100,6 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have groups are listed to user with same group.
-     *
-     * @return void
      */
     public function testResourcesWithGroupsAreListedToUsersWithSameGroup(): void
     {

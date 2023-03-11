@@ -15,8 +15,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -32,8 +30,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
     public function testEditFormIsDisplayed(): void
     {
@@ -47,8 +43,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Edited user can be saved.
-     *
-     * @return void
      */
     public function testAdministratorCanEditAUser(): void
     {
@@ -71,8 +65,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Regular user can not update a user.
-     *
-     * @return void
      */
     public function testUserCanNotEditAUser(): void
     {
@@ -92,8 +84,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Group relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedGroupsAreSaved(): void
     {
@@ -115,8 +105,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Resources must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingGroupsAreNotAllowed(): void
     {
@@ -137,8 +125,6 @@ class UsersTableTest extends TestCase
 
     /**
      * A user must have a name and an e-mail address.
-     *
-     * @return void
      */
     public function testUserMustHaveANameAndEmail(): void
     {
@@ -166,8 +152,6 @@ class UsersTableTest extends TestCase
 
     /**
      * User can be deleted.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteUser(): void
     {
@@ -186,8 +170,6 @@ class UsersTableTest extends TestCase
 
     /**
      * An administrator can not delete its own account.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteOwnAccount(): void
     {
@@ -203,8 +185,6 @@ class UsersTableTest extends TestCase
 
     /**
      * Regular user can not delete user.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteUser(): void
     {

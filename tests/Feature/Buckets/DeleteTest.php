@@ -13,8 +13,6 @@ class DeleteTest extends TestCase
 
     /**
      * Buckets can be deleted.
-     *
-     * @return void
      */
     public function testBucketsCanBeDeleted(): void
     {
@@ -29,8 +27,6 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete buckets.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotDeleteBuckets(): void
     {

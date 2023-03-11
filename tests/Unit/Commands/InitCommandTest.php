@@ -12,8 +12,6 @@ class InitCommandTest extends TestCase
 
     /**
      * Admin user is created during init.
-     *
-     * @return void
      */
     public function testUserIsCreated(): void
     {
@@ -33,8 +31,6 @@ class InitCommandTest extends TestCase
 
     /**
      * E-mail address is required.
-     *
-     * @return void
      */
     public function testEmailAddressIsRequired(): void
     {
@@ -51,8 +47,6 @@ class InitCommandTest extends TestCase
 
     /**
      * E-mail address is required.
-     *
-     * @return void
      */
     public function testEmailAddressMustBeUnique(): void
     {
@@ -71,8 +65,6 @@ class InitCommandTest extends TestCase
 
     /**
      * Password is required.
-     *
-     * @return void
      */
     public function testPasswordIsRequired(): void
     {
@@ -89,8 +81,6 @@ class InitCommandTest extends TestCase
 
     /**
      * User information can be passed as options.
-     *
-     * @return void
      */
     public function testInformationCanBePassedAsOptions(): void
     {
@@ -111,8 +101,6 @@ class InitCommandTest extends TestCase
 
     /**
      * User information can be passed as options.
-     *
-     * @return void
      */
     public function testMissingOptionsAskForInformation(): void
     {

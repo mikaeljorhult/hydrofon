@@ -14,8 +14,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Utilization is calculated for a single resource.
-     *
-     * @return void
      */
     public function testUtilizationIsCalculatedForSingleResource(): void
     {
@@ -33,8 +31,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Utilization is calculated for multiple resources.
-     *
-     * @return void
      */
     public function testUtilizationIsCalculatedForMultipleResources(): void
     {
@@ -55,8 +51,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Utilization is calculated for resource without bookings.
-     *
-     * @return void
      */
     public function testUtilizationIsCalculatedForResourceWithoutBookings(): void
     {
@@ -69,8 +63,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Bookings partly within scope are counted.
-     *
-     * @return void
      */
     public function testEarlyBookingsPartlyWithinScopeAreCounted(): void
     {
@@ -88,8 +80,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Bookings partly within scope are counted.
-     *
-     * @return void
      */
     public function testLateBookingsPartlyWithinScopeAreCounted(): void
     {
@@ -107,8 +97,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Period of multiple days are calculated.
-     *
-     * @return void
      */
     public function testUtilizationIsCalculatedOverMultipleDays(): void
     {
@@ -134,8 +122,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Setting a time range limit daily calculation.
-     *
-     * @return void
      */
     public function testSetTimeLimitCalculation(): void
     {
@@ -154,8 +140,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Setting a time range limit daily calculation for each day.
-     *
-     * @return void
      */
     public function testSetTimeLimitCalculationOverMultipleDays(): void
     {
@@ -174,8 +158,6 @@ class UtilizationReportTest extends TestCase
 
     /**
      * Bookings outside daily time range is excluded.
-     *
-     * @return void
      */
     public function testSetTimeCanExcludeBookings(): void
     {

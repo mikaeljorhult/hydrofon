@@ -16,8 +16,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -33,8 +31,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
     public function testEditFormIsDisplayed(): void
     {
@@ -48,8 +44,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Edited bucket can be saved.
-     *
-     * @return void
      */
     public function testAdministratorCanEditABucket(): void
     {
@@ -72,8 +66,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Regular user can not update a bucket.
-     *
-     * @return void
      */
     public function testUserCanNotEditABucket(): void
     {
@@ -93,8 +85,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Resource relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedResourcesAreSaved(): void
     {
@@ -113,8 +103,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * A bucket must have a name.
-     *
-     * @return void
      */
     public function testBucketMustHaveAName(): void
     {
@@ -137,8 +125,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Resources must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingResourcesAreNotAllowed(): void
     {
@@ -159,8 +145,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Bucket can be deleted.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteBucket(): void
     {
@@ -179,8 +163,6 @@ class BucketsTableTest extends TestCase
 
     /**
      * Regular user can not delete bucket.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteBucket(): void
     {

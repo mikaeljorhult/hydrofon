@@ -13,8 +13,6 @@ class ShowTest extends TestCase
 
     /**
      * Resource is displayed to administrators.
-     *
-     * @return void
      */
     public function testIdentifierIsDisplayed(): void
     {
@@ -30,8 +28,6 @@ class ShowTest extends TestCase
 
     /**
      * Non-admin users can not show identifier.
-     *
-     * @return void
      */
     public function testUsersCanNotShowIdentifier(): void
     {
@@ -45,8 +41,6 @@ class ShowTest extends TestCase
 
     /**
      * Visitors can not show identifier.
-     *
-     * @return void
      */
     public function testVisitorsCanNotShowIdentifier(): void
     {

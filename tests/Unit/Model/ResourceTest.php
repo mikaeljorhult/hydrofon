@@ -14,8 +14,6 @@ class ResourceTest extends TestCase
 
     /**
      * Resource can have bookings.
-     *
-     * @return void
      */
     public function testResourceCanHaveBookings(): void
     {
@@ -26,8 +24,6 @@ class ResourceTest extends TestCase
 
     /**
      * Resource can belong to categories.
-     *
-     * @return void
      */
     public function testResourceCanBelongToCategories(): void
     {
@@ -40,8 +36,6 @@ class ResourceTest extends TestCase
 
     /**
      * Resource can belong to a group.
-     *
-     * @return void
      */
     public function testResourceCanBelongToAGroup(): void
     {

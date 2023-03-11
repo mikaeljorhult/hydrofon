@@ -16,8 +16,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources are listed in index.
-     *
-     * @return void
      */
     public function testResourcesAreListed(): void
     {
@@ -31,8 +29,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources can be filtered by the name.
-     *
-     * @return void
      */
     public function testResourcesAreFilteredByName(): void
     {
@@ -48,8 +44,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources can be filtered by category.
-     *
-     * @return void
      */
     public function testResourcesAreFilteredByCategory(): void
     {
@@ -67,8 +61,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources can be filtered by group.
-     *
-     * @return void
      */
     public function testResourcesAreFilteredByGroup(): void
     {
@@ -86,8 +78,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources can be filtered by facility status.
-     *
-     * @return void
      */
     public function testResourcesAreFilteredByFacility(): void
     {
@@ -103,8 +93,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources can be filtered by flags.
-     *
-     * @return void
      */
     public function testResourcesAreFilteredByFlags(): void
     {

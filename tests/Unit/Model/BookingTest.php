@@ -14,8 +14,6 @@ class BookingTest extends TestCase
 
     /**
      * Booking has an owner.
-     *
-     * @return void
      */
     public function testBookingHasAnOwner(): void
     {
@@ -26,8 +24,6 @@ class BookingTest extends TestCase
 
     /**
      * Booking has a creator.
-     *
-     * @return void
      */
     public function testBookingHasACreator(): void
     {
@@ -40,8 +36,6 @@ class BookingTest extends TestCase
 
     /**
      * Booking has an resource.
-     *
-     * @return void
      */
     public function testBookingHasAResource(): void
     {
@@ -54,8 +48,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that end outside date range should be excluded in between scope.
-     *
-     * @return void
      */
     public function testBetweenScopeExcludeBookings(): void
     {
@@ -78,8 +70,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that end on start time of between scope should be excluded.
-     *
-     * @return void
      */
     public function testBetweenScopeExcludeBookingsThatEndOnStartTime(): void
     {
@@ -98,8 +88,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that start on start time of between scope should be included.
-     *
-     * @return void
      */
     public function testBetweenScopeIncludeBookingsThatStartOnStartTime(): void
     {
@@ -122,8 +110,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that end on end time of between scope should be included.
-     *
-     * @return void
      */
     public function testBetweenScopeIncludeBookingsThatEndOnEndTime(): void
     {
@@ -146,8 +132,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that start and end outside between scope should be included.
-     *
-     * @return void
      */
     public function testBetweenScopeIncludeBookingsThatStartAndEndOutsideScope(): void
     {
@@ -167,8 +151,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that end before current time should be included.
-     *
-     * @return void
      */
     public function testPastScopeIncludePastBookings(): void
     {
@@ -189,8 +171,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that end before current time should be included.
-     *
-     * @return void
      */
     public function testFutureScopeIncludeFutureBookings(): void
     {
@@ -211,8 +191,6 @@ class BookingTest extends TestCase
 
     /**
      * Bookings that has started but not ended should be included.
-     *
-     * @return void
      */
     public function testCurrentScopeIncludeCurrentBookings(): void
     {
@@ -233,8 +211,6 @@ class BookingTest extends TestCase
 
     /**
      * Past bookings that has been checked out but not yet checked back in should be included.
-     *
-     * @return void
      */
     public function testOverdueScopeIncludeOverdueBookings(): void
     {

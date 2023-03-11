@@ -13,8 +13,6 @@ class StoreTest extends TestCase
 
     /**
      * Identifiers can be created and stored.
-     *
-     * @return void
      */
     public function testIdentifiersCanBeStored(): void
     {
@@ -35,8 +33,6 @@ class StoreTest extends TestCase
 
     /**
      * Identifiers must have a value.
-     *
-     * @return void
      */
     public function testIdentifierMustHaveAValue(): void
     {
@@ -54,8 +50,6 @@ class StoreTest extends TestCase
 
     /**
      * Value of identifier must be unique.
-     *
-     * @return void
      */
     public function testValueMustBeUnique(): void
     {
@@ -74,8 +68,6 @@ class StoreTest extends TestCase
 
     /**
      * Value of identifier can not be a user e-mail address.
-     *
-     * @return void
      */
     public function testValueCanNotBeAUserEmailAddress(): void
     {
@@ -93,8 +85,6 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store identifiers.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotStoreIdentifiers(): void
     {

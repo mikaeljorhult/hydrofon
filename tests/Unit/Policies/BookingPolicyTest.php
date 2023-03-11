@@ -13,8 +13,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Administrators can view a booking.
-     *
-     * @return void
      */
     public function testAdminsCanViewABooking(): void
     {
@@ -29,8 +27,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * The user that owns the booking can view it.
-     *
-     * @return void
      */
     public function testOwnerCanViewBooking(): void
     {
@@ -44,8 +40,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * All users can create bookings.
-     *
-     * @return void
      */
     public function testAllUsersCanCreateBookings(): void
     {
@@ -58,8 +52,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Administrators can update any booking.
-     *
-     * @return void
      */
     public function testAdminsCanUpdateAnyBooking(): void
     {
@@ -74,8 +66,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * The user that owns the booking can update it if it hasn't started or been checked out.
-     *
-     * @return void
      */
     public function testOwnerCanUpdateBooking(): void
     {
@@ -93,8 +83,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Administrators can delete any booking.
-     *
-     * @return void
      */
     public function testAdminsCanDeleteAnyBooking(): void
     {
@@ -109,8 +97,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * The user that owns the booking can update it if it hasn't started or been checked out.
-     *
-     * @return void
      */
     public function testOwnerCanDeleteBooking(): void
     {
@@ -128,8 +114,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Only administrators can create checkins.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateCheckins(): void
     {
@@ -142,8 +126,6 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Only administrators can create checkouts.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateCheckouts(): void
     {

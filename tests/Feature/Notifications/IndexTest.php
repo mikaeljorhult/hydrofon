@@ -13,8 +13,6 @@ class IndexTest extends TestCase
 
     /**
      * A visitor can not visit notifications.
-     *
-     * @return void
      */
     public function testVisitorAreRedirectedToLogin(): void
     {
@@ -24,8 +22,6 @@ class IndexTest extends TestCase
 
     /**
      * A user can visit notifications.
-     *
-     * @return void
      */
     public function testUserCanSeeNotifications(): void
     {
@@ -38,8 +34,6 @@ class IndexTest extends TestCase
 
     /**
      * Booking overdue notification is displayed.
-     *
-     * @return void
      */
     public function testOverdueNotificationIsDisplayed(): void
     {

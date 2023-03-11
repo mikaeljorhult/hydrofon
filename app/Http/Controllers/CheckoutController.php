@@ -21,9 +21,6 @@ class CheckoutController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\CheckoutStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CheckoutStoreRequest $request): RedirectResponse
     {

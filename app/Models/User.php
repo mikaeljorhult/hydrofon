@@ -51,8 +51,6 @@ class User extends Authenticatable
 
     /**
      * Get the prunable model query.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function prunable(): Builder
     {
@@ -82,8 +80,6 @@ class User extends Authenticatable
 
     /**
      * Whether user is administrator or not.
-     *
-     * @return bool
      */
     public function isAdmin(): bool
     {
@@ -92,8 +88,6 @@ class User extends Authenticatable
 
     /**
      * User is being impersonated by another user.
-     *
-     * @return bool
      */
     public function isImpersonated(): bool
     {
@@ -102,8 +96,6 @@ class User extends Authenticatable
 
     /**
      * Check if user owns another model.
-     *
-     * @return bool
      */
     public function owns($related): bool
     {
@@ -112,8 +104,6 @@ class User extends Authenticatable
 
     /**
      * Groups the user can approve bookings for.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function approvingGroups(): BelongsToMany
     {
@@ -122,8 +112,6 @@ class User extends Authenticatable
 
     /**
      * Get all identifiers.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function identifiers(): MorphMany
     {
@@ -132,8 +120,6 @@ class User extends Authenticatable
 
     /**
      * Bookings owned by user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function bookings(): HasMany
     {
@@ -142,8 +128,6 @@ class User extends Authenticatable
 
     /**
      * Groups the user belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function groups(): BelongsToMany
     {
@@ -152,8 +136,6 @@ class User extends Authenticatable
 
     /**
      * Subscription of user bookings.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function subscription(): MorphOne
     {

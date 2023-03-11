@@ -21,9 +21,6 @@ class CalendarController extends Controller
 
     /**
      * Show the calendar view.
-     *
-     * @param  null|string  $date
-     * @return \Illuminate\Http\Response
      */
     public function index(?string $date = null): View
     {
@@ -39,9 +36,6 @@ class CalendarController extends Controller
 
     /**
      * Retrieve resources and redirect to calendar view.
-     *
-     * @param  \App\Http\Requests\CalendarRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CalendarRequest $request): RedirectResponse
     {
@@ -55,7 +49,6 @@ class CalendarController extends Controller
      * Parse supplied date or default to current date.
      *
      * @param $date
-     * @return \Carbon\Carbon
      */
     private function date($date): Carbon
     {
@@ -66,8 +59,6 @@ class CalendarController extends Controller
 
     /**
      * Return resources stored in session.
-     *
-     * @return array
      */
     private function resources(): array
     {
@@ -76,8 +67,6 @@ class CalendarController extends Controller
 
     /**
      * Return categories stored in session.
-     *
-     * @return array
      */
     private function categories(): array
     {

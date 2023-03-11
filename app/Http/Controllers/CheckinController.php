@@ -21,9 +21,6 @@ class CheckinController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\CheckinStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CheckinStoreRequest $request): RedirectResponse
     {

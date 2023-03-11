@@ -25,8 +25,6 @@ class CategoryController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -53,8 +51,6 @@ class CategoryController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -69,9 +65,6 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\CategoryStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CategoryStoreRequest $request): RedirectResponse
     {
@@ -89,9 +82,6 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function show(Category $category): View
     {
@@ -100,9 +90,6 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function edit(Category $category): View
     {
@@ -118,10 +105,6 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\CategoryUpdateRequest  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
@@ -139,10 +122,6 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @param  \App\Http\Requests\CategoryDestroyRequest  $request
-     * @return void
      */
     public function destroy(Category $category, CategoryDestroyRequest $request): RedirectResponse
     {

@@ -13,8 +13,6 @@ class DeleteTest extends TestCase
 
     /**
      * Categories can be deleted.
-     *
-     * @return void
      */
     public function testCategoriesCanBeDeleted(): void
     {

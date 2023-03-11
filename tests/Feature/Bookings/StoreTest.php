@@ -16,10 +16,6 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a booking.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function storeBooking(array $overrides = [], ?User $user = null): TestResponse
     {
@@ -31,8 +27,6 @@ class StoreTest extends TestCase
 
     /**
      * Bookings can be created and stored.
-     *
-     * @return void
      */
     public function testBookingsCanBeStored(): void
     {
@@ -47,8 +41,6 @@ class StoreTest extends TestCase
 
     /**
      * An administrator can create bookings for other users.
-     *
-     * @return void
      */
     public function testAdministratorCanCreateBookingForOtherUser(): void
     {
@@ -66,8 +58,6 @@ class StoreTest extends TestCase
 
     /**
      * A regular user cannot create bookings for other users.
-     *
-     * @return void
      */
     public function testUserCannotCreateBookingsForOtherUser(): void
     {
@@ -85,8 +75,6 @@ class StoreTest extends TestCase
 
     /**
      * Bookings is owned by current user.
-     *
-     * @return void
      */
     public function testBookingsCanBeStoredWithoutUserID(): void
     {
@@ -100,8 +88,6 @@ class StoreTest extends TestCase
 
     /**
      * Bookings must have a resource.
-     *
-     * @return void
      */
     public function testBookingsMustHaveAResource(): void
     {
@@ -114,8 +100,6 @@ class StoreTest extends TestCase
 
     /**
      * The requested resource must exist in the database.
-     *
-     * @return void
      */
     public function testResourceMustExist(): void
     {
@@ -128,8 +112,6 @@ class StoreTest extends TestCase
 
     /**
      * Bookings must have a start time.
-     *
-     * @return void
      */
     public function testBookingsMustHaveAStartTime(): void
     {
@@ -142,8 +124,6 @@ class StoreTest extends TestCase
 
     /**
      * Start time must be a valid timestamp.
-     *
-     * @return void
      */
     public function testStartTimeMustBeValidTimestamp(): void
     {
@@ -164,8 +144,6 @@ class StoreTest extends TestCase
 
     /**
      * Bookings must have a end time.
-     *
-     * @return void
      */
     public function testBookingsMustHaveAEndTime(): void
     {
@@ -178,8 +156,6 @@ class StoreTest extends TestCase
 
     /**
      * End time must be a valid timestamp.
-     *
-     * @return void
      */
     public function testEndTimeMustBeValidTimestamp(): void
     {
@@ -200,8 +176,6 @@ class StoreTest extends TestCase
 
     /**
      * Booking have to start before it ends.
-     *
-     * @return void
      */
     public function testStartTimeMustBeBeforeEndTime(): void
     {
@@ -217,8 +191,6 @@ class StoreTest extends TestCase
 
     /**
      * Bookings can not overlap previous bookings.
-     *
-     * @return void
      */
     public function testBookingsCanNotOverlapPreviousBookings(): void
     {

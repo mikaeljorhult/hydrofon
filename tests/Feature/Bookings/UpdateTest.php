@@ -14,8 +14,6 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
     public function testEditRouteIsAvailable(): void
     {
@@ -30,8 +28,6 @@ class UpdateTest extends TestCase
 
     /**
      * Bookings can be updated.
-     *
-     * @return void
      */
     public function testBookingsCanBeUpdated(): void
     {
@@ -53,8 +49,6 @@ class UpdateTest extends TestCase
 
     /**
      * An administrator can change the user of a booking.
-     *
-     * @return void
      */
     public function testAdministratorCanChangeUserOfBooking(): void
     {
@@ -78,8 +72,6 @@ class UpdateTest extends TestCase
 
     /**
      * A regular user cannot change the user of a booking.
-     *
-     * @return void
      */
     public function testUserCannotChangeUserOfABooking(): void
     {
@@ -103,8 +95,6 @@ class UpdateTest extends TestCase
 
     /**
      * A user can change a booking it owns.
-     *
-     * @return void
      */
     public function testUserCanChangeBookingItOwns(): void
     {
@@ -126,8 +116,6 @@ class UpdateTest extends TestCase
 
     /**
      * A user can not change a booking it don't own.
-     *
-     * @return void
      */
     public function testUserCanNotChangeBookingItDontOwn(): void
     {
@@ -150,8 +138,6 @@ class UpdateTest extends TestCase
 
     /**
      * A user can not change a booking that has started.
-     *
-     * @return void
      */
     public function testUserCanNotChangeBookingThatHasStarted(): void
     {
@@ -173,8 +159,6 @@ class UpdateTest extends TestCase
 
     /**
      * A user can not change a booking that has started.
-     *
-     * @return void
      */
     public function testUserCanNotChangeBookingThatHasBeenCheckedOut(): void
     {
@@ -196,8 +180,6 @@ class UpdateTest extends TestCase
 
     /**
      * Bookings must have an resource.
-     *
-     * @return void
      */
     public function testBookingsMustHaveAResource(): void
     {
@@ -219,8 +201,6 @@ class UpdateTest extends TestCase
 
     /**
      * The requested resource must exist in the database.
-     *
-     * @return void
      */
     public function testResourceMustExist(): void
     {
@@ -242,8 +222,6 @@ class UpdateTest extends TestCase
 
     /**
      * Bookings can not overlap other bookings.
-     *
-     * @return void
      */
     public function testBookingsCanNotOverlapOtherBookings(): void
     {
@@ -268,8 +246,6 @@ class UpdateTest extends TestCase
 
     /**
      * A start time must be present.
-     *
-     * @return void
      */
     public function testBookingsMustHaveAStartTime(): void
     {
@@ -291,8 +267,6 @@ class UpdateTest extends TestCase
 
     /**
      * Start time must be a valid timestamp.
-     *
-     * @return void
      */
     public function testStartTimeMustBeValidTimestamp(): void
     {
@@ -314,8 +288,6 @@ class UpdateTest extends TestCase
 
     /**
      * A end time must be present.
-     *
-     * @return void
      */
     public function testBookingsMustHaveAEndTime(): void
     {
@@ -337,8 +309,6 @@ class UpdateTest extends TestCase
 
     /**
      * End time must be a valid timestamp.
-     *
-     * @return void
      */
     public function testEndTimeMustBeValidTimestamp(): void
     {
@@ -360,8 +330,6 @@ class UpdateTest extends TestCase
 
     /**
      * Booking have to start before it ends.
-     *
-     * @return void
      */
     public function testStartTimeMustBeBeforeEndTime(): void
     {

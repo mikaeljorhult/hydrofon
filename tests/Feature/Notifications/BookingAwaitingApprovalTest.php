@@ -15,8 +15,6 @@ class BookingAwaitingApprovalTest extends TestCase
 
     /**
      * Approver with bookings waiting for approval get notified.
-     *
-     * @return void
      */
     public function testApproverWithWaitingApprovalsGetNotified(): void
     {
@@ -35,8 +33,6 @@ class BookingAwaitingApprovalTest extends TestCase
 
     /**
      * Approver only get notified once about the same pending booking.
-     *
-     * @return void
      */
     public function testApproverDontGetNotifiedTwiceAboutSamePendingBooking(): void
     {
@@ -55,8 +51,6 @@ class BookingAwaitingApprovalTest extends TestCase
 
     /**
      * Approver gets notified about new pending bookings.
-     *
-     * @return void
      */
     public function testApproverGetsNotifiedAboutNewBooking(): void
     {

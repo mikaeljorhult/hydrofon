@@ -13,8 +13,6 @@ class IndexTest extends TestCase
 
     /**
      * Bookings are listed in index.
-     *
-     * @return void
      */
     public function testBookingsAreListed(): void
     {
@@ -28,8 +26,6 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the resource.
-     *
-     * @return void
      */
     public function testBookingsAreFilteredByResource(): void
     {
@@ -45,8 +41,6 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the user.
-     *
-     * @return void
      */
     public function testBookingsAreFilteredByUser(): void
     {
@@ -62,8 +56,6 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the start time.
-     *
-     * @return void
      */
     public function testBookingsAreFilteredByStartTime(): void
     {
@@ -79,8 +71,6 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the end time.
-     *
-     * @return void
      */
     public function testBookingsAreFilteredByEndTime(): void
     {

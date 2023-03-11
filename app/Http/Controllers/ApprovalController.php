@@ -24,8 +24,6 @@ class ApprovalController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -65,9 +63,6 @@ class ApprovalController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request): RedirectResponse
     {
@@ -82,9 +77,6 @@ class ApprovalController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Booking $booking): RedirectResponse
     {

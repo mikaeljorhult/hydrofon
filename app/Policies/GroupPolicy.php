@@ -12,10 +12,6 @@ class GroupPolicy
 
     /**
      * Determine whether the user can view the group.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return mixed
      */
     public function view(User $user, Group $group): bool
     {
@@ -24,9 +20,6 @@ class GroupPolicy
 
     /**
      * Determine whether the user can create groups.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
      */
     public function create(User $user): bool
     {
@@ -35,10 +28,6 @@ class GroupPolicy
 
     /**
      * Determine whether the user can update the group.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return mixed
      */
     public function update(User $user, Group $group): bool
     {
@@ -47,10 +36,6 @@ class GroupPolicy
 
     /**
      * Determine whether the user can delete the group.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return mixed
      */
     public function delete(User $user, Group $group): bool
     {

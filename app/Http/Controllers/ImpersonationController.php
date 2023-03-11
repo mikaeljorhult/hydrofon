@@ -20,9 +20,6 @@ class ImpersonationController extends Controller
 
     /**
      * Create impersonation of user.
-     *
-     * @param  \App\Http\Requests\ImpersonationRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ImpersonationRequest $request): RedirectResponse
     {
@@ -39,8 +36,6 @@ class ImpersonationController extends Controller
 
     /**
      * Stop impersonation of user.
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(): RedirectResponse
     {

@@ -13,8 +13,6 @@ class IndexTest extends TestCase
 
     /**
      * Groups are listed in index.
-     *
-     * @return void
      */
     public function testGroupsAreListed(): void
     {
@@ -28,8 +26,6 @@ class IndexTest extends TestCase
 
     /**
      * Groups index can be filtered by name.
-     *
-     * @return void
      */
     public function testGroupsCanBeFilteredByName(): void
     {

@@ -14,10 +14,6 @@ class DeleteTest extends TestCase
 
     /**
      * Posts request to delete a subscription.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function deleteSubscription(Subscription $subscription, ?User $user = null): TestResponse
     {
@@ -27,8 +23,6 @@ class DeleteTest extends TestCase
 
     /**
      * A user can delete subscription of their own bookings.
-     *
-     * @return void
      */
     public function testUserSubscriptionsCanBeDeleted(): void
     {
@@ -43,8 +37,6 @@ class DeleteTest extends TestCase
 
     /**
      * An administrator can delete subscription of another users bookings.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteAnyUserSubscription(): void
     {
@@ -59,8 +51,6 @@ class DeleteTest extends TestCase
 
     /**
      * An administrator can delete subscription of resource bookings.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteAResourceSubscription(): void
     {
@@ -75,8 +65,6 @@ class DeleteTest extends TestCase
 
     /**
      * A regular user can not delete subscription of resource bookings.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteAResourceSubscription(): void
     {

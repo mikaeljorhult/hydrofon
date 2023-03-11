@@ -12,8 +12,6 @@ class BookingsTest extends TestCase
 
     /**
      * Profile bookings is available.
-     *
-     * @return void
      */
     public function testBookingsAreAvailable(): void
     {

@@ -15,8 +15,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -32,8 +30,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
     public function testEditFormIsDisplayed(): void
     {
@@ -47,8 +43,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Edited group can be saved.
-     *
-     * @return void
      */
     public function testAdministratorCanEditAGroup(): void
     {
@@ -71,8 +65,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Regular user can not update a group.
-     *
-     * @return void
      */
     public function testUserCanNotEditAGroup(): void
     {
@@ -92,8 +84,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Approver relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedApproversAreSaved(): void
     {
@@ -115,8 +105,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * A group must have a name.
-     *
-     * @return void
      */
     public function testGroupMustHaveAName(): void
     {
@@ -139,8 +127,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Approvers must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingApproversAreNotAllowed(): void
     {
@@ -161,8 +147,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Group can be deleted.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteGroup(): void
     {
@@ -181,8 +165,6 @@ class GroupsTableTest extends TestCase
 
     /**
      * Regular user can not delete group.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteGroup(): void
     {

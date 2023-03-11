@@ -15,8 +15,6 @@ class PruneTest extends TestCase
 
     /**
      * Bookings less than 6 months old are not deleted.
-     *
-     * @return void
      */
     public function testBookingsOlderThanSixMonthsAreDeleted(): void
     {
@@ -32,8 +30,6 @@ class PruneTest extends TestCase
 
     /**
      * Bookings less than 6 months old are not deleted.
-     *
-     * @return void
      */
     public function testCheckedOutBookingsAreNotDeleted(): void
     {
@@ -50,8 +46,6 @@ class PruneTest extends TestCase
 
     /**
      * Bookings that ended less than 6 months ago are not deleted.
-     *
-     * @return void
      */
     public function testNewlyEndedBookingsAreNotDeleted(): void
     {
@@ -67,8 +61,6 @@ class PruneTest extends TestCase
 
     /**
      * Current bookings are not deleted.
-     *
-     * @return void
      */
     public function testCurrentBookingsAreNotDeleted(): void
     {
@@ -84,8 +76,6 @@ class PruneTest extends TestCase
 
     /**
      * Bookings in the future are not deleted.
-     *
-     * @return void
      */
     public function testFutureBookingsAreNotDeleted(): void
     {
@@ -101,8 +91,6 @@ class PruneTest extends TestCase
 
     /**
      * Users that haven't logged in for over a year are deleted.
-     *
-     * @return void
      */
     public function testNoneActiveUsersAreDeleted(): void
     {
@@ -117,8 +105,6 @@ class PruneTest extends TestCase
 
     /**
      * Users created over a year ago that haven't logged in are deleted.
-     *
-     * @return void
      */
     public function testOldAndInactiveUsersAreDeleted(): void
     {
@@ -133,8 +119,6 @@ class PruneTest extends TestCase
 
     /**
      * Users that haven't logged in are not deleted.
-     *
-     * @return void
      */
     public function testNewlyCreatedUsersThatHaveNotLoggedInAreNotDeleted(): void
     {
@@ -147,8 +131,6 @@ class PruneTest extends TestCase
 
     /**
      * Users that have logged in within the last year are not deleted.
-     *
-     * @return void
      */
     public function testActiveUsersAreNotDeleted(): void
     {
@@ -168,8 +150,6 @@ class PruneTest extends TestCase
 
     /**
      * Users that have checked out bookings are not deleted.
-     *
-     * @return void
      */
     public function testUsersWithCheckedOutBookingsAreNotDeleted(): void
     {
@@ -186,8 +166,6 @@ class PruneTest extends TestCase
 
     /**
      * Pruned users relationships are also deleted.
-     *
-     * @return void
      */
     public function testRelationshipsAreDeletedWithTheirUser(): void
     {
@@ -210,8 +188,6 @@ class PruneTest extends TestCase
     /**
      * The time before users get pruned from the database can be
      * set in configuration.
-     *
-     * @return void
      */
     public function testTimeBeforePruningUsersCanBeConfigured(): void
     {
@@ -229,8 +205,6 @@ class PruneTest extends TestCase
     /**
      * The time before bookings get pruned from the database can be
      * set in configuration.
-     *
-     * @return void
      */
     public function testTimeBeforePruningBookingsCanBeConfigured(): void
     {

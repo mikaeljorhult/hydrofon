@@ -26,8 +26,6 @@ class Category extends Model
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
     protected static function boot(): void
     {
@@ -38,8 +36,6 @@ class Category extends Model
 
     /**
      * Parent category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function parent(): BelongsTo
     {
@@ -48,8 +44,6 @@ class Category extends Model
 
     /**
      * Categories assigned to model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function categories(): HasMany
     {
@@ -59,8 +53,6 @@ class Category extends Model
 
     /**
      * Groups the category belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function groups(): BelongsToMany
     {
@@ -69,8 +61,6 @@ class Category extends Model
 
     /**
      * Resources assigned to model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function resources(): BelongsToMany
     {

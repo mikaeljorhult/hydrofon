@@ -13,8 +13,6 @@ class DeleteTest extends TestCase
 
     /**
      * Groups can be deleted.
-     *
-     * @return void
      */
     public function testGroupsCanBeDeleted(): void
     {
@@ -29,8 +27,6 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete groups.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotDeleteGroups(): void
     {

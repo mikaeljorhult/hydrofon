@@ -15,8 +15,6 @@ class AvailableTest extends TestCase
 
     /**
      * Two bookings can't occupy the same resource and time.
-     *
-     * @return void
      */
     public function testSameResourceAndTime(): void
     {
@@ -28,8 +26,6 @@ class AvailableTest extends TestCase
 
     /**
      * Two bookings can occupy the same time as long as resources are different.
-     *
-     * @return void
      */
     public function testSameTimeDifferentResources(): void
     {
@@ -41,8 +37,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking can be ignored from availability to allow for updates.
-     *
-     * @return void
      */
     public function testOneBookingCanBeIgnored(): void
     {
@@ -54,8 +48,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking can start when another ends.
-     *
-     * @return void
      */
     public function testBookingCanStartWhenAnotherEnds(): void
     {
@@ -77,8 +69,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking can end when another start.
-     *
-     * @return void
      */
     public function testBookingCanEndWhenAnotherStart(): void
     {
@@ -100,8 +90,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking cannot overlap a whole other booking.
-     *
-     * @return void
      */
     public function testBookingCannotOverlapAWholeOtherBooking(): void
     {
@@ -123,8 +111,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking cannot overlap start of other booking.
-     *
-     * @return void
      */
     public function testBookingCannotOverlapStartOfAnotherBooking(): void
     {
@@ -146,8 +132,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking cannot overlap end of another booking.
-     *
-     * @return void
      */
     public function testBookingCannotOverlapEndOfAnotherBooking(): void
     {
@@ -169,8 +153,6 @@ class AvailableTest extends TestCase
 
     /**
      * A booking cannot overlap middle of another booking.
-     *
-     * @return void
      */
     public function testBookingCannotOverlapMiddleOfAnotherBooking(): void
     {

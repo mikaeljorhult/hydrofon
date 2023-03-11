@@ -13,8 +13,6 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
     public function testEditRouteIsAvailable(): void
     {
@@ -29,8 +27,6 @@ class UpdateTest extends TestCase
 
     /**
      * Users can be updated.
-     *
-     * @return void
      */
     public function testUsersCanBeUpdated(): void
     {
@@ -50,8 +46,6 @@ class UpdateTest extends TestCase
 
     /**
      * Users must have a name.
-     *
-     * @return void
      */
     public function testUsersMustHaveAName(): void
     {
@@ -72,8 +66,6 @@ class UpdateTest extends TestCase
 
     /**
      * Users must have an e-mail address.
-     *
-     * @return void
      */
     public function testUsersMustHaveAnEmailAddress(): void
     {
@@ -94,8 +86,6 @@ class UpdateTest extends TestCase
 
     /**
      * E-mail address must be unique.
-     *
-     * @return void
      */
     public function testEmailAddressMustBeUnique(): void
     {
@@ -116,8 +106,6 @@ class UpdateTest extends TestCase
 
     /**
      * Password can be provided but must be confirmed.
-     *
-     * @return void
      */
     public function testPasswordMustBeConfirmed(): void
     {
@@ -140,8 +128,6 @@ class UpdateTest extends TestCase
 
     /**
      * Password can be changed.
-     *
-     * @return void
      */
     public function testPasswordCanBeChanged(): void
     {
@@ -163,8 +149,6 @@ class UpdateTest extends TestCase
 
     /**
      * Non admin users can not update users..
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotUpdateUsers(): void
     {

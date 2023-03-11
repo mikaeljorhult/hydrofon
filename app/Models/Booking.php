@@ -49,8 +49,6 @@ class Booking extends Model
 
     /**
      * The "booted" method of the model.
-     *
-     * @return void
      */
     protected static function booted(): void
     {
@@ -120,8 +118,6 @@ class Booking extends Model
 
     /**
      * Get the prunable model query.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function prunable(): Builder
     {
@@ -133,8 +129,6 @@ class Booking extends Model
 
     /**
      * User that created the booking.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function created_by(): BelongsTo
     {
@@ -143,8 +137,6 @@ class Booking extends Model
 
     /**
      * The booked resource.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function resource(): BelongsTo
     {
@@ -153,8 +145,6 @@ class Booking extends Model
 
     /**
      * User owning the booking.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -163,8 +153,6 @@ class Booking extends Model
 
     /**
      * Get approved state.
-     *
-     * @return bool
      */
     protected function getIsApprovedAttribute(): bool
     {
@@ -174,8 +162,6 @@ class Booking extends Model
 
     /**
      * Get rejected state.
-     *
-     * @return bool
      */
     protected function getIsRejectedAttribute(): bool
     {
@@ -184,8 +170,6 @@ class Booking extends Model
 
     /**
      * Get pending state.
-     *
-     * @return bool
      */
     protected function getIsPendingAttribute(): bool
     {
@@ -194,8 +178,6 @@ class Booking extends Model
 
     /**
      * Get checked in state.
-     *
-     * @return bool
      */
     protected function getIsCheckedInAttribute(): bool
     {
@@ -204,8 +186,6 @@ class Booking extends Model
 
     /**
      * Get checked out state.
-     *
-     * @return bool
      */
     protected function getIsCheckedOutAttribute(): bool
     {
@@ -215,10 +195,8 @@ class Booking extends Model
     /**
      * Scope a query to only include bookings between dates.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  mixed  $start
      * @param  mixed  $end
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeBetween(Builder $query, $start, $end): Builder
     {
@@ -252,9 +230,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include bookings in the past.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCurrent(Builder $query): Builder
     {
@@ -264,9 +239,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include bookings in the past.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePast(Builder $query): Builder
     {
@@ -275,9 +247,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include bookings in the future.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFuture(Builder $query): Builder
     {
@@ -286,9 +255,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include bookings that are to be returned.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOverdue(Builder $query): Builder
     {
@@ -302,9 +268,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include approved bookings.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeApproved(Builder $query): Builder
     {
@@ -313,9 +276,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include rejected bookings.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeRejected(Builder $query): Builder
     {
@@ -324,9 +284,6 @@ class Booking extends Model
 
     /**
      * Scope a query to only include rejected bookings.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePending(Builder $query): Builder
     {
@@ -335,8 +292,6 @@ class Booking extends Model
 
     /**
      * Calculate duration in seconds.
-     *
-     * @return int
      */
     public function getDurationAttribute(): int
     {
@@ -357,8 +312,6 @@ class Booking extends Model
 
     /**
      * Approve booking.
-     *
-     * @return void
      */
     public function approve(): void
     {
@@ -371,8 +324,6 @@ class Booking extends Model
 
     /**
      * Reject booking.
-     *
-     * @return void
      */
     public function reject(): void
     {
@@ -385,8 +336,6 @@ class Booking extends Model
 
     /**
      * Revoke booking approval.
-     *
-     * @return void
      */
     public function revoke(): void
     {

@@ -13,8 +13,6 @@ class CalendarTest extends TestCase
 
     /**
      * A user can visit calendar.
-     *
-     * @return void
      */
     public function testUserCanVisitCalendar(): void
     {
@@ -27,8 +25,6 @@ class CalendarTest extends TestCase
 
     /**
      * Requested resources are stored in session.
-     *
-     * @return void
      */
     public function testResourcesAreAddedToSession(): void
     {
@@ -45,8 +41,6 @@ class CalendarTest extends TestCase
 
     /**
      * Requested resources are not stored in session if not in database.
-     *
-     * @return void
      */
     public function testMissingResourcesAreNotAddedToSession(): void
     {
@@ -62,8 +56,6 @@ class CalendarTest extends TestCase
 
     /**
      * Requested date is used.
-     *
-     * @return void
      */
     public function testDateIsUsed(): void
     {
@@ -78,8 +70,6 @@ class CalendarTest extends TestCase
 
     /**
      * Requested resources are shown.
-     *
-     * @return void
      */
     public function testResourcesAreShown(): void
     {

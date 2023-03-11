@@ -21,8 +21,6 @@ class Bucket extends Model
 
     /**
      * Resources in the bucket.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function resources(): BelongsToMany
     {

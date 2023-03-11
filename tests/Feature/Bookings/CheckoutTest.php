@@ -13,8 +13,6 @@ class CheckoutTest extends TestCase
 
     /**
      * Booking can be checked out.
-     *
-     * @return void
      */
     public function testBookingCanBeCheckedOut(): void
     {
@@ -32,8 +30,6 @@ class CheckoutTest extends TestCase
 
     /**
      * Booking to be checked out must exist in database.
-     *
-     * @return void
      */
     public function testBookingMustExist(): void
     {
@@ -49,8 +45,6 @@ class CheckoutTest extends TestCase
 
     /**
      * Non-admin users can not check out bookings.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotCheckOutBookings(): void
     {

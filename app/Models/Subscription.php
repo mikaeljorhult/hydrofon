@@ -31,8 +31,6 @@ class Subscription extends Model
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
     protected static function boot(): void
     {
@@ -46,8 +44,6 @@ class Subscription extends Model
 
     /**
      * Get all of the owning subscribable models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function subscribable(): MorphTo
     {
@@ -56,8 +52,6 @@ class Subscription extends Model
 
     /**
      * Render subscription as calendar.
-     *
-     * @return string
      */
     public function toCalendar(): string
     {
@@ -90,8 +84,6 @@ class Subscription extends Model
 
     /**
      * Generate events for resource bookings.
-     *
-     * @return \Illuminate\Support\Collection
      */
     private function createResourceEvents(): Collection
     {
@@ -117,8 +109,6 @@ class Subscription extends Model
 
     /**
      * Generate events for facility bookings.
-     *
-     * @return \Illuminate\Support\Collection
      */
     private function createFacilityEvents(): Collection
     {

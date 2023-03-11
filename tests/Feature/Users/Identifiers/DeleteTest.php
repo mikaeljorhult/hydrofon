@@ -12,8 +12,6 @@ class DeleteTest extends TestCase
 
     /**
      * Identifiers can be deleted.
-     *
-     * @return void
      */
     public function testIdentifiersCanBeDeleted(): void
     {
@@ -31,8 +29,6 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete identifiers.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotDeleteIdentifiers(): void
     {

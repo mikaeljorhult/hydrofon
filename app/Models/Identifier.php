@@ -19,8 +19,6 @@ class Identifier extends Model
 
     /**
      * Get the owning identifiable models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function identifiable(): MorphTo
     {
@@ -29,8 +27,6 @@ class Identifier extends Model
 
     /**
      * Get HTML of associated QR code.
-     *
-     * @return string
      */
     public function QrCode(): string
     {

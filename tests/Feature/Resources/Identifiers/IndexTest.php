@@ -13,8 +13,6 @@ class IndexTest extends TestCase
 
     /**
      * Resources are listed in index.
-     *
-     * @return void
      */
     public function testResourcesAreListed(): void
     {

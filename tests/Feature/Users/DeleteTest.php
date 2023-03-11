@@ -13,8 +13,6 @@ class DeleteTest extends TestCase
 
     /**
      * Users can be deleted.
-     *
-     * @return void
      */
     public function testUsersCanBeDeleted(): void
     {
@@ -29,8 +27,6 @@ class DeleteTest extends TestCase
 
     /**
      * Bookings of deleted user are also deleted.
-     *
-     * @return void
      */
     public function testRelatedBookingsAreDeletedWithUser(): void
     {
@@ -45,8 +41,6 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete other users.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotDeleteUsers(): void
     {
@@ -61,8 +55,6 @@ class DeleteTest extends TestCase
 
     /**
      * Users can not delete themselves.
-     *
-     * @return void
      */
     public function testUsersCanNotDeleteThemselves(): void
     {

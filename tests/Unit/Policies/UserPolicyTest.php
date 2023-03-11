@@ -12,8 +12,6 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can view a user.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanViewAUser(): void
     {
@@ -28,8 +26,6 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can create users.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateUsers(): void
     {
@@ -42,8 +38,6 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can update a user.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanUpdateAUser(): void
     {
@@ -58,8 +52,6 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can delete a user.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanDeleteAUser(): void
     {
@@ -74,8 +66,6 @@ class UserPolicyTest extends TestCase
 
     /**
      * An administrator can not delete themselves.
-     *
-     * @return void
      */
     public function testAnAdministratorCanNotDeleteOwnAccount(): void
     {

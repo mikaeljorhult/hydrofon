@@ -25,8 +25,6 @@ class BucketController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -41,8 +39,6 @@ class BucketController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -53,9 +49,6 @@ class BucketController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\BucketStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(BucketStoreRequest $request): RedirectResponse
     {
@@ -73,9 +66,6 @@ class BucketController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Bucket  $bucket
-     * @return \Illuminate\Http\Response
      */
     public function show(Bucket $bucket): View
     {
@@ -84,9 +74,6 @@ class BucketController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bucket  $bucket
-     * @return \Illuminate\Http\Response
      */
     public function edit(Bucket $bucket): View
     {
@@ -100,10 +87,6 @@ class BucketController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\BucketUpdateRequest  $request
-     * @param  \App\Models\Bucket  $bucket
-     * @return \Illuminate\Http\Response
      */
     public function update(BucketUpdateRequest $request, Bucket $bucket): RedirectResponse
     {
@@ -121,10 +104,6 @@ class BucketController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bucket  $bucket
-     * @param  \App\Http\Requests\BucketDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Bucket $bucket, BucketDestroyRequest $request): RedirectResponse
     {

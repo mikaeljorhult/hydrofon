@@ -14,10 +14,6 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a group.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function storeResource(array $overrides = [], ?User $user = null): TestResponse
     {
@@ -29,8 +25,6 @@ class StoreTest extends TestCase
 
     /**
      * Resources can be created and stored.
-     *
-     * @return void
      */
     public function testResourcesCanBeStored(): void
     {
@@ -44,8 +38,6 @@ class StoreTest extends TestCase
 
     /**
      * Resources must have a name.
-     *
-     * @return void
      */
     public function testResourcesMustHaveAName(): void
     {
@@ -58,8 +50,6 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store resources.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotStoreResources(): void
     {

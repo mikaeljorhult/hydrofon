@@ -27,8 +27,6 @@ class BookingController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -83,8 +81,6 @@ class BookingController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -99,9 +95,6 @@ class BookingController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\BookingStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(BookingStoreRequest $request): RedirectResponse
     {
@@ -123,7 +116,6 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
     public function show(Booking $booking)
@@ -161,9 +153,6 @@ class BookingController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
      */
     public function edit(Booking $booking): View
     {
@@ -179,10 +168,6 @@ class BookingController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\BookingUpdateRequest  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
      */
     public function update(BookingUpdateRequest $request, Booking $booking): RedirectResponse
     {
@@ -203,10 +188,6 @@ class BookingController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @param  \App\Http\Requests\BookingDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Booking $booking, BookingDestroyRequest $request): RedirectResponse
     {

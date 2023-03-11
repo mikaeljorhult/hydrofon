@@ -11,9 +11,6 @@ class ResourceListComposer
 {
     /**
      * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
      */
     public function compose(View $view): void
     {
@@ -28,8 +25,6 @@ class ResourceListComposer
 
     /**
      * Retrieve all categories within same group as current user.
-     *
-     * @return \Illuminate\Support\Collection
      */
     private function getCategories(): Collection
     {
@@ -41,8 +36,6 @@ class ResourceListComposer
 
     /**
      * Retrieve resources within same group as current user that dosen't belong to any categories.
-     *
-     * @return \Illuminate\Support\Collection
      */
     private function getRootResources(): Collection
     {

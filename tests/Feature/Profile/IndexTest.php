@@ -12,8 +12,6 @@ class IndexTest extends TestCase
 
     /**
      * Profile page is available.
-     *
-     * @return void
      */
     public function testProfileIsAvailable(): void
     {

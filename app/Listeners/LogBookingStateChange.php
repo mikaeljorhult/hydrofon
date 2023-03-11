@@ -26,9 +26,6 @@ class LogBookingStateChange
 
     /**
      * Handle the event.
-     *
-     * @param  \Spatie\ModelStates\Events\StateChanged  $event
-     * @return void
      */
     public function handle(StateChanged $event): void
     {

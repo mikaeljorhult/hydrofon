@@ -14,8 +14,6 @@ class DeleteTest extends TestCase
 
     /**
      * Resources can be deleted.
-     *
-     * @return void
      */
     public function testResourcesCanBeDeleted(): void
     {
@@ -30,8 +28,6 @@ class DeleteTest extends TestCase
 
     /**
      * Bookings of deleted resource is also deleted.
-     *
-     * @return void
      */
     public function testRelatedBookingsAreDeletedWithResource(): void
     {
@@ -46,8 +42,6 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete resources.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotDeleteResources(): void
     {

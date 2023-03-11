@@ -11,8 +11,6 @@ class Status extends \Spatie\ModelStatus\Status
 
     /**
      * The "booted" method of the model.
-     *
-     * @return void
      */
     protected static function booted(): void
     {
@@ -27,8 +25,6 @@ class Status extends \Spatie\ModelStatus\Status
 
     /**
      * User whose action generated the status.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function created_by(): BelongsTo
     {

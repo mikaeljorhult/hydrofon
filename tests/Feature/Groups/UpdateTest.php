@@ -13,8 +13,6 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
     public function testEditRouteIsAvailable(): void
     {
@@ -29,8 +27,6 @@ class UpdateTest extends TestCase
 
     /**
      * Groups can be updated.
-     *
-     * @return void
      */
     public function testGroupsCanBeUpdated(): void
     {
@@ -49,8 +45,6 @@ class UpdateTest extends TestCase
 
     /**
      * Groups must have a name.
-     *
-     * @return void
      */
     public function testGroupsMustHaveAName(): void
     {
@@ -70,8 +64,6 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update groups.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotUpdateGroups(): void
     {

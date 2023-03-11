@@ -25,8 +25,6 @@ class GroupController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -41,8 +39,6 @@ class GroupController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -53,9 +49,6 @@ class GroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\GroupStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(GroupStoreRequest $request): RedirectResponse
     {
@@ -73,9 +66,6 @@ class GroupController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
      */
     public function show(Group $group): View
     {
@@ -84,9 +74,6 @@ class GroupController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
      */
     public function edit(Group $group): View
     {
@@ -100,10 +87,6 @@ class GroupController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\GroupUpdateRequest  $request
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
      */
     public function update(GroupUpdateRequest $request, Group $group): RedirectResponse
     {
@@ -121,10 +104,6 @@ class GroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Group  $group
-     * @param  \App\Http\Requests\GroupDestroyRequest  $reqest
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Group $group, GroupDestroyRequest $reqest): RedirectResponse
     {

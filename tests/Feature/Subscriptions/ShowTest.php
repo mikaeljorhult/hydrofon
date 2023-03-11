@@ -12,8 +12,6 @@ class ShowTest extends TestCase
 
     /**
      * A user subscription can be shown.
-     *
-     * @return void
      */
     public function testUserSubscriptionIsShown(): void
     {

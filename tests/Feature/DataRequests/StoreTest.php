@@ -12,8 +12,6 @@ class StoreTest extends TestCase
 
     /**
      * User personal data can be downloaded.
-     *
-     * @return void
      */
     public function testDataExportCanBeRequested(): void
     {
@@ -24,8 +22,6 @@ class StoreTest extends TestCase
 
     /**
      * User must be logged in to access data export..
-     *
-     * @return void
      */
     public function testUserMustBeLoggedInToRequestExport(): void
     {

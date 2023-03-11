@@ -13,8 +13,6 @@ class ResourcePolicy
     /**
      * Determine whether the user can see the resource in listings.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Resource  $resource
      * @return mixed
      */
     public function list(User $user, Resource $resource)
@@ -26,10 +24,6 @@ class ResourcePolicy
 
     /**
      * Determine whether the user can view the resource.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Resource  $resource
-     * @return mixed
      */
     public function view(User $user, Resource $resource): bool
     {
@@ -38,9 +32,6 @@ class ResourcePolicy
 
     /**
      * Determine whether the user can create resources.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
      */
     public function create(User $user): bool
     {
@@ -49,10 +40,6 @@ class ResourcePolicy
 
     /**
      * Determine whether the user can update the resource.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Resource  $resource
-     * @return mixed
      */
     public function update(User $user, Resource $resource): bool
     {
@@ -61,10 +48,6 @@ class ResourcePolicy
 
     /**
      * Determine whether the user can delete the resource.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Resource  $resource
-     * @return mixed
      */
     public function delete(User $user, Resource $resource): bool
     {

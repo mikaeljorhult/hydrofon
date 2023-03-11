@@ -26,8 +26,6 @@ class UserController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -47,8 +45,6 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -59,9 +55,6 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\UserStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(UserStoreRequest $request): RedirectResponse
     {
@@ -86,9 +79,6 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
     public function show(User $user): View
     {
@@ -97,9 +87,6 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
     public function edit(User $user): View
     {
@@ -113,10 +100,6 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UserUpdateRequest  $request
-     * @param  \App\Models\User  $user
-     * @return void
      */
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
@@ -146,10 +129,6 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Http\Requests\UserDestroyRequest  $request
-     * @return void
      */
     public function destroy(User $user, UserDestroyRequest $request): RedirectResponse
     {

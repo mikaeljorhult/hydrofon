@@ -15,8 +15,6 @@ class DeleteTest extends TestCase
 
     /**
      * Status can be deleted.
-     *
-     * @return void
      */
     public function testStatusCanDeleted(): void
     {
@@ -31,8 +29,6 @@ class DeleteTest extends TestCase
 
     /**
      * Regular users can not set status.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteStatus(): void
     {
@@ -47,8 +43,6 @@ class DeleteTest extends TestCase
 
     /**
      * Status deletion is logged as "deflagging".
-     *
-     * @return void
      */
     public function testStatusDeletionIsLogged(): void
     {

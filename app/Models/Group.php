@@ -21,8 +21,6 @@ class Group extends Model
 
     /**
      * Users that can approve bookings for users in group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function approvers(): BelongsToMany
     {
@@ -31,8 +29,6 @@ class Group extends Model
 
     /**
      * Categories in the group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories(): BelongsToMany
     {
@@ -41,8 +37,6 @@ class Group extends Model
 
     /**
      * Resources in the group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function resources(): BelongsToMany
     {
@@ -51,8 +45,6 @@ class Group extends Model
 
     /**
      * Users in the group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users(): BelongsToMany
     {

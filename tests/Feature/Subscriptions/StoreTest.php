@@ -15,10 +15,6 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a subscription.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function storeSubscription(array $overrides = [], ?User $user = null): TestResponse
     {
@@ -30,8 +26,6 @@ class StoreTest extends TestCase
 
     /**
      * A user can subscribe to its bookings.
-     *
-     * @return void
      */
     public function testUserSubscriptionsCanBeStored(): void
     {
@@ -52,8 +46,6 @@ class StoreTest extends TestCase
 
     /**
      * Only one subscription is created for each object.
-     *
-     * @return void
      */
     public function testOnlyOneSubscriptionIsCreatedForEachObject(): void
     {
@@ -73,8 +65,6 @@ class StoreTest extends TestCase
 
     /**
      * A user can not subscribe to bookings of another user.
-     *
-     * @return void
      */
     public function testUserCanNotSubscribeToOtherUsersBookings(): void
     {
@@ -90,8 +80,6 @@ class StoreTest extends TestCase
 
     /**
      * An administrator can subscribe to bookings of a resource.
-     *
-     * @return void
      */
     public function testResourceSubscriptionsCanBeStored(): void
     {
@@ -112,8 +100,6 @@ class StoreTest extends TestCase
 
     /**
      * A regular user can not subscribe to bookings of a resource.
-     *
-     * @return void
      */
     public function testUserCanNotSubscribeResourceBookings(): void
     {

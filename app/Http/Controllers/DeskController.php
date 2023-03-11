@@ -24,9 +24,6 @@ class DeskController extends Controller
 
     /**
      * Show the circulation desk view.
-     *
-     * @param  null|string  $search
-     * @return \Illuminate\Http\Response
      */
     public function index(?string $search = null): View
     {
@@ -46,9 +43,6 @@ class DeskController extends Controller
 
     /**
      * Redirect to desk view with search term.
-     *
-     * @param  \App\Http\Requests\DeskRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(DeskRequest $request): RedirectResponse
     {

@@ -14,8 +14,6 @@ class GroupTest extends TestCase
 
     /**
      * Group can have resources.
-     *
-     * @return void
      */
     public function testGroupCanHaveResources(): void
     {
@@ -28,8 +26,6 @@ class GroupTest extends TestCase
 
     /**
      * Group can have users.
-     *
-     * @return void
      */
     public function testGroupCanHaveUsers(): void
     {

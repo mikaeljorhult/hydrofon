@@ -16,8 +16,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -33,8 +31,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
     public function testEditFormIsDisplayed(): void
     {
@@ -48,8 +44,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Edited category can be saved.
-     *
-     * @return void
      */
     public function testAdministratorCanEditACategory(): void
     {
@@ -72,8 +66,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Regular user can not update a category.
-     *
-     * @return void
      */
     public function testUserCanNotEditACategory(): void
     {
@@ -93,8 +85,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Parent relationship is stored.
-     *
-     * @return void
      */
     public function testParentRelationshipIsSaved(): void
     {
@@ -117,8 +107,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Parent must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingParentIsNotAllowed(): void
     {
@@ -139,8 +127,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Category can't be its own parent.
-     *
-     * @return void
      */
     public function testCategoryCanNotBeItsOwnParent(): void
     {
@@ -161,8 +147,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Group relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedGroupsAreSaved(): void
     {
@@ -184,8 +168,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Resources must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingResourcesAreNotAllowed(): void
     {
@@ -206,8 +188,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * A category must have a name.
-     *
-     * @return void
      */
     public function testCategoryMustHaveAName(): void
     {
@@ -230,8 +210,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Category can be deleted.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteCategory(): void
     {
@@ -250,8 +228,6 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Regular user can not delete category.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteCategory(): void
     {

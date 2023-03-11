@@ -14,8 +14,6 @@ class OverdueBookingNotificationTest extends TestCase
 
     /**
      * User with overdue a booking gets notified.
-     *
-     * @return void
      */
     public function testUserWithOverdueBookingGetNotified(): void
     {
@@ -29,8 +27,6 @@ class OverdueBookingNotificationTest extends TestCase
 
     /**
      * User only get notified once about the same booking.
-     *
-     * @return void
      */
     public function testUserDontGetNotifiedTwiceAboutSameBooking(): void
     {
@@ -46,8 +42,6 @@ class OverdueBookingNotificationTest extends TestCase
 
     /**
      * User gets notified about new bookings.
-     *
-     * @return void
      */
     public function testUserGetsNotifiedAboutNewBooking(): void
     {

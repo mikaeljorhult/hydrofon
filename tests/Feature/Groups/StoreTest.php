@@ -14,10 +14,6 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a group.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function storeGroup(array $overrides = [], ?User $user = null): TestResponse
     {
@@ -29,8 +25,6 @@ class StoreTest extends TestCase
 
     /**
      * Groups can be created and stored.
-     *
-     * @return void
      */
     public function testGroupsCanBeStored(): void
     {
@@ -46,8 +40,6 @@ class StoreTest extends TestCase
 
     /**
      * Groups must have a name.
-     *
-     * @return void
      */
     public function testGroupsMustHaveAName(): void
     {
@@ -60,8 +52,6 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store groups.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotStoreGroups(): void
     {

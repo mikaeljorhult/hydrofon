@@ -16,8 +16,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -33,8 +31,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Administrator can approve a booking.
-     *
-     * @return void
      */
     public function testAdministratorCanApproveBooking(): void
     {
@@ -62,8 +58,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Group approver can approve a booking.
-     *
-     * @return void
      */
     public function testGroupApproverCanApproveBooking(): void
     {
@@ -91,8 +85,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Regular user can not approve a booking.
-     *
-     * @return void
      */
     public function testUserCanNotApproveBooking(): void
     {
@@ -117,8 +109,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Administrator can reject a booking.
-     *
-     * @return void
      */
     public function testAdministratorCanRejectBooking(): void
     {
@@ -146,8 +136,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Group approver can reject a booking.
-     *
-     * @return void
      */
     public function testGroupApproverCanRejectBooking(): void
     {
@@ -175,8 +163,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Regular user can not reject a booking.
-     *
-     * @return void
      */
     public function testUserCanNotRejectBooking(): void
     {
@@ -201,8 +187,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be approved.
-     *
-     * @return void
      */
     public function testBookingMustHaveValidStateToBeApproved(): void
     {
@@ -224,8 +208,6 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be rejected.
-     *
-     * @return void
      */
     public function testBookingMustHaveValidStateToBeRejected(): void
     {

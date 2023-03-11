@@ -14,8 +14,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when creating a category.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreStoredWhenCreatingCategory(): void
     {
@@ -36,8 +34,6 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when creating a category.
-     *
-     * @return void
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringCategory(): void
     {
@@ -57,8 +53,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when updating a category.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingCategory(): void
     {
@@ -79,8 +73,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are removed when updating user.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingCategory(): void
     {
@@ -108,8 +100,6 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when updating a category.
-     *
-     * @return void
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingCategory(): void
     {

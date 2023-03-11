@@ -13,8 +13,6 @@ class ResourceDeskTest extends TestCase
 
     /**
      * Resources can be found by an identifier.
-     *
-     * @return void
      */
     public function testResourcesCanBeFoundByIdentifier(): void
     {

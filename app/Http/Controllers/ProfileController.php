@@ -20,8 +20,6 @@ class ProfileController extends Controller
 
     /**
      * Handle the incoming request.
-     *
-     * @return \Illuminate\View\View
      */
     public function __invoke(): View
     {
@@ -41,9 +39,6 @@ class ProfileController extends Controller
 
     /**
      * Retrieve upcoming bookings for the next week from the database.
-     *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
-     * @return \Illuminate\Support\Collection
      */
     private function upcomingBookings(Authenticatable $user): Collection
     {

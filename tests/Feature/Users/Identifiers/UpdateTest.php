@@ -12,8 +12,6 @@ class UpdateTest extends TestCase
 
     /**
      * Identifiers can be updated.
-     *
-     * @return void
      */
     public function testIdentifiersCanBeUpdated(): void
     {
@@ -33,8 +31,6 @@ class UpdateTest extends TestCase
 
     /**
      * Identifier must have a value.
-     *
-     * @return void
      */
     public function testIdentifierMustHaveAValue(): void
     {
@@ -55,8 +51,6 @@ class UpdateTest extends TestCase
 
     /**
      * Value must be unique.
-     *
-     * @return void
      */
     public function testValueMustBeUnique(): void
     {
@@ -79,8 +73,6 @@ class UpdateTest extends TestCase
 
     /**
      * Value can not be a user e-mail address.
-     *
-     * @return void
      */
     public function testValueCanNotBeAUserEmailAddress(): void
     {
@@ -102,8 +94,6 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update identifiers.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotUpdateIdentifiers(): void
     {

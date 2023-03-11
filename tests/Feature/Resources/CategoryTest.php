@@ -14,8 +14,6 @@ class CategoryTest extends TestCase
 
     /**
      * Category relationships are stored when creating resource.
-     *
-     * @return void
      */
     public function testCategoryRelationshipsAreStoredWhenCreatingResource(): void
     {
@@ -36,8 +34,6 @@ class CategoryTest extends TestCase
 
     /**
      * Non-existing categories cannot be added when creating resource.
-     *
-     * @return void
      */
     public function testNonExistingCategoriesCannotBeAddedWhenStoringResource(): void
     {
@@ -57,8 +53,6 @@ class CategoryTest extends TestCase
 
     /**
      * Category relationships are stored when updating resource.
-     *
-     * @return void
      */
     public function testCategoryRelationshipsAreStoredWhenUpdatingResource(): void
     {
@@ -79,8 +73,6 @@ class CategoryTest extends TestCase
 
     /**
      * Category relationships are removed when updating user.
-     *
-     * @return void
      */
     public function testCategoryRelationshipsAreRemovedWhenUpdatingResource(): void
     {
@@ -108,8 +100,6 @@ class CategoryTest extends TestCase
 
     /**
      * Non-existing categories cannot be added when updating resource.
-     *
-     * @return void
      */
     public function testNonExistingCategoriesCannotBeAddedWhenUpdatingResource(): void
     {

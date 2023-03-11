@@ -13,8 +13,6 @@ class DeleteTest extends TestCase
 
     /**
      * Bookings can be deleted.
-     *
-     * @return void
      */
     public function testBookingsCanBeDeleted(): void
     {
@@ -31,8 +29,6 @@ class DeleteTest extends TestCase
 
     /**
      * A user can delete a booking it owns.
-     *
-     * @return void
      */
     public function testUserCanDeleteBookingItOwns(): void
     {
@@ -48,8 +44,6 @@ class DeleteTest extends TestCase
 
     /**
      * A user can not delete a booking by another user.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteBookingByAnotherUser(): void
     {
@@ -64,8 +58,6 @@ class DeleteTest extends TestCase
 
     /**
      * A user can not delete a booking that has started.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteBookingThatHasStarted(): void
     {
@@ -79,8 +71,6 @@ class DeleteTest extends TestCase
 
     /**
      * A user can not delete a booking that has been checked out.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteBookingThatHasBeenCheckedOut(): void
     {

@@ -13,8 +13,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when creating user.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreStoredWhenCreatingUser(): void
     {
@@ -38,8 +36,6 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when creating user.
-     *
-     * @return void
      */
     public function testNonExistingGroupsCannotBeAddedWhenStoringUser(): void
     {
@@ -62,8 +58,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when updating user.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreStoredWhenUpdatingUser(): void
     {
@@ -85,8 +79,6 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are removed when updating user.
-     *
-     * @return void
      */
     public function testGroupRelationshipsAreRemovedWhenUpdatingUser(): void
     {
@@ -115,8 +107,6 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when updating user.
-     *
-     * @return void
      */
     public function testNonExistingGroupsCannotBeAddedWhenUpdatingUser(): void
     {

@@ -12,8 +12,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * An administration can see impersonation form.
-     *
-     * @return void
      */
     public function testAdministratorCanSeeImpersonationForm(): void
     {
@@ -26,8 +24,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * An administration can impersonate a user.
-     *
-     * @return void
      */
     public function testAdministratorCanImpersonateUser(): void
     {
@@ -45,8 +41,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * An administration can impersonate a user.
-     *
-     * @return void
      */
     public function testAdministratorCanStopImpersonatingUser(): void
     {
@@ -65,8 +59,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * ID of the user to impersonate is required.
-     *
-     * @return void
      */
     public function testUserIDIsRequired(): void
     {
@@ -83,8 +75,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * User to impersonate must exist.
-     *
-     * @return void
      */
     public function testUserMustExist(): void
     {
@@ -101,8 +91,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * A user can not see impersonation form.
-     *
-     * @return void
      */
     public function testUserCanNotSeeImpersonationForm(): void
     {
@@ -115,8 +103,6 @@ class ImpersonationTest extends TestCase
 
     /**
      * A user can not impersonate another user.
-     *
-     * @return void
      */
     public function testUserCanNotImpersonateUser(): void
     {

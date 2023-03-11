@@ -13,8 +13,6 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
     public function testEditRouteIsAvailable(): void
     {
@@ -29,8 +27,6 @@ class UpdateTest extends TestCase
 
     /**
      * Buckets can be updated.
-     *
-     * @return void
      */
     public function testBucketsCanBeUpdated(): void
     {
@@ -49,8 +45,6 @@ class UpdateTest extends TestCase
 
     /**
      * Buckets must have a name.
-     *
-     * @return void
      */
     public function testBucketsMustHaveAName(): void
     {
@@ -70,8 +64,6 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update buckets.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotUpdateBuckets(): void
     {

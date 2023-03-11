@@ -12,8 +12,6 @@ class CreateTest extends TestCase
 
     /**
      * Create route is served successfully.
-     *
-     * @return void
      */
     public function testCreateRouteIsServedSuccessfully(): void
     {

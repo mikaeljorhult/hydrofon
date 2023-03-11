@@ -18,8 +18,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
     public function testItemsAreRendered(): void
     {
@@ -35,8 +33,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
     public function testEditFormIsDisplayed(): void
     {
@@ -50,8 +46,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Edited resource can be saved.
-     *
-     * @return void
      */
     public function testAdministratorCanEditAResource(): void
     {
@@ -74,8 +68,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Regular user can not update a resource.
-     *
-     * @return void
      */
     public function testUserCanNotEditAResource(): void
     {
@@ -95,8 +87,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Bucket relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedBucketsAreSaved(): void
     {
@@ -118,8 +108,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Category relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedCategoriesAreSaved(): void
     {
@@ -141,8 +129,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Group relationships are stored.
-     *
-     * @return void
      */
     public function testRelatedGroupsAreSaved(): void
     {
@@ -164,8 +150,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * A resource must have a name.
-     *
-     * @return void
      */
     public function testResourceMustHaveAName(): void
     {
@@ -188,8 +172,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Buckets must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingBucketsAreNotAllowed(): void
     {
@@ -210,8 +192,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Categories must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingCategoriesAreNotAllowed(): void
     {
@@ -232,8 +212,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Groups must exist to be allowed.
-     *
-     * @return void
      */
     public function testMissingGroupsAreNotAllowed(): void
     {
@@ -254,8 +232,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Resource can be deleted.
-     *
-     * @return void
      */
     public function testAdministratorCanDeleteResource(): void
     {
@@ -274,8 +250,6 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Regular user can not delete resource.
-     *
-     * @return void
      */
     public function testUserCanNotDeleteResource(): void
     {

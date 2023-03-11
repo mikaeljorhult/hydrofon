@@ -13,8 +13,6 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can view an identifier.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanViewAnIdentifier(): void
     {
@@ -29,8 +27,6 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can create identifiers.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateIdentifiers(): void
     {
@@ -43,8 +39,6 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can update an identifier.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanUpdateAnIdentifier(): void
     {
@@ -59,8 +53,6 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can delete an identifier.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanDeleteAnIdentifier(): void
     {

@@ -13,8 +13,6 @@ class GroupPolicyTest extends TestCase
 
     /**
      * Only administrators can view a group.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanViewAGroup(): void
     {
@@ -29,8 +27,6 @@ class GroupPolicyTest extends TestCase
 
     /**
      * Only administrators can create groups.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateGroups(): void
     {
@@ -43,8 +39,6 @@ class GroupPolicyTest extends TestCase
 
     /**
      * Only administrators can update a group.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanUpdateAGroup(): void
     {
@@ -59,8 +53,6 @@ class GroupPolicyTest extends TestCase
 
     /**
      * Only administrators can delete a group.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanDeleteAGroup(): void
     {

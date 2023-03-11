@@ -13,8 +13,6 @@ class CheckinTest extends TestCase
 
     /**
      * Booking can be checked in.
-     *
-     * @return void
      */
     public function testBookingCanBeCheckedIn(): void
     {
@@ -30,8 +28,6 @@ class CheckinTest extends TestCase
 
     /**
      * End time is shortened if it has not ended yet when booking is checked in.
-     *
-     * @return void
      */
     public function testEndTimeIsShortenedWhenBookingIsCheckedIn(): void
     {
@@ -50,8 +46,6 @@ class CheckinTest extends TestCase
 
     /**
      * Booking to be checked in must exist in database.
-     *
-     * @return void
      */
     public function testBookingMustExist(): void
     {
@@ -67,8 +61,6 @@ class CheckinTest extends TestCase
 
     /**
      * Non-admin users can not check in bookings.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotCheckInBookings(): void
     {

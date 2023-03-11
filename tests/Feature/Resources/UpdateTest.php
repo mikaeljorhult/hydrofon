@@ -13,8 +13,6 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
     public function testEditRouteIsAvailable(): void
     {
@@ -29,8 +27,6 @@ class UpdateTest extends TestCase
 
     /**
      * Resources can be updated.
-     *
-     * @return void
      */
     public function testResourcesCanBeUpdated(): void
     {
@@ -49,8 +45,6 @@ class UpdateTest extends TestCase
 
     /**
      * Resources must have a name.
-     *
-     * @return void
      */
     public function testResourcesMustHaveAName(): void
     {
@@ -70,8 +64,6 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update resources.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotUpdateResources(): void
     {

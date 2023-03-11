@@ -41,7 +41,6 @@ class Available implements Rule
      *
      * @param  mixed  $startTime
      * @param  mixed  $endTime
-     * @param  int  $ignore
      * @param  string  $column  = ''
      */
     public function __construct($startTime, $endTime, int $ignore = 0, string $column = '')
@@ -62,9 +61,7 @@ class Available implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
      * @param  mixed  $value
-     * @return bool
      */
     public function passes(string $attribute, $value): bool
     {
@@ -82,8 +79,6 @@ class Available implements Rule
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {

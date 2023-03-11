@@ -14,10 +14,6 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a bucket.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function storeBucket(array $overrides = [], ?User $user = null): TestResponse
     {
@@ -29,8 +25,6 @@ class StoreTest extends TestCase
 
     /**
      * Buckets can be created and stored.
-     *
-     * @return void
      */
     public function testBucketsCanBeStored(): void
     {
@@ -44,8 +38,6 @@ class StoreTest extends TestCase
 
     /**
      * Buckets must have a name.
-     *
-     * @return void
      */
     public function testBucketsMustHaveAName(): void
     {
@@ -58,8 +50,6 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store buckets.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotStoreBuckets(): void
     {

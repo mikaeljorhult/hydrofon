@@ -14,8 +14,6 @@ class CategoryTest extends TestCase
 
     /**
      * Category can have a parent.
-     *
-     * @return void
      */
     public function testCategoryCanHaveAParent(): void
     {
@@ -28,8 +26,6 @@ class CategoryTest extends TestCase
 
     /**
      * Category can have child categories.
-     *
-     * @return void
      */
     public function testCategoryCanHaveChildCategories(): void
     {
@@ -42,8 +38,6 @@ class CategoryTest extends TestCase
 
     /**
      * Category can have child resources.
-     *
-     * @return void
      */
     public function testCategoryCanHaveChildResources(): void
     {

@@ -12,8 +12,6 @@ class UserDeskTest extends TestCase
 
     /**
      * Regular users can't visit the desk.
-     *
-     * @return void
      */
     public function testUsersCantVisitDesk(): void
     {
@@ -24,8 +22,6 @@ class UserDeskTest extends TestCase
 
     /**
      * Administrator users can visit the desk.
-     *
-     * @return void
      */
     public function testAdministratorsCanVisitDesk(): void
     {
@@ -36,8 +32,6 @@ class UserDeskTest extends TestCase
 
     /**
      * Users can be found by their e-mail address.
-     *
-     * @return void
      */
     public function testSearchRedirectsToUserPage(): void
     {
@@ -52,8 +46,6 @@ class UserDeskTest extends TestCase
 
     /**
      * Users can be found by their e-mail address.
-     *
-     * @return void
      */
     public function testUsersCanBeFoundByEmail(): void
     {
@@ -67,8 +59,6 @@ class UserDeskTest extends TestCase
 
     /**
      * Users can be found by an identifier.
-     *
-     * @return void
      */
     public function testUsersCanBeFoundByIdentifier(): void
     {

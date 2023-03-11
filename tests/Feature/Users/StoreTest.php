@@ -12,8 +12,6 @@ class StoreTest extends TestCase
 
     /**
      * Users can be created and stored.
-     *
-     * @return void
      */
     public function testUsersCanBeStored(): void
     {
@@ -35,8 +33,6 @@ class StoreTest extends TestCase
 
     /**
      * Users must have a name.
-     *
-     * @return void
      */
     public function testUsersMustHaveAName(): void
     {
@@ -60,8 +56,6 @@ class StoreTest extends TestCase
 
     /**
      * Users must have an e-mail address.
-     *
-     * @return void
      */
     public function testUsersMustHaveAnEmailAddress(): void
     {
@@ -85,8 +79,6 @@ class StoreTest extends TestCase
 
     /**
      * E-mail address must be unique and not in use by another user.
-     *
-     * @return void
      */
     public function testEmailAddressMustBeUnique(): void
     {
@@ -110,8 +102,6 @@ class StoreTest extends TestCase
 
     /**
      * Users must have a password.
-     *
-     * @return void
      */
     public function testUsersMustHaveAPassword(): void
     {
@@ -135,8 +125,6 @@ class StoreTest extends TestCase
 
     /**
      * Password must match confirmation.
-     *
-     * @return void
      */
     public function testPasswordMustBeConfirmed(): void
     {
@@ -160,8 +148,6 @@ class StoreTest extends TestCase
 
     /**
      * Users can be created and stored.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotStoreUsers(): void
     {

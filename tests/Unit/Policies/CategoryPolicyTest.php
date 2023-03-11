@@ -13,8 +13,6 @@ class CategoryPolicyTest extends TestCase
 
     /**
      * Only administrators can view a category.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanViewACategory(): void
     {
@@ -29,8 +27,6 @@ class CategoryPolicyTest extends TestCase
 
     /**
      * Only administrators can create categories.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanCreateCategories(): void
     {
@@ -43,8 +39,6 @@ class CategoryPolicyTest extends TestCase
 
     /**
      * Only administrators can update a category.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanUpdateACategory(): void
     {
@@ -59,8 +53,6 @@ class CategoryPolicyTest extends TestCase
 
     /**
      * Only administrators can delete a category.
-     *
-     * @return void
      */
     public function testOnlyAdminUsersCanDeleteACategory(): void
     {

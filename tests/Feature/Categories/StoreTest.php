@@ -14,10 +14,6 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a category.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
     public function storeCategory(array $overrides = [], ?User $user = null): TestResponse
     {
@@ -29,8 +25,6 @@ class StoreTest extends TestCase
 
     /**
      * Categories can be created and stored.
-     *
-     * @return void
      */
     public function testCategoriesCanBeStored(): void
     {
@@ -50,8 +44,6 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store categories.
-     *
-     * @return void
      */
     public function testNonAdminUsersCanNotStoreCategories(): void
     {
@@ -65,8 +57,6 @@ class StoreTest extends TestCase
 
     /**
      * Categories must have a name.
-     *
-     * @return void
      */
     public function testCategoriesMustHaveAName(): void
     {
@@ -79,8 +69,6 @@ class StoreTest extends TestCase
 
     /**
      * A parent category must exist in the database.
-     *
-     * @return void
      */
     public function testParentMustExist(): void
     {

@@ -15,8 +15,6 @@ class StoreTest extends TestCase
 
     /**
      * Status can be set on resource.
-     *
-     * @return void
      */
     public function testStatusCanBeSet(): void
     {
@@ -37,8 +35,6 @@ class StoreTest extends TestCase
 
     /**
      * Regular users can not set status.
-     *
-     * @return void
      */
     public function testUserCanNotSetStatus(): void
     {
@@ -56,8 +52,6 @@ class StoreTest extends TestCase
 
     /**
      * Statuses are validated.
-     *
-     * @return void
      */
     public function testInvalidStatusIsCaughtByValidation(): void
     {
@@ -74,8 +68,6 @@ class StoreTest extends TestCase
 
     /**
      * Any status changes are logged.
-     *
-     * @return void
      */
     public function testStatusChangesAreLogged(): void
     {
