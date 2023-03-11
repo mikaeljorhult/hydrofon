@@ -6,15 +6,15 @@ Equipment booking system.
 [![License](https://img.shields.io/badge/license-MIT-428f7e.svg)](http://mikaeljorhult.mit-license.org)
 
 ## Requirements
-Hydrofon is built on Laravel 9 and therefore inherit [its requirements](https://laravel.com/docs/9.x/deployment#server-requirements). It also
+Hydrofon is built on Laravel 10 and therefore inherit [its requirements](https://laravel.com/docs/10.x/deployment#server-requirements). It also
 makes use of Common Table Expressions for some features so the chosen database must support that as well. 
 
-PHP: 8.0+
+PHP: 8.1+
 
 Database:
 - MySQL 8.0+
-- MariaDB 10.2+
-- PostgreSQL 9.6+
+- MariaDB 10.3+
+- PostgreSQL 10.0+
 - SQLite 3.8.8+
 - SQL Server 2017+
 
