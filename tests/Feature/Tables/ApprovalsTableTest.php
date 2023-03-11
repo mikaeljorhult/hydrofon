@@ -16,10 +16,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Booking::factory()->count(3)->create();
 
@@ -33,10 +31,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Administrator can approve a booking.
-     *
-     * @return void
      */
-    public function testAdministratorCanApproveBooking()
+    public function testAdministratorCanApproveBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -62,10 +58,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Group approver can approve a booking.
-     *
-     * @return void
      */
-    public function testGroupApproverCanApproveBooking()
+    public function testGroupApproverCanApproveBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -91,10 +85,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Regular user can not approve a booking.
-     *
-     * @return void
      */
-    public function testUserCanNotApproveBooking()
+    public function testUserCanNotApproveBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -117,10 +109,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Administrator can reject a booking.
-     *
-     * @return void
      */
-    public function testAdministratorCanRejectBooking()
+    public function testAdministratorCanRejectBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -146,10 +136,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Group approver can reject a booking.
-     *
-     * @return void
      */
-    public function testGroupApproverCanRejectBooking()
+    public function testGroupApproverCanRejectBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -175,10 +163,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Regular user can not reject a booking.
-     *
-     * @return void
      */
-    public function testUserCanNotRejectBooking()
+    public function testUserCanNotRejectBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -201,10 +187,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be approved.
-     *
-     * @return void
      */
-    public function testBookingMustHaveValidStateToBeApproved()
+    public function testBookingMustHaveValidStateToBeApproved(): void
     {
         $this->approvalIsRequired();
 
@@ -224,10 +208,8 @@ class ApprovalsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be rejected.
-     *
-     * @return void
      */
-    public function testBookingMustHaveValidStateToBeRejected()
+    public function testBookingMustHaveValidStateToBeRejected(): void
     {
         $this->approvalIsRequired();
 

@@ -7,6 +7,8 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Group;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
@@ -24,10 +26,8 @@ class UserController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(User::class)
                              ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
@@ -45,10 +45,8 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
 
@@ -57,11 +55,8 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\UserStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         $input = $request->validated();
         $input['is_admin'] = $request->has('is_admin');
@@ -84,22 +79,16 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
         return view('users.show')->with('user', $user);
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
 
@@ -111,12 +100,8 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UserUpdateRequest  $request
-     * @param  \App\Models\User  $user
-     * @return void
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $input = $request->validated();
 
@@ -144,12 +129,8 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Http\Requests\UserDestroyRequest  $request
-     * @return void
      */
-    public function destroy(User $user, UserDestroyRequest $request)
+    public function destroy(User $user, UserDestroyRequest $request): RedirectResponse
     {
         $user->delete();
 

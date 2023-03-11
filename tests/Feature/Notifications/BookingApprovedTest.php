@@ -16,10 +16,8 @@ class BookingApprovedTest extends TestCase
 
     /**
      * User with an approved booking gets notified.
-     *
-     * @return void
      */
-    public function testUserWithApprovedBookingGetNotified()
+    public function testUserWithApprovedBookingGetNotified(): void
     {
         $this->approvalIsRequired();
 
@@ -37,10 +35,8 @@ class BookingApprovedTest extends TestCase
 
     /**
      * User with a (auto-)approved booking don't get notified.
-     *
-     * @return void
      */
-    public function testUserWithAutoApprovedBookingDontGetNotified()
+    public function testUserWithAutoApprovedBookingDontGetNotified(): void
     {
         $this->approvalIsRequired();
 
@@ -52,10 +48,8 @@ class BookingApprovedTest extends TestCase
 
     /**
      * User with previous unread notification don't get notified again.
-     *
-     * @return void
      */
-    public function testUserDontGetNotifiedMultipleTimes()
+    public function testUserDontGetNotifiedMultipleTimes(): void
     {
         $this->approvalIsRequired();
 
@@ -74,10 +68,8 @@ class BookingApprovedTest extends TestCase
 
     /**
      * Approver gets notified about new approved bookings.
-     *
-     * @return void
      */
-    public function testApproverGetsNotifiedAboutNewBooking()
+    public function testApproverGetsNotifiedAboutNewBooking(): void
     {
         $this->approvalIsRequired();
 

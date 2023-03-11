@@ -18,10 +18,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Resource::factory()->count(3)->create();
 
@@ -35,10 +33,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -50,10 +46,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Edited resource can be saved.
-     *
-     * @return void
      */
-    public function testAdministratorCanEditAResource()
+    public function testAdministratorCanEditAResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -74,10 +68,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Regular user can not update a resource.
-     *
-     * @return void
      */
-    public function testUserCanNotEditAResource()
+    public function testUserCanNotEditAResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -95,10 +87,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Bucket relationships are stored.
-     *
-     * @return void
      */
-    public function testRelatedBucketsAreSaved()
+    public function testRelatedBucketsAreSaved(): void
     {
         $items = Resource::factory()->count(1)->create();
         $bucket = Bucket::factory()->create();
@@ -118,10 +108,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Category relationships are stored.
-     *
-     * @return void
      */
-    public function testRelatedCategoriesAreSaved()
+    public function testRelatedCategoriesAreSaved(): void
     {
         $items = Resource::factory()->count(1)->create();
         $category = Category::factory()->create();
@@ -141,10 +129,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Group relationships are stored.
-     *
-     * @return void
      */
-    public function testRelatedGroupsAreSaved()
+    public function testRelatedGroupsAreSaved(): void
     {
         $items = Resource::factory()->count(1)->create();
         $group = Group::factory()->create();
@@ -164,10 +150,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * A resource must have a name.
-     *
-     * @return void
      */
-    public function testResourceMustHaveAName()
+    public function testResourceMustHaveAName(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -188,10 +172,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Buckets must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingBucketsAreNotAllowed()
+    public function testMissingBucketsAreNotAllowed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -210,10 +192,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Categories must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingCategoriesAreNotAllowed()
+    public function testMissingCategoriesAreNotAllowed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -232,10 +212,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Groups must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingGroupsAreNotAllowed()
+    public function testMissingGroupsAreNotAllowed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -254,10 +232,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Resource can be deleted.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteResource()
+    public function testAdministratorCanDeleteResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -274,10 +250,8 @@ class ResourcesTableTest extends TestCase
 
     /**
      * Regular user can not delete resource.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteResource()
+    public function testUserCanNotDeleteResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 

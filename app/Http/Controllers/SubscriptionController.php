@@ -6,17 +6,16 @@ use App\Http\Requests\SubscriptionDestroyRequest;
 use App\Http\Requests\SubscriptionStoreRequest;
 use App\Models\Subscription;
 use App\Scopes\GroupPolicyScope;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SubscriptionController extends Controller
 {
     /**
      * Display the specified resource.
-     *
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(string $uuid): StreamedResponse
     {
         $subscription = Subscription::where('uuid', $uuid)->with([
             'subscribable' => function ($query) {
@@ -31,11 +30,8 @@ class SubscriptionController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\SubscriptionStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(SubscriptionStoreRequest $request)
+    public function store(SubscriptionStoreRequest $request): RedirectResponse
     {
         Subscription::firstOrCreate([
             'subscribable_type' => 'App\\Models\\'.Str::ucfirst($request->get('subscribable_type')),
@@ -53,12 +49,8 @@ class SubscriptionController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @param  \App\Http\Requests\SubscriptionDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscription $subscription, SubscriptionDestroyRequest $request)
+    public function destroy(Subscription $subscription, SubscriptionDestroyRequest $request): RedirectResponse
     {
         $subscription->delete();
 

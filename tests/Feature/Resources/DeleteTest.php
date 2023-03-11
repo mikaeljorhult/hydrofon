@@ -14,10 +14,8 @@ class DeleteTest extends TestCase
 
     /**
      * Resources can be deleted.
-     *
-     * @return void
      */
-    public function testResourcesCanBeDeleted()
+    public function testResourcesCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -30,10 +28,8 @@ class DeleteTest extends TestCase
 
     /**
      * Bookings of deleted resource is also deleted.
-     *
-     * @return void
      */
-    public function testRelatedBookingsAreDeletedWithResource()
+    public function testRelatedBookingsAreDeletedWithResource(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -46,10 +42,8 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete resources.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotDeleteResources()
+    public function testNonAdminUsersCanNotDeleteResources(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();

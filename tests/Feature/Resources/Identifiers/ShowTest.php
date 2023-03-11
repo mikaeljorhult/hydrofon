@@ -13,10 +13,8 @@ class ShowTest extends TestCase
 
     /**
      * Resource is displayed to administrators.
-     *
-     * @return void
      */
-    public function testIdentifierIsDisplayed()
+    public function testIdentifierIsDisplayed(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
@@ -30,10 +28,8 @@ class ShowTest extends TestCase
 
     /**
      * Non-admin users can not show identifier.
-     *
-     * @return void
      */
-    public function testUsersCanNotShowIdentifier()
+    public function testUsersCanNotShowIdentifier(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
@@ -45,10 +41,8 @@ class ShowTest extends TestCase
 
     /**
      * Visitors can not show identifier.
-     *
-     * @return void
      */
-    public function testVisitorsCanNotShowIdentifier()
+    public function testVisitorsCanNotShowIdentifier(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);

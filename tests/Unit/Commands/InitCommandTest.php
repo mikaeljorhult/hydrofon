@@ -12,10 +12,8 @@ class InitCommandTest extends TestCase
 
     /**
      * Admin user is created during init.
-     *
-     * @return void
      */
-    public function testUserIsCreated()
+    public function testUserIsCreated(): void
     {
         $this
             ->artisan('hydrofon:init')
@@ -33,10 +31,8 @@ class InitCommandTest extends TestCase
 
     /**
      * E-mail address is required.
-     *
-     * @return void
      */
-    public function testEmailAddressIsRequired()
+    public function testEmailAddressIsRequired(): void
     {
         $this
             ->artisan('hydrofon:init')
@@ -51,10 +47,8 @@ class InitCommandTest extends TestCase
 
     /**
      * E-mail address is required.
-     *
-     * @return void
      */
-    public function testEmailAddressMustBeUnique()
+    public function testEmailAddressMustBeUnique(): void
     {
         $user = User::factory()->create();
 
@@ -71,10 +65,8 @@ class InitCommandTest extends TestCase
 
     /**
      * Password is required.
-     *
-     * @return void
      */
-    public function testPasswordIsRequired()
+    public function testPasswordIsRequired(): void
     {
         $this
             ->artisan('hydrofon:init')
@@ -89,10 +81,8 @@ class InitCommandTest extends TestCase
 
     /**
      * User information can be passed as options.
-     *
-     * @return void
      */
-    public function testInformationCanBePassedAsOptions()
+    public function testInformationCanBePassedAsOptions(): void
     {
         $this
             ->artisan('hydrofon:init', [
@@ -111,10 +101,8 @@ class InitCommandTest extends TestCase
 
     /**
      * User information can be passed as options.
-     *
-     * @return void
      */
-    public function testMissingOptionsAskForInformation()
+    public function testMissingOptionsAskForInformation(): void
     {
         $this
             ->artisan('hydrofon:init', [

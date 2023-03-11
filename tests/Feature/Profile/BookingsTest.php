@@ -12,10 +12,8 @@ class BookingsTest extends TestCase
 
     /**
      * Profile bookings is available.
-     *
-     * @return void
      */
-    public function testBookingsAreAvailable()
+    public function testBookingsAreAvailable(): void
     {
         $booking = Booking::factory()->create();
 

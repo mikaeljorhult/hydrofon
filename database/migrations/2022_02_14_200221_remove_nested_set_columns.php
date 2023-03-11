@@ -8,10 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (Schema::hasColumn('categories', '_lft')) {
             Schema::table('categories', function (Blueprint $table) {

@@ -16,10 +16,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Booking::factory()->count(3)->create();
 
@@ -33,10 +31,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -48,10 +44,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Edited booking can be saved.
-     *
-     * @return void
      */
-    public function testAdministratorCanEditABooking()
+    public function testAdministratorCanEditABooking(): void
     {
         $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -73,10 +67,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Regular user can not update another users booking.
-     *
-     * @return void
      */
-    public function testUserCanNotEditAnotherUsersBooking()
+    public function testUserCanNotEditAnotherUsersBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -95,10 +87,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Regular user can update their own booking.
-     *
-     * @return void
      */
-    public function testUserCanEditTheirOwnBooking()
+    public function testUserCanEditTheirOwnBooking(): void
     {
         $items = Booking::factory()->future()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -120,10 +110,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Regular user can not change user of their own booking.
-     *
-     * @return void
      */
-    public function testUserCanNotChangeUserOfTheirOwnBooking()
+    public function testUserCanNotChangeUserOfTheirOwnBooking(): void
     {
         $items = Booking::factory()->future()->count(1)->create();
         $user = User::factory()->create();
@@ -145,10 +133,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * A booking have required attributes.
-     *
-     * @return void
      */
-    public function testBookingHaveRequiredAttributes()
+    public function testBookingHaveRequiredAttributes(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -179,10 +165,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Resource must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingResourceIsNotAllowed()
+    public function testMissingResourceIsNotAllowed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -203,10 +187,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * User must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingUserIsNotAllowed()
+    public function testMissingUserIsNotAllowed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -227,10 +209,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Booking can be deleted.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteBooking()
+    public function testAdministratorCanDeleteBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -247,10 +227,8 @@ class ProfileBookingsTableTest extends TestCase
 
     /**
      * Regular user can not delete booking.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteBooking()
+    public function testUserCanNotDeleteBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
 

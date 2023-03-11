@@ -14,10 +14,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Resource list is available in calendar view.
-     *
-     * @return void
      */
-    public function testResourceListIsAvailable()
+    public function testResourceListIsAvailable(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/calendar');
@@ -28,10 +26,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Categories are listed in resource list.
-     *
-     * @return void
      */
-    public function testCategoriesWithoutGroupsAreListed()
+    public function testCategoriesWithoutGroupsAreListed(): void
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -44,10 +40,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Categories that have groups are not listed.
-     *
-     * @return void
      */
-    public function testCategoriesWithGroupsAreNotListed()
+    public function testCategoriesWithGroupsAreNotListed(): void
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -61,10 +55,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have groups are listed to user with same group.
-     *
-     * @return void
      */
-    public function testCategoriesWithGroupsAreListedToUsersWithSameGroup()
+    public function testCategoriesWithGroupsAreListedToUsersWithSameGroup(): void
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -79,10 +71,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have no groups are listed.
-     *
-     * @return void
      */
-    public function testResourcesWithoutGroupsAreListed()
+    public function testResourcesWithoutGroupsAreListed(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();
@@ -95,10 +85,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have groups are not listed.
-     *
-     * @return void
      */
-    public function testResourcesWithGroupsAreNotListed()
+    public function testResourcesWithGroupsAreNotListed(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();
@@ -112,10 +100,8 @@ class ResourceListTest extends TestCase
 
     /**
      * Resources that have groups are listed to user with same group.
-     *
-     * @return void
      */
-    public function testResourcesWithGroupsAreListedToUsersWithSameGroup()
+    public function testResourcesWithGroupsAreListedToUsersWithSameGroup(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();

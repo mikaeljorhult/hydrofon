@@ -5,6 +5,7 @@ namespace Tests\Feature\Categories;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -13,12 +14,8 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a category.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
-    public function storeCategory($overrides = [], $user = null)
+    public function storeCategory(array $overrides = [], ?User $user = null): TestResponse
     {
         $category = Category::factory()->make($overrides);
 
@@ -28,10 +25,8 @@ class StoreTest extends TestCase
 
     /**
      * Categories can be created and stored.
-     *
-     * @return void
      */
-    public function testCategoriesCanBeStored()
+    public function testCategoriesCanBeStored(): void
     {
         $parent = Category::factory()->create();
 
@@ -49,10 +44,8 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store categories.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotStoreCategories()
+    public function testNonAdminUsersCanNotStoreCategories(): void
     {
         $user = User::factory()->create();
 
@@ -64,10 +57,8 @@ class StoreTest extends TestCase
 
     /**
      * Categories must have a name.
-     *
-     * @return void
      */
-    public function testCategoriesMustHaveAName()
+    public function testCategoriesMustHaveAName(): void
     {
         $this->storeCategory(['name' => null])
              ->assertRedirect()
@@ -78,10 +69,8 @@ class StoreTest extends TestCase
 
     /**
      * A parent category must exist in the database.
-     *
-     * @return void
      */
-    public function testParentMustExist()
+    public function testParentMustExist(): void
     {
         $category = Category::factory()->make();
 

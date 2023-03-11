@@ -15,10 +15,8 @@ class StoreTest extends TestCase
 
     /**
      * Status can be set on resource.
-     *
-     * @return void
      */
-    public function testStatusCanBeSet()
+    public function testStatusCanBeSet(): void
     {
         $resource = Resource::factory()->create();
 
@@ -37,10 +35,8 @@ class StoreTest extends TestCase
 
     /**
      * Regular users can not set status.
-     *
-     * @return void
      */
-    public function testUserCanNotSetStatus()
+    public function testUserCanNotSetStatus(): void
     {
         $resource = Resource::factory()->create();
 
@@ -56,10 +52,8 @@ class StoreTest extends TestCase
 
     /**
      * Statuses are validated.
-     *
-     * @return void
      */
-    public function testInvalidStatusIsCaughtByValidation()
+    public function testInvalidStatusIsCaughtByValidation(): void
     {
         $resource = Resource::factory()->create();
 
@@ -74,10 +68,8 @@ class StoreTest extends TestCase
 
     /**
      * Any status changes are logged.
-     *
-     * @return void
      */
-    public function testStatusChangesAreLogged()
+    public function testStatusChangesAreLogged(): void
     {
         $resource = Resource::factory()->create();
 

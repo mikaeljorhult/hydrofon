@@ -13,10 +13,8 @@ class IndexTest extends TestCase
 
     /**
      * Users are listed in index.
-     *
-     * @return void
      */
-    public function testUsersAreListed()
+    public function testUsersAreListed(): void
     {
         $user = User::factory()->create();
 
@@ -28,10 +26,8 @@ class IndexTest extends TestCase
 
     /**
      * Users can be filtered by the name.
-     *
-     * @return void
      */
-    public function testUsersAreFilteredByName()
+    public function testUsersAreFilteredByName(): void
     {
         $visibleUser = User::factory()->create();
         $notVisibleUser = User::factory()->create();
@@ -45,10 +41,8 @@ class IndexTest extends TestCase
 
     /**
      * Users can be filtered by the e-mail address.
-     *
-     * @return void
      */
-    public function testUsersAreFilteredByEmail()
+    public function testUsersAreFilteredByEmail(): void
     {
         $visibleUser = User::factory()->create();
         $notVisibleUser = User::factory()->create();
@@ -62,10 +56,8 @@ class IndexTest extends TestCase
 
     /**
      * Users can be filtered by the group.
-     *
-     * @return void
      */
-    public function testUsersAreFilteredByGroup()
+    public function testUsersAreFilteredByGroup(): void
     {
         $visibleUser = User::factory()->admin()->create();
         $notVisibleUser = User::factory()->create();

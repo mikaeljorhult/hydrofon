@@ -14,10 +14,8 @@ class OverdueBookingNotificationTest extends TestCase
 
     /**
      * User with overdue a booking gets notified.
-     *
-     * @return void
      */
-    public function testUserWithOverdueBookingGetNotified()
+    public function testUserWithOverdueBookingGetNotified(): void
     {
         $overdueBooking = Booking::factory()->overdue()->createQuietly();
 
@@ -29,10 +27,8 @@ class OverdueBookingNotificationTest extends TestCase
 
     /**
      * User only get notified once about the same booking.
-     *
-     * @return void
      */
-    public function testUserDontGetNotifiedTwiceAboutSameBooking()
+    public function testUserDontGetNotifiedTwiceAboutSameBooking(): void
     {
         $user = User::factory()->create();
         $user->notify(new BookingOverdue());
@@ -46,10 +42,8 @@ class OverdueBookingNotificationTest extends TestCase
 
     /**
      * User gets notified about new bookings.
-     *
-     * @return void
      */
-    public function testUserGetsNotifiedAboutNewBooking()
+    public function testUserGetsNotifiedAboutNewBooking(): void
     {
         $user = User::factory()->create();
         $user->notify(new BookingOverdue());

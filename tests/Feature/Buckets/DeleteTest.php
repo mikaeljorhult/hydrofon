@@ -13,10 +13,8 @@ class DeleteTest extends TestCase
 
     /**
      * Buckets can be deleted.
-     *
-     * @return void
      */
-    public function testBucketsCanBeDeleted()
+    public function testBucketsCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $bucket = Bucket::factory()->create();
@@ -29,10 +27,8 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete buckets.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotDeleteBuckets()
+    public function testNonAdminUsersCanNotDeleteBuckets(): void
     {
         $user = User::factory()->create();
         $bucket = Bucket::factory()->create();

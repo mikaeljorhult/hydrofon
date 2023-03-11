@@ -14,10 +14,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when creating a category.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreStoredWhenCreatingCategory()
+    public function testGroupRelationshipsAreStoredWhenCreatingCategory(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -36,10 +34,8 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when creating a category.
-     *
-     * @return void
      */
-    public function testNonExistingGroupsCannotBeAddedWhenStoringCategory()
+    public function testNonExistingGroupsCannotBeAddedWhenStoringCategory(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->make();
@@ -57,10 +53,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when updating a category.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreStoredWhenUpdatingCategory()
+    public function testGroupRelationshipsAreStoredWhenUpdatingCategory(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -79,10 +73,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are removed when updating user.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreRemovedWhenUpdatingCategory()
+    public function testGroupRelationshipsAreRemovedWhenUpdatingCategory(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -108,10 +100,8 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when updating a category.
-     *
-     * @return void
      */
-    public function testNonExistingGroupsCannotBeAddedWhenUpdatingCategory()
+    public function testNonExistingGroupsCannotBeAddedWhenUpdatingCategory(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create();

@@ -4,17 +4,15 @@ namespace App\Http\ViewComposers;
 
 use App\Models\Category;
 use App\Models\Resource;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class ResourceListComposer
 {
     /**
      * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $categories = $this->getCategories()->toTree();
         $rootResources = $this->getRootResources();
@@ -27,10 +25,8 @@ class ResourceListComposer
 
     /**
      * Retrieve all categories within same group as current user.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    private function getCategories()
+    private function getCategories(): Collection
     {
         return Category::with(['resources'])
                        ->orderBy('name')
@@ -40,10 +36,8 @@ class ResourceListComposer
 
     /**
      * Retrieve resources within same group as current user that dosen't belong to any categories.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    private function getRootResources()
+    private function getRootResources(): Collection
     {
         return Resource::orderBy('name')
                        ->whereDoesntHave('categories', function ($query) {

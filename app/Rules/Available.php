@@ -41,7 +41,6 @@ class Available implements Rule
      *
      * @param  mixed  $startTime
      * @param  mixed  $endTime
-     * @param  int  $ignore
      * @param  string  $column  = ''
      */
     public function __construct($startTime, $endTime, int $ignore = 0, string $column = '')
@@ -62,11 +61,9 @@ class Available implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
      * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         // Fail validation if timestamps is invalid.
         if ($this->startTime == null || $this->endTime == null) {
@@ -82,10 +79,8 @@ class Available implements Rule
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'The resource is not available during the given time frame.';
     }

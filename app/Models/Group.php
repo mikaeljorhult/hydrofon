@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Group extends Model
 {
@@ -20,40 +21,32 @@ class Group extends Model
 
     /**
      * Users that can approve bookings for users in group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function approvers()
+    public function approvers(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\User::class, 'approver_group');
     }
 
     /**
      * Categories in the group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class);
     }
 
     /**
      * Resources in the group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function resources()
+    public function resources(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class);
     }
 
     /**
      * Users in the group.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\User::class);
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Status extends \Spatie\ModelStatus\Status
 {
@@ -10,10 +11,8 @@ class Status extends \Spatie\ModelStatus\Status
 
     /**
      * The "booted" method of the model.
-     *
-     * @return void
      */
-    protected static function booted()
+    protected static function booted(): void
     {
         static::creating(function ($status) {
             if ($status->created_by_id === null) {
@@ -26,10 +25,8 @@ class Status extends \Spatie\ModelStatus\Status
 
     /**
      * User whose action generated the status.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function created_by()
+    public function created_by(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
     }

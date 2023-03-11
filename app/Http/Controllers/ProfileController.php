@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -18,10 +20,8 @@ class ProfileController extends Controller
 
     /**
      * Handle the incoming request.
-     *
-     * @return \Illuminate\View\View
      */
-    public function __invoke()
+    public function __invoke(): View
     {
         $user = auth()->user();
         $latest = $user->bookings()->with(['resource'])->latest()->limit(10)->get();
@@ -39,11 +39,8 @@ class ProfileController extends Controller
 
     /**
      * Retrieve upcoming bookings for the next week from the database.
-     *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
-     * @return \Illuminate\Support\Collection
      */
-    private function upcomingBookings(Authenticatable $user)
+    private function upcomingBookings(Authenticatable $user): Collection
     {
         $upcoming = $user->bookings()
                          ->whereHas('resource', function ($query) {

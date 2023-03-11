@@ -29,10 +29,8 @@ class InitCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $name = $this->option('name')
             ? $this->option('name')

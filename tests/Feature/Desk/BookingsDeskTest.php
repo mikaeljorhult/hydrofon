@@ -14,10 +14,8 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Current bookings are displayed on desk page.
-     *
-     * @return void
      */
-    public function testCurrentBookingsAreDisplayed()
+    public function testCurrentBookingsAreDisplayed(): void
     {
         $booking = Booking::factory()->current()->create();
 
@@ -29,10 +27,8 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Older bookings are omitted.
-     *
-     * @return void
      */
-    public function testOlderBookingsAreOmitted()
+    public function testOlderBookingsAreOmitted(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->subHours(2),
@@ -47,10 +43,8 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Future bookings are omitted.
-     *
-     * @return void
      */
-    public function testFutureBookingsAreOmitted()
+    public function testFutureBookingsAreOmitted(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->addHour(),
@@ -65,10 +59,8 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Bookings that have been checked in are omitted.
-     *
-     * @return void
      */
-    public function testCheckedInBookingsAreOmitted()
+    public function testCheckedInBookingsAreOmitted(): void
     {
         $booking = Booking::factory()->checkedin()->createQuietly();
 
@@ -80,10 +72,8 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Time span of desk can be changed through filters.
-     *
-     * @return void
      */
-    public function testBookingsTimeSpanCanBeFiltered()
+    public function testBookingsTimeSpanCanBeFiltered(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->subDays(5)->subHour(),
@@ -99,10 +89,8 @@ class BookingsDeskTest extends TestCase
 
     /**
      * Time span of desk can be changed through configuration.
-     *
-     * @return void
      */
-    public function testBookingsTimeSpanCanBeConfigured()
+    public function testBookingsTimeSpanCanBeConfigured(): void
     {
         Config::set('hydrofon.desk_inclusion_hours.earlier', 1);
         Config::set('hydrofon.desk_inclusion_hours.later', 1);

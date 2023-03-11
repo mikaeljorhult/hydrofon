@@ -15,10 +15,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = User::factory()->count(3)->create();
 
@@ -32,10 +30,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -47,10 +43,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Edited user can be saved.
-     *
-     * @return void
      */
-    public function testAdministratorCanEditAUser()
+    public function testAdministratorCanEditAUser(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -71,10 +65,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Regular user can not update a user.
-     *
-     * @return void
      */
-    public function testUserCanNotEditAUser()
+    public function testUserCanNotEditAUser(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -92,10 +84,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Group relationships are stored.
-     *
-     * @return void
      */
-    public function testRelatedGroupsAreSaved()
+    public function testRelatedGroupsAreSaved(): void
     {
         $items = User::factory()->count(1)->create();
         $group = Group::factory()->create();
@@ -115,10 +105,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Resources must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingGroupsAreNotAllowed()
+    public function testMissingGroupsAreNotAllowed(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -137,10 +125,8 @@ class UsersTableTest extends TestCase
 
     /**
      * A user must have a name and an e-mail address.
-     *
-     * @return void
      */
-    public function testUserMustHaveANameAndEmail()
+    public function testUserMustHaveANameAndEmail(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -166,10 +152,8 @@ class UsersTableTest extends TestCase
 
     /**
      * User can be deleted.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteUser()
+    public function testAdministratorCanDeleteUser(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -186,10 +170,8 @@ class UsersTableTest extends TestCase
 
     /**
      * An administrator can not delete its own account.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteOwnAccount()
+    public function testAdministratorCanDeleteOwnAccount(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -203,10 +185,8 @@ class UsersTableTest extends TestCase
 
     /**
      * Regular user can not delete user.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteUser()
+    public function testUserCanNotDeleteUser(): void
     {
         $items = User::factory()->count(1)->create();
 

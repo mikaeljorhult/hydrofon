@@ -5,6 +5,7 @@ namespace Tests\Feature\Bookings;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -15,12 +16,8 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a booking.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
-    public function storeBooking($overrides = [], $user = null)
+    public function storeBooking(array $overrides = [], ?User $user = null): TestResponse
     {
         $this->storedBooking = Booking::factory()->make($overrides);
 
@@ -30,10 +27,8 @@ class StoreTest extends TestCase
 
     /**
      * Bookings can be created and stored.
-     *
-     * @return void
      */
-    public function testBookingsCanBeStored()
+    public function testBookingsCanBeStored(): void
     {
         $this->storeBooking()
              ->assertRedirect();
@@ -46,10 +41,8 @@ class StoreTest extends TestCase
 
     /**
      * An administrator can create bookings for other users.
-     *
-     * @return void
      */
-    public function testAdministratorCanCreateBookingForOtherUser()
+    public function testAdministratorCanCreateBookingForOtherUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -65,10 +58,8 @@ class StoreTest extends TestCase
 
     /**
      * A regular user cannot create bookings for other users.
-     *
-     * @return void
      */
-    public function testUserCannotCreateBookingsForOtherUser()
+    public function testUserCannotCreateBookingsForOtherUser(): void
     {
         $firstUser = User::factory()->create();
         $secondUser = User::factory()->create();
@@ -84,10 +75,8 @@ class StoreTest extends TestCase
 
     /**
      * Bookings is owned by current user.
-     *
-     * @return void
      */
-    public function testBookingsCanBeStoredWithoutUserID()
+    public function testBookingsCanBeStoredWithoutUserID(): void
     {
         $this->storeBooking(['user_id' => null])
              ->assertRedirect();
@@ -99,10 +88,8 @@ class StoreTest extends TestCase
 
     /**
      * Bookings must have a resource.
-     *
-     * @return void
      */
-    public function testBookingsMustHaveAResource()
+    public function testBookingsMustHaveAResource(): void
     {
         $this->storeBooking(['resource_id' => null])
              ->assertRedirect()
@@ -113,10 +100,8 @@ class StoreTest extends TestCase
 
     /**
      * The requested resource must exist in the database.
-     *
-     * @return void
      */
-    public function testResourceMustExist()
+    public function testResourceMustExist(): void
     {
         $this->storeBooking(['resource_id' => 100])
              ->assertRedirect()
@@ -127,10 +112,8 @@ class StoreTest extends TestCase
 
     /**
      * Bookings must have a start time.
-     *
-     * @return void
      */
-    public function testBookingsMustHaveAStartTime()
+    public function testBookingsMustHaveAStartTime(): void
     {
         $this->storeBooking(['start_time' => null])
              ->assertRedirect()
@@ -141,10 +124,8 @@ class StoreTest extends TestCase
 
     /**
      * Start time must be a valid timestamp.
-     *
-     * @return void
      */
-    public function testStartTimeMustBeValidTimestamp()
+    public function testStartTimeMustBeValidTimestamp(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->make();
@@ -163,10 +144,8 @@ class StoreTest extends TestCase
 
     /**
      * Bookings must have a end time.
-     *
-     * @return void
      */
-    public function testBookingsMustHaveAEndTime()
+    public function testBookingsMustHaveAEndTime(): void
     {
         $this->storeBooking(['end_time' => null])
              ->assertRedirect()
@@ -177,10 +156,8 @@ class StoreTest extends TestCase
 
     /**
      * End time must be a valid timestamp.
-     *
-     * @return void
      */
-    public function testEndTimeMustBeValidTimestamp()
+    public function testEndTimeMustBeValidTimestamp(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->make();
@@ -199,10 +176,8 @@ class StoreTest extends TestCase
 
     /**
      * Booking have to start before it ends.
-     *
-     * @return void
      */
-    public function testStartTimeMustBeBeforeEndTime()
+    public function testStartTimeMustBeBeforeEndTime(): void
     {
         $this->storeBooking([
             'start_time' => now()->addMonth(),
@@ -216,10 +191,8 @@ class StoreTest extends TestCase
 
     /**
      * Bookings can not overlap previous bookings.
-     *
-     * @return void
      */
-    public function testBookingsCanNotOverlapPreviousBookings()
+    public function testBookingsCanNotOverlapPreviousBookings(): void
     {
         $booking = Booking::factory()->create();
 

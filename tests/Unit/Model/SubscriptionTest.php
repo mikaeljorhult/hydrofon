@@ -14,10 +14,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * A UUID is automatically created when storing subscription.
-     *
-     * @return void
      */
-    public function testUuidIsCreated()
+    public function testUuidIsCreated(): void
     {
         $subscription = Subscription::factory()->create();
 
@@ -26,10 +24,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * A user subscription can be rendered.
-     *
-     * @return void
      */
-    public function testUserSubscriptionIsRendered()
+    public function testUserSubscriptionIsRendered(): void
     {
         $subscription = Subscription::factory()->user()->create();
 
@@ -42,10 +38,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * A resource subscription can be rendered.
-     *
-     * @return void
      */
-    public function testResourceSubscriptionIsRendered()
+    public function testResourceSubscriptionIsRendered(): void
     {
         $subscription = Subscription::factory()->resource()->create();
 
@@ -58,10 +52,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * Bookings are included as events.
-     *
-     * @return void
      */
-    public function testBookingsAreIncludedAsEvents()
+    public function testBookingsAreIncludedAsEvents(): void
     {
         $subscription = Subscription::factory()->user()->create();
         $booking = Booking::factory()->for($subscription->subscribable)->create();
@@ -75,10 +67,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * Bookings with the same start time is bundled in the same event.
-     *
-     * @return void
      */
-    public function testBookingsAreBundled()
+    public function testBookingsAreBundled(): void
     {
         $subscription = Subscription::factory()->user()->create();
         Booking::factory()->times(2)->for($subscription->subscribable)->create([
@@ -95,10 +85,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * Bookings of resources are bundled while facility bookings are not.
-     *
-     * @return void
      */
-    public function testFacilityBookingsAreNotBundled()
+    public function testFacilityBookingsAreNotBundled(): void
     {
         $timestamps = [
             'start_time' => today(),
@@ -119,10 +107,8 @@ class SubscriptionTest extends TestCase
 
     /**
      * Events in a facility resource subscription are summarized with name of user.
-     *
-     * @return void
      */
-    public function testFacilityResourceSubscriptionHaveUserName()
+    public function testFacilityResourceSubscriptionHaveUserName(): void
     {
         $booking = Booking::factory()->create([
             'resource_id' => Resource::factory()->facility(),

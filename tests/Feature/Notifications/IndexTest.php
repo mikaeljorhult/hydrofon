@@ -13,10 +13,8 @@ class IndexTest extends TestCase
 
     /**
      * A visitor can not visit notifications.
-     *
-     * @return void
      */
-    public function testVisitorAreRedirectedToLogin()
+    public function testVisitorAreRedirectedToLogin(): void
     {
         $this->get('notifications')
              ->assertRedirect('login');
@@ -24,10 +22,8 @@ class IndexTest extends TestCase
 
     /**
      * A user can visit notifications.
-     *
-     * @return void
      */
-    public function testUserCanSeeNotifications()
+    public function testUserCanSeeNotifications(): void
     {
         $this
             ->actingAs(User::factory()->create())
@@ -38,10 +34,8 @@ class IndexTest extends TestCase
 
     /**
      * Booking overdue notification is displayed.
-     *
-     * @return void
      */
-    public function testOverdueNotificationIsDisplayed()
+    public function testOverdueNotificationIsDisplayed(): void
     {
         $user = User::factory()->create();
         $user->notify(new BookingOverdue());

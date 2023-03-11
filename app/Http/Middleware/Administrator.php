@@ -4,19 +4,18 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Administrator
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         // User is not logged in.
         if ($request->user() === null) {

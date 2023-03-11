@@ -11,6 +11,8 @@ use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Subscription extends Model
@@ -29,10 +31,8 @@ class Subscription extends Model
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
@@ -44,20 +44,16 @@ class Subscription extends Model
 
     /**
      * Get all of the owning subscribable models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function subscribable()
+    public function subscribable(): MorphTo
     {
         return $this->morphTo();
     }
 
     /**
      * Render subscription as calendar.
-     *
-     * @return string
      */
-    public function toCalendar()
+    public function toCalendar(): string
     {
         $this->subscribable->load([
             'bookings',
@@ -88,10 +84,8 @@ class Subscription extends Model
 
     /**
      * Generate events for resource bookings.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    private function createResourceEvents()
+    private function createResourceEvents(): Collection
     {
         return $this->subscribable->bookings
             ->filter(function ($item, $key) {
@@ -115,10 +109,8 @@ class Subscription extends Model
 
     /**
      * Generate events for facility bookings.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    private function createFacilityEvents()
+    private function createFacilityEvents(): Collection
     {
         return $this->subscribable->bookings
             ->filter(function ($item, $key) {

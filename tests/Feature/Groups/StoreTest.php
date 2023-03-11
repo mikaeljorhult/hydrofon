@@ -5,6 +5,7 @@ namespace Tests\Feature\Groups;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -13,12 +14,8 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a group.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
-    public function storeGroup($overrides = [], $user = null)
+    public function storeGroup(array $overrides = [], ?User $user = null): TestResponse
     {
         $group = Group::factory()->make($overrides);
 
@@ -28,10 +25,8 @@ class StoreTest extends TestCase
 
     /**
      * Groups can be created and stored.
-     *
-     * @return void
      */
-    public function testGroupsCanBeStored()
+    public function testGroupsCanBeStored(): void
     {
         $this->storeGroup([
             'name' => 'New Group',
@@ -45,10 +40,8 @@ class StoreTest extends TestCase
 
     /**
      * Groups must have a name.
-     *
-     * @return void
      */
-    public function testGroupsMustHaveAName()
+    public function testGroupsMustHaveAName(): void
     {
         $this->storeGroup(['name' => null])
              ->assertRedirect()
@@ -59,10 +52,8 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store groups.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotStoreGroups()
+    public function testNonAdminUsersCanNotStoreGroups(): void
     {
         $user = User::factory()->create();
 

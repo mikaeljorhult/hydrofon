@@ -13,10 +13,8 @@ class ResourceDeskTest extends TestCase
 
     /**
      * Resources can be found by an identifier.
-     *
-     * @return void
      */
-    public function testResourcesCanBeFoundByIdentifier()
+    public function testResourcesCanBeFoundByIdentifier(): void
     {
         $resource = Resource::factory()->create();
         $resource->identifiers()->create(['value' => 'resource-identifier']);

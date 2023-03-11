@@ -13,10 +13,8 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
-    public function testEditRouteIsAvailable()
+    public function testEditRouteIsAvailable(): void
     {
         $user = User::factory()->create();
 
@@ -29,10 +27,8 @@ class UpdateTest extends TestCase
 
     /**
      * Users can be updated.
-     *
-     * @return void
      */
-    public function testUsersCanBeUpdated()
+    public function testUsersCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -50,10 +46,8 @@ class UpdateTest extends TestCase
 
     /**
      * Users must have a name.
-     *
-     * @return void
      */
-    public function testUsersMustHaveAName()
+    public function testUsersMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -72,10 +66,8 @@ class UpdateTest extends TestCase
 
     /**
      * Users must have an e-mail address.
-     *
-     * @return void
      */
-    public function testUsersMustHaveAnEmailAddress()
+    public function testUsersMustHaveAnEmailAddress(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -94,10 +86,8 @@ class UpdateTest extends TestCase
 
     /**
      * E-mail address must be unique.
-     *
-     * @return void
      */
-    public function testEmailAddressMustBeUnique()
+    public function testEmailAddressMustBeUnique(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -116,10 +106,8 @@ class UpdateTest extends TestCase
 
     /**
      * Password can be provided but must be confirmed.
-     *
-     * @return void
      */
-    public function testPasswordMustBeConfirmed()
+    public function testPasswordMustBeConfirmed(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -140,10 +128,8 @@ class UpdateTest extends TestCase
 
     /**
      * Password can be changed.
-     *
-     * @return void
      */
-    public function testPasswordCanBeChanged()
+    public function testPasswordCanBeChanged(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -163,10 +149,8 @@ class UpdateTest extends TestCase
 
     /**
      * Non admin users can not update users..
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotUpdateUsers()
+    public function testNonAdminUsersCanNotUpdateUsers(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

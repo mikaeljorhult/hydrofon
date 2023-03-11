@@ -13,10 +13,8 @@ class CalendarTest extends TestCase
 
     /**
      * A user can visit calendar.
-     *
-     * @return void
      */
-    public function testUserCanVisitCalendar()
+    public function testUserCanVisitCalendar(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/calendar');
@@ -27,10 +25,8 @@ class CalendarTest extends TestCase
 
     /**
      * Requested resources are stored in session.
-     *
-     * @return void
      */
-    public function testResourcesAreAddedToSession()
+    public function testResourcesAreAddedToSession(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();
@@ -45,10 +41,8 @@ class CalendarTest extends TestCase
 
     /**
      * Requested resources are not stored in session if not in database.
-     *
-     * @return void
      */
-    public function testMissingResourcesAreNotAddedToSession()
+    public function testMissingResourcesAreNotAddedToSession(): void
     {
         $user = User::factory()->create();
 
@@ -62,10 +56,8 @@ class CalendarTest extends TestCase
 
     /**
      * Requested date is used.
-     *
-     * @return void
      */
-    public function testDateIsUsed()
+    public function testDateIsUsed(): void
     {
         $user = User::factory()->create();
 
@@ -78,10 +70,8 @@ class CalendarTest extends TestCase
 
     /**
      * Requested resources are shown.
-     *
-     * @return void
      */
-    public function testResourcesAreShown()
+    public function testResourcesAreShown(): void
     {
         $user = User::factory()->create();
         $resources = Resource::factory()->create();

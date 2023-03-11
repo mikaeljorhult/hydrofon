@@ -15,10 +15,8 @@ class BookingRejectedTest extends TestCase
 
     /**
      * User with a rejected booking gets notified.
-     *
-     * @return void
      */
-    public function testUserWithRejectedBookingGetNotified()
+    public function testUserWithRejectedBookingGetNotified(): void
     {
         $this->approvalIsRequired();
 
@@ -36,10 +34,8 @@ class BookingRejectedTest extends TestCase
 
     /**
      * User with previous unread notification don't get notified again.
-     *
-     * @return void
      */
-    public function testUserDontGetNotifiedMultipleTimes()
+    public function testUserDontGetNotifiedMultipleTimes(): void
     {
         $this->approvalIsRequired();
 
@@ -58,10 +54,8 @@ class BookingRejectedTest extends TestCase
 
     /**
      * Approver gets notified about new rejected bookings.
-     *
-     * @return void
      */
-    public function testApproverGetsNotifiedAboutNewBooking()
+    public function testApproverGetsNotifiedAboutNewBooking(): void
     {
         $this->approvalIsRequired();
 

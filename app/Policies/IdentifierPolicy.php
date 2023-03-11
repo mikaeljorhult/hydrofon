@@ -12,47 +12,32 @@ class IdentifierPolicy
 
     /**
      * Determine whether the user can view the identifier.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Identifier  $identifier
-     * @return mixed
      */
-    public function view(User $user, Identifier $identifier)
+    public function view(User $user, Identifier $identifier): bool
     {
         return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can create identifiers.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can update the identifier.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Identifier  $identifier
-     * @return mixed
      */
-    public function update(User $user, Identifier $identifier)
+    public function update(User $user, Identifier $identifier): bool
     {
         return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can delete the identifier.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Identifier  $identifier
-     * @return mixed
      */
-    public function delete(User $user, Identifier $identifier)
+    public function delete(User $user, Identifier $identifier): bool
     {
         return $user->isAdmin();
     }

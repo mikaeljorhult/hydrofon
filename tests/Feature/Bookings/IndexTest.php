@@ -13,10 +13,8 @@ class IndexTest extends TestCase
 
     /**
      * Bookings are listed in index.
-     *
-     * @return void
      */
-    public function testBookingsAreListed()
+    public function testBookingsAreListed(): void
     {
         $booking = Booking::factory()->create();
 
@@ -28,10 +26,8 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the resource.
-     *
-     * @return void
      */
-    public function testBookingsAreFilteredByResource()
+    public function testBookingsAreFilteredByResource(): void
     {
         $visibleBooking = Booking::factory()->create();
         $notVisibleBooking = Booking::factory()->create();
@@ -45,10 +41,8 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the user.
-     *
-     * @return void
      */
-    public function testBookingsAreFilteredByUser()
+    public function testBookingsAreFilteredByUser(): void
     {
         $visibleBooking = Booking::factory()->create();
         $notVisibleBooking = Booking::factory()->create();
@@ -62,10 +56,8 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the start time.
-     *
-     * @return void
      */
-    public function testBookingsAreFilteredByStartTime()
+    public function testBookingsAreFilteredByStartTime(): void
     {
         $visibleBooking = Booking::factory()->future()->create();
         $notVisibleBooking = Booking::factory()->past()->create();
@@ -79,10 +71,8 @@ class IndexTest extends TestCase
 
     /**
      * Bookings can be filtered by the end time.
-     *
-     * @return void
      */
-    public function testBookingsAreFilteredByEndTime()
+    public function testBookingsAreFilteredByEndTime(): void
     {
         $visibleBooking = Booking::factory()->future()->create();
         $notVisibleBooking = Booking::factory()->past()->create();

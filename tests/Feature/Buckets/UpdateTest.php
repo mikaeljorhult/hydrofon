@@ -13,10 +13,8 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
-    public function testEditRouteIsAvailable()
+    public function testEditRouteIsAvailable(): void
     {
         $bucket = Bucket::factory()->create();
 
@@ -29,10 +27,8 @@ class UpdateTest extends TestCase
 
     /**
      * Buckets can be updated.
-     *
-     * @return void
      */
-    public function testBucketsCanBeUpdated()
+    public function testBucketsCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $bucket = Bucket::factory()->create();
@@ -49,10 +45,8 @@ class UpdateTest extends TestCase
 
     /**
      * Buckets must have a name.
-     *
-     * @return void
      */
-    public function testBucketsMustHaveAName()
+    public function testBucketsMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $bucket = Bucket::factory()->create();
@@ -70,10 +64,8 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update buckets.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotUpdateBuckets()
+    public function testNonAdminUsersCanNotUpdateBuckets(): void
     {
         $user = User::factory()->create();
         $bucket = Bucket::factory()->create();

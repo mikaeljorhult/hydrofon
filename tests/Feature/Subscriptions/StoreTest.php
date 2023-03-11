@@ -6,6 +6,7 @@ use App\Models\Resource;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -14,12 +15,8 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a subscription.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
-    public function storeSubscription($overrides = [], $user = null)
+    public function storeSubscription(array $overrides = [], ?User $user = null): TestResponse
     {
         $subscription = Subscription::factory()->make($overrides);
 
@@ -29,10 +26,8 @@ class StoreTest extends TestCase
 
     /**
      * A user can subscribe to its bookings.
-     *
-     * @return void
      */
-    public function testUserSubscriptionsCanBeStored()
+    public function testUserSubscriptionsCanBeStored(): void
     {
         $user = User::factory()->create();
 
@@ -51,10 +46,8 @@ class StoreTest extends TestCase
 
     /**
      * Only one subscription is created for each object.
-     *
-     * @return void
      */
-    public function testOnlyOneSubscriptionIsCreatedForEachObject()
+    public function testOnlyOneSubscriptionIsCreatedForEachObject(): void
     {
         $subscription = Subscription::factory()->create($attributes = [
             'subscribable_type' => \App\Models\User::class,
@@ -72,10 +65,8 @@ class StoreTest extends TestCase
 
     /**
      * A user can not subscribe to bookings of another user.
-     *
-     * @return void
      */
-    public function testUserCanNotSubscribeToOtherUsersBookings()
+    public function testUserCanNotSubscribeToOtherUsersBookings(): void
     {
         $users = User::factory()->times(2)->create();
 
@@ -89,10 +80,8 @@ class StoreTest extends TestCase
 
     /**
      * An administrator can subscribe to bookings of a resource.
-     *
-     * @return void
      */
-    public function testResourceSubscriptionsCanBeStored()
+    public function testResourceSubscriptionsCanBeStored(): void
     {
         $resource = Resource::factory()->create();
 
@@ -111,10 +100,8 @@ class StoreTest extends TestCase
 
     /**
      * A regular user can not subscribe to bookings of a resource.
-     *
-     * @return void
      */
-    public function testUserCanNotSubscribeResourceBookings()
+    public function testUserCanNotSubscribeResourceBookings(): void
     {
         $resource = Resource::factory()->create();
 

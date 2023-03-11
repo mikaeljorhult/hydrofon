@@ -7,7 +7,9 @@ use App\Http\Requests\IdentifierStoreRequest;
 use App\Http\Requests\IdentifierUpdateRequest;
 use App\Models\Identifier;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class UserIdentifierController extends Controller
 {
@@ -23,11 +25,8 @@ class UserIdentifierController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index(User $user): View
     {
         $this->authorize('view', [$user, Identifier::class]);
 
@@ -36,11 +35,8 @@ class UserIdentifierController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function create(User $user)
+    public function create(User $user): View
     {
         $this->authorize('create', Identifier::class);
 
@@ -49,12 +45,8 @@ class UserIdentifierController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\IdentifierStoreRequest  $request
-     * @param  \App\Models\User  $user
-     * @return void
      */
-    public function store(IdentifierStoreRequest $request, User $user)
+    public function store(IdentifierStoreRequest $request, User $user): RedirectResponse
     {
         $user->identifiers()->create($request->validated());
 
@@ -74,12 +66,8 @@ class UserIdentifierController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Identifier  $identifier
-     * @return \Illuminate\Http\Response
      */
-    public function edit(User $user, Identifier $identifier)
+    public function edit(User $user, Identifier $identifier): View
     {
         $this->authorize('update', $identifier);
 
@@ -90,13 +78,8 @@ class UserIdentifierController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\IdentifierUpdateRequest  $request
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Identifier  $identifier
-     * @return \Illuminate\Http\Response
      */
-    public function update(IdentifierUpdateRequest $request, User $user, Identifier $identifier)
+    public function update(IdentifierUpdateRequest $request, User $user, Identifier $identifier): RedirectResponse
     {
         $identifier->update($request->validated());
 
@@ -116,13 +99,8 @@ class UserIdentifierController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Identifier  $identifier
-     * @param  \App\Http\Requests\IdentifierDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, Identifier $identifier, IdentifierDestroyRequest $request)
+    public function destroy(User $user, Identifier $identifier, IdentifierDestroyRequest $request): RedirectResponse
     {
         $identifier->delete();
 

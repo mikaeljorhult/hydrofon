@@ -12,10 +12,8 @@ class StoreTest extends TestCase
 
     /**
      * Users can be created and stored.
-     *
-     * @return void
      */
-    public function testUsersCanBeStored()
+    public function testUsersCanBeStored(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -35,10 +33,8 @@ class StoreTest extends TestCase
 
     /**
      * Users must have a name.
-     *
-     * @return void
      */
-    public function testUsersMustHaveAName()
+    public function testUsersMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -60,10 +56,8 @@ class StoreTest extends TestCase
 
     /**
      * Users must have an e-mail address.
-     *
-     * @return void
      */
-    public function testUsersMustHaveAnEmailAddress()
+    public function testUsersMustHaveAnEmailAddress(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -85,10 +79,8 @@ class StoreTest extends TestCase
 
     /**
      * E-mail address must be unique and not in use by another user.
-     *
-     * @return void
      */
-    public function testEmailAddressMustBeUnique()
+    public function testEmailAddressMustBeUnique(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -110,10 +102,8 @@ class StoreTest extends TestCase
 
     /**
      * Users must have a password.
-     *
-     * @return void
      */
-    public function testUsersMustHaveAPassword()
+    public function testUsersMustHaveAPassword(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -135,10 +125,8 @@ class StoreTest extends TestCase
 
     /**
      * Password must match confirmation.
-     *
-     * @return void
      */
-    public function testPasswordMustBeConfirmed()
+    public function testPasswordMustBeConfirmed(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -160,10 +148,8 @@ class StoreTest extends TestCase
 
     /**
      * Users can be created and stored.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotStoreUsers()
+    public function testNonAdminUsersCanNotStoreUsers(): void
     {
         $admin = User::factory()->create();
         $user = User::factory()->make();

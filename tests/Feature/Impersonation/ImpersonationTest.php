@@ -12,10 +12,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * An administration can see impersonation form.
-     *
-     * @return void
      */
-    public function testAdministratorCanSeeImpersonationForm()
+    public function testAdministratorCanSeeImpersonationForm(): void
     {
         User::factory()->create();
         $response = $this->actingAs(User::factory()->admin()->create())->get('users');
@@ -26,10 +24,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * An administration can impersonate a user.
-     *
-     * @return void
      */
-    public function testAdministratorCanImpersonateUser()
+    public function testAdministratorCanImpersonateUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -45,10 +41,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * An administration can impersonate a user.
-     *
-     * @return void
      */
-    public function testAdministratorCanStopImpersonatingUser()
+    public function testAdministratorCanStopImpersonatingUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -65,10 +59,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * ID of the user to impersonate is required.
-     *
-     * @return void
      */
-    public function testUserIDIsRequired()
+    public function testUserIDIsRequired(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -83,10 +75,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * User to impersonate must exist.
-     *
-     * @return void
      */
-    public function testUserMustExist()
+    public function testUserMustExist(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -101,10 +91,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * A user can not see impersonation form.
-     *
-     * @return void
      */
-    public function testUserCanNotSeeImpersonationForm()
+    public function testUserCanNotSeeImpersonationForm(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('calendar');
@@ -115,10 +103,8 @@ class ImpersonationTest extends TestCase
 
     /**
      * A user can not impersonate another user.
-     *
-     * @return void
      */
-    public function testUserCanNotImpersonateUser()
+    public function testUserCanNotImpersonateUser(): void
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();

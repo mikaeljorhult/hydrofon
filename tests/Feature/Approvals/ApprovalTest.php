@@ -15,10 +15,8 @@ class ApprovalTest extends TestCase
 
     /**
      * User not assigned as an approver can not access approvals index.
-     *
-     * @return void
      */
-    public function testNonApproverUserCannotSeeList()
+    public function testNonApproverUserCannotSeeList(): void
     {
         $this->approvalIsRequired();
 
@@ -30,10 +28,8 @@ class ApprovalTest extends TestCase
 
     /**
      * List is not available to approvers if approval requirement has been turned off.
-     *
-     * @return void
      */
-    public function testApproverCannotSeeListIfTurnedOff()
+    public function testApproverCannotSeeListIfTurnedOff(): void
     {
         $this->approvalIsNotRequired();
 
@@ -46,10 +42,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Bookings needing approval are listed.
-     *
-     * @return void
      */
-    public function testBookingsNeedingApprovalAreListed()
+    public function testBookingsNeedingApprovalAreListed(): void
     {
         $this->approvalIsRequired();
 
@@ -68,10 +62,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Config may remove need for approval for equipment.
-     *
-     * @return void
      */
-    public function testConfigCanRemoveNeedForApprovalForEquipment()
+    public function testConfigCanRemoveNeedForApprovalForEquipment(): void
     {
         $this->approvalIsRequiredForFacilities();
 
@@ -96,10 +88,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Config may remove need for approval for facilities.
-     *
-     * @return void
      */
-    public function testConfigCanRemoveNeedForApprovalForFacilities()
+    public function testConfigCanRemoveNeedForApprovalForFacilities(): void
     {
         $this->approvalIsRequiredForEquipment();
 
@@ -124,10 +114,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Bookings not needing approval are omitted from listing.
-     *
-     * @return void
      */
-    public function testBookingsNotNeedingApprovalAreOmitted()
+    public function testBookingsNotNeedingApprovalAreOmitted(): void
     {
         $this->approvalIsRequired();
 
@@ -143,10 +131,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Booking can be approved.
-     *
-     * @return void
      */
-    public function testBookingCanBeApproved()
+    public function testBookingCanBeApproved(): void
     {
         $this->approvalIsRequired();
 
@@ -170,10 +156,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Approval can be revoked by an administrator.
-     *
-     * @return void
      */
-    public function testApprovalCanBeRevokedByAdmin()
+    public function testApprovalCanBeRevokedByAdmin(): void
     {
         $this->approvalIsRequired();
 
@@ -188,10 +172,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Users can not revoke an approval.
-     *
-     * @return void
      */
-    public function testUsersCanNotRevokeApproval()
+    public function testUsersCanNotRevokeApproval(): void
     {
         $this->approvalIsRequired();
 
@@ -206,10 +188,8 @@ class ApprovalTest extends TestCase
 
     /**
      * If user is in an approving group and changes the booking after getting approval the approval is revoked.
-     *
-     * @return void
      */
-    public function testApprovalIsRevokedIfUserChangesBooking()
+    public function testApprovalIsRevokedIfUserChangesBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -230,10 +210,8 @@ class ApprovalTest extends TestCase
 
     /**
      * If user don't need approval the booking is still automatically approved after changes.
-     *
-     * @return void
      */
-    public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking()
+    public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -251,10 +229,8 @@ class ApprovalTest extends TestCase
 
     /**
      * Administrators can change a booking without approval being revoked.
-     *
-     * @return void
      */
-    public function testApprovalIsNotRevokedIfAdminChangesBooking()
+    public function testApprovalIsNotRevokedIfAdminChangesBooking(): void
     {
         $this->approvalIsRequired();
 

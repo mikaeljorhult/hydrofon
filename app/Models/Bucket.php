@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Bucket extends Model
 {
@@ -20,10 +21,8 @@ class Bucket extends Model
 
     /**
      * Resources in the bucket.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function resources()
+    public function resources(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class);
     }

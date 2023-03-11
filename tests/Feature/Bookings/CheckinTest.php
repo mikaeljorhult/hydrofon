@@ -13,10 +13,8 @@ class CheckinTest extends TestCase
 
     /**
      * Booking can be checked in.
-     *
-     * @return void
      */
-    public function testBookingCanBeCheckedIn()
+    public function testBookingCanBeCheckedIn(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->checkedout()->createQuietly();
@@ -30,10 +28,8 @@ class CheckinTest extends TestCase
 
     /**
      * End time is shortened if it has not ended yet when booking is checked in.
-     *
-     * @return void
      */
-    public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
+    public function testEndTimeIsShortenedWhenBookingIsCheckedIn(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->checkedout()->createQuietly([
@@ -50,10 +46,8 @@ class CheckinTest extends TestCase
 
     /**
      * Booking to be checked in must exist in database.
-     *
-     * @return void
      */
-    public function testBookingMustExist()
+    public function testBookingMustExist(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -67,10 +61,8 @@ class CheckinTest extends TestCase
 
     /**
      * Non-admin users can not check in bookings.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotCheckInBookings()
+    public function testNonAdminUsersCanNotCheckInBookings(): void
     {
         $admin = User::factory()->create();
         $booking = Booking::factory()->checkedout()->createQuietly();

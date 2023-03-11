@@ -12,10 +12,8 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can view a user.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanViewAUser()
+    public function testOnlyAdminUsersCanViewAUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -28,10 +26,8 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can create users.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanCreateUsers()
+    public function testOnlyAdminUsersCanCreateUsers(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -42,10 +38,8 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can update a user.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanUpdateAUser()
+    public function testOnlyAdminUsersCanUpdateAUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -58,10 +52,8 @@ class UserPolicyTest extends TestCase
 
     /**
      * Only administrators can delete a user.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanDeleteAUser()
+    public function testOnlyAdminUsersCanDeleteAUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -74,10 +66,8 @@ class UserPolicyTest extends TestCase
 
     /**
      * An administrator can not delete themselves.
-     *
-     * @return void
      */
-    public function testAnAdministratorCanNotDeleteOwnAccount()
+    public function testAnAdministratorCanNotDeleteOwnAccount(): void
     {
         $admin = User::factory()->admin()->create();
 

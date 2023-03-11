@@ -13,10 +13,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when creating user.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreStoredWhenCreatingUser()
+    public function testGroupRelationshipsAreStoredWhenCreatingUser(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -38,10 +36,8 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when creating user.
-     *
-     * @return void
      */
-    public function testNonExistingGroupsCannotBeAddedWhenStoringUser()
+    public function testNonExistingGroupsCannotBeAddedWhenStoringUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -62,10 +58,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when updating user.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreStoredWhenUpdatingUser()
+    public function testGroupRelationshipsAreStoredWhenUpdatingUser(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -85,10 +79,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are removed when updating user.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreRemovedWhenUpdatingUser()
+    public function testGroupRelationshipsAreRemovedWhenUpdatingUser(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -115,10 +107,8 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when updating user.
-     *
-     * @return void
      */
-    public function testNonExistingGroupsCannotBeAddedWhenUpdatingUser()
+    public function testNonExistingGroupsCannotBeAddedWhenUpdatingUser(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

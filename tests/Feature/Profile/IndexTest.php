@@ -12,10 +12,8 @@ class IndexTest extends TestCase
 
     /**
      * Profile page is available.
-     *
-     * @return void
      */
-    public function testProfileIsAvailable()
+    public function testProfileIsAvailable(): void
     {
         $user = User::factory()->create();
 

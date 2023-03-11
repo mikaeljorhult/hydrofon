@@ -7,6 +7,8 @@ use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Models\Group;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
@@ -23,10 +25,8 @@ class CategoryController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Category::class)
                              ->with(['parent'])
@@ -51,10 +51,8 @@ class CategoryController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $parentOptions = Category::orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -67,11 +65,8 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\CategoryStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
         $category = Category::create($request->validated());
         $category->groups()->sync($request->get('groups'));
@@ -87,22 +82,16 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category): View
     {
         return view('categories.show')->with('category', $category);
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         $parentOptions = Category::where('id', '!=', $category->id)->orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -116,12 +105,8 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\CategoryUpdateRequest  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
         $category->groups()->sync($request->get('groups'));
@@ -137,12 +122,8 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @param  \App\Http\Requests\CategoryDestroyRequest  $request
-     * @return void
      */
-    public function destroy(Category $category, CategoryDestroyRequest $request)
+    public function destroy(Category $category, CategoryDestroyRequest $request): RedirectResponse
     {
         // Make any direct descending category root to prevent deletion.
         $category->children->each(function ($child) {

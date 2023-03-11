@@ -36,10 +36,8 @@ class OverdueBookingNotification extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $users = User::whereHas('bookings', function (Builder $query) {
             $query->overdue()
@@ -57,9 +55,8 @@ class OverdueBookingNotification extends Command
      * Retrieve date of last notification of type.
      *
      * @param  string  $className  FQN of notification type
-     * @return string
      */
-    private function dateOfLastNotification(string $className)
+    private function dateOfLastNotification(string $className): string
     {
         $notification = \DB::table('notifications')
                            ->select(['created_at', 'read_at'])

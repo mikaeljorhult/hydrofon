@@ -7,7 +7,9 @@ use App\Http\Requests\IdentifierStoreRequest;
 use App\Http\Requests\IdentifierUpdateRequest;
 use App\Models\Identifier;
 use App\Models\Resource;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class ResourceIdentifierController extends Controller
 {
@@ -23,11 +25,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
      */
-    public function index(Resource $resource)
+    public function index(Resource $resource): View
     {
         $this->authorize('view', [$resource, Identifier::class]);
 
@@ -36,11 +35,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
      */
-    public function create(Resource $resource)
+    public function create(Resource $resource): View
     {
         $this->authorize('create', Identifier::class);
 
@@ -49,12 +45,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\IdentifierStoreRequest  $request
-     * @param  \App\Models\Resource  $resource
-     * @return void
      */
-    public function store(IdentifierStoreRequest $request, Resource $resource)
+    public function store(IdentifierStoreRequest $request, Resource $resource): RedirectResponse
     {
         $resource->identifiers()->create($request->validated());
 
@@ -74,12 +66,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @param  \App\Models\Identifier  $identifier
-     * @return \Illuminate\Http\Response
      */
-    public function show(Resource $resource, Identifier $identifier)
+    public function show(Resource $resource, Identifier $identifier): View
     {
         return view('identifiers.show')->with([
             'resource' => $resource,
@@ -89,12 +77,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @param  \App\Models\Identifier  $identifier
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Resource $resource, Identifier $identifier)
+    public function edit(Resource $resource, Identifier $identifier): View
     {
         $this->authorize('update', $identifier);
 
@@ -105,13 +89,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\IdentifierUpdateRequest  $request
-     * @param  \App\Models\Resource  $resource
-     * @param  \App\Models\Identifier  $identifier
-     * @return \Illuminate\Http\Response
      */
-    public function update(IdentifierUpdateRequest $request, Resource $resource, Identifier $identifier)
+    public function update(IdentifierUpdateRequest $request, Resource $resource, Identifier $identifier): RedirectResponse
     {
         $identifier->update($request->validated());
 
@@ -131,13 +110,8 @@ class ResourceIdentifierController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @param  \App\Models\Identifier  $identifier
-     * @param  \App\Http\Requests\IdentifierDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Resource $resource, Identifier $identifier, IdentifierDestroyRequest $request)
+    public function destroy(Resource $resource, Identifier $identifier, IdentifierDestroyRequest $request): RedirectResponse
     {
         $identifier->delete();
 

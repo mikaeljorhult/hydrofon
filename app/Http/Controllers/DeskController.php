@@ -6,6 +6,8 @@ use App\Http\Requests\DeskRequest;
 use App\Models\Identifier;
 use App\Models\User;
 use App\States\CheckedIn;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class DeskController extends Controller
@@ -22,11 +24,8 @@ class DeskController extends Controller
 
     /**
      * Show the circulation desk view.
-     *
-     * @param  null|string  $search
-     * @return \Illuminate\Http\Response
      */
-    public function index($search = null)
+    public function index(?string $search = null): View
     {
         // Only resolve resource or user if a search string is available.
         $identifiable = $search ? $this->resolveIdentifiable($search) : null;
@@ -44,11 +43,8 @@ class DeskController extends Controller
 
     /**
      * Redirect to desk view with search term.
-     *
-     * @param  \App\Http\Requests\DeskRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(DeskRequest $request)
+    public function store(DeskRequest $request): RedirectResponse
     {
         return redirect('/desk/'.$request->input('search'));
     }
@@ -57,7 +53,6 @@ class DeskController extends Controller
      * Resolve resource or user from search term.
      * Checks against user e-mail address and otherwise against identifiers.
      *
-     * @param $search
      * @return mixed
      */
     private function resolveIdentifiable($search)

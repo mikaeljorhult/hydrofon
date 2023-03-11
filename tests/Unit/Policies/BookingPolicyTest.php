@@ -13,10 +13,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Administrators can view a booking.
-     *
-     * @return void
      */
-    public function testAdminsCanViewABooking()
+    public function testAdminsCanViewABooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -29,10 +27,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * The user that owns the booking can view it.
-     *
-     * @return void
      */
-    public function testOwnerCanViewBooking()
+    public function testOwnerCanViewBooking(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create([
@@ -44,10 +40,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * All users can create bookings.
-     *
-     * @return void
      */
-    public function testAllUsersCanCreateBookings()
+    public function testAllUsersCanCreateBookings(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -58,10 +52,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Administrators can update any booking.
-     *
-     * @return void
      */
-    public function testAdminsCanUpdateAnyBooking()
+    public function testAdminsCanUpdateAnyBooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -74,10 +66,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * The user that owns the booking can update it if it hasn't started or been checked out.
-     *
-     * @return void
      */
-    public function testOwnerCanUpdateBooking()
+    public function testOwnerCanUpdateBooking(): void
     {
         $user = User::factory()->create();
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
@@ -93,10 +83,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Administrators can delete any booking.
-     *
-     * @return void
      */
-    public function testAdminsCanDeleteAnyBooking()
+    public function testAdminsCanDeleteAnyBooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -109,10 +97,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * The user that owns the booking can update it if it hasn't started or been checked out.
-     *
-     * @return void
      */
-    public function testOwnerCanDeleteBooking()
+    public function testOwnerCanDeleteBooking(): void
     {
         $user = User::factory()->create();
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
@@ -128,10 +114,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Only administrators can create checkins.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanCreateCheckins()
+    public function testOnlyAdminUsersCanCreateCheckins(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -142,10 +126,8 @@ class BookingPolicyTest extends TestCase
 
     /**
      * Only administrators can create checkouts.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanCreateCheckouts()
+    public function testOnlyAdminUsersCanCreateCheckouts(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

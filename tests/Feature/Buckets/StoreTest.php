@@ -5,6 +5,7 @@ namespace Tests\Feature\Buckets;
 use App\Models\Bucket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -13,12 +14,8 @@ class StoreTest extends TestCase
 
     /**
      * Posts request to persist a bucket.
-     *
-     * @param  array  $overrides
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
-    public function storeBucket($overrides = [], $user = null)
+    public function storeBucket(array $overrides = [], ?User $user = null): TestResponse
     {
         $bucket = Bucket::factory()->make($overrides);
 
@@ -28,10 +25,8 @@ class StoreTest extends TestCase
 
     /**
      * Buckets can be created and stored.
-     *
-     * @return void
      */
-    public function testBucketsCanBeStored()
+    public function testBucketsCanBeStored(): void
     {
         $this->storeBucket(['name' => 'New Bucket'])
              ->assertRedirect('/buckets');
@@ -43,10 +38,8 @@ class StoreTest extends TestCase
 
     /**
      * Buckets must have a name.
-     *
-     * @return void
      */
-    public function testBucketsMustHaveAName()
+    public function testBucketsMustHaveAName(): void
     {
         $this->storeBucket(['name' => null])
              ->assertRedirect()
@@ -57,10 +50,8 @@ class StoreTest extends TestCase
 
     /**
      * Non-admin users can not store buckets.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotStoreBuckets()
+    public function testNonAdminUsersCanNotStoreBuckets(): void
     {
         $user = User::factory()->create();
 

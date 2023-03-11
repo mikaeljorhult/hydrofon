@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model
@@ -23,10 +26,8 @@ class Category extends Model
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
@@ -35,20 +36,16 @@ class Category extends Model
 
     /**
      * Parent category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class);
     }
 
     /**
      * Categories assigned to model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function categories()
+    public function categories(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id')
                     ->orderBy('name');
@@ -56,20 +53,16 @@ class Category extends Model
 
     /**
      * Groups the category belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function groups()
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Group::class);
     }
 
     /**
      * Resources assigned to model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function resources()
+    public function resources(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class)
                     ->orderBy('name');

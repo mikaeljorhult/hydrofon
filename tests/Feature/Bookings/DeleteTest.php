@@ -13,10 +13,8 @@ class DeleteTest extends TestCase
 
     /**
      * Bookings can be deleted.
-     *
-     * @return void
      */
-    public function testBookingsCanBeDeleted()
+    public function testBookingsCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -31,10 +29,8 @@ class DeleteTest extends TestCase
 
     /**
      * A user can delete a booking it owns.
-     *
-     * @return void
      */
-    public function testUserCanDeleteBookingItOwns()
+    public function testUserCanDeleteBookingItOwns(): void
     {
         $booking = Booking::factory()->create();
 
@@ -48,10 +44,8 @@ class DeleteTest extends TestCase
 
     /**
      * A user can not delete a booking by another user.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteBookingByAnotherUser()
+    public function testUserCanNotDeleteBookingByAnotherUser(): void
     {
         $booking = Booking::factory()->future()->create();
         $anotherUser = User::factory()->create();
@@ -64,10 +58,8 @@ class DeleteTest extends TestCase
 
     /**
      * A user can not delete a booking that has started.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteBookingThatHasStarted()
+    public function testUserCanNotDeleteBookingThatHasStarted(): void
     {
         $booking = Booking::factory()->past()->create();
 
@@ -79,10 +71,8 @@ class DeleteTest extends TestCase
 
     /**
      * A user can not delete a booking that has been checked out.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteBookingThatHasBeenCheckedOut()
+    public function testUserCanNotDeleteBookingThatHasBeenCheckedOut(): void
     {
         $booking = Booking::factory()->past()->checkedout()->createQuietly();
 

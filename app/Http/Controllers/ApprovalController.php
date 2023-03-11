@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ApprovalController extends Controller
@@ -22,10 +24,8 @@ class ApprovalController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         // Bail if approvals are not set up.
         if (config('hydrofon.require_approval') === 'none') {
@@ -63,11 +63,8 @@ class ApprovalController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $booking = Booking::findOrFail($request->input('booking_id'));
 
@@ -80,11 +77,8 @@ class ApprovalController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking): RedirectResponse
     {
         $this->authorize('approve', $booking);
 

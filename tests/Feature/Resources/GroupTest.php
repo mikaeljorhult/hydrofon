@@ -14,10 +14,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when creating resource.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreStoredWhenCreatingResource()
+    public function testGroupRelationshipsAreStoredWhenCreatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -36,10 +34,8 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when creating resource.
-     *
-     * @return void
      */
-    public function testNonExistingGroupsCannotBeAddedWhenStoringResource()
+    public function testNonExistingGroupsCannotBeAddedWhenStoringResource(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->make();
@@ -57,10 +53,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are stored when updating resource.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreStoredWhenUpdatingResource()
+    public function testGroupRelationshipsAreStoredWhenUpdatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -79,10 +73,8 @@ class GroupTest extends TestCase
 
     /**
      * Group relationships are removed when updating user.
-     *
-     * @return void
      */
-    public function testGroupRelationshipsAreRemovedWhenUpdatingResource()
+    public function testGroupRelationshipsAreRemovedWhenUpdatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -108,10 +100,8 @@ class GroupTest extends TestCase
 
     /**
      * Non-existing groups cannot be added when updating resource.
-     *
-     * @return void
      */
-    public function testNonExistingGroupsCannotBeAddedWhenUpdatingResource()
+    public function testNonExistingGroupsCannotBeAddedWhenUpdatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();

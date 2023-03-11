@@ -13,10 +13,8 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
-    public function testEditRouteIsAvailable()
+    public function testEditRouteIsAvailable(): void
     {
         $category = Category::factory()->create();
 
@@ -29,10 +27,8 @@ class UpdateTest extends TestCase
 
     /**
      * Categories can be updated.
-     *
-     * @return void
      */
-    public function testCategoriesCanBeUpdated()
+    public function testCategoriesCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $parents = Category::factory()->times(2)->create();
@@ -54,10 +50,8 @@ class UpdateTest extends TestCase
 
     /**
      * Categories must have a name.
-     *
-     * @return void
      */
-    public function testCategoriesMustHaveAName()
+    public function testCategoriesMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create();
@@ -75,10 +69,8 @@ class UpdateTest extends TestCase
 
     /**
      * A parent category must exist in the database.
-     *
-     * @return void
      */
-    public function testParentMustExist()
+    public function testParentMustExist(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create([
@@ -100,10 +92,8 @@ class UpdateTest extends TestCase
 
     /**
      * Category can't be its own parent.
-     *
-     * @return void
      */
-    public function testCategoryMustNotBeItsOwnParent()
+    public function testCategoryMustNotBeItsOwnParent(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create([
@@ -125,10 +115,8 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin user can not update categories.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotUpdateCategories()
+    public function testNonAdminUsersCanNotUpdateCategories(): void
     {
         $admin = User::factory()->create();
         $category = Category::factory()->create();

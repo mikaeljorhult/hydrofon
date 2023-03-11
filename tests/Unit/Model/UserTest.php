@@ -14,10 +14,8 @@ class UserTest extends TestCase
 
     /**
      * User can have bookings.
-     *
-     * @return void
      */
-    public function testUserCanHaveBookings()
+    public function testUserCanHaveBookings(): void
     {
         $user = User::factory()->create();
 
@@ -26,10 +24,8 @@ class UserTest extends TestCase
 
     /**
      * User can belong to a group.
-     *
-     * @return void
      */
-    public function testUserCanBelongToAGroup()
+    public function testUserCanBelongToAGroup(): void
     {
         $user = User::factory()->create();
 
@@ -38,10 +34,8 @@ class UserTest extends TestCase
 
     /**
      * User is recognized as administrator if is_admin attribute is true.
-     *
-     * @return void
      */
-    public function testUserCanBeAdmin()
+    public function testUserCanBeAdmin(): void
     {
         $user = User::factory()->create(['is_admin' => false]);
 
@@ -52,10 +46,8 @@ class UserTest extends TestCase
 
     /**
      * The owns method checks if related model belongs to user.
-     *
-     * @return void
      */
-    public function testOwnMethodChecksIfModelBelongsToUser()
+    public function testOwnMethodChecksIfModelBelongsToUser(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create();
@@ -67,10 +59,8 @@ class UserTest extends TestCase
 
     /**
      * A user data request export can be rendered.
-     *
-     * @return void
      */
-    public function testDataRequestExportIsRendered()
+    public function testDataRequestExportIsRendered(): void
     {
         $user = User::factory()->create();
 
@@ -82,10 +72,8 @@ class UserTest extends TestCase
 
     /**
      * Bookings are included in export.
-     *
-     * @return void
      */
-    public function testBookingsAreIncludedInExport()
+    public function testBookingsAreIncludedInExport(): void
     {
         $booking = Booking::factory()->create();
 
@@ -97,10 +85,8 @@ class UserTest extends TestCase
 
     /**
      * Identifiers are included in export.
-     *
-     * @return void
      */
-    public function testIdentifiersAreIncludedInExport()
+    public function testIdentifiersAreIncludedInExport(): void
     {
         $user = User::factory()->create();
         $user->identifiers()->create($identifier = [

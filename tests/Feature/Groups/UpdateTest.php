@@ -13,10 +13,8 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
-    public function testEditRouteIsAvailable()
+    public function testEditRouteIsAvailable(): void
     {
         $group = Group::factory()->create();
 
@@ -29,10 +27,8 @@ class UpdateTest extends TestCase
 
     /**
      * Groups can be updated.
-     *
-     * @return void
      */
-    public function testGroupsCanBeUpdated()
+    public function testGroupsCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -49,10 +45,8 @@ class UpdateTest extends TestCase
 
     /**
      * Groups must have a name.
-     *
-     * @return void
      */
-    public function testGroupsMustHaveAName()
+    public function testGroupsMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -70,10 +64,8 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update groups.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotUpdateGroups()
+    public function testNonAdminUsersCanNotUpdateGroups(): void
     {
         $user = User::factory()->create();
         $group = Group::factory()->create();

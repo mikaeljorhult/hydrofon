@@ -13,10 +13,8 @@ class UpdateTest extends TestCase
 
     /**
      * Edit route is available.
-     *
-     * @return void
      */
-    public function testEditRouteIsAvailable()
+    public function testEditRouteIsAvailable(): void
     {
         $resource = Resource::factory()->create();
 
@@ -29,10 +27,8 @@ class UpdateTest extends TestCase
 
     /**
      * Resources can be updated.
-     *
-     * @return void
      */
-    public function testResourcesCanBeUpdated()
+    public function testResourcesCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -49,10 +45,8 @@ class UpdateTest extends TestCase
 
     /**
      * Resources must have a name.
-     *
-     * @return void
      */
-    public function testResourcesMustHaveAName()
+    public function testResourcesMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -70,10 +64,8 @@ class UpdateTest extends TestCase
 
     /**
      * Non-admin users can not update resources.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotUpdateResources()
+    public function testNonAdminUsersCanNotUpdateResources(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();

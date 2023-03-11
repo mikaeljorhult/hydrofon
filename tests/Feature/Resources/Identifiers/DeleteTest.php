@@ -13,10 +13,8 @@ class DeleteTest extends TestCase
 
     /**
      * Identifiers can be deleted.
-     *
-     * @return void
      */
-    public function testIdentifiersCanBeDeleted()
+    public function testIdentifiersCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -30,10 +28,8 @@ class DeleteTest extends TestCase
 
     /**
      * Non-admin users can not delete identifiers.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotDeleteIdentifiers()
+    public function testNonAdminUsersCanNotDeleteIdentifiers(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);

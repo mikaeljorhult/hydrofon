@@ -13,10 +13,8 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can view an identifier.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanViewAnIdentifier()
+    public function testOnlyAdminUsersCanViewAnIdentifier(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -29,10 +27,8 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can create identifiers.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanCreateIdentifiers()
+    public function testOnlyAdminUsersCanCreateIdentifiers(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -43,10 +39,8 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can update an identifier.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanUpdateAnIdentifier()
+    public function testOnlyAdminUsersCanUpdateAnIdentifier(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -59,10 +53,8 @@ class IdentifierPolicyTest extends TestCase
 
     /**
      * Only administrators can delete an identifier.
-     *
-     * @return void
      */
-    public function testOnlyAdminUsersCanDeleteAnIdentifier()
+    public function testOnlyAdminUsersCanDeleteAnIdentifier(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

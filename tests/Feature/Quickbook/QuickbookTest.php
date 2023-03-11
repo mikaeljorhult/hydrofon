@@ -16,10 +16,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Component is rendered correctly.
-     *
-     * @return void
      */
-    public function testComponentIsRendered()
+    public function testComponentIsRendered(): void
     {
         Resource::factory()->create();
 
@@ -30,10 +28,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Available resources are prefetched.
-     *
-     * @return void
      */
-    public function testAvailableResourcesArePrefetched()
+    public function testAvailableResourcesArePrefetched(): void
     {
         $resource = Resource::factory()->create();
 
@@ -45,10 +41,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Unavailable resources are omitted.
-     *
-     * @return void
      */
-    public function testUnavailableResourcesAreOmitted()
+    public function testUnavailableResourcesAreOmitted(): void
     {
         $booking = Booking::factory()->current()->create();
 
@@ -59,10 +53,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Bookings can be created.
-     *
-     * @return void
      */
-    public function testBookingIsCreated()
+    public function testBookingIsCreated(): void
     {
         $resource = Resource::factory()->create();
 
@@ -83,10 +75,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Start time, end time and resource must be present.
-     *
-     * @return void
      */
-    public function testAllParametersMustBePresent()
+    public function testAllParametersMustBePresent(): void
     {
         Livewire::actingAs(User::factory()->create())
                 ->test(QuickBook::class)
@@ -106,10 +96,8 @@ class QuickbookTest extends TestCase
 
     /**
      * End time must be after start time.
-     *
-     * @return void
      */
-    public function testEndTimeMustBeAfterStartTime()
+    public function testEndTimeMustBeAfterStartTime(): void
     {
         $resource = Resource::factory()->create();
 
@@ -130,10 +118,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Resource must exist.
-     *
-     * @return void
      */
-    public function testResourceMustExist()
+    public function testResourceMustExist(): void
     {
         Livewire::actingAs(User::factory()->create())
                 ->test(QuickBook::class)
@@ -151,10 +137,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Resource must be available.
-     *
-     * @return void
      */
-    public function testResourceMustBeAvailable()
+    public function testResourceMustBeAvailable(): void
     {
         $booking = Booking::factory()->current()->createQuietly();
 
@@ -174,10 +158,8 @@ class QuickbookTest extends TestCase
 
     /**
      * Error notifications are reset on next request.
-     *
-     * @return void
      */
-    public function testErrorNotificationsAreReset()
+    public function testErrorNotificationsAreReset(): void
     {
         $resource = Resource::factory()->create();
 

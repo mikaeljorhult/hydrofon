@@ -13,10 +13,8 @@ class CheckoutTest extends TestCase
 
     /**
      * Booking can be checked out.
-     *
-     * @return void
      */
-    public function testBookingCanBeCheckedOut()
+    public function testBookingCanBeCheckedOut(): void
     {
         $this->withoutExceptionHandling();
 
@@ -32,10 +30,8 @@ class CheckoutTest extends TestCase
 
     /**
      * Booking to be checked out must exist in database.
-     *
-     * @return void
      */
-    public function testBookingMustExist()
+    public function testBookingMustExist(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -49,10 +45,8 @@ class CheckoutTest extends TestCase
 
     /**
      * Non-admin users can not check out bookings.
-     *
-     * @return void
      */
-    public function testNonAdminUsersCanNotCheckOutBookings()
+    public function testNonAdminUsersCanNotCheckOutBookings(): void
     {
         $admin = User::factory()->create();
         $booking = Booking::factory()->autoapproved()->createQuietly();

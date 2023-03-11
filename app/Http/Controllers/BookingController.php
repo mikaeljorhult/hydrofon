@@ -8,6 +8,8 @@ use App\Http\Requests\BookingUpdateRequest;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BookingController extends Controller
@@ -25,10 +27,8 @@ class BookingController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Booking::class)
                              ->select('bookings.*')
@@ -81,10 +81,8 @@ class BookingController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
         $userOptions = User::orderBy('name')->pluck('name', 'id');
@@ -97,11 +95,8 @@ class BookingController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\BookingStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(BookingStoreRequest $request)
+    public function store(BookingStoreRequest $request): RedirectResponse
     {
         $currentUser = auth()->user();
 
@@ -121,7 +116,6 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
     public function show(Booking $booking)
@@ -159,11 +153,8 @@ class BookingController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Booking $booking)
+    public function edit(Booking $booking): View
     {
         $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
         $userOptions = User::orderBy('name')->pluck('name', 'id');
@@ -177,12 +168,8 @@ class BookingController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\BookingUpdateRequest  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
      */
-    public function update(BookingUpdateRequest $request, Booking $booking)
+    public function update(BookingUpdateRequest $request, Booking $booking): RedirectResponse
     {
         $currentUser = auth()->user();
 
@@ -201,12 +188,8 @@ class BookingController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @param  \App\Http\Requests\BookingDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking, BookingDestroyRequest $request)
+    public function destroy(Booking $booking, BookingDestroyRequest $request): RedirectResponse
     {
         $booking->delete();
 

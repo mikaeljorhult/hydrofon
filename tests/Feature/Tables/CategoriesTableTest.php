@@ -16,10 +16,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Category::factory()->count(3)->create();
 
@@ -33,10 +31,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -48,10 +44,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Edited category can be saved.
-     *
-     * @return void
      */
-    public function testAdministratorCanEditACategory()
+    public function testAdministratorCanEditACategory(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -72,10 +66,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Regular user can not update a category.
-     *
-     * @return void
      */
-    public function testUserCanNotEditACategory()
+    public function testUserCanNotEditACategory(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -93,10 +85,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Parent relationship is stored.
-     *
-     * @return void
      */
-    public function testParentRelationshipIsSaved()
+    public function testParentRelationshipIsSaved(): void
     {
         $items = Category::factory()->count(1)->create();
         $parent = Category::factory()->create();
@@ -117,10 +107,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Parent must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingParentIsNotAllowed()
+    public function testMissingParentIsNotAllowed(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -139,10 +127,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Category can't be its own parent.
-     *
-     * @return void
      */
-    public function testCategoryCanNotBeItsOwnParent()
+    public function testCategoryCanNotBeItsOwnParent(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -161,10 +147,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Group relationships are stored.
-     *
-     * @return void
      */
-    public function testRelatedGroupsAreSaved()
+    public function testRelatedGroupsAreSaved(): void
     {
         $items = Category::factory()->count(1)->create();
         $group = Group::factory()->create();
@@ -184,10 +168,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Resources must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingResourcesAreNotAllowed()
+    public function testMissingResourcesAreNotAllowed(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -206,10 +188,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * A category must have a name.
-     *
-     * @return void
      */
-    public function testCategoryMustHaveAName()
+    public function testCategoryMustHaveAName(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -230,10 +210,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Category can be deleted.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteCategory()
+    public function testAdministratorCanDeleteCategory(): void
     {
         $items = Category::factory()->count(1)->create();
 
@@ -250,10 +228,8 @@ class CategoriesTableTest extends TestCase
 
     /**
      * Regular user can not delete category.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteCategory()
+    public function testUserCanNotDeleteCategory(): void
     {
         $items = Category::factory()->count(1)->create();
 

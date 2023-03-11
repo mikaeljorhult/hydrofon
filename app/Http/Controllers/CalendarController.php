@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CalendarRequest;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CalendarController extends Controller
 {
@@ -19,11 +21,8 @@ class CalendarController extends Controller
 
     /**
      * Show the calendar view.
-     *
-     * @param  null|string  $date
-     * @return \Illuminate\Http\Response
      */
-    public function index($date = null)
+    public function index(?string $date = null): View
     {
         $date = $this->date($date)->startOfDay();
         $expanded = $this->categories();
@@ -37,11 +36,8 @@ class CalendarController extends Controller
 
     /**
      * Retrieve resources and redirect to calendar view.
-     *
-     * @param  \App\Http\Requests\CalendarRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(CalendarRequest $request)
+    public function store(CalendarRequest $request): RedirectResponse
     {
         session()->put('expanded', array_unique((array) $request->input('categories'), SORT_NUMERIC));
         session()->flash('resources', array_unique((array) $request->input('resources'), SORT_NUMERIC));
@@ -51,11 +47,8 @@ class CalendarController extends Controller
 
     /**
      * Parse supplied date or default to current date.
-     *
-     * @param $date
-     * @return \Carbon\Carbon
      */
-    private function date($date)
+    private function date($date): Carbon
     {
         return $date != null
             ? Carbon::parse($date)
@@ -64,20 +57,16 @@ class CalendarController extends Controller
 
     /**
      * Return resources stored in session.
-     *
-     * @return array
      */
-    private function resources()
+    private function resources(): array
     {
         return session('resources', []);
     }
 
     /**
      * Return categories stored in session.
-     *
-     * @return array
      */
-    private function categories()
+    private function categories(): array
     {
         return session('expanded', []);
     }

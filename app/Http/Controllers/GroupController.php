@@ -7,6 +7,8 @@ use App\Http\Requests\GroupStoreRequest;
 use App\Http\Requests\GroupUpdateRequest;
 use App\Models\Group;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class GroupController extends Controller
@@ -23,10 +25,8 @@ class GroupController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Group::class)
                              ->allowedFilters('name')
@@ -39,10 +39,8 @@ class GroupController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $userOptions = User::orderBy('name')->pluck('name', 'id');
 
@@ -51,11 +49,8 @@ class GroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\GroupStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(GroupStoreRequest $request)
+    public function store(GroupStoreRequest $request): RedirectResponse
     {
         $group = Group::create($request->validated());
         $group->approvers()->sync($request->get('approvers'));
@@ -71,22 +66,16 @@ class GroupController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Group $group): View
     {
         return view('groups.show')->with('group', $group);
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Group $group): View
     {
         $userOptions = User::orderBy('name')->pluck('name', 'id');
 
@@ -98,12 +87,8 @@ class GroupController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\GroupUpdateRequest  $request
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
      */
-    public function update(GroupUpdateRequest $request, Group $group)
+    public function update(GroupUpdateRequest $request, Group $group): RedirectResponse
     {
         $group->update($request->validated());
         $group->approvers()->sync($request->get('approvers'));
@@ -119,12 +104,8 @@ class GroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Group  $group
-     * @param  \App\Http\Requests\GroupDestroyRequest  $reqest
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group, GroupDestroyRequest $reqest)
+    public function destroy(Group $group, GroupDestroyRequest $reqest): RedirectResponse
     {
         $group->delete();
 

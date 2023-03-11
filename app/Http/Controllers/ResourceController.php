@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Flag;
 use App\Models\Group;
 use App\Models\Resource;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -26,10 +28,8 @@ class ResourceController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Resource::class)
                              ->allowedFilters([
@@ -57,10 +57,8 @@ class ResourceController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $categoryOptions = Category::orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -73,11 +71,8 @@ class ResourceController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\ResourceStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ResourceStoreRequest $request)
+    public function store(ResourceStoreRequest $request): RedirectResponse
     {
         $input = $request->validated();
         $input['is_facility'] = $request->has('is_facility');
@@ -97,11 +92,8 @@ class ResourceController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
      */
-    public function show(Resource $resource)
+    public function show(Resource $resource): View
     {
         $resource->load([
             'activities.causer:id,name' => function ($query) {
@@ -114,11 +106,8 @@ class ResourceController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Resource $resource)
+    public function edit(Resource $resource): View
     {
         $categoryOptions = Category::orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -132,12 +121,8 @@ class ResourceController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\ResourceUpdateRequest  $request
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
      */
-    public function update(ResourceUpdateRequest $request, Resource $resource)
+    public function update(ResourceUpdateRequest $request, Resource $resource): RedirectResponse
     {
         $input = $request->validated();
         $input['is_facility'] = $request->has('is_facility');
@@ -157,12 +142,8 @@ class ResourceController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @param  \App\Http\Requests\ResourceDestroyRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Resource $resource, ResourceDestroyRequest $request)
+    public function destroy(Resource $resource, ResourceDestroyRequest $request): RedirectResponse
     {
         $resource->delete();
 

@@ -13,10 +13,8 @@ class DeleteTest extends TestCase
 
     /**
      * Categories can be deleted.
-     *
-     * @return void
      */
-    public function testCategoriesCanBeDeleted()
+    public function testCategoriesCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create();

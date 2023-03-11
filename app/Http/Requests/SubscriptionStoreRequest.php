@@ -10,10 +10,8 @@ class SubscriptionStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         if ($this->user()->isAdmin()) {
             return true;
@@ -24,10 +22,8 @@ class SubscriptionStoreRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'subscribable_type' => [

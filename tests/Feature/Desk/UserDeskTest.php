@@ -12,10 +12,8 @@ class UserDeskTest extends TestCase
 
     /**
      * Regular users can't visit the desk.
-     *
-     * @return void
      */
-    public function testUsersCantVisitDesk()
+    public function testUsersCantVisitDesk(): void
     {
         $response = $this->actingAs(User::factory()->create())->get('/desk');
 
@@ -24,10 +22,8 @@ class UserDeskTest extends TestCase
 
     /**
      * Administrator users can visit the desk.
-     *
-     * @return void
      */
-    public function testAdministratorsCanVisitDesk()
+    public function testAdministratorsCanVisitDesk(): void
     {
         $response = $this->actingAs(User::factory()->admin()->create())->get('/desk');
 
@@ -36,10 +32,8 @@ class UserDeskTest extends TestCase
 
     /**
      * Users can be found by their e-mail address.
-     *
-     * @return void
      */
-    public function testSearchRedirectsToUserPage()
+    public function testSearchRedirectsToUserPage(): void
     {
         $response = $this->actingAs(User::factory()->admin()->create())
                          ->post('/desk', [
@@ -52,10 +46,8 @@ class UserDeskTest extends TestCase
 
     /**
      * Users can be found by their e-mail address.
-     *
-     * @return void
      */
-    public function testUsersCanBeFoundByEmail()
+    public function testUsersCanBeFoundByEmail(): void
     {
         $user = User::factory()->create();
 
@@ -67,10 +59,8 @@ class UserDeskTest extends TestCase
 
     /**
      * Users can be found by an identifier.
-     *
-     * @return void
      */
-    public function testUsersCanBeFoundByIdentifier()
+    public function testUsersCanBeFoundByIdentifier(): void
     {
         $user = User::factory()->create();
         $user->identifiers()->create(['value' => 'user-identifier']);

@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\ModelStatus\HasStatuses;
@@ -35,10 +38,8 @@ class Resource extends Model
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
@@ -47,30 +48,24 @@ class Resource extends Model
 
     /**
      * Whether user is administrator or not.
-     *
-     * @return bool
      */
-    public function isFacility()
+    public function isFacility(): bool
     {
         return $this->is_facility;
     }
 
     /**
      * Bookings of resource.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bookings()
+    public function bookings(): HasMany
     {
         return $this->hasMany(\App\Models\Booking::class);
     }
 
     /**
      * Categories the resource belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Category::class)
                     ->orderBy('name');
@@ -78,30 +73,24 @@ class Resource extends Model
 
     /**
      * Buckets the resource belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function buckets()
+    public function buckets(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Bucket::class);
     }
 
     /**
      * Get all identifiers.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function identifiers()
+    public function identifiers(): MorphMany
     {
         return $this->morphMany(\App\Models\Identifier::class, 'identifiable');
     }
 
     /**
      * Groups the resource belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function groups()
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Group::class);
     }
@@ -118,10 +107,6 @@ class Resource extends Model
 
     /**
      * Checks if status being set is valid.
-     *
-     * @param  string  $name
-     * @param  string|null  $reason
-     * @return bool
      */
     public function isValidStatus(string $name, ?string $reason = null): bool
     {
@@ -130,8 +115,6 @@ class Resource extends Model
 
     /**
      * Determines what to activity to log.
-     *
-     * @return \Spatie\Activitylog\LogOptions
      */
     public function getActivitylogOptions(): LogOptions
     {

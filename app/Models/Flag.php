@@ -12,8 +12,6 @@ class Flag extends Model
     /**
      * Flags available for resources.
      * Colors defined in array need to be safelisted in Tailwind CSS configuration.
-     *
-     * @var array
      */
     protected array $rows = [
         ['abbr' => 'broken', 'name' => 'Broken', 'color' => 'text-red-600'],

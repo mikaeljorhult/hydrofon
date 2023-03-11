@@ -5,6 +5,7 @@ namespace Tests\Feature\Subscriptions;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class DeleteTest extends TestCase
@@ -13,12 +14,8 @@ class DeleteTest extends TestCase
 
     /**
      * Posts request to delete a subscription.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @param  \App\Models\User|null  $user
-     * @return \Illuminate\Testing\TestResponse
      */
-    public function deleteSubscription($subscription, $user = null)
+    public function deleteSubscription(Subscription $subscription, ?User $user = null): TestResponse
     {
         return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->delete('subscriptions/'.$subscription->id);
@@ -26,10 +23,8 @@ class DeleteTest extends TestCase
 
     /**
      * A user can delete subscription of their own bookings.
-     *
-     * @return void
      */
-    public function testUserSubscriptionsCanBeDeleted()
+    public function testUserSubscriptionsCanBeDeleted(): void
     {
         $subscription = Subscription::factory()->user()->create();
 
@@ -42,10 +37,8 @@ class DeleteTest extends TestCase
 
     /**
      * An administrator can delete subscription of another users bookings.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteAnyUserSubscription()
+    public function testAdministratorCanDeleteAnyUserSubscription(): void
     {
         $subscription = Subscription::factory()->user()->create();
 
@@ -58,10 +51,8 @@ class DeleteTest extends TestCase
 
     /**
      * An administrator can delete subscription of resource bookings.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteAResourceSubscription()
+    public function testAdministratorCanDeleteAResourceSubscription(): void
     {
         $subscription = Subscription::factory()->resource()->create();
 
@@ -74,10 +65,8 @@ class DeleteTest extends TestCase
 
     /**
      * A regular user can not delete subscription of resource bookings.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteAResourceSubscription()
+    public function testUserCanNotDeleteAResourceSubscription(): void
     {
         $subscription = Subscription::factory()->resource()->create();
 

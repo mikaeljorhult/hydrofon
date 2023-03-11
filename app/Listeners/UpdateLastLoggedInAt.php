@@ -8,11 +8,8 @@ class UpdateLastLoggedInAt
 {
     /**
      * Handle the event.
-     *
-     * @param  Login  $event
-     * @return void
      */
-    public function handle(Login $event)
+    public function handle(Login $event): void
     {
         $event->user->last_logged_in_at = now();
         $event->user->save();

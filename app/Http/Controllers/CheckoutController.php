@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CheckoutStoreRequest;
 use App\Models\Booking;
 use App\States\CheckedOut;
+use Illuminate\Http\RedirectResponse;
 
 class CheckoutController extends Controller
 {
@@ -20,11 +21,8 @@ class CheckoutController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\CheckoutStoreRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(CheckoutStoreRequest $request)
+    public function store(CheckoutStoreRequest $request): RedirectResponse
     {
         $booking = Booking::findOrFail($request->get('booking_id'));
         $booking->state->transitionTo(CheckedOut::class);

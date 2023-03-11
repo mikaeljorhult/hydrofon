@@ -9,10 +9,8 @@ class ResourcesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (app()->environment('local')) {
             Resource::factory()->times(20)->create();

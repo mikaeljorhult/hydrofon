@@ -18,10 +18,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Table is rendered with items.
-     *
-     * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Booking::factory()->count(3)->create();
 
@@ -35,10 +33,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Inline edit form is displayed.
-     *
-     * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -50,10 +46,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Edited booking can be saved.
-     *
-     * @return void
      */
-    public function testAdministratorCanEditABooking()
+    public function testAdministratorCanEditABooking(): void
     {
         $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -75,10 +69,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can not update another users booking.
-     *
-     * @return void
      */
-    public function testUserCanNotEditAnotherUsersBooking()
+    public function testUserCanNotEditAnotherUsersBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -97,10 +89,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can update their own booking.
-     *
-     * @return void
      */
-    public function testUserCanEditTheirOwnBooking()
+    public function testUserCanEditTheirOwnBooking(): void
     {
         $items = Booking::factory()->future()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -122,10 +112,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can not change user of their own booking.
-     *
-     * @return void
      */
-    public function testUserCanNotChangeUserOfTheirOwnBooking()
+    public function testUserCanNotChangeUserOfTheirOwnBooking(): void
     {
         $items = Booking::factory()->future()->count(1)->create();
         $user = User::factory()->create();
@@ -147,10 +135,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * A booking have required attributes.
-     *
-     * @return void
      */
-    public function testBookingHaveRequiredAttributes()
+    public function testBookingHaveRequiredAttributes(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -181,10 +167,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingResourceIsNotAllowed()
+    public function testMissingResourceIsNotAllowed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -205,10 +189,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * User must exist to be allowed.
-     *
-     * @return void
      */
-    public function testMissingUserIsNotAllowed()
+    public function testMissingUserIsNotAllowed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -229,10 +211,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be checked out.
-     *
-     * @return void
      */
-    public function testAdministratorCanCheckoutBooking()
+    public function testAdministratorCanCheckoutBooking(): void
     {
         $items = Booking::factory()->current()->approved()->count(1)->createQuietly();
 
@@ -249,10 +229,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource can be changed to other in same bucket.
-     *
-     * @return void
      */
-    public function testAdministratorCanSwitchResource()
+    public function testAdministratorCanSwitchResource(): void
     {
         $bucket = Bucket::factory()->hasResources(2)->create();
 
@@ -276,10 +254,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource can not be switch if only one resource in bucket.
-     *
-     * @return void
      */
-    public function testBucketMustHaveMultipleResources()
+    public function testBucketMustHaveMultipleResources(): void
     {
         $bucket = Bucket::factory()->hasResources(1)->create();
 
@@ -303,10 +279,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Resource can not be switch if only one resource in bucket.
-     *
-     * @return void
      */
-    public function testResourceMustBeAvailableToSwitch()
+    public function testResourceMustBeAvailableToSwitch(): void
     {
         $items = Booking::factory()
                         ->current()
@@ -329,10 +303,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be checked in.
-     *
-     * @return void
      */
-    public function testAdministratorCanCheckinBooking()
+    public function testAdministratorCanCheckinBooking(): void
     {
         $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
@@ -349,10 +321,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be approved.
-     *
-     * @return void
      */
-    public function testBookingCanBeApproved()
+    public function testBookingCanBeApproved(): void
     {
         $this->approvalIsRequired();
 
@@ -379,10 +349,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be rejected.
-     *
-     * @return void
      */
-    public function testBookingCanBeRejected()
+    public function testBookingCanBeRejected(): void
     {
         $this->approvalIsRequired();
 
@@ -409,10 +377,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be checked in.
-     *
-     * @return void
      */
-    public function testBookingMustHaveValidStateToBeCheckedIn()
+    public function testBookingMustHaveValidStateToBeCheckedIn(): void
     {
         $items = Booking::factory()->current()->count(1)->createQuietly();
 
@@ -430,10 +396,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be checked out.
-     *
-     * @return void
      */
-    public function testBookingMustHaveValidStateToBeCheckedOut()
+    public function testBookingMustHaveValidStateToBeCheckedOut(): void
     {
         $items = Booking::factory()->current()->count(1)->createQuietly();
 
@@ -451,10 +415,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be approved.
-     *
-     * @return void
      */
-    public function testBookingMustHaveValidStateToBeApproved()
+    public function testBookingMustHaveValidStateToBeApproved(): void
     {
         $this->approvalIsRequired();
 
@@ -474,10 +436,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking must have a valid state to be rejected.
-     *
-     * @return void
      */
-    public function testBookingMustHaveValidStateToBeRejected()
+    public function testBookingMustHaveValidStateToBeRejected(): void
     {
         $this->approvalIsRequired();
 
@@ -497,10 +457,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Booking can be deleted.
-     *
-     * @return void
      */
-    public function testAdministratorCanDeleteBooking()
+    public function testAdministratorCanDeleteBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -517,10 +475,8 @@ class BookingsTableTest extends TestCase
 
     /**
      * Regular user can not delete booking.
-     *
-     * @return void
      */
-    public function testUserCanNotDeleteBooking()
+    public function testUserCanNotDeleteBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
 

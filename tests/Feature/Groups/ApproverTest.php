@@ -13,10 +13,8 @@ class ApproverTest extends TestCase
 
     /**
      * Approvers are stored when creating a group.
-     *
-     * @return void
      */
-    public function testApproversAreStoredWhenCreatingGroup()
+    public function testApproversAreStoredWhenCreatingGroup(): void
     {
         $approver = User::factory()->create();
 
@@ -33,10 +31,8 @@ class ApproverTest extends TestCase
 
     /**
      * Non-existing users cannot be added as an approver when creating a group.
-     *
-     * @return void
      */
-    public function testNonExistingUserCannotBeAddedWhenStoringGroup()
+    public function testNonExistingUserCannotBeAddedWhenStoringGroup(): void
     {
         $response = $this->actingAs(User::factory()->admin()->create())->post('groups', [
             'name' => 'New Group',
@@ -51,10 +47,8 @@ class ApproverTest extends TestCase
 
     /**
      * Approvers are stored when updating a group.
-     *
-     * @return void
      */
-    public function testApproversAreStoredWhenUpdatingGroup()
+    public function testApproversAreStoredWhenUpdatingGroup(): void
     {
         $group = Group::factory()->create();
         $approver = User::factory()->create();
@@ -72,10 +66,8 @@ class ApproverTest extends TestCase
 
     /**
      * Approvers are removed when updating a group.
-     *
-     * @return void
      */
-    public function testApproversAreRemovedWhenUpdatingGroup()
+    public function testApproversAreRemovedWhenUpdatingGroup(): void
     {
         $group = Group::factory()->has(User::factory(), 'approvers')->create();
 
@@ -93,10 +85,8 @@ class ApproverTest extends TestCase
 
     /**
      * Non-existing user cannot be added as an approver when updating a group.
-     *
-     * @return void
      */
-    public function testNonExistingUserCannotBeAddedWhenUpdatingGroup()
+    public function testNonExistingUserCannotBeAddedWhenUpdatingGroup(): void
     {
         $group = Group::factory()->create();
 

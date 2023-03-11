@@ -4,6 +4,7 @@ namespace App\Reports;
 
 use App\Models\Booking;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
 class Utilization
@@ -45,10 +46,6 @@ class Utilization
 
     /**
      * Class constructor.
-     *
-     * @param $resources
-     * @param  \Carbon\Carbon  $periodStart
-     * @param  \Carbon\Carbon  $periodEnd
      */
     public function __construct($resources, Carbon $periodStart, Carbon $periodEnd)
     {
@@ -59,12 +56,8 @@ class Utilization
 
     /**
      * Set times between which utilization should be calculated.
-     *
-     * @param  string  $start
-     * @param  string  $end
-     * @return void
      */
-    public function setTime($start, $end)
+    public function setTime(string $start, string $end): void
     {
         $this->dayStart = $start;
         $this->dayEnd = $end;
@@ -73,8 +66,6 @@ class Utilization
     /**
      * Calculate utilization for resources during supplied period.
      *
-     * @param  \Carbon\Carbon  $startTime
-     * @param  \Carbon\Carbon  $endTime
      * @return float|int
      */
     private function calculateUtilization(Carbon $startTime, Carbon $endTime)
@@ -104,13 +95,8 @@ class Utilization
 
     /**
      * Get all bookings for the supplied resources and period.
-     *
-     * @param  array  $resources
-     * @param  \Carbon\Carbon  $startTime
-     * @param  \Carbon\Carbon  $endTime
-     * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function fetchBookings(array $resources, Carbon $startTime, Carbon $endTime)
+    private function fetchBookings(array $resources, Carbon $startTime, Carbon $endTime): Collection
     {
         return Booking::whereIn('resource_id', $resources)
                       ->between($startTime, $endTime)
@@ -119,10 +105,8 @@ class Utilization
 
     /**
      * Get collection of all days during period.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    private function getDays()
+    private function getDays(): \Illuminate\Support\Collection
     {
         return collect($this->periodStart->toPeriod($this->periodEnd));
     }
@@ -140,9 +124,6 @@ class Utilization
     }
 
     /**
-     * @param  array  $resources
-     * @param  \Carbon\Carbon  $startTime
-     * @param  \Carbon\Carbon  $endTime
      * @return float|int
      */
     private function getPotentialHours(array $resources, Carbon $startTime, Carbon $endTime)

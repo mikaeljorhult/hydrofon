@@ -8,10 +8,8 @@ class SubscriptionFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $subscribables = [
             \App\Models\Resource::class,
@@ -28,10 +26,8 @@ class SubscriptionFactory extends Factory
 
     /**
      * Subscription of a resource.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function resource()
+    public function resource(): Factory
     {
         return $this->state(function (array $attributes) {
             return [
@@ -43,10 +39,8 @@ class SubscriptionFactory extends Factory
 
     /**
      * Subscription of a user.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function user()
+    public function user(): Factory
     {
         return $this->state(function (array $attributes) {
             return [
