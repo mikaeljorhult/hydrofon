@@ -15,7 +15,6 @@
         "calebporzio/sushi": "^2.4",
         "coderello/laraflash": "^5.0",
         "eluceo/ical": "^2.7",
-        "fruitcake/laravel-cors": "^2.2",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.34",
         "laravel/tinker": "^2.7.2",
