@@ -6,7 +6,6 @@ use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 class Utilization
 {
@@ -47,10 +46,6 @@ class Utilization
 
     /**
      * Class constructor.
-     *
-     * @param $resources
-     * @param  \Carbon\Carbon  $periodStart
-     * @param  \Carbon\Carbon  $periodEnd
      */
     public function __construct($resources, Carbon $periodStart, Carbon $periodEnd)
     {
@@ -61,10 +56,6 @@ class Utilization
 
     /**
      * Set times between which utilization should be calculated.
-     *
-     * @param  string  $start
-     * @param  string  $end
-     * @return void
      */
     public function setTime(string $start, string $end): void
     {
@@ -75,8 +66,6 @@ class Utilization
     /**
      * Calculate utilization for resources during supplied period.
      *
-     * @param  \Carbon\Carbon  $startTime
-     * @param  \Carbon\Carbon  $endTime
      * @return float|int
      */
     private function calculateUtilization(Carbon $startTime, Carbon $endTime)
@@ -106,11 +95,6 @@ class Utilization
 
     /**
      * Get all bookings for the supplied resources and period.
-     *
-     * @param  array  $resources
-     * @param  \Carbon\Carbon  $startTime
-     * @param  \Carbon\Carbon  $endTime
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     private function fetchBookings(array $resources, Carbon $startTime, Carbon $endTime): Collection
     {
@@ -121,10 +105,8 @@ class Utilization
 
     /**
      * Get collection of all days during period.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    private function getDays(): Collection
+    private function getDays(): \Illuminate\Support\Collection
     {
         return collect($this->periodStart->toPeriod($this->periodEnd));
     }
@@ -142,9 +124,6 @@ class Utilization
     }
 
     /**
-     * @param  array  $resources
-     * @param  \Carbon\Carbon  $startTime
-     * @param  \Carbon\Carbon  $endTime
      * @return float|int
      */
     private function getPotentialHours(array $resources, Carbon $startTime, Carbon $endTime)

@@ -10,12 +10,14 @@ class BookingPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user, string $ability): bool
+    public function before(User $user, string $ability): bool|null
     {
         // An administrator can do anything.
         if ($user->isAdmin()) {
             return true;
         }
+
+        return null;
     }
 
     /**

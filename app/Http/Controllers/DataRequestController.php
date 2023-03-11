@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DataRequestController extends Controller
 {
@@ -21,7 +21,7 @@ class DataRequestController extends Controller
     /**
      * Generate new file with user data.
      */
-    public function store(Request $request): Response
+    public function store(Request $request): StreamedResponse
     {
         return response()->streamDownload(function () use ($request) {
             echo $request->user()->exportToJson();

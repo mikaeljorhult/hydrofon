@@ -7,15 +7,15 @@ use App\Http\Requests\SubscriptionStoreRequest;
 use App\Models\Subscription;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SubscriptionController extends Controller
 {
     /**
      * Display the specified resource.
      */
-    public function show(string $uuid): Response
+    public function show(string $uuid): StreamedResponse
     {
         $subscription = Subscription::where('uuid', $uuid)->with([
             'subscribable' => function ($query) {

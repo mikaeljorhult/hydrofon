@@ -63,7 +63,7 @@ class Available implements Rule
      *
      * @param  mixed  $value
      */
-    public function passes(string $attribute, $value): bool
+    public function passes($attribute, $value): bool
     {
         // Fail validation if timestamps is invalid.
         if ($this->startTime == null || $this->endTime == null) {

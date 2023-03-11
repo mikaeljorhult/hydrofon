@@ -47,8 +47,6 @@ class CalendarController extends Controller
 
     /**
      * Parse supplied date or default to current date.
-     *
-     * @param $date
      */
     private function date($date): Carbon
     {

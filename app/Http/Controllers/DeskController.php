@@ -53,7 +53,6 @@ class DeskController extends Controller
      * Resolve resource or user from search term.
      * Checks against user e-mail address and otherwise against identifiers.
      *
-     * @param $search
      * @return mixed
      */
     private function resolveIdentifiable($search)
