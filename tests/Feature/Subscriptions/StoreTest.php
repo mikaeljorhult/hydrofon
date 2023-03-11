@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Subscriptions;
 
+use Illuminate\Testing\TestResponse;
 use App\Models\Resource;
 use App\Models\Subscription;
 use App\Models\User;
@@ -19,7 +20,7 @@ class StoreTest extends TestCase
      * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
-    public function storeSubscription($overrides = [], $user = null)
+    public function storeSubscription(array $overrides = [], ?User $user = null): TestResponse
     {
         $subscription = Subscription::factory()->make($overrides);
 
@@ -32,7 +33,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUserSubscriptionsCanBeStored()
+    public function testUserSubscriptionsCanBeStored(): void
     {
         $user = User::factory()->create();
 
@@ -54,7 +55,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyOneSubscriptionIsCreatedForEachObject()
+    public function testOnlyOneSubscriptionIsCreatedForEachObject(): void
     {
         $subscription = Subscription::factory()->create($attributes = [
             'subscribable_type' => \App\Models\User::class,
@@ -75,7 +76,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotSubscribeToOtherUsersBookings()
+    public function testUserCanNotSubscribeToOtherUsersBookings(): void
     {
         $users = User::factory()->times(2)->create();
 
@@ -92,7 +93,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testResourceSubscriptionsCanBeStored()
+    public function testResourceSubscriptionsCanBeStored(): void
     {
         $resource = Resource::factory()->create();
 
@@ -114,7 +115,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotSubscribeResourceBookings()
+    public function testUserCanNotSubscribeResourceBookings(): void
     {
         $resource = Resource::factory()->create();
 

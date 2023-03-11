@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ImpersonationRequest;
 use App\Models\User;
 
@@ -23,7 +24,7 @@ class ImpersonationController extends Controller
      * @param  \App\Http\Requests\ImpersonationRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ImpersonationRequest $request)
+    public function store(ImpersonationRequest $request): RedirectResponse
     {
         $user = User::findOrFail($request->get('user_id'));
 
@@ -41,7 +42,7 @@ class ImpersonationController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
         session()->forget('impersonate');
 

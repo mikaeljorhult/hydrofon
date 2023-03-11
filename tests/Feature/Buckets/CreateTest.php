@@ -16,7 +16,7 @@ class CreateTest extends TestCase
      *
      * @return void
      */
-    public function testCreateRouteIsServedSuccessfully()
+    public function testCreateRouteIsServedSuccessfully(): void
     {
         Resource::factory()->create();
 

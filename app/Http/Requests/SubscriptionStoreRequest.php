@@ -13,7 +13,7 @@ class SubscriptionStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         if ($this->user()->isAdmin()) {
             return true;
@@ -27,7 +27,7 @@ class SubscriptionStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'subscribable_type' => [

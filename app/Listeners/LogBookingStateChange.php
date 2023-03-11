@@ -30,7 +30,7 @@ class LogBookingStateChange
      * @param  \Spatie\ModelStates\Events\StateChanged  $event
      * @return void
      */
-    public function handle(StateChanged $event)
+    public function handle(StateChanged $event): void
     {
         $eventType = match (get_class($event->finalState)) {
             Created::class => 'created',

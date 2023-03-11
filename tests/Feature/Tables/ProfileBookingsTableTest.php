@@ -19,7 +19,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Booking::factory()->count(3)->create();
 
@@ -36,7 +36,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -51,7 +51,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanEditABooking()
+    public function testAdministratorCanEditABooking(): void
     {
         $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -76,7 +76,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotEditAnotherUsersBooking()
+    public function testUserCanNotEditAnotherUsersBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -98,7 +98,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanEditTheirOwnBooking()
+    public function testUserCanEditTheirOwnBooking(): void
     {
         $items = Booking::factory()->future()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -123,7 +123,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotChangeUserOfTheirOwnBooking()
+    public function testUserCanNotChangeUserOfTheirOwnBooking(): void
     {
         $items = Booking::factory()->future()->count(1)->create();
         $user = User::factory()->create();
@@ -148,7 +148,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testBookingHaveRequiredAttributes()
+    public function testBookingHaveRequiredAttributes(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -182,7 +182,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingResourceIsNotAllowed()
+    public function testMissingResourceIsNotAllowed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -206,7 +206,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingUserIsNotAllowed()
+    public function testMissingUserIsNotAllowed(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -230,7 +230,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteBooking()
+    public function testAdministratorCanDeleteBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
 
@@ -250,7 +250,7 @@ class ProfileBookingsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteBooking()
+    public function testUserCanNotDeleteBooking(): void
     {
         $items = Booking::factory()->count(1)->create();
 

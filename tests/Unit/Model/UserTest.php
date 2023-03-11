@@ -17,7 +17,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanHaveBookings()
+    public function testUserCanHaveBookings(): void
     {
         $user = User::factory()->create();
 
@@ -29,7 +29,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanBelongToAGroup()
+    public function testUserCanBelongToAGroup(): void
     {
         $user = User::factory()->create();
 
@@ -41,7 +41,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanBeAdmin()
+    public function testUserCanBeAdmin(): void
     {
         $user = User::factory()->create(['is_admin' => false]);
 
@@ -55,7 +55,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testOwnMethodChecksIfModelBelongsToUser()
+    public function testOwnMethodChecksIfModelBelongsToUser(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create();
@@ -70,7 +70,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testDataRequestExportIsRendered()
+    public function testDataRequestExportIsRendered(): void
     {
         $user = User::factory()->create();
 
@@ -85,7 +85,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsAreIncludedInExport()
+    public function testBookingsAreIncludedInExport(): void
     {
         $booking = Booking::factory()->create();
 
@@ -100,7 +100,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testIdentifiersAreIncludedInExport()
+    public function testIdentifiersAreIncludedInExport(): void
     {
         $user = User::factory()->create();
         $user->identifiers()->create($identifier = [

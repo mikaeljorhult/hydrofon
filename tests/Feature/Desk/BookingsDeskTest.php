@@ -17,7 +17,7 @@ class BookingsDeskTest extends TestCase
      *
      * @return void
      */
-    public function testCurrentBookingsAreDisplayed()
+    public function testCurrentBookingsAreDisplayed(): void
     {
         $booking = Booking::factory()->current()->create();
 
@@ -32,7 +32,7 @@ class BookingsDeskTest extends TestCase
      *
      * @return void
      */
-    public function testOlderBookingsAreOmitted()
+    public function testOlderBookingsAreOmitted(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->subHours(2),
@@ -50,7 +50,7 @@ class BookingsDeskTest extends TestCase
      *
      * @return void
      */
-    public function testFutureBookingsAreOmitted()
+    public function testFutureBookingsAreOmitted(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->addHour(),
@@ -68,7 +68,7 @@ class BookingsDeskTest extends TestCase
      *
      * @return void
      */
-    public function testCheckedInBookingsAreOmitted()
+    public function testCheckedInBookingsAreOmitted(): void
     {
         $booking = Booking::factory()->checkedin()->createQuietly();
 
@@ -83,7 +83,7 @@ class BookingsDeskTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsTimeSpanCanBeFiltered()
+    public function testBookingsTimeSpanCanBeFiltered(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->subDays(5)->subHour(),
@@ -102,7 +102,7 @@ class BookingsDeskTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsTimeSpanCanBeConfigured()
+    public function testBookingsTimeSpanCanBeConfigured(): void
     {
         Config::set('hydrofon.desk_inclusion_hours.earlier', 1);
         Config::set('hydrofon.desk_inclusion_hours.later', 1);

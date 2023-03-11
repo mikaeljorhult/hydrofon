@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\DeskRequest;
 use App\Models\Identifier;
 use App\Models\User;
@@ -26,7 +28,7 @@ class DeskController extends Controller
      * @param  null|string  $search
      * @return \Illuminate\Http\Response
      */
-    public function index($search = null)
+    public function index(?string $search = null): View
     {
         // Only resolve resource or user if a search string is available.
         $identifiable = $search ? $this->resolveIdentifiable($search) : null;
@@ -48,7 +50,7 @@ class DeskController extends Controller
      * @param  \App\Http\Requests\DeskRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeskRequest $request)
+    public function store(DeskRequest $request): RedirectResponse
     {
         return redirect('/desk/'.$request->input('search'));
     }

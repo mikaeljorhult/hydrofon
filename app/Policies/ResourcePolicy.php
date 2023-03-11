@@ -31,7 +31,7 @@ class ResourcePolicy
      * @param  \App\Models\Resource  $resource
      * @return mixed
      */
-    public function view(User $user, Resource $resource)
+    public function view(User $user, Resource $resource): bool
     {
         return $user->isAdmin();
     }
@@ -42,7 +42,7 @@ class ResourcePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -54,7 +54,7 @@ class ResourcePolicy
      * @param  \App\Models\Resource  $resource
      * @return mixed
      */
-    public function update(User $user, Resource $resource)
+    public function update(User $user, Resource $resource): bool
     {
         return $user->isAdmin();
     }
@@ -66,7 +66,7 @@ class ResourcePolicy
      * @param  \App\Models\Resource  $resource
      * @return mixed
      */
-    public function delete(User $user, Resource $resource)
+    public function delete(User $user, Resource $resource): bool
     {
         return $user->isAdmin();
     }

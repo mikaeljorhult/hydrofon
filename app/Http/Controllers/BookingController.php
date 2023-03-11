@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BookingDestroyRequest;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
@@ -28,7 +30,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Booking::class)
                              ->select('bookings.*')
@@ -84,7 +86,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
         $userOptions = User::orderBy('name')->pluck('name', 'id');
@@ -101,7 +103,7 @@ class BookingController extends Controller
      * @param  \App\Http\Requests\BookingStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookingStoreRequest $request)
+    public function store(BookingStoreRequest $request): RedirectResponse
     {
         $currentUser = auth()->user();
 
@@ -163,7 +165,7 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit(Booking $booking)
+    public function edit(Booking $booking): View
     {
         $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
         $userOptions = User::orderBy('name')->pluck('name', 'id');
@@ -182,7 +184,7 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(BookingUpdateRequest $request, Booking $booking)
+    public function update(BookingUpdateRequest $request, Booking $booking): RedirectResponse
     {
         $currentUser = auth()->user();
 
@@ -206,7 +208,7 @@ class BookingController extends Controller
      * @param  \App\Http\Requests\BookingDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking, BookingDestroyRequest $request)
+    public function destroy(Booking $booking, BookingDestroyRequest $request): RedirectResponse
     {
         $booking->delete();
 

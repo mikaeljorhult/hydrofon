@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
@@ -22,7 +23,7 @@ class NotificationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): View
     {
         $notifications = auth()->user()->notifications()
                                ->orderBy('read_at', 'desc')

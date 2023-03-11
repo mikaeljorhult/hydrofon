@@ -15,7 +15,7 @@ class GroupPolicyScope implements Scope
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(Builder $builder, Model $model): void
     {
         // Only limit query if user is not an administrator.
         if (auth()->check() && ! auth()->user()->isAdmin()) {

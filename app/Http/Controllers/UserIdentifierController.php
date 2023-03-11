@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\IdentifierDestroyRequest;
 use App\Http\Requests\IdentifierStoreRequest;
 use App\Http\Requests\IdentifierUpdateRequest;
@@ -27,7 +29,7 @@ class UserIdentifierController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index(User $user): View
     {
         $this->authorize('view', [$user, Identifier::class]);
 
@@ -40,7 +42,7 @@ class UserIdentifierController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function create(User $user)
+    public function create(User $user): View
     {
         $this->authorize('create', Identifier::class);
 
@@ -54,7 +56,7 @@ class UserIdentifierController extends Controller
      * @param  \App\Models\User  $user
      * @return void
      */
-    public function store(IdentifierStoreRequest $request, User $user)
+    public function store(IdentifierStoreRequest $request, User $user): RedirectResponse
     {
         $user->identifiers()->create($request->validated());
 
@@ -79,7 +81,7 @@ class UserIdentifierController extends Controller
      * @param  \App\Models\Identifier  $identifier
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user, Identifier $identifier)
+    public function edit(User $user, Identifier $identifier): View
     {
         $this->authorize('update', $identifier);
 
@@ -96,7 +98,7 @@ class UserIdentifierController extends Controller
      * @param  \App\Models\Identifier  $identifier
      * @return \Illuminate\Http\Response
      */
-    public function update(IdentifierUpdateRequest $request, User $user, Identifier $identifier)
+    public function update(IdentifierUpdateRequest $request, User $user, Identifier $identifier): RedirectResponse
     {
         $identifier->update($request->validated());
 
@@ -122,7 +124,7 @@ class UserIdentifierController extends Controller
      * @param  \App\Http\Requests\IdentifierDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, Identifier $identifier, IdentifierDestroyRequest $request)
+    public function destroy(User $user, Identifier $identifier, IdentifierDestroyRequest $request): RedirectResponse
     {
         $identifier->delete();
 

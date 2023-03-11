@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Groups;
 
+use Illuminate\Testing\TestResponse;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +19,7 @@ class StoreTest extends TestCase
      * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
-    public function storeGroup($overrides = [], $user = null)
+    public function storeGroup(array $overrides = [], ?User $user = null): TestResponse
     {
         $group = Group::factory()->make($overrides);
 
@@ -31,7 +32,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testGroupsCanBeStored()
+    public function testGroupsCanBeStored(): void
     {
         $this->storeGroup([
             'name' => 'New Group',
@@ -48,7 +49,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testGroupsMustHaveAName()
+    public function testGroupsMustHaveAName(): void
     {
         $this->storeGroup(['name' => null])
              ->assertRedirect()
@@ -62,7 +63,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotStoreGroups()
+    public function testNonAdminUsersCanNotStoreGroups(): void
     {
         $user = User::factory()->create();
 

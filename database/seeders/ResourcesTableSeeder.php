@@ -12,7 +12,7 @@ class ResourcesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (app()->environment('local')) {
             Resource::factory()->times(20)->create();

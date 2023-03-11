@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ResourceDestroyRequest;
 use App\Http\Requests\ResourceStoreRequest;
 use App\Http\Requests\ResourceUpdateRequest;
@@ -29,7 +31,7 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Resource::class)
                              ->allowedFilters([
@@ -60,7 +62,7 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $categoryOptions = Category::orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -77,7 +79,7 @@ class ResourceController extends Controller
      * @param  \App\Http\Requests\ResourceStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ResourceStoreRequest $request)
+    public function store(ResourceStoreRequest $request): RedirectResponse
     {
         $input = $request->validated();
         $input['is_facility'] = $request->has('is_facility');
@@ -101,7 +103,7 @@ class ResourceController extends Controller
      * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function show(Resource $resource)
+    public function show(Resource $resource): View
     {
         $resource->load([
             'activities.causer:id,name' => function ($query) {
@@ -118,7 +120,7 @@ class ResourceController extends Controller
      * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function edit(Resource $resource)
+    public function edit(Resource $resource): View
     {
         $categoryOptions = Category::orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -137,7 +139,7 @@ class ResourceController extends Controller
      * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function update(ResourceUpdateRequest $request, Resource $resource)
+    public function update(ResourceUpdateRequest $request, Resource $resource): RedirectResponse
     {
         $input = $request->validated();
         $input['is_facility'] = $request->has('is_facility');
@@ -162,7 +164,7 @@ class ResourceController extends Controller
      * @param  \App\Http\Requests\ResourceDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resource $resource, ResourceDestroyRequest $request)
+    public function destroy(Resource $resource, ResourceDestroyRequest $request): RedirectResponse
     {
         $resource->delete();
 

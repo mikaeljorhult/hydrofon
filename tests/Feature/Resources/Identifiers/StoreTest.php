@@ -17,7 +17,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testIdentifiersCanBeStored()
+    public function testIdentifiersCanBeStored(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -39,7 +39,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testIdentifierMustHaveAValue()
+    public function testIdentifierMustHaveAValue(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -58,7 +58,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testValueMustBeUnique()
+    public function testValueMustBeUnique(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -78,7 +78,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testValueCanNotBeAUserEmailAddress()
+    public function testValueCanNotBeAUserEmailAddress(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -97,7 +97,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotStoreIdentifiers()
+    public function testNonAdminUsersCanNotStoreIdentifiers(): void
     {
         $resource = Resource::factory()->create();
 

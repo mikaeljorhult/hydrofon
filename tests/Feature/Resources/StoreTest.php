@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Resources;
 
+use Illuminate\Testing\TestResponse;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +19,7 @@ class StoreTest extends TestCase
      * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
-    public function storeResource($overrides = [], $user = null)
+    public function storeResource(array $overrides = [], ?User $user = null): TestResponse
     {
         $resource = Resource::factory()->make($overrides);
 
@@ -31,7 +32,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesCanBeStored()
+    public function testResourcesCanBeStored(): void
     {
         $this->storeResource(['name' => 'New Resource'])
              ->assertRedirect('/resources');
@@ -46,7 +47,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesMustHaveAName()
+    public function testResourcesMustHaveAName(): void
     {
         $this->storeResource(['name' => null])
              ->assertRedirect()
@@ -60,7 +61,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotStoreResources()
+    public function testNonAdminUsersCanNotStoreResources(): void
     {
         $user = User::factory()->create();
 

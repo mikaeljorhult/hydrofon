@@ -17,7 +17,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testUtilizationIsCalculatedForSingleResource()
+    public function testUtilizationIsCalculatedForSingleResource(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->setTimeFromTimeString('00:00:00'),
@@ -36,7 +36,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testUtilizationIsCalculatedForMultipleResources()
+    public function testUtilizationIsCalculatedForMultipleResources(): void
     {
         $resources = Resource::factory()->count(2)->create();
 
@@ -58,7 +58,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testUtilizationIsCalculatedForResourceWithoutBookings()
+    public function testUtilizationIsCalculatedForResourceWithoutBookings(): void
     {
         $utilization = new Utilization(Resource::factory()->create()->id, now()->startOfDay(), now()->endOfDay());
 
@@ -72,7 +72,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testEarlyBookingsPartlyWithinScopeAreCounted()
+    public function testEarlyBookingsPartlyWithinScopeAreCounted(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->subDay()->setTimeFromTimeString('00:00:00'),
@@ -91,7 +91,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testLateBookingsPartlyWithinScopeAreCounted()
+    public function testLateBookingsPartlyWithinScopeAreCounted(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->setTimeFromTimeString('18:00:00'),
@@ -110,7 +110,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testUtilizationIsCalculatedOverMultipleDays()
+    public function testUtilizationIsCalculatedOverMultipleDays(): void
     {
         Booking::factory()
                ->for($resource = Resource::factory()->create())
@@ -137,7 +137,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testSetTimeLimitCalculation()
+    public function testSetTimeLimitCalculation(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->setTimeFromTimeString('08:00:00'),
@@ -157,7 +157,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testSetTimeLimitCalculationOverMultipleDays()
+    public function testSetTimeLimitCalculationOverMultipleDays(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->setTimeFromTimeString('08:00:00'),
@@ -177,7 +177,7 @@ class UtilizationReportTest extends TestCase
      *
      * @return void
      */
-    public function testSetTimeCanExcludeBookings()
+    public function testSetTimeCanExcludeBookings(): void
     {
         $booking = Booking::factory()->create([
             'start_time' => now()->setTimeFromTimeString('00:00:00'),

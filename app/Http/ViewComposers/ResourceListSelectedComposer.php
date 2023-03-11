@@ -12,7 +12,7 @@ class ResourceListSelectedComposer
      * @param  View  $view
      * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $view->with([
             'expanded' => session('expanded') ? array_map('intval', session('expanded')) : [],

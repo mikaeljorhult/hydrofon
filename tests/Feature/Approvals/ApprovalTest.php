@@ -18,7 +18,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testNonApproverUserCannotSeeList()
+    public function testNonApproverUserCannotSeeList(): void
     {
         $this->approvalIsRequired();
 
@@ -33,7 +33,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApproverCannotSeeListIfTurnedOff()
+    public function testApproverCannotSeeListIfTurnedOff(): void
     {
         $this->approvalIsNotRequired();
 
@@ -49,7 +49,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsNeedingApprovalAreListed()
+    public function testBookingsNeedingApprovalAreListed(): void
     {
         $this->approvalIsRequired();
 
@@ -71,7 +71,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testConfigCanRemoveNeedForApprovalForEquipment()
+    public function testConfigCanRemoveNeedForApprovalForEquipment(): void
     {
         $this->approvalIsRequiredForFacilities();
 
@@ -99,7 +99,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testConfigCanRemoveNeedForApprovalForFacilities()
+    public function testConfigCanRemoveNeedForApprovalForFacilities(): void
     {
         $this->approvalIsRequiredForEquipment();
 
@@ -127,7 +127,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsNotNeedingApprovalAreOmitted()
+    public function testBookingsNotNeedingApprovalAreOmitted(): void
     {
         $this->approvalIsRequired();
 
@@ -146,7 +146,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testBookingCanBeApproved()
+    public function testBookingCanBeApproved(): void
     {
         $this->approvalIsRequired();
 
@@ -173,7 +173,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApprovalCanBeRevokedByAdmin()
+    public function testApprovalCanBeRevokedByAdmin(): void
     {
         $this->approvalIsRequired();
 
@@ -191,7 +191,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testUsersCanNotRevokeApproval()
+    public function testUsersCanNotRevokeApproval(): void
     {
         $this->approvalIsRequired();
 
@@ -209,7 +209,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApprovalIsRevokedIfUserChangesBooking()
+    public function testApprovalIsRevokedIfUserChangesBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -233,7 +233,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking()
+    public function testApprovalIsNotRevokedIfUserWithoutGroupsChangesBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -254,7 +254,7 @@ class ApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApprovalIsNotRevokedIfAdminChangesBooking()
+    public function testApprovalIsNotRevokedIfAdminChangesBooking(): void
     {
         $this->approvalIsRequired();
 

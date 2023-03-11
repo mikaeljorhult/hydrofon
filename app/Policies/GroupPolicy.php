@@ -17,7 +17,7 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return mixed
      */
-    public function view(User $user, Group $group)
+    public function view(User $user, Group $group): bool
     {
         return $user->isAdmin();
     }
@@ -28,7 +28,7 @@ class GroupPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -40,7 +40,7 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return mixed
      */
-    public function update(User $user, Group $group)
+    public function update(User $user, Group $group): bool
     {
         return $user->isAdmin();
     }
@@ -52,7 +52,7 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return mixed
      */
-    public function delete(User $user, Group $group)
+    public function delete(User $user, Group $group): bool
     {
         return $user->isAdmin();
     }

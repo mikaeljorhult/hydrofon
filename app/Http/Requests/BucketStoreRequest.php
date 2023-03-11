@@ -12,7 +12,7 @@ class BucketStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('create', Bucket::class);
     }
@@ -22,7 +22,7 @@ class BucketStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required'],

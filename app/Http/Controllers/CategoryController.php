@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryDestroyRequest;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
@@ -26,7 +28,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Category::class)
                              ->with(['parent'])
@@ -54,7 +56,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $parentOptions = Category::orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -71,7 +73,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\CategoryStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
         $category = Category::create($request->validated());
         $category->groups()->sync($request->get('groups'));
@@ -91,7 +93,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category): View
     {
         return view('categories.show')->with('category', $category);
     }
@@ -102,7 +104,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         $parentOptions = Category::where('id', '!=', $category->id)->orderBy('name')->pluck('name', 'id');
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
@@ -121,7 +123,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
         $category->groups()->sync($request->get('groups'));
@@ -142,7 +144,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\CategoryDestroyRequest  $request
      * @return void
      */
-    public function destroy(Category $category, CategoryDestroyRequest $request)
+    public function destroy(Category $category, CategoryDestroyRequest $request): RedirectResponse
     {
         // Make any direct descending category root to prevent deletion.
         $category->children->each(function ($child) {

@@ -16,7 +16,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesAreListed()
+    public function testCategoriesAreListed(): void
     {
         $category = Category::factory()->create();
 
@@ -31,7 +31,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesAreFilteredByName()
+    public function testCategoriesAreFilteredByName(): void
     {
         $visibleCategory = Category::factory()->create();
         $notVisibleCategory = Category::factory()->create();
@@ -48,7 +48,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesAreFilteredByParent()
+    public function testCategoriesAreFilteredByParent(): void
     {
         $visibleCategory = Category::factory()->create();
         $notVisibleCategory = Category::factory()->create();

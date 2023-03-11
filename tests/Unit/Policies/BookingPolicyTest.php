@@ -16,7 +16,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAdminsCanViewABooking()
+    public function testAdminsCanViewABooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -32,7 +32,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOwnerCanViewBooking()
+    public function testOwnerCanViewBooking(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create([
@@ -47,7 +47,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAllUsersCanCreateBookings()
+    public function testAllUsersCanCreateBookings(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -61,7 +61,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAdminsCanUpdateAnyBooking()
+    public function testAdminsCanUpdateAnyBooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -77,7 +77,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOwnerCanUpdateBooking()
+    public function testOwnerCanUpdateBooking(): void
     {
         $user = User::factory()->create();
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
@@ -96,7 +96,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAdminsCanDeleteAnyBooking()
+    public function testAdminsCanDeleteAnyBooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -112,7 +112,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOwnerCanDeleteBooking()
+    public function testOwnerCanDeleteBooking(): void
     {
         $user = User::factory()->create();
         $pastBooking = Booking::factory()->past()->create(['user_id' => $user->id]);
@@ -131,7 +131,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanCreateCheckins()
+    public function testOnlyAdminUsersCanCreateCheckins(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -145,7 +145,7 @@ class BookingPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanCreateCheckouts()
+    public function testOnlyAdminUsersCanCreateCheckouts(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

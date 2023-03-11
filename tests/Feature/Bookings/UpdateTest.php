@@ -17,7 +17,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testEditRouteIsAvailable()
+    public function testEditRouteIsAvailable(): void
     {
         $booking = Booking::factory()->create();
 
@@ -33,7 +33,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsCanBeUpdated()
+    public function testBookingsCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -56,7 +56,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanChangeUserOfBooking()
+    public function testAdministratorCanChangeUserOfBooking(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -81,7 +81,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testUserCannotChangeUserOfABooking()
+    public function testUserCannotChangeUserOfABooking(): void
     {
         $firstUser = User::factory()->create();
         $secondUser = User::factory()->create();
@@ -106,7 +106,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanChangeBookingItOwns()
+    public function testUserCanChangeBookingItOwns(): void
     {
         $booking = Booking::factory()->create();
 
@@ -129,7 +129,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotChangeBookingItDontOwn()
+    public function testUserCanNotChangeBookingItDontOwn(): void
     {
         $user = User::factory()->create();
         $booking = Booking::factory()->create();
@@ -153,7 +153,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotChangeBookingThatHasStarted()
+    public function testUserCanNotChangeBookingThatHasStarted(): void
     {
         $booking = Booking::factory()->past()->create();
 
@@ -176,7 +176,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotChangeBookingThatHasBeenCheckedOut()
+    public function testUserCanNotChangeBookingThatHasBeenCheckedOut(): void
     {
         $booking = Booking::factory()->checkedout()->createQuietly();
 
@@ -199,7 +199,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsMustHaveAResource()
+    public function testBookingsMustHaveAResource(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -222,7 +222,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testResourceMustExist()
+    public function testResourceMustExist(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -245,7 +245,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsCanNotOverlapOtherBookings()
+    public function testBookingsCanNotOverlapOtherBookings(): void
     {
         $admin = User::factory()->admin()->create();
         $previous = Booking::factory()->create();
@@ -271,7 +271,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsMustHaveAStartTime()
+    public function testBookingsMustHaveAStartTime(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -294,7 +294,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testStartTimeMustBeValidTimestamp()
+    public function testStartTimeMustBeValidTimestamp(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -317,7 +317,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsMustHaveAEndTime()
+    public function testBookingsMustHaveAEndTime(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -340,7 +340,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testEndTimeMustBeValidTimestamp()
+    public function testEndTimeMustBeValidTimestamp(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -363,7 +363,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testStartTimeMustBeBeforeEndTime()
+    public function testStartTimeMustBeBeforeEndTime(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();

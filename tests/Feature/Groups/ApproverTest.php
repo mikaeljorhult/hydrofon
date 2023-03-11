@@ -16,7 +16,7 @@ class ApproverTest extends TestCase
      *
      * @return void
      */
-    public function testApproversAreStoredWhenCreatingGroup()
+    public function testApproversAreStoredWhenCreatingGroup(): void
     {
         $approver = User::factory()->create();
 
@@ -36,7 +36,7 @@ class ApproverTest extends TestCase
      *
      * @return void
      */
-    public function testNonExistingUserCannotBeAddedWhenStoringGroup()
+    public function testNonExistingUserCannotBeAddedWhenStoringGroup(): void
     {
         $response = $this->actingAs(User::factory()->admin()->create())->post('groups', [
             'name' => 'New Group',
@@ -54,7 +54,7 @@ class ApproverTest extends TestCase
      *
      * @return void
      */
-    public function testApproversAreStoredWhenUpdatingGroup()
+    public function testApproversAreStoredWhenUpdatingGroup(): void
     {
         $group = Group::factory()->create();
         $approver = User::factory()->create();
@@ -75,7 +75,7 @@ class ApproverTest extends TestCase
      *
      * @return void
      */
-    public function testApproversAreRemovedWhenUpdatingGroup()
+    public function testApproversAreRemovedWhenUpdatingGroup(): void
     {
         $group = Group::factory()->has(User::factory(), 'approvers')->create();
 
@@ -96,7 +96,7 @@ class ApproverTest extends TestCase
      *
      * @return void
      */
-    public function testNonExistingUserCannotBeAddedWhenUpdatingGroup()
+    public function testNonExistingUserCannotBeAddedWhenUpdatingGroup(): void
     {
         $group = Group::factory()->create();
 

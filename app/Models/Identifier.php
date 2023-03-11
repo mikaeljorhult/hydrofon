@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Model;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -21,7 +22,7 @@ class Identifier extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function identifiable()
+    public function identifiable(): MorphTo
     {
         return $this->morphTo();
     }
@@ -31,7 +32,7 @@ class Identifier extends Model
      *
      * @return string
      */
-    public function QrCode()
+    public function QrCode(): string
     {
         return QrCode::style('round')
                      ->eyeColor(0, 220, 38, 38, 0, 0, 0)

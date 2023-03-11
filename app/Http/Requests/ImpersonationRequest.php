@@ -12,7 +12,7 @@ class ImpersonationRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->isAdmin();
     }
@@ -22,7 +22,7 @@ class ImpersonationRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'user_id' => ['required', Rule::exists('users', 'id')],

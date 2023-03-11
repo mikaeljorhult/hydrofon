@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CheckinStoreRequest;
 use App\Models\Booking;
 use App\States\CheckedIn;
@@ -24,7 +25,7 @@ class CheckinController extends Controller
      * @param  \App\Http\Requests\CheckinStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CheckinStoreRequest $request)
+    public function store(CheckinStoreRequest $request): RedirectResponse
     {
         $booking = Booking::findOrFail($request->get('booking_id'));
         $booking->state->transitionTo(CheckedIn::class);

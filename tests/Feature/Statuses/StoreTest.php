@@ -18,7 +18,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testStatusCanBeSet()
+    public function testStatusCanBeSet(): void
     {
         $resource = Resource::factory()->create();
 
@@ -40,7 +40,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotSetStatus()
+    public function testUserCanNotSetStatus(): void
     {
         $resource = Resource::factory()->create();
 
@@ -59,7 +59,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testInvalidStatusIsCaughtByValidation()
+    public function testInvalidStatusIsCaughtByValidation(): void
     {
         $resource = Resource::factory()->create();
 
@@ -77,7 +77,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testStatusChangesAreLogged()
+    public function testStatusChangesAreLogged(): void
     {
         $resource = Resource::factory()->create();
 

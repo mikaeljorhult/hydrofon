@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 use App\States\Approved;
 use App\States\AutoApproved;
 use App\States\BookingState;
@@ -50,7 +52,7 @@ class Booking extends Model
      *
      * @return void
      */
-    protected static function booted()
+    protected static function booted(): void
     {
         static::creating(function ($booking) {
             $booking->created_by_id = session()->has('impersonate')
@@ -121,7 +123,7 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function prunable()
+    public function prunable(): Builder
     {
         // Booking is not checked out and ended at least half a year ago.
         return static::whereNotState('state', CheckedOut::class)
@@ -134,7 +136,7 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function created_by()
+    public function created_by(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
     }
@@ -144,7 +146,7 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function resource()
+    public function resource(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Resource::class);
     }
@@ -154,7 +156,7 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
     }
@@ -164,7 +166,7 @@ class Booking extends Model
      *
      * @return bool
      */
-    protected function getIsApprovedAttribute()
+    protected function getIsApprovedAttribute(): bool
     {
         return $this->state->equals(Approved::class)
             || $this->state->equals(AutoApproved::class);
@@ -175,7 +177,7 @@ class Booking extends Model
      *
      * @return bool
      */
-    protected function getIsRejectedAttribute()
+    protected function getIsRejectedAttribute(): bool
     {
         return $this->state->equals(Rejected::class);
     }
@@ -185,7 +187,7 @@ class Booking extends Model
      *
      * @return bool
      */
-    protected function getIsPendingAttribute()
+    protected function getIsPendingAttribute(): bool
     {
         return $this->state->equals(Pending::class);
     }
@@ -195,7 +197,7 @@ class Booking extends Model
      *
      * @return bool
      */
-    protected function getIsCheckedInAttribute()
+    protected function getIsCheckedInAttribute(): bool
     {
         return $this->state->equals(CheckedIn::class);
     }
@@ -205,7 +207,7 @@ class Booking extends Model
      *
      * @return bool
      */
-    protected function getIsCheckedOutAttribute()
+    protected function getIsCheckedOutAttribute(): bool
     {
         return $this->state->equals(CheckedOut::class);
     }
@@ -218,7 +220,7 @@ class Booking extends Model
      * @param  mixed  $end
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeBetween($query, $start, $end)
+    public function scopeBetween(Builder $query, $start, $end): Builder
     {
         // Make sure dates are Carbon objects.
         $start = Carbon::parse((is_numeric($start) ? '@' : '').$start);
@@ -254,7 +256,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeCurrent($query)
+    public function scopeCurrent(Builder $query): Builder
     {
         return $query->where('start_time', '<=', now())
                      ->where('end_time', '>=', now());
@@ -266,7 +268,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePast($query)
+    public function scopePast(Builder $query): Builder
     {
         return $query->where('end_time', '<=', now());
     }
@@ -277,7 +279,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFuture($query)
+    public function scopeFuture(Builder $query): Builder
     {
         return $query->where('start_time', '>=', now());
     }
@@ -288,7 +290,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOverdue($query)
+    public function scopeOverdue(Builder $query): Builder
     {
         return $query
             ->whereHas('resource', function ($query) {
@@ -304,7 +306,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeApproved($query)
+    public function scopeApproved(Builder $query): Builder
     {
         return $query->whereState('state', [Approved::class, AutoApproved::class]);
     }
@@ -315,7 +317,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeRejected($query)
+    public function scopeRejected(Builder $query): Builder
     {
         return $query->whereState('state', Rejected::class);
     }
@@ -326,7 +328,7 @@ class Booking extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePending($query)
+    public function scopePending(Builder $query): Builder
     {
         return $query->whereState('state', Pending::class);
     }
@@ -336,7 +338,7 @@ class Booking extends Model
      *
      * @return int
      */
-    public function getDurationAttribute()
+    public function getDurationAttribute(): int
     {
         return $this->start_time->diffInSeconds($this->end_time);
     }
@@ -358,7 +360,7 @@ class Booking extends Model
      *
      * @return void
      */
-    public function approve()
+    public function approve(): void
     {
         if (auth()->user()->cannot('approve', $this)) {
             abort(403);
@@ -372,7 +374,7 @@ class Booking extends Model
      *
      * @return void
      */
-    public function reject()
+    public function reject(): void
     {
         if (auth()->user()->cannot('approve', $this)) {
             abort(403);
@@ -386,7 +388,7 @@ class Booking extends Model
      *
      * @return void
      */
-    public function revoke()
+    public function revoke(): void
     {
         if (auth()->user()->cannot('approve', $this)) {
             abort(403);

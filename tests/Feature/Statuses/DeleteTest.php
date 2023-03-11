@@ -18,7 +18,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testStatusCanDeleted()
+    public function testStatusCanDeleted(): void
     {
         $status = Status::factory()->create();
 
@@ -34,7 +34,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteStatus()
+    public function testUserCanNotDeleteStatus(): void
     {
         $status = Status::factory()->create();
 
@@ -50,7 +50,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testStatusDeletionIsLogged()
+    public function testStatusDeletionIsLogged(): void
     {
         $status = Status::factory()->create();
 

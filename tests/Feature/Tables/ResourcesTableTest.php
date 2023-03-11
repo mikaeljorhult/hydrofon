@@ -21,7 +21,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Resource::factory()->count(3)->create();
 
@@ -38,7 +38,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -53,7 +53,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanEditAResource()
+    public function testAdministratorCanEditAResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -77,7 +77,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotEditAResource()
+    public function testUserCanNotEditAResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -98,7 +98,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedBucketsAreSaved()
+    public function testRelatedBucketsAreSaved(): void
     {
         $items = Resource::factory()->count(1)->create();
         $bucket = Bucket::factory()->create();
@@ -121,7 +121,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedCategoriesAreSaved()
+    public function testRelatedCategoriesAreSaved(): void
     {
         $items = Resource::factory()->count(1)->create();
         $category = Category::factory()->create();
@@ -144,7 +144,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedGroupsAreSaved()
+    public function testRelatedGroupsAreSaved(): void
     {
         $items = Resource::factory()->count(1)->create();
         $group = Group::factory()->create();
@@ -167,7 +167,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testResourceMustHaveAName()
+    public function testResourceMustHaveAName(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -191,7 +191,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingBucketsAreNotAllowed()
+    public function testMissingBucketsAreNotAllowed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -213,7 +213,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingCategoriesAreNotAllowed()
+    public function testMissingCategoriesAreNotAllowed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -235,7 +235,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingGroupsAreNotAllowed()
+    public function testMissingGroupsAreNotAllowed(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -257,7 +257,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteResource()
+    public function testAdministratorCanDeleteResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 
@@ -277,7 +277,7 @@ class ResourcesTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteResource()
+    public function testUserCanNotDeleteResource(): void
     {
         $items = Resource::factory()->count(1)->create();
 

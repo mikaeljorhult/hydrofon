@@ -16,7 +16,7 @@ class CategoryPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanViewACategory()
+    public function testOnlyAdminUsersCanViewACategory(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -32,7 +32,7 @@ class CategoryPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanCreateCategories()
+    public function testOnlyAdminUsersCanCreateCategories(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -46,7 +46,7 @@ class CategoryPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanUpdateACategory()
+    public function testOnlyAdminUsersCanUpdateACategory(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -62,7 +62,7 @@ class CategoryPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanDeleteACategory()
+    public function testOnlyAdminUsersCanDeleteACategory(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

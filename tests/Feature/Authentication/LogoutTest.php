@@ -15,7 +15,7 @@ class LogoutTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanLogOut()
+    public function testUserCanLogOut(): void
     {
         $user = User::factory()->create();
 

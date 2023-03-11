@@ -18,7 +18,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Group::factory()->count(3)->create();
 
@@ -35,7 +35,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Group::factory()->count(1)->create();
 
@@ -50,7 +50,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanEditAGroup()
+    public function testAdministratorCanEditAGroup(): void
     {
         $items = Group::factory()->count(1)->create();
 
@@ -74,7 +74,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotEditAGroup()
+    public function testUserCanNotEditAGroup(): void
     {
         $items = Group::factory()->count(1)->create();
 
@@ -95,7 +95,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedApproversAreSaved()
+    public function testRelatedApproversAreSaved(): void
     {
         $items = Group::factory()->count(1)->create();
         $approver = User::factory()->create();
@@ -118,7 +118,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testGroupMustHaveAName()
+    public function testGroupMustHaveAName(): void
     {
         $items = Group::factory()->count(1)->create();
 
@@ -142,7 +142,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingApproversAreNotAllowed()
+    public function testMissingApproversAreNotAllowed(): void
     {
         $items = Group::factory()->count(1)->create();
 
@@ -164,7 +164,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteGroup()
+    public function testAdministratorCanDeleteGroup(): void
     {
         $items = Group::factory()->count(1)->create();
 
@@ -184,7 +184,7 @@ class GroupsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteGroup()
+    public function testUserCanNotDeleteGroup(): void
     {
         $items = Group::factory()->count(1)->create();
 

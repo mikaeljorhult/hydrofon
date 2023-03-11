@@ -14,7 +14,7 @@ class IdentifierStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('create', Identifier::class);
     }
@@ -24,7 +24,7 @@ class IdentifierStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         // TODO: Validation should fail for __ANY__ e-mail address.
         return [

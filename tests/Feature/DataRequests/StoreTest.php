@@ -15,7 +15,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testDataExportCanBeRequested()
+    public function testDataExportCanBeRequested(): void
     {
         $this->actingAs(User::factory()->create())->post('datarequests')
              ->assertStatus(200)
@@ -27,7 +27,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUserMustBeLoggedInToRequestExport()
+    public function testUserMustBeLoggedInToRequestExport(): void
     {
         $this->post('datarequests')
              ->assertStatus(302);

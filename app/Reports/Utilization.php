@@ -2,6 +2,8 @@
 
 namespace App\Reports;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -64,7 +66,7 @@ class Utilization
      * @param  string  $end
      * @return void
      */
-    public function setTime($start, $end)
+    public function setTime(string $start, string $end): void
     {
         $this->dayStart = $start;
         $this->dayEnd = $end;
@@ -110,7 +112,7 @@ class Utilization
      * @param  \Carbon\Carbon  $endTime
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function fetchBookings(array $resources, Carbon $startTime, Carbon $endTime)
+    private function fetchBookings(array $resources, Carbon $startTime, Carbon $endTime): Collection
     {
         return Booking::whereIn('resource_id', $resources)
                       ->between($startTime, $endTime)
@@ -122,7 +124,7 @@ class Utilization
      *
      * @return \Illuminate\Support\Collection
      */
-    private function getDays()
+    private function getDays(): Collection
     {
         return collect($this->periodStart->toPeriod($this->periodEnd));
     }

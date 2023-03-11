@@ -25,7 +25,7 @@ class BookingRejected extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         $hasNotifications = $notifiable->unreadNotifications()
                                        ->where('type', get_class($this))
@@ -40,7 +40,7 @@ class BookingRejected extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray($notifiable): array
     {
         return [
             'icon' => 'x-circle',

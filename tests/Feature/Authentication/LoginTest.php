@@ -16,7 +16,7 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function testLoginRouteIsAvailable()
+    public function testLoginRouteIsAvailable(): void
     {
         $response = $this->get('/login');
 
@@ -28,7 +28,7 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanLogIn()
+    public function testUserCanLogIn(): void
     {
         $user = User::factory()->create();
 

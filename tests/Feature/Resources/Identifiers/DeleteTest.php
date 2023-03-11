@@ -16,7 +16,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testIdentifiersCanBeDeleted()
+    public function testIdentifiersCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -33,7 +33,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotDeleteIdentifiers()
+    public function testNonAdminUsersCanNotDeleteIdentifiers(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);

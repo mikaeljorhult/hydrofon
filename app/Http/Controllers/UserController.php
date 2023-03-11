@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UserDestroyRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -27,7 +29,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(User::class)
                              ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
@@ -48,7 +50,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
 
@@ -61,7 +63,7 @@ class UserController extends Controller
      * @param  \App\Http\Requests\UserStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         $input = $request->validated();
         $input['is_admin'] = $request->has('is_admin');
@@ -88,7 +90,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
         return view('users.show')->with('user', $user);
     }
@@ -99,7 +101,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         $groupOptions = Group::orderBy('name')->pluck('name', 'id');
 
@@ -116,7 +118,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return void
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $input = $request->validated();
 
@@ -149,7 +151,7 @@ class UserController extends Controller
      * @param  \App\Http\Requests\UserDestroyRequest  $request
      * @return void
      */
-    public function destroy(User $user, UserDestroyRequest $request)
+    public function destroy(User $user, UserDestroyRequest $request): RedirectResponse
     {
         $user->delete();
 

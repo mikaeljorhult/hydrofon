@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,7 @@ class Group extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function approvers()
+    public function approvers(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\User::class, 'approver_group');
     }
@@ -33,7 +34,7 @@ class Group extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class);
     }
@@ -43,7 +44,7 @@ class Group extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function resources()
+    public function resources(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class);
     }
@@ -53,7 +54,7 @@ class Group extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\User::class);
     }

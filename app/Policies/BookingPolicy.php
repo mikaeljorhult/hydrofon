@@ -15,7 +15,7 @@ class BookingPolicy
      * @param  string  $ability
      * @return bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, string $ability): bool
     {
         // An administrator can do anything.
         if ($user->isAdmin()) {
@@ -30,7 +30,7 @@ class BookingPolicy
      * @param  \App\Models\Booking  $booking
      * @return mixed
      */
-    public function view(User $user, Booking $booking)
+    public function view(User $user, Booking $booking): bool
     {
         return $user->owns($booking);
     }
@@ -41,7 +41,7 @@ class BookingPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -53,7 +53,7 @@ class BookingPolicy
      * @param  \App\Models\Booking  $booking
      * @return mixed
      */
-    public function update(User $user, Booking $booking)
+    public function update(User $user, Booking $booking): bool
     {
         return $user->owns($booking) && $booking->start_time->isFuture() && ! $booking->isCheckedOut;
     }
@@ -65,7 +65,7 @@ class BookingPolicy
      * @param  \App\Models\Booking  $booking
      * @return mixed
      */
-    public function delete(User $user, Booking $booking)
+    public function delete(User $user, Booking $booking): bool
     {
         return $user->owns($booking) && $booking->start_time->isFuture() && ! $booking->isCheckedOut;
     }

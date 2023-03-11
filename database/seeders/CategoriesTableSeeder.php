@@ -12,7 +12,7 @@ class CategoriesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (app()->environment('local')) {
             Category::factory()->times(10)->create();

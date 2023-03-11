@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Collection;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
@@ -32,7 +34,7 @@ class Subscription extends Model
      *
      * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
@@ -47,7 +49,7 @@ class Subscription extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function subscribable()
+    public function subscribable(): MorphTo
     {
         return $this->morphTo();
     }
@@ -57,7 +59,7 @@ class Subscription extends Model
      *
      * @return string
      */
-    public function toCalendar()
+    public function toCalendar(): string
     {
         $this->subscribable->load([
             'bookings',
@@ -91,7 +93,7 @@ class Subscription extends Model
      *
      * @return \Illuminate\Support\Collection
      */
-    private function createResourceEvents()
+    private function createResourceEvents(): Collection
     {
         return $this->subscribable->bookings
             ->filter(function ($item, $key) {
@@ -118,7 +120,7 @@ class Subscription extends Model
      *
      * @return \Illuminate\Support\Collection
      */
-    private function createFacilityEvents()
+    private function createFacilityEvents(): Collection
     {
         return $this->subscribable->bookings
             ->filter(function ($item, $key) {

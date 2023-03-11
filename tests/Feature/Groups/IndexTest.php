@@ -16,7 +16,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testGroupsAreListed()
+    public function testGroupsAreListed(): void
     {
         $group = Group::factory()->create();
 
@@ -31,7 +31,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testGroupsCanBeFilteredByName()
+    public function testGroupsCanBeFilteredByName(): void
     {
         $visibleGroup = Group::factory()->create();
         $notVisibleGroup = Group::factory()->create();

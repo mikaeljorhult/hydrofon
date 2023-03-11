@@ -16,7 +16,7 @@ class IdentifierPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanViewAnIdentifier()
+    public function testOnlyAdminUsersCanViewAnIdentifier(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -32,7 +32,7 @@ class IdentifierPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanCreateIdentifiers()
+    public function testOnlyAdminUsersCanCreateIdentifiers(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -46,7 +46,7 @@ class IdentifierPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanUpdateAnIdentifier()
+    public function testOnlyAdminUsersCanUpdateAnIdentifier(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -62,7 +62,7 @@ class IdentifierPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanDeleteAnIdentifier()
+    public function testOnlyAdminUsersCanDeleteAnIdentifier(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

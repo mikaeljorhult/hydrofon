@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use App\States\CheckedOut;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,7 +54,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function prunable()
+    public function prunable(): Builder
     {
         return static::whereDoesntHave('bookings', function (Builder $query) {
             return $query->whereState('state', CheckedOut::class);
@@ -81,7 +85,7 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->is_admin;
     }
@@ -91,7 +95,7 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function isImpersonated()
+    public function isImpersonated(): bool
     {
         return session()->has('impersonate');
     }
@@ -101,7 +105,7 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function owns($related)
+    public function owns($related): bool
     {
         return $this->id == $related->user_id;
     }
@@ -111,7 +115,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function approvingGroups()
+    public function approvingGroups(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Group::class, 'approver_group');
     }
@@ -121,7 +125,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function identifiers()
+    public function identifiers(): MorphMany
     {
         return $this->morphMany(\App\Models\Identifier::class, 'identifiable');
     }
@@ -131,7 +135,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bookings()
+    public function bookings(): HasMany
     {
         return $this->hasMany(\App\Models\Booking::class);
     }
@@ -141,7 +145,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function groups()
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Group::class);
     }
@@ -151,7 +155,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function subscription()
+    public function subscription(): MorphOne
     {
         return $this->morphOne(\App\Models\Subscription::class, 'subscribable');
     }

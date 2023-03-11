@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Categories;
 
+use Illuminate\Testing\TestResponse;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +19,7 @@ class StoreTest extends TestCase
      * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
-    public function storeCategory($overrides = [], $user = null)
+    public function storeCategory(array $overrides = [], ?User $user = null): TestResponse
     {
         $category = Category::factory()->make($overrides);
 
@@ -31,7 +32,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesCanBeStored()
+    public function testCategoriesCanBeStored(): void
     {
         $parent = Category::factory()->create();
 
@@ -52,7 +53,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotStoreCategories()
+    public function testNonAdminUsersCanNotStoreCategories(): void
     {
         $user = User::factory()->create();
 
@@ -67,7 +68,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesMustHaveAName()
+    public function testCategoriesMustHaveAName(): void
     {
         $this->storeCategory(['name' => null])
              ->assertRedirect()
@@ -81,7 +82,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testParentMustExist()
+    public function testParentMustExist(): void
     {
         $category = Category::factory()->make();
 

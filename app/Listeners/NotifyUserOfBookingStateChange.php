@@ -31,7 +31,7 @@ class NotifyUserOfBookingStateChange
      * @param  \Spatie\ModelStates\Events\StateChanged  $event
      * @return void
      */
-    public function handle(StateChanged $event)
+    public function handle(StateChanged $event): void
     {
         $stateClass = get_class($event->finalState);
 

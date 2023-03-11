@@ -18,7 +18,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = User::factory()->count(3)->create();
 
@@ -35,7 +35,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -50,7 +50,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanEditAUser()
+    public function testAdministratorCanEditAUser(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -74,7 +74,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotEditAUser()
+    public function testUserCanNotEditAUser(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -95,7 +95,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedGroupsAreSaved()
+    public function testRelatedGroupsAreSaved(): void
     {
         $items = User::factory()->count(1)->create();
         $group = Group::factory()->create();
@@ -118,7 +118,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingGroupsAreNotAllowed()
+    public function testMissingGroupsAreNotAllowed(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -140,7 +140,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserMustHaveANameAndEmail()
+    public function testUserMustHaveANameAndEmail(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -169,7 +169,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteUser()
+    public function testAdministratorCanDeleteUser(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -189,7 +189,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteOwnAccount()
+    public function testAdministratorCanDeleteOwnAccount(): void
     {
         $items = User::factory()->count(1)->create();
 
@@ -206,7 +206,7 @@ class UsersTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteUser()
+    public function testUserCanNotDeleteUser(): void
     {
         $items = User::factory()->count(1)->create();
 

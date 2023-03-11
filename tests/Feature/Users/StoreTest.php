@@ -15,7 +15,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUsersCanBeStored()
+    public function testUsersCanBeStored(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -38,7 +38,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUsersMustHaveAName()
+    public function testUsersMustHaveAName(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -63,7 +63,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUsersMustHaveAnEmailAddress()
+    public function testUsersMustHaveAnEmailAddress(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -88,7 +88,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testEmailAddressMustBeUnique()
+    public function testEmailAddressMustBeUnique(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -113,7 +113,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testUsersMustHaveAPassword()
+    public function testUsersMustHaveAPassword(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -138,7 +138,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testPasswordMustBeConfirmed()
+    public function testPasswordMustBeConfirmed(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->make();
@@ -163,7 +163,7 @@ class StoreTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotStoreUsers()
+    public function testNonAdminUsersCanNotStoreUsers(): void
     {
         $admin = User::factory()->create();
         $user = User::factory()->make();

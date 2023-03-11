@@ -17,7 +17,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryRelationshipsAreStoredWhenCreatingResource()
+    public function testCategoryRelationshipsAreStoredWhenCreatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create();
@@ -39,7 +39,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testNonExistingCategoriesCannotBeAddedWhenStoringResource()
+    public function testNonExistingCategoriesCannotBeAddedWhenStoringResource(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->make();
@@ -60,7 +60,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryRelationshipsAreStoredWhenUpdatingResource()
+    public function testCategoryRelationshipsAreStoredWhenUpdatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create();
@@ -82,7 +82,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryRelationshipsAreRemovedWhenUpdatingResource()
+    public function testCategoryRelationshipsAreRemovedWhenUpdatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $category = Category::factory()->create();
@@ -111,7 +111,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testNonExistingCategoriesCannotBeAddedWhenUpdatingResource()
+    public function testNonExistingCategoriesCannotBeAddedWhenUpdatingResource(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();

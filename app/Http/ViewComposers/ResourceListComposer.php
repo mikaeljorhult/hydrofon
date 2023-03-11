@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
+use Illuminate\Support\Collection;
 use App\Models\Category;
 use App\Models\Resource;
 use Illuminate\View\View;
@@ -14,7 +15,7 @@ class ResourceListComposer
      * @param  View  $view
      * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $categories = $this->getCategories()->toTree();
         $rootResources = $this->getRootResources();
@@ -30,7 +31,7 @@ class ResourceListComposer
      *
      * @return \Illuminate\Support\Collection
      */
-    private function getCategories()
+    private function getCategories(): Collection
     {
         return Category::with(['resources'])
                        ->orderBy('name')
@@ -43,7 +44,7 @@ class ResourceListComposer
      *
      * @return \Illuminate\Support\Collection
      */
-    private function getRootResources()
+    private function getRootResources(): Collection
     {
         return Resource::orderBy('name')
                        ->whereDoesntHave('categories', function ($query) {

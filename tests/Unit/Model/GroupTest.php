@@ -17,7 +17,7 @@ class GroupTest extends TestCase
      *
      * @return void
      */
-    public function testGroupCanHaveResources()
+    public function testGroupCanHaveResources(): void
     {
         $this->actingAs(User::factory()->admin()->create());
 
@@ -31,7 +31,7 @@ class GroupTest extends TestCase
      *
      * @return void
      */
-    public function testGroupCanHaveUsers()
+    public function testGroupCanHaveUsers(): void
     {
         $group = Group::factory()->create();
 

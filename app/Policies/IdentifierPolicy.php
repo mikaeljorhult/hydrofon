@@ -17,7 +17,7 @@ class IdentifierPolicy
      * @param  \App\Models\Identifier  $identifier
      * @return mixed
      */
-    public function view(User $user, Identifier $identifier)
+    public function view(User $user, Identifier $identifier): bool
     {
         return $user->isAdmin();
     }
@@ -28,7 +28,7 @@ class IdentifierPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -40,7 +40,7 @@ class IdentifierPolicy
      * @param  \App\Models\Identifier  $identifier
      * @return mixed
      */
-    public function update(User $user, Identifier $identifier)
+    public function update(User $user, Identifier $identifier): bool
     {
         return $user->isAdmin();
     }
@@ -52,7 +52,7 @@ class IdentifierPolicy
      * @param  \App\Models\Identifier  $identifier
      * @return mixed
      */
-    public function delete(User $user, Identifier $identifier)
+    public function delete(User $user, Identifier $identifier): bool
     {
         return $user->isAdmin();
     }

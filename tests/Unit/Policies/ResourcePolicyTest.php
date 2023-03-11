@@ -17,7 +17,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanViewAResource()
+    public function testOnlyAdminUsersCanViewAResource(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -33,7 +33,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanCreateResources()
+    public function testOnlyAdminUsersCanCreateResources(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -47,7 +47,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanUpdateAResource()
+    public function testOnlyAdminUsersCanUpdateAResource(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -63,7 +63,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanDeleteAResource()
+    public function testOnlyAdminUsersCanDeleteAResource(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -79,7 +79,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAResourceCanBeListedIfUserIsAdministrator()
+    public function testAResourceCanBeListedIfUserIsAdministrator(): void
     {
         $user = User::factory()->admin()->create();
         $resourceWithGroup = Resource::factory()->create();
@@ -96,7 +96,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAResourceCanBeListedIfItHasNoGroup()
+    public function testAResourceCanBeListedIfItHasNoGroup(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();
@@ -109,7 +109,7 @@ class ResourcePolicyTest extends TestCase
      *
      * @return void
      */
-    public function testAResourceCanBeListedIfItIsInSameGroupAsUser()
+    public function testAResourceCanBeListedIfItIsInSameGroupAsUser(): void
     {
         $userWithGroup = User::factory()->create();
         $userWithoutGroup = User::factory()->create();

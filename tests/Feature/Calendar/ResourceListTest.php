@@ -17,7 +17,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testResourceListIsAvailable()
+    public function testResourceListIsAvailable(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/calendar');
@@ -31,7 +31,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesWithoutGroupsAreListed()
+    public function testCategoriesWithoutGroupsAreListed(): void
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -47,7 +47,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesWithGroupsAreNotListed()
+    public function testCategoriesWithGroupsAreNotListed(): void
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -64,7 +64,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testCategoriesWithGroupsAreListedToUsersWithSameGroup()
+    public function testCategoriesWithGroupsAreListedToUsersWithSameGroup(): void
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -82,7 +82,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesWithoutGroupsAreListed()
+    public function testResourcesWithoutGroupsAreListed(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();
@@ -98,7 +98,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesWithGroupsAreNotListed()
+    public function testResourcesWithGroupsAreNotListed(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();
@@ -115,7 +115,7 @@ class ResourceListTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesWithGroupsAreListedToUsersWithSameGroup()
+    public function testResourcesWithGroupsAreListedToUsersWithSameGroup(): void
     {
         $user = User::factory()->create();
         $resource = Resource::factory()->create();

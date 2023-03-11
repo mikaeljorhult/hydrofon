@@ -19,7 +19,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testComponentIsRendered()
+    public function testComponentIsRendered(): void
     {
         Resource::factory()->create();
 
@@ -33,7 +33,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testAvailableResourcesArePrefetched()
+    public function testAvailableResourcesArePrefetched(): void
     {
         $resource = Resource::factory()->create();
 
@@ -48,7 +48,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testUnavailableResourcesAreOmitted()
+    public function testUnavailableResourcesAreOmitted(): void
     {
         $booking = Booking::factory()->current()->create();
 
@@ -62,7 +62,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testBookingIsCreated()
+    public function testBookingIsCreated(): void
     {
         $resource = Resource::factory()->create();
 
@@ -86,7 +86,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testAllParametersMustBePresent()
+    public function testAllParametersMustBePresent(): void
     {
         Livewire::actingAs(User::factory()->create())
                 ->test(QuickBook::class)
@@ -109,7 +109,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testEndTimeMustBeAfterStartTime()
+    public function testEndTimeMustBeAfterStartTime(): void
     {
         $resource = Resource::factory()->create();
 
@@ -133,7 +133,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testResourceMustExist()
+    public function testResourceMustExist(): void
     {
         Livewire::actingAs(User::factory()->create())
                 ->test(QuickBook::class)
@@ -154,7 +154,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testResourceMustBeAvailable()
+    public function testResourceMustBeAvailable(): void
     {
         $booking = Booking::factory()->current()->createQuietly();
 
@@ -177,7 +177,7 @@ class QuickbookTest extends TestCase
      *
      * @return void
      */
-    public function testErrorNotificationsAreReset()
+    public function testErrorNotificationsAreReset(): void
     {
         $resource = Resource::factory()->create();
 

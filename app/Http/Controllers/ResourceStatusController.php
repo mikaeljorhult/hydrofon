@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StatusDestroyRequest;
 use App\Http\Requests\StatusStoreRequest;
 use App\Models\Resource;
@@ -16,7 +17,7 @@ class ResourceStatusController extends Controller
      * @param  \App\Http\Requests\StatusStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Resource $resource, StatusStoreRequest $request)
+    public function store(Resource $resource, StatusStoreRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
 
@@ -41,7 +42,7 @@ class ResourceStatusController extends Controller
      * @param  \App\Http\Requests\StatusDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resource $resource, Status $status, StatusDestroyRequest $request)
+    public function destroy(Resource $resource, Status $status, StatusDestroyRequest $request): RedirectResponse
     {
         $status->delete();
 

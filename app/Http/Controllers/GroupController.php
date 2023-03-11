@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\GroupDestroyRequest;
 use App\Http\Requests\GroupStoreRequest;
 use App\Http\Requests\GroupUpdateRequest;
@@ -26,7 +28,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Group::class)
                              ->allowedFilters('name')
@@ -42,7 +44,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $userOptions = User::orderBy('name')->pluck('name', 'id');
 
@@ -55,7 +57,7 @@ class GroupController extends Controller
      * @param  \App\Http\Requests\GroupStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroupStoreRequest $request)
+    public function store(GroupStoreRequest $request): RedirectResponse
     {
         $group = Group::create($request->validated());
         $group->approvers()->sync($request->get('approvers'));
@@ -75,7 +77,7 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Group $group): View
     {
         return view('groups.show')->with('group', $group);
     }
@@ -86,7 +88,7 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Group $group): View
     {
         $userOptions = User::orderBy('name')->pluck('name', 'id');
 
@@ -103,7 +105,7 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(GroupUpdateRequest $request, Group $group)
+    public function update(GroupUpdateRequest $request, Group $group): RedirectResponse
     {
         $group->update($request->validated());
         $group->approvers()->sync($request->get('approvers'));
@@ -124,7 +126,7 @@ class GroupController extends Controller
      * @param  \App\Http\Requests\GroupDestroyRequest  $reqest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group, GroupDestroyRequest $reqest)
+    public function destroy(Group $group, GroupDestroyRequest $reqest): RedirectResponse
     {
         $group->delete();
 

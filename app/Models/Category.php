@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +29,7 @@ class Category extends Model
      *
      * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
@@ -38,7 +41,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class);
     }
@@ -48,7 +51,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function categories()
+    public function categories(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id')
                     ->orderBy('name');
@@ -59,7 +62,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function groups()
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Group::class);
     }
@@ -69,7 +72,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function resources()
+    public function resources(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class)
                     ->orderBy('name');

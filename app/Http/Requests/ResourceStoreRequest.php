@@ -13,7 +13,7 @@ class ResourceStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('create', Resource::class);
     }
@@ -23,7 +23,7 @@ class ResourceStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'max:60'],

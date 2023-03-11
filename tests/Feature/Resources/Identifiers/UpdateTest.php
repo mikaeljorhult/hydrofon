@@ -16,7 +16,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testIdentifiersCanBeUpdated()
+    public function testIdentifiersCanBeUpdated(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -37,7 +37,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testIdentifierMustHaveAValue()
+    public function testIdentifierMustHaveAValue(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -59,7 +59,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testValueMustBeUnique()
+    public function testValueMustBeUnique(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -83,7 +83,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testValueCanNotBeAUserEmailAddress()
+    public function testValueCanNotBeAUserEmailAddress(): void
     {
         $admin = User::factory()->admin()->create();
         $resource = Resource::factory()->create();
@@ -106,7 +106,7 @@ class UpdateTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotUpdateIdentifiers()
+    public function testNonAdminUsersCanNotUpdateIdentifiers(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);

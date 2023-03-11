@@ -17,7 +17,7 @@ class BucketPolicy
      * @param  \App\Models\Bucket  $bucket
      * @return mixed
      */
-    public function view(User $user, Bucket $bucket)
+    public function view(User $user, Bucket $bucket): bool
     {
         return $user->isAdmin();
     }
@@ -28,7 +28,7 @@ class BucketPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -40,7 +40,7 @@ class BucketPolicy
      * @param  \App\Models\Bucket  $bucket
      * @return mixed
      */
-    public function update(User $user, Bucket $bucket)
+    public function update(User $user, Bucket $bucket): bool
     {
         return $user->isAdmin();
     }
@@ -52,7 +52,7 @@ class BucketPolicy
      * @param  \App\Models\Bucket  $bucket
      * @return mixed
      */
-    public function delete(User $user, Bucket $bucket)
+    public function delete(User $user, Bucket $bucket): bool
     {
         return $user->isAdmin();
     }

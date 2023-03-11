@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BucketDestroyRequest;
 use App\Http\Requests\BucketStoreRequest;
 use App\Http\Requests\BucketUpdateRequest;
@@ -26,7 +28,7 @@ class BucketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = QueryBuilder::for(Bucket::class)
                              ->allowedFilters('name')
@@ -42,7 +44,7 @@ class BucketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
 
@@ -55,7 +57,7 @@ class BucketController extends Controller
      * @param  \App\Http\Requests\BucketStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BucketStoreRequest $request)
+    public function store(BucketStoreRequest $request): RedirectResponse
     {
         $bucket = Bucket::create($request->validated());
         $bucket->resources()->sync($request->get('resources'));
@@ -75,7 +77,7 @@ class BucketController extends Controller
      * @param  \App\Models\Bucket  $bucket
      * @return \Illuminate\Http\Response
      */
-    public function show(Bucket $bucket)
+    public function show(Bucket $bucket): View
     {
         return view('buckets.show')->with('bucket', $bucket);
     }
@@ -86,7 +88,7 @@ class BucketController extends Controller
      * @param  \App\Models\Bucket  $bucket
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bucket $bucket)
+    public function edit(Bucket $bucket): View
     {
         $resourceOptions = Resource::orderBy('name')->pluck('name', 'id');
 
@@ -103,7 +105,7 @@ class BucketController extends Controller
      * @param  \App\Models\Bucket  $bucket
      * @return \Illuminate\Http\Response
      */
-    public function update(BucketUpdateRequest $request, Bucket $bucket)
+    public function update(BucketUpdateRequest $request, Bucket $bucket): RedirectResponse
     {
         $bucket->update($request->validated());
         $bucket->resources()->sync($request->get('resources'));
@@ -124,7 +126,7 @@ class BucketController extends Controller
      * @param  \App\Http\Requests\BucketDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bucket $bucket, BucketDestroyRequest $request)
+    public function destroy(Bucket $bucket, BucketDestroyRequest $request): RedirectResponse
     {
         $bucket->delete();
 

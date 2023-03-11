@@ -16,7 +16,7 @@ class CheckoutTest extends TestCase
      *
      * @return void
      */
-    public function testBookingCanBeCheckedOut()
+    public function testBookingCanBeCheckedOut(): void
     {
         $this->withoutExceptionHandling();
 
@@ -35,7 +35,7 @@ class CheckoutTest extends TestCase
      *
      * @return void
      */
-    public function testBookingMustExist()
+    public function testBookingMustExist(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -52,7 +52,7 @@ class CheckoutTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotCheckOutBookings()
+    public function testNonAdminUsersCanNotCheckOutBookings(): void
     {
         $admin = User::factory()->create();
         $booking = Booking::factory()->autoapproved()->createQuietly();

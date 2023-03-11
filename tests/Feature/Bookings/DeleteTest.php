@@ -16,7 +16,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsCanBeDeleted()
+    public function testBookingsCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -34,7 +34,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanDeleteBookingItOwns()
+    public function testUserCanDeleteBookingItOwns(): void
     {
         $booking = Booking::factory()->create();
 
@@ -51,7 +51,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteBookingByAnotherUser()
+    public function testUserCanNotDeleteBookingByAnotherUser(): void
     {
         $booking = Booking::factory()->future()->create();
         $anotherUser = User::factory()->create();
@@ -67,7 +67,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteBookingThatHasStarted()
+    public function testUserCanNotDeleteBookingThatHasStarted(): void
     {
         $booking = Booking::factory()->past()->create();
 
@@ -82,7 +82,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteBookingThatHasBeenCheckedOut()
+    public function testUserCanNotDeleteBookingThatHasBeenCheckedOut(): void
     {
         $booking = Booking::factory()->past()->checkedout()->createQuietly();
 

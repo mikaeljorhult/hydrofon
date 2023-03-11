@@ -15,7 +15,7 @@ class CreateTest extends TestCase
      *
      * @return void
      */
-    public function testCreateRouteIsServedSuccessfully()
+    public function testCreateRouteIsServedSuccessfully(): void
     {
         $this->actingAs(User::factory()->admin()->create())
              ->get('categories/create')

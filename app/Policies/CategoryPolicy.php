@@ -17,7 +17,7 @@ class CategoryPolicy
      * @param  \App\Models\Category  $category
      * @return mixed
      */
-    public function view(User $user, Category $category)
+    public function view(User $user, Category $category): bool
     {
         return $user->isAdmin();
     }
@@ -28,7 +28,7 @@ class CategoryPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -40,7 +40,7 @@ class CategoryPolicy
      * @param  \App\Models\Category  $category
      * @return mixed
      */
-    public function update(User $user, Category $category)
+    public function update(User $user, Category $category): bool
     {
         return $user->isAdmin();
     }
@@ -52,7 +52,7 @@ class CategoryPolicy
      * @param  \App\Models\Category  $category
      * @return mixed
      */
-    public function delete(User $user, Category $category)
+    public function delete(User $user, Category $category): bool
     {
         return $user->isAdmin();
     }

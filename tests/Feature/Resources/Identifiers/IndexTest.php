@@ -16,7 +16,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreListed()
+    public function testResourcesAreListed(): void
     {
         $resource = Resource::factory()->create();
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);

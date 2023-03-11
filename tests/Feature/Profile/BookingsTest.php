@@ -15,7 +15,7 @@ class BookingsTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsAreAvailable()
+    public function testBookingsAreAvailable(): void
     {
         $booking = Booking::factory()->create();
 

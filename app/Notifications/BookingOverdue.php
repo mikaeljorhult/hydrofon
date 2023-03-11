@@ -25,7 +25,7 @@ class BookingOverdue extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['database'];
     }
@@ -36,7 +36,7 @@ class BookingOverdue extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray($notifiable): array
     {
         return [
             'icon' => 'exclamation-triangle',

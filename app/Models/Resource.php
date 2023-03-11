@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Scopes\GroupPolicyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,7 +41,7 @@ class Resource extends Model
      *
      * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
@@ -50,7 +53,7 @@ class Resource extends Model
      *
      * @return bool
      */
-    public function isFacility()
+    public function isFacility(): bool
     {
         return $this->is_facility;
     }
@@ -60,7 +63,7 @@ class Resource extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bookings()
+    public function bookings(): HasMany
     {
         return $this->hasMany(\App\Models\Booking::class);
     }
@@ -70,7 +73,7 @@ class Resource extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Category::class)
                     ->orderBy('name');
@@ -81,7 +84,7 @@ class Resource extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function buckets()
+    public function buckets(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Bucket::class);
     }
@@ -91,7 +94,7 @@ class Resource extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function identifiers()
+    public function identifiers(): MorphMany
     {
         return $this->morphMany(\App\Models\Identifier::class, 'identifiable');
     }
@@ -101,7 +104,7 @@ class Resource extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function groups()
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Group::class);
     }

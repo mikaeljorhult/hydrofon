@@ -15,7 +15,7 @@ class ShowTest extends TestCase
      *
      * @return void
      */
-    public function testUserSubscriptionIsShown()
+    public function testUserSubscriptionIsShown(): void
     {
         $subscription = Subscription::factory()->user()->create();
 

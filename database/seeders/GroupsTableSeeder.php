@@ -12,7 +12,7 @@ class GroupsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (app()->environment('local')) {
             Group::factory()->times(10)->create();

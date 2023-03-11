@@ -17,7 +17,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBookingHasAnOwner()
+    public function testBookingHasAnOwner(): void
     {
         $booking = Booking::factory()->create();
 
@@ -29,7 +29,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBookingHasACreator()
+    public function testBookingHasACreator(): void
     {
         $this->actingAs($user = User::factory()->create());
         $booking = Booking::factory()->create();
@@ -43,7 +43,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBookingHasAResource()
+    public function testBookingHasAResource(): void
     {
         $this->actingAs(User::factory()->admin()->create());
 
@@ -57,7 +57,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBetweenScopeExcludeBookings()
+    public function testBetweenScopeExcludeBookings(): void
     {
         // Create a past booking.
         Booking::factory()->past()->create();
@@ -81,7 +81,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBetweenScopeExcludeBookingsThatEndOnStartTime()
+    public function testBetweenScopeExcludeBookingsThatEndOnStartTime(): void
     {
         // Create a booking between 12.00 yesterday and 00.00 on current date.
         Booking::factory()->create([
@@ -101,7 +101,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBetweenScopeIncludeBookingsThatStartOnStartTime()
+    public function testBetweenScopeIncludeBookingsThatStartOnStartTime(): void
     {
         // Create a past booking.
         Booking::factory()->past()->create();
@@ -125,7 +125,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBetweenScopeIncludeBookingsThatEndOnEndTime()
+    public function testBetweenScopeIncludeBookingsThatEndOnEndTime(): void
     {
         // Create a past booking.
         Booking::factory()->past()->create();
@@ -149,7 +149,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testBetweenScopeIncludeBookingsThatStartAndEndOutsideScope()
+    public function testBetweenScopeIncludeBookingsThatStartAndEndOutsideScope(): void
     {
         // Create a booking between 00.00 and 04.00 on current date.
         $booking = Booking::factory()->create([
@@ -170,7 +170,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testPastScopeIncludePastBookings()
+    public function testPastScopeIncludePastBookings(): void
     {
         // Create a current and a future booking.
         Booking::factory()->current()->create();
@@ -192,7 +192,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testFutureScopeIncludeFutureBookings()
+    public function testFutureScopeIncludeFutureBookings(): void
     {
         // Create a current and a past booking.
         Booking::factory()->current()->create();
@@ -214,7 +214,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testCurrentScopeIncludeCurrentBookings()
+    public function testCurrentScopeIncludeCurrentBookings(): void
     {
         // Create a past and a future booking.
         Booking::factory()->past()->create();
@@ -236,7 +236,7 @@ class BookingTest extends TestCase
      *
      * @return void
      */
-    public function testOverdueScopeIncludeOverdueBookings()
+    public function testOverdueScopeIncludeOverdueBookings(): void
     {
         // Create a past and a future booking.
         Booking::factory()->past()->create();

@@ -19,7 +19,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreListed()
+    public function testResourcesAreListed(): void
     {
         $resource = Resource::factory()->create();
 
@@ -34,7 +34,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreFilteredByName()
+    public function testResourcesAreFilteredByName(): void
     {
         $visibleResource = Resource::factory()->create();
         $notVisibleResource = Resource::factory()->create();
@@ -51,7 +51,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreFilteredByCategory()
+    public function testResourcesAreFilteredByCategory(): void
     {
         $visibleResource = Resource::factory()->create();
         $notVisibleResource = Resource::factory()->create();
@@ -70,7 +70,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreFilteredByGroup()
+    public function testResourcesAreFilteredByGroup(): void
     {
         $visibleResource = Resource::factory()->create();
         $notVisibleResource = Resource::factory()->create();
@@ -89,7 +89,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreFilteredByFacility()
+    public function testResourcesAreFilteredByFacility(): void
     {
         $visibleResource = Resource::factory()->facility()->create();
         $notVisibleResource = Resource::factory()->create();
@@ -106,7 +106,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testResourcesAreFilteredByFlags()
+    public function testResourcesAreFilteredByFlags(): void
     {
         $status = Status::factory()->create();
         $notVisibleResource = Resource::factory()->create();

@@ -18,7 +18,7 @@ class BookingAwaitingApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApproverWithWaitingApprovalsGetNotified()
+    public function testApproverWithWaitingApprovalsGetNotified(): void
     {
         $this->approvalIsRequired();
 
@@ -38,7 +38,7 @@ class BookingAwaitingApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApproverDontGetNotifiedTwiceAboutSamePendingBooking()
+    public function testApproverDontGetNotifiedTwiceAboutSamePendingBooking(): void
     {
         $this->approvalIsRequired();
 
@@ -58,7 +58,7 @@ class BookingAwaitingApprovalTest extends TestCase
      *
      * @return void
      */
-    public function testApproverGetsNotifiedAboutNewBooking()
+    public function testApproverGetsNotifiedAboutNewBooking(): void
     {
         $this->approvalIsRequired();
 

@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->routes(function () {
             Route::middleware('web')

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\SubscriptionDestroyRequest;
 use App\Http\Requests\SubscriptionStoreRequest;
 use App\Models\Subscription;
@@ -16,7 +18,7 @@ class SubscriptionController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(string $uuid): Response
     {
         $subscription = Subscription::where('uuid', $uuid)->with([
             'subscribable' => function ($query) {
@@ -35,7 +37,7 @@ class SubscriptionController extends Controller
      * @param  \App\Http\Requests\SubscriptionStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SubscriptionStoreRequest $request)
+    public function store(SubscriptionStoreRequest $request): RedirectResponse
     {
         Subscription::firstOrCreate([
             'subscribable_type' => 'App\\Models\\'.Str::ucfirst($request->get('subscribable_type')),
@@ -58,7 +60,7 @@ class SubscriptionController extends Controller
      * @param  \App\Http\Requests\SubscriptionDestroyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscription $subscription, SubscriptionDestroyRequest $request)
+    public function destroy(Subscription $subscription, SubscriptionDestroyRequest $request): RedirectResponse
     {
         $subscription->delete();
 

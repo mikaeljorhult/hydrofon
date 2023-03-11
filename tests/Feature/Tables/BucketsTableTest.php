@@ -19,7 +19,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testItemsAreRendered()
+    public function testItemsAreRendered(): void
     {
         $items = Bucket::factory()->count(3)->create();
 
@@ -36,7 +36,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testEditFormIsDisplayed()
+    public function testEditFormIsDisplayed(): void
     {
         $items = Bucket::factory()->count(1)->create();
 
@@ -51,7 +51,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanEditABucket()
+    public function testAdministratorCanEditABucket(): void
     {
         $items = Bucket::factory()->count(1)->create();
 
@@ -75,7 +75,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotEditABucket()
+    public function testUserCanNotEditABucket(): void
     {
         $items = Bucket::factory()->count(1)->create();
 
@@ -96,7 +96,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedResourcesAreSaved()
+    public function testRelatedResourcesAreSaved(): void
     {
         $items = Bucket::factory()->count(1)->create();
         $resource = Resource::factory()->create();
@@ -116,7 +116,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testBucketMustHaveAName()
+    public function testBucketMustHaveAName(): void
     {
         $items = Bucket::factory()->count(1)->create();
 
@@ -140,7 +140,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testMissingResourcesAreNotAllowed()
+    public function testMissingResourcesAreNotAllowed(): void
     {
         $items = Bucket::factory()->count(1)->create();
 
@@ -162,7 +162,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteBucket()
+    public function testAdministratorCanDeleteBucket(): void
     {
         $items = Bucket::factory()->count(1)->create();
 
@@ -182,7 +182,7 @@ class BucketsTableTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteBucket()
+    public function testUserCanNotDeleteBucket(): void
     {
         $items = Bucket::factory()->count(1)->create();
 

@@ -17,7 +17,7 @@ class StatusPolicy
      * @param  \App\Models\Status  $status
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Status $status)
+    public function view(User $user, Status $status): bool
     {
         return $user->isAdmin();
     }
@@ -28,7 +28,7 @@ class StatusPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -40,7 +40,7 @@ class StatusPolicy
      * @param  \App\Models\Status  $status
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Status $status)
+    public function delete(User $user, Status $status): bool
     {
         return $user->isAdmin();
     }

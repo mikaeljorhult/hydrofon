@@ -13,7 +13,7 @@ class CheckinStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('checkinAny', Booking::class);
     }
@@ -23,7 +23,7 @@ class CheckinStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'booking_id' => [Rule::exists('bookings', 'id')],

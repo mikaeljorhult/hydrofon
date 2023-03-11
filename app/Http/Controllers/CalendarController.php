@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CalendarRequest;
 use Carbon\Carbon;
 
@@ -23,7 +25,7 @@ class CalendarController extends Controller
      * @param  null|string  $date
      * @return \Illuminate\Http\Response
      */
-    public function index($date = null)
+    public function index(?string $date = null): View
     {
         $date = $this->date($date)->startOfDay();
         $expanded = $this->categories();
@@ -41,7 +43,7 @@ class CalendarController extends Controller
      * @param  \App\Http\Requests\CalendarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CalendarRequest $request)
+    public function store(CalendarRequest $request): RedirectResponse
     {
         session()->put('expanded', array_unique((array) $request->input('categories'), SORT_NUMERIC));
         session()->flash('resources', array_unique((array) $request->input('resources'), SORT_NUMERIC));
@@ -55,7 +57,7 @@ class CalendarController extends Controller
      * @param $date
      * @return \Carbon\Carbon
      */
-    private function date($date)
+    private function date($date): Carbon
     {
         return $date != null
             ? Carbon::parse($date)
@@ -67,7 +69,7 @@ class CalendarController extends Controller
      *
      * @return array
      */
-    private function resources()
+    private function resources(): array
     {
         return session('resources', []);
     }
@@ -77,7 +79,7 @@ class CalendarController extends Controller
      *
      * @return array
      */
-    private function categories()
+    private function categories(): array
     {
         return session('expanded', []);
     }

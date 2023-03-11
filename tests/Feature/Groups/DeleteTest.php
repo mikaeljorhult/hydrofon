@@ -16,7 +16,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testGroupsCanBeDeleted()
+    public function testGroupsCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $group = Group::factory()->create();
@@ -32,7 +32,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotDeleteGroups()
+    public function testNonAdminUsersCanNotDeleteGroups(): void
     {
         $user = User::factory()->create();
         $group = Group::factory()->create();

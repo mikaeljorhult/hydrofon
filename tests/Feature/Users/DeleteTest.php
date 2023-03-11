@@ -16,7 +16,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUsersCanBeDeleted()
+    public function testUsersCanBeDeleted(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -32,7 +32,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testRelatedBookingsAreDeletedWithUser()
+    public function testRelatedBookingsAreDeletedWithUser(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->create();
@@ -48,7 +48,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotDeleteUsers()
+    public function testNonAdminUsersCanNotDeleteUsers(): void
     {
         $notAdmin = User::factory()->create();
         $user = User::factory()->create();
@@ -64,7 +64,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUsersCanNotDeleteThemselves()
+    public function testUsersCanNotDeleteThemselves(): void
     {
         $admin = User::factory()->admin()->create();
 

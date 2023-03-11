@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Subscriptions;
 
+use Illuminate\Testing\TestResponse;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +19,7 @@ class DeleteTest extends TestCase
      * @param  \App\Models\User|null  $user
      * @return \Illuminate\Testing\TestResponse
      */
-    public function deleteSubscription($subscription, $user = null)
+    public function deleteSubscription(Subscription $subscription, ?User $user = null): TestResponse
     {
         return $this->actingAs($user ?: User::factory()->admin()->create())
                     ->delete('subscriptions/'.$subscription->id);
@@ -29,7 +30,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserSubscriptionsCanBeDeleted()
+    public function testUserSubscriptionsCanBeDeleted(): void
     {
         $subscription = Subscription::factory()->user()->create();
 
@@ -45,7 +46,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteAnyUserSubscription()
+    public function testAdministratorCanDeleteAnyUserSubscription(): void
     {
         $subscription = Subscription::factory()->user()->create();
 
@@ -61,7 +62,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testAdministratorCanDeleteAResourceSubscription()
+    public function testAdministratorCanDeleteAResourceSubscription(): void
     {
         $subscription = Subscription::factory()->resource()->create();
 
@@ -77,7 +78,7 @@ class DeleteTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanNotDeleteAResourceSubscription()
+    public function testUserCanNotDeleteAResourceSubscription(): void
     {
         $subscription = Subscription::factory()->resource()->create();
 

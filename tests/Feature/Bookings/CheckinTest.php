@@ -16,7 +16,7 @@ class CheckinTest extends TestCase
      *
      * @return void
      */
-    public function testBookingCanBeCheckedIn()
+    public function testBookingCanBeCheckedIn(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->checkedout()->createQuietly();
@@ -33,7 +33,7 @@ class CheckinTest extends TestCase
      *
      * @return void
      */
-    public function testEndTimeIsShortenedWhenBookingIsCheckedIn()
+    public function testEndTimeIsShortenedWhenBookingIsCheckedIn(): void
     {
         $admin = User::factory()->admin()->create();
         $booking = Booking::factory()->checkedout()->createQuietly([
@@ -53,7 +53,7 @@ class CheckinTest extends TestCase
      *
      * @return void
      */
-    public function testBookingMustExist()
+    public function testBookingMustExist(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -70,7 +70,7 @@ class CheckinTest extends TestCase
      *
      * @return void
      */
-    public function testNonAdminUsersCanNotCheckInBookings()
+    public function testNonAdminUsersCanNotCheckInBookings(): void
     {
         $admin = User::factory()->create();
         $booking = Booking::factory()->checkedout()->createQuietly();

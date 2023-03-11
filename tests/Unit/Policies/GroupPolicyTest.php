@@ -16,7 +16,7 @@ class GroupPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanViewAGroup()
+    public function testOnlyAdminUsersCanViewAGroup(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -32,7 +32,7 @@ class GroupPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanCreateGroups()
+    public function testOnlyAdminUsersCanCreateGroups(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -46,7 +46,7 @@ class GroupPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanUpdateAGroup()
+    public function testOnlyAdminUsersCanUpdateAGroup(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();
@@ -62,7 +62,7 @@ class GroupPolicyTest extends TestCase
      *
      * @return void
      */
-    public function testOnlyAdminUsersCanDeleteAGroup()
+    public function testOnlyAdminUsersCanDeleteAGroup(): void
     {
         $admin = User::factory()->admin()->create();
         $user = User::factory()->create();

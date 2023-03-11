@@ -14,7 +14,7 @@ class BookingStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('create', Booking::class);
     }
@@ -24,7 +24,7 @@ class BookingStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],

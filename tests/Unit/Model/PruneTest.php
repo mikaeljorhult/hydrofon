@@ -18,7 +18,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testBookingsOlderThanSixMonthsAreDeleted()
+    public function testBookingsOlderThanSixMonthsAreDeleted(): void
     {
         Booking::factory()->times(2)->create([
             'start_time' => now()->subMonths(7),
@@ -35,7 +35,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testCheckedOutBookingsAreNotDeleted()
+    public function testCheckedOutBookingsAreNotDeleted(): void
     {
         $booking = Booking::factory()->createQuietly([
             'start_time' => now()->subMonths(7),
@@ -53,7 +53,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testNewlyEndedBookingsAreNotDeleted()
+    public function testNewlyEndedBookingsAreNotDeleted(): void
     {
         Booking::factory()->create([
             'start_time' => now()->subMonths(2),
@@ -70,7 +70,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testCurrentBookingsAreNotDeleted()
+    public function testCurrentBookingsAreNotDeleted(): void
     {
         Booking::factory()->create([
             'start_time' => now()->subMonth(),
@@ -87,7 +87,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testFutureBookingsAreNotDeleted()
+    public function testFutureBookingsAreNotDeleted(): void
     {
         Booking::factory()->create([
             'start_time' => now()->addMonths(1),
@@ -104,7 +104,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testNoneActiveUsersAreDeleted()
+    public function testNoneActiveUsersAreDeleted(): void
     {
         User::factory()->create([
             'last_logged_in_at' => now()->subYear(),
@@ -120,7 +120,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testOldAndInactiveUsersAreDeleted()
+    public function testOldAndInactiveUsersAreDeleted(): void
     {
         User::factory()->create([
             'created_at' => now()->subYear(),
@@ -136,7 +136,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testNewlyCreatedUsersThatHaveNotLoggedInAreNotDeleted()
+    public function testNewlyCreatedUsersThatHaveNotLoggedInAreNotDeleted(): void
     {
         User::factory()->create();
 
@@ -150,7 +150,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testActiveUsersAreNotDeleted()
+    public function testActiveUsersAreNotDeleted(): void
     {
         User::factory()->create([
             'last_logged_in_at' => now()->subMonth(),
@@ -171,7 +171,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testUsersWithCheckedOutBookingsAreNotDeleted()
+    public function testUsersWithCheckedOutBookingsAreNotDeleted(): void
     {
         $user = User::factory()->create([
             'created_at' => now()->subYear(),
@@ -189,7 +189,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testRelationshipsAreDeletedWithTheirUser()
+    public function testRelationshipsAreDeletedWithTheirUser(): void
     {
         $user = User::factory()->create([
             'created_at' => now()->subYear(),
@@ -213,7 +213,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testTimeBeforePruningUsersCanBeConfigured()
+    public function testTimeBeforePruningUsersCanBeConfigured(): void
     {
         Config::set('hydrofon.prune_models_after_days.users', 1);
 
@@ -232,7 +232,7 @@ class PruneTest extends TestCase
      *
      * @return void
      */
-    public function testTimeBeforePruningBookingsCanBeConfigured()
+    public function testTimeBeforePruningBookingsCanBeConfigured(): void
     {
         Config::set('hydrofon.prune_models_after_days.bookings', 1);
 

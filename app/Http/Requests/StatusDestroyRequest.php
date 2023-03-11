@@ -11,7 +11,7 @@ class StatusDestroyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('delete', $this->route('status'));
     }
@@ -21,7 +21,7 @@ class StatusDestroyRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

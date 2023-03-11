@@ -17,7 +17,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryCanHaveAParent()
+    public function testCategoryCanHaveAParent(): void
     {
         $this->actingAs(User::factory()->admin()->create());
 
@@ -31,7 +31,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryCanHaveChildCategories()
+    public function testCategoryCanHaveChildCategories(): void
     {
         $this->actingAs(User::factory()->admin()->create());
 
@@ -45,7 +45,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryCanHaveChildResources()
+    public function testCategoryCanHaveChildResources(): void
     {
         $this->actingAs(User::factory()->admin()->create());
 

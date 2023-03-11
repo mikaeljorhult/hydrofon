@@ -13,7 +13,7 @@ class BookingUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('update', $this->route('booking'));
     }
@@ -23,7 +23,7 @@ class BookingUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'user_id' => ['sometimes', 'nullable', Rule::exists('users', 'id')],

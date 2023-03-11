@@ -17,7 +17,7 @@ class ResourceTest extends TestCase
      *
      * @return void
      */
-    public function testResourceCanHaveBookings()
+    public function testResourceCanHaveBookings(): void
     {
         $resource = Resource::factory()->create();
 
@@ -29,7 +29,7 @@ class ResourceTest extends TestCase
      *
      * @return void
      */
-    public function testResourceCanBelongToCategories()
+    public function testResourceCanBelongToCategories(): void
     {
         $this->actingAs(User::factory()->admin()->create());
 
@@ -43,7 +43,7 @@ class ResourceTest extends TestCase
      *
      * @return void
      */
-    public function testResourceCanBelongToAGroup()
+    public function testResourceCanBelongToAGroup(): void
     {
         $resource = Resource::factory()->create();
 
