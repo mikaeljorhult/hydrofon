@@ -77,7 +77,7 @@
                             <a href="{{ route('categories.edit', $item) }}">{{ $item->name }}</a>
                         </td>
                         <td data-title="Parent">
-                            {{ optional($item->parent)->name }}
+                            {{ $item->parent?->name }}
                         </td>
                         <td data-title="&nbsp;" class="flex justify-end">
                             <a
