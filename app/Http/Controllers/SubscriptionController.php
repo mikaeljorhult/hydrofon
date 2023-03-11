@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\SubscriptionDestroyRequest;
 use App\Http\Requests\SubscriptionStoreRequest;
 use App\Models\Subscription;
 use App\Scopes\GroupPolicyScope;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 class SubscriptionController extends Controller

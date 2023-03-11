@@ -2,11 +2,11 @@
 
 namespace App\Reports;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection;
 use App\Models\Booking;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class Utilization
 {

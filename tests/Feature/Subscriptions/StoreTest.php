@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Subscriptions;
 
-use Illuminate\Testing\TestResponse;
 use App\Models\Resource;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase

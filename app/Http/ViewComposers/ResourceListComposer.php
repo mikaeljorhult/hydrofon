@@ -2,9 +2,9 @@
 
 namespace App\Http\ViewComposers;
 
-use Illuminate\Support\Collection;
 use App\Models\Category;
 use App\Models\Resource;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class ResourceListComposer

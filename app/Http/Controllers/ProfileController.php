@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class ProfileController extends Controller
 {

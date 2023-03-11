@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Groups;
 
-use Illuminate\Testing\TestResponse;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase

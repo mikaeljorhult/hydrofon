@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CheckoutStoreRequest;
 use App\Models\Booking;
 use App\States\CheckedOut;
+use Illuminate\Http\RedirectResponse;
 
 class CheckoutController extends Controller
 {

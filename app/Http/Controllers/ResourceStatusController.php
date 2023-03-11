@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StatusDestroyRequest;
 use App\Http\Requests\StatusStoreRequest;
 use App\Models\Resource;
 use App\Models\Status;
+use Illuminate\Http\RedirectResponse;
 
 class ResourceStatusController extends Controller
 {

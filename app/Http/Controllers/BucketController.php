@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BucketDestroyRequest;
 use App\Http\Requests\BucketStoreRequest;
 use App\Http\Requests\BucketUpdateRequest;
 use App\Models\Bucket;
 use App\Models\Resource;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class BucketController extends Controller

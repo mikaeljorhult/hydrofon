@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Buckets;
 
-use Illuminate\Testing\TestResponse;
 use App\Models\Bucket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
