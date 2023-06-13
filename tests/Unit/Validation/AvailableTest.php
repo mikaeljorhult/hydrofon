@@ -13,15 +13,30 @@ class AvailableTest extends TestCase
 {
     use RefreshDatabase;
 
+    private function ruleValidates(Available $rule, $attribute, $value)
+    {
+        $passes = true;
+
+        $this->app->call([$rule, 'validate'], [
+            'attribute' => $attribute,
+            'value' => $value,
+            'fail' => static function () use (&$passes): void {
+                $passes = false;
+            },
+        ]);
+
+        return $passes;
+    }
+
     /**
      * Two bookings can't occupy the same resource and time.
      */
     public function testSameResourceAndTime(): void
     {
         $booking = Booking::factory()->create();
-        $availableRule = new Available($booking->start_time, $booking->end_time);
+        $rule = new Available($booking->start_time, $booking->end_time);
 
-        $this->assertFalse($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertFalse($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -30,9 +45,9 @@ class AvailableTest extends TestCase
     public function testSameTimeDifferentResources(): void
     {
         $booking = Booking::factory()->create();
-        $availableRule = new Available($booking->start_time, $booking->end_time);
+        $rule = new Available($booking->start_time, $booking->end_time);
 
-        $this->assertTrue($availableRule->passes('resource_id', Resource::factory()->create()->id));
+        $this->assertTrue($this->ruleValidates($rule, 'resource_id', Resource::factory()->create()->id));
     }
 
     /**
@@ -41,9 +56,9 @@ class AvailableTest extends TestCase
     public function testOneBookingCanBeIgnored(): void
     {
         $booking = Booking::factory()->create();
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertTrue($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertTrue($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -62,9 +77,9 @@ class AvailableTest extends TestCase
             'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertTrue($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertTrue($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -83,9 +98,9 @@ class AvailableTest extends TestCase
             'end_time' => Carbon::parse('2017-01-01 13:00:00'),
         ]);
 
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertTrue($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertTrue($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -104,9 +119,9 @@ class AvailableTest extends TestCase
             'end_time' => Carbon::parse('2017-01-01 15:00:00'),
         ]);
 
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertFalse($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertFalse($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -125,9 +140,9 @@ class AvailableTest extends TestCase
             'end_time' => Carbon::parse('2017-01-01 13:15:00'),
         ]);
 
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertFalse($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertFalse($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -146,9 +161,9 @@ class AvailableTest extends TestCase
             'end_time' => Carbon::parse('2017-01-01 14:00:00'),
         ]);
 
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertFalse($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertFalse($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 
     /**
@@ -167,8 +182,8 @@ class AvailableTest extends TestCase
             'end_time' => Carbon::parse('2017-01-01 12:45:00'),
         ]);
 
-        $availableRule = new Available($booking->start_time, $booking->end_time, $booking->id);
+        $rule = new Available($booking->start_time, $booking->end_time, $booking->id);
 
-        $this->assertFalse($availableRule->passes('resource_id', $booking->resource_id));
+        $this->assertFalse($this->ruleValidates($rule, 'resource_id', $booking->resource_id));
     }
 }

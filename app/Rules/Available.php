@@ -4,9 +4,10 @@ namespace App\Rules;
 
 use App\Models\Booking;
 use Carbon\Carbon;
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class Available implements Rule
+class Available implements ValidationRule
 {
     /**
      * Start of time span to check.
@@ -38,12 +39,8 @@ class Available implements Rule
 
     /**
      * Create a new rule instance.
-     *
-     * @param  mixed  $startTime
-     * @param  mixed  $endTime
-     * @param  string  $column  = ''
      */
-    public function __construct($startTime, $endTime, int $ignore = 0, string $column = '')
+    public function __construct(mixed $startTime, mixed $endTime, int $ignore = 0, string $column = '')
     {
         // Try to parse the supplied timestamps.
         try {
@@ -59,29 +56,23 @@ class Available implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
-     *
-     * @param  mixed  $value
+     * Run the validation rule.
      */
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        // Fail validation if timestamps is invalid.
+        // Fail validation if timestamps are invalid.
         if ($this->startTime == null || $this->endTime == null) {
-            return false;
+            $fail('The :attribute timestamps are invalid.');
         }
 
         // Check if any bookings collide with requested resources within timestamps.
-        return ! Booking::where(! empty($this->column) ? $this->column : $attribute, $value)
+        $available = ! Booking::where(! empty($this->column) ? $this->column : $attribute, $value)
                         ->where('id', '!=', $this->ignore)
                         ->between($this->startTime, $this->endTime)
                         ->exists();
-    }
 
-    /**
-     * Get the validation error message.
-     */
-    public function message(): string
-    {
-        return 'The resource is not available during the given time frame.';
+        if (!$available) {
+            $fail('The resource is not available during the given time frame.');
+        }
     }
 }
