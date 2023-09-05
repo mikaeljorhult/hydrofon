@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Quickbook;
 
-use App\Http\Livewire\QuickBook;
+use App\Livewire\QuickBook;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
@@ -63,8 +63,8 @@ class QuickbookTest extends TestCase
                 ->call('loadResources')
                 ->set('resource_id', $resource->id)
                 ->call('book')
-                ->assertDispatchedBrowserEvent('booking-created')
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('booking-created')
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -86,8 +86,8 @@ class QuickbookTest extends TestCase
                 ->set('resource_id', '')
                 ->call('book')
                 ->assertHasErrors(['start_time', 'end_time', 'resource_id'])
-                ->assertNotDispatchedBrowserEvent('booking-created')
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertNotDispatched('booking-created')
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -109,7 +109,7 @@ class QuickbookTest extends TestCase
                 ->set('resource_id', $resource->id)
                 ->call('book')
                 ->assertHasErrors(['end_time'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -128,7 +128,7 @@ class QuickbookTest extends TestCase
                 ->set('resource_id', 100)
                 ->call('book')
                 ->assertHasErrors(['resource_id'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -149,7 +149,7 @@ class QuickbookTest extends TestCase
                 ->set('resource_id', $booking->resource_id)
                 ->call('book')
                 ->assertHasErrors(['resource_id'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -172,14 +172,14 @@ class QuickbookTest extends TestCase
                 ->set('resource_id', 100)
                 ->call('book')
                 ->assertHasErrors(['resource_id'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 })
 
                 // Successful on existing resource.
                 ->set('resource_id', $resource->id)
                 ->call('book')
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 

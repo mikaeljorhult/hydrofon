@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -36,11 +36,11 @@ class CategoriesTable extends BaseTable
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Category could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Category could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -58,11 +58,11 @@ class CategoriesTable extends BaseTable
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Category was updated',
-            'body' => 'The category was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Category was updated',
+            body: 'The category was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function render()

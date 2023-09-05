@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Identifier;
 use App\Rules\Available;
@@ -60,11 +60,11 @@ class BookingsTable extends BaseTable
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Booking could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Booking could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -94,11 +94,11 @@ class BookingsTable extends BaseTable
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Booking was updated',
-            'body' => 'The booking was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Booking was updated',
+            body: 'The booking was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function onCheckin($id, $multiple = false)
@@ -117,24 +117,24 @@ class BookingsTable extends BaseTable
             $this->refreshItems($itemsToCheckin);
 
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking was checked in',
-                    'body' => 'The booking was checked in successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking was checked in',
+                    body: 'The booking was checked in successfully.',
+                    level: 'success',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings were checked in',
-                    'body' => $items->count().' bookings were checked in successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings were checked in',
+                    body: $items->count().' bookings were checked in successfully.',
+                    level: 'success',
+                );
             }
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Bookings not checked in',
-                'body' => 'One or more of the selected bookings could not be checked in.',
-                'level' => 'error',
-            ]);
+            $this->dispatch('notify',
+                title: 'Bookings not checked in',
+                body: 'One or more of the selected bookings could not be checked in.',
+                level: 'error',
+            );
         }
     }
 
@@ -154,24 +154,24 @@ class BookingsTable extends BaseTable
             $this->refreshItems($itemsToCheckout);
 
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking was checked out',
-                    'body' => 'The booking was checked out successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking was checked out',
+                    body: 'The booking was checked out successfully.',
+                    level: 'success',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings were checked out',
-                    'body' => $items->count().' bookings were checked out successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings were checked out',
+                    body: $items->count().' bookings were checked out successfully.',
+                    level: 'success',
+                );
             }
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Bookings not checked out',
-                'body' => 'One or more of the selected bookings could not be checked out.',
-                'level' => 'error',
-            ]);
+            $this->dispatch('notify',
+                title: 'Bookings not checked out',
+                body: 'One or more of the selected bookings could not be checked out.',
+                level: 'error',
+            );
         }
     }
 
@@ -191,24 +191,24 @@ class BookingsTable extends BaseTable
             $this->refreshItems($itemsToApprove);
 
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking was approved',
-                    'body' => 'The booking was approved successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking was approved',
+                    body: 'The booking was approved successfully.',
+                    level: 'success',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings were approved',
-                    'body' => $items->count().' bookings were approved successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings were approved',
+                    body: $items->count().' bookings were approved successfully.',
+                    level: 'success',
+                );
             }
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Bookings not approved',
-                'body' => 'One or more of the selected bookings could not be approved.',
-                'level' => 'error',
-            ]);
+            $this->dispatch('notify',
+                title: 'Bookings not approved',
+                body: 'One or more of the selected bookings could not be approved.',
+                level: 'error',
+            );
         }
     }
 
@@ -228,24 +228,24 @@ class BookingsTable extends BaseTable
             $this->refreshItems($itemsToReject);
 
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking was rejected',
-                    'body' => 'The booking was rejected successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking was rejected',
+                    body: 'The booking was rejected successfully.',
+                    level: 'success',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings were rejected',
-                    'body' => $items->count().' bookings were rejected successfully.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings were rejected',
+                    body: $items->count().' bookings were rejected successfully.',
+                    level: 'success',
+                );
             }
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Bookings not rejected',
-                'body' => 'One or more of the selected bookings could not be rejected.',
-                'level' => 'error',
-            ]);
+            $this->dispatch('notify',
+                title: 'Bookings not rejected',
+                body: 'One or more of the selected bookings could not be rejected.',
+                level: 'error',
+            );
         }
     }
 
@@ -269,17 +269,17 @@ class BookingsTable extends BaseTable
             $item->resource()->associate($resource);
             $item->save();
 
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Booking was updated',
-                'body' => 'The resource was changed to '.$resource->name.'.',
-                'level' => 'success',
-            ]);
+            $this->dispatch('notify',
+                title: 'Booking was updated',
+                body: 'The resource was changed to '.$resource->name.'.',
+                level: 'success',
+            );
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'No available resources',
-                'body' => 'There are no available resources during that time.',
-                'level' => 'error',
-            ]);
+            $this->dispatch('notify',
+                title: 'No available resources',
+                body: 'There are no available resources during that time.',
+                level: 'error',
+            );
         }
 
         $this->refreshItems([$id]);

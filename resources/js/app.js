@@ -1,4 +1,4 @@
-import Alpine from 'alpinejs';
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import ResourceTree from './components/resourceTree';
 import QrScanner from './components/qrScanner';
 import Segel from './components/segel';
@@ -13,8 +13,7 @@ Alpine.data('flaggspel', Flaggspel);
 Alpine.data('multiBook', MultiBook);
 Alpine.data('quickBook', QuickBook);
 Alpine.data('itemsTable', ItemsTable);
-window.Alpine = Alpine;
-Alpine.start();
+Livewire.start();
 
 import interact from 'interactjs';
 window.interact = interact;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\States\Approved;
 use App\States\Rejected;
@@ -46,31 +46,31 @@ class ApprovalsTable extends BaseTable
                 ->each->approve();
 
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking approved',
-                    'body' => 'The booking was approved.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking approved',
+                    body: 'The booking was approved.',
+                    level: 'success',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings approved',
-                    'body' => $items->count().' bookings were approved.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings approved',
+                    body: $items->count().' bookings were approved.',
+                    level: 'success',
+                );
             }
         } else {
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking not approved',
-                    'body' => 'The booking could not be approved.',
-                    'level' => 'error',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking not approved',
+                    body: 'The booking could not be approved.',
+                    level: 'error',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings not approved',
-                    'body' => 'One or more of the selected bookings could not be approved.',
-                    'level' => 'error',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings not approved',
+                    body: 'One or more of the selected bookings could not be approved.',
+                    level: 'error',
+                );
             }
         }
 
@@ -91,31 +91,31 @@ class ApprovalsTable extends BaseTable
                 ->each->reject();
 
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking rejected',
-                    'body' => 'The booking was rejected.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking rejected',
+                    body: 'The booking was rejected.',
+                    level: 'success',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings rejected',
-                    'body' => $items->count().' bookings were rejected.',
-                    'level' => 'success',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings rejected',
+                    body: $items->count().' bookings were rejected.',
+                    level: 'success',
+                );
             }
         } else {
             if ($items->count() === 1) {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Booking not rejected',
-                    'body' => 'The booking could not be rejected.',
-                    'level' => 'error',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Booking not rejected',
+                    body: 'The booking could not be rejected.',
+                    level: 'error',
+                );
             } else {
-                $this->dispatchBrowserEvent('notify', [
-                    'title' => 'Bookings not rejected',
-                    'body' => 'One or more of the selected bookings could not be rejected.',
-                    'level' => 'error',
-                ]);
+                $this->dispatch('notify',
+                    title: 'Bookings not rejected',
+                    body: 'One or more of the selected bookings could not be rejected.',
+                    level: 'error',
+                );
             }
         }
 

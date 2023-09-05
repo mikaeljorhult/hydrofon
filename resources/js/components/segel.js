@@ -1,3 +1,4 @@
+import { Livewire } from '../../../vendor/livewire/livewire/dist/livewire.esm';
 import interact from 'interactjs';
 import Grid from '../segel/grid';
 import Interactions from '../segel/interactions';
@@ -29,12 +30,18 @@ export default (initialState) => ({
 
         this.$watch('start, duration, steps', this.setupTimestamps.bind(this));
 
-        window.Livewire.hook('message.processed', (message, component) => {
+        Livewire.hook('morph.adding', ({ el, component }) => {
             if (component.name === 'segel') {
                 this.setupInteractions();
                 this.diffSelected();
             }
-        });
+        })
+
+        Livewire.hook('morph.removed', ({ el, component }) => {
+            if (component.name === 'segel') {
+                this.diffSelected();
+            }
+        })
 
         Array.prototype.forEach.call(this.$el.querySelectorAll('[name="selected[]"]'), checkbox => {
             checkbox.checked = false;

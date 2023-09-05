@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Rules\Available;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -52,11 +52,11 @@ class ProfileBookingsTable extends BaseTable
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Booking could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Booking could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -86,11 +86,11 @@ class ProfileBookingsTable extends BaseTable
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Booking was updated',
-            'body' => 'The booking was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Booking was updated',
+            body: 'The booking was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function render()

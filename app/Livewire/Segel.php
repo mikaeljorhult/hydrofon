@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Helpers\Grid;
 use App\Models\Booking;
@@ -114,11 +114,11 @@ class Segel extends Component
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Booking could not be created',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Booking could not be created',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -152,17 +152,17 @@ class Segel extends Component
         $this->values = [];
 
         if ($bookings->count() === 1) {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Booking was created',
-                'body' => 'The booking was created successfully.',
-                'level' => 'success',
-            ]);
+            $this->dispatch('notify',
+                title: 'Booking was created',
+                body: 'The booking was created successfully.',
+                level: 'success',
+            );
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Bookings was created',
-                'body' => $bookings->count().' bookings were created successfully.',
-                'level' => 'success',
-            ]);
+            $this->dispatch('notify',
+                title: 'Bookings was created',
+                body: $bookings->count().' bookings were created successfully.',
+                level: 'success',
+            );
         }
     }
 
@@ -181,11 +181,11 @@ class Segel extends Component
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Booking could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Booking could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -203,11 +203,11 @@ class Segel extends Component
 
         $this->values = [];
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Booking was updated',
-            'body' => 'The booking was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Booking was updated',
+            body: 'The booking was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function deleteBooking($values)
@@ -217,10 +217,10 @@ class Segel extends Component
 
         $booking->delete();
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Booking was deleted',
-            'body' => 'The booking was deleted successfully.',
-        ]);
+        $this->dispatch('notify',
+            title: 'Booking was deleted',
+            body: 'The booking was deleted successfully.',
+        );
     }
 
     private function getResources()
@@ -254,12 +254,12 @@ class Segel extends Component
         $start = Carbon::createFromTimestamp($this->start + $difference);
         $this->setGrid($start, $this->type);
 
-        $this->emit('dateChanged', [
-            'date' => $this->dateString,
-            'start' => $this->start,
-            'end' => $this->end,
-            'duration' => $this->duration,
-            'url' => route('calendar', [$start->format('Y-m-d')]),
-        ]);
+        $this->dispatch('dateChanged',
+            date: $this->dateString,
+            start: $this->start,
+            end: $this->end,
+            duration: $this->duration,
+            url: route('calendar', [$start->format('Y-m-d')]),
+        );
     }
 }

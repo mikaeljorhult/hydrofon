@@ -1,4 +1,4 @@
-<div x-data="itemsTable({ selectedRows: @entangle('selectedRows').defer })">
+<div x-data="itemsTable({ selectedRows: @entangle('selectedRows') })">
     <table class="table">
         @include('livewire.partials.table-header')
 
@@ -12,7 +12,7 @@
                                 name="name"
                                 value="{{ $item->name }}"
                                 :hasErrors="$errors->has('editValues.name')"
-                                wire:model.debounce.500ms="editValues.name"
+                                wire:model.live.debounce.500ms="editValues.name"
                             />
 
                             @error('editValues.name')
@@ -22,7 +22,7 @@
                         <td class="whitespace-nowrap text-right">
                             <div>
                                 <x-forms.button
-                                    wire:click.prevent="$emit('save')"
+                                    wire:click.prevent="$dispatch('save')"
                                     wire:loading.attr="disabled"
                                 >Save</x-forms.button>
 
@@ -43,7 +43,7 @@
                                         :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
                                         :hasErrors="$errors->has('editValues.resources')"
                                         multiple
-                                        wire:model="editValues.resources"
+                                        wire:model.live="editValues.resources"
                                     />
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
                                 href="{{ route('buckets.edit', $item) }}"
                                 title="Edit"
-                                wire:click.prevent="$emit('edit', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('edit', {{ $item->id }})"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -75,7 +75,7 @@
                                 form="deleteform-{{ $item->id }}"
                                 type="submit"
                                 title="Delete"
-                                wire:click.prevent="$emit('delete', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('delete', {{ $item->id }})"
                                 wire:loading.attr="disabled"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
@@ -102,7 +102,7 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$emit('delete', false, true)"
+                                wire:click.prevent="$dispatch('delete', false, true)"
                             >Delete</x-forms.button-link>
                         </form>
                     </div>

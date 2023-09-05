@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
-class GroupsTable extends BaseTable
+class BucketsTable extends BaseTable
 {
     use AuthorizesRequests;
 
-    protected $model = \App\Models\Group::class;
+    protected $model = \App\Models\Bucket::class;
 
-    protected $relationships = ['approvers'];
+    protected $relationships = ['resources'];
 
     public function onSave()
     {
@@ -23,35 +23,36 @@ class GroupsTable extends BaseTable
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Group could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Bucket could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
             'editValues.name' => ['required'],
-            'editValues.approvers' => ['nullable', 'array'],
-            'editValues.approvers.*' => [Rule::exists('users', 'id')],
+            'editValues.resources' => ['nullable', 'array'],
+            'editValues.resources.*' => [Rule::exists('resources', 'id')],
         ])['editValues'];
 
-        $this->syncRelationship($item, $validated, 'approvers');
+        $this->syncRelationship($item, $validated, 'resources');
+
         $item->update($validated);
 
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Group was updated',
-            'body' => 'The group was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Bucket was updated',
+            body: 'The bucket was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function render()
     {
-        return view('livewire.groups-table', [
+        return view('livewire.buckets-table', [
             'items' => $this->items->loadMissing($this->relationships),
         ]);
     }

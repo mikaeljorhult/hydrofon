@@ -1,6 +1,6 @@
 <div
-    x-data="itemsTable({ selectedRows: @entangle('selectedRows').defer })"
-    x-on:qrcoderead.window="$wire.emit('selectIdentifier', $event.detail)"
+    x-data="itemsTable({ selectedRows: @entangle('selectedRows') })"
+    x-on:qrcoderead.window="$dispatch('selectIdentifier', $event.detail)"
 >
     <table class="table">
         @include('livewire.partials.table-header')
@@ -15,7 +15,7 @@
                                 name="resource_id"
                                 :options="\App\Models\Resource::orderBy('name')->pluck('name', 'id')"
                                 :hasErrors="$errors->has('editValues.resource_id')"
-                                wire:model="editValues.resource_id"
+                                wire:model.live="editValues.resource_id"
                             />
 
                             @error('editValues.resource_id')
@@ -27,7 +27,7 @@
                                 name="user_id"
                                 :options="\App\Models\User::orderBy('name')->pluck('name', 'id')"
                                 :hasErrors="$errors->has('editValues.user_id')"
-                                wire:model="editValues.user_id"
+                                wire:model.live="editValues.user_id"
                             />
 
                             @error('editValues.user_id')
@@ -40,7 +40,7 @@
                                     name="start_time"
                                     value="{{ $item->start_time }}"
                                     :hasErrors="$errors->has('editValues.start_time')"
-                                    wire:model.defer="editValues.start_time"
+                                    wire:model="editValues.start_time"
                                 />
                             </div>
 
@@ -54,7 +54,7 @@
                                     name="end_time"
                                     value="{{ $item->end_time }}"
                                     :hasErrors="$errors->has('editValues.end_time')"
-                                    wire:model.defer="editValues.end_time"
+                                    wire:model="editValues.end_time"
                                 />
                             </div>
 
@@ -66,7 +66,7 @@
                         <td class="whitespace-nowrap text-right">
                             <div>
                                 <x-forms.button
-                                    wire:click.prevent="$emit('save')"
+                                    wire:click.prevent="$dispatch('save')"
                                     wire:loading.attr="disabled"
                                 >Save</x-forms.button>
 
@@ -91,7 +91,7 @@
 
                             @if(count($item->resource->buckets) > 0)
                                 <button
-                                    wire:click.prevent="$emit('switch', {{ $item->id }})"
+                                    wire:click.prevent="$dispatch('switch', {{ $item->id }})"
                                 ><x-heroicon-m-arrow-path class="w-4 text-gray-600 fill-current" /></button>
                             @endif
                         </td>
@@ -114,7 +114,7 @@
                                     form="checkoutform-{{ $item->id }}"
                                     type="submit"
                                     title="Check out"
-                                    wire:click.prevent="$emit('checkout', {{ $item->id }})"
+                                    wire:click.prevent="$dispatch('checkout', {{ $item->id }})"
                                     wire:loading.attr="disabled"
                                 >
                                     <x-heroicon-m-arrow-up-tray class="w-4 h-4 fill-current" />
@@ -127,7 +127,7 @@
                                     form="checkinform-{{ $item->id }}"
                                     type="submit"
                                     title="Check in"
-                                    wire:click.prevent="$emit('checkin', {{ $item->id }})"
+                                    wire:click.prevent="$dispatch('checkin', {{ $item->id }})"
                                     wire:loading.attr="disabled"
                                 ><x-heroicon-m-arrow-down-tray class="w-4 h-4 fill-current" /></button>
                             @endif
@@ -143,7 +143,7 @@
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
                                 href="{{ route('bookings.edit', $item) }}"
                                 title="Edit"
-                                wire:click.prevent="$emit('edit', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('edit', {{ $item->id }})"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -151,7 +151,7 @@
                                 form="deleteform-{{ $item->id }}"
                                 type="submit"
                                 title="Delete"
-                                wire:click.prevent="$emit('delete', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('delete', {{ $item->id }})"
                                 wire:loading.attr="disabled"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
@@ -198,14 +198,14 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$emit('checkout', false, true)"
+                                wire:click.prevent="$dispatch('checkout', false, true)"
                             >Check out</x-forms.button-link>
                         </form>
 
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$emit('checkin', false, true)"
+                                wire:click.prevent="$dispatch('checkin', false, true)"
                             >Check in</x-forms.button-link>
                         </form>
 
@@ -213,14 +213,14 @@
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"
-                                    wire:click.prevent="$emit('approve', false, true)"
+                                    wire:click.prevent="$dispatch('approve', false, true)"
                                 >Approve</x-forms.button-link>
                             </form>
 
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"
-                                    wire:click.prevent="$emit('reject', false, true)"
+                                    wire:click.prevent="$dispatch('reject', false, true)"
                                 >Reject</x-forms.button-link>
                             </form>
                         @endif
@@ -228,7 +228,7 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$emit('delete', false, true)"
+                                wire:click.prevent="$dispatch('delete', false, true)"
                             >Delete</x-forms.button-link>
                         </form>
                     </div>

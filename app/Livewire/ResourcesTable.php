@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -36,11 +36,11 @@ class ResourcesTable extends BaseTable
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Resource could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Resource could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -63,11 +63,11 @@ class ResourcesTable extends BaseTable
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Resource was updated',
-            'body' => 'The resource was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Resource was updated',
+            body: 'The resource was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function render()

@@ -33,7 +33,7 @@
     </div>
 
     @vite('resources/js/app.js')
-    <livewire:scripts />
+    @livewireScriptConfig
     @stack('scripts')
 </body>
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Tables;
 
-use App\Http\Livewire\CategoriesTable;
+use App\Livewire\CategoriesTable;
 use App\Models\Category;
 use App\Models\Group;
 use App\Models\User;
@@ -37,7 +37,7 @@ class CategoriesTableTest extends TestCase
         $items = Category::factory()->count(1)->create();
 
         Livewire::test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->assertSet('isEditing', $items[0]->id)
                 ->assertSeeHtml('name="name" value="'.$items[0]->name.'"');
     }
@@ -51,11 +51,11 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated Category')
-                ->emit('save')
+                ->dispatch('save')
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -73,9 +73,9 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.name', 'Updated Category')
-                ->emit('save')
+                ->dispatch('save')
                 ->assertForbidden();
 
         $this->assertDatabaseHas(Category::class, [
@@ -93,12 +93,12 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.parent_id', $parent->id)
-                ->emit('save')
+                ->dispatch('save')
                 ->assertHasNoErrors()
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -114,11 +114,11 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.parent_id', 100)
-                ->emit('save')
+                ->dispatch('save')
                 ->assertHasErrors(['editValues.parent_id'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -134,11 +134,11 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.parent_id', $items[0]->id)
-                ->emit('save')
+                ->dispatch('save')
                 ->assertHasErrors(['editValues.parent_id'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -155,11 +155,11 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.groups', [$group->id])
-                ->emit('save')
+                ->dispatch('save')
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -175,11 +175,11 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.groups', [100])
-                ->emit('save')
+                ->dispatch('save')
                 ->assertHasErrors(['editValues.groups.*'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -195,11 +195,11 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('edit', $items[0]->id)
+                ->dispatch('edit', $items[0]->id)
                 ->set('editValues.name', '')
-                ->emit('save')
+                ->dispatch('save')
                 ->assertHasErrors(['editValues.name'])
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -217,9 +217,9 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('delete', $items[0]->id)
+                ->dispatch('delete', $items[0]->id)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -235,7 +235,7 @@ class CategoriesTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->create())
                 ->test(CategoriesTable::class, ['items' => $items])
-                ->emit('delete', $items[0]->id)
+                ->dispatch('delete', $items[0]->id)
                 ->assertForbidden();
 
         $this->assertModelExists($items[0]);

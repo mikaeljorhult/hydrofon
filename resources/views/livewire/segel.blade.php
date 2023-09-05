@@ -3,7 +3,6 @@
         <div class="calendar-header flex items-baseline">
             <h1
                 class="order-2 my-0 mx-1 text-3xl"
-                x-text="date"
             >{{ $this->dateString }}</h1>
             <a
                 class="order-1"
@@ -33,7 +32,7 @@
                     name="type"
                     id="type"
                     :options="['day' => 'Day', 'week' => 'Week', 'month' => 'Month']"
-                    wire:model="type"
+                    wire:model.live="type"
                     class="ml-1"
                 />
             </div>
@@ -44,9 +43,9 @@
         id="segel"
         class="segel my-4"
         x-data="segel({
-            start: @entangle('start'),
-            duration: @entangle('duration'),
-            steps: @entangle('steps')
+            start: @entangle('start').live,
+            duration: @entangle('duration').live,
+            steps: @entangle('steps').live
         })"
         x-bind="base"
     >
@@ -223,13 +222,15 @@
             @this.setTimestamps(event.state.start, event.state.end, event.state.duration);
         };
 
-        window.livewire.on('dateChanged', (state) => {
-            history.pushState({
-                date: state.date,
-                start: state.start,
-                end: state.end,
-                duration: state.duration
-            }, state.date, state.url);
+        document.addEventListener('livewire:init', () => {
+            window.Livewire.on('dateChanged', (state) => {
+                history.pushState({
+                    date: state.date,
+                    start: state.start,
+                    end: state.end,
+                    duration: state.duration
+                }, state.date, state.url);
+            });
         });
     </script>
 @endpush

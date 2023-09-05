@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Validator;
@@ -41,10 +41,8 @@ class BaseTable extends Component
         'delete' => 'onDelete',
     ];
 
-    public function __construct($id)
+    public function __construct()
     {
-        parent::__construct($id);
-
         $this->modelInstance = app($this->model);
         $this->tableBaseUrl = url()->current();
         $this->validationAttributes = Arr::prependKeysWith($this->editFields, 'editValues.');
@@ -80,7 +78,7 @@ class BaseTable extends Component
         // Reset validation errors when editing a new row.
         $this->resetValidation();
 
-        $this->emit('editing');
+        $this->dispatch('editing');
     }
 
     public function onSave()
@@ -92,11 +90,11 @@ class BaseTable extends Component
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Item could not be updated',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Item could not be updated',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -108,11 +106,11 @@ class BaseTable extends Component
         $this->refreshItems([$item->id]);
         $this->isEditing = false;
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Item was updated',
-            'body' => 'The item was updated successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Item was updated',
+            body: 'The item was updated successfully.',
+            level: 'success',
+        );
     }
 
     public function onDelete($id, $multiple = false)
@@ -131,17 +129,17 @@ class BaseTable extends Component
         $this->removeItems($itemsToDelete);
 
         if ($items->count() === 1) {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Item was deleted',
-                'body' => 'The item was deleted successfully.',
-                'level' => 'success',
-            ]);
+            $this->dispatch('notify',
+                title: 'Item was deleted',
+                body: 'The item was deleted successfully.',
+                level: 'success',
+            );
         } else {
-            $this->dispatchBrowserEvent('notify', [
-                'title' => 'Items were deleted',
-                'body' => $items->count().' items were deleted successfully.',
-                'level' => 'success',
-            ]);
+            $this->dispatch('notify',
+                title: 'Items were deleted',
+                body: $items->count().' items were deleted successfully.',
+                level: 'success',
+            );
         }
     }
 

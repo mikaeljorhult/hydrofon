@@ -1,10 +1,10 @@
 <div
     class="mx-1 relative"
     x-data="quickBook({
-        start_time: @entangle('start_time'),
-        end_time: @entangle('end_time'),
-        resource_id: @entangle('resource_id'),
-        search: @entangle('search')
+        start_time: @entangle('start_time').live,
+        end_time: @entangle('end_time').live,
+        resource_id: @entangle('resource_id').live,
+        search: @entangle('search').live
     })"
     x-on:click.outside="outsideClick"
 >
@@ -16,7 +16,7 @@
             aria-expanded="false"
             aria-haspopup="true"
             x-on:click.prevent="isOpen = !isOpen"
-            wire:click.prefetch="loadResources"
+            wire:click="loadResources"
         >
             <span class="sr-only">Open Quick Book</span>
             <x-heroicon-o-bolt class="w-6 h-6" />
@@ -40,7 +40,7 @@
         x-cloak
     >
         <div class="py-2 px-4">
-            <form wire:submit.prevent="book">
+            <form wire:submit="book">
                 <h3 class="mb-2 text-base">Quick Book</h3>
 
                 <div class="mb-2">

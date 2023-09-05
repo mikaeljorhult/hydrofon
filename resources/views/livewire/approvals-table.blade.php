@@ -1,4 +1,4 @@
-<div x-data="itemsTable({ selectedRows: @entangle('selectedRows').defer })">
+<div x-data="itemsTable({ selectedRows: @entangle('selectedRows') })">
     <table class="table">
         @include('livewire.partials.table-header')
 
@@ -36,7 +36,7 @@
                                 form="approveform-{{ $item->id }}"
                                 type="submit"
                                 title="Approve"
-                                wire:click.prevent="$emit('approve', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('approve', {{ $item->id }})"
                                 wire:loading.attr="disabled"
                             ><x-heroicon-m-check class="w-4 h-4 fill-current" /></button>
 
@@ -44,7 +44,7 @@
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-700 rounded hover:text-red-700 hover:border-red-700"
                                 type="submit"
                                 title="Reject"
-                                wire:click.prevent="$emit('reject', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('reject', {{ $item->id }})"
                                 wire:loading.attr="disabled"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
                         @endif
@@ -84,14 +84,14 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$emit('approve', false, true)"
+                                wire:click.prevent="$dispatch('approve', false, true)"
                             >Approve</x-forms.button-link>
                         </form>
 
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$emit('reject', false, true)"
+                                wire:click.prevent="$dispatch('reject', false, true)"
                             >Reject</x-forms.button-link>
                         </form>
                     </div>

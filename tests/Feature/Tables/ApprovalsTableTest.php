@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Tables;
 
-use App\Http\Livewire\ApprovalsTable;
+use App\Livewire\ApprovalsTable;
 use App\Models\Booking;
 use App\Models\Group;
 use App\Models\User;
@@ -47,9 +47,9 @@ class ApprovalsTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
-                ->emit('approve', $items[0]->id)
+                ->dispatch('approve', $items[0]->id)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -74,9 +74,9 @@ class ApprovalsTableTest extends TestCase
 
         Livewire::actingAs($approver)
                 ->test(ApprovalsTable::class, ['items' => $items])
-                ->emit('approve', $items[0]->id)
+                ->dispatch('approve', $items[0]->id)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -101,7 +101,7 @@ class ApprovalsTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
-                ->emit('approve', $items[0]->id)
+                ->dispatch('approve', $items[0]->id)
                 ->assertForbidden();
 
         $this->assertFalse($items[0]->fresh()->isApproved);
@@ -125,9 +125,9 @@ class ApprovalsTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
-                ->emit('reject', $items[0]->id)
+                ->dispatch('reject', $items[0]->id)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -152,9 +152,9 @@ class ApprovalsTableTest extends TestCase
 
         Livewire::actingAs($approver)
                 ->test(ApprovalsTable::class, ['items' => $items])
-                ->emit('reject', $items[0]->id)
+                ->dispatch('reject', $items[0]->id)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'success';
                 });
 
@@ -179,7 +179,7 @@ class ApprovalsTableTest extends TestCase
 
         Livewire::actingAs(User::factory()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
-                ->emit('reject', $items[0]->id)
+                ->dispatch('reject', $items[0]->id)
                 ->assertForbidden();
 
         $this->assertFalse($items[0]->fresh()->isRejected);
@@ -197,9 +197,9 @@ class ApprovalsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
-                ->emit('approve', null, true)
+                ->dispatch('approve', null, true)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 
@@ -218,9 +218,9 @@ class ApprovalsTableTest extends TestCase
         Livewire::actingAs(User::factory()->admin()->create())
                 ->test(ApprovalsTable::class, ['items' => $items])
                 ->set('selectedRows', [$items[0]->id])
-                ->emit('reject', null, true)
+                ->dispatch('reject', null, true)
                 ->assertOk()
-                ->assertDispatchedBrowserEvent('notify', function ($name, $data) {
+                ->assertDispatched('notify', function ($name, $data) {
                     return data_get($data, 'level') === 'error';
                 });
 

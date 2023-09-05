@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Booking;
 use App\Models\Resource;
@@ -65,11 +65,11 @@ class QuickBook extends Component
         $validated = $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->any()) {
-                    $this->dispatchBrowserEvent('notify', [
-                        'title' => 'Booking could not be created',
-                        'body' => $validator->errors()->first(),
-                        'level' => 'error',
-                    ]);
+                    $this->dispatch('notify',
+                        title: 'Booking could not be created',
+                        body: $validator->errors()->first(),
+                        level: 'error',
+                    );
                 }
             });
         })->validate([
@@ -85,17 +85,17 @@ class QuickBook extends Component
 
         $booking = Booking::create($validated);
 
-        $this->dispatchBrowserEvent('booking-created', [
-            'resource_id' => $booking->resource_id,
-            'start_time' => $booking->start_time->format('U'),
-            'end_time' => $booking->end_time->format('U'),
-        ]);
+        $this->dispatch('booking-created',
+            resource_id: $booking->resource_id,
+            start_time: $booking->start_time->format('U'),
+            end_time: $booking->end_time->format('U'),
+        );
 
-        $this->dispatchBrowserEvent('notify', [
-            'title' => 'Booking was created',
-            'body' => 'The booking was created successfully.',
-            'level' => 'success',
-        ]);
+        $this->dispatch('notify',
+            title: 'Booking was created',
+            body: 'The booking was created successfully.',
+            level: 'success',
+        );
     }
 
     private function getAvailableResources()

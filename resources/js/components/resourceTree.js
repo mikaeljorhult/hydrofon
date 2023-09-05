@@ -1,3 +1,4 @@
+import { Livewire } from '../../../vendor/livewire/livewire/dist/livewire.esm';
 import interact from 'interactjs';
 import Store from '../store';
 
@@ -56,7 +57,7 @@ export default (initialState) => ({
             }, 1000);
         });
 
-        window.livewire.on('dateChanged', (state) => {
+        Livewire.on('dateChanged', (state) => {
             this.date = state.date;
             this.datepicker.setDate(this.date, false);
         });

@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "laravolt/avatar": "^5.0",
-        "livewire/livewire": "^2.11",
+        "livewire/livewire": "^3.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-model-states": "^2.4.2",
