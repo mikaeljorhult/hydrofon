@@ -8,12 +8,12 @@
     "dynamicImports": [
       "node_modules/qr-scanner/qr-scanner-worker.min.js"
     ],
-    "file": "assets/app-b9ae05b2.js",
+    "file": "assets/app-0375bd94.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-7dd8ca66.css",
+    "file": "assets/app-5e2eece0.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   }
