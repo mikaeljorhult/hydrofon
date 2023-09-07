@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-full h-full flex flex-col items-center justify-center">
-        <div class="w-full sm:w-1/2 md:w-1/3">
+    <div class="relative w-full h-full flex flex-col items-center justify-center">
+        <div class="w-full sm:w-1/2 md:w-1/3 p-4">
             <h1 class="mb-4">Password Reset</h1>
 
             <form method="POST" action="{{ route('password.request') }}">
@@ -73,5 +73,10 @@
                 </div>
             </form>
         </div>
+
+        <a
+            class="absolute top-4 left-4"
+            href="{{ route('home') }}"
+        >&leftarrow; {{ config('app.name', 'Hydrofon') }}</a>
     </div>
 @endsection
