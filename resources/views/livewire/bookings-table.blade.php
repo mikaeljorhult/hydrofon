@@ -1,6 +1,6 @@
 <div
     x-data="itemsTable({ selectedRows: @entangle('selectedRows') })"
-    x-on:qrcoderead.window="$dispatch('selectIdentifier', $event.detail)"
+    x-on:qrcoderead.window="$dispatch('selectIdentifier', { identifier: $event.detail })"
 >
     <table class="table">
         @include('livewire.partials.table-header')
@@ -91,7 +91,7 @@
 
                             @if(count($item->resource->buckets) > 0)
                                 <button
-                                    wire:click.prevent="$dispatch('switch', {{ $item->id }})"
+                                    wire:click.prevent="$dispatch('switch', { id: {{ $item->id }} })"
                                 ><x-heroicon-m-arrow-path class="w-4 text-gray-600 fill-current" /></button>
                             @endif
                         </td>
@@ -114,7 +114,7 @@
                                     form="checkoutform-{{ $item->id }}"
                                     type="submit"
                                     title="Check out"
-                                    wire:click.prevent="$dispatch('checkout', {{ $item->id }})"
+                                    wire:click.prevent="$dispatch('checkout', { id: {{ $item->id }} })"
                                     wire:loading.attr="disabled"
                                 >
                                     <x-heroicon-m-arrow-up-tray class="w-4 h-4 fill-current" />
@@ -127,7 +127,7 @@
                                     form="checkinform-{{ $item->id }}"
                                     type="submit"
                                     title="Check in"
-                                    wire:click.prevent="$dispatch('checkin', {{ $item->id }})"
+                                    wire:click.prevent="$dispatch('checkin', { id: {{ $item->id }} })"
                                     wire:loading.attr="disabled"
                                 ><x-heroicon-m-arrow-down-tray class="w-4 h-4 fill-current" /></button>
                             @endif
@@ -143,7 +143,7 @@
                                 class="invisible group-hover:visible ml-2 p-1 border border-solid border-gray-300 text-gray-500 rounded hover:text-red-700 hover:border-red-700"
                                 href="{{ route('bookings.edit', $item) }}"
                                 title="Edit"
-                                wire:click.prevent="$dispatch('edit', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('edit', { id: {{ $item->id }} })"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -151,7 +151,7 @@
                                 form="deleteform-{{ $item->id }}"
                                 type="submit"
                                 title="Delete"
-                                wire:click.prevent="$dispatch('delete', {{ $item->id }})"
+                                wire:click.prevent="$dispatch('delete', { id: {{ $item->id }} })"
                                 wire:loading.attr="disabled"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
@@ -198,14 +198,14 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$dispatch('checkout', false, true)"
+                                wire:click.prevent="$dispatch('checkout', { id: false, multiple: true })"
                             >Check out</x-forms.button-link>
                         </form>
 
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$dispatch('checkin', false, true)"
+                                wire:click.prevent="$dispatch('checkin', { id: false, multiple: true })"
                             >Check in</x-forms.button-link>
                         </form>
 
@@ -213,14 +213,14 @@
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"
-                                    wire:click.prevent="$dispatch('approve', false, true)"
+                                    wire:click.prevent="$dispatch('approve', { id: false, true })"
                                 >Approve</x-forms.button-link>
                             </form>
 
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"
-                                    wire:click.prevent="$dispatch('reject', false, true)"
+                                    wire:click.prevent="$dispatch('reject', { id: false, true })"
                                 >Reject</x-forms.button-link>
                             </form>
                         @endif
@@ -228,7 +228,7 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$dispatch('delete', false, true)"
+                                wire:click.prevent="$dispatch('delete', { id: false, true })"
                             >Delete</x-forms.button-link>
                         </form>
                     </div>
