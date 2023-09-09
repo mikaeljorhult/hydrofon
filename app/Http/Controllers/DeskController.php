@@ -25,7 +25,7 @@ class DeskController extends Controller
     /**
      * Show the circulation desk view.
      */
-    public function index(?string $search = null): View
+    public function index(string $search = null): View
     {
         // Only resolve resource or user if a search string is available.
         $identifiable = $search ? $this->resolveIdentifiable($search) : null;
@@ -61,8 +61,8 @@ class DeskController extends Controller
 
         if (! $identifiable) {
             $identifier = Identifier::with('identifiable')
-                                    ->where('value', $search)
-                                    ->first();
+                ->where('value', $search)
+                ->first();
 
             $identifiable = $identifier?->identifiable;
         }
@@ -79,29 +79,29 @@ class DeskController extends Controller
     private function getBookings($identifiable)
     {
         return QueryBuilder::for($identifiable->bookings()->getQuery())
-                           ->select('bookings.*')
-                           ->with(['resource', 'user'])
-                           ->whereNotState('state', CheckedIn::class)
-                           ->whereHas('resource', function ($query) {
-                               $query->where('is_facility', '=', 0);
-                           })
-                           ->where(function ($query) {
-                               $filter = request()->query->all('filter');
+            ->select('bookings.*')
+            ->with(['resource', 'user'])
+            ->whereNotState('state', CheckedIn::class)
+            ->whereHas('resource', function ($query) {
+                $query->where('is_facility', '=', 0);
+            })
+            ->where(function ($query) {
+                $filter = request()->query->all('filter');
 
-                               if (! isset($filter['between'])) {
-                                   $query->between(
-                                       now()->subHours(config('hydrofon.desk_inclusion_hours.earlier', 0)),
-                                       now()->addHours(config('hydrofon.desk_inclusion_hours.later', 0))
-                                   );
-                               } else {
-                                   $between = explode(',', $filter['between']);
-                                   $query->between($between[0], $between[1]);
-                               }
-                           })
-                           ->join('resources', 'resources.id', '=', 'bookings.resource_id')
-                           ->join('users', 'users.id', '=', 'bookings.user_id')
-                           ->defaultSort('start_time')
-                           ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
-                           ->paginate(15);
+                if (! isset($filter['between'])) {
+                    $query->between(
+                        now()->subHours(config('hydrofon.desk_inclusion_hours.earlier', 0)),
+                        now()->addHours(config('hydrofon.desk_inclusion_hours.later', 0))
+                    );
+                } else {
+                    $between = explode(',', $filter['between']);
+                    $query->between($between[0], $between[1]);
+                }
+            })
+            ->join('resources', 'resources.id', '=', 'bookings.resource_id')
+            ->join('users', 'users.id', '=', 'bookings.user_id')
+            ->defaultSort('start_time')
+            ->allowedSorts(['resources.name', 'users.name', 'start_time', 'end_time'])
+            ->paginate(15);
     }
 }

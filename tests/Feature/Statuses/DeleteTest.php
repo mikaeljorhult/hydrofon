@@ -21,8 +21,8 @@ class DeleteTest extends TestCase
         $status = Status::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
-             ->assertRedirect();
+            ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
+            ->assertRedirect();
 
         $this->assertDatabaseCount(Status::class, 0);
     }
@@ -35,8 +35,8 @@ class DeleteTest extends TestCase
         $status = Status::factory()->create();
 
         $this->actingAs(User::factory()->create())
-             ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
-             ->assertForbidden();
+            ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
+            ->assertForbidden();
 
         $this->assertDatabaseCount(Status::class, 1);
     }
@@ -49,8 +49,8 @@ class DeleteTest extends TestCase
         $status = Status::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
-             ->assertRedirect();
+            ->delete('resources/'.$status->model_id.'/statuses/'.$status->id)
+            ->assertRedirect();
 
         $this->assertDatabaseHas(Activity::class, [
             'event' => 'broken',

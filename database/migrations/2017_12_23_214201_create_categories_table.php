@@ -19,8 +19,8 @@ return new class extends Migration
 
             // Set parent to NULL if parent category is deleted.
             $table->foreign('parent_id')->references('id')->on('categories')
-                  ->onUpdate('cascade')
-                  ->onDelete('set null');
+                ->onUpdate('cascade')
+                ->onDelete('set null');
         });
     }
 

@@ -18,8 +18,8 @@ class BookingsTest extends TestCase
         $booking = Booking::factory()->create();
 
         $this->actingAs($booking->user)
-             ->get('profile/bookings')
-             ->assertSuccessful()
-             ->assertSee($booking->resource->name);
+            ->get('profile/bookings')
+            ->assertSuccessful()
+            ->assertSee($booking->resource->name);
     }
 }

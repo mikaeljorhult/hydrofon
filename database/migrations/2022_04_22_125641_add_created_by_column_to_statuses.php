@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::table('statuses', function (Blueprint $table) {
             $table->unsignedInteger('created_by_id')
-                  ->nullable()
-                  ->after('model_id');
+                ->nullable()
+                ->after('model_id');
 
             // Set creator to NULL if creating user is deleted.
             $table->foreign('created_by_id')
-                  ->references('id')->on('users')
-                  ->onDelete('set null');
+                ->references('id')->on('users')
+                ->onDelete('set null');
         });
     }
 

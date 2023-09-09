@@ -22,8 +22,8 @@ class QuickbookTest extends TestCase
         Resource::factory()->create();
 
         Livewire::test(QuickBook::class)
-                ->assertSee('Quick Book')
-                ->assertOk();
+            ->assertSee('Quick Book')
+            ->assertOk();
     }
 
     /**
@@ -34,9 +34,9 @@ class QuickbookTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::test(QuickBook::class)
-                ->call('loadResources')
-                ->assertSee($resource->name)
-                ->assertOk();
+            ->call('loadResources')
+            ->assertSee($resource->name)
+            ->assertOk();
     }
 
     /**
@@ -47,8 +47,8 @@ class QuickbookTest extends TestCase
         $booking = Booking::factory()->current()->create();
 
         Livewire::test(QuickBook::class)
-                ->assertDontSee($booking->resource->name)
-                ->assertOk();
+            ->assertDontSee($booking->resource->name)
+            ->assertOk();
     }
 
     /**
@@ -59,14 +59,14 @@ class QuickbookTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(QuickBook::class)
-                ->call('loadResources')
-                ->set('resource_id', $resource->id)
-                ->call('book')
-                ->assertDispatched('booking-created')
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(QuickBook::class)
+            ->call('loadResources')
+            ->set('resource_id', $resource->id)
+            ->call('book')
+            ->assertDispatched('booking-created')
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -79,17 +79,17 @@ class QuickbookTest extends TestCase
     public function testAllParametersMustBePresent(): void
     {
         Livewire::actingAs(User::factory()->create())
-                ->test(QuickBook::class)
-                ->call('loadResources')
-                ->set('start_time', '')
-                ->set('end_time', '')
-                ->set('resource_id', '')
-                ->call('book')
-                ->assertHasErrors(['start_time', 'end_time', 'resource_id'])
-                ->assertNotDispatched('booking-created')
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(QuickBook::class)
+            ->call('loadResources')
+            ->set('start_time', '')
+            ->set('end_time', '')
+            ->set('resource_id', '')
+            ->call('book')
+            ->assertHasErrors(['start_time', 'end_time', 'resource_id'])
+            ->assertNotDispatched('booking-created')
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseCount(Booking::class, 0);
     }
@@ -102,16 +102,16 @@ class QuickbookTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(QuickBook::class)
-                ->call('loadResources')
-                ->set('start_time', now())
-                ->set('end_time', now()->subHour())
-                ->set('resource_id', $resource->id)
-                ->call('book')
-                ->assertHasErrors(['end_time'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(QuickBook::class)
+            ->call('loadResources')
+            ->set('start_time', now())
+            ->set('end_time', now()->subHour())
+            ->set('resource_id', $resource->id)
+            ->call('book')
+            ->assertHasErrors(['end_time'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseCount(Booking::class, 0);
     }
@@ -122,15 +122,15 @@ class QuickbookTest extends TestCase
     public function testResourceMustExist(): void
     {
         Livewire::actingAs(User::factory()->create())
-                ->test(QuickBook::class)
-                ->set('start_time', now())
-                ->set('end_time', now()->addHour())
-                ->set('resource_id', 100)
-                ->call('book')
-                ->assertHasErrors(['resource_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(QuickBook::class)
+            ->set('start_time', now())
+            ->set('end_time', now()->addHour())
+            ->set('resource_id', 100)
+            ->call('book')
+            ->assertHasErrors(['resource_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseCount(Booking::class, 0);
     }
@@ -143,15 +143,15 @@ class QuickbookTest extends TestCase
         $booking = Booking::factory()->current()->createQuietly();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(QuickBook::class)
-                ->set('start_time', now())
-                ->set('end_time', now()->addHour())
-                ->set('resource_id', $booking->resource_id)
-                ->call('book')
-                ->assertHasErrors(['resource_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(QuickBook::class)
+            ->set('start_time', now())
+            ->set('end_time', now()->addHour())
+            ->set('resource_id', $booking->resource_id)
+            ->call('book')
+            ->assertHasErrors(['resource_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseCount(Booking::class, 1);
     }
@@ -164,24 +164,24 @@ class QuickbookTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(QuickBook::class)
-                ->set('start_time', now())
-                ->set('end_time', now()->addHour())
+            ->test(QuickBook::class)
+            ->set('start_time', now())
+            ->set('end_time', now()->addHour())
 
                 // Error on missing resource.
-                ->set('resource_id', 100)
-                ->call('book')
-                ->assertHasErrors(['resource_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                })
+            ->set('resource_id', 100)
+            ->call('book')
+            ->assertHasErrors(['resource_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            })
 
                 // Successful on existing resource.
-                ->set('resource_id', $resource->id)
-                ->call('book')
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->set('resource_id', $resource->id)
+            ->call('book')
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseCount(Booking::class, 1);
     }

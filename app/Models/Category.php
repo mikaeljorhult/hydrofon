@@ -48,7 +48,7 @@ class Category extends Model
     public function categories(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id')
-                    ->orderBy('name');
+            ->orderBy('name');
     }
 
     /**
@@ -65,6 +65,6 @@ class Category extends Model
     public function resources(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class)
-                    ->orderBy('name');
+            ->orderBy('name');
     }
 }

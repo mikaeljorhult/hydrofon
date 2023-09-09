@@ -23,7 +23,7 @@ class ApprovalTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)->get('approvals')
-             ->assertForbidden();
+            ->assertForbidden();
     }
 
     /**
@@ -37,7 +37,7 @@ class ApprovalTest extends TestCase
         Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $this->actingAs($approver)->get('approvals')
-             ->assertForbidden();
+            ->assertForbidden();
     }
 
     /**
@@ -52,12 +52,12 @@ class ApprovalTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $booking = Booking::factory()
-                          ->for(User::factory()->hasAttached($group))
-                          ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         $this->actingAs($approver)->get('approvals')
-             ->assertOk()
-             ->assertSeeText($booking->user->name);
+            ->assertOk()
+            ->assertSeeText($booking->user->name);
     }
 
     /**
@@ -71,19 +71,19 @@ class ApprovalTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $equipmentBooking = Booking::factory()
-                                   ->for(User::factory()->hasAttached($group))
-                                   ->for(Resource::factory()->equipment())
-                                   ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->for(Resource::factory()->equipment())
+            ->create();
 
         $facilityBooking = Booking::factory()
-                                  ->for(User::factory()->hasAttached($group))
-                                  ->for(Resource::factory()->facility())
-                                  ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->for(Resource::factory()->facility())
+            ->create();
 
         $this->actingAs($approver)->get('approvals')
-             ->assertOk()
-             ->assertDontSeeText($equipmentBooking->user->name)
-             ->assertSeeText($facilityBooking->user->name);
+            ->assertOk()
+            ->assertDontSeeText($equipmentBooking->user->name)
+            ->assertSeeText($facilityBooking->user->name);
     }
 
     /**
@@ -97,19 +97,19 @@ class ApprovalTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $equipmentBooking = Booking::factory()
-                                   ->for(User::factory()->hasAttached($group))
-                                   ->for(Resource::factory()->equipment())
-                                   ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->for(Resource::factory()->equipment())
+            ->create();
 
         $facilityBooking = Booking::factory()
-                                  ->for(User::factory()->hasAttached($group))
-                                  ->for(Resource::factory()->facility())
-                                  ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->for(Resource::factory()->facility())
+            ->create();
 
         $this->actingAs($approver)->get('approvals')
-             ->assertOk()
-             ->assertSeeText($equipmentBooking->user->name)
-             ->assertDontSeeText($facilityBooking->user->name);
+            ->assertOk()
+            ->assertSeeText($equipmentBooking->user->name)
+            ->assertDontSeeText($facilityBooking->user->name);
     }
 
     /**
@@ -125,8 +125,8 @@ class ApprovalTest extends TestCase
         $booking = Booking::factory()->autoapproved()->createQuietly();
 
         $this->actingAs($approver)->get('approvals')
-             ->assertOk()
-             ->assertDontSeeText($booking->user->name);
+            ->assertOk()
+            ->assertDontSeeText($booking->user->name);
     }
 
     /**
@@ -143,8 +143,8 @@ class ApprovalTest extends TestCase
         $user->groups()->attach($group);
 
         $booking = Booking::factory()
-                          ->for($user)
-                          ->create();
+            ->for($user)
+            ->create();
 
         $response = $this->actingAs($approver)->post('approvals', [
             'booking_id' => $booking->id,

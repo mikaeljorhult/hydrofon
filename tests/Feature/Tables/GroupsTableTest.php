@@ -21,11 +21,11 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(3)->create();
 
         Livewire::test(GroupsTable::class, ['items' => $items])
-                ->assertSee([
-                    $items[0]->name,
-                    $items[1]->name,
-                    $items[2]->name,
-                ]);
+            ->assertSee([
+                $items[0]->name,
+                $items[1]->name,
+                $items[2]->name,
+            ]);
     }
 
     /**
@@ -36,9 +36,9 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::test(GroupsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->assertSet('isEditing', $items[0]->id)
-                ->assertSeeHtml('name="name" value="'.$items[0]->name.'"');
+            ->dispatch('edit', $items[0]->id)
+            ->assertSet('isEditing', $items[0]->id)
+            ->assertSeeHtml('name="name" value="'.$items[0]->name.'"');
     }
 
     /**
@@ -49,14 +49,14 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.name', 'Updated Group')
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.name', 'Updated Group')
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Group::class, [
             'name' => 'Updated Group',
@@ -71,11 +71,11 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.name', 'Updated Group')
-                ->dispatch('save')
-                ->assertForbidden();
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.name', 'Updated Group')
+            ->dispatch('save')
+            ->assertForbidden();
 
         $this->assertDatabaseHas(Group::class, [
             'name' => $items[0]->name,
@@ -91,14 +91,14 @@ class GroupsTableTest extends TestCase
         $approver = User::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.approvers', [$approver->id])
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.approvers', [$approver->id])
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertEquals(1, $items[0]->approvers()->count());
     }
@@ -111,14 +111,14 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.name', '')
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.name'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.name', '')
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.name'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseHas(Group::class, [
             'name' => $items[0]->name,
@@ -133,14 +133,14 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.approvers', [100])
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.approvers.*'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.approvers', [100])
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.approvers.*'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertEquals(0, $items[0]->approvers()->count());
     }
@@ -153,12 +153,12 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertModelMissing($items[0]);
     }
@@ -171,9 +171,9 @@ class GroupsTableTest extends TestCase
         $items = Group::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(GroupsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertForbidden();
+            ->test(GroupsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertForbidden();
 
         $this->assertModelExists($items[0]);
     }

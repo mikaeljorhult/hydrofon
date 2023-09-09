@@ -16,8 +16,8 @@ class StoreTest extends TestCase
     public function testDataExportCanBeRequested(): void
     {
         $this->actingAs(User::factory()->create())->post('datarequests')
-             ->assertStatus(200)
-             ->assertHeader('Content-Type', 'application/json; charset=UTF-8');
+            ->assertStatus(200)
+            ->assertHeader('Content-Type', 'application/json; charset=UTF-8');
     }
 
     /**
@@ -26,6 +26,6 @@ class StoreTest extends TestCase
     public function testUserMustBeLoggedInToRequestExport(): void
     {
         $this->post('datarequests')
-             ->assertStatus(302);
+            ->assertStatus(302);
     }
 }

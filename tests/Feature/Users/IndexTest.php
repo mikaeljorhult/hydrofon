@@ -19,9 +19,9 @@ class IndexTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('users')
-             ->assertSuccessful()
-             ->assertSee($user->name);
+            ->get('users')
+            ->assertSuccessful()
+            ->assertSee($user->name);
     }
 
     /**
@@ -33,10 +33,10 @@ class IndexTest extends TestCase
         $notVisibleUser = User::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('users?filter[name]='.$visibleUser->name)
-             ->assertSuccessful()
-             ->assertSee(route('users.edit', $visibleUser))
-             ->assertDontSee(route('users.edit', $notVisibleUser));
+            ->get('users?filter[name]='.$visibleUser->name)
+            ->assertSuccessful()
+            ->assertSee(route('users.edit', $visibleUser))
+            ->assertDontSee(route('users.edit', $notVisibleUser));
     }
 
     /**
@@ -48,10 +48,10 @@ class IndexTest extends TestCase
         $notVisibleUser = User::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('users?filter[email]='.$visibleUser->email)
-             ->assertSuccessful()
-             ->assertSee(route('users.edit', $visibleUser))
-             ->assertDontSee(route('users.edit', $notVisibleUser));
+            ->get('users?filter[email]='.$visibleUser->email)
+            ->assertSuccessful()
+            ->assertSee(route('users.edit', $visibleUser))
+            ->assertDontSee(route('users.edit', $notVisibleUser));
     }
 
     /**
@@ -65,9 +65,9 @@ class IndexTest extends TestCase
         $visibleUser->groups()->attach(Group::factory()->create());
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('users?filter[is_admin]=1')
-             ->assertSuccessful()
-             ->assertSee(route('users.edit', $visibleUser))
-             ->assertDontSee(route('users.edit', $notVisibleUser));
+            ->get('users?filter[is_admin]=1')
+            ->assertSuccessful()
+            ->assertSee(route('users.edit', $visibleUser))
+            ->assertDontSee(route('users.edit', $notVisibleUser));
     }
 }

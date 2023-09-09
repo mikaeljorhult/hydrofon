@@ -43,11 +43,11 @@ class ProfileController extends Controller
     private function upcomingBookings(Authenticatable $user): Collection
     {
         $upcoming = $user->bookings()
-                         ->whereHas('resource', function ($query) {
-                             $query->where('is_facility', '=', 0);
-                         })
-                         ->whereBetween('start_time', [today(), today()->addWeek()])
-                         ->get();
+            ->whereHas('resource', function ($query) {
+                $query->where('is_facility', '=', 0);
+            })
+            ->whereBetween('start_time', [today(), today()->addWeek()])
+            ->get();
 
         return $upcoming->groupBy(function ($item, $key) {
             return $item->start_time->format('Ymd');

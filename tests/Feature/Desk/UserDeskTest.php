@@ -36,9 +36,9 @@ class UserDeskTest extends TestCase
     public function testSearchRedirectsToUserPage(): void
     {
         $response = $this->actingAs(User::factory()->admin()->create())
-                         ->post('/desk', [
-                             'search' => 'search-term',
-                         ]);
+            ->post('/desk', [
+                'search' => 'search-term',
+            ]);
 
         $response->assertStatus(302);
         $response->assertRedirect('/desk/search-term');

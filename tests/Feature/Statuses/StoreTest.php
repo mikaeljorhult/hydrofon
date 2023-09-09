@@ -21,11 +21,11 @@ class StoreTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->post('resources/'.$resource->id.'/statuses', [
-                 'name' => 'broken',
-                 'reason' => 'Comment',
-             ])
-             ->assertRedirect();
+            ->post('resources/'.$resource->id.'/statuses', [
+                'name' => 'broken',
+                'reason' => 'Comment',
+            ])
+            ->assertRedirect();
 
         $this->assertDatabaseHas(Status::class, [
             'name' => 'broken',
@@ -41,11 +41,11 @@ class StoreTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->actingAs(User::factory()->create())
-             ->post('resources/'.$resource->id.'/statuses', [
-                 'name' => 'broken',
-                 'reason' => 'Comment',
-             ])
-             ->assertForbidden();
+            ->post('resources/'.$resource->id.'/statuses', [
+                'name' => 'broken',
+                'reason' => 'Comment',
+            ])
+            ->assertForbidden();
 
         $this->assertDatabaseCount(Status::class, 0);
     }
@@ -58,10 +58,10 @@ class StoreTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->post('resources/'.$resource->id.'/statuses', [
-                 'name' => 'invalid-status',
-             ])
-             ->assertSessionHasErrors('name');
+            ->post('resources/'.$resource->id.'/statuses', [
+                'name' => 'invalid-status',
+            ])
+            ->assertSessionHasErrors('name');
 
         $this->assertDatabaseCount(Status::class, 0);
     }
@@ -74,10 +74,10 @@ class StoreTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->post('resources/'.$resource->id.'/statuses', [
-                 'name' => 'broken',
-             ])
-             ->assertRedirect();
+            ->post('resources/'.$resource->id.'/statuses', [
+                'name' => 'broken',
+            ])
+            ->assertRedirect();
 
         $this->assertDatabaseHas(Activity::class, [
             'event' => 'broken',

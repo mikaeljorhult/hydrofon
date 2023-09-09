@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('bookings', function (Blueprint $table) {
             $table->string('state')
-                  ->default('created')
-                  ->after('end_time');
+                ->default('created')
+                ->after('end_time');
         });
     }
 

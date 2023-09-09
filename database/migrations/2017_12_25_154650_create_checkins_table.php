@@ -19,11 +19,11 @@ return new class extends Migration
 
             // Delete checkin if booking is deleted.
             $table->foreign('booking_id')->references('id')->on('bookings')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
 
             // Set creator to NULL if creating user is deleted.
             $table->foreign('user_id')->references('id')->on('users')
-                  ->onDelete('set null');
+                ->onDelete('set null');
         });
     }
 

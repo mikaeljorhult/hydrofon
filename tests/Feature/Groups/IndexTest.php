@@ -19,9 +19,9 @@ class IndexTest extends TestCase
         $group = Group::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('groups')
-             ->assertSuccessful()
-             ->assertSee($group->name);
+            ->get('groups')
+            ->assertSuccessful()
+            ->assertSee($group->name);
     }
 
     /**
@@ -33,11 +33,11 @@ class IndexTest extends TestCase
         $notVisibleGroup = Group::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('groups?'.http_build_query([
-                 'filter[name]' => $visibleGroup->name,
-             ]))
-             ->assertSuccessful()
-             ->assertSee($visibleGroup->name)
-             ->assertDontSee($notVisibleGroup->name);
+            ->get('groups?'.http_build_query([
+                'filter[name]' => $visibleGroup->name,
+            ]))
+            ->assertSuccessful()
+            ->assertSee($visibleGroup->name)
+            ->assertDontSee($notVisibleGroup->name);
     }
 }

@@ -22,7 +22,7 @@ class CalendarController extends Controller
     /**
      * Show the calendar view.
      */
-    public function index(?string $date = null): View
+    public function index(string $date = null): View
     {
         $date = $this->date($date)->startOfDay();
         $expanded = $this->categories();

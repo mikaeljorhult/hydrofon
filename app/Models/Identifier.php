@@ -31,8 +31,8 @@ class Identifier extends Model
     public function QrCode(): string
     {
         return QrCode::style('round')
-                     ->eyeColor(0, 220, 38, 38, 0, 0, 0)
-                     ->size(200)
-                     ->generate('hydrofon:'.$this->value);
+            ->eyeColor(0, 220, 38, 38, 0, 0, 0)
+            ->size(200)
+            ->generate('hydrofon:'.$this->value);
     }
 }

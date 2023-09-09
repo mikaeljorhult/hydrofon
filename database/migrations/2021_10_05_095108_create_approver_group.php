@@ -17,13 +17,13 @@ return new class extends Migration
 
             // Delete relation if group is deleted.
             $table->foreign('group_id')
-                  ->references('id')->on('groups')
-                  ->onDelete('cascade');
+                ->references('id')->on('groups')
+                ->onDelete('cascade');
 
             // Delete relation if user is deleted.
             $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
+                ->references('id')->on('users')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

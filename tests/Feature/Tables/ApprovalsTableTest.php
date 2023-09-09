@@ -22,11 +22,11 @@ class ApprovalsTableTest extends TestCase
         $items = Booking::factory()->count(3)->create();
 
         Livewire::test(ApprovalsTable::class, ['items' => $items])
-                ->assertSee([
-                    $items[0]->name,
-                    $items[1]->name,
-                    $items[2]->name,
-                ]);
+            ->assertSee([
+                $items[0]->name,
+                $items[1]->name,
+                $items[2]->name,
+            ]);
     }
 
     /**
@@ -41,17 +41,17 @@ class ApprovalsTableTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $items = Booking::factory()
-                        ->count(1)
-                        ->for(User::factory()->hasAttached($group))
-                        ->create();
+            ->count(1)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->dispatch('approve', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->dispatch('approve', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isApproved);
     }
@@ -68,17 +68,17 @@ class ApprovalsTableTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $items = Booking::factory()
-                        ->count(1)
-                        ->for(User::factory()->hasAttached($group))
-                        ->create();
+            ->count(1)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         Livewire::actingAs($approver)
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->dispatch('approve', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->dispatch('approve', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isApproved);
     }
@@ -95,14 +95,14 @@ class ApprovalsTableTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $items = Booking::factory()
-                        ->count(1)
-                        ->for(User::factory()->hasAttached($group))
-                        ->create();
+            ->count(1)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->dispatch('approve', $items[0]->id)
-                ->assertForbidden();
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->dispatch('approve', $items[0]->id)
+            ->assertForbidden();
 
         $this->assertFalse($items[0]->fresh()->isApproved);
     }
@@ -119,17 +119,17 @@ class ApprovalsTableTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $items = Booking::factory()
-                        ->count(1)
-                        ->for(User::factory()->hasAttached($group))
-                        ->create();
+            ->count(1)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->dispatch('reject', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->dispatch('reject', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isRejected);
     }
@@ -146,17 +146,17 @@ class ApprovalsTableTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $items = Booking::factory()
-                        ->count(1)
-                        ->for(User::factory()->hasAttached($group))
-                        ->create();
+            ->count(1)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         Livewire::actingAs($approver)
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->dispatch('reject', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->dispatch('reject', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isRejected);
     }
@@ -173,14 +173,14 @@ class ApprovalsTableTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         $items = Booking::factory()
-                        ->count(1)
-                        ->for(User::factory()->hasAttached($group))
-                        ->create();
+            ->count(1)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->dispatch('reject', $items[0]->id)
-                ->assertForbidden();
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->dispatch('reject', $items[0]->id)
+            ->assertForbidden();
 
         $this->assertFalse($items[0]->fresh()->isRejected);
     }
@@ -195,13 +195,13 @@ class ApprovalsTableTest extends TestCase
         $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->set('selectedRows', [$items[0]->id])
-                ->dispatch('approve', null, true)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->set('selectedRows', [$items[0]->id])
+            ->dispatch('approve', null, true)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertFalse($items[0]->fresh()->isApproved);
     }
@@ -216,13 +216,13 @@ class ApprovalsTableTest extends TestCase
         $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ApprovalsTable::class, ['items' => $items])
-                ->set('selectedRows', [$items[0]->id])
-                ->dispatch('reject', null, true)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(ApprovalsTable::class, ['items' => $items])
+            ->set('selectedRows', [$items[0]->id])
+            ->dispatch('reject', null, true)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertFalse($items[0]->fresh()->isRejected);
     }

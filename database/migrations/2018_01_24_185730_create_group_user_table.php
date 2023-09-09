@@ -17,11 +17,11 @@ return new class extends Migration
 
             // Delete relationship if group is deleted.
             $table->foreign('group_id')->references('id')->on('groups')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
 
             // Delete relationship if user is deleted.
             $table->foreign('user_id')->references('id')->on('users')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
         });
     }
 

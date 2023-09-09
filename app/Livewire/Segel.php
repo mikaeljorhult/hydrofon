@@ -230,15 +230,15 @@ class Segel extends Component
 
         return count($this->resources) > 0
             ? Resource::whereIn('id', $this->resources)
-                      ->with([
-                          'bookings' => function ($query) use ($startDate, $endDate) {
-                              $query
-                                  ->with('user')
-                                  ->between($startDate, $endDate)
-                                  ->orderBy('start_time');
-                          },
-                      ])
-                      ->get()
+                ->with([
+                    'bookings' => function ($query) use ($startDate, $endDate) {
+                        $query
+                            ->with('user')
+                            ->between($startDate, $endDate)
+                            ->orderBy('start_time');
+                    },
+                ])
+                ->get()
             : new Collection();
     }
 

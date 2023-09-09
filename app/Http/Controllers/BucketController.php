@@ -29,10 +29,10 @@ class BucketController extends Controller
     public function index(): View
     {
         $items = QueryBuilder::for(Bucket::class)
-                             ->allowedFilters('name')
-                             ->defaultSort('name')
-                             ->allowedSorts('name')
-                             ->paginate(15);
+            ->allowedFilters('name')
+            ->defaultSort('name')
+            ->allowedSorts('name')
+            ->paginate(15);
 
         return view('buckets.index')->with(compact(['items']));
     }

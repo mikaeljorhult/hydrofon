@@ -17,7 +17,7 @@ class IndexTest extends TestCase
     public function testVisitorAreRedirectedToLogin(): void
     {
         $this->get('notifications')
-             ->assertRedirect('login');
+            ->assertRedirect('login');
     }
 
     /**

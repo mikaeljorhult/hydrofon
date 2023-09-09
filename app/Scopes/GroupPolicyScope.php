@@ -20,9 +20,9 @@ class GroupPolicyScope implements Scope
 
             // Models in same group or without any groups are allowed.
             $builder->doesntHave('groups')
-                    ->orWhereHas('groups', function ($query) use ($userGroups) {
-                        $query->whereIn('id', $userGroups);
-                    });
+                ->orWhereHas('groups', function ($query) use ($userGroups) {
+                    $query->whereIn('id', $userGroups);
+                });
         }
     }
 }

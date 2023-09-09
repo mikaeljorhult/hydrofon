@@ -29,10 +29,10 @@ class GroupController extends Controller
     public function index(): View
     {
         $items = QueryBuilder::for(Group::class)
-                             ->allowedFilters('name')
-                             ->defaultSort('name')
-                             ->allowedSorts('name')
-                             ->paginate(15);
+            ->allowedFilters('name')
+            ->defaultSort('name')
+            ->allowedSorts('name')
+            ->paginate(15);
 
         return view('groups.index')->with(compact(['items']));
     }

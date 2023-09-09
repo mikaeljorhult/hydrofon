@@ -15,12 +15,12 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a category.
      */
-    public function storeCategory(array $overrides = [], ?User $user = null): TestResponse
+    public function storeCategory(array $overrides = [], User $user = null): TestResponse
     {
         $category = Category::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->admin()->create())
-                    ->post('categories', $category->toArray());
+            ->post('categories', $category->toArray());
     }
 
     /**
@@ -34,7 +34,7 @@ class StoreTest extends TestCase
             'name' => 'New Category',
             'parent_id' => $parent->id,
         ])
-             ->assertRedirect('/categories');
+            ->assertRedirect('/categories');
 
         $this->assertDatabaseHas('categories', [
             'name' => 'New Category',
@@ -50,7 +50,7 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->storeCategory([], $user)
-             ->assertStatus(403);
+            ->assertStatus(403);
 
         $this->assertCount(0, Category::all());
     }
@@ -61,8 +61,8 @@ class StoreTest extends TestCase
     public function testCategoriesMustHaveAName(): void
     {
         $this->storeCategory(['name' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('name');
+            ->assertRedirect()
+            ->assertSessionHasErrors('name');
 
         $this->assertCount(0, Category::all());
     }
@@ -75,9 +75,9 @@ class StoreTest extends TestCase
         $category = Category::factory()->make();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->post('categories', array_merge($category->toArray(), ['parent_id' => 100]))
-             ->assertRedirect()
-             ->assertSessionHasErrors('parent_id');
+            ->post('categories', array_merge($category->toArray(), ['parent_id' => 100]))
+            ->assertRedirect()
+            ->assertSessionHasErrors('parent_id');
 
         $this->assertCount(0, Category::all());
     }

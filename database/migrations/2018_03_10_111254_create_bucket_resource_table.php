@@ -17,11 +17,11 @@ return new class extends Migration
 
             // Delete relationship if bucket is deleted.
             $table->foreign('bucket_id')->references('id')->on('buckets')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
 
             // Delete relationship if resource is deleted.
             $table->foreign('resource_id')->references('id')->on('resources')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
         });
     }
 

@@ -30,10 +30,10 @@ class UserController extends Controller
     public function index(): View
     {
         $items = QueryBuilder::for(User::class)
-                             ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
-                             ->defaultSort('email')
-                             ->allowedSorts(['email', 'name'])
-                             ->paginate(15);
+            ->allowedFilters(['email', 'name', 'is_admin', 'groups.id'])
+            ->defaultSort('email')
+            ->allowedSorts(['email', 'name'])
+            ->paginate(15);
 
         $filterGroups = Group::orderBy('name')->pluck('name', 'id');
 

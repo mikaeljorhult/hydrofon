@@ -19,9 +19,9 @@ class IndexTest extends TestCase
         $booking = Booking::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('bookings')
-             ->assertSuccessful()
-             ->assertSee($booking->resource->name);
+            ->get('bookings')
+            ->assertSuccessful()
+            ->assertSee($booking->resource->name);
     }
 
     /**
@@ -33,10 +33,10 @@ class IndexTest extends TestCase
         $notVisibleBooking = Booking::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('bookings?filter[resource_id]='.$visibleBooking->resource->id)
-             ->assertSuccessful()
-             ->assertSee(route('bookings.edit', $visibleBooking))
-             ->assertDontSee(route('bookings.edit', $notVisibleBooking));
+            ->get('bookings?filter[resource_id]='.$visibleBooking->resource->id)
+            ->assertSuccessful()
+            ->assertSee(route('bookings.edit', $visibleBooking))
+            ->assertDontSee(route('bookings.edit', $notVisibleBooking));
     }
 
     /**
@@ -48,10 +48,10 @@ class IndexTest extends TestCase
         $notVisibleBooking = Booking::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('bookings?filter[user_id]='.$visibleBooking->user->id)
-             ->assertSuccessful()
-             ->assertSee(route('bookings.edit', $visibleBooking))
-             ->assertDontSee(route('bookings.edit', $notVisibleBooking));
+            ->get('bookings?filter[user_id]='.$visibleBooking->user->id)
+            ->assertSuccessful()
+            ->assertSee(route('bookings.edit', $visibleBooking))
+            ->assertDontSee(route('bookings.edit', $notVisibleBooking));
     }
 
     /**
@@ -63,10 +63,10 @@ class IndexTest extends TestCase
         $notVisibleBooking = Booking::factory()->past()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('bookings?filter[start_time]='.$visibleBooking->start_time->format('Y-m-d'))
-             ->assertSuccessful()
-             ->assertSee(route('bookings.edit', $visibleBooking))
-             ->assertDontSee(route('bookings.edit', $notVisibleBooking));
+            ->get('bookings?filter[start_time]='.$visibleBooking->start_time->format('Y-m-d'))
+            ->assertSuccessful()
+            ->assertSee(route('bookings.edit', $visibleBooking))
+            ->assertDontSee(route('bookings.edit', $notVisibleBooking));
     }
 
     /**
@@ -78,9 +78,9 @@ class IndexTest extends TestCase
         $notVisibleBooking = Booking::factory()->past()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('bookings?filter[end_time]='.$visibleBooking->start_time->format('Y-m-d'))
-             ->assertSuccessful()
-             ->assertSee(route('bookings.edit', $visibleBooking))
-             ->assertDontSee(route('bookings.edit', $notVisibleBooking));
+            ->get('bookings?filter[end_time]='.$visibleBooking->start_time->format('Y-m-d'))
+            ->assertSuccessful()
+            ->assertSee(route('bookings.edit', $visibleBooking))
+            ->assertDontSee(route('bookings.edit', $notVisibleBooking));
     }
 }

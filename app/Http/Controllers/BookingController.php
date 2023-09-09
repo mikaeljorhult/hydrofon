@@ -31,28 +31,28 @@ class BookingController extends Controller
     public function index(): View
     {
         $items = QueryBuilder::for(Booking::class)
-                             ->select('bookings.*')
-                             ->with(['resource.buckets', 'user'])
-                             ->addSelect([
-                                 'user_name' => User::whereColumn('user_id', 'users.id')
-                                                    ->select('name')
-                                                    ->take(1),
-                             ])
-                             ->addSelect([
-                                 'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
-                                                            ->select('name')
-                                                            ->take(1),
-                             ])
-                             ->allowedFilters([
-                                 'resource_id',
-                                 'user_id',
-                                 'start_time',
-                                 'end_time',
-                                 'state',
-                             ])
-                             ->defaultSort('start_time')
-                             ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time', 'state'])
-                             ->paginate(15);
+            ->select('bookings.*')
+            ->with(['resource.buckets', 'user'])
+            ->addSelect([
+                'user_name' => User::whereColumn('user_id', 'users.id')
+                    ->select('name')
+                    ->take(1),
+            ])
+            ->addSelect([
+                'resource_name' => Resource::whereColumn('resource_id', 'resources.id')
+                    ->select('name')
+                    ->take(1),
+            ])
+            ->allowedFilters([
+                'resource_id',
+                'user_id',
+                'start_time',
+                'end_time',
+                'state',
+            ])
+            ->defaultSort('start_time')
+            ->allowedSorts(['resource_name', 'user_name', 'start_time', 'end_time', 'state'])
+            ->paginate(15);
 
         $filterResources = Resource::orderBy('name')->pluck('name', 'id');
         $filterUsers = User::orderBy('name')->pluck('name', 'id');
@@ -125,11 +125,11 @@ class BookingController extends Controller
             'user',
             'activities' => function ($query) {
                 $query->with('causer:id,name')
-                      ->when(config('hydrofon.require_approval') === 'none', function ($query) {
-                          // Ignore logs for approval states if approval isn't use.
-                          $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
-                      })
-                      ->oldest();
+                    ->when(config('hydrofon.require_approval') === 'none', function ($query) {
+                        // Ignore logs for approval states if approval isn't use.
+                        $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
+                    })
+                    ->oldest();
             },
         ]);
 

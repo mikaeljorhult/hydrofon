@@ -19,7 +19,7 @@ class CreateTest extends TestCase
         Resource::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('buckets/create')
-             ->assertSuccessful();
+            ->get('buckets/create')
+            ->assertSuccessful();
     }
 }

@@ -29,9 +29,9 @@ class ResourceListComposer
     private function getCategories(): Collection
     {
         return Category::with(['resources'])
-                       ->orderBy('name')
-                       ->tree()
-                       ->get();
+            ->orderBy('name')
+            ->tree()
+            ->get();
     }
 
     /**
@@ -40,9 +40,9 @@ class ResourceListComposer
     private function getRootResources(): Collection
     {
         return Resource::orderBy('name')
-                       ->whereDoesntHave('categories', function ($query) {
-                           $query->withoutGlobalScopes();
-                       })
-                       ->get(['id', 'name', 'is_facility']);
+            ->whereDoesntHave('categories', function ($query) {
+                $query->withoutGlobalScopes();
+            })
+            ->get(['id', 'name', 'is_facility']);
     }
 }

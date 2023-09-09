@@ -17,11 +17,11 @@ return new class extends Migration
 
             // Delete relationship if category is deleted.
             $table->foreign('category_id')->references('id')->on('categories')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
 
             // Delete relationship if resource is deleted.
             $table->foreign('resource_id')->references('id')->on('resources')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
         });
     }
 

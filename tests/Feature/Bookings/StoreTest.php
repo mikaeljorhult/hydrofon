@@ -17,12 +17,12 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a booking.
      */
-    public function storeBooking(array $overrides = [], ?User $user = null): TestResponse
+    public function storeBooking(array $overrides = [], User $user = null): TestResponse
     {
         $this->storedBooking = Booking::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->create())
-                    ->post('bookings', $this->storedBooking->toArray());
+            ->post('bookings', $this->storedBooking->toArray());
     }
 
     /**
@@ -31,7 +31,7 @@ class StoreTest extends TestCase
     public function testBookingsCanBeStored(): void
     {
         $this->storeBooking()
-             ->assertRedirect();
+            ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => $this->storedBooking->user_id + 1,
@@ -48,7 +48,7 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->storeBooking(['user_id' => $user->id], $admin)
-             ->assertRedirect();
+            ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => $user->id,
@@ -65,7 +65,7 @@ class StoreTest extends TestCase
         $secondUser = User::factory()->create();
 
         $this->storeBooking(['user_id' => $secondUser->id], $firstUser)
-             ->assertRedirect();
+            ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => $firstUser->id,
@@ -79,7 +79,7 @@ class StoreTest extends TestCase
     public function testBookingsCanBeStoredWithoutUserID(): void
     {
         $this->storeBooking(['user_id' => null])
-             ->assertRedirect();
+            ->assertRedirect();
 
         $this->assertDatabaseHas('bookings', [
             'user_id' => 2,
@@ -92,8 +92,8 @@ class StoreTest extends TestCase
     public function testBookingsMustHaveAResource(): void
     {
         $this->storeBooking(['resource_id' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('resource_id');
+            ->assertRedirect()
+            ->assertSessionHasErrors('resource_id');
 
         $this->assertCount(0, Booking::all());
     }
@@ -104,8 +104,8 @@ class StoreTest extends TestCase
     public function testResourceMustExist(): void
     {
         $this->storeBooking(['resource_id' => 100])
-             ->assertRedirect()
-             ->assertSessionHasErrors('resource_id');
+            ->assertRedirect()
+            ->assertSessionHasErrors('resource_id');
 
         $this->assertCount(0, Booking::all());
     }
@@ -116,8 +116,8 @@ class StoreTest extends TestCase
     public function testBookingsMustHaveAStartTime(): void
     {
         $this->storeBooking(['start_time' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('start_time');
+            ->assertRedirect()
+            ->assertSessionHasErrors('start_time');
 
         $this->assertCount(0, Booking::all());
     }
@@ -148,8 +148,8 @@ class StoreTest extends TestCase
     public function testBookingsMustHaveAEndTime(): void
     {
         $this->storeBooking(['end_time' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('end_time');
+            ->assertRedirect()
+            ->assertSessionHasErrors('end_time');
 
         $this->assertCount(0, Booking::all());
     }
@@ -183,8 +183,8 @@ class StoreTest extends TestCase
             'start_time' => now()->addMonth(),
             'end_time' => now()->addMonth()->subHour(),
         ])
-             ->assertRedirect()
-             ->assertSessionHasErrors('start_time');
+            ->assertRedirect()
+            ->assertSessionHasErrors('start_time');
 
         $this->assertCount(0, Booking::all());
     }
@@ -201,8 +201,8 @@ class StoreTest extends TestCase
             'start_time' => $booking->start_time,
             'end_time' => $booking->end_time,
         ])
-             ->assertRedirect()
-             ->assertSessionHasErrors('resource_id');
+            ->assertRedirect()
+            ->assertSessionHasErrors('resource_id');
 
         $this->assertCount(1, Booking::all());
     }

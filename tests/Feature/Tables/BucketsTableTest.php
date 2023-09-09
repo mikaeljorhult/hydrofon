@@ -22,11 +22,11 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(3)->create();
 
         Livewire::test(BucketsTable::class, ['items' => $items])
-                ->assertSee([
-                    $items[0]->name,
-                    $items[1]->name,
-                    $items[2]->name,
-                ]);
+            ->assertSee([
+                $items[0]->name,
+                $items[1]->name,
+                $items[2]->name,
+            ]);
     }
 
     /**
@@ -37,9 +37,9 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::test(BucketsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->assertSet('isEditing', $items[0]->id)
-                ->assertSeeHtml('name="name" value="'.$items[0]->name.'"');
+            ->dispatch('edit', $items[0]->id)
+            ->assertSet('isEditing', $items[0]->id)
+            ->assertSeeHtml('name="name" value="'.$items[0]->name.'"');
     }
 
     /**
@@ -50,14 +50,14 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.name', 'Updated Bucket')
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.name', 'Updated Bucket')
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Bucket::class, [
             'name' => 'Updated Bucket',
@@ -72,11 +72,11 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.name', 'Updated Bucket')
-                ->dispatch('save')
-                ->assertForbidden();
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.name', 'Updated Bucket')
+            ->dispatch('save')
+            ->assertForbidden();
 
         $this->assertDatabaseHas(Bucket::class, [
             'name' => $items[0]->name,
@@ -92,11 +92,11 @@ class BucketsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resources', [$resource->id])
-                ->dispatch('save')
-                ->assertOk();
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resources', [$resource->id])
+            ->dispatch('save')
+            ->assertOk();
 
         $this->assertEquals(1, $items[0]->resources()->count());
     }
@@ -109,14 +109,14 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.name', '')
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.name'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.name', '')
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.name'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseHas(Bucket::class, [
             'name' => $items[0]->name,
@@ -131,14 +131,14 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resources', [100])
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.resources.*'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resources', [100])
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.resources.*'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertEquals(0, $items[0]->resources()->count());
     }
@@ -151,12 +151,12 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertModelMissing($items[0]);
     }
@@ -169,9 +169,9 @@ class BucketsTableTest extends TestCase
         $items = Bucket::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(BucketsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertForbidden();
+            ->test(BucketsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertForbidden();
 
         $this->assertModelExists($items[0]);
     }

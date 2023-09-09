@@ -18,7 +18,7 @@ class ShowTest extends TestCase
         $subscription = Subscription::factory()->user()->create();
 
         $this->get('feeds/'.$subscription->uuid)
-             ->assertStatus(200)
-             ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8');
+            ->assertStatus(200)
+            ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8');
     }
 }

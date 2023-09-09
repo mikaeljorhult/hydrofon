@@ -123,8 +123,8 @@ class Booking extends Model
     {
         // Booking is not checked out and ended at least half a year ago.
         return static::whereNotState('state', CheckedOut::class)
-                     ->where('end_time', '<=',
-                         now()->subDays(config('hydrofon.prune_models_after_days.bookings', 180)));
+            ->where('end_time', '<=',
+                now()->subDays(config('hydrofon.prune_models_after_days.bookings', 180)));
     }
 
     /**
@@ -234,7 +234,7 @@ class Booking extends Model
     public function scopeCurrent(Builder $query): Builder
     {
         return $query->where('start_time', '<=', now())
-                     ->where('end_time', '>=', now());
+            ->where('end_time', '>=', now());
     }
 
     /**
@@ -301,13 +301,13 @@ class Booking extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-                         ->logOnly([
-                             'user_id',
-                             'resource_id',
-                             'start_time',
-                             'end_time',
-                         ])
-                         ->logOnlyDirty();
+            ->logOnly([
+                'user_id',
+                'resource_id',
+                'start_time',
+                'end_time',
+            ])
+            ->logOnlyDirty();
     }
 
     /**

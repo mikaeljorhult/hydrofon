@@ -16,12 +16,12 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a subscription.
      */
-    public function storeSubscription(array $overrides = [], ?User $user = null): TestResponse
+    public function storeSubscription(array $overrides = [], User $user = null): TestResponse
     {
         $subscription = Subscription::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->admin()->create())
-                    ->post('subscriptions', $subscription->toArray());
+            ->post('subscriptions', $subscription->toArray());
     }
 
     /**
@@ -32,11 +32,11 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->from(route('users.show', [$user->id]))
-             ->storeSubscription([
-                 'subscribable_type' => 'user',
-                 'subscribable_id' => $user->id,
-             ], $user)
-             ->assertRedirect(route('users.show', [$user->id]));
+            ->storeSubscription([
+                'subscribable_type' => 'user',
+                'subscribable_id' => $user->id,
+            ], $user)
+            ->assertRedirect(route('users.show', [$user->id]));
 
         $this->assertDatabaseHas('subscriptions', [
             'subscribable_type' => \App\Models\User::class,
@@ -86,11 +86,11 @@ class StoreTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->from(route('resources.show', [$resource->id]))
-             ->storeSubscription([
-                 'subscribable_type' => 'resource',
-                 'subscribable_id' => $resource->id,
-             ])
-             ->assertRedirect(route('resources.show', [$resource->id]));
+            ->storeSubscription([
+                'subscribable_type' => 'resource',
+                'subscribable_id' => $resource->id,
+            ])
+            ->assertRedirect(route('resources.show', [$resource->id]));
 
         $this->assertDatabaseHas('subscriptions', [
             'subscribable_type' => \App\Models\Resource::class,
@@ -106,11 +106,11 @@ class StoreTest extends TestCase
         $resource = Resource::factory()->create();
 
         $this->from(route('resources.show', [$resource->id]))
-             ->storeSubscription([
-                 'subscribable_type' => 'resource',
-                 'subscribable_id' => $resource->id,
-             ], User::factory()->create())
-             ->assertStatus(403);
+            ->storeSubscription([
+                'subscribable_type' => 'resource',
+                'subscribable_id' => $resource->id,
+            ], User::factory()->create())
+            ->assertStatus(403);
 
         $this->assertCount(0, Subscription::all());
     }

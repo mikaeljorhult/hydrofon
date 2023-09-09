@@ -20,10 +20,10 @@ class ShowTest extends TestCase
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('resources/'.$resource->id.'/identifiers/'.$identifier->id)
-             ->assertSuccessful()
-             ->assertSee($resource->name)
-             ->assertViewHas('identifier');
+            ->get('resources/'.$resource->id.'/identifiers/'.$identifier->id)
+            ->assertSuccessful()
+            ->assertSee($resource->name)
+            ->assertViewHas('identifier');
     }
 
     /**
@@ -35,8 +35,8 @@ class ShowTest extends TestCase
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $this->actingAs(User::factory()->create())
-             ->get('resources/'.$resource->id.'/identifiers/'.$identifier->id)
-             ->assertForbidden();
+            ->get('resources/'.$resource->id.'/identifiers/'.$identifier->id)
+            ->assertForbidden();
     }
 
     /**
@@ -48,6 +48,6 @@ class ShowTest extends TestCase
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $this->get('resources/'.$resource->id.'/identifiers/'.$identifier->id)
-             ->assertRedirect('login');
+            ->assertRedirect('login');
     }
 }

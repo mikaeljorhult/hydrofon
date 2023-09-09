@@ -15,12 +15,12 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a group.
      */
-    public function storeGroup(array $overrides = [], ?User $user = null): TestResponse
+    public function storeGroup(array $overrides = [], User $user = null): TestResponse
     {
         $group = Group::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->admin()->create())
-                    ->post('groups', $group->toArray());
+            ->post('groups', $group->toArray());
     }
 
     /**
@@ -31,7 +31,7 @@ class StoreTest extends TestCase
         $this->storeGroup([
             'name' => 'New Group',
         ])
-             ->assertRedirect('/groups');
+            ->assertRedirect('/groups');
 
         $this->assertDatabaseHas('groups', [
             'name' => 'New Group',
@@ -44,8 +44,8 @@ class StoreTest extends TestCase
     public function testGroupsMustHaveAName(): void
     {
         $this->storeGroup(['name' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('name');
+            ->assertRedirect()
+            ->assertSessionHasErrors('name');
 
         $this->assertCount(0, Group::all());
     }
@@ -58,7 +58,7 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->storeGroup([], $user)
-             ->assertStatus(403);
+            ->assertStatus(403);
 
         $this->assertCount(0, Group::all());
     }

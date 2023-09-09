@@ -41,7 +41,7 @@ class OverdueBookingNotification extends Command
     {
         $users = User::whereHas('bookings', function (Builder $query) {
             $query->overdue()
-                  ->where('end_time', '>', $this->dateOfLastNotification(BookingOverdue::class));
+                ->where('end_time', '>', $this->dateOfLastNotification(BookingOverdue::class));
         })->get();
 
         if ($users->isNotEmpty()) {
@@ -59,10 +59,10 @@ class OverdueBookingNotification extends Command
     private function dateOfLastNotification(string $className): string
     {
         $notification = \DB::table('notifications')
-                           ->select(['created_at', 'read_at'])
-                           ->where('type', '=', $className)
-                           ->latest()
-                           ->first();
+            ->select(['created_at', 'read_at'])
+            ->where('type', '=', $className)
+            ->latest()
+            ->first();
 
         // Don't notify users again if they have an unread notification of same type.
         if ($notification && $notification->read_at === null) {

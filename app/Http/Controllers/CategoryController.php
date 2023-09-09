@@ -29,17 +29,17 @@ class CategoryController extends Controller
     public function index(): View
     {
         $items = QueryBuilder::for(Category::class)
-                             ->with(['parent'])
-                             ->addSelect([
-                                 'parent_name' => Category::from('categories AS parent')
-                                                          ->whereColumn('id', 'categories.parent_id')
-                                                          ->select('name')
-                                                          ->take(1),
-                             ])
-                             ->allowedFilters('name', 'parent_id')
-                             ->allowedSorts(['name', 'parent_name'])
-                             ->defaultSort('name')
-                             ->paginate(15);
+            ->with(['parent'])
+            ->addSelect([
+                'parent_name' => Category::from('categories AS parent')
+                    ->whereColumn('id', 'categories.parent_id')
+                    ->select('name')
+                    ->take(1),
+            ])
+            ->allowedFilters('name', 'parent_id')
+            ->allowedSorts(['name', 'parent_name'])
+            ->defaultSort('name')
+            ->paginate(15);
 
         $filterParent = Category::orderBy('name')->pluck('name', 'id');
 

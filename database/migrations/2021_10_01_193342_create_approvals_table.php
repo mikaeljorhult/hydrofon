@@ -19,13 +19,13 @@ return new class extends Migration
 
             // Delete approval if booking is deleted.
             $table->foreign('booking_id')
-                  ->references('id')->on('bookings')
-                  ->onDelete('cascade');
+                ->references('id')->on('bookings')
+                ->onDelete('cascade');
 
             // Set approver to null if user is deleted.
             $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('set null');
+                ->references('id')->on('users')
+                ->onDelete('set null');
 
             $table->timestamps();
         });

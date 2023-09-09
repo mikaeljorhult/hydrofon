@@ -24,11 +24,11 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(3)->create();
 
         Livewire::test(BookingsTable::class, ['items' => $items])
-                ->assertSee([
-                    $items[0]->name,
-                    $items[1]->name,
-                    $items[2]->name,
-                ]);
+            ->assertSee([
+                $items[0]->name,
+                $items[1]->name,
+                $items[2]->name,
+            ]);
     }
 
     /**
@@ -39,9 +39,9 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->assertSet('isEditing', $items[0]->id)
-                ->assertSeeHtml('name="resource_id"');
+            ->dispatch('edit', $items[0]->id)
+            ->assertSet('isEditing', $items[0]->id)
+            ->assertSeeHtml('name="resource_id"');
     }
 
     /**
@@ -53,14 +53,14 @@ class BookingsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', $resource->id)
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', $resource->id)
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -76,11 +76,11 @@ class BookingsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', $resource->id)
-                ->dispatch('save')
-                ->assertForbidden();
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', $resource->id)
+            ->dispatch('save')
+            ->assertForbidden();
 
         $this->assertDatabaseMissing(Booking::class, [
             'resource_id' => $resource->id,
@@ -96,14 +96,14 @@ class BookingsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs($items[0]->user)
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', $resource->id)
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', $resource->id)
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -119,14 +119,14 @@ class BookingsTableTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($items[0]->user)
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.user_id', $user->id)
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.user_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.user_id', $user->id)
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.user_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseMissing(Booking::class, [
             'user_id' => $user->id,
@@ -141,20 +141,20 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', '')
-                ->set('editValues.start_time', '')
-                ->set('editValues.end_time', '')
-                ->dispatch('save')
-                ->assertHasErrors([
-                    'editValues.resource_id',
-                    'editValues.start_time',
-                    'editValues.end_time',
-                ])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', '')
+            ->set('editValues.start_time', '')
+            ->set('editValues.end_time', '')
+            ->dispatch('save')
+            ->assertHasErrors([
+                'editValues.resource_id',
+                'editValues.start_time',
+                'editValues.end_time',
+            ])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $items[0] = $items[0]->fresh();
 
@@ -173,14 +173,14 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', 100)
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.resource_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', 100)
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.resource_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $items[0]->resource_id,
@@ -195,14 +195,14 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.user_id', 100)
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.user_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.user_id', 100)
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.user_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'user_id' => $items[0]->user_id,
@@ -217,12 +217,12 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->current()->approved()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('checkout', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('checkout', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isCheckedOut);
     }
@@ -235,19 +235,19 @@ class BookingsTableTest extends TestCase
         $bucket = Bucket::factory()->hasResources(2)->create();
 
         $items = Booking::factory()
-                        ->current()
-                        ->approved()
-                        ->count(1)
-                        ->for($bucket->resources->first())
-                        ->createQuietly();
+            ->current()
+            ->approved()
+            ->count(1)
+            ->for($bucket->resources->first())
+            ->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('switch', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('switch', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertEquals($items[0]->fresh()->resource_id, $bucket->resources->last()->id);
     }
@@ -260,19 +260,19 @@ class BookingsTableTest extends TestCase
         $bucket = Bucket::factory()->hasResources(1)->create();
 
         $items = Booking::factory()
-                        ->current()
-                        ->approved()
-                        ->count(1)
-                        ->for($bucket->resources->first())
-                        ->createQuietly();
+            ->current()
+            ->approved()
+            ->count(1)
+            ->for($bucket->resources->first())
+            ->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('switch', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('switch', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertEquals($items[0]->fresh()->resource_id, $bucket->resources->first()->id);
     }
@@ -283,20 +283,20 @@ class BookingsTableTest extends TestCase
     public function testResourceMustBeAvailableToSwitch(): void
     {
         $items = Booking::factory()
-                        ->current()
-                        ->approved()
-                        ->count(2)
-                        ->createQuietly();
+            ->current()
+            ->approved()
+            ->count(2)
+            ->createQuietly();
 
         Bucket::factory()->hasAttached($items->pluck('resource'))->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('switch', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('switch', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertNotEquals($items[0]->fresh()->resource_id, $items[1]->resource_id);
     }
@@ -309,12 +309,12 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('checkin', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('checkin', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isCheckedIn);
     }
@@ -327,22 +327,22 @@ class BookingsTableTest extends TestCase
         $this->approvalIsRequired();
 
         $group = Group::factory()
-                      ->hasAttached(User::factory()->create(), [], 'approvers')
-                      ->create();
+            ->hasAttached(User::factory()->create(), [], 'approvers')
+            ->create();
 
         $items = Booking::factory()
-                        ->current()
-                        ->for(User::factory()->hasAttached($group))
-                        ->count(1)
-                        ->create();
+            ->current()
+            ->for(User::factory()->hasAttached($group))
+            ->count(1)
+            ->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('approve', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('approve', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isApproved);
     }
@@ -355,22 +355,22 @@ class BookingsTableTest extends TestCase
         $this->approvalIsRequired();
 
         $group = Group::factory()
-                      ->hasAttached(User::factory()->create(), [], 'approvers')
-                      ->create();
+            ->hasAttached(User::factory()->create(), [], 'approvers')
+            ->create();
 
         $items = Booking::factory()
-                        ->current()
-                        ->for(User::factory()->hasAttached($group))
-                        ->count(1)
-                        ->create();
+            ->current()
+            ->for(User::factory()->hasAttached($group))
+            ->count(1)
+            ->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('reject', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('reject', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertTrue($items[0]->fresh()->isRejected);
     }
@@ -383,13 +383,13 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->current()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->set('selectedRows', [$items[0]->id])
-                ->dispatch('checkin', null, true)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->set('selectedRows', [$items[0]->id])
+            ->dispatch('checkin', null, true)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertFalse($items[0]->fresh()->isCheckedIn);
     }
@@ -402,13 +402,13 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->current()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->set('selectedRows', [$items[0]->id])
-                ->dispatch('checkout', null, true)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->set('selectedRows', [$items[0]->id])
+            ->dispatch('checkout', null, true)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertFalse($items[0]->fresh()->isCheckedOut);
     }
@@ -423,13 +423,13 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->set('selectedRows', [$items[0]->id])
-                ->dispatch('approve', null, true)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->set('selectedRows', [$items[0]->id])
+            ->dispatch('approve', null, true)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertFalse($items[0]->fresh()->isApproved);
     }
@@ -444,13 +444,13 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->current()->checkedout()->count(1)->createQuietly();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->set('selectedRows', [$items[0]->id])
-                ->dispatch('reject', null, true)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->set('selectedRows', [$items[0]->id])
+            ->dispatch('reject', null, true)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertFalse($items[0]->fresh()->isRejected);
     }
@@ -463,12 +463,12 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertModelMissing($items[0]);
     }
@@ -481,9 +481,9 @@ class BookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(BookingsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertForbidden();
+            ->test(BookingsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertForbidden();
 
         $this->assertModelExists($items[0]);
     }

@@ -22,11 +22,11 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(3)->create();
 
         Livewire::test(ProfileBookingsTable::class, ['items' => $items])
-                ->assertSee([
-                    $items[0]->name,
-                    $items[1]->name,
-                    $items[2]->name,
-                ]);
+            ->assertSee([
+                $items[0]->name,
+                $items[1]->name,
+                $items[2]->name,
+            ]);
     }
 
     /**
@@ -37,9 +37,9 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->assertSet('isEditing', $items[0]->id)
-                ->assertSeeHtml('name="resource_id"');
+            ->dispatch('edit', $items[0]->id)
+            ->assertSet('isEditing', $items[0]->id)
+            ->assertSeeHtml('name="resource_id"');
     }
 
     /**
@@ -51,14 +51,14 @@ class ProfileBookingsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', $resource->id)
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', $resource->id)
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -74,11 +74,11 @@ class ProfileBookingsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', $resource->id)
-                ->dispatch('save')
-                ->assertForbidden();
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', $resource->id)
+            ->dispatch('save')
+            ->assertForbidden();
 
         $this->assertDatabaseMissing(Booking::class, [
             'resource_id' => $resource->id,
@@ -94,14 +94,14 @@ class ProfileBookingsTableTest extends TestCase
         $resource = Resource::factory()->create();
 
         Livewire::actingAs($items[0]->user)
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', $resource->id)
-                ->dispatch('save')
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', $resource->id)
+            ->dispatch('save')
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $resource->id,
@@ -117,14 +117,14 @@ class ProfileBookingsTableTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($items[0]->user)
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.user_id', $user->id)
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.user_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.user_id', $user->id)
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.user_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseMissing(Booking::class, [
             'user_id' => $user->id,
@@ -139,20 +139,20 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', '')
-                ->set('editValues.start_time', '')
-                ->set('editValues.end_time', '')
-                ->dispatch('save')
-                ->assertHasErrors([
-                    'editValues.resource_id',
-                    'editValues.start_time',
-                    'editValues.end_time',
-                ])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', '')
+            ->set('editValues.start_time', '')
+            ->set('editValues.end_time', '')
+            ->dispatch('save')
+            ->assertHasErrors([
+                'editValues.resource_id',
+                'editValues.start_time',
+                'editValues.end_time',
+            ])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $items[0] = $items[0]->fresh();
 
@@ -171,14 +171,14 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.resource_id', 100)
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.resource_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.resource_id', 100)
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.resource_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'resource_id' => $items[0]->resource_id,
@@ -193,14 +193,14 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('edit', $items[0]->id)
-                ->set('editValues.user_id', 100)
-                ->dispatch('save')
-                ->assertHasErrors(['editValues.user_id'])
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'error';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('edit', $items[0]->id)
+            ->set('editValues.user_id', 100)
+            ->dispatch('save')
+            ->assertHasErrors(['editValues.user_id'])
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'error';
+            });
 
         $this->assertDatabaseHas(Booking::class, [
             'user_id' => $items[0]->user_id,
@@ -215,12 +215,12 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->admin()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertOk()
-                ->assertDispatched('notify', function ($name, $data) {
-                    return data_get($data, 'level') === 'success';
-                });
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertOk()
+            ->assertDispatched('notify', function ($name, $data) {
+                return data_get($data, 'level') === 'success';
+            });
 
         $this->assertModelMissing($items[0]);
     }
@@ -233,9 +233,9 @@ class ProfileBookingsTableTest extends TestCase
         $items = Booking::factory()->count(1)->create();
 
         Livewire::actingAs(User::factory()->create())
-                ->test(ProfileBookingsTable::class, ['items' => $items])
-                ->dispatch('delete', $items[0]->id)
-                ->assertForbidden();
+            ->test(ProfileBookingsTable::class, ['items' => $items])
+            ->dispatch('delete', $items[0]->id)
+            ->assertForbidden();
 
         $this->assertModelExists($items[0]);
     }

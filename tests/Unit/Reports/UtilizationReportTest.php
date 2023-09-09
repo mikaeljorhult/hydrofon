@@ -101,17 +101,17 @@ class UtilizationReportTest extends TestCase
     public function testUtilizationIsCalculatedOverMultipleDays(): void
     {
         Booking::factory()
-               ->for($resource = Resource::factory()->create())
-               ->createMany([
-                   [
-                       'start_time' => now()->setTimeFromTimeString('00:00:00'),
-                       'end_time' => now()->setTimeFromTimeString('12:00:00'),
-                   ],
-                   [
-                       'start_time' => now()->addDay()->setTimeFromTimeString('00:00:00'),
-                       'end_time' => now()->addDay()->setTimeFromTimeString('12:00:00'),
-                   ],
-               ]);
+            ->for($resource = Resource::factory()->create())
+            ->createMany([
+                [
+                    'start_time' => now()->setTimeFromTimeString('00:00:00'),
+                    'end_time' => now()->setTimeFromTimeString('12:00:00'),
+                ],
+                [
+                    'start_time' => now()->addDay()->setTimeFromTimeString('00:00:00'),
+                    'end_time' => now()->addDay()->setTimeFromTimeString('12:00:00'),
+                ],
+            ]);
 
         $utilization = new Utilization($resource->id, now()->startOfDay(), now()->endOfDay()->addDay());
 

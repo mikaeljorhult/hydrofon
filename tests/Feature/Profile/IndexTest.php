@@ -18,8 +18,8 @@ class IndexTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
-             ->get('profile')
-             ->assertSuccessful()
-             ->assertSee($user->name);
+            ->get('profile')
+            ->assertSuccessful()
+            ->assertSee($user->name);
     }
 }

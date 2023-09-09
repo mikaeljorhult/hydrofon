@@ -68,7 +68,7 @@ class Resource extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Category::class)
-                    ->orderBy('name');
+            ->orderBy('name');
     }
 
     /**
@@ -108,7 +108,7 @@ class Resource extends Model
     /**
      * Checks if status being set is valid.
      */
-    public function isValidStatus(string $name, ?string $reason = null): bool
+    public function isValidStatus(string $name, string $reason = null): bool
     {
         return in_array($name, Flag::pluck('abbr')->all());
     }
@@ -119,11 +119,11 @@ class Resource extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-                         ->logOnly([
-                             'name',
-                             'description',
-                             'is_facility',
-                         ])
-                         ->logOnlyDirty();
+            ->logOnly([
+                'name',
+                'description',
+                'is_facility',
+            ])
+            ->logOnlyDirty();
     }
 }

@@ -15,12 +15,12 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a group.
      */
-    public function storeResource(array $overrides = [], ?User $user = null): TestResponse
+    public function storeResource(array $overrides = [], User $user = null): TestResponse
     {
         $resource = Resource::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->admin()->create())
-                    ->post('resources', $resource->toArray());
+            ->post('resources', $resource->toArray());
     }
 
     /**
@@ -29,7 +29,7 @@ class StoreTest extends TestCase
     public function testResourcesCanBeStored(): void
     {
         $this->storeResource(['name' => 'New Resource'])
-             ->assertRedirect('/resources');
+            ->assertRedirect('/resources');
 
         $this->assertDatabaseHas('resources', [
             'name' => 'New Resource',
@@ -42,8 +42,8 @@ class StoreTest extends TestCase
     public function testResourcesMustHaveAName(): void
     {
         $this->storeResource(['name' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('name');
+            ->assertRedirect()
+            ->assertSessionHasErrors('name');
 
         $this->assertCount(0, Resource::all());
     }
@@ -56,7 +56,7 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->storeResource([], $user)
-             ->assertStatus(403);
+            ->assertStatus(403);
 
         $this->assertCount(0, Resource::all());
     }

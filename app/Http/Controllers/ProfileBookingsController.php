@@ -27,19 +27,19 @@ class ProfileBookingsController extends Controller
     {
         $user = auth()->user();
         $bookings = QueryBuilder::for(auth()->user()->bookings()->getQuery())
-                                ->select('bookings.*')
-                                ->with(['user'])
-                                ->join('resources', 'resources.id', '=', 'bookings.resource_id')
-                                ->allowedFilters([
-                                    'resource_id',
-                                    'start_time',
-                                    'end_time',
-                                    AllowedFilter::scope('upcoming', 'future'),
-                                    AllowedFilter::scope('overdue'),
-                                ])
-                                ->defaultSort('start_time')
-                                ->allowedSorts(['resources.name', 'start_time', 'end_time'])
-                                ->paginate(15);
+            ->select('bookings.*')
+            ->with(['user'])
+            ->join('resources', 'resources.id', '=', 'bookings.resource_id')
+            ->allowedFilters([
+                'resource_id',
+                'start_time',
+                'end_time',
+                AllowedFilter::scope('upcoming', 'future'),
+                AllowedFilter::scope('overdue'),
+            ])
+            ->defaultSort('start_time')
+            ->allowedSorts(['resources.name', 'start_time', 'end_time'])
+            ->paginate(15);
 
         $filterResources = Resource::orderBy('name')->pluck('name', 'id');
 

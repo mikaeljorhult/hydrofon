@@ -101,12 +101,12 @@ class QuickBook extends Component
     private function getAvailableResources()
     {
         return Resource::query()
-                       ->when($this->isSearch, function (Builder $query) {
-                           $query->where('name', 'like', '%'.$this->search.'%');
-                       })
-                       ->whereDoesntHave('bookings', function (Builder $query) {
-                           $query->between($this->start_time, $this->end_time);
-                       })
-                       ->orderBy('name')->get();
+            ->when($this->isSearch, function (Builder $query) {
+                $query->where('name', 'like', '%'.$this->search.'%');
+            })
+            ->whereDoesntHave('bookings', function (Builder $query) {
+                $query->between($this->start_time, $this->end_time);
+            })
+            ->orderBy('name')->get();
     }
 }

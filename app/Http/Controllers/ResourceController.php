@@ -32,16 +32,16 @@ class ResourceController extends Controller
     public function index(): View
     {
         $items = QueryBuilder::for(Resource::class)
-                             ->allowedFilters([
-                                 'name',
-                                 'is_facility',
-                                 'categories.id',
-                                 'groups.id',
-                                 AllowedFilter::scope('flags', 'currentStatus'),
-                             ])
-                             ->defaultSort('name')
-                             ->allowedSorts(['name', 'description', 'is_facility'])
-                             ->paginate(15);
+            ->allowedFilters([
+                'name',
+                'is_facility',
+                'categories.id',
+                'groups.id',
+                AllowedFilter::scope('flags', 'currentStatus'),
+            ])
+            ->defaultSort('name')
+            ->allowedSorts(['name', 'description', 'is_facility'])
+            ->paginate(15);
 
         $filterCategories = Category::orderBy('name')->pluck('name', 'id');
         $filterGroups = Group::orderBy('name')->pluck('name', 'id');

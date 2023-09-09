@@ -22,15 +22,15 @@ return new class extends Migration
 
             // Delete booking if user is deleted.
             $table->foreign('user_id')->references('id')->on('users')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
 
             // Delete booking if resource is deleted.
             $table->foreign('resource_id')->references('id')->on('resources')
-                  ->onDelete('cascade');
+                ->onDelete('cascade');
 
             // Set creator to NULL if creating user is deleted.
             $table->foreign('created_by_id')->references('id')->on('users')
-                  ->onDelete('set null');
+                ->onDelete('set null');
         });
     }
 

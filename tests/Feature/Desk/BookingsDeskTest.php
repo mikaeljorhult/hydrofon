@@ -81,7 +81,7 @@ class BookingsDeskTest extends TestCase
         ]);
 
         $response = $this->actingAs(User::factory()->admin()->create())
-                         ->get('/desk/'.$booking->user->email.'?filter[between]='.now()->subDays(6)->format('U').','.now()->subDays(4)->format('U'));
+            ->get('/desk/'.$booking->user->email.'?filter[between]='.now()->subDays(6)->format('U').','.now()->subDays(4)->format('U'));
 
         $response->assertStatus(200);
         $response->assertSee($booking->resource->name);

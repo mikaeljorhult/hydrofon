@@ -27,8 +27,8 @@ class BookingRejected extends Notification
     public function via($notifiable): array
     {
         $hasNotifications = $notifiable->unreadNotifications()
-                                       ->where('type', get_class($this))
-                                       ->exists();
+            ->where('type', get_class($this))
+            ->exists();
 
         return $hasNotifications ? [] : ['database'];
     }

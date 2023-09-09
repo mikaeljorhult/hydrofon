@@ -99,8 +99,8 @@ class Utilization
     private function fetchBookings(array $resources, Carbon $startTime, Carbon $endTime): Collection
     {
         return Booking::whereIn('resource_id', $resources)
-                      ->between($startTime, $endTime)
-                      ->get();
+            ->between($startTime, $endTime)
+            ->get();
     }
 
     /**

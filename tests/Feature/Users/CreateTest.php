@@ -16,7 +16,7 @@ class CreateTest extends TestCase
     public function testCreateRouteIsServedSuccessfully(): void
     {
         $this->actingAs(User::factory()->admin()->create())
-             ->get('users/create')
-             ->assertSuccessful();
+            ->get('users/create')
+            ->assertSuccessful();
     }
 }

@@ -67,11 +67,11 @@ class Available implements ValidationRule
 
         // Check if any bookings collide with requested resources within timestamps.
         $available = ! Booking::where(! empty($this->column) ? $this->column : $attribute, $value)
-                        ->where('id', '!=', $this->ignore)
-                        ->between($this->startTime, $this->endTime)
-                        ->exists();
+            ->where('id', '!=', $this->ignore)
+            ->between($this->startTime, $this->endTime)
+            ->exists();
 
-        if (!$available) {
+        if (! $available) {
             $fail('The resource is not available during the given time frame.');
         }
     }

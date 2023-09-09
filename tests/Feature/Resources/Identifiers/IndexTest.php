@@ -20,8 +20,8 @@ class IndexTest extends TestCase
         $identifier = $resource->identifiers()->create(['value' => 'test-value']);
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('resources/'.$resource->id.'/identifiers')
-             ->assertSuccessful()
-             ->assertSee($identifier->value);
+            ->get('resources/'.$resource->id.'/identifiers')
+            ->assertSuccessful()
+            ->assertSee($identifier->value);
     }
 }

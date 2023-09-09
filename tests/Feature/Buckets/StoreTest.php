@@ -15,12 +15,12 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a bucket.
      */
-    public function storeBucket(array $overrides = [], ?User $user = null): TestResponse
+    public function storeBucket(array $overrides = [], User $user = null): TestResponse
     {
         $bucket = Bucket::factory()->make($overrides);
 
         return $this->actingAs($user ?: User::factory()->admin()->create())
-                    ->post('buckets', $bucket->toArray());
+            ->post('buckets', $bucket->toArray());
     }
 
     /**
@@ -29,7 +29,7 @@ class StoreTest extends TestCase
     public function testBucketsCanBeStored(): void
     {
         $this->storeBucket(['name' => 'New Bucket'])
-             ->assertRedirect('/buckets');
+            ->assertRedirect('/buckets');
 
         $this->assertDatabaseHas('buckets', [
             'name' => 'New Bucket',
@@ -42,8 +42,8 @@ class StoreTest extends TestCase
     public function testBucketsMustHaveAName(): void
     {
         $this->storeBucket(['name' => null])
-             ->assertRedirect()
-             ->assertSessionHasErrors('name');
+            ->assertRedirect()
+            ->assertSessionHasErrors('name');
 
         $this->assertCount(0, Bucket::all());
     }
@@ -56,7 +56,7 @@ class StoreTest extends TestCase
         $user = User::factory()->create();
 
         $this->storeBucket([], $user)
-             ->assertStatus(403);
+            ->assertStatus(403);
 
         $this->assertCount(0, Bucket::all());
     }

@@ -19,8 +19,8 @@ class IndexTest extends TestCase
         $identifier = $user->identifiers()->create(['value' => 'test-value']);
 
         $this->actingAs(User::factory()->admin()->create())
-             ->get('users/'.$user->id.'/identifiers')
-             ->assertSuccessful()
-             ->assertSee($identifier->value);
+            ->get('users/'.$user->id.'/identifiers')
+            ->assertSuccessful()
+            ->assertSee($identifier->value);
     }
 }

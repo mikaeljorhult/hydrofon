@@ -24,8 +24,8 @@ class BookingAwaitingApprovalTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         Booking::factory()
-               ->for(User::factory()->hasAttached($group))
-               ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         $this->assertCount(1, $approver->notifications);
         $this->assertEquals(BookingAwaitingApproval::class, $approver->notifications->first()->type);
@@ -42,9 +42,9 @@ class BookingAwaitingApprovalTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         Booking::factory()
-               ->count(2)
-               ->for(User::factory()->hasAttached($group))
-               ->create();
+            ->count(2)
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         $this->assertCount(1, $approver->notifications);
     }
@@ -63,8 +63,8 @@ class BookingAwaitingApprovalTest extends TestCase
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();
 
         Booking::factory()
-               ->for(User::factory()->hasAttached($group))
-               ->create();
+            ->for(User::factory()->hasAttached($group))
+            ->create();
 
         $this->assertCount(2, $approver->notifications);
     }
