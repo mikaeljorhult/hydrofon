@@ -36,7 +36,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Auth::routes();
 Route::redirect('home', '/')->name('home');
 
 Route::get('profile', ProfileController::class)->name('profile');

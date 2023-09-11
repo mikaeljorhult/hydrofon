@@ -5,10 +5,10 @@
         <div class="w-full sm:w-1/2 md:w-1/3 p-4">
             <h1 class="mb-4">Password Reset</h1>
 
-            <form method="POST" action="{{ route('password.request') }}">
+            <form method="POST" action="{{ route('password.update') }}">
                 {{ csrf_field() }}
 
-                <input type="hidden" name="token" value="{{ $token }}">
+                <input type="hidden" name="token" value="{{ request()->route('token') }}">
 
                 <div class="mb-4{{ $errors->has('email') ? ' has-error' : '' }}">
                     <x-forms.label for="email" class="sr-only">E-mail</x-forms.label>
@@ -17,9 +17,9 @@
                         name="email"
                         id="email"
                         placeholder="E-mail"
-                        value="{{ old('email') }}"
+                        value="{{ old('email', request('email')) }}"
                         required
-                        autofocus
+                        :autofocus="!request()->has('email')"
                         :hasErrors="$errors->has('email')"
                     />
 
@@ -38,6 +38,7 @@
                         id="password"
                         placeholder="Password"
                         required
+                        :autofocus="request()->has('email')"
                         :hasErrors="$errors->has('password')"
                     />
 
