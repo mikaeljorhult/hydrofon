@@ -3,13 +3,16 @@
 namespace Tests\Browser\Authentication;
 
 use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Notification;
+use ProtoneMedia\LaravelDuskFakes\Notifications\PersistentNotifications;
 use Tests\DuskTestCase;
 
 class ForgotPasswordTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, PersistentNotifications;
 
     public function testLoginPageLinkToPasswordReset(): void
     {
@@ -17,22 +20,25 @@ class ForgotPasswordTest extends DuskTestCase
             $browser->visit('/login')
                 ->assertSeeLink('Forgot password?')
                 ->clickLink('Forgot password?')
-                ->assertPathIs('/password/reset');
+                ->assertPathIs('/forgot-password');
         });
     }
 
     public function testUserCanRequestPasswordReset(): void
     {
-        User::factory()->create([
+        $user = User::factory()->create([
             'email' => 'test@hydrofon.se',
         ]);
 
         $this->browse(function (Browser $browser) {
-            $browser->visit('/password/reset')
+            $browser->visit('/forgot-password')
                 ->assertSee('Password Reset')
                 ->type('email', 'test@hydrofon.se')
                 ->clickAndWaitForReload('[type=submit]')
-                ->assertPathIs('/password/email');
+                ->assertPathIs('/forgot-password')
+                ->assertSee('We have emailed your password reset link.');
         });
+
+        Notification::assertSentTo($user, ResetPassword::class);
     }
 }
