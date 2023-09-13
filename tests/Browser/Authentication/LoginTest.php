@@ -31,7 +31,8 @@ class LoginTest extends DuskTestCase
                 ->type('email', 'test@hydrofon.se')
                 ->type('password', 'password')
                 ->clickAndWaitForReload('[type=submit]')
-                ->assertAuthenticated();
+                ->assertAuthenticated()
+                ->assertPathIs('/calendar');
         });
     }
 }
