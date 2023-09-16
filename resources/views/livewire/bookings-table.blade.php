@@ -204,6 +204,7 @@
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
                                 wire:click.prevent="$dispatch('checkout', { id: false, multiple: true })"
+                                dusk="checkout-multiple"
                             >Check out</x-forms.button-link>
                         </form>
 
@@ -211,6 +212,7 @@
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
                                 wire:click.prevent="$dispatch('checkin', { id: false, multiple: true })"
+                                dusk="checkin-multiple"
                             >Check in</x-forms.button-link>
                         </form>
 
@@ -218,14 +220,16 @@
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"
-                                    wire:click.prevent="$dispatch('approve', { id: false, true })"
+                                    wire:click.prevent="$dispatch('approve', { id: false, multiple: true })"
+                                    dusk="approve-multiple"
                                 >Approve</x-forms.button-link>
                             </form>
 
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"
-                                    wire:click.prevent="$dispatch('reject', { id: false, true })"
+                                    wire:click.prevent="$dispatch('reject', { id: false, multiple: true })"
+                                    dusk="reject-multiple"
                                 >Reject</x-forms.button-link>
                             </form>
                         @endif
@@ -233,7 +237,8 @@
                         <form>
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
-                                wire:click.prevent="$dispatch('delete', { id: false, true })"
+                                wire:click.prevent="$dispatch('delete', { id: false, multiple: true })"
+                                dusk="delete-multiple"
                             >Delete</x-forms.button-link>
                         </form>
                     </div>

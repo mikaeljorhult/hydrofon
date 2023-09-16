@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class BookingsTest extends DuskTestCase
+class BookingsIndexTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -166,5 +166,129 @@ class BookingsTest extends DuskTestCase
         $booking->refresh();
 
         $this->assertTrue($booking->isCheckedIn);
+    }
+
+    public function testMultipleItemsCanBeDeleted(): void
+    {
+        $bookings = Booking::factory(5)->create();
+
+        $this->browse(function (Browser $browser) use ($bookings) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/bookings')
+                ->check('[name="selected[]"][value="'.$bookings->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$bookings->last()->id.'"]')
+                ->click('@delete-multiple')
+                ->waitUntilMissing('@item-'.$bookings->first()->id)
+                ->logout();
+        });
+
+        $this->assertDatabaseCount(Booking::class, 3);
+        $this->assertModelMissing($bookings->first());
+        $this->assertModelMissing($bookings->last());
+    }
+
+    public function testMultipleItemsCanBeCheckedOut(): void
+    {
+        $bookings = Booking::factory(5)->create();
+
+        $this->browse(function (Browser $browser) use ($bookings) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/bookings')
+                ->check('[name="selected[]"][value="'.$bookings->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$bookings->last()->id.'"]')
+                ->click('@checkout-multiple')
+                ->waitForTextIn('@item-'.$bookings->first()->id, 'Checked out')
+                ->logout();
+        });
+
+        $bookings->each->refresh();
+
+        $this->assertTrue($bookings->first()->isCheckedOut);
+        $this->assertTrue($bookings->last()->isCheckedOut);
+        $this->assertFalse($bookings[1]->isCheckedOut);
+        $this->assertFalse($bookings[2]->isCheckedOut);
+        $this->assertFalse($bookings[3]->isCheckedOut);
+    }
+
+    public function testMultipleItemsCanBeCheckedIn(): void
+    {
+        $bookings = Booking::factory(5)->checkedout()->createQuietly();
+
+        $this->browse(function (Browser $browser) use ($bookings) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/bookings')
+                ->check('[name="selected[]"][value="'.$bookings->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$bookings->last()->id.'"]')
+                ->click('@checkin-multiple')
+                ->waitForTextIn('@item-'.$bookings->first()->id, 'Checked in')
+                ->logout();
+        });
+
+        $bookings->each->refresh();
+
+        $this->assertTrue($bookings->first()->isCheckedIn);
+        $this->assertTrue($bookings->last()->isCheckedIn);
+        $this->assertFalse($bookings[1]->isCheckedIn);
+        $this->assertFalse($bookings[2]->isCheckedIn);
+        $this->assertFalse($bookings[3]->isCheckedIn);
+    }
+
+    public function testMultipleItemsCanBeApproved(): void
+    {
+        $this->setConfig('hydrofon.require_approval', 'all');
+
+        $bookings = Booking::factory(5)->pending()->createQuietly();
+
+        $this->browse(function (Browser $browser) use ($bookings) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/bookings')
+                ->check('[name="selected[]"][value="'.$bookings->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$bookings->last()->id.'"]')
+                ->click('@approve-multiple')
+                ->waitForTextIn('@item-'.$bookings->first()->id, 'Approved')
+                ->logout();
+        });
+
+        $bookings->each->refresh();
+
+        $this->assertTrue($bookings->first()->isApproved);
+        $this->assertTrue($bookings->last()->isApproved);
+        $this->assertFalse($bookings[1]->isApproved);
+        $this->assertFalse($bookings[2]->isApproved);
+        $this->assertFalse($bookings[3]->isApproved);
+
+        $this->resetConfig();
+    }
+
+    public function testMultipleItemsCanBeRejected(): void
+    {
+        $this->setConfig('hydrofon.require_approval', 'all');
+
+        $bookings = Booking::factory(5)->pending()->createQuietly();
+
+        $this->browse(function (Browser $browser) use ($bookings) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/bookings')
+                ->check('[name="selected[]"][value="'.$bookings->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$bookings->last()->id.'"]')
+                ->click('@reject-multiple')
+                ->waitForTextIn('@item-'.$bookings->first()->id, 'Rejected')
+                ->logout();
+        });
+
+        $bookings->each->refresh();
+
+        $this->assertTrue($bookings->first()->isRejected);
+        $this->assertTrue($bookings->last()->isRejected);
+        $this->assertFalse($bookings[1]->isRejected);
+        $this->assertFalse($bookings[2]->isRejected);
+        $this->assertFalse($bookings[3]->isRejected);
+
+        $this->resetConfig();
     }
 }

@@ -29,6 +29,7 @@
         "staudenmeir/laravel-adjacency-list": "^1.13"
     },
     "require-dev": {
+        "alebatistella/duskapiconf": "^1.2",
         "barryvdh/laravel-debugbar": "^3.8",
         "barryvdh/laravel-ide-helper": "^2.13",
         "brianium/paratest": "^7.0",
