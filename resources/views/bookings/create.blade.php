@@ -61,7 +61,7 @@
                                 <x-forms.input
                                     id="start_time"
                                     name="start_time"
-                                    type="datetime-local"
+                                    type="text"
                                     value="{{ old('start_time') ?? null }}"
                                     placeholder="Start Time"
                                     :hasErrors="$errors->has('start_time')"
@@ -80,7 +80,7 @@
                                 <x-forms.input
                                     id="end_time"
                                     name="end_time"
-                                    type="datetime-local"
+                                    type="text"
                                     value="{{ old('end_time') ?? null }}"
                                     placeholder="End Time"
                                     :hasErrors="$errors->has('end_time')"
@@ -95,16 +95,42 @@
 
                     <div class="pt-5">
                         <div class="flex justify-end">
-                            <x-forms.link :href="session()->get('index-referer-url') ?? request()->headers->get('referer')">
-                                Cancel
-                            </x-forms.link>
-                            <x-forms.button>
-                                Create
-                            </x-forms.button>
+                            <x-forms.link
+                                :href="request()->headers->get('referer') ?? route('bookings.index')"
+                                dusk="submitcancel"
+                            >Cancel</x-forms.link>
+                            <x-forms.button
+                                dusk="submitcreate"
+                            >Create</x-forms.button>
                         </div>
                     </div>
                 </div>
             </form>
         </section>
     </section>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let startTime = document.querySelector('#start_time');
+                let endTime = document.querySelector('#end_time');
+
+                flatpickr(startTime, {
+                    allowInput: true,
+                    enableTime: true,
+                    altInput: false,
+                    dateFormat: 'Y-m-d H:i',
+                    time_24hr: true,
+                });
+
+                flatpickr(endTime, {
+                    allowInput: true,
+                    enableTime: true,
+                    altInput: false,
+                    dateFormat: 'Y-m-d H:i',
+                    time_24hr: true,
+                });
+            });
+        </script>
+    @endpush
 @endsection

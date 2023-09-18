@@ -56,12 +56,13 @@
 
                     <div class="pt-5">
                         <div class="flex justify-end">
-                            <x-forms.link :href="session()->get('index-referer-url') ?? request()->headers->get('referer')">
-                                Cancel
-                            </x-forms.link>
-                            <x-forms.button>
-                                Create
-                            </x-forms.button>
+                            <x-forms.link
+                                :href="request()->headers->get('referer') ?? route('buckets.index')"
+                                dusk="submitcancel"
+                            >Cancel</x-forms.link>
+                            <x-forms.button
+                                dusk="submitcreate"
+                            >Create</x-forms.button>
                         </div>
                     </div>
                 </div>

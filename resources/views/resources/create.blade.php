@@ -107,7 +107,7 @@
 
                     <div class="pt-5">
                         <div class="flex justify-end">
-                            <x-forms.link :href="session()->get('index-referer-url') ?? request()->headers->get('referer')">
+                            <x-forms.link :href="request()->headers->get('referer') ?? route('resources.index')">
                                 Cancel
                             </x-forms.link>
                             <x-forms.button>
