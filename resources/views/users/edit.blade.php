@@ -131,12 +131,13 @@
 
                     <div class="pt-5">
                         <div class="flex justify-end">
-                            <x-forms.link :href="request()->headers->get('referer') ?? route('users.index')">
-                                Cancel
-                            </x-forms.link>
-                            <x-forms.button>
-                                Update
-                            </x-forms.button>
+                            <x-forms.link
+                                :href="request()->headers->get('referer') ?? route('users.index')"
+                                dusk="submitcancel"
+                            >Cancel</x-forms.link>
+                            <x-forms.button
+                                dusk="submitupdate"
+                            >Update</x-forms.button>
                         </div>
                     </div>
                 </div>

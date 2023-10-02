@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        <x-heading title="Edit booking" />
+        <x-heading title="Edit category" />
 
         <section>
             <form
@@ -76,12 +76,13 @@
 
                     <div class="pt-5">
                         <div class="flex justify-end">
-                            <x-forms.link :href="request()->headers->get('referer') ?? route('categories.index')">
-                                Cancel
-                            </x-forms.link>
-                            <x-forms.button>
-                                Update
-                            </x-forms.button>
+                            <x-forms.link
+                                :href="request()->headers->get('referer') ?? route('categories.index')"
+                                dusk="submitcancel"
+                            >Cancel</x-forms.link>
+                            <x-forms.button
+                                dusk="submitupdate"
+                            >Update</x-forms.button>
                         </div>
                     </div>
                 </div>

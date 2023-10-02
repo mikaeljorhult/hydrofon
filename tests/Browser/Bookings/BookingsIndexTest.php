@@ -1,6 +1,6 @@
 <?php
 
-namespace Browser\Bookings;
+namespace Tests\Browser\Bookings;
 
 use App\Models\Booking;
 use App\Models\Resource;

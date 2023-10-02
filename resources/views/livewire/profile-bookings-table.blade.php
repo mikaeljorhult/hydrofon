@@ -5,7 +5,7 @@
         <tbody>
             @forelse($this->items as $item)
                 @if($this->isEditing === $item->id)
-                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} is-editing">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} is-editing" dusk="inline-item-{{ $item->id }}">
                         <td data-title="&nbsp;">&nbsp;</td>
                         <td data-title="Resource">
                             <x-forms.select
@@ -55,16 +55,18 @@
                                 <x-forms.button
                                     wire:click.prevent="$dispatch('save')"
                                     wire:loading.attr="disabled"
+                                    dusk="inline-save"
                                 >Save</x-forms.button>
 
                                 <x-forms.button-secondary
                                     wire:click.prevent="$set('isEditing', false)"
+                                    dusk="inline-cancel"
                                 >Cancel</x-forms.button-secondary>
                             </div>
                         </td>
                     </tr>
                 @else
-                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} group hover:bg-red-50">
+                    <tr class="{{ $loop->odd ? 'odd' : 'even bg-slate-50' }} group hover:bg-red-50" dusk="item-{{ $item->id }}">
                         <td data-title="&nbsp;">
                             <x-forms.checkbox
                                 class="text-red-500"
@@ -94,6 +96,7 @@
                                 form="viewincalendarform-{{ $item->id }}"
                                 type="submit"
                                 title="View in calendar"
+                                dusk="viewincalendar"
                             ><x-heroicon-m-calendar class="w-4 h-4 fill-current" /></button>
 
                             <a
@@ -101,6 +104,7 @@
                                 href="{{ route('bookings.edit', $item) }}"
                                 title="Edit"
                                 wire:click.prevent="$dispatch('edit', { id: {{ $item->id }} })"
+                                dusk="inline-edit"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -110,6 +114,7 @@
                                 title="Delete"
                                 wire:click.prevent="$dispatch('delete', { id: {{ $item->id }} })"
                                 wire:loading.attr="disabled"
+                                dusk="delete"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Browser\Bookings;
+namespace Tests\Browser\Bookings;
 
 use App\Models\Booking;
 use App\Models\Resource;
@@ -13,7 +13,7 @@ class BookingsCreateTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testBookingsCreateIsReachable(): void
+    public function testBookingsEditIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser
@@ -27,7 +27,7 @@ class BookingsCreateTest extends DuskTestCase
         });
     }
 
-    public function testItemCanBeCreated(): void
+    public function testItemCanBeEdited(): void
     {
         $resources = Resource::factory(5)->create();
         $users = User::factory(5)->create();
@@ -58,7 +58,7 @@ class BookingsCreateTest extends DuskTestCase
         ]);
     }
 
-    public function testCreateCanBeCancelled(): void
+    public function testEditCanBeCancelled(): void
     {
         $this->browse(function (Browser $browser) {
             $browser
