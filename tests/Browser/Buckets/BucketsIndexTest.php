@@ -113,4 +113,24 @@ class BucketsIndexTest extends DuskTestCase
                 ->logout();
         });
     }
+
+    public function testMultipleItemsCanBeDeleted(): void
+    {
+        $buckets = Bucket::factory(5)->create();
+
+        $this->browse(function (Browser $browser) use ($buckets) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/buckets')
+                ->check('[name="selected[]"][value="'.$buckets->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$buckets->last()->id.'"]')
+                ->click('@delete-multiple')
+                ->waitUntilMissing('@item-'.$buckets->first()->id)
+                ->logout();
+        });
+
+        $this->assertDatabaseCount(Bucket::class, 3);
+        $this->assertModelMissing($buckets->first());
+        $this->assertModelMissing($buckets->last());
+    }
 }

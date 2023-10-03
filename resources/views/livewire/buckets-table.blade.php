@@ -107,6 +107,7 @@
                             <x-forms.button-link
                                 x-bind:disabled="selectedRows.length === 0"
                                 wire:click.prevent="$dispatch('delete', { id: false, multiple: true })"
+                                dusk="delete-multiple"
                             >Delete</x-forms.button-link>
                         </form>
                     </div>

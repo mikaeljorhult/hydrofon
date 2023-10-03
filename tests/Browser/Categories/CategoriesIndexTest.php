@@ -111,4 +111,24 @@ class CategoriesIndexTest extends DuskTestCase
                 ->logout();
         });
     }
+
+    public function testMultipleItemsCanBeDeleted(): void
+    {
+        $categories = Category::factory(5)->create();
+
+        $this->browse(function (Browser $browser) use ($categories) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/categories')
+                ->check('[name="selected[]"][value="'.$categories->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$categories->last()->id.'"]')
+                ->click('@delete-multiple')
+                ->waitUntilMissing('@item-'.$categories->first()->id)
+                ->logout();
+        });
+
+        $this->assertDatabaseCount(Category::class, 3);
+        $this->assertModelMissing($categories->first());
+        $this->assertModelMissing($categories->last());
+    }
 }

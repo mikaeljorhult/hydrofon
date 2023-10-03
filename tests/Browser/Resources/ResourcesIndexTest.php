@@ -111,4 +111,24 @@ class ResourcesIndexTest extends DuskTestCase
                 ->logout();
         });
     }
+
+    public function testMultipleItemsCanBeDeleted(): void
+    {
+        $resources = Resource::factory(5)->create();
+
+        $this->browse(function (Browser $browser) use ($resources) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/resources')
+                ->check('[name="selected[]"][value="'.$resources->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$resources->last()->id.'"]')
+                ->click('@delete-multiple')
+                ->waitUntilMissing('@item-'.$resources->first()->id)
+                ->logout();
+        });
+
+        $this->assertDatabaseCount(Resource::class, 3);
+        $this->assertModelMissing($resources->first());
+        $this->assertModelMissing($resources->last());
+    }
 }

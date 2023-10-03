@@ -111,4 +111,24 @@ class GroupsIndexTest extends DuskTestCase
                 ->logout();
         });
     }
+
+    public function testMultipleItemsCanBeDeleted(): void
+    {
+        $groups = Group::factory(5)->create();
+
+        $this->browse(function (Browser $browser) use ($groups) {
+            $browser
+                ->loginAs(User::factory()->admin()->create())
+                ->visit('/groups')
+                ->check('[name="selected[]"][value="'.$groups->first()->id.'"]')
+                ->check('[name="selected[]"][value="'.$groups->last()->id.'"]')
+                ->click('@delete-multiple')
+                ->waitUntilMissing('@item-'.$groups->first()->id)
+                ->logout();
+        });
+
+        $this->assertDatabaseCount(Group::class, 3);
+        $this->assertModelMissing($groups->first());
+        $this->assertModelMissing($groups->last());
+    }
 }
