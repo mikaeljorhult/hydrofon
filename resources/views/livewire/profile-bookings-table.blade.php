@@ -96,7 +96,7 @@
                                 form="viewincalendarform-{{ $item->id }}"
                                 type="submit"
                                 title="View in calendar"
-                                dusk="viewincalendar"
+                                dusk="viewincalendar-{{ $item->id }}"
                             ><x-heroicon-m-calendar class="w-4 h-4 fill-current" /></button>
 
                             <a
@@ -104,7 +104,7 @@
                                 href="{{ route('bookings.edit', $item) }}"
                                 title="Edit"
                                 wire:click.prevent="$dispatch('edit', { id: {{ $item->id }} })"
-                                dusk="inline-edit"
+                                dusk="inline-edit-{{ $item->id }}"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -114,7 +114,7 @@
                                 title="Delete"
                                 wire:click.prevent="$dispatch('delete', { id: {{ $item->id }} })"
                                 wire:loading.attr="disabled"
-                                dusk="delete"
+                                dusk="delete-{{ $item->id }}"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
 

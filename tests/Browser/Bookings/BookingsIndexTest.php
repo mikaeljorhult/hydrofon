@@ -51,7 +51,7 @@ class BookingsIndexTest extends DuskTestCase
                 ->loginAs(User::factory()->admin()->create())
                 ->visit('/bookings')
                 ->mouseover('@item-'.$booking->id)
-                ->click('@inline-edit')
+                ->click('@inline-edit-'.$booking->id)
                 ->waitFor('@inline-item-'.$booking->id)
                 ->select('resource_id', $resource->id)
                 ->press('Save')
@@ -75,7 +75,7 @@ class BookingsIndexTest extends DuskTestCase
                 ->loginAs(User::factory()->admin()->create())
                 ->visit('/bookings')
                 ->mouseover('@item-'.$booking->id)
-                ->click('@inline-edit')
+                ->click('@inline-edit-'.$booking->id)
                 ->waitFor('@inline-item-'.$booking->id)
                 ->press('Cancel')
                 ->waitFor('@item-'.$booking->id)
@@ -93,7 +93,7 @@ class BookingsIndexTest extends DuskTestCase
                 ->loginAs(User::factory()->admin()->create())
                 ->visit('/bookings')
                 ->mouseover('@item-'.$booking->id)
-                ->click('@delete')
+                ->click('@delete-'.$booking->id)
                 ->waitUntilMissing('@item-'.$booking->id)
                 ->assertDontSee($booking->resource->name)
                 ->logout();
@@ -123,7 +123,7 @@ class BookingsIndexTest extends DuskTestCase
                 ->loginAs(User::factory()->admin()->create())
                 ->visit('/bookings')
                 ->mouseover('@item-'.$booking->id)
-                ->clickAndWaitForReload('@viewincalendar')
+                ->clickAndWaitForReload('@viewincalendar-'.$booking->id)
                 ->assertPathIs('/calendar/'.$booking->start_time->format('Y-m-d'))
                 ->assertPresent('.segel-booking[data-id="'.$booking->id.'"]')
                 ->logout();
@@ -139,8 +139,8 @@ class BookingsIndexTest extends DuskTestCase
                 ->loginAs(User::factory()->admin()->create())
                 ->visit('/bookings')
                 ->mouseover('@item-'.$booking->id)
-                ->click('@checkout')
-                ->waitFor('@checkin')
+                ->click('@checkout-'.$booking->id)
+                ->waitFor('@checkin-'.$booking->id)
                 ->logout();
         });
 
@@ -158,8 +158,8 @@ class BookingsIndexTest extends DuskTestCase
                 ->loginAs(User::factory()->admin()->create())
                 ->visit('/bookings')
                 ->mouseover('@item-'.$booking->id)
-                ->click('@checkin')
-                ->waitUntilMissing('@checkin')
+                ->click('@checkin-'.$booking->id)
+                ->waitUntilMissing('@checkin-'.$booking->id)
                 ->logout();
         });
 

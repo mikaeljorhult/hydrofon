@@ -118,7 +118,7 @@
                                     title="Check out"
                                     wire:click.prevent="$dispatch('checkout', { id: {{ $item->id }} })"
                                     wire:loading.attr="disabled"
-                                    dusk="checkout"
+                                    dusk="checkout-{{ $item->id }}"
                                 ><x-heroicon-m-arrow-up-tray class="w-4 h-4 fill-current" /></button>
                             @endif
 
@@ -130,7 +130,7 @@
                                     title="Check in"
                                     wire:click.prevent="$dispatch('checkin', { id: {{ $item->id }} })"
                                     wire:loading.attr="disabled"
-                                    dusk="checkin"
+                                    dusk="checkin-{{ $item->id }}"
                                 ><x-heroicon-m-arrow-down-tray class="w-4 h-4 fill-current" /></button>
                             @endif
 
@@ -139,7 +139,7 @@
                                 form="viewincalendarform-{{ $item->id }}"
                                 type="submit"
                                 title="View in calendar"
-                                dusk="viewincalendar"
+                                dusk="viewincalendar-{{ $item->id }}"
                             ><x-heroicon-m-calendar class="w-4 h-4 fill-current" /></button>
 
                             <a
@@ -147,7 +147,7 @@
                                 href="{{ route('bookings.edit', $item) }}"
                                 title="Edit"
                                 wire:click.prevent="$dispatch('edit', { id: {{ $item->id }} })"
-                                dusk="inline-edit"
+                                dusk="inline-edit-{{ $item->id }}"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -157,7 +157,7 @@
                                 title="Delete"
                                 wire:click.prevent="$dispatch('delete', { id: {{ $item->id }} })"
                                 wire:loading.attr="disabled"
-                                dusk="delete"
+                                dusk="delete-{{ $item->id }}"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
                             <div class="hidden">

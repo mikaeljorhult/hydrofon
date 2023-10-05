@@ -118,7 +118,7 @@
                                 href="{{ route('users.edit', $item) }}"
                                 title="Edit"
                                 wire:click.prevent="$dispatch('edit', { id: {{ $item->id }} })"
-                                dusk="inline-edit"
+                                dusk="inline-edit-{{ $item->id }}"
                             ><x-heroicon-m-pencil class="w-4 h-4 fill-current" /></a>
 
                             <button
@@ -128,7 +128,7 @@
                                 title="Delete"
                                 wire:click.prevent="$dispatch('delete', { id: {{ $item->id }} })"
                                 wire:loading.attr="disabled"
-                                dusk="delete"
+                                dusk="delete-{{ $item->id }}"
                             ><x-heroicon-m-x-mark class="w-4 h-4 fill-current" /></button>
 
                             <div class="hidden">
