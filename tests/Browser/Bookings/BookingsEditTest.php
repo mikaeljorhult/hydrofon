@@ -13,7 +13,7 @@ class BookingsEditTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testBookingsCreateIsReachable(): void
+    public function testCreateRouteIsReachable(): void
     {
         $booking = Booking::factory()->create();
 

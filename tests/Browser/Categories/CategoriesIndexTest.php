@@ -12,7 +12,7 @@ class CategoriesIndexTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testCategoriesIndexIsReachable(): void
+    public function testIndexRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

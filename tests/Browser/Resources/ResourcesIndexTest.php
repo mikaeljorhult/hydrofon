@@ -12,7 +12,7 @@ class ResourcesIndexTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testResourcesIndexIsReachable(): void
+    public function testIndexRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

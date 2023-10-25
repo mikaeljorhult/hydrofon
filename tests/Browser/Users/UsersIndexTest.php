@@ -2,8 +2,6 @@
 
 namespace Tests\Browser\Users;
 
-use App\Models\Bucket;
-use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -13,7 +11,7 @@ class UsersIndexTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testUsersIndexIsReachable(): void
+    public function testIndexRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

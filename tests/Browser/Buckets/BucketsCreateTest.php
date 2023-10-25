@@ -12,7 +12,7 @@ class BucketsCreateTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testBucketsCreateIsReachable(): void
+    public function testCreateRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

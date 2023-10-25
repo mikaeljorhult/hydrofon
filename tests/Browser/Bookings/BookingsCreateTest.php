@@ -13,7 +13,7 @@ class BookingsCreateTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testBookingsEditIsReachable(): void
+    public function testEditRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

@@ -12,7 +12,7 @@ class ResourcesEditTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testResourcesEditIsReachable(): void
+    public function testEditRouteIsReachable(): void
     {
         $resource = Resource::factory()->create();
 

@@ -12,7 +12,7 @@ class CategoriesEditTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testCategoriesEditIsReachable(): void
+    public function testEditRouteIsReachable(): void
     {
         $category = Category::factory()->create();
 

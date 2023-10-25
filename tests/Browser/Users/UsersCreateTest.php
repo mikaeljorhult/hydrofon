@@ -11,7 +11,7 @@ class UsersCreateTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testUsersCreateIsReachable(): void
+    public function testCreateRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

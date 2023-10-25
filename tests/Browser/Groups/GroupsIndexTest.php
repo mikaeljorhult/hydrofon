@@ -12,7 +12,7 @@ class GroupsIndexTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testGroupsIndexIsReachable(): void
+    public function testIndexRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

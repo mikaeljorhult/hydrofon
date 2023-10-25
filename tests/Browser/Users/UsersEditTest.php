@@ -11,7 +11,7 @@ class UsersEditTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testUsersEditIsReachable(): void
+    public function testEditRouteIsReachable(): void
     {
         $user = User::factory()->create();
 

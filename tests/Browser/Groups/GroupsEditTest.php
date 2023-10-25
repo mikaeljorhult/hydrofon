@@ -12,7 +12,7 @@ class GroupsEditTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testGroupsEditIsReachable(): void
+    public function testEditRouteIsReachable(): void
     {
         $group = Group::factory()->create();
 

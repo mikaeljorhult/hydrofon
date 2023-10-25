@@ -13,7 +13,7 @@ class BucketsIndexTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testBucketsIndexIsReachable(): void
+    public function testIndexRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser

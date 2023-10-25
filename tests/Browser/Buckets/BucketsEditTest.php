@@ -12,7 +12,7 @@ class BucketsEditTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testBucketsEditIsReachable(): void
+    public function testEditRouteIsReachable(): void
     {
         $bucket = Bucket::factory()->create();
 

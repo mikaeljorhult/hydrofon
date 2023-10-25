@@ -12,7 +12,7 @@ class ResourcesCreateTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    public function testResourcesCreateIsReachable(): void
+    public function testCreateRouteIsReachable(): void
     {
         $this->browse(function (Browser $browser) {
             $browser
