@@ -9,6 +9,7 @@
                 title="Previous"
                 href="{{ route('calendar') }}"
                 wire:click.prevent="previousTimeScope"
+                dusk="segel-previous-timescope"
             >
                 <x-heroicon-s-chevron-left class="w-5" />
                 <span class="sr-only">Previous</span>
@@ -18,6 +19,7 @@
                 title="Next"
                 href="{{ route('calendar') }}"
                 wire:click.prevent="nextTimeScope"
+                dusk="segel-next-timescope"
             >
                 <span class="sr-only">Next</span>
                 <x-heroicon-s-chevron-right class="w-5" />
@@ -29,11 +31,11 @@
                 <x-forms.label for="type">Show:</x-forms.label>
 
                 <x-forms.select
+                    class="ml-1"
                     name="type"
                     id="type"
                     :options="['day' => 'Day', 'week' => 'Week', 'month' => 'Month']"
                     wire:model.live="type"
-                    class="ml-1"
                 />
             </div>
         </div>
