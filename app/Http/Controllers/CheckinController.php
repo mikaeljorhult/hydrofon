@@ -27,11 +27,10 @@ class CheckinController extends Controller
         $booking = Booking::findOrFail($request->get('booking_id'));
         $booking->state->transitionTo(CheckedIn::class);
 
-        laraflash()
-            ->message()
-            ->title('Booking was checked in')
-            ->content('Booking was checked in successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Booking was checked in',
+            'message' => 'Booking was checked in successfully.',
+        ]), 'success');
 
         return redirect()->back();
     }

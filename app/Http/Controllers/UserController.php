@@ -68,11 +68,10 @@ class UserController extends Controller
         $user = User::create($input);
         $user->groups()->sync($request->get('groups'));
 
-        laraflash()
-            ->message()
-            ->title('User was created')
-            ->content('User "'.$user->email.'" was created successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'User was created',
+            'message' => 'User "'.$user->email.'" was created successfully.',
+        ]), 'success');
 
         return redirect()->route('users.index');
     }
@@ -118,11 +117,10 @@ class UserController extends Controller
         $user->update($input);
         $user->groups()->sync($request->get('groups'));
 
-        laraflash()
-            ->message()
-            ->title('User was updated')
-            ->content('User was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'User was updated',
+            'message' => 'User was updated successfully.',
+        ]), 'success');
 
         return redirect()->route('users.index');
     }
@@ -134,11 +132,10 @@ class UserController extends Controller
     {
         $user->delete();
 
-        laraflash()
-            ->message()
-            ->title('User was deleted')
-            ->content('User was deleted successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'User was deleted',
+            'message' => 'User was deleted successfully.',
+        ]), 'success');
 
         return redirect()->route('users.index');
     }

@@ -38,11 +38,10 @@ class SubscriptionController extends Controller
             'subscribable_id' => $request->get('subscribable_id'),
         ]);
 
-        laraflash()
-            ->message()
-            ->title('Subscription was added')
-            ->content('Subscription was added successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Subscription was added',
+            'message' => 'Subscription was added successfully.',
+        ]), 'success');
 
         return redirect()->back();
     }
@@ -54,11 +53,10 @@ class SubscriptionController extends Controller
     {
         $subscription->delete();
 
-        laraflash()
-            ->message()
-            ->title('Subscription was removed')
-            ->content('Subscription was removed successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Subscription was removed',
+            'message' => 'Subscription was removed successfully.',
+        ]), 'success');
 
         return redirect()->back();
     }

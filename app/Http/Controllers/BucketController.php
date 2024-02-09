@@ -55,11 +55,10 @@ class BucketController extends Controller
         $bucket = Bucket::create($request->validated());
         $bucket->resources()->sync($request->get('resources'));
 
-        laraflash()
-            ->message()
-            ->title('Bucket was created')
-            ->content('Bucket "'.$bucket->name.'" was created successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Bucket was created',
+            'message' => 'Bucket "'.$bucket->name.'" was created successfully.',
+        ]), 'success');
 
         return redirect()->route('buckets.index');
     }
@@ -93,11 +92,10 @@ class BucketController extends Controller
         $bucket->update($request->validated());
         $bucket->resources()->sync($request->get('resources'));
 
-        laraflash()
-            ->message()
-            ->title('Bucket was updated')
-            ->content('Bucket was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Bucket was updated',
+            'message' => 'Bucket was updated successfully.',
+        ]), 'success');
 
         return redirect()->route('buckets.index');
     }
@@ -109,11 +107,10 @@ class BucketController extends Controller
     {
         $bucket->delete();
 
-        laraflash()
-            ->message()
-            ->title('Bucket was deleted')
-            ->content('Bucket was deleted successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Bucket was deleted',
+            'message' => 'Bucket was deleted successfully.',
+        ]), 'success');
 
         return redirect()->route('buckets.index');
     }

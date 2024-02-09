@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24cceb5b8b6ccba3df0859561f811375",
+    "content-hash": "fd5e8ee48701aee524fe55c87d68af2a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -386,62 +386,6 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
-        },
-        {
-            "name": "coderello/laraflash",
-            "version": "6.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/coderello/laraflash.git",
-                "reference": "d06923a3888ec80c6ab2cb17d15fcc9585a7683e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/coderello/laraflash/zipball/d06923a3888ec80c6ab2cb17d15fcc9585a7683e",
-                "reference": "d06923a3888ec80c6ab2cb17d15fcc9585a7683e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^10.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Coderello\\Laraflash\\Providers\\LaraflashServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Coderello\\Laraflash\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Advanced flash messages for Laravel.",
-            "keywords": [
-                "advanced",
-                "flash",
-                "laraflash",
-                "laravel",
-                "messages"
-            ],
-            "support": {
-                "issues": "https://github.com/coderello/laraflash/issues",
-                "source": "https://github.com/coderello/laraflash/tree/6.0.0"
-            },
-            "time": "2023-03-10T19:26:10+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -4184,6 +4128,67 @@
             "time": "2023-01-25T17:04:51+00:00"
         },
         {
+            "name": "spatie/laravel-flash",
+            "version": "1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-flash.git",
+                "reference": "f0417044fd5c6be9082fe42fe793e5ccaadf29df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-flash/zipball/f0417044fd5c6be9082fe42fe793e5ccaadf29df",
+                "reference": "f0417044fd5c6be9082fe42fe793e5ccaadf29df",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.23|^7.0|^8.0",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Flash\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight package to flash messages",
+            "homepage": "https://github.com/spatie/laravel-flash",
+            "keywords": [
+                "laravel-flash",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-flash/issues",
+                "source": "https://github.com/spatie/laravel-flash/tree/1.9.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-01-23T14:53:09+00:00"
+        },
+        {
             "name": "spatie/laravel-model-states",
             "version": "2.6.1",
             "source": {
@@ -4506,16 +4511,16 @@
         },
         {
             "name": "staudenmeir/laravel-adjacency-list",
-            "version": "v1.18",
+            "version": "v1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-adjacency-list.git",
-                "reference": "f8a6778fb276e0d8eaa848d14cfe6823c15a7f5c"
+                "reference": "3ba43b7a0bc5224f8fc2ed00497dadaf4a0d6f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/f8a6778fb276e0d8eaa848d14cfe6823c15a7f5c",
-                "reference": "f8a6778fb276e0d8eaa848d14cfe6823c15a7f5c",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/3ba43b7a0bc5224f8fc2ed00497dadaf4a0d6f12",
+                "reference": "3ba43b7a0bc5224f8fc2ed00497dadaf4a0d6f12",
                 "shasum": ""
             },
             "require": {
@@ -4563,7 +4568,7 @@
             "description": "Recursive Laravel Eloquent relationships with CTEs",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-adjacency-list/issues",
-                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.18"
+                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.19"
             },
             "funding": [
                 {
@@ -4571,7 +4576,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-01-30T15:50:51+00:00"
+            "time": "2024-02-08T14:17:27+00:00"
         },
         {
             "name": "staudenmeir/laravel-cte",

@@ -8,7 +8,7 @@
         "@tailwindcss/forms": "^0.4.0",
         "autoprefixer": "^10.4.0",
         "flatpickr": "^4.6.3",
-        "interactjs": "^1.10.11",
+        "interactjs": "1.10.21",
         "postcss": "^8.4.31",
         "qr-scanner": "^1.4.1",
         "resolve-url-loader": "^5.0.0",

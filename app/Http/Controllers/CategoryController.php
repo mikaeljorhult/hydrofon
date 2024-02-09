@@ -71,11 +71,10 @@ class CategoryController extends Controller
         $category = Category::create($request->validated());
         $category->groups()->sync($request->get('groups'));
 
-        laraflash()
-            ->message()
-            ->title('Category was created')
-            ->content('Category "'.$category->name.'" was created successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Category was created',
+            'message' => 'Category "'.$category->name.'" was created successfully.',
+        ]), 'success');
 
         return redirect()->route('categories.index');
     }
@@ -111,11 +110,10 @@ class CategoryController extends Controller
         $category->update($request->validated());
         $category->groups()->sync($request->get('groups'));
 
-        laraflash()
-            ->message()
-            ->title('Category was updated')
-            ->content('Category was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Category was updated',
+            'message' => 'Category was updated successfully.',
+        ]), 'success');
 
         return redirect()->route('categories.index');
     }
@@ -132,11 +130,10 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        laraflash()
-            ->message()
-            ->title('Category was deleted')
-            ->content('Category was deleted successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Category was deleted',
+            'message' => 'Category was deleted successfully.',
+        ]), 'success');
 
         return redirect()->route('categories.index');
     }

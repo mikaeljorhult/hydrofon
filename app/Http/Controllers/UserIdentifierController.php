@@ -50,11 +50,10 @@ class UserIdentifierController extends Controller
     {
         $user->identifiers()->create($request->validated());
 
-        laraflash()
-            ->message()
-            ->title('Identifier was added')
-            ->content('Identifier was added for "'.$user->name.'" successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Identifier was added',
+            'message' => 'Identifier was added for "'.$user->name.'" successfully.',
+        ]), 'success');
 
         // Redirect to index if sent from create form, otherwise redirect back.
         if (Str::contains($request->headers->get('referer'), '/create')) {
@@ -83,11 +82,10 @@ class UserIdentifierController extends Controller
     {
         $identifier->update($request->validated());
 
-        laraflash()
-            ->message()
-            ->title('Identifier was updated')
-            ->content('Identifier was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Identifier was updated',
+            'message' => 'Identifier was updated successfully.',
+        ]), 'success');
 
         // Redirect to index if sent from edit form, otherwise redirect back.
         if (Str::contains($request->headers->get('referer'), '/edit')) {
@@ -104,11 +102,10 @@ class UserIdentifierController extends Controller
     {
         $identifier->delete();
 
-        laraflash()
-            ->message()
-            ->title('Identifier was removed')
-            ->content('Identifier was removed successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Identifier was removed',
+            'message' => 'Identifier was removed successfully.',
+        ]), 'success');
 
         return redirect()->back();
     }

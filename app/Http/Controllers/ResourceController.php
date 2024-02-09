@@ -81,11 +81,10 @@ class ResourceController extends Controller
         $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
-        laraflash()
-            ->message()
-            ->title('Resource was created')
-            ->content('Resource "'.$resource->name.'" was created successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Resource was created',
+            'message' => 'Resource "'.$resource->name.'" was created successfully.',
+        ]), 'success');
 
         return redirect()->route('resources.index');
     }
@@ -131,11 +130,10 @@ class ResourceController extends Controller
         $resource->categories()->sync($request->get('categories'));
         $resource->groups()->sync($request->get('groups'));
 
-        laraflash()
-            ->message()
-            ->title('Resource was updated')
-            ->content('Resource was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Resource was updated',
+            'message' => 'Resource was updated successfully.',
+        ]), 'success');
 
         return redirect()->route('resources.index');
     }
@@ -147,11 +145,10 @@ class ResourceController extends Controller
     {
         $resource->delete();
 
-        laraflash()
-            ->message()
-            ->title('Resource was deleted')
-            ->content('Resource was deleted successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Resource was deleted',
+            'message' => 'Resource was deleted successfully.',
+        ]), 'success');
 
         return redirect()->route('resources.index');
     }

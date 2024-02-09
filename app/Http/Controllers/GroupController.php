@@ -55,11 +55,10 @@ class GroupController extends Controller
         $group = Group::create($request->validated());
         $group->approvers()->sync($request->get('approvers'));
 
-        laraflash()
-            ->message()
-            ->title('Group was created')
-            ->content('Group "'.$group->name.'" was created successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Group was created',
+            'message' => 'Group "'.$group->name.'" was created successfully.',
+        ]), 'success');
 
         return redirect()->route('groups.index');
     }
@@ -93,11 +92,10 @@ class GroupController extends Controller
         $group->update($request->validated());
         $group->approvers()->sync($request->get('approvers'));
 
-        laraflash()
-            ->message()
-            ->title('Group was updated')
-            ->content('Group was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Group was updated',
+            'message' => 'Group was updated successfully.',
+        ]), 'success');
 
         return redirect()->route('groups.index');
     }
@@ -109,11 +107,10 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        laraflash()
-            ->message()
-            ->title('Group was deleted')
-            ->content('Group was deleted successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Group was deleted',
+            'message' => 'Group was deleted successfully.',
+        ]), 'success');
 
         return redirect()->route('groups.index');
     }

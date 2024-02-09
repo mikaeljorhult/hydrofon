@@ -104,11 +104,10 @@ class BookingController extends Controller
             'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $currentUser->id,
         ]));
 
-        laraflash()
-            ->message()
-            ->title('Booking was created')
-            ->content('Booking was created successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Booking was created',
+            'message' => 'Booking was created successfully.',
+        ]), 'success');
 
         return redirect()->route('bookings.index');
     }
@@ -177,11 +176,10 @@ class BookingController extends Controller
             'user_id' => $currentUser->isAdmin() && $request->input('user_id') ? $request->input('user_id') : $booking->user_id,
         ]));
 
-        laraflash()
-            ->message()
-            ->title('Booking was updated')
-            ->content('Booking was updated successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Booking was updated',
+            'message' => 'Booking was updated successfully.',
+        ]), 'success');
 
         return redirect()->route('bookings.index');
     }
@@ -193,11 +191,10 @@ class BookingController extends Controller
     {
         $booking->delete();
 
-        laraflash()
-            ->message()
-            ->title('Booking was deleted')
-            ->content('Booking was deleted successfully.')
-            ->success();
+        flash(json_encode([
+            'title' => 'Booking was deleted',
+            'message' => 'Booking was deleted successfully.',
+        ]), 'success');
 
         return redirect()->route('bookings.index');
     }
