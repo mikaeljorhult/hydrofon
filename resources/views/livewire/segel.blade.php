@@ -50,6 +50,9 @@
             steps: @entangle('steps').live
         })"
         x-bind="base"
+        x-on:createbooking="$wire.createBooking($event.detail)"
+        x-on:updatebooking="$wire.updateBooking($event.detail)"
+        x-on:deletebooking="$wire.deleteBooking($event.detail)"
     >
         <div class="segel-container relative border-t-2 border-b-2 border-gray-200 min-h-[16rem]">
             <ul class="segel-grid flex absolute inset-0 top-9 pointer-events-none ml-8">
@@ -81,14 +84,12 @@
                 ></div>
             </template>
 
-            <ul class="segel-resources overflow-hidden select-none">
+            <ul class="segel-resources overflow-x-hidden select-none">
                 @forelse($items as $resource)
                     <li
                         class="segel-resource h-11 relative flex items-center ml-8 px-0 border-b border-gray-200"
                         data-id="{{ $resource->id }}"
-                        x-on:createbooking="$wire.createBooking($event.detail)"
-                        x-on:updatebooking="$wire.updateBooking($event.detail)"
-                        x-on:deletebooking="$wire.deleteBooking($event.detail)"
+                        x-bind="resource"
                     >
                         <div class="w-8 h-full flex items-center justify-center mt-px -ml-8 border-b border-gray-200">
                             <x-forms.checkbox
@@ -102,10 +103,10 @@
                         <label for="selected-{{ $resource->id }}" class="pl-2">{{ $resource->name }}</label>
 
                         @if($resource->bookings->isNotEmpty())
-                            <ul class="segel-bookings absolute inset-0 select-none">
+                            <ul class="segel-bookings absolute inset-0 pointer-events-none select-none">
                                 @foreach($resource->bookings as $booking)
                                     <li
-                                        class="segel-booking block h-full absolute inset-y-0 z-40 overflow-hidden @if(auth()->user()->owns($booking)) bg-red-600 @else bg-gray-400 @endif opacity-75 rounded @can('update', $booking) editable @endcan"
+                                        class="segel-booking block h-full absolute inset-y-0 z-40 overflow-hidden pointer-events-auto @if(auth()->user()->owns($booking)) bg-red-600 @else bg-gray-400 @endif opacity-75 rounded @can('update', $booking) editable @endcan"
                                         title="{{ $booking->user->name }}"
                                         style="
                                             width: {{ $booking->duration / $this->duration * 100 }}%;
@@ -113,11 +114,28 @@
                                             "
                                         data-id="{{ $booking->id }}"
                                         data-user="{{ $booking->user_id }}"
+                                        data-resource="{{ $booking->resource_id }}"
                                         data-start="{{ $booking->start_time->format('U') }}"
                                         data-end="{{ $booking->end_time->format('U') }}"
+
+                                        @can('update', $booking)
+                                            x-bind="booking"
+                                            draggable="true"
+                                        @endcan
                                     >
-                                        <span class="segel-resize-handle segel-resize-handle__left hidden items-center w-2 h-full absolute inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center">&#8942;</span>
-                                        <span class="segel-resize-handle segel-resize-handle__right hidden items-center w-2 h-full absolute inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center">&#8942;</span>
+                                        @can('update', $booking)
+                                            <span
+                                                class="segel-resize-handle segel-resize-handle__left hidden items-center w-2 h-full absolute inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center"
+                                                x-bind="resizeLeft"
+                                                draggable="true"
+                                            >&#8942;</span>
+
+                                            <span
+                                                class="segel-resize-handle segel-resize-handle__right hidden items-center w-2 h-full absolute inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center"
+                                                x-bind="resizeRight"
+                                                draggable="true"
+                                            >&#8942;</span>
+                                        @endcan
                                     </li>
                                 @endforeach
                             </ul>

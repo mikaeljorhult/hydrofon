@@ -15,8 +15,5 @@ Alpine.data('quickBook', QuickBook);
 Alpine.data('itemsTable', ItemsTable);
 Livewire.start();
 
-import interact from 'interactjs';
-window.interact = interact;
-
 import flatpickr from 'flatpickr';
 window.flatpickr = flatpickr;
