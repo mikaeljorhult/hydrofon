@@ -24,6 +24,10 @@ export default (initialState) => ({
             );
         }, 1000);
 
+        new ResizeObserver(() => {
+            this.handleResize()
+        }).observe(this.$el);
+
         this.setupTimestamps();
         this.calculateGrid();
         this.setupInteractions();
@@ -51,9 +55,6 @@ export default (initialState) => ({
     },
 
     base: {
-        ['x-on:resize.window.debounce.500']() {
-            this.handleResize();
-        },
         ['x-on:booking-created.window'](event) {
             let checkboxes = Array.from(this.$el.querySelectorAll('input[type="checkbox"]'))
                 .map(checkbox => checkbox.value);
