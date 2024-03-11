@@ -1,6 +1,6 @@
 <div
     id="resourcelist"
-    class="resourcelist w-2/3 fixed inset-y-0 z-50 pt-16 overflow-hidden whitespace-nowrap select-none bg-slate-700 md:w-auto md:relative md:!flex"
+    class="resourcelist w-2/3 fixed inset-y-0 z-50 pt-16 overflow-hidden whitespace-nowrap select-none bg-slate-700 md:w-56 md:relative md:!flex"
     x-data="resourceTree({
         visible: false,
         expanded: @json($expanded),

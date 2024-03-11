@@ -1,6 +1,4 @@
-import { Livewire } from '../../../vendor/livewire/livewire/dist/livewire.esm';
-import interact from 'interactjs';
-import Store from '../store';
+import { Livewire, Alpine } from '../../../vendor/livewire/livewire/dist/livewire.esm';
 
 export default (initialState) => ({
     visible: initialState.visible ?? true,
@@ -36,7 +34,7 @@ export default (initialState) => ({
 
     init() {
         this.$watch('expanded', value => {
-            if (Store.initialized) {
+            if (Alpine.store('segelInitialized')) {
                 clearTimeout(this.debounceExpanded);
 
                 this.debounceExpanded = setTimeout(() => {
@@ -49,7 +47,7 @@ export default (initialState) => ({
             clearTimeout(this.debounceSelected);
 
             this.debounceSelected = setTimeout(() => {
-                if (Store.initialized) {
+                if (Alpine.store('segelInitialized')) {
                     this.$dispatch('segel-setresources', value);
                 } else {
                     this.$refs.form.submit();
@@ -72,7 +70,7 @@ export default (initialState) => ({
                     selectedDates[0].getTime() - (selectedDates[0].getTimezoneOffset() * 60 * 1000)
                 ).getTime() / 1000;
 
-                if (Store.initialized) {
+                if (Alpine.store('segelInitialized')) {
                     this.$dispatch('segel-settimestamps', {
                         start: newDate,
                     });
@@ -81,30 +79,5 @@ export default (initialState) => ({
                 }
             },
         });
-
-        if (window.innerWidth > 640) {
-            interact(this.$el).resizable({
-                edges: { top: false, left: false, bottom: false, right: true, },
-                listeners: {
-                    move: function (event) {
-                        let width = event.rect.width < 140
-                            ? '140px'
-                            : `${event.rect.width}px`;
-
-                        Object.assign(event.target.style, {
-                            width: width,
-                        });
-
-                        // Store size in session storage.
-                        sessionStorage.setItem('resource-tree-width', width);
-
-                        // Dispatch resize event to make Segel recalculate.
-                        window.dispatchEvent(new Event('resize'));
-                    }
-                }
-            });
-
-            this.$el.style.width = sessionStorage.getItem('resource-tree-width') || '14rem';
-        }
     },
 })
