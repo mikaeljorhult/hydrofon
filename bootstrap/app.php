@@ -14,7 +14,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectGuestsTo(fn () => route('login'));
+        $middleware->redirectUsersTo(RouteServiceProvider::HOME);
+
+        $middleware->web(\App\Http\Middleware\Impersonate::class);
+
+        $middleware->throttleApi('60,1');
+        $middleware->api('bindings');
+
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\Administrator::class,
+            'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
