@@ -74,11 +74,7 @@
                         aria-haspopup="true"
                         x-on:click.prevent="isOpen = !isOpen"
                     >
-                        <img
-                            class="h-8 w-8 rounded-full"
-                            src="{{ Avatar::create(auth()->user()->name)->toBase64() }}"
-                            alt="Avatar"
-                        />
+                        <x-heroicon-o-user-circle class="h-7 w-7 rounded-full text-gray-400" />
 
                         <span class="hidden ml-3 text-gray-700 text-sm font-light lg:block">
                             <span class="sr-only">Open user menu for </span>{{ auth()->user()->name }}

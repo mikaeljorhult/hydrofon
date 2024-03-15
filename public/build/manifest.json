@@ -5,7 +5,7 @@
     "isDynamicEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-DnRfD_ec.js",
+    "file": "assets/app-C6QTKqCf.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -13,7 +13,7 @@
     ]
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-Bc0PxViC.css",
+    "file": "assets/app-Ddol_v5t.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   }
