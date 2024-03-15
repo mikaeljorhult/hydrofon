@@ -10,36 +10,36 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^8.1",
-        "blade-ui-kit/blade-heroicons": "^2.1",
+        "php": "^8.2",
+        "blade-ui-kit/blade-heroicons": "^2.3",
         "calebporzio/sushi": "^2.4",
         "eluceo/ical": "^2.7",
         "guzzlehttp/guzzle": "^7.5",
-        "laravel/fortify": "^1.17",
-        "laravel/framework": "^10.3",
-        "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.0",
+        "laravel/fortify": "^1.20",
+        "laravel/framework": "^11.0",
+        "laravel/tinker": "^2.9",
+        "livewire/livewire": "^3.3",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "spatie/laravel-activitylog": "^4.7",
-        "spatie/laravel-flash": "^1.9",
-        "spatie/laravel-model-states": "^2.4.2",
-        "spatie/laravel-model-status": "^1.11",
-        "spatie/laravel-query-builder": "^5.1",
-        "staudenmeir/laravel-adjacency-list": "^1.13"
+        "spatie/laravel-activitylog": "^4.8",
+        "spatie/laravel-flash": "^1.10",
+        "spatie/laravel-model-states": "^2.6",
+        "spatie/laravel-model-status": "^1.15",
+        "spatie/laravel-query-builder": "^5.8",
+        "staudenmeir/laravel-adjacency-list": "^1.21"
     },
     "require-dev": {
         "alebatistella/duskapiconf": "^1.2",
-        "barryvdh/laravel-debugbar": "^3.8",
+        "barryvdh/laravel-debugbar": "^3.10",
         "barryvdh/laravel-ide-helper": "^3.0",
         "brianium/paratest": "^7.0",
-        "fakerphp/faker": "^1.20",
+        "fakerphp/faker": "^1.23",
         "laravel/dusk": "^8.0",
-        "laravel/pint": "^1.2",
-        "mockery/mockery": "^1.5.1",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0",
+        "laravel/pint": "^1.13",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^10.5",
         "protonemedia/laravel-dusk-fakes": "^1.4",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
         "psr-4": {
@@ -84,6 +84,6 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
