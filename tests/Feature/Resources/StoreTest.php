@@ -15,7 +15,7 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a group.
      */
-    public function storeResource(array $overrides = [], User $user = null): TestResponse
+    public function storeResource(array $overrides = [], ?User $user = null): TestResponse
     {
         $resource = Resource::factory()->make($overrides);
 

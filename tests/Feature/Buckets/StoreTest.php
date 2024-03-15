@@ -15,7 +15,7 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a bucket.
      */
-    public function storeBucket(array $overrides = [], User $user = null): TestResponse
+    public function storeBucket(array $overrides = [], ?User $user = null): TestResponse
     {
         $bucket = Bucket::factory()->make($overrides);
 

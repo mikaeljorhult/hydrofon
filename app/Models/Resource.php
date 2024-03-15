@@ -108,7 +108,7 @@ class Resource extends Model
     /**
      * Checks if status being set is valid.
      */
-    public function isValidStatus(string $name, string $reason = null): bool
+    public function isValidStatus(string $name, ?string $reason = null): bool
     {
         return in_array($name, Flag::pluck('abbr')->all());
     }

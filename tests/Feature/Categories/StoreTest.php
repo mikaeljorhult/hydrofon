@@ -15,7 +15,7 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a category.
      */
-    public function storeCategory(array $overrides = [], User $user = null): TestResponse
+    public function storeCategory(array $overrides = [], ?User $user = null): TestResponse
     {
         $category = Category::factory()->make($overrides);
 

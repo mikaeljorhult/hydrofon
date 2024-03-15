@@ -15,7 +15,7 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a group.
      */
-    public function storeGroup(array $overrides = [], User $user = null): TestResponse
+    public function storeGroup(array $overrides = [], ?User $user = null): TestResponse
     {
         $group = Group::factory()->make($overrides);
 

@@ -15,7 +15,7 @@ class DeleteTest extends TestCase
     /**
      * Posts request to delete a subscription.
      */
-    public function deleteSubscription(Subscription $subscription, User $user = null): TestResponse
+    public function deleteSubscription(Subscription $subscription, ?User $user = null): TestResponse
     {
         return $this->actingAs($user ?: User::factory()->admin()->create())
             ->delete('subscriptions/'.$subscription->id);

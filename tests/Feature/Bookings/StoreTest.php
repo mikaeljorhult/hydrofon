@@ -17,7 +17,7 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a booking.
      */
-    public function storeBooking(array $overrides = [], User $user = null): TestResponse
+    public function storeBooking(array $overrides = [], ?User $user = null): TestResponse
     {
         $this->storedBooking = Booking::factory()->make($overrides);
 

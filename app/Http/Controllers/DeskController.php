@@ -25,7 +25,7 @@ class DeskController extends Controller
     /**
      * Show the circulation desk view.
      */
-    public function index(string $search = null): View
+    public function index(?string $search = null): View
     {
         // Only resolve resource or user if a search string is available.
         $identifiable = $search ? $this->resolveIdentifiable($search) : null;

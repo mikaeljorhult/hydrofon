@@ -16,7 +16,7 @@ class StoreTest extends TestCase
     /**
      * Posts request to persist a subscription.
      */
-    public function storeSubscription(array $overrides = [], User $user = null): TestResponse
+    public function storeSubscription(array $overrides = [], ?User $user = null): TestResponse
     {
         $subscription = Subscription::factory()->make($overrides);
 
