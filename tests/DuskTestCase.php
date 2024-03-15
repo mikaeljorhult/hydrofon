@@ -11,7 +11,7 @@ use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication, UsesDuskApiConfig;
+    use UsesDuskApiConfig;
 
     /**
      * Prepare for Dusk test execution.
