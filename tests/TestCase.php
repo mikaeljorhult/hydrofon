@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Config;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
 
     public function approvalIsNotRequired()
     {
