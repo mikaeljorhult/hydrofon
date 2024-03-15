@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Config;
 
 abstract class TestCase extends BaseTestCase
 {
-
     public function approvalIsNotRequired()
     {
         Config::set('hydrofon.require_approval', 'none');
