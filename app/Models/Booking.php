@@ -37,15 +37,18 @@ class Booking extends Model
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'start_time' => 'datetime:Y-m-d H:i',
-        'end_time' => 'datetime:Y-m-d H:i',
-        'state' => BookingState::class,
-    ];
+    protected function casts(): array
+    {
+        return [
+            'start_time' => 'datetime:Y-m-d H:i',
+            'end_time' => 'datetime:Y-m-d H:i',
+            'state' => BookingState::class,
+        ];
+    }
 
     /**
      * The "booted" method of the model.

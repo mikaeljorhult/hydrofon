@@ -28,15 +28,6 @@ class Resource extends Model
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'is_facility' => 'boolean',
-    ];
-
-    /**
      * The "booting" method of the model.
      */
     protected static function boot(): void
@@ -44,6 +35,18 @@ class Resource extends Model
         parent::boot();
 
         static::addGlobalScope(new GroupPolicyScope());
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_facility' => 'boolean',
+        ];
     }
 
     /**

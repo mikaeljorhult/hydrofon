@@ -40,14 +40,17 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'is_admin' => 'boolean',
-        'last_logged_in_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_admin' => 'boolean',
+            'last_logged_in_at' => 'datetime',
+        ];
+    }
 
     /**
      * Get the prunable model query.
