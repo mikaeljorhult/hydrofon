@@ -14,12 +14,12 @@
         document.documentElement.classList.add('js');
     </script>
 
-    @vite('resources/sass/app.scss')
+    @vite('resources/css/app.css')
 </head>
 
 <body class="h-full bg-white text-gray-700 font-base font-light">
     <div id="app" class="app h-full flex">
-        <main class="main-content flex-grow overflow-scroll">
+        <main class="flex-grow overflow-scroll bg-slate-100">
             @yield('content')
         </main>
     </div>

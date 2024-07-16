@@ -1,0 +1,33 @@
+.sidebar nav {
+    scrollbar-width: thin;
+    scrollbar-color: #b91c1c #1e293b; /* .bg-red-600, .bg-slate-800 */
+}
+
+.sidebar nav::-webkit-scrollbar {
+    width: 12px;
+}
+
+.sidebar nav::-webkit-scrollbar-track {
+    @apply bg-slate-800;
+}
+
+.sidebar nav::-webkit-scrollbar-thumb {
+    @apply bg-red-600 rounded border-solid border-4 border-slate-800;
+}
+
+.resourcelist-base {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #334155; /* .bg-slate-300, .bg-slate-700 */
+}
+
+.resourcelist-base::-webkit-scrollbar {
+    width: 12px;
+}
+
+.resourcelist-base::-webkit-scrollbar-track {
+    @apply bg-slate-700;
+}
+
+.resourcelist-base::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded border-solid border-4 border-slate-700;
+}

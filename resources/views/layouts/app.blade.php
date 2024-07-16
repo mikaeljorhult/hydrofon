@@ -15,7 +15,7 @@
         document.documentElement.classList.add('js');
     </script>
 
-    @vite('resources/sass/app.scss')
+    @vite('resources/css/app.css')
     <livewire:styles />
 </head>
 
@@ -24,7 +24,7 @@
         @include('partials.sidebar')
         @yield('sidebar')
 
-        <main class="main-content h-full flex-grow overflow-y-scroll overflow-x-hidden">
+        <main class="h-full flex-grow overflow-y-scroll overflow-x-hidden bg-slate-100">
             @include('partials/topbar')
             @yield('content')
         </main>

@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    list-style: none;
+}
+
+.pagination span,
+.pagination button,
+.pagination a {
+    margin: 0 .25rem;
+    padding: .25rem;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.pagination button,
+.pagination a {
+    text-decoration: underline;
+}
+
+.pagination [rel="prev"],
+.pagination [rel="next"] {
+    text-decoration: none;
+}
+
+.pagination .disabled {
+    opacity: .25;
+}

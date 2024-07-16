@@ -1,0 +1,71 @@
+.segel-resource.droppable {
+    @apply bg-red-600 bg-opacity-5;
+}
+
+.segel-resource .is-dragging {
+    @apply border-2 border-red-700 border-opacity-10 shadow-sm;
+}
+
+.segel-booking.editable:hover .segel-resize-handle,
+.segel-booking.is-resizing .segel-resize-handle {
+    @apply flex;
+}
+
+.segel-booking.is-dragging .segel-resize-handle {
+    @apply hidden;
+}
+
+/* Animations */
+@keyframes indeterminate {
+    0% {
+        left: -35%;
+        right: 100%;
+    }
+    60% {
+        left: 100%;
+        right: -90%;
+    }
+    100% {
+        left: 100%;
+        right: -90%;
+    }
+}
+
+@keyframes indeterminate-short {
+    0% {
+        left: -200%;
+        right: 100%;
+    }
+    60% {
+        left: 107%;
+        right: -8%;
+    }
+    100% {
+        left: 107%;
+        right: -8%;
+    }
+}
+
+.progress {
+    background-color: tomato;
+}
+
+.progress:before,
+.progress:after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    left: 0;
+    bottom: 0;
+    background-color: inherit;
+    will-change: left, right;
+}
+
+.progress:before {
+    animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.progress:after {
+    animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+    animation-delay: 1.15s;
+}

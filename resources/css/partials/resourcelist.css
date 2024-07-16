@@ -1,0 +1,13 @@
+.resourcelist-children {
+    display: none;
+    margin: 0 0 .5rem .5rem;
+}
+
+.expanded > .resourcelist-children {
+    display: block;
+}
+
+.resourcelist-category.has-children > span {
+    display: block;
+    cursor: pointer;
+}

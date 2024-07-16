@@ -125,13 +125,13 @@
                                     >
                                         @can('update', $booking)
                                             <span
-                                                class="segel-resize-handle segel-resize-handle__left hidden items-center w-2 h-full absolute inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center"
+                                                class="segel-resize-handle hidden items-center w-2 h-full absolute inset-y-0 left-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center"
                                                 x-bind="resizeLeft"
                                                 draggable="true"
                                             >&#8942;</span>
 
                                             <span
-                                                class="segel-resize-handle segel-resize-handle__right hidden items-center w-2 h-full absolute inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center"
+                                                class="segel-resize-handle hidden items-center w-2 h-full absolute right-0 inset-y-0 @if(auth()->user()->owns($booking)) bg-red-900 @else bg-gray-700 @endif opacity-50 text-white text-center"
                                                 x-bind="resizeRight"
                                                 draggable="true"
                                             >&#8942;</span>

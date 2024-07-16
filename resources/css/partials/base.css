@@ -13,10 +13,6 @@ h3 {font-size: 1.728em;}
 h4 {font-size: 1.44em;}
 h5 {font-size: 1.2em;}
 
-.main-content {
-    @apply bg-slate-100;
-}
-
 .container {
     @apply w-full p-8;
 }
