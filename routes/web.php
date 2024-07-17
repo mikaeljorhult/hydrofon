@@ -18,6 +18,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ResourceIdentifierController;
 use App\Http\Controllers\ResourceStatusController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserIdentifierController;
@@ -79,3 +80,8 @@ Route::resource('subscriptions', SubscriptionController::class)->only(['store', 
 Route::get('feeds/{feed}', [SubscriptionController::class, 'show'])->name('feed');
 
 Route::resource('datarequests', DataRequestController::class)->only(['store']);
+
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('settings', 'index')->name('settings.index');
+    Route::post('settings', 'update')->name('settings.update');
+});

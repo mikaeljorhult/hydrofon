@@ -25,6 +25,7 @@
         "spatie/laravel-model-states": "^2.6",
         "spatie/laravel-model-status": "^1.15",
         "spatie/laravel-query-builder": "^5.8",
+        "spatie/laravel-settings": "^3.3",
         "staudenmeir/laravel-adjacency-list": "^1.21"
     },
     "require-dev": {

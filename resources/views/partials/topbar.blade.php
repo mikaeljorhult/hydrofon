@@ -103,13 +103,19 @@
                     <!-- Active: "bg-gray-100", Not Active: "" -->
                     <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('settings.index') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                    @endif
+
+                    <hr />
+
                     @if(auth()->user()->isImpersonated())
                         <a
                             class="block px-4 py-2 text-sm text-gray-700"
                             href="{{ route('impersonation') }}"
                             role="menuitem"
                             tabindex="-1"
-                            id="user-menu-item-1"
+                            id="user-menu-item-2"
                             onclick="event.preventDefault(); document.getElementById('impersonation-form').submit();"
                         >Stop impersonation</a>
 
@@ -123,7 +129,7 @@
                             href="{{ route('logout') }}"
                             role="menuitem"
                             tabindex="-1"
-                            id="user-menu-item-1"
+                            id="user-menu-item-2"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                         >Logout</a>
 
