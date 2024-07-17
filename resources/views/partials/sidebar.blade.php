@@ -15,13 +15,13 @@
     </header>
 
     @auth
-        <section class="w-full py-4 px-1 bg-red-700">
-            <a href="{{ route('profile') }}" class="block text-white no-underline hover:text-white">
-                <x-heroicon-s-user class="icon w-6 h-auto mt-0 mx-auto mb-1 opacity-75 fill-current" />
-
-                <div class="pt-1 text-xs">
-                    {{ auth()->user()->name }}
-                </div>
+        <section class="w-full px-1 bg-red-700">
+            <a
+                href="{{ route('profile') }}"
+                class="block py-8 text-white no-underline hover:text-white"
+                title="{{ auth()->user()->name }}"
+            >
+                <x-heroicon-s-user class="icon w-6 h-6 mt-0 mx-auto opacity-75 fill-current" />
             </a>
         </section>
 
