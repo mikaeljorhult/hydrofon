@@ -5,13 +5,13 @@ namespace Tests\Browser\Bookings;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class BookingsEditTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTruncation;
 
     public function testCreateRouteIsReachable(): void
     {

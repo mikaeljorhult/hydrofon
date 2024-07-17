@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use AleBatistella\DuskApiConf\Traits\UsesDuskApiConfig;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -11,7 +10,7 @@ use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use UsesDuskApiConfig;
+    protected $exceptTables = ['settings'];
 
     /**
      * Prepare for Dusk test execution.

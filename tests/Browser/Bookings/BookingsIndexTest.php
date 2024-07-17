@@ -2,16 +2,18 @@
 
 namespace Tests\Browser\Bookings;
 
+use App\Enums\ApprovalSetting;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Settings\General;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class BookingsIndexTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTruncation;
 
     public function testIndexRouteIsReachable(): void
     {
@@ -238,7 +240,9 @@ class BookingsIndexTest extends DuskTestCase
 
     public function testMultipleItemsCanBeApproved(): void
     {
-        $this->setConfig('hydrofon.require_approval', 'all');
+        $settings = app(General::class);
+        $settings->require_approval = ApprovalSetting::ALL->value;
+        $settings->save();
 
         $bookings = Booking::factory(5)->pending()->createQuietly();
 
@@ -260,13 +264,13 @@ class BookingsIndexTest extends DuskTestCase
         $this->assertFalse($bookings[1]->isApproved);
         $this->assertFalse($bookings[2]->isApproved);
         $this->assertFalse($bookings[3]->isApproved);
-
-        $this->resetConfig();
     }
 
     public function testMultipleItemsCanBeRejected(): void
     {
-        $this->setConfig('hydrofon.require_approval', 'all');
+        $settings = app(General::class);
+        $settings->require_approval = ApprovalSetting::ALL->value;
+        $settings->save();
 
         $bookings = Booking::factory(5)->pending()->createQuietly();
 
@@ -288,7 +292,5 @@ class BookingsIndexTest extends DuskTestCase
         $this->assertFalse($bookings[1]->isRejected);
         $this->assertFalse($bookings[2]->isRejected);
         $this->assertFalse($bookings[3]->isRejected);
-
-        $this->resetConfig();
     }
 }

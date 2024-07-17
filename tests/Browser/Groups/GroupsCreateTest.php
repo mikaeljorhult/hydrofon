@@ -4,13 +4,13 @@ namespace Tests\Browser\Groups;
 
 use App\Models\Group;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class GroupsCreateTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTruncation;
 
     public function testCreateRouteIsReachable(): void
     {

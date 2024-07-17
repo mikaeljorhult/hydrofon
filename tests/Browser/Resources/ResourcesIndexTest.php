@@ -4,13 +4,13 @@ namespace Tests\Browser\Resources;
 
 use App\Models\Resource;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class ResourcesIndexTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTruncation;
 
     public function testIndexRouteIsReachable(): void
     {

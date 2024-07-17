@@ -3,7 +3,7 @@
 namespace Tests\Browser\Authentication;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Laravel\Dusk\Browser;
@@ -11,7 +11,7 @@ use Tests\DuskTestCase;
 
 class ResetPasswordTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTruncation;
 
     public function testUserCanRequestPasswordReset(): void
     {

@@ -4,7 +4,7 @@ namespace Tests\Browser\Authentication;
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
 use Notification;
 use ProtoneMedia\LaravelDuskFakes\Notifications\PersistentNotifications;
@@ -12,7 +12,7 @@ use Tests\DuskTestCase;
 
 class ForgotPasswordTest extends DuskTestCase
 {
-    use DatabaseMigrations, PersistentNotifications;
+    use DatabaseTruncation, PersistentNotifications;
 
     public function testLoginPageLinkToPasswordReset(): void
     {
