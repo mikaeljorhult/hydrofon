@@ -21,7 +21,7 @@
                     <p class="mb-4">
                         <x-forms.select
                             name="require_approval"
-                            :options="['none' => 'No approval', 'all' => 'Approval for everything', 'equipment' => 'Only equipment', 'facilities' => 'Only facilities']"
+                            :options="\App\Enums\ApprovalSetting::options()"
                             :selected="$require_approval"
                             :hasErrors="$errors->has('require_approval')"
                         />

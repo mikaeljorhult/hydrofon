@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ApprovalSetting;
 use App\Settings\General;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -23,7 +24,7 @@ class SettingsController extends Controller
     public function update(General $settings, Request $request)
     {
         $validated = $request->validate([
-            'require_approval' => ['required', Rule::in(['none', 'all', 'equipment', 'facilities'])],
+            'require_approval' => ['required', Rule::enum(ApprovalSetting::class)],
         ]);
 
         $settings->require_approval = $validated['require_approval'];
