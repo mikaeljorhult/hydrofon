@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Enums\ApprovalSetting;
 use App\Rules\Available;
+use App\Settings\General;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
@@ -38,7 +40,7 @@ class ProfileBookingsTable extends BaseTable
 
     public function getHeadersProperty()
     {
-        return config('hydrofon.require_approval') !== 'none'
+        return app(General::class)->require_approval !== ApprovalSetting::NONE->value
             ? array_merge($this->tableHeaders, ['status' => 'Status'])
             : $this->tableHeaders;
     }

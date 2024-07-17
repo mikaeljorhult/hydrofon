@@ -23,7 +23,7 @@
                             <x-forms.input name="filter[end_time]" value="{{ request('filter.end_time') }}" placeholder="End Time" />
                         </div>
 
-                        @if(config('hydrofon.require_approval') !== 'none')
+                        @if(app(\App\Settings\General::class)->require_approval !== \App\Enums\ApprovalSetting::NONE->value)
                             <div class="items-center mb-2 lg:mb-0 lg:mr-4">
                                 <x-forms.label for="filter[status]" class="sr-only">Status</x-forms.label>
                                 <x-forms.select name="filter[status]" :options="['approved' => 'Approved', 'rejected' => 'Rejected', 'pending' => 'Pending']" :selected="request('filter')['status'] ?? null" placeholder="All statuses" />

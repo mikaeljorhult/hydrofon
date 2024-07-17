@@ -47,7 +47,7 @@
                                 <x-forms.error :message="$message" />
                             @enderror
                         </td>
-                        @if(config('hydrofon.require_approval') !== 'none')
+                        @if(app(\App\Settings\General::class)->require_approval !== \App\Enums\ApprovalSetting::NONE->value)
                             <td data-title="&nbsp;">&nbsp;</td>
                         @endif
                         <td class="whitespace-nowrap text-right">
@@ -84,7 +84,7 @@
                         <td data-title="End">
                             {{ $item->end_time->format('Y-m-d H:i') }}
                         </td>
-                        @if(config('hydrofon.require_approval') !== 'none')
+                        @if(app(\App\Settings\General::class)->require_approval !== \App\Enums\ApprovalSetting::NONE->value)
                             <td data-title="Status">
                                 @include('livewire.partials.item-status', ['item' => $item])
                             </td>

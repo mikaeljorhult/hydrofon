@@ -11,8 +11,7 @@ enum ApprovalSetting: string
 
     public function label(): string
     {
-        return match ($this)
-        {
+        return match ($this) {
             self::NONE => 'No approval',
             self::ALL => 'Approval for everything',
             self::EQUIPMENT => 'Only equipment',
@@ -22,12 +21,12 @@ enum ApprovalSetting: string
 
     public static function options(): array
     {
-        $cases = static::cases();
+        $cases = self::cases();
 
         return array_combine(
             array_column($cases, 'value'),
             array_map(
-                fn(\App\Enums\ApprovalSetting $setting) => $setting->label(),
+                fn (\App\Enums\ApprovalSetting $setting) => $setting->label(),
                 $cases
             ),
         );

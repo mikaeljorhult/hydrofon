@@ -216,7 +216,7 @@
                             >Check in</x-forms.button-link>
                         </form>
 
-                        @if(config('hydrofon.require_approval') !== 'none')
+                        @if(app(\App\Settings\General::class)->require_approval !== \App\Enums\ApprovalSetting::NONE->value)
                             <form>
                                 <x-forms.button-link
                                     x-bind:disabled="selectedRows.length === 0"

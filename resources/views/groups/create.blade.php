@@ -33,7 +33,7 @@
                                 @enderror
                             </div>
 
-                            @if(config('hydrofon.require_approval') !== 'none')
+                            @if(app(\App\Settings\General::class)->require_approval !== \App\Enums\ApprovalSetting::NONE->value)
                                 <div class="sm:col-span-4">
                                     <x-forms.label for="approvers">
                                         Approvers

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ApprovalSetting;
 use App\Http\Requests\BookingDestroyRequest;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
+use App\Settings\General;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -57,7 +59,7 @@ class BookingController extends Controller
         $filterResources = Resource::orderBy('name')->pluck('name', 'id');
         $filterUsers = User::orderBy('name')->pluck('name', 'id');
 
-        $filterState = config('hydrofon.require_approval') !== 'none'
+        $filterState = app(General::class)->require_approval !== ApprovalSetting::NONE->value
             ? [
                 'pending' => 'Pending',
                 'approved' => 'Approved',
@@ -124,7 +126,7 @@ class BookingController extends Controller
             'user',
             'activities' => function ($query) {
                 $query->with('causer:id,name')
-                    ->when(config('hydrofon.require_approval') === 'none', function ($query) {
+                    ->when(app(General::class)->require_approval === ApprovalSetting::NONE->value, function ($query) {
                         // Ignore logs for approval states if approval isn't use.
                         $query->whereNotIn('event', ['pending', 'approved', 'autoapproved', 'rejected']);
                     })

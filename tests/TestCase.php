@@ -2,28 +2,37 @@
 
 namespace Tests;
 
+use App\Enums\ApprovalSetting;
+use App\Settings\General;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Facades\Config;
 
 abstract class TestCase extends BaseTestCase
 {
     public function approvalIsNotRequired()
     {
-        Config::set('hydrofon.require_approval', 'none');
+        General::fake([
+            'require_approval' => ApprovalSetting::NONE->value,
+        ]);
     }
 
     public function approvalIsRequired()
     {
-        Config::set('hydrofon.require_approval', 'all');
-    }
-
-    public function approvalIsRequiredForFacilities()
-    {
-        Config::set('hydrofon.require_approval', 'facilities');
+        General::fake([
+            'require_approval' => ApprovalSetting::ALL->value,
+        ]);
     }
 
     public function approvalIsRequiredForEquipment()
     {
-        Config::set('hydrofon.require_approval', 'equipment');
+        General::fake([
+            'require_approval' => ApprovalSetting::EQUIPMENT->value,
+        ]);
+    }
+
+    public function approvalIsRequiredForFacilities()
+    {
+        General::fake([
+            'require_approval' => ApprovalSetting::FACILITIES->value,
+        ]);
     }
 }

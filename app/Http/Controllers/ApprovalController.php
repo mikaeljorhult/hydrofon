@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ApprovalSetting;
 use App\Models\Booking;
 use App\Models\Resource;
 use App\Models\User;
+use App\Settings\General;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -28,7 +30,7 @@ class ApprovalController extends Controller
     public function index(): View
     {
         // Bail if approvals are not set up.
-        if (config('hydrofon.require_approval') === 'none') {
+        if (app(General::class)->require_approval === ApprovalSetting::NONE->value) {
             abort(403);
         }
 

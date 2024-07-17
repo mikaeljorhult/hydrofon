@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\ApprovalSetting;
+use App\Settings\General;
 use App\States\Approved;
 use App\States\AutoApproved;
 use App\States\BookingState;
@@ -62,12 +64,12 @@ class Booking extends Model
         });
 
         static::created(function ($booking) {
-            $requireApproval = config('hydrofon.require_approval');
+            $requireApproval = app(General::class)->require_approval;
 
             if (
-                $requireApproval === 'none'
-                || ($requireApproval === 'equipment' && $booking->resource->isFacility())
-                || ($requireApproval === 'facilities' && ! $booking->resource->isFacility())
+                $requireApproval === ApprovalSetting::NONE->value
+                || ($requireApproval === ApprovalSetting::EQUIPMENT->value && $booking->resource->isFacility())
+                || ($requireApproval === ApprovalSetting::FACILITIES->value && ! $booking->resource->isFacility())
             ) {
                 $mustBeApproved = false;
             } else {
@@ -98,13 +100,13 @@ class Booking extends Model
                 return;
             }
 
-            $requireApproval = config('hydrofon.require_approval');
+            $requireApproval = app(General::class)->require_approval;
 
             if (
                 (auth()->user() && auth()->user()->isAdmin())
-                || $requireApproval === 'none'
-                || ($requireApproval === 'equipment' && $booking->resource->isFacility())
-                || ($requireApproval === 'facilities' && ! $booking->resource->isFacility())
+                || $requireApproval === ApprovalSetting::NONE->value
+                || ($requireApproval === ApprovalSetting::EQUIPMENT->value && $booking->resource->isFacility())
+                || ($requireApproval === ApprovalSetting::FACILITIES->value && ! $booking->resource->isFacility())
             ) {
                 return;
             }
