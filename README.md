@@ -6,24 +6,23 @@ Equipment booking system.
 [![License](https://img.shields.io/badge/license-MIT-428f7e.svg)](http://mikaeljorhult.mit-license.org)
 
 ## Requirements
-Hydrofon is built on Laravel 10 and therefore inherit [its requirements](https://laravel.com/docs/10.x/deployment#server-requirements). It also
+Hydrofon is built on Laravel 11 and therefore inherit [its requirements](https://laravel.com/docs/11.x/deployment#server-requirements). It also
 makes use of Common Table Expressions for some features so the chosen database must support that as well. 
 
-PHP: 8.1+
+PHP: 8.2+
 
 Database:
 - MySQL 8.0+
 - MariaDB 10.3+
 - PostgreSQL 10.0+
-- SQLite 3.8.8+
+- SQLite 3.35.0+
 - SQL Server 2017+
 
 ## Installation
 1. Clone this repository with to your local machine or a web server.
 2. Run `composer install` to install the PHP dependencies.
-3. Set up a local database called `hydrofon` (see the `.env.example` for default connection and credentials).
-4. Run `composer setup` to setup the application.
-5. Optional: Run `php artisan hydrofon:init` to add an administrator account.
+3. Run `composer setup` to setup the application.
+4. Optional: Run `php artisan hydrofon:init` to add an administrator account.
 
 ## Terminology
 
