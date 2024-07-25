@@ -12,6 +12,10 @@ class General extends Settings
 
     public int $desk_inclusion_later;
 
+    public int $prune_bookings;
+
+    public int $prune_users;
+
     public static function group(): string
     {
         return 'general';

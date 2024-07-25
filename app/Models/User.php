@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Settings\General;
 use App\States\CheckedOut;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -63,14 +64,12 @@ class User extends Authenticatable
             ->where(function ($query) {
                 // User has never logged in and was created more than a year ago.
                 $query->whereNull('last_logged_in_at')
-                    ->whereDate('created_at', '<=',
-                        now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
+                    ->whereDate('created_at', '<=', now()->subDays(app(General::class)->prune_users));
             })
             ->orWhere(function ($query) {
                 // User has logged in but not been active for more than a year.
                 $query->whereNotNull('last_logged_in_at')
-                    ->whereDate('last_logged_in_at', '<=',
-                        now()->subDays(config('hydrofon.prune_models_after_days.users', 365)));
+                    ->whereDate('last_logged_in_at', '<=', now()->subDays(app(General::class)->prune_bookings));
             });
     }
 

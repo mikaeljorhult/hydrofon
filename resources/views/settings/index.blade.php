@@ -9,7 +9,7 @@
         <form action="{{ route('settings.update') }}" method="post">
             @csrf
 
-            <div>
+            <div class="mb-4">
                 <h2>Approval</h2>
 
                 <div class="max-w-xl">
@@ -18,7 +18,7 @@
                         Bookings already made will not be affected by changes to the setting.
                     </p>
 
-                    <p class="mb-4">
+                    <p>
                         <x-forms.select
                             name="require_approval"
                             :options="\App\Enums\ApprovalSetting::options()"
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="mb-4">
                 <h2>Desk inclusion</h2>
 
                 <div class="max-w-xl">
@@ -68,6 +68,50 @@
                             max="240"
                             :value="$desk_inclusion_later"
                             :hasErrors="$errors->has('desk_inclusion_later')"
+                        />
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h2>Prune older content</h2>
+
+                <div class="max-w-xl">
+                    <p class="mb-2">
+                        Users and bookings can be automatically removed after a number of days. Be default, bookings
+                        are removed six months (180 days) after after they've ended if they're not still checked out. Users
+                        are removed one year (365 days) after their last login.
+                    </p>
+
+                    <p>
+                        <x-forms.label
+                            for="prune_bookings"
+                        >Bookings</x-forms.label>
+
+                        <x-forms.input
+                            id="prune_bookings"
+                            name="prune_bookings"
+                            type="number"
+                            min="0"
+                            max="3650"
+                            :value="$prune_bookings"
+                            :hasErrors="$errors->has('prune_bookings')"
+                        />
+                    </p>
+
+                    <p>
+                        <x-forms.label
+                            for="prune_users"
+                        >Users</x-forms.label>
+
+                        <x-forms.input
+                            id="prune_users"
+                            name="prune_users"
+                            type="number"
+                            min="0"
+                            max="3650"
+                            :value="$prune_users"
+                            :hasErrors="$errors->has('prune_users')"
                         />
                     </p>
                 </div>

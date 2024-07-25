@@ -9,5 +9,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.require_approval', 'none');
         $this->migrator->add('general.desk_inclusion_earlier', 0);
         $this->migrator->add('general.desk_inclusion_later', 0);
+        $this->migrator->add('general.prune_bookings', 180);
+        $this->migrator->add('general.prune_users', 365);
     }
 };

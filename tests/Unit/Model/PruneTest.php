@@ -4,9 +4,9 @@ namespace Tests\Unit\Model;
 
 use App\Models\Booking;
 use App\Models\User;
+use App\Settings\General;
 use App\States\CheckedOut;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class PruneTest extends TestCase
@@ -191,7 +191,9 @@ class PruneTest extends TestCase
      */
     public function testTimeBeforePruningUsersCanBeConfigured(): void
     {
-        Config::set('hydrofon.prune_models_after_days.users', 1);
+        General::fake([
+            'prune_users' => 1,
+        ]);
 
         $user = User::factory()->create([
             'created_at' => now()->subDay(),
@@ -208,14 +210,16 @@ class PruneTest extends TestCase
      */
     public function testTimeBeforePruningBookingsCanBeConfigured(): void
     {
-        Config::set('hydrofon.prune_models_after_days.bookings', 1);
+        General::fake([
+            'prune_bookings' => 1,
+        ]);
 
-        $user = Booking::factory()->create([
+        $booking = Booking::factory()->create([
             'end_time' => now()->subDay(),
         ]);
 
         $this->artisan('model:prune');
 
-        $this->assertModelMissing($user);
+        $this->assertModelMissing($booking);
     }
 }

@@ -40,6 +40,8 @@ class IndexTest extends TestCase
                 'require_approval' => 'all',
                 'desk_inclusion_earlier' => 15,
                 'desk_inclusion_later' => 60,
+                'prune_bookings' => 60,
+                'prune_users' => 60,
             ])
             ->assertRedirect('settings')
             ->assertSessionHasNoErrors();
@@ -47,6 +49,8 @@ class IndexTest extends TestCase
         $this->assertEquals('all', app(General::class)->require_approval);
         $this->assertEquals(15, app(General::class)->desk_inclusion_earlier);
         $this->assertEquals(60, app(General::class)->desk_inclusion_later);
+        $this->assertEquals(60, app(General::class)->prune_bookings);
+        $this->assertEquals(60, app(General::class)->prune_users);
     }
 
     public function testInvalidValuesAreCaught(): void
@@ -59,12 +63,22 @@ class IndexTest extends TestCase
                 'require_approval' => 'invalid',
                 'desk_inclusion_earlier' => -1,
                 'desk_inclusion_later' => 241,
+                'prune_bookings' => -1,
+                'prune_users' => 10000,
             ])
             ->assertRedirect('settings')
-            ->assertSessionHasErrors(['require_approval', 'desk_inclusion_earlier', 'desk_inclusion_later']);
+            ->assertSessionHasErrors([
+                'require_approval',
+                'desk_inclusion_earlier',
+                'desk_inclusion_later',
+                'prune_bookings',
+                'prune_users',
+            ]);
 
         $this->assertEquals('none', app(General::class)->require_approval);
         $this->assertEquals(0, app(General::class)->desk_inclusion_earlier);
         $this->assertEquals(0, app(General::class)->desk_inclusion_later);
+        $this->assertEquals(180, app(General::class)->prune_bookings);
+        $this->assertEquals(365, app(General::class)->prune_users);
     }
 }
