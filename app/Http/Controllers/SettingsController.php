@@ -18,6 +18,8 @@ class SettingsController extends Controller
     {
         return view('settings.index', [
             'require_approval' => $settings->require_approval,
+            'desk_inclusion_earlier' => $settings->desk_inclusion_earlier,
+            'desk_inclusion_later' => $settings->desk_inclusion_later,
         ]);
     }
 
@@ -25,9 +27,13 @@ class SettingsController extends Controller
     {
         $validated = $request->validate([
             'require_approval' => ['required', Rule::enum(ApprovalSetting::class)],
+            'desk_inclusion_earlier' => ['required', 'integer', 'min:0', 'max:240'],
+            'desk_inclusion_later' => ['required', 'integer', 'min:0', 'max:240'],
         ]);
 
         $settings->require_approval = $validated['require_approval'];
+        $settings->desk_inclusion_earlier = $validated['desk_inclusion_earlier'];
+        $settings->desk_inclusion_later = $validated['desk_inclusion_later'];
         $settings->save();
 
         return redirect()->route('settings.index')->with('success', 'Settings saved');

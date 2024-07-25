@@ -26,10 +26,60 @@
                             :hasErrors="$errors->has('require_approval')"
                         />
                     </p>
+                </div>
+            </div>
 
-                    <x-forms.button>
-                        Save settings
-                    </x-forms.button>
+            <div>
+                <h2>Desk inclusion</h2>
+
+                <div class="max-w-xl">
+                    <p class="mb-2">
+                        Bookings that have started but not yet ended are displayed within the desk view by default.
+                        This timeframe can be extended 240 minutes earlier or later to allow bookings to be checked
+                        out even outside the reserved time if available.
+                    </p>
+
+                    <p>
+                        <x-forms.label
+                            for="desk_inclusion_earlier"
+                        >Earlier</x-forms.label>
+
+                        <x-forms.input
+                            id="desk_inclusion_earlier"
+                            name="desk_inclusion_earlier"
+                            type="number"
+                            min="0"
+                            max="240"
+                            :value="$desk_inclusion_earlier"
+                            :hasErrors="$errors->has('desk_inclusion_earlier')"
+                        />
+                    </p>
+
+                    <p>
+                        <x-forms.label
+                            for="desk_inclusion_later"
+                        >Later</x-forms.label>
+
+                        <x-forms.input
+                            id="desk_inclusion_later"
+                            name="desk_inclusion_later"
+                            type="number"
+                            min="0"
+                            max="240"
+                            :value="$desk_inclusion_later"
+                            :hasErrors="$errors->has('desk_inclusion_later')"
+                        />
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <div class="max-w-xl">
+                    <p class="mt-4">
+                        <x-forms.button>
+                            Save settings
+                        </x-forms.button>
+                    </p>
                 </div>
             </div>
         </form>

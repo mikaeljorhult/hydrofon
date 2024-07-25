@@ -4,8 +4,8 @@ namespace Tests\Feature\Desk;
 
 use App\Models\Booking;
 use App\Models\User;
+use App\Settings\General;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class BookingsDeskTest extends TestCase
@@ -92,8 +92,10 @@ class BookingsDeskTest extends TestCase
      */
     public function testBookingsTimeSpanCanBeConfigured(): void
     {
-        Config::set('hydrofon.desk_inclusion_hours.earlier', 1);
-        Config::set('hydrofon.desk_inclusion_hours.later', 1);
+        General::fake([
+            'desk_inclusion_earlier' => 60,
+            'desk_inclusion_later' => 60,
+        ]);
 
         $user = User::factory()->create();
 

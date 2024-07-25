@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeskRequest;
 use App\Models\Identifier;
 use App\Models\User;
+use App\Settings\General;
 use App\States\CheckedIn;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -89,9 +90,11 @@ class DeskController extends Controller
                 $filter = request()->query->all('filter');
 
                 if (! isset($filter['between'])) {
+                    $settings = app(General::class);
+
                     $query->between(
-                        now()->subHours(config('hydrofon.desk_inclusion_hours.earlier', 0)),
-                        now()->addHours(config('hydrofon.desk_inclusion_hours.later', 0))
+                        now()->subMinutes($settings->desk_inclusion_earlier),
+                        now()->addMinutes($settings->desk_inclusion_earlier)
                     );
                 } else {
                     $between = explode(',', $filter['between']);

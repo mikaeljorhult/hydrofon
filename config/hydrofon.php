@@ -4,22 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Desk Inclusion Tme
-    |--------------------------------------------------------------------------
-    |
-    | A number of hours to extend the "current" scope with within desk view.
-    | By default, bookings that have started and not yet ended are shown.
-    | Adding 1 will also include bookings that started one hour ago.
-    |
-    */
-
-    'desk_inclusion_hours' => [
-        'earlier' => 0,
-        'later' => 0,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Model Pruning
     |--------------------------------------------------------------------------
     |
