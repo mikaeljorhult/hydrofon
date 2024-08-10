@@ -9,16 +9,6 @@ use Illuminate\Http\RedirectResponse;
 class ImpersonationController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin')->except('destroy');
-    }
-
-    /**
      * Create impersonation of user.
      */
     public function store(ImpersonationRequest $request): RedirectResponse

@@ -14,16 +14,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 class DeskController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
-    /**
      * Show the circulation desk view.
      */
     public function index(?string $search = null): View

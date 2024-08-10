@@ -45,7 +45,7 @@ class OverdueBookingNotification extends Command
         })->get();
 
         if ($users->isNotEmpty()) {
-            Notification::send($users, new BookingOverdue());
+            Notification::send($users, new BookingOverdue);
         }
 
         return 0;

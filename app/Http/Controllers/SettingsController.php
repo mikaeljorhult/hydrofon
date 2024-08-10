@@ -9,11 +9,6 @@ use Illuminate\Validation\Rule;
 
 class SettingsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index(General $settings)
     {
         return view('settings.index', [

@@ -239,7 +239,7 @@ class Segel extends Component
                     },
                 ])
                 ->get()
-            : new Collection();
+            : new Collection;
     }
 
     private function roundTimestamp($timestamp)

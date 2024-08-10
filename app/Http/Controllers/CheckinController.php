@@ -10,16 +10,6 @@ use Illuminate\Http\RedirectResponse;
 class CheckinController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(CheckinStoreRequest $request): RedirectResponse

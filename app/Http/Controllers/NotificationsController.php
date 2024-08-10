@@ -8,16 +8,6 @@ use Illuminate\View\View;
 class NotificationsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Handle the incoming request.
      */
     public function __invoke(Request $request): View

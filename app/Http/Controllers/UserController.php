@@ -20,7 +20,6 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
         $this->middleware('admin')->except(['update']);
     }
 
@@ -106,8 +105,6 @@ class UserController extends Controller
 
         if (! $user->is(auth()->user())) {
             $input['is_admin'] = $request->has('is_admin');
-        } else {
-            unset($input['is_admin']);
         }
 
         if ($request->has('password')) {

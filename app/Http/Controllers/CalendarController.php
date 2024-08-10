@@ -10,16 +10,6 @@ use Illuminate\View\View;
 class CalendarController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the calendar view.
      */
     public function index(?string $date = null): View

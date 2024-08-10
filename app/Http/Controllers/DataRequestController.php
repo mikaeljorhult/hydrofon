@@ -9,16 +9,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class DataRequestController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Generate new file with user data.
      */
     public function store(Request $request): StreamedResponse

@@ -33,9 +33,9 @@ class NotifyUserOfBookingStateChange
         $stateClass = get_class($event->finalState);
 
         $notification = match (get_class($event->finalState)) {
-            Pending::class => new BookingAwaitingApproval(),
-            Approved::class => new BookingApproved(),
-            Rejected::class => new BookingRejected(),
+            Pending::class => new BookingAwaitingApproval,
+            Approved::class => new BookingApproved,
+            Rejected::class => new BookingRejected,
             default => null,
         };
 

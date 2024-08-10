@@ -57,7 +57,7 @@ class BookingAwaitingApprovalTest extends TestCase
         $this->approvalIsRequired();
 
         $approver = User::factory()->create();
-        $approver->notify(new BookingAwaitingApproval());
+        $approver->notify(new BookingAwaitingApproval);
         $approver->notifications()->update(['created_at' => now()->subHour(), 'read_at' => now()]);
 
         $group = Group::factory()->hasAttached($approver, [], 'approvers')->create();

@@ -17,7 +17,7 @@
     @auth
         <section class="w-full px-1 bg-red-700">
             <a
-                href="{{ route('profile') }}"
+                href="{{ route('profile.index') }}"
                 class="block py-8 text-white no-underline hover:text-white"
                 title="{{ auth()->user()->name }}"
             >

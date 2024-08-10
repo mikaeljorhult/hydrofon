@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container space-y-8">
-        <x-heading :title="$user->name" :url="route('profile')" />
+        <x-heading :title="$user->name" :url="route('profile.index')" />
 
         @if($latest->isNotEmpty() || $upcoming->isNotEmpty() || $overdue->isNotEmpty())
             <div>

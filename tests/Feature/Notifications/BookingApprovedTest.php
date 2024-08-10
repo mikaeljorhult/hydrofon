@@ -78,7 +78,7 @@ class BookingApprovedTest extends TestCase
 
         $booking = Booking::factory()->for(User::factory()->hasAttached($group))->create();
 
-        $booking->user->notify(new BookingApproved());
+        $booking->user->notify(new BookingApproved);
         $booking->user->notifications()->update(['created_at' => now()->subHour(), 'read_at' => now()]);
 
         $this->actingAs($approver);

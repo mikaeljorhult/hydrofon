@@ -38,7 +38,7 @@ class IndexTest extends TestCase
     public function testOverdueNotificationIsDisplayed(): void
     {
         $user = User::factory()->create();
-        $user->notify(new BookingOverdue());
+        $user->notify(new BookingOverdue);
 
         $this
             ->actingAs($user)

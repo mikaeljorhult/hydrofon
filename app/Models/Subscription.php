@@ -67,7 +67,7 @@ class Subscription extends Model
             ->toArray();
 
         $calendar = new Calendar($events);
-        $componentFactory = new CalendarFactory();
+        $componentFactory = new CalendarFactory;
         $component = $componentFactory
             ->createCalendar($calendar)
             ->withProperty(new Property(
@@ -95,7 +95,7 @@ class Subscription extends Model
                 return $item->start_time->format('YmdHis');
             })
             ->map(function ($item, $key) {
-                return (new Event())
+                return (new Event)
                     ->setSummary('Pick up '.Str::plural('booking', $item->count()))
                     ->setDescription('To pick up:'.PHP_EOL.'- '.$item->implode('resource.name', PHP_EOL.'- '))
                     ->setOccurrence(
@@ -121,7 +121,7 @@ class Subscription extends Model
                     ? $item->resource->name
                     : $item->user->name;
 
-                return (new Event())
+                return (new Event)
                     ->setSummary($summary)
                     ->setDescription('')
                     ->setOccurrence(

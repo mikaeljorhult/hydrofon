@@ -15,6 +15,7 @@ use App\Http\Controllers\ImpersonationController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProfileBookingsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileUpdateController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ResourceIdentifierController;
 use App\Http\Controllers\ResourceStatusController;
@@ -36,52 +37,69 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-
 Route::redirect('home', '/')->name('home');
 
-Route::get('profile', ProfileController::class)->name('profile');
-Route::get('profile/bookings', ProfileBookingsController::class)->name('profile.bookings');
+Route::middleware('auth')->group(function () {
+    Route::resource('bookings', BookingController::class);
 
-Route::get('notifications', NotificationsController::class)->name('notifications');
+    Route::name('profile.')
+        ->prefix('profile')
+        ->group(function () {
+            Route::get('/', ProfileController::class)->name('index');
+            Route::put('/', ProfileUpdateController::class)->name('update');
+            Route::get('bookings', ProfileBookingsController::class)->name('bookings');
+        });
 
-Route::get('calendar/{date?}', [CalendarController::class, 'index'])->name('calendar');
-Route::post('calendar', [CalendarController::class, 'store']);
+    Route::resource('datarequests', DataRequestController::class)->only(['store']);
 
-Route::get('desk/{search?}', [DeskController::class, 'index'])->name('desk');
-Route::post('desk', [DeskController::class, 'store']);
+    Route::get('notifications', NotificationsController::class)->name('notifications');
 
-Route::post('impersonation', [ImpersonationController::class, 'store'])->name('impersonation');
-Route::delete('impersonation', [ImpersonationController::class, 'destroy']);
+    Route::get('calendar/{date?}', [CalendarController::class, 'index'])->name('calendar');
+    Route::post('calendar', [CalendarController::class, 'store']);
 
-Route::resources([
-    'bookings' => BookingController::class,
-    'buckets' => BucketController::class,
-    'categories' => CategoryController::class,
-    'groups' => GroupController::class,
-    'resources' => ResourceController::class,
-    'users' => UserController::class,
-]);
+    Route::controller(ApprovalController::class)
+        ->name('approvals.')
+        ->prefix('approvals')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::delete('{booking}', 'destroy')->name('destroy');
+        });
 
-Route::resource('checkins', CheckinController::class)->only(['store']);
-Route::resource('checkouts', CheckoutController::class)->only(['store']);
+    Route::resource('resources.statuses', ResourceStatusController::class)->only(['store', 'destroy']);
 
-Route::controller(ApprovalController::class)->group(function () {
-    Route::get('approvals', 'index')->name('approvals.index');
-    Route::post('approvals', 'store')->name('approvals.store');
-    Route::delete('approvals/{booking}', 'destroy')->name('approvals.destroy');
+    Route::delete('impersonation', [ImpersonationController::class, 'destroy']);
+
+    Route::resource('subscriptions', SubscriptionController::class)->only(['store', 'destroy']);
 });
 
-Route::resource('resources.statuses', ResourceStatusController::class)->only(['store', 'destroy']);
+Route::middleware('admin')->group(function () {
+    Route::get('desk/{search?}', [DeskController::class, 'index'])->name('desk');
+    Route::post('desk', [DeskController::class, 'store']);
 
-Route::resource('resources.identifiers', ResourceIdentifierController::class);
-Route::resource('users.identifiers', UserIdentifierController::class)->except(['show']);
+    Route::resource('checkins', CheckinController::class)->only(['store']);
+    Route::resource('checkouts', CheckoutController::class)->only(['store']);
 
-Route::resource('subscriptions', SubscriptionController::class)->only(['store', 'destroy']);
+    Route::resources([
+        'buckets' => BucketController::class,
+        'categories' => CategoryController::class,
+        'groups' => GroupController::class,
+        'resources' => ResourceController::class,
+        'users' => UserController::class,
+    ]);
+
+    Route::resource('resources.identifiers', ResourceIdentifierController::class);
+    Route::resource('users.identifiers', UserIdentifierController::class)->except(['show']);
+
+    Route::controller(SettingsController::class)
+        ->name('settings.')
+        ->prefix('settings')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'update')->name('update');
+        });
+
+    Route::post('impersonation', [ImpersonationController::class, 'store'])->name('impersonation');
+});
+
 Route::get('feeds/{feed}', [SubscriptionController::class, 'show'])->name('feed');
-
-Route::resource('datarequests', DataRequestController::class)->only(['store']);
-
-Route::controller(SettingsController::class)->group(function () {
-    Route::get('settings', 'index')->name('settings.index');
-    Route::post('settings', 'update')->name('settings.update');
-});
