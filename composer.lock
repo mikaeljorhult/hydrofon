@@ -1984,7 +1984,6 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "6fbb36d44824ed4091adbcf4c7d4a3923cdb3405"
                 "reference": "ac815920de0eff6de947eac0a6a94e5ed0fb147c"
             },
             "dist": {
@@ -2785,10 +2784,8 @@
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
                 "source": "https://github.com/nette/utils/tree/v4.0.6"
-                "source": "https://github.com/nette/utils/tree/v4.0.5"
             },
             "time": "2025-03-30T21:06:30+00:00"
-            "time": "2024-08-07T15:39:19+00:00"
         },
         {
             "name": "nikic/php-parser",
