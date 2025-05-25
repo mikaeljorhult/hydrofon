@@ -213,25 +213,22 @@ class Booking extends Model
         $endTime = $end->copy()->subSecond();
 
         // Return any bookings with the same resource and within the same time frame.
-        return $query->where(function ($query) use ($startTime, $endTime) {
-            $query
-                // Exactly the same time as given interval.
-                ->where(function ($query) use ($startTime, $endTime) {
-                    $query
-                        ->where('start_time', '=', $startTime->copy()->subSecond())
-                        ->where('end_time', '=', $endTime->copy()->addSecond());
-                })
-                // Start before and end after interval.
-                ->orWhere(function ($query) use ($startTime, $endTime) {
-                    $query
-                        ->where('start_time', '<', $startTime)
-                        ->where('end_time', '>', $endTime);
-                })
-                // Start in interval.
-                ->orWhereBetween('start_time', [$startTime, $endTime])
-                // End in interval.
-                ->orWhereBetween('end_time', [$startTime, $endTime]);
-        });
+        return $query->where(fn($query) => $query
+            // Exactly the same time as given interval.
+            ->where(fn($query) => $query
+                ->where('start_time', '=', $start)
+                ->where('end_time', '=', $end)
+            )
+            // Start before and end after interval.
+            ->orWhere(fn($query) => $query
+                ->where('start_time', '<', $startTime)
+                ->where('end_time', '>', $endTime)
+            )
+            // Start in interval.
+            ->orWhereBetween('start_time', [$startTime, $endTime])
+            // End in interval.
+            ->orWhereBetween('end_time', [$startTime, $endTime])
+        );
     }
 
     /**
