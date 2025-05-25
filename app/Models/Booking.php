@@ -205,8 +205,8 @@ class Booking extends Model
     public function scopeBetween(Builder $query, $start, $end): Builder
     {
         // Make sure dates are Carbon objects.
-        $start = Carbon::parse((is_numeric($start) ? '@' : '').$start);
-        $end = Carbon::parse((is_numeric($end) ? '@' : '').$end);
+        $start = is_numeric($start) ? Carbon::createFromTimestamp($start) : Carbon::parse($start);
+        $end = is_numeric($end) ? Carbon::createFromTimestamp($end) : Carbon::parse($end);
 
         // Add second and subtract second to allow booking to start or end at same time.
         $startTime = $start->copy()->addSecond();
@@ -216,15 +216,17 @@ class Booking extends Model
         return $query->where(function ($query) use ($startTime, $endTime) {
             $query
                 // Exactly the same time as given interval.
-                ->where([
-                    ['start_time', $startTime->copy()->subSecond()],
-                    ['end_time', $endTime->copy()->addSecond()],
-                ])
+                ->where(function ($query) use ($startTime, $endTime) {
+                    $query
+                        ->where('start_time', '=', $startTime->copy()->subSecond())
+                        ->where('end_time', '=', $endTime->copy()->addSecond());
+                })
                 // Start before and end after interval.
-                ->orWhere([
-                    ['start_time', '<', $startTime],
-                    ['end_time', '>', $endTime],
-                ])
+                ->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query
+                        ->where('start_time', '<', $startTime)
+                        ->where('end_time', '>', $endTime);
+                })
                 // Start in interval.
                 ->orWhereBetween('start_time', [$startTime, $endTime])
                 // End in interval.
